@@ -1,0 +1,322 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3A9E3FCE1C80AE330069BDFC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FCD1C80AE330069BDFC /* main.m */; };
+		3A9E3FD11C80AE330069BDFC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FD01C80AE330069BDFC /* AppDelegate.m */; };
+		3A9E3FD41C80AE330069BDFC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FD31C80AE330069BDFC /* ViewController.m */; };
+		3A9E3FD71C80AE330069BDFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E3FD51C80AE330069BDFC /* Main.storyboard */; };
+		3A9E3FDA1C80AE330069BDFC /* Vidal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FD81C80AE330069BDFC /* Vidal.xcdatamodeld */; };
+		3A9E3FDC1C80AE330069BDFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E3FDB1C80AE330069BDFC /* Assets.xcassets */; };
+		3A9E3FDF1C80AE330069BDFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E3FDD1C80AE330069BDFC /* LaunchScreen.storyboard */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3A9E3FC91C80AE330069BDFC /* Vidal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vidal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A9E3FCD1C80AE330069BDFC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		3A9E3FCF1C80AE330069BDFC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		3A9E3FD01C80AE330069BDFC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		3A9E3FD21C80AE330069BDFC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		3A9E3FD31C80AE330069BDFC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		3A9E3FD61C80AE330069BDFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		3A9E3FD91C80AE330069BDFC /* Vidal.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vidal.xcdatamodel; sourceTree = "<group>"; };
+		3A9E3FDB1C80AE330069BDFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3A9E3FDE1C80AE330069BDFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		3A9E3FE01C80AE330069BDFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		3A9E3FC61C80AE330069BDFC /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		3A9E3FC01C80AE330069BDFC = {
+			isa = PBXGroup;
+			children = (
+				3A9E3FCB1C80AE330069BDFC /* Vidal */,
+				3A9E3FCA1C80AE330069BDFC /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3A9E3FCA1C80AE330069BDFC /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A9E3FC91C80AE330069BDFC /* Vidal.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3A9E3FCB1C80AE330069BDFC /* Vidal */ = {
+			isa = PBXGroup;
+			children = (
+				3A9E3FCF1C80AE330069BDFC /* AppDelegate.h */,
+				3A9E3FD01C80AE330069BDFC /* AppDelegate.m */,
+				3A9E3FD21C80AE330069BDFC /* ViewController.h */,
+				3A9E3FD31C80AE330069BDFC /* ViewController.m */,
+				3A9E3FD51C80AE330069BDFC /* Main.storyboard */,
+				3A9E3FDB1C80AE330069BDFC /* Assets.xcassets */,
+				3A9E3FDD1C80AE330069BDFC /* LaunchScreen.storyboard */,
+				3A9E3FE01C80AE330069BDFC /* Info.plist */,
+				3A9E3FD81C80AE330069BDFC /* Vidal.xcdatamodeld */,
+				3A9E3FCC1C80AE330069BDFC /* Supporting Files */,
+			);
+			path = Vidal;
+			sourceTree = "<group>";
+		};
+		3A9E3FCC1C80AE330069BDFC /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3A9E3FCD1C80AE330069BDFC /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		3A9E3FC81C80AE330069BDFC /* Vidal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3A9E3FE31C80AE330069BDFC /* Build configuration list for PBXNativeTarget "Vidal" */;
+			buildPhases = (
+				3A9E3FC51C80AE330069BDFC /* Sources */,
+				3A9E3FC61C80AE330069BDFC /* Frameworks */,
+				3A9E3FC71C80AE330069BDFC /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Vidal;
+			productName = Vidal;
+			productReference = 3A9E3FC91C80AE330069BDFC /* Vidal.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		3A9E3FC11C80AE330069BDFC /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0720;
+				ORGANIZATIONNAME = StyleRU;
+				TargetAttributes = {
+					3A9E3FC81C80AE330069BDFC = {
+						CreatedOnToolsVersion = 7.2;
+					};
+				};
+			};
+			buildConfigurationList = 3A9E3FC41C80AE330069BDFC /* Build configuration list for PBXProject "Vidal" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 3A9E3FC01C80AE330069BDFC;
+			productRefGroup = 3A9E3FCA1C80AE330069BDFC /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				3A9E3FC81C80AE330069BDFC /* Vidal */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		3A9E3FC71C80AE330069BDFC /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A9E3FDF1C80AE330069BDFC /* LaunchScreen.storyboard in Resources */,
+				3A9E3FDC1C80AE330069BDFC /* Assets.xcassets in Resources */,
+				3A9E3FD71C80AE330069BDFC /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		3A9E3FC51C80AE330069BDFC /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3A9E3FD41C80AE330069BDFC /* ViewController.m in Sources */,
+				3A9E3FD11C80AE330069BDFC /* AppDelegate.m in Sources */,
+				3A9E3FDA1C80AE330069BDFC /* Vidal.xcdatamodeld in Sources */,
+				3A9E3FCE1C80AE330069BDFC /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		3A9E3FD51C80AE330069BDFC /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A9E3FD61C80AE330069BDFC /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		3A9E3FDD1C80AE330069BDFC /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3A9E3FDE1C80AE330069BDFC /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		3A9E3FE11C80AE330069BDFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		3A9E3FE21C80AE330069BDFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		3A9E3FE41C80AE330069BDFC /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Vidal/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = StyleRU.Vidal;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		3A9E3FE51C80AE330069BDFC /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = Vidal/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = StyleRU.Vidal;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		3A9E3FC41C80AE330069BDFC /* Build configuration list for PBXProject "Vidal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A9E3FE11C80AE330069BDFC /* Debug */,
+				3A9E3FE21C80AE330069BDFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		3A9E3FE31C80AE330069BDFC /* Build configuration list for PBXNativeTarget "Vidal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3A9E3FE41C80AE330069BDFC /* Debug */,
+				3A9E3FE51C80AE330069BDFC /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		3A9E3FD81C80AE330069BDFC /* Vidal.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				3A9E3FD91C80AE330069BDFC /* Vidal.xcdatamodel */,
+			);
+			currentVersion = 3A9E3FD91C80AE330069BDFC /* Vidal.xcdatamodel */;
+			path = Vidal.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = 3A9E3FC11C80AE330069BDFC /* Project object */;
+}
