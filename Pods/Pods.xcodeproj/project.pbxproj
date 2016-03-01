@@ -1,0 +1,446 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		10247641EF0B5157FF6DA347A3ED0C7B /* Pods-Vidal-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6734262E44B76851C8E59BFCCF6F9DEB /* Pods-Vidal-dummy.m */; };
+		3C07078E2E908590A85561F87C7D02CB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		537A40F2C8C55B233C338EA879919B0B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */; };
+		7873F380EBB90D62BB98741912B517DE /* HSDatePickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = F20B34291DDC72D326A6DFA4865A81D0 /* HSDatePickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		B682329EDE95117413AB34E604B70445 /* HSDatePickerViewController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 4043D21B09F46F45A6D297F2D385E939 /* HSDatePickerViewController-dummy.m */; };
+		D2597C4AB8316CB430A3460C98D86D68 /* HSDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C3A8FF73DD817385EE9CA0E56DDBE853 /* HSDatePickerViewController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		2ABBA4AA9E569694D32992F71729B6AB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 6B0B9C928B05BA6346AB032DD0260C56;
+			remoteInfo = HSDatePickerViewController;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1003720974CAF85C25B2C8DDFABA195A /* Pods-Vidal-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Vidal-frameworks.sh"; sourceTree = "<group>"; };
+		225805EDA56AACDC7813C740038E01F6 /* Pods-Vidal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vidal.debug.xcconfig"; sourceTree = "<group>"; };
+		36ABB1128ED33DCB33E453D82DB4371C /* libHSDatePickerViewController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHSDatePickerViewController.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		3F8BA4F0990DD3F114E120F929389014 /* Pods-Vidal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vidal.release.xcconfig"; sourceTree = "<group>"; };
+		4043D21B09F46F45A6D297F2D385E939 /* HSDatePickerViewController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HSDatePickerViewController-dummy.m"; sourceTree = "<group>"; };
+		44AC6650AAA33C22C6C22D7B2BB3328C /* HSDatePickerViewController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HSDatePickerViewController.xcconfig; sourceTree = "<group>"; };
+		557A2A90C371010EB9EED4F2EB182113 /* Pods-Vidal-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Vidal-resources.sh"; sourceTree = "<group>"; };
+		5D0DEBA501ED3EA0A4246776B9E0BE39 /* HSDatePickerViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = HSDatePickerViewController.xib; path = HSDatePickerViewControllerDemo/HSDatePickerViewController/HSDatePickerViewController.xib; sourceTree = "<group>"; };
+		6734262E44B76851C8E59BFCCF6F9DEB /* Pods-Vidal-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Vidal-dummy.m"; sourceTree = "<group>"; };
+		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		BC0193C06E52CC879798FF79F2595C08 /* HSDatePickerViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HSDatePickerViewController-prefix.pch"; sourceTree = "<group>"; };
+		BE4003A6E773294E28B415176008471C /* Pods-Vidal-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Vidal-acknowledgements.markdown"; sourceTree = "<group>"; };
+		BF3D967D0E2433BA08D45D731C3943C9 /* libPods-Vidal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vidal.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C3A8FF73DD817385EE9CA0E56DDBE853 /* HSDatePickerViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HSDatePickerViewController.m; path = HSDatePickerViewControllerDemo/HSDatePickerViewController/HSDatePickerViewController.m; sourceTree = "<group>"; };
+		CC27AECCC874476BA997722357635D3E /* Pods-Vidal-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Vidal-acknowledgements.plist"; sourceTree = "<group>"; };
+		F20B34291DDC72D326A6DFA4865A81D0 /* HSDatePickerViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HSDatePickerViewController.h; path = HSDatePickerViewControllerDemo/HSDatePickerViewController/HSDatePickerViewController.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		1DAF83ABD809CDBFB1C8F011883A8858 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3C07078E2E908590A85561F87C7D02CB /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D646D2234B48B3EA5209C3F5B5365977 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				537A40F2C8C55B233C338EA879919B0B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1437C26F16B5E5A5FDC5A97E1F4DCBF3 /* Pods-Vidal */ = {
+			isa = PBXGroup;
+			children = (
+				BE4003A6E773294E28B415176008471C /* Pods-Vidal-acknowledgements.markdown */,
+				CC27AECCC874476BA997722357635D3E /* Pods-Vidal-acknowledgements.plist */,
+				6734262E44B76851C8E59BFCCF6F9DEB /* Pods-Vidal-dummy.m */,
+				1003720974CAF85C25B2C8DDFABA195A /* Pods-Vidal-frameworks.sh */,
+				557A2A90C371010EB9EED4F2EB182113 /* Pods-Vidal-resources.sh */,
+				225805EDA56AACDC7813C740038E01F6 /* Pods-Vidal.debug.xcconfig */,
+				3F8BA4F0990DD3F114E120F929389014 /* Pods-Vidal.release.xcconfig */,
+			);
+			name = "Pods-Vidal";
+			path = "Target Support Files/Pods-Vidal";
+			sourceTree = "<group>";
+		};
+		5B72083A728EDB665C830CB055122C6A /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				1437C26F16B5E5A5FDC5A97E1F4DCBF3 /* Pods-Vidal */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		67FB103A1C34862AD86018237B7B9CB7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8D85BB67DBEA6E830C2AE7E2137BCF3B /* HSDatePickerViewController */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6AD6D1B71042693FC8C5329DA9CADDAA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				5D0DEBA501ED3EA0A4246776B9E0BE39 /* HSDatePickerViewController.xib */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		7DB346D0F39D3F0E887471402A8071AB = {
+			isa = PBXGroup;
+			children = (
+				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
+				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
+				67FB103A1C34862AD86018237B7B9CB7 /* Pods */,
+				A37402C5BDA65F51C7894D582CB9D255 /* Products */,
+				5B72083A728EDB665C830CB055122C6A /* Targets Support Files */,
+			);
+			sourceTree = "<group>";
+		};
+		8D85BB67DBEA6E830C2AE7E2137BCF3B /* HSDatePickerViewController */ = {
+			isa = PBXGroup;
+			children = (
+				F20B34291DDC72D326A6DFA4865A81D0 /* HSDatePickerViewController.h */,
+				C3A8FF73DD817385EE9CA0E56DDBE853 /* HSDatePickerViewController.m */,
+				6AD6D1B71042693FC8C5329DA9CADDAA /* Resources */,
+				B98E884F646622C52DF125AB9E0BE757 /* Support Files */,
+			);
+			path = HSDatePickerViewController;
+			sourceTree = "<group>";
+		};
+		A37402C5BDA65F51C7894D582CB9D255 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				36ABB1128ED33DCB33E453D82DB4371C /* libHSDatePickerViewController.a */,
+				BF3D967D0E2433BA08D45D731C3943C9 /* libPods-Vidal.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B98E884F646622C52DF125AB9E0BE757 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				44AC6650AAA33C22C6C22D7B2BB3328C /* HSDatePickerViewController.xcconfig */,
+				4043D21B09F46F45A6D297F2D385E939 /* HSDatePickerViewController-dummy.m */,
+				BC0193C06E52CC879798FF79F2595C08 /* HSDatePickerViewController-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/HSDatePickerViewController";
+			sourceTree = "<group>";
+		};
+		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF6342C8B29F4CEEA088EFF7AB4DE362 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				3E4E89230EF59BC255123B67864ACF77 /* Foundation.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		E0670F27B95AB1F2597B56E1D837731D /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				7873F380EBB90D62BB98741912B517DE /* HSDatePickerViewController.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		6B0B9C928B05BA6346AB032DD0260C56 /* HSDatePickerViewController */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = A3B0172AA86BBEA6BE600520E675E6A1 /* Build configuration list for PBXNativeTarget "HSDatePickerViewController" */;
+			buildPhases = (
+				17851A1483CC3597C82A5CAEA073B237 /* Sources */,
+				D646D2234B48B3EA5209C3F5B5365977 /* Frameworks */,
+				E0670F27B95AB1F2597B56E1D837731D /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = HSDatePickerViewController;
+			productName = HSDatePickerViewController;
+			productReference = 36ABB1128ED33DCB33E453D82DB4371C /* libHSDatePickerViewController.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		739D2F5A9FCC2F15434F0B756101BD82 /* Pods-Vidal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BAEB8B6BF5EEEC9C0A79ACB4EBD70241 /* Build configuration list for PBXNativeTarget "Pods-Vidal" */;
+			buildPhases = (
+				165D9038FE30A2D6219B2DCBA9FBFED6 /* Sources */,
+				1DAF83ABD809CDBFB1C8F011883A8858 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				5A90D36C30A53FB7BADC288E3A71D02C /* PBXTargetDependency */,
+			);
+			name = "Pods-Vidal";
+			productName = "Pods-Vidal";
+			productReference = BF3D967D0E2433BA08D45D731C3943C9 /* libPods-Vidal.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
+			};
+			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
+			productRefGroup = A37402C5BDA65F51C7894D582CB9D255 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				6B0B9C928B05BA6346AB032DD0260C56 /* HSDatePickerViewController */,
+				739D2F5A9FCC2F15434F0B756101BD82 /* Pods-Vidal */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		165D9038FE30A2D6219B2DCBA9FBFED6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				10247641EF0B5157FF6DA347A3ED0C7B /* Pods-Vidal-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		17851A1483CC3597C82A5CAEA073B237 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B682329EDE95117413AB34E604B70445 /* HSDatePickerViewController-dummy.m in Sources */,
+				D2597C4AB8316CB430A3460C98D86D68 /* HSDatePickerViewController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		5A90D36C30A53FB7BADC288E3A71D02C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = HSDatePickerViewController;
+			target = 6B0B9C928B05BA6346AB032DD0260C56 /* HSDatePickerViewController */;
+			targetProxy = 2ABBA4AA9E569694D32992F71729B6AB /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		41DEBFF87E8E7082B337B05E83D2E509 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44AC6650AAA33C22C6C22D7B2BB3328C /* HSDatePickerViewController.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/HSDatePickerViewController/HSDatePickerViewController-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		8521756508CFA97DA7AB2AD137E0C92B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3F8BA4F0990DD3F114E120F929389014 /* Pods-Vidal.release.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		8D1534490D941DCA47C62AC4314182AF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				ONLY_ACTIVE_ARCH = YES;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+			};
+			name = Debug;
+		};
+		9880037D4CEBA42EDABF62A3F7E1A82B /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 44AC6650AAA33C22C6C22D7B2BB3328C /* HSDatePickerViewController.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/HSDatePickerViewController/HSDatePickerViewController-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRIVATE_HEADERS_FOLDER_PATH = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PUBLIC_HEADERS_FOLDER_PATH = "";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		C5A18280E9321A9268D1C80B7DA43967 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = "${SRCROOT}/../build";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D7C05E923DAF5A9A0D28F33A235CB7FD /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 225805EDA56AACDC7813C740038E01F6 /* Pods-Vidal.debug.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				MACH_O_TYPE = staticlib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PODS_ROOT = "$(SRCROOT)";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8D1534490D941DCA47C62AC4314182AF /* Debug */,
+				C5A18280E9321A9268D1C80B7DA43967 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		A3B0172AA86BBEA6BE600520E675E6A1 /* Build configuration list for PBXNativeTarget "HSDatePickerViewController" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				41DEBFF87E8E7082B337B05E83D2E509 /* Debug */,
+				9880037D4CEBA42EDABF62A3F7E1A82B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BAEB8B6BF5EEEC9C0A79ACB4EBD70241 /* Build configuration list for PBXNativeTarget "Pods-Vidal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D7C05E923DAF5A9A0D28F33A235CB7FD /* Debug */,
+				8521756508CFA97DA7AB2AD137E0C92B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+}

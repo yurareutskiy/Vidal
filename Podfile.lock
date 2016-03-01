@@ -1,0 +1,10 @@
+PODS:
+  - HSDatePickerViewController (1.0.1)
+
+DEPENDENCIES:
+  - HSDatePickerViewController (~> 1.0)
+
+SPEC CHECKSUMS:
+  HSDatePickerViewController: b292f2a53b2644a68aa5e1343053d2f3554de64c
+
+COCOAPODS: 0.39.0

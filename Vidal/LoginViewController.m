@@ -1,18 +1,18 @@
 //
-//  ViewController.m
+//  LoginViewController.m
 //  Vidal
 //
 //  Created by Anton Scherbakov on 26/02/16.
 //  Copyright © 2016 StyleRU. All rights reserved.
 //
 
-#import "ViewController.h"
+#import "LoginViewController.h"
 
-@interface ViewController ()
+@interface LoginViewController ()
 
 @end
 
-@implementation ViewController
+@implementation LoginViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,4 +28,9 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (IBAction)registration:(UIButton *)sender {
+    
+    [self performSegueWithIdentifier:@"toReg" sender:self];
+    
+}
 @end

@@ -10,26 +10,36 @@
 		3A70F38A1C80B32C00193150 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A70F3891C80B32C00193150 /* CoreGraphics.framework */; };
 		3A9E3FCE1C80AE330069BDFC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FCD1C80AE330069BDFC /* main.m */; };
 		3A9E3FD11C80AE330069BDFC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FD01C80AE330069BDFC /* AppDelegate.m */; };
-		3A9E3FD41C80AE330069BDFC /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FD31C80AE330069BDFC /* ViewController.m */; };
+		3A9E3FD41C80AE330069BDFC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FD31C80AE330069BDFC /* LoginViewController.m */; };
 		3A9E3FD71C80AE330069BDFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E3FD51C80AE330069BDFC /* Main.storyboard */; };
 		3A9E3FDA1C80AE330069BDFC /* Vidal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FD81C80AE330069BDFC /* Vidal.xcdatamodeld */; };
 		3A9E3FDC1C80AE330069BDFC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E3FDB1C80AE330069BDFC /* Assets.xcassets */; };
 		3A9E3FDF1C80AE330069BDFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E3FDD1C80AE330069BDFC /* LaunchScreen.storyboard */; };
+		3AAAA2C81C833FA3006DEE4E /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAAA2C71C833FA3006DEE4E /* RegViewController.m */; };
+		3AAAA2CB1C8384EB006DEE4E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAAA2CA1C8384EB006DEE4E /* MainViewController.m */; };
+		E82C22A1236860E5691C38CA /* libPods-Vidal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 267537716EDB3475C0BE9A2D /* libPods-Vidal.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		267537716EDB3475C0BE9A2D /* libPods-Vidal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vidal.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2EC6DDBDE2C370D5A4C9DA5A /* Pods-Vidal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vidal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vidal/Pods-Vidal.debug.xcconfig"; sourceTree = "<group>"; };
 		3A70F3891C80B32C00193150 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3A9E3FC91C80AE330069BDFC /* Vidal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vidal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9E3FCD1C80AE330069BDFC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A9E3FCF1C80AE330069BDFC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3A9E3FD01C80AE330069BDFC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		3A9E3FD21C80AE330069BDFC /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		3A9E3FD31C80AE330069BDFC /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		3A9E3FD21C80AE330069BDFC /* LoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		3A9E3FD31C80AE330069BDFC /* LoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		3A9E3FD61C80AE330069BDFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		3A9E3FD91C80AE330069BDFC /* Vidal.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vidal.xcdatamodel; sourceTree = "<group>"; };
 		3A9E3FDB1C80AE330069BDFC /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A9E3FDE1C80AE330069BDFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A9E3FE01C80AE330069BDFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3AAAA2C61C833FA3006DEE4E /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewController.h; sourceTree = "<group>"; };
+		3AAAA2C71C833FA3006DEE4E /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
+		3AAAA2C91C8384EB006DEE4E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
+		3AAAA2CA1C8384EB006DEE4E /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		639C2F57EA1C775AEEFEE2C9 /* Pods-Vidal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vidal.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vidal/Pods-Vidal.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -38,18 +48,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A70F38A1C80B32C00193150 /* CoreGraphics.framework in Frameworks */,
+				E82C22A1236860E5691C38CA /* libPods-Vidal.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1059885AE5801E2DA5485E93 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2EC6DDBDE2C370D5A4C9DA5A /* Pods-Vidal.debug.xcconfig */,
+				639C2F57EA1C775AEEFEE2C9 /* Pods-Vidal.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		3A9E3FC01C80AE330069BDFC = {
 			isa = PBXGroup;
 			children = (
 				3A70F3891C80B32C00193150 /* CoreGraphics.framework */,
 				3A9E3FCB1C80AE330069BDFC /* Vidal */,
 				3A9E3FCA1C80AE330069BDFC /* Products */,
+				1059885AE5801E2DA5485E93 /* Pods */,
+				FED137FC56CC9C0ECB250158 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -66,8 +88,12 @@
 			children = (
 				3A9E3FCF1C80AE330069BDFC /* AppDelegate.h */,
 				3A9E3FD01C80AE330069BDFC /* AppDelegate.m */,
-				3A9E3FD21C80AE330069BDFC /* ViewController.h */,
-				3A9E3FD31C80AE330069BDFC /* ViewController.m */,
+				3A9E3FD21C80AE330069BDFC /* LoginViewController.h */,
+				3A9E3FD31C80AE330069BDFC /* LoginViewController.m */,
+				3AAAA2C61C833FA3006DEE4E /* RegViewController.h */,
+				3AAAA2C71C833FA3006DEE4E /* RegViewController.m */,
+				3AAAA2C91C8384EB006DEE4E /* MainViewController.h */,
+				3AAAA2CA1C8384EB006DEE4E /* MainViewController.m */,
 				3A9E3FD51C80AE330069BDFC /* Main.storyboard */,
 				3A9E3FDB1C80AE330069BDFC /* Assets.xcassets */,
 				3A9E3FDD1C80AE330069BDFC /* LaunchScreen.storyboard */,
@@ -86,6 +112,14 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		FED137FC56CC9C0ECB250158 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				267537716EDB3475C0BE9A2D /* libPods-Vidal.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -93,9 +127,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 3A9E3FE31C80AE330069BDFC /* Build configuration list for PBXNativeTarget "Vidal" */;
 			buildPhases = (
+				6AC209F1D90B2C7B87C0F10F /* Check Pods Manifest.lock */,
 				3A9E3FC51C80AE330069BDFC /* Sources */,
 				3A9E3FC61C80AE330069BDFC /* Frameworks */,
 				3A9E3FC71C80AE330069BDFC /* Resources */,
+				AB1FE182AC0B1F07115FCF39 /* Embed Pods Frameworks */,
+				C6B93B91499BECDD934E44A5 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -151,14 +188,64 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		6AC209F1D90B2C7B87C0F10F /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AB1FE182AC0B1F07115FCF39 /* Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vidal/Pods-Vidal-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C6B93B91499BECDD934E44A5 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Vidal/Pods-Vidal-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		3A9E3FC51C80AE330069BDFC /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3A9E3FD41C80AE330069BDFC /* ViewController.m in Sources */,
+				3A9E3FD41C80AE330069BDFC /* LoginViewController.m in Sources */,
+				3AAAA2CB1C8384EB006DEE4E /* MainViewController.m in Sources */,
 				3A9E3FD11C80AE330069BDFC /* AppDelegate.m in Sources */,
 				3A9E3FDA1C80AE330069BDFC /* Vidal.xcdatamodeld in Sources */,
+				3AAAA2C81C833FA3006DEE4E /* RegViewController.m in Sources */,
 				3A9E3FCE1C80AE330069BDFC /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -267,6 +354,7 @@
 		};
 		3A9E3FE41C80AE330069BDFC /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2EC6DDBDE2C370D5A4C9DA5A /* Pods-Vidal.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Vidal/Info.plist;
@@ -278,6 +366,7 @@
 		};
 		3A9E3FE51C80AE330069BDFC /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 639C2F57EA1C775AEEFEE2C9 /* Pods-Vidal.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = Vidal/Info.plist;

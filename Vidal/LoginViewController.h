@@ -1,5 +1,5 @@
 //
-//  ViewController.h
+//  LoginViewController.h
 //  Vidal
 //
 //  Created by Anton Scherbakov on 26/02/16.
@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController
+@interface LoginViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UIButton *regButton;
+- (IBAction)registration:(UIButton *)sender;
 
 @end
 
