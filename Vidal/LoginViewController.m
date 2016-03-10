@@ -30,6 +30,12 @@
 
 - (IBAction)registration:(UIButton *)sender {
     
+    [self performSegueWithIdentifier:@"toReg" sender:self];
+    
+}
+
+- (IBAction)login:(UIButton *)sender {
+    
     UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
     [self presentViewController:vc animated:false completion:nil];
     
