@@ -7,8 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "ModelViewController.h"
 
-@interface MainViewController : UIViewController
-- (IBAction)back:(UIButton *)sender;
+@interface MainViewController : ModelViewController
 
 @end

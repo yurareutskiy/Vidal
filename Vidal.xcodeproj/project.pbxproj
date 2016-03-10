@@ -8,6 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		3A70F38A1C80B32C00193150 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A70F3891C80B32C00193150 /* CoreGraphics.framework */; };
+		3A78F0FF1C91E7DA008C6BE5 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F0FE1C91E7DA008C6BE5 /* MenuViewController.m */; };
+		3A78F1061C91E80A008C6BE5 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F1051C91E80A008C6BE5 /* SWRevealViewController.m */; };
+		3A78F10A1C920531008C6BE5 /* ModelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F1091C920531008C6BE5 /* ModelViewController.m */; };
+		3A78F10F1C920701008C6BE5 /* NewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F10E1C920701008C6BE5 /* NewsViewController.m */; };
+		3A78F1121C92071A008C6BE5 /* DrugsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F1111C92071A008C6BE5 /* DrugsViewController.m */; };
+		3A78F1151C920725008C6BE5 /* ActiveViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F1141C920725008C6BE5 /* ActiveViewController.m */; };
+		3A78F1181C920737008C6BE5 /* InteractionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F1171C920737008C6BE5 /* InteractionsViewController.m */; };
+		3A78F11B1C920740008C6BE5 /* PharmaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F11A1C920740008C6BE5 /* PharmaViewController.m */; };
+		3A78F11E1C92074B008C6BE5 /* ProducersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F11D1C92074B008C6BE5 /* ProducersViewController.m */; };
+		3A78F1211C920756008C6BE5 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F1201C920756008C6BE5 /* AboutViewController.m */; };
+		3A78F1241C920762008C6BE5 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F1231C920762008C6BE5 /* ProfileViewController.m */; };
+		3A78F1271C92076D008C6BE5 /* FavouriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F1261C92076D008C6BE5 /* FavouriteViewController.m */; };
+		3A78F12A1C920775008C6BE5 /* ReferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F1291C920775008C6BE5 /* ReferenceViewController.m */; };
 		3A9E3FCE1C80AE330069BDFC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FCD1C80AE330069BDFC /* main.m */; };
 		3A9E3FD11C80AE330069BDFC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FD01C80AE330069BDFC /* AppDelegate.m */; };
 		3A9E3FD41C80AE330069BDFC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FD31C80AE330069BDFC /* LoginViewController.m */; };
@@ -24,6 +37,32 @@
 		267537716EDB3475C0BE9A2D /* libPods-Vidal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vidal.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EC6DDBDE2C370D5A4C9DA5A /* Pods-Vidal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vidal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vidal/Pods-Vidal.debug.xcconfig"; sourceTree = "<group>"; };
 		3A70F3891C80B32C00193150 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		3A78F0FD1C91E7DA008C6BE5 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
+		3A78F0FE1C91E7DA008C6BE5 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
+		3A78F1041C91E80A008C6BE5 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		3A78F1051C91E80A008C6BE5 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
+		3A78F1081C920531008C6BE5 /* ModelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ModelViewController.h; sourceTree = "<group>"; };
+		3A78F1091C920531008C6BE5 /* ModelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ModelViewController.m; sourceTree = "<group>"; };
+		3A78F10D1C920701008C6BE5 /* NewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NewsViewController.h; sourceTree = "<group>"; };
+		3A78F10E1C920701008C6BE5 /* NewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsViewController.m; sourceTree = "<group>"; };
+		3A78F1101C92071A008C6BE5 /* DrugsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DrugsViewController.h; sourceTree = "<group>"; };
+		3A78F1111C92071A008C6BE5 /* DrugsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DrugsViewController.m; sourceTree = "<group>"; };
+		3A78F1131C920725008C6BE5 /* ActiveViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveViewController.h; sourceTree = "<group>"; };
+		3A78F1141C920725008C6BE5 /* ActiveViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActiveViewController.m; sourceTree = "<group>"; };
+		3A78F1161C920737008C6BE5 /* InteractionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InteractionsViewController.h; sourceTree = "<group>"; };
+		3A78F1171C920737008C6BE5 /* InteractionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InteractionsViewController.m; sourceTree = "<group>"; };
+		3A78F1191C920740008C6BE5 /* PharmaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PharmaViewController.h; sourceTree = "<group>"; };
+		3A78F11A1C920740008C6BE5 /* PharmaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PharmaViewController.m; sourceTree = "<group>"; };
+		3A78F11C1C92074B008C6BE5 /* ProducersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProducersViewController.h; sourceTree = "<group>"; };
+		3A78F11D1C92074B008C6BE5 /* ProducersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProducersViewController.m; sourceTree = "<group>"; };
+		3A78F11F1C920755008C6BE5 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		3A78F1201C920756008C6BE5 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		3A78F1221C920762008C6BE5 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
+		3A78F1231C920762008C6BE5 /* ProfileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileViewController.m; sourceTree = "<group>"; };
+		3A78F1251C92076D008C6BE5 /* FavouriteViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FavouriteViewController.h; sourceTree = "<group>"; };
+		3A78F1261C92076D008C6BE5 /* FavouriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteViewController.m; sourceTree = "<group>"; };
+		3A78F1281C920775008C6BE5 /* ReferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferenceViewController.h; sourceTree = "<group>"; };
+		3A78F1291C920775008C6BE5 /* ReferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferenceViewController.m; sourceTree = "<group>"; };
 		3A9E3FC91C80AE330069BDFC /* Vidal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vidal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9E3FCD1C80AE330069BDFC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A9E3FCF1C80AE330069BDFC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -64,6 +103,53 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
+		3A78F1001C91E7E4008C6BE5 /* SWRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				3A78F0FD1C91E7DA008C6BE5 /* MenuViewController.h */,
+				3A78F0FE1C91E7DA008C6BE5 /* MenuViewController.m */,
+				3A78F1041C91E80A008C6BE5 /* SWRevealViewController.h */,
+				3A78F1051C91E80A008C6BE5 /* SWRevealViewController.m */,
+			);
+			name = SWRevealViewController;
+			sourceTree = "<group>";
+		};
+		3A78F1071C92051F008C6BE5 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3A78F1081C920531008C6BE5 /* ModelViewController.h */,
+				3A78F1091C920531008C6BE5 /* ModelViewController.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		3A78F10C1C9206EF008C6BE5 /* From menu */ = {
+			isa = PBXGroup;
+			children = (
+				3A78F10D1C920701008C6BE5 /* NewsViewController.h */,
+				3A78F10E1C920701008C6BE5 /* NewsViewController.m */,
+				3A78F1101C92071A008C6BE5 /* DrugsViewController.h */,
+				3A78F1111C92071A008C6BE5 /* DrugsViewController.m */,
+				3A78F1131C920725008C6BE5 /* ActiveViewController.h */,
+				3A78F1141C920725008C6BE5 /* ActiveViewController.m */,
+				3A78F1161C920737008C6BE5 /* InteractionsViewController.h */,
+				3A78F1171C920737008C6BE5 /* InteractionsViewController.m */,
+				3A78F1191C920740008C6BE5 /* PharmaViewController.h */,
+				3A78F11A1C920740008C6BE5 /* PharmaViewController.m */,
+				3A78F11C1C92074B008C6BE5 /* ProducersViewController.h */,
+				3A78F11D1C92074B008C6BE5 /* ProducersViewController.m */,
+				3A78F11F1C920755008C6BE5 /* AboutViewController.h */,
+				3A78F1201C920756008C6BE5 /* AboutViewController.m */,
+				3A78F1221C920762008C6BE5 /* ProfileViewController.h */,
+				3A78F1231C920762008C6BE5 /* ProfileViewController.m */,
+				3A78F1251C92076D008C6BE5 /* FavouriteViewController.h */,
+				3A78F1261C92076D008C6BE5 /* FavouriteViewController.m */,
+				3A78F1281C920775008C6BE5 /* ReferenceViewController.h */,
+				3A78F1291C920775008C6BE5 /* ReferenceViewController.m */,
+			);
+			name = "From menu";
+			sourceTree = "<group>";
+		};
 		3A9E3FC01C80AE330069BDFC = {
 			isa = PBXGroup;
 			children = (
@@ -88,6 +174,9 @@
 			children = (
 				3A9E3FCF1C80AE330069BDFC /* AppDelegate.h */,
 				3A9E3FD01C80AE330069BDFC /* AppDelegate.m */,
+				3A78F1001C91E7E4008C6BE5 /* SWRevealViewController */,
+				3A78F1071C92051F008C6BE5 /* Models */,
+				3A78F10C1C9206EF008C6BE5 /* From menu */,
 				3A9E3FD21C80AE330069BDFC /* LoginViewController.h */,
 				3A9E3FD31C80AE330069BDFC /* LoginViewController.m */,
 				3AAAA2C61C833FA3006DEE4E /* RegViewController.h */,
@@ -241,12 +330,25 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A78F1271C92076D008C6BE5 /* FavouriteViewController.m in Sources */,
+				3A78F1151C920725008C6BE5 /* ActiveViewController.m in Sources */,
+				3A78F11B1C920740008C6BE5 /* PharmaViewController.m in Sources */,
 				3A9E3FD41C80AE330069BDFC /* LoginViewController.m in Sources */,
 				3AAAA2CB1C8384EB006DEE4E /* MainViewController.m in Sources */,
 				3A9E3FD11C80AE330069BDFC /* AppDelegate.m in Sources */,
+				3A78F1121C92071A008C6BE5 /* DrugsViewController.m in Sources */,
+				3A78F1061C91E80A008C6BE5 /* SWRevealViewController.m in Sources */,
+				3A78F10A1C920531008C6BE5 /* ModelViewController.m in Sources */,
 				3A9E3FDA1C80AE330069BDFC /* Vidal.xcdatamodeld in Sources */,
+				3A78F1241C920762008C6BE5 /* ProfileViewController.m in Sources */,
+				3A78F0FF1C91E7DA008C6BE5 /* MenuViewController.m in Sources */,
+				3A78F12A1C920775008C6BE5 /* ReferenceViewController.m in Sources */,
+				3A78F1211C920756008C6BE5 /* AboutViewController.m in Sources */,
+				3A78F1181C920737008C6BE5 /* InteractionsViewController.m in Sources */,
+				3A78F10F1C920701008C6BE5 /* NewsViewController.m in Sources */,
 				3AAAA2C81C833FA3006DEE4E /* RegViewController.m in Sources */,
 				3A9E3FCE1C80AE330069BDFC /* main.m in Sources */,
+				3A78F11E1C92074B008C6BE5 /* ProducersViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

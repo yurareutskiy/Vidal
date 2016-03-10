@@ -16,6 +16,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -34,9 +35,4 @@
 }
 */
 
-- (IBAction)back:(UIButton *)sender {
-    
-    [self performSegueWithIdentifier:@"back" sender:self];
-    
-}
 @end
