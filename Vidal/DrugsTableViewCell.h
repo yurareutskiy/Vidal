@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <SLExpandableTableView.h>
 
-@interface DrugsTableViewCell : UITableViewCell
+
+@interface DrugsTableViewCell : UITableViewCell <UIExpandingTableViewCell>
+
+@property (nonatomic, assign, getter = isLoading) BOOL loading;
+
+@property (nonatomic, readonly) UIExpansionStyle expansionStyle;
+- (void)setExpansionStyle:(UIExpansionStyle)expansionStyle animated:(BOOL)animated;
 
 @end
