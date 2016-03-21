@@ -16,6 +16,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.navigationItem.title = @"О Такеда";
+    
+    NSString *string1 = self.takeda.text;
+    self.takeda.numberOfLines = 0;
+    self.takeda.text = string1;
+    [self.takeda sizeToFit];
+    
+    NSString *string2 = self.drug.text;
+    self.drug.numberOfLines = 0;
+    self.drug.text = string2;
+    [self.drug sizeToFit];
+    
+    
     // Do any additional setup after loading the view.
 }
 

@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '047C3177A67BA1C6D897F3C5'
-               BlueprintName = 'HSDatePickerViewController'
+               BlueprintIdentifier = 'C31A32B2BBCB3C75EF33DD84'
+               BlueprintName = 'SLExpandableTableView'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libHSDatePickerViewController.a'>
+               BuildableName = 'libSLExpandableTableView.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

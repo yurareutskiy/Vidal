@@ -8,6 +8,7 @@
 
 #import "ModelViewController.h"
 
-@interface NewsViewController : ModelViewController
+@interface NewsViewController : ModelViewController<UITableViewDataSource, UITableViewDelegate>
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end

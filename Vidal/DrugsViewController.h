@@ -7,7 +7,10 @@
 //
 
 #import "ModelViewController.h"
+#import <SLExpandableTableView.h>
 
-@interface DrugsViewController : ModelViewController
+@interface DrugsViewController : ModelViewController<UITableViewDelegate, UITableViewDataSource, SLExpandableTableViewDatasource, SLExpandableTableViewDelegate>
+
+@property (strong, nonatomic) IBOutlet SLExpandableTableView *tableView;
 
 @end

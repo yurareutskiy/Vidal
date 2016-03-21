@@ -8,6 +8,8 @@
 
 #import "ModelViewController.h"
 
-@interface ProducersViewController : ModelViewController
+@interface ProducersViewController : ModelViewController<UITableViewDelegate, UITableViewDataSource>
+
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end

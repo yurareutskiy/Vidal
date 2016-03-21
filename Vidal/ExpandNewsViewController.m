@@ -1,27 +1,28 @@
 //
-//  NewsViewController.m
+//  ExpandNewsViewController.m
 //  Vidal
 //
-//  Created by Anton Scherbakov on 10/03/16.
+//  Created by Anton Scherbakov on 18/03/16.
 //  Copyright © 2016 StyleRU. All rights reserved.
 //
 
-#import "NewsViewController.h"
+#import "ExpandNewsViewController.h"
 
-@interface NewsViewController ()
+@interface ExpandNewsViewController ()
 
 @end
 
-@implementation NewsViewController
+@implementation ExpandNewsViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    
     self.navigationItem.title = @"Новости";
-
+    
+    NSString *string = self.newsText.text;
+    self.newsText.numberOfLines = 0;
+    self.newsText.text = string;
+    [self.newsText sizeToFit];
     
     // Do any additional setup after loading the view.
 }
@@ -29,22 +30,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"newsCell"];
-    
-    return cell;
-    
-}
-
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
 }
 
 /*
@@ -57,4 +42,9 @@
 }
 */
 
+- (IBAction)backAction:(UIButton *)sender {
+    
+    [self.navigationController popViewControllerAnimated:true];
+    
+}
 @end

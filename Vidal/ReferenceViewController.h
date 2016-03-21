@@ -10,4 +10,6 @@
 
 @interface ReferenceViewController : ModelViewController
 
+@property (strong, nonatomic) IBOutlet UILabel *takeda;
+
 @end

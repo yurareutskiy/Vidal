@@ -8,6 +8,7 @@
 
 #import "ModelViewController.h"
 
-@interface ActiveViewController : ModelViewController
+@interface ActiveViewController : ModelViewController<UITableViewDelegate, UITableViewDataSource>
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end

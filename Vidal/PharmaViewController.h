@@ -8,6 +8,8 @@
 
 #import "ModelViewController.h"
 
-@interface PharmaViewController : ModelViewController
+@interface PharmaViewController : ModelViewController<UITableViewDataSource, UITableViewDelegate>
+
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end

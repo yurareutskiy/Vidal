@@ -14,15 +14,25 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SLExpandableTableView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>6B0B9C928B05BA6346AB032DD0260C56</key>
+		<key>19239225D895C3593FFC7329E11C71C5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>739D2F5A9FCC2F15434F0B756101BD82</key>
+		<key>6148E741EBA74B8EEB827F0D53F656E3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6B0B9C928B05BA6346AB032DD0260C56</key>
 		<dict>
 			<key>primary</key>
 			<true/>

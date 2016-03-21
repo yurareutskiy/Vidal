@@ -8,6 +8,7 @@
 
 #import "ModelViewController.h"
 
-@interface FavouriteViewController : ModelViewController
+@interface FavouriteViewController : ModelViewController<UITableViewDataSource, UITableViewDelegate>
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end
