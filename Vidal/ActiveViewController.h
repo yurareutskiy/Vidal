@@ -7,8 +7,10 @@
 //
 
 #import "ModelViewController.h"
+#import <SLExpandableTableView.h>
+#import "ActiveTableViewCell.h"
 
-@interface ActiveViewController : ModelViewController<UITableViewDelegate, UITableViewDataSource>
-@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@interface ActiveViewController : ModelViewController<SLExpandableTableViewDatasource, SLExpandableTableViewDelegate>
+@property (strong, nonatomic) IBOutlet SLExpandableTableView *tableView;
 
 @end

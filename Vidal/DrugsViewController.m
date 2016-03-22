@@ -12,9 +12,7 @@
 
 @property (nonatomic, strong) NSArray *firstSectionStrings;
 @property (nonatomic, strong) NSArray *secondSectionStrings;
-
 @property (nonatomic, strong) NSMutableArray *sectionsArray;
-
 @property (nonatomic, strong) NSMutableIndexSet *expandableSections;
 
 @end
@@ -29,7 +27,6 @@
     
     _firstSectionStrings = @[@"Гадовист", @"Галидор", @"Гордокс"];
     _secondSectionStrings = @[@"Тест", @"Тест", @"Тест"];
-    
     _sectionsArray = @[_firstSectionStrings, _secondSectionStrings].mutableCopy;
     _expandableSections = [NSMutableIndexSet indexSet];
     

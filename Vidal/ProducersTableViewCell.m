@@ -11,6 +11,17 @@
 @implementation ProducersTableViewCell
 
 - (void)awakeFromNib {
+    
+    NSString *string = self.name.text;
+    self.name.numberOfLines = 0;
+    self.name.text = string;
+    [self.name sizeToFit];
+    
+    NSString *string1 = self.country.text;
+    self.country.numberOfLines = 0;
+    self.country.text = string1;
+    [self.country sizeToFit];
+    
     // Initialization code
 }
 

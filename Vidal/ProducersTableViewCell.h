@@ -10,4 +10,7 @@
 
 @interface ProducersTableViewCell : UITableViewCell
 
+@property (strong, nonatomic) IBOutlet UILabel *name;
+@property (strong, nonatomic) IBOutlet UILabel *country;
+
 @end

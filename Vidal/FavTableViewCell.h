@@ -9,5 +9,6 @@
 #import <UIKit/UIKit.h>
 
 @interface FavTableViewCell : UITableViewCell
+@property (strong, nonatomic) IBOutlet UILabel *information;
 
 @end

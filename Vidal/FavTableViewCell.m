@@ -11,6 +11,12 @@
 @implementation FavTableViewCell
 
 - (void)awakeFromNib {
+    
+    NSString *string = self.information.text;
+    self.information.numberOfLines = 0;
+    self.information.text = string;
+    [self.information sizeToFit];
+    
     // Initialization code
 }
 
