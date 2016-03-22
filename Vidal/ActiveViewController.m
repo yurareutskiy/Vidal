@@ -30,7 +30,6 @@
     _sectionsArray = @[_firstSectionStrings, _secondSectionStrings].mutableCopy;
     _expandableSections = [NSMutableIndexSet indexSet];
     
-    
     self.navigationItem.title = @"Указатель активных веществ";
     
     // Do any additional setup after loading the view.

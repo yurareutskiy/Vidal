@@ -16,12 +16,23 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSString *string = self.info1.text;
+    self.info1.numberOfLines = 0;
+    self.info1.text = string;
+    [self.info1 sizeToFit];
+    
     // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.input resignFirstResponder];
 }
 
 /*

@@ -816,34 +816,65 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="takedaPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="bNT-vg-vKY">
-                                <rect key="frame" x="0.0" y="64" width="600" height="128"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takedaPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="bNT-vg-vKY">
+                                <rect key="frame" x="0.0" y="64" width="600" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="Hr6-mB-XFz"/>
+                                </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Проверка лекарстенного взаимодействия проводится только для активных веществ лекарственных препаратов" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqc-0v-mbv">
-                                <rect key="frame" x="20" y="209" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Проверка лекарстенного взаимодействия проводится только для активных веществ лекарственных препаратов" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqc-0v-mbv">
+                                <rect key="frame" x="30" y="224" width="540" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.68235294120000001" green="0.68235294120000001" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Выберите активное вещество" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4S-hc-dtw">
-                                <rect key="frame" x="20" y="254" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Выберите активное вещество:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q4S-hc-dtw">
+                                <rect key="frame" x="30" y="257" width="540" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                <color key="textColor" red="0.68235294120000001" green="0.68235294120000001" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZeT-q2-6rc">
-                                <rect key="frame" x="20" y="324" width="240" height="26"/>
-                                <color key="backgroundColor" red="0.41568627450000001" green="0.41568627450000001" blue="0.41568627450000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZeT-q2-6rc">
+                                <rect key="frame" x="30" y="306" width="540" height="1"/>
+                                <color key="backgroundColor" red="0.68235294120000001" green="0.68235294120000001" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="1" id="MUq-wn-g9v"/>
+                                </constraints>
                             </view>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ddz-PV-PjD">
-                                <rect key="frame" x="20" y="283" width="97" height="30"/>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ddz-PV-PjD">
+                                <rect key="frame" x="30" y="281" width="540" height="25"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="Rhz-Xn-UTV"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="qqc-0v-mbv" firstAttribute="leading" secondItem="LBm-7j-jiE" secondAttribute="leadingMargin" constant="10" id="6is-3l-HTe"/>
+                            <constraint firstItem="q4S-hc-dtw" firstAttribute="leading" secondItem="qqc-0v-mbv" secondAttribute="leading" id="7JG-Gn-qAx"/>
+                            <constraint firstItem="q4S-hc-dtw" firstAttribute="top" secondItem="qqc-0v-mbv" secondAttribute="bottom" constant="15" id="Bin-SM-cKf"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bNT-vg-vKY" secondAttribute="trailing" constant="-20" id="Bmt-ky-rrD"/>
+                            <constraint firstItem="ZeT-q2-6rc" firstAttribute="top" secondItem="Ddz-PV-PjD" secondAttribute="bottom" id="D1z-3c-cI5"/>
+                            <constraint firstItem="bNT-vg-vKY" firstAttribute="leading" secondItem="LBm-7j-jiE" secondAttribute="leadingMargin" constant="-20" id="Ha4-mp-YgJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="qqc-0v-mbv" secondAttribute="trailing" constant="10" id="LCr-y8-QDI"/>
+                            <constraint firstItem="q4S-hc-dtw" firstAttribute="trailing" secondItem="qqc-0v-mbv" secondAttribute="trailing" id="YLD-W7-fkJ"/>
+                            <constraint firstItem="ZeT-q2-6rc" firstAttribute="trailing" secondItem="Ddz-PV-PjD" secondAttribute="trailing" id="Zfi-AH-ptQ"/>
+                            <constraint firstItem="ZeT-q2-6rc" firstAttribute="leading" secondItem="Ddz-PV-PjD" secondAttribute="leading" id="caK-Ax-m77"/>
+                            <constraint firstItem="Ddz-PV-PjD" firstAttribute="leading" secondItem="q4S-hc-dtw" secondAttribute="leading" id="dzH-BW-rCj"/>
+                            <constraint firstItem="bNT-vg-vKY" firstAttribute="top" secondItem="bMk-mt-tKB" secondAttribute="bottom" id="gHC-XN-NUt"/>
+                            <constraint firstItem="qqc-0v-mbv" firstAttribute="top" secondItem="bNT-vg-vKY" secondAttribute="bottom" constant="10" id="nxk-K9-GMh"/>
+                            <constraint firstItem="Ddz-PV-PjD" firstAttribute="trailing" secondItem="q4S-hc-dtw" secondAttribute="trailing" id="oaD-MS-pjh"/>
+                            <constraint firstItem="Ddz-PV-PjD" firstAttribute="top" secondItem="q4S-hc-dtw" secondAttribute="bottom" constant="8" id="xId-Cv-8EQ"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="7hY-Mh-qLF"/>
+                    <connections>
+                        <outlet property="info1" destination="qqc-0v-mbv" id="h5N-93-U3f"/>
+                        <outlet property="info2" destination="q4S-hc-dtw" id="1T2-Vq-PDs"/>
+                        <outlet property="input" destination="Ddz-PV-PjD" id="DEf-8a-Nzn"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RoC-YJ-f6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
