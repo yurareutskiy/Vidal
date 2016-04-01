@@ -93,8 +93,8 @@
 		3A15705D1CAEAA2B00D49C5E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		3A15705E1CAEAA2B00D49C5E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		3A15705F1CAEAA2B00D49C5E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
-		3A1570641CAEAAAF00D49C5E /* OKSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKSDK.h; sourceTree = "<group>"; };
-		3A1570651CAEAAAF00D49C5E /* OKSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKSDK.m; sourceTree = "<group>"; };
+		3A1570641CAEAAAF00D49C5E /* OKSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OKSDK.h; path = Vidal/OKSDK.h; sourceTree = "<group>"; };
+		3A1570651CAEAAAF00D49C5E /* OKSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OKSDK.m; path = Vidal/OKSDK.m; sourceTree = "<group>"; };
 		3A5638571CA19971000A83B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A70F3891C80B32C00193150 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3A78F0FD1C91E7DA008C6BE5 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
@@ -186,13 +186,13 @@
 			name = TableCells;
 			sourceTree = "<group>";
 		};
-		3A0D5CB21C9C6D29005E6976 /* Second iteration from menu */ = {
+		3A0D5CB21C9C6D29005E6976 /* From Main Screens */ = {
 			isa = PBXGroup;
 			children = (
 				3A0D5CB31C9C6D6E005E6976 /* ExpandNewsViewController.h */,
 				3A0D5CB41C9C6D6E005E6976 /* ExpandNewsViewController.m */,
 			);
-			name = "Second iteration from menu";
+			name = "From Main Screens";
 			sourceTree = "<group>";
 		};
 		3A15704A1CAEA86800D49C5E /* Products */ = {
@@ -201,6 +201,69 @@
 				3A15704F1CAEA86800D49C5E /* libsqlcipher.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		3A1570681CAEAE2900D49C5E /* Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				3A1570641CAEAAAF00D49C5E /* OKSDK.h */,
+				3A1570651CAEAAAF00D49C5E /* OKSDK.m */,
+				3A78F1001C91E7E4008C6BE5 /* SWRevealViewController */,
+				3A70F3891C80B32C00193150 /* CoreGraphics.framework */,
+				3A15705D1CAEAA2B00D49C5E /* FBSDKCoreKit.framework */,
+				3A15705E1CAEAA2B00D49C5E /* FBSDKLoginKit.framework */,
+				3A15705F1CAEAA2B00D49C5E /* FBSDKShareKit.framework */,
+			);
+			name = Libraries;
+			sourceTree = "<group>";
+		};
+		3A1570691CAEAE3D00D49C5E /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				3A1570531CAEA8F800D49C5E /* DBManager.h */,
+				3A1570541CAEA8F800D49C5E /* DBManager.m */,
+				3A1570561CAEA95900D49C5E /* vidal.cardio.crypt.db3 */,
+				3A1570571CAEA95900D49C5E /* vidal.cardio.encrypt.db3 */,
+			);
+			name = Database;
+			sourceTree = "<group>";
+		};
+		3A15706A1CAEAE4800D49C5E /* Social Network */ = {
+			isa = PBXGroup;
+			children = (
+				3A15705A1CAEA96A00D49C5E /* SocialNetworkManager.h */,
+				3A15705B1CAEA96A00D49C5E /* SocialNetworkManager.m */,
+			);
+			name = "Social Network";
+			sourceTree = "<group>";
+		};
+		3A15706B1CAEAE7800D49C5E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3A78F1081C920531008C6BE5 /* ModelViewController.h */,
+				3A78F1091C920531008C6BE5 /* ModelViewController.m */,
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		3A15706C1CAEAED300D49C5E /* Login Screens */ = {
+			isa = PBXGroup;
+			children = (
+				3A9E3FD21C80AE330069BDFC /* LoginViewController.h */,
+				3A9E3FD31C80AE330069BDFC /* LoginViewController.m */,
+				3AAAA2C61C833FA3006DEE4E /* RegViewController.h */,
+				3AAAA2C71C833FA3006DEE4E /* RegViewController.m */,
+			);
+			name = "Login Screens";
+			sourceTree = "<group>";
+		};
+		3A15706D1CAEAF1200D49C5E /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				3A9E3FD51C80AE330069BDFC /* Main.storyboard */,
+				3A9E3FDD1C80AE330069BDFC /* LaunchScreen.storyboard */,
+			);
+			name = Storyboards;
 			sourceTree = "<group>";
 		};
 		3A78F1001C91E7E4008C6BE5 /* SWRevealViewController */ = {
@@ -212,20 +275,24 @@
 				3A78F1051C91E80A008C6BE5 /* SWRevealViewController.m */,
 			);
 			name = SWRevealViewController;
+			path = Vidal;
 			sourceTree = "<group>";
 		};
-		3A78F1071C92051F008C6BE5 /* Models */ = {
+		3A78F1071C92051F008C6BE5 /* Additional Files */ = {
 			isa = PBXGroup;
 			children = (
-				3A78F1081C920531008C6BE5 /* ModelViewController.h */,
-				3A78F1091C920531008C6BE5 /* ModelViewController.m */,
+				3A0D5C9E1C9C455A005E6976 /* TableCells */,
+				3A15706B1CAEAE7800D49C5E /* Models */,
 			);
-			name = Models;
+			name = "Additional Files";
 			sourceTree = "<group>";
 		};
-		3A78F10C1C9206EF008C6BE5 /* From menu */ = {
+		3A78F10C1C9206EF008C6BE5 /* Main Screens */ = {
 			isa = PBXGroup;
 			children = (
+				3A15706C1CAEAED300D49C5E /* Login Screens */,
+				3AAAA2C91C8384EB006DEE4E /* MainViewController.h */,
+				3AAAA2CA1C8384EB006DEE4E /* MainViewController.m */,
 				3A78F10D1C920701008C6BE5 /* NewsViewController.h */,
 				3A78F10E1C920701008C6BE5 /* NewsViewController.m */,
 				3A78F1101C92071A008C6BE5 /* DrugsViewController.h */,
@@ -247,17 +314,14 @@
 				3A78F1281C920775008C6BE5 /* ReferenceViewController.h */,
 				3A78F1291C920775008C6BE5 /* ReferenceViewController.m */,
 			);
-			name = "From menu";
+			name = "Main Screens";
 			sourceTree = "<group>";
 		};
 		3A9E3FC01C80AE330069BDFC = {
 			isa = PBXGroup;
 			children = (
 				3A1570491CAEA86800D49C5E /* sqlcipher.xcodeproj */,
-				3A70F3891C80B32C00193150 /* CoreGraphics.framework */,
-				3A15705D1CAEAA2B00D49C5E /* FBSDKCoreKit.framework */,
-				3A15705E1CAEAA2B00D49C5E /* FBSDKLoginKit.framework */,
-				3A15705F1CAEAA2B00D49C5E /* FBSDKShareKit.framework */,
+				3A1570681CAEAE2900D49C5E /* Libraries */,
 				3A9E3FCB1C80AE330069BDFC /* Vidal */,
 				3A9E3FCA1C80AE330069BDFC /* Products */,
 				1059885AE5801E2DA5485E93 /* Pods */,
@@ -278,30 +342,15 @@
 			children = (
 				3A9E3FCF1C80AE330069BDFC /* AppDelegate.h */,
 				3A9E3FD01C80AE330069BDFC /* AppDelegate.m */,
-				3A1570531CAEA8F800D49C5E /* DBManager.h */,
-				3A1570541CAEA8F800D49C5E /* DBManager.m */,
-				3A15705A1CAEA96A00D49C5E /* SocialNetworkManager.h */,
-				3A15705B1CAEA96A00D49C5E /* SocialNetworkManager.m */,
-				3A78F1001C91E7E4008C6BE5 /* SWRevealViewController */,
-				3A78F1071C92051F008C6BE5 /* Models */,
-				3A78F10C1C9206EF008C6BE5 /* From menu */,
-				3A0D5CB21C9C6D29005E6976 /* Second iteration from menu */,
-				3A0D5C9E1C9C455A005E6976 /* TableCells */,
-				3A9E3FD21C80AE330069BDFC /* LoginViewController.h */,
-				3A9E3FD31C80AE330069BDFC /* LoginViewController.m */,
-				3AAAA2C61C833FA3006DEE4E /* RegViewController.h */,
-				3AAAA2C71C833FA3006DEE4E /* RegViewController.m */,
-				3AAAA2C91C8384EB006DEE4E /* MainViewController.h */,
-				3AAAA2CA1C8384EB006DEE4E /* MainViewController.m */,
-				3A9E3FD51C80AE330069BDFC /* Main.storyboard */,
-				3A9E3FDD1C80AE330069BDFC /* LaunchScreen.storyboard */,
+				3A1570691CAEAE3D00D49C5E /* Database */,
+				3A15706A1CAEAE4800D49C5E /* Social Network */,
+				3A78F1071C92051F008C6BE5 /* Additional Files */,
+				3A78F10C1C9206EF008C6BE5 /* Main Screens */,
+				3A0D5CB21C9C6D29005E6976 /* From Main Screens */,
+				3A15706D1CAEAF1200D49C5E /* Storyboards */,
 				3A5638571CA19971000A83B5 /* Assets.xcassets */,
 				3A9E3FE01C80AE330069BDFC /* Info.plist */,
 				3A9E3FD81C80AE330069BDFC /* Vidal.xcdatamodeld */,
-				3A1570561CAEA95900D49C5E /* vidal.cardio.crypt.db3 */,
-				3A1570571CAEA95900D49C5E /* vidal.cardio.encrypt.db3 */,
-				3A1570641CAEAAAF00D49C5E /* OKSDK.h */,
-				3A1570651CAEAAAF00D49C5E /* OKSDK.m */,
 				3A9E3FCC1C80AE330069BDFC /* Supporting Files */,
 			);
 			path = Vidal;

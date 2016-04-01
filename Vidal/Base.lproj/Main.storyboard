@@ -2314,6 +2314,10 @@ Lactobacillus acidophilus и другие.</string>
         <scene sceneID="NtZ-dL-0BP">
             <objects>
                 <viewController id="sbh-iQ-PXQ" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="qzg-VA-qG5"/>
+                        <viewControllerLayoutGuide type="bottom" id="qkI-gU-txH"/>
+                    </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9B6-ff-9rP">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="476"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
