@@ -17,7 +17,12 @@
 
 @end
 
-@implementation PharmaViewController
+@implementation PharmaViewController {
+
+    BOOL container;
+    UITapGestureRecognizer *tap;
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,8 +38,25 @@
     
     self.navigationItem.title = @"Фармаколгические группы";
     
+    self.containerView.hidden = true;
+    self.darkView.hidden = true;
+    container = false;
+    
+    tap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(tableView:didCollapseSection:animated:)];
+    
     // Do any additional setup after loading the view.
 }
+
+//- (void)close {
+//    
+//    self.darkView.hidden = true;
+//    self.containerView.hidden = true;
+//    container = false;
+//    [self.darkView removeGestureRecognizer:tap];
+//    
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -70,14 +92,19 @@
 - (void)tableView:(SLExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section
 {
     //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    [self.expandableSections addIndex:section];
-    [tableView expandSection:section animated:YES];
-    //});
+    if (!container) {
+        [self.expandableSections addIndex:section];
+        [tableView expandSection:section animated:YES];
+    }
 }
 
 - (void)tableView:(SLExpandableTableView *)tableView didCollapseSection:(NSUInteger)section animated:(BOOL)animated
 {
     [self.expandableSections removeIndex:section];
+    self.containerView.hidden = true;
+    container = false;
+    [self.darkView removeGestureRecognizer:tap];
+    self.darkView.hidden = true;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -131,6 +158,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if (!container) {
+        self.containerView.hidden = false;
+        container = true;
+        self.darkView.hidden = false;
+        [self.darkView addGestureRecognizer:tap];
+    }
 }
 
 /*

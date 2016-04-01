@@ -1,585 +1,4526 @@
-// !$*UTF8*$!
-{
-	archiveVersion = 1;
-	classes = {
-	};
-	objectVersion = 46;
-	objects = {
-
-/* Begin PBXBuildFile section */
-		1FAB3E0070C1885387F5ADDEDBA6AD2C /* SLExpandableTableView.h in Headers */ = {isa = PBXBuildFile; fileRef = B25A9B17F86B2AE20AC1ADA67D90A837 /* SLExpandableTableView.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		537A40F2C8C55B233C338EA879919B0B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
-		54CB386CA6C40261EED6ABA1C20181E9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
-		7873F380EBB90D62BB98741912B517DE /* HSDatePickerViewController.h in Headers */ = {isa = PBXBuildFile; fileRef = 44B454496C7405AF4B7B1121ECDE32EA /* HSDatePickerViewController.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		8F70E0F929B28908ACE29C980D7AE41A /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */; };
-		A89A6CD8209211F87B40C4F0432C147D /* Pods-Vidal-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6734262E44B76851C8E59BFCCF6F9DEB /* Pods-Vidal-dummy.m */; };
-		B682329EDE95117413AB34E604B70445 /* HSDatePickerViewController-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B3560FC9847438CFC0E88880D6DBD4F8 /* HSDatePickerViewController-dummy.m */; };
-		C781A109EA612E7DADFB9E9D2E53670E /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C3B7BDF5CE5CB8F095FE12DA55D9A9BB /* UIKit.framework */; };
-		D2597C4AB8316CB430A3460C98D86D68 /* HSDatePickerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6F2F726533263E806813CD8FD54963C0 /* HSDatePickerViewController.m */; };
-		D2629762BE8CD92089233B55B632D1FD /* SLExpandableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 8832CA18C9EAD8E6F91D0B4E1A760501 /* SLExpandableTableView.m */; };
-		EF4C780C5D88604BAF5F68526B298A38 /* SLExpandableTableView-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 36D8B68A0932F125B3B0A658AB58D9D2 /* SLExpandableTableView-dummy.m */; };
-/* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		7CB395A929B7DAA20DDB38828B698AB7 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6B0B9C928B05BA6346AB032DD0260C56;
-			remoteInfo = HSDatePickerViewController;
-		};
-		E7A3E373B032EB27674668C72E03F1F3 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 6148E741EBA74B8EEB827F0D53F656E3;
-			remoteInfo = SLExpandableTableView;
-		};
-/* End PBXContainerItemProxy section */
-
-/* Begin PBXFileReference section */
-		1003720974CAF85C25B2C8DDFABA195A /* Pods-Vidal-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Vidal-frameworks.sh"; sourceTree = "<group>"; };
-		225805EDA56AACDC7813C740038E01F6 /* Pods-Vidal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vidal.debug.xcconfig"; sourceTree = "<group>"; };
-		22EAC3502125583477B9E6300FDDC0DE /* HSDatePickerViewController.xib */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = file.xib; name = HSDatePickerViewController.xib; path = HSDatePickerViewControllerDemo/HSDatePickerViewController/HSDatePickerViewController.xib; sourceTree = "<group>"; };
-		36D8B68A0932F125B3B0A658AB58D9D2 /* SLExpandableTableView-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SLExpandableTableView-dummy.m"; sourceTree = "<group>"; };
-		3A681D4B7BBC6D5ECC82732601E9D93E /* libHSDatePickerViewController.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libHSDatePickerViewController.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		3F4D6E8B7BD4E94B9DFA38C039350F49 /* libPods-Vidal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vidal.a"; sourceTree = BUILT_PRODUCTS_DIR; };
-		3F8BA4F0990DD3F114E120F929389014 /* Pods-Vidal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-Vidal.release.xcconfig"; sourceTree = "<group>"; };
-		42FD3B312FC822098F7FD8693C2ED48E /* SLExpandableTableView.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SLExpandableTableView.xcconfig; sourceTree = "<group>"; };
-		44B454496C7405AF4B7B1121ECDE32EA /* HSDatePickerViewController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = HSDatePickerViewController.h; path = HSDatePickerViewControllerDemo/HSDatePickerViewController/HSDatePickerViewController.h; sourceTree = "<group>"; };
-		557A2A90C371010EB9EED4F2EB182113 /* Pods-Vidal-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-Vidal-resources.sh"; sourceTree = "<group>"; };
-		5DADE0839B50C77B2EEFA7D79C092835 /* HSDatePickerViewController.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = HSDatePickerViewController.xcconfig; sourceTree = "<group>"; };
-		66EB2E461A599AA958CE53AF58F597CE /* HSDatePickerViewController-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "HSDatePickerViewController-prefix.pch"; sourceTree = "<group>"; };
-		6734262E44B76851C8E59BFCCF6F9DEB /* Pods-Vidal-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-Vidal-dummy.m"; sourceTree = "<group>"; };
-		6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		6F2F726533263E806813CD8FD54963C0 /* HSDatePickerViewController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = HSDatePickerViewController.m; path = HSDatePickerViewControllerDemo/HSDatePickerViewController/HSDatePickerViewController.m; sourceTree = "<group>"; };
-		7D9B9B1E33F7E28AD6F94FA13F13A647 /* SLExpandableTableView-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SLExpandableTableView-prefix.pch"; sourceTree = "<group>"; };
-		8832CA18C9EAD8E6F91D0B4E1A760501 /* SLExpandableTableView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SLExpandableTableView.m; path = SLExpandableTableView/SLExpandableTableView.m; sourceTree = "<group>"; };
-		A3DC973353FA0B38F5C6D3E43AD8700F /* libSLExpandableTableView.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSLExpandableTableView.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B25A9B17F86B2AE20AC1ADA67D90A837 /* SLExpandableTableView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SLExpandableTableView.h; path = SLExpandableTableView/SLExpandableTableView.h; sourceTree = "<group>"; };
-		B3560FC9847438CFC0E88880D6DBD4F8 /* HSDatePickerViewController-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "HSDatePickerViewController-dummy.m"; sourceTree = "<group>"; };
-		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		BE4003A6E773294E28B415176008471C /* Pods-Vidal-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-Vidal-acknowledgements.markdown"; sourceTree = "<group>"; };
-		C3B7BDF5CE5CB8F095FE12DA55D9A9BB /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
-		CC27AECCC874476BA997722357635D3E /* Pods-Vidal-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-Vidal-acknowledgements.plist"; sourceTree = "<group>"; };
-/* End PBXFileReference section */
-
-/* Begin PBXFrameworksBuildPhase section */
-		B433F1528372E9E91523ED1AE42FC35F /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				8F70E0F929B28908ACE29C980D7AE41A /* Foundation.framework in Frameworks */,
-				C781A109EA612E7DADFB9E9D2E53670E /* UIKit.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BCEAFDD1EF771705703DCB9376D62591 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				54CB386CA6C40261EED6ABA1C20181E9 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D646D2234B48B3EA5209C3F5B5365977 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				537A40F2C8C55B233C338EA879919B0B /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXFrameworksBuildPhase section */
-
-/* Begin PBXGroup section */
-		1437C26F16B5E5A5FDC5A97E1F4DCBF3 /* Pods-Vidal */ = {
-			isa = PBXGroup;
-			children = (
-				BE4003A6E773294E28B415176008471C /* Pods-Vidal-acknowledgements.markdown */,
-				CC27AECCC874476BA997722357635D3E /* Pods-Vidal-acknowledgements.plist */,
-				6734262E44B76851C8E59BFCCF6F9DEB /* Pods-Vidal-dummy.m */,
-				1003720974CAF85C25B2C8DDFABA195A /* Pods-Vidal-frameworks.sh */,
-				557A2A90C371010EB9EED4F2EB182113 /* Pods-Vidal-resources.sh */,
-				225805EDA56AACDC7813C740038E01F6 /* Pods-Vidal.debug.xcconfig */,
-				3F8BA4F0990DD3F114E120F929389014 /* Pods-Vidal.release.xcconfig */,
-			);
-			name = "Pods-Vidal";
-			path = "Target Support Files/Pods-Vidal";
-			sourceTree = "<group>";
-		};
-		18340F12838DEE43507667CC74401EB1 /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				6E7E5AF37923BFA48D6994B9BFC6535F /* Foundation.framework */,
-				C3B7BDF5CE5CB8F095FE12DA55D9A9BB /* UIKit.framework */,
-			);
-			name = iOS;
-			sourceTree = "<group>";
-		};
-		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				18340F12838DEE43507667CC74401EB1 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		5B72083A728EDB665C830CB055122C6A /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				1437C26F16B5E5A5FDC5A97E1F4DCBF3 /* Pods-Vidal */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		7DB346D0F39D3F0E887471402A8071AB = {
-			isa = PBXGroup;
-			children = (
-				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
-				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
-				FF2C6CF192DCF0734B9FA594EE1BF575 /* Pods */,
-				BF77D7C112548407D69AC7DC02B342DE /* Products */,
-				5B72083A728EDB665C830CB055122C6A /* Targets Support Files */,
-			);
-			sourceTree = "<group>";
-		};
-		A0DDE6C91A9617FDAF5F1622815DF6D7 /* SLExpandableTableView */ = {
-			isa = PBXGroup;
-			children = (
-				B25A9B17F86B2AE20AC1ADA67D90A837 /* SLExpandableTableView.h */,
-				8832CA18C9EAD8E6F91D0B4E1A760501 /* SLExpandableTableView.m */,
-				DD5153FE1FDBA60E929517CA341BDF58 /* Support Files */,
-			);
-			path = SLExpandableTableView;
-			sourceTree = "<group>";
-		};
-		BF77D7C112548407D69AC7DC02B342DE /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3A681D4B7BBC6D5ECC82732601E9D93E /* libHSDatePickerViewController.a */,
-				3F4D6E8B7BD4E94B9DFA38C039350F49 /* libPods-Vidal.a */,
-				A3DC973353FA0B38F5C6D3E43AD8700F /* libSLExpandableTableView.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		DA971034C96842E9875FF451028A2570 /* HSDatePickerViewController */ = {
-			isa = PBXGroup;
-			children = (
-				44B454496C7405AF4B7B1121ECDE32EA /* HSDatePickerViewController.h */,
-				6F2F726533263E806813CD8FD54963C0 /* HSDatePickerViewController.m */,
-				DBE70CF0E958ED853F0E08A2EF3B55FC /* Resources */,
-				E563F24CFB8E539862CB8F6D98121DC6 /* Support Files */,
-			);
-			path = HSDatePickerViewController;
-			sourceTree = "<group>";
-		};
-		DBE70CF0E958ED853F0E08A2EF3B55FC /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				22EAC3502125583477B9E6300FDDC0DE /* HSDatePickerViewController.xib */,
-			);
-			name = Resources;
-			sourceTree = "<group>";
-		};
-		DD5153FE1FDBA60E929517CA341BDF58 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				42FD3B312FC822098F7FD8693C2ED48E /* SLExpandableTableView.xcconfig */,
-				36D8B68A0932F125B3B0A658AB58D9D2 /* SLExpandableTableView-dummy.m */,
-				7D9B9B1E33F7E28AD6F94FA13F13A647 /* SLExpandableTableView-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/SLExpandableTableView";
-			sourceTree = "<group>";
-		};
-		E563F24CFB8E539862CB8F6D98121DC6 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				5DADE0839B50C77B2EEFA7D79C092835 /* HSDatePickerViewController.xcconfig */,
-				B3560FC9847438CFC0E88880D6DBD4F8 /* HSDatePickerViewController-dummy.m */,
-				66EB2E461A599AA958CE53AF58F597CE /* HSDatePickerViewController-prefix.pch */,
-			);
-			name = "Support Files";
-			path = "../Target Support Files/HSDatePickerViewController";
-			sourceTree = "<group>";
-		};
-		FF2C6CF192DCF0734B9FA594EE1BF575 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				DA971034C96842E9875FF451028A2570 /* HSDatePickerViewController */,
-				A0DDE6C91A9617FDAF5F1622815DF6D7 /* SLExpandableTableView */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
-/* End PBXGroup section */
-
-/* Begin PBXHeadersBuildPhase section */
-		34AAED7B649467B01CDC36AA2BBEE47F /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				1FAB3E0070C1885387F5ADDEDBA6AD2C /* SLExpandableTableView.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E0670F27B95AB1F2597B56E1D837731D /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7873F380EBB90D62BB98741912B517DE /* HSDatePickerViewController.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
-/* Begin PBXNativeTarget section */
-		19239225D895C3593FFC7329E11C71C5 /* Pods-Vidal */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = B830473E3D97EA9A9EAD06F3A897388A /* Build configuration list for PBXNativeTarget "Pods-Vidal" */;
-			buildPhases = (
-				5A70ACE7DECF73E4D90B66A16836BFEC /* Sources */,
-				BCEAFDD1EF771705703DCB9376D62591 /* Frameworks */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				1DD9F9C5D879049E178E5F5BDA7C74BC /* PBXTargetDependency */,
-				055BA0F9FEE4062F9C247C32513F026E /* PBXTargetDependency */,
-			);
-			name = "Pods-Vidal";
-			productName = "Pods-Vidal";
-			productReference = 3F4D6E8B7BD4E94B9DFA38C039350F49 /* libPods-Vidal.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		6148E741EBA74B8EEB827F0D53F656E3 /* SLExpandableTableView */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 757681A843AFE62B207C7E550D549A14 /* Build configuration list for PBXNativeTarget "SLExpandableTableView" */;
-			buildPhases = (
-				6E96AF7DC4D38C1DBC7A2641ABBC3EB9 /* Sources */,
-				B433F1528372E9E91523ED1AE42FC35F /* Frameworks */,
-				34AAED7B649467B01CDC36AA2BBEE47F /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = SLExpandableTableView;
-			productName = SLExpandableTableView;
-			productReference = A3DC973353FA0B38F5C6D3E43AD8700F /* libSLExpandableTableView.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-		6B0B9C928B05BA6346AB032DD0260C56 /* HSDatePickerViewController */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = A3B0172AA86BBEA6BE600520E675E6A1 /* Build configuration list for PBXNativeTarget "HSDatePickerViewController" */;
-			buildPhases = (
-				17851A1483CC3597C82A5CAEA073B237 /* Sources */,
-				D646D2234B48B3EA5209C3F5B5365977 /* Frameworks */,
-				E0670F27B95AB1F2597B56E1D837731D /* Headers */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = HSDatePickerViewController;
-			productName = HSDatePickerViewController;
-			productReference = 3A681D4B7BBC6D5ECC82732601E9D93E /* libHSDatePickerViewController.a */;
-			productType = "com.apple.product-type.library.static";
-		};
-/* End PBXNativeTarget section */
-
-/* Begin PBXProject section */
-		D41D8CD98F00B204E9800998ECF8427E /* Project object */ = {
-			isa = PBXProject;
-			attributes = {
-				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0700;
-			};
-			buildConfigurationList = 2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */;
-			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
-			hasScannedForEncodings = 0;
-			knownRegions = (
-				en,
-			);
-			mainGroup = 7DB346D0F39D3F0E887471402A8071AB;
-			productRefGroup = BF77D7C112548407D69AC7DC02B342DE /* Products */;
-			projectDirPath = "";
-			projectRoot = "";
-			targets = (
-				6B0B9C928B05BA6346AB032DD0260C56 /* HSDatePickerViewController */,
-				19239225D895C3593FFC7329E11C71C5 /* Pods-Vidal */,
-				6148E741EBA74B8EEB827F0D53F656E3 /* SLExpandableTableView */,
-			);
-		};
-/* End PBXProject section */
-
-/* Begin PBXSourcesBuildPhase section */
-		17851A1483CC3597C82A5CAEA073B237 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				B682329EDE95117413AB34E604B70445 /* HSDatePickerViewController-dummy.m in Sources */,
-				D2597C4AB8316CB430A3460C98D86D68 /* HSDatePickerViewController.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		5A70ACE7DECF73E4D90B66A16836BFEC /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				A89A6CD8209211F87B40C4F0432C147D /* Pods-Vidal-dummy.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		6E96AF7DC4D38C1DBC7A2641ABBC3EB9 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				EF4C780C5D88604BAF5F68526B298A38 /* SLExpandableTableView-dummy.m in Sources */,
-				D2629762BE8CD92089233B55B632D1FD /* SLExpandableTableView.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		055BA0F9FEE4062F9C247C32513F026E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SLExpandableTableView;
-			target = 6148E741EBA74B8EEB827F0D53F656E3 /* SLExpandableTableView */;
-			targetProxy = E7A3E373B032EB27674668C72E03F1F3 /* PBXContainerItemProxy */;
-		};
-		1DD9F9C5D879049E178E5F5BDA7C74BC /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = HSDatePickerViewController;
-			target = 6B0B9C928B05BA6346AB032DD0260C56 /* HSDatePickerViewController */;
-			targetProxy = 7CB395A929B7DAA20DDB38828B698AB7 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
-/* Begin XCBuildConfiguration section */
-		3D627A0212DE7BA34C36CBCD2F9D2448 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 3F8BA4F0990DD3F114E120F929389014 /* Pods-Vidal.release.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		41DEBFF87E8E7082B337B05E83D2E509 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5DADE0839B50C77B2EEFA7D79C092835 /* HSDatePickerViewController.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/HSDatePickerViewController/HSDatePickerViewController-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		655858BBC98CC38439CB68F7EA52EE94 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 42FD3B312FC822098F7FD8693C2ED48E /* SLExpandableTableView.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SLExpandableTableView/SLExpandableTableView-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		6E1521A00A954939217D5FFE8A8C9E28 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 42FD3B312FC822098F7FD8693C2ED48E /* SLExpandableTableView.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/SLExpandableTableView/SLExpandableTableView-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		899DBCC430FEA87117FC3DB352682D79 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 225805EDA56AACDC7813C740038E01F6 /* Pods-Vidal.debug.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				MACH_O_TYPE = staticlib;
-				MTL_ENABLE_DEBUG_INFO = YES;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PODS_ROOT = "$(SRCROOT)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Debug;
-		};
-		8D1534490D941DCA47C62AC4314182AF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				ONLY_ACTIVE_ARCH = YES;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-			};
-			name = Debug;
-		};
-		9880037D4CEBA42EDABF62A3F7E1A82B /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5DADE0839B50C77B2EEFA7D79C092835 /* HSDatePickerViewController.xcconfig */;
-			buildSettings = {
-				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				GCC_PREFIX_HEADER = "Target Support Files/HSDatePickerViewController/HSDatePickerViewController-prefix.pch";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				MTL_ENABLE_DEBUG_INFO = NO;
-				OTHER_LDFLAGS = "";
-				OTHER_LIBTOOLFLAGS = "";
-				PRIVATE_HEADERS_FOLDER_PATH = "";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PUBLIC_HEADERS_FOLDER_PATH = "";
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-			};
-			name = Release;
-		};
-		C5A18280E9321A9268D1C80B7DA43967 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_SEARCH_USER_PATHS = NO;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_ENABLE_MODULES = YES;
-				CLANG_ENABLE_OBJC_ARC = YES;
-				CLANG_WARN_BOOL_CONVERSION = YES;
-				CLANG_WARN_CONSTANT_CONVERSION = YES;
-				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES;
-				CLANG_WARN_EMPTY_BODY = YES;
-				CLANG_WARN_ENUM_CONVERSION = YES;
-				CLANG_WARN_INT_CONVERSION = YES;
-				CLANG_WARN_OBJC_ROOT_CLASS = YES;
-				CLANG_WARN_UNREACHABLE_CODE = YES;
-				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				COPY_PHASE_STRIP = YES;
-				ENABLE_NS_ASSERTIONS = NO;
-				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_PREPROCESSOR_DEFINITIONS = "RELEASE=1";
-				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
-				GCC_WARN_ABOUT_RETURN_TYPE = YES;
-				GCC_WARN_UNDECLARED_SELECTOR = YES;
-				GCC_WARN_UNINITIALIZED_AUTOS = YES;
-				GCC_WARN_UNUSED_FUNCTION = YES;
-				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
-				STRIP_INSTALLED_PRODUCT = NO;
-				SYMROOT = "${SRCROOT}/../build";
-				VALIDATE_PRODUCT = YES;
-			};
-			name = Release;
-		};
-/* End XCBuildConfiguration section */
-
-/* Begin XCConfigurationList section */
-		2D8E8EC45A3A1A1D94AE762CB5028504 /* Build configuration list for PBXProject "Pods" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				8D1534490D941DCA47C62AC4314182AF /* Debug */,
-				C5A18280E9321A9268D1C80B7DA43967 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		757681A843AFE62B207C7E550D549A14 /* Build configuration list for PBXNativeTarget "SLExpandableTableView" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				6E1521A00A954939217D5FFE8A8C9E28 /* Debug */,
-				655858BBC98CC38439CB68F7EA52EE94 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		A3B0172AA86BBEA6BE600520E675E6A1 /* Build configuration list for PBXNativeTarget "HSDatePickerViewController" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				41DEBFF87E8E7082B337B05E83D2E509 /* Debug */,
-				9880037D4CEBA42EDABF62A3F7E1A82B /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		B830473E3D97EA9A9EAD06F3A897388A /* Build configuration list for PBXNativeTarget "Pods-Vidal" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				899DBCC430FEA87117FC3DB352682D79 /* Debug */,
-				3D627A0212DE7BA34C36CBCD2F9D2448 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-/* End XCConfigurationList section */
-	};
-	rootObject = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
-}
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>archiveVersion</key>
+	<string>1</string>
+	<key>classes</key>
+	<dict/>
+	<key>objectVersion</key>
+	<string>46</string>
+	<key>objects</key>
+	<dict>
+		<key>0022C6258A32828BFF43512E0DB19D60</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>6B0B9C928B05BA6346AB032DD0260C56</string>
+			<key>remoteInfo</key>
+			<string>HSDatePickerViewController</string>
+		</dict>
+		<key>012690EF350204B244BA7D964DB67354</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A4F4CDF09CF33515A031E4FAED148FA2</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0313267360587D8ACED8DC269A2DC8B9</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9DE17AE515D3688B275BAEB5B98AE84D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>031FDBF258939D0D8F2CB6ADB6E3D2F5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1BB925ED3A7311FB81271F42B4A14F5C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>032EE8048D2265431673EB1BABFCC492</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKApiFriends.h</string>
+			<key>path</key>
+			<string>library/Source/API/methods/VKApiFriends.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>03AF1133B6D87A57EAA98DCC3BE6ACF6</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>E4BE19C8AA21A5643561967C8B9765E8</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/VK-ios-sdk/VK-ios-sdk-prefix.pch</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.2</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PRIVATE_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>03D921799F2A2EC741F55808A147FB80</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1D5771BFF33EBDB3FD00B47B16A15B76</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>04D5806F630C2FEBDF6E38F02D5A8924</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>763325655781F5CB0690C97CB3843F12</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>05AE01642634A8D28B72A2D300D06B29</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7CD3100B805B9A9A79B12BB269DFFD42</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>05DFE798CA8ABDF6CFD78F38CDF3E700</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6557E31FBFCD3778519E5EABEC898CA1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>06785145EA2C5DFA58AE8FE939D70BF4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3C4B844AA92F8BD1D0D722AF1FC2231C</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>0837E69B6CAAFBC95084A425BB9938ED</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7EB3375AC3660DD8FA10D9632881F469</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>0D42449EF1DECAB1E39BFA6CBF4E8CE7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>VK-ios-sdk-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0D717284AA9E521A5570FD89B317E82B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKApiFriends.m</string>
+			<key>path</key>
+			<string>library/Source/API/methods/VKApiFriends.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0E5F40C4F7DE5A809AC79B1A087D26E2</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKApiPhotos.m</string>
+			<key>path</key>
+			<string>library/Source/API/methods/VKApiPhotos.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0FA7645ADBF3029EA25A16739543F909</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKCaptchaViewController.m</string>
+			<key>path</key>
+			<string>library/Source/Views/VKCaptchaViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>0FDB531EC7E9B5A4EE307C2584D5F3CE</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>D8C3F0682B51E04C7EE2953EB1BF3D52</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/SLExpandableTableView/SLExpandableTableView-prefix.pch</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.2</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PRIVATE_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>0FFA9EF6EA5FA527F06D6C49C1D7CB54</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKActivity.h</string>
+			<key>path</key>
+			<string>library/Source/Views/VKActivity.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1003720974CAF85C25B2C8DDFABA195A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-Vidal-frameworks.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>108DC5936CA764E957F0077D3301ECF4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5BF14676E26359C397A3AF987E3D08A0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>12070C57C690677043E4D6C87B521DFB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DAC4F3B471FA1C980A9A73E2CA1EADCE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>1346B8635293A9AF5369D9A159CFD676</key>
+		<dict>
+			<key>fileRef</key>
+			<string>EC53BBE369B9448B1BE4F266D725ABC6</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>1437C26F16B5E5A5FDC5A97E1F4DCBF3</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>BE4003A6E773294E28B415176008471C</string>
+				<string>CC27AECCC874476BA997722357635D3E</string>
+				<string>6734262E44B76851C8E59BFCCF6F9DEB</string>
+				<string>1003720974CAF85C25B2C8DDFABA195A</string>
+				<string>557A2A90C371010EB9EED4F2EB182113</string>
+				<string>225805EDA56AACDC7813C740038E01F6</string>
+				<string>3F8BA4F0990DD3F114E120F929389014</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods-Vidal</string>
+			<key>path</key>
+			<string>Target Support Files/Pods-Vidal</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>15103840912B4A64CFF444E5B1290201</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>326EC87DD0C520C7BF422897B8FE3B3C</string>
+				<string>89BAAB2246BE23490CD385EB2746FA12</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>15B4410A257282C59BE7F76908DF0117</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKUploadPhotoRequest.h</string>
+			<key>path</key>
+			<string>library/Source/API/upload/VKUploadPhotoRequest.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1690C111B683AF9B4B27DB9025FBD850</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>libVK-ios-sdk.a</string>
+			<key>path</key>
+			<string>libVK-ios-sdk.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>1775E7ED3EE43E73D506163F64FB6E63</key>
+		<dict>
+			<key>fileRef</key>
+			<string>73F0EAD6C2FC061E5317D9B9BDFACC3E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>17851A1483CC3597C82A5CAEA073B237</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>B682329EDE95117413AB34E604B70445</string>
+				<string>D2597C4AB8316CB430A3460C98D86D68</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>18340F12838DEE43507667CC74401EB1</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>6E7E5AF37923BFA48D6994B9BFC6535F</string>
+				<string>C3B7BDF5CE5CB8F095FE12DA55D9A9BB</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>iOS</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>187993F0081E286F3A16B0D4C9A4C266</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>D8C3F0682B51E04C7EE2953EB1BF3D52</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/SLExpandableTableView/SLExpandableTableView-prefix.pch</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.2</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PRIVATE_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>19C4ECB315A33E375EB70EADDBAE68C9</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6FB79A27865A0A6A6A88DC0884A24E30</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>19E3D0568D23F53D84A30D9401DF331A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F86EF4418AA7C94B747EC98A2525964A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>1B3CACBECB64C2266E089DAC5A0296C0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKApiBase.h</string>
+			<key>path</key>
+			<string>library/Source/API/methods/VKApiBase.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1BB925ED3A7311FB81271F42B4A14F5C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKApiObjectArray.m</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKApiObjectArray.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1D5771BFF33EBDB3FD00B47B16A15B76</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKSharedTransitioningObject.m</string>
+			<key>path</key>
+			<string>library/Source/Views/VKSharedTransitioningObject.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1D6A18F03CDF2FBCA4CAE24762B0B334</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7769EAA5BC3BCAE7F6435A2583B272EF</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>1E4C62B9A084103F1EBBF9798C1C5015</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKBundle.m</string>
+			<key>path</key>
+			<string>library/Source/VKBundle.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1F1D6CE093A951A12349086542A6E288</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKRequest.m</string>
+			<key>path</key>
+			<string>library/Source/Core/VKRequest.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>1F3410CCFA71A8C73817451AE8BA4290</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKApiObject.m</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKApiObject.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>20A3BB93DE22A4C13E4C8EEE425FCDA0</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>3F8BA4F0990DD3F114E120F929389014</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.2</string>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>20B828D4DAF379F40399CA2020BF317C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>65BF8E77B362432AE0D663810DB498A6</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>20CC39A84B5C3247238D78134E36AC20</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKApiBase.m</string>
+			<key>path</key>
+			<string>library/Source/API/methods/VKApiBase.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>225805EDA56AACDC7813C740038E01F6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Vidal.debug.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2319F405B7C35B4A07B66B5BDAE8CCA4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKObject.m</string>
+			<key>path</key>
+			<string>library/Source/Core/VKObject.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>238AABF76A18DE99C0E188E6C47B1E40</key>
+		<dict>
+			<key>fileRef</key>
+			<string>53AD47453DFFDAAD3AF4C978B718E3B9</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>23D970CE735FE3654B779B6330B69343</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKSchool.h</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKSchool.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>250C346D0562F224F3FE16099338216C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5B9FD6ECA1D87769C5BEDB2383E3AE1A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>259D79D991CF17622C7C341B83A230FE</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>E4BE19C8AA21A5643561967C8B9765E8</string>
+				<string>E1267C3B515310F95E7769F96CE4CB76</string>
+				<string>0D42449EF1DECAB1E39BFA6CBF4E8CE7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Support Files</string>
+			<key>path</key>
+			<string>../Target Support Files/VK-ios-sdk</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>27008CD6BB37E01A1A72BC9CE8B22FCD</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>3DD12C11D7807F0B6A2FAE5D82D489E1</string>
+			<key>buildPhases</key>
+			<array>
+				<string>B6FBAD7FDBC8A07DF53F49E4FD75B5D8</string>
+				<string>F2963294B2AF9CE4329E8C1DCAEBED8E</string>
+				<string>2F6CB3B5A5C0BF5AD50B52FCE10570B6</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>VK-ios-sdk</string>
+			<key>productName</key>
+			<string>VK-ios-sdk</string>
+			<key>productReference</key>
+			<string>1690C111B683AF9B4B27DB9025FBD850</string>
+			<key>productType</key>
+			<string>com.apple.product-type.library.static</string>
+		</dict>
+		<key>2ADF8357EC2BB8CE68F78CA16EB61B49</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B58CE5BC0FA6289D4F26D557F03145F4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>2AF475E187DFA0826C302A200AC790F5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKObject.h</string>
+			<key>path</key>
+			<string>library/Source/Core/VKObject.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>2D8E8EC45A3A1A1D94AE762CB5028504</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>8D1534490D941DCA47C62AC4314182AF</string>
+				<string>C5A18280E9321A9268D1C80B7DA43967</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>2F0950BCB0BF6398F3CB47965487ABDF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7AB84036B7EBA2D96B27462FE3729C98</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>2F6CB3B5A5C0BF5AD50B52FCE10570B6</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>7D7540A733ABA88EFC6763251A01A92E</string>
+				<string>ECE77385E89BBB044DA827462C2D0907</string>
+				<string>2F0950BCB0BF6398F3CB47965487ABDF</string>
+				<string>648DF6724CF86528729573F83D3A140D</string>
+				<string>FC1859E98BCCE709EE4CA15E7CBF16B5</string>
+				<string>D28620C06B74650B86C923220E7C3CD4</string>
+				<string>753C0C3CC4A83B6D9068EFBE617F6729</string>
+				<string>96180B2D6CEF567012AE1CA9EC55C852</string>
+				<string>7E14D20BCE23117FA84E2477B572257B</string>
+				<string>A8F4C5C84A418CB13BA16A88CB4EA721</string>
+				<string>D6D90F1B37DB58C1911D95BF3F44445F</string>
+				<string>05AE01642634A8D28B72A2D300D06B29</string>
+				<string>F571840B3BB942A2B8E2330F09BB7547</string>
+				<string>19C4ECB315A33E375EB70EADDBAE68C9</string>
+				<string>BC7E725631A6BB912046DDBEE4BCC9DE</string>
+				<string>1D6A18F03CDF2FBCA4CAE24762B0B334</string>
+				<string>D6128A72348E6E9AB08792D2C6ACF4D5</string>
+				<string>3E1C0FAF1BBB43890F057AD1C8391641</string>
+				<string>3CCF1AF9B0B7E7DC293C7E80254520E7</string>
+				<string>2ADF8357EC2BB8CE68F78CA16EB61B49</string>
+				<string>4930AACE04BBE6FEA38239B74C183DE0</string>
+				<string>A8EB92FAFE173FE3C72B624DCFCC8758</string>
+				<string>7BB94A5A9AA02F1F394D8E79F57EBD2C</string>
+				<string>9048E5F72E794983C15C0CA3CE73CCA3</string>
+				<string>7D5CA6189EDD8053BF33A1F864ED64BB</string>
+				<string>7B61D9FD5BD76F9C700E0A5C7E920B01</string>
+				<string>70FA5CEE5A551E288F66AFD825E997D2</string>
+				<string>250C346D0562F224F3FE16099338216C</string>
+				<string>06785145EA2C5DFA58AE8FE939D70BF4</string>
+				<string>F0396D8D10FAFFEFFAB1CFDF045AFB8F</string>
+				<string>B4CAB0091BE8E6642D8E7A68894B60FF</string>
+				<string>108DC5936CA764E957F0077D3301ECF4</string>
+				<string>AE65D089AF0087BC239E55D63AEC3BEF</string>
+				<string>75E3ECFC39A91E869BABB20D72AB5587</string>
+				<string>D2F0C650034EE6870BBC28FAEB240642</string>
+				<string>E3FC446BA6AEBF99DDA8B3920251C919</string>
+				<string>678019B740D838BF487EDB05AA25B17A</string>
+				<string>E8AE0AC49B336982134EBFD919CEEA9D</string>
+				<string>B8C124E4C97DE5353DEBAB54AD43DD9B</string>
+				<string>12070C57C690677043E4D6C87B521DFB</string>
+				<string>1346B8635293A9AF5369D9A159CFD676</string>
+				<string>9B70F391801A69C7058721767B3C844C</string>
+				<string>31699E804422734762038F8B53B61CF4</string>
+				<string>C1E19D13B8D6C46A4F1302E7FB34428A</string>
+				<string>66084FD0D8EF6EB603AE54E0A546337A</string>
+				<string>238AABF76A18DE99C0E188E6C47B1E40</string>
+				<string>A1ECCD8955317682ED82360E5B7A979A</string>
+				<string>642D566B4A16D40CC03E2CF6F5F87B4A</string>
+				<string>D12637F362F61F18E9381671BE3FD1B6</string>
+				<string>94834220324C9F203A376FFEF3DE0085</string>
+				<string>E1680B7ADF4641F73ECCA41C2F16F125</string>
+				<string>90AE3CA4FA0FE0EC33CD8DFF0789BA3A</string>
+				<string>CA96567B9CEDE04932324BBFA1912D7A</string>
+				<string>809A2BC90C7EB704113D150FFE1190E8</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>2FA00820E313631A7EC93ABB97DCF1D0</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>0FDB531EC7E9B5A4EE307C2584D5F3CE</string>
+				<string>187993F0081E286F3A16B0D4C9A4C266</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>30A1EDE568EEBBE4912B1C17903BDD50</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>HSDatePickerViewController-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>30A7D6560472778309CF65F04B3FF3F9</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKAudio.m</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKAudio.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>31699E804422734762038F8B53B61CF4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E2DAFDFC8BA09F1273C5377ECD965B45</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>31D6CAC1A9B7ADB57CEBAFD09D2E86CA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKJSONOperation.m</string>
+			<key>path</key>
+			<string>library/Source/Core/VKJSONOperation.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>32462FCED57F164E99C7CB8D12BBDF28</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKApiConst.h</string>
+			<key>path</key>
+			<string>library/Source/API/methods/VKApiConst.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>326EC87DD0C520C7BF422897B8FE3B3C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6E7E5AF37923BFA48D6994B9BFC6535F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3368D004D4E26105F3E121350542AC1E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKUploadMessagesPhotoRequest.h</string>
+			<key>path</key>
+			<string>library/Source/API/upload/VKUploadMessagesPhotoRequest.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>343C45B33C9D2BB1CFFD17BAD5BD5E3C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.plug-in</string>
+			<key>path</key>
+			<string>VKSdkResources.bundle</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>344BDE5D581D803601FCF70D605E7FE6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2319F405B7C35B4A07B66B5BDAE8CCA4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>34AE7FBFE180596F2FF45E30E58863C4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKCounters.m</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKCounters.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>353F01A3D97CC4409E294D54EDE4B2C2</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>B6ED017B71AF5D1E7827F9051B950803</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Resources</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3698ACB6553701F39077D5B67B262379</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E1267C3B515310F95E7769F96CE4CB76</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>36DC478025C5DB13E295992619CB3DD9</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKUploadImage.m</string>
+			<key>path</key>
+			<string>library/Source/Image/VKUploadImage.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>382356A6B4D0D78FDDFE126911BB6248</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKImageParameters.m</string>
+			<key>path</key>
+			<string>library/Source/Image/VKImageParameters.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3A0F0FB27ABB5BE952A1E70421DA0DF1</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>27008CD6BB37E01A1A72BC9CE8B22FCD</string>
+			<key>remoteInfo</key>
+			<string>VK-ios-sdk</string>
+		</dict>
+		<key>3A7D770CC0E6644D35EBD06A83EB9EB7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>30A7D6560472778309CF65F04B3FF3F9</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3B6B723F0773DE915743A805F53650F4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKActivity.m</string>
+			<key>path</key>
+			<string>library/Source/Views/VKActivity.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3C089AE36A8300337677327E5A8AEB9D</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>EAB067F51F54C87448D8EB416471225A</string>
+				<string>4616AE7115F86872C8D2D854ED154502</string>
+				<string>353F01A3D97CC4409E294D54EDE4B2C2</string>
+				<string>E5750F114E68AD4AF80BC06804AA4EE7</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>HSDatePickerViewController</string>
+			<key>path</key>
+			<string>HSDatePickerViewController</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3C4B844AA92F8BD1D0D722AF1FC2231C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKHTTPOperation.h</string>
+			<key>path</key>
+			<string>library/Source/Core/VKHTTPOperation.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3C5C725613F3D4F06B9A7FED20076CBD</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3B6B723F0773DE915743A805F53650F4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>3CCF1AF9B0B7E7DC293C7E80254520E7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>84966FD1F80FB004F26936852C5B6634</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>3DD12C11D7807F0B6A2FAE5D82D489E1</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>64E3FF52C6F91D3DE14AA760B583B520</string>
+				<string>03AF1133B6D87A57EAA98DCC3BE6ACF6</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>3E1C0FAF1BBB43890F057AD1C8391641</key>
+		<dict>
+			<key>fileRef</key>
+			<string>986A64A7CEAC8C8B028800770E5B2A23</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>3E4638011239E1567355F4E5AB3155E4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKCaptchaViewController.h</string>
+			<key>path</key>
+			<string>library/Source/Views/VKCaptchaViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>3F8BA4F0990DD3F114E120F929389014</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>Pods-Vidal.release.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>41DEBFF87E8E7082B337B05E83D2E509</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>6871AB779FEB808BBB7777BE97F6EC22</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/HSDatePickerViewController/HSDatePickerViewController-prefix.pch</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.2</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PRIVATE_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>42B45B6465494A6B7831300912FF471E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1E4C62B9A084103F1EBBF9798C1C5015</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>433CD3331B6C3787F473C941B61FC68F</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>18340F12838DEE43507667CC74401EB1</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Frameworks</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4616AE7115F86872C8D2D854ED154502</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>HSDatePickerViewController.m</string>
+			<key>path</key>
+			<string>HSDatePickerViewControllerDemo/HSDatePickerViewController/HSDatePickerViewController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4690ADBCFBD7ECBC9F4837DB406A7D52</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKPhotoSize.m</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKPhotoSize.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>47722F3E74404DE8BB8E10C235F9993B</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>2FA00820E313631A7EC93ABB97DCF1D0</string>
+			<key>buildPhases</key>
+			<array>
+				<string>EE66D69446ABD192BBC1312AF5E45228</string>
+				<string>15103840912B4A64CFF444E5B1290201</string>
+				<string>04D5806F630C2FEBDF6E38F02D5A8924</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>SLExpandableTableView</string>
+			<key>productName</key>
+			<string>SLExpandableTableView</string>
+			<key>productReference</key>
+			<string>5E0B4003B2AB94902590B6447B9AEFFB</string>
+			<key>productType</key>
+			<string>com.apple.product-type.library.static</string>
+		</dict>
+		<key>47EE5C5525872C77B2C369517FB6FD48</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKPhoto.m</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKPhoto.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4843694F7C3673824FA63D3674919A94</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKUser.h</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKUser.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>4911DC7EC2F720204760810FDAC5AB31</key>
+		<dict>
+			<key>fileRef</key>
+			<string>FE0C366C852437E971619A9C7FF793CA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4930AACE04BBE6FEA38239B74C183DE0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F3C40048B18BAD12E41608CD880C8851</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>49E55854897D12B0A522216F559EF891</key>
+		<dict>
+			<key>fileRef</key>
+			<string>66B857397359484B6D5336ADA58783D6</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4A78C3465C1C4733FA6BF57BEEEF4AE6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E651BAC7D01288688F779001E3DD51F0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>4C2F39CB00BD40093E0D71C240A190AB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B38C46D96F549392F45E5E64C5688395</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>5008C7D40333A46DA663E1FB9E0C7A5F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>52EF97603857863955AA8B0EE40EDBDC</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>511E364ABD6DBC0C71C8931DEF29662F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKResponse.m</string>
+			<key>path</key>
+			<string>library/Source/Core/VKResponse.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>527F2DCF264265CD65A5EF7B3286D930</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKUniversity.h</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKUniversity.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>52EF97603857863955AA8B0EE40EDBDC</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKUploadWallPhotoRequest.m</string>
+			<key>path</key>
+			<string>library/Source/API/upload/VKUploadWallPhotoRequest.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>537A40F2C8C55B233C338EA879919B0B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6E7E5AF37923BFA48D6994B9BFC6535F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>53AD47453DFFDAAD3AF4C978B718E3B9</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKSharedTransitioningObject.h</string>
+			<key>path</key>
+			<string>library/Source/Views/VKSharedTransitioningObject.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>543F0A0D2102D8E633B0031776A79BA8</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKApiCaptcha.h</string>
+			<key>path</key>
+			<string>library/Source/API/methods/VKApiCaptcha.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>54FB2F7C5991736711AEA7569A2C3CF6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKApiCaptcha.m</string>
+			<key>path</key>
+			<string>library/Source/API/methods/VKApiCaptcha.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>557A2A90C371010EB9EED4F2EB182113</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.script.sh</string>
+			<key>path</key>
+			<string>Pods-Vidal-resources.sh</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>56DC3C23D6120911D6520878256B203D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1F3410CCFA71A8C73817451AE8BA4290</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>56E75D24F88146EC34B5B30E53EFC297</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>name</key>
+			<string>VK-ios-sdk</string>
+			<key>target</key>
+			<string>27008CD6BB37E01A1A72BC9CE8B22FCD</string>
+			<key>targetProxy</key>
+			<string>3A0F0FB27ABB5BE952A1E70421DA0DF1</string>
+		</dict>
+		<key>57424121E8751AB1A8A197C93FF4CA46</key>
+		<dict>
+			<key>fileRef</key>
+			<string>20CC39A84B5C3247238D78134E36AC20</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>575F13CA9036D50717EB1EBEFED6D525</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>C16CB7B332D14C79BD6BFEAB27F330BB</string>
+			<key>buildPhases</key>
+			<array>
+				<string>A85BC9FEE8365DBBD4619AD8596A1264</string>
+				<string>961D139C3039A1BD91695D5C35C29F0D</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array>
+				<string>B10A06D74AE29383A9C017272C3D9653</string>
+				<string>86DD52AA77202A1B16D81017EDB059D1</string>
+				<string>56E75D24F88146EC34B5B30E53EFC297</string>
+			</array>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>Pods-Vidal</string>
+			<key>productName</key>
+			<string>Pods-Vidal</string>
+			<key>productReference</key>
+			<string>83728C6D711E44A445DD7AA6E72D38CD</string>
+			<key>productType</key>
+			<string>com.apple.product-type.library.static</string>
+		</dict>
+		<key>5ACCE156C2B74C274AC34D0C05D0103F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKApiUsers.h</string>
+			<key>path</key>
+			<string>library/Source/API/methods/VKApiUsers.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5B72083A728EDB665C830CB055122C6A</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>1437C26F16B5E5A5FDC5A97E1F4DCBF3</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Targets Support Files</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5B9FD6ECA1D87769C5BEDB2383E3AE1A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKHTTPClient.h</string>
+			<key>path</key>
+			<string>library/Source/Core/VKHTTPClient.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5BAA3F21D5FFC1B90A04B137BC40D0C6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKCounters.h</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKCounters.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5BF14676E26359C397A3AF987E3D08A0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKLikes.h</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKLikes.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5CE68FBDE539C3231475655FAA92633D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7C2BC4336A268DD8F79733F5E5ED2D13</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>5D63F388D1A847A55690187807337F15</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>NSError+VKError.h</string>
+			<key>path</key>
+			<string>library/Source/Core/NSError+VKError.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5E0B4003B2AB94902590B6447B9AEFFB</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>libSLExpandableTableView.a</string>
+			<key>path</key>
+			<string>libSLExpandableTableView.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>5F3ED7FC14A91313F3EF15A1EA7ECE1E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKSdk.m</string>
+			<key>path</key>
+			<string>library/Source/VKSdk.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>5F55D7DBD927C57F7AF00385D358932B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKUtil.h</string>
+			<key>path</key>
+			<string>library/Source/Utils/VKUtil.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>61D0F5FF432430341D0489D25F06B68F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKPhotoSize.h</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKPhotoSize.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6236453CF5E9176A065D9B6DDBD36CB7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0FA7645ADBF3029EA25A16739543F909</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>642D566B4A16D40CC03E2CF6F5F87B4A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>BB1EE96BF2005D7B1C549DA078346153</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>648DF6724CF86528729573F83D3A140D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A16887899925EACB24273DEF089FA3A8</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>64E3FF52C6F91D3DE14AA760B583B520</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>E4BE19C8AA21A5643561967C8B9765E8</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/VK-ios-sdk/VK-ios-sdk-prefix.pch</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.2</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PRIVATE_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>6504611142B6F7DE5CCE9F8F3EE0591C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>EE08B57A18576CFC89316757C22EB364</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>6557E31FBFCD3778519E5EABEC898CA1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKUniversity.m</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKUniversity.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>65BF8E77B362432AE0D663810DB498A6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKAuthorizeController.m</string>
+			<key>path</key>
+			<string>library/Source/Views/VKAuthorizeController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>66084FD0D8EF6EB603AE54E0A546337A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E97BC77E36EB46C0155E79638228B45F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>66B857397359484B6D5336ADA58783D6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKHTTPClient.m</string>
+			<key>path</key>
+			<string>library/Source/Core/VKHTTPClient.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6734262E44B76851C8E59BFCCF6F9DEB</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>Pods-Vidal-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>678019B740D838BF487EDB05AA25B17A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>61D0F5FF432430341D0489D25F06B68F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>6871AB779FEB808BBB7777BE97F6EC22</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>HSDatePickerViewController.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6966E7B79A5FF35B664505CD12B6174B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKUploadMessagesPhotoRequest.m</string>
+			<key>path</key>
+			<string>library/Source/API/upload/VKUploadMessagesPhotoRequest.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>699F970A63EEFC517630965C8F5FC185</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6E7E5AF37923BFA48D6994B9BFC6535F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>6A2A0D775B5D1EE6560D71D277A52970</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKUtil.m</string>
+			<key>path</key>
+			<string>library/Source/Utils/VKUtil.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6A4A6D4C55E2FCA9B609A5C59256E646</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C3B7BDF5CE5CB8F095FE12DA55D9A9BB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>6B0B9C928B05BA6346AB032DD0260C56</key>
+		<dict>
+			<key>buildConfigurationList</key>
+			<string>A3B0172AA86BBEA6BE600520E675E6A1</string>
+			<key>buildPhases</key>
+			<array>
+				<string>17851A1483CC3597C82A5CAEA073B237</string>
+				<string>D646D2234B48B3EA5209C3F5B5365977</string>
+				<string>E0670F27B95AB1F2597B56E1D837731D</string>
+			</array>
+			<key>buildRules</key>
+			<array/>
+			<key>dependencies</key>
+			<array/>
+			<key>isa</key>
+			<string>PBXNativeTarget</string>
+			<key>name</key>
+			<string>HSDatePickerViewController</string>
+			<key>productName</key>
+			<string>HSDatePickerViewController</string>
+			<key>productReference</key>
+			<string>F34AB404123393E0817199D417A81391</string>
+			<key>productType</key>
+			<string>com.apple.product-type.library.static</string>
+		</dict>
+		<key>6CDE7E66DBDF640C88B977B78EE3A40F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9F2A9DDEEF8A0F27A1FE06CEC8346521</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>6E7E5AF37923BFA48D6994B9BFC6535F</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>Foundation.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/Foundation.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>6F31AD0804FA2FC23D4533973921497E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKGroup.h</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKGroup.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>6FB79A27865A0A6A6A88DC0884A24E30</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKApiObject.h</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKApiObject.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>70FA5CEE5A551E288F66AFD825E997D2</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6F31AD0804FA2FC23D4533973921497E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>723ED2DAE18A158BF2568238B48A6CEE</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKSdkVersion.h</string>
+			<key>path</key>
+			<string>library/Source/VKSdkVersion.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>73F0EAD6C2FC061E5317D9B9BDFACC3E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKShareDialogController.m</string>
+			<key>path</key>
+			<string>library/Source/Views/VKShareDialogController.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>753C0C3CC4A83B6D9068EFBE617F6729</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7FE1F84861E12E4B2B05C47058B122BA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>759D28B89D1D47899773198A620E0004</key>
+		<dict>
+			<key>fileRef</key>
+			<string>93E21081E9A4F62DD97A69CDDCC79D10</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>75E3ECFC39A91E869BABB20D72AB5587</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DFAD4A9E4BDE65015DA05A1D7FE30535</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>763325655781F5CB0690C97CB3843F12</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B131F99404810225D450DD87E540CC06</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>7769EAA5BC3BCAE7F6435A2583B272EF</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKApiPhotos.h</string>
+			<key>path</key>
+			<string>library/Source/API/methods/VKApiPhotos.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7873F380EBB90D62BB98741912B517DE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>EAB067F51F54C87448D8EB416471225A</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>79BA2CC1A6BAC7C3739A2BB522DBE635</key>
+		<dict>
+			<key>fileRef</key>
+			<string>9BC9FD4C2E7BB10C516B7806301D3DC5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>7AB84036B7EBA2D96B27462FE3729C98</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>NSString+MD5.h</string>
+			<key>path</key>
+			<string>library/Source/Utils/NSString+MD5.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7AF2FE11C5127C8B69905A317FDA3A28</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6966E7B79A5FF35B664505CD12B6174B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>7B61D9FD5BD76F9C700E0A5C7E920B01</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C7BB0D115455368CF633BDF22B9A41CA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>7BB94A5A9AA02F1F394D8E79F57EBD2C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>8D311D9C7DD2FF70529BD53519F73F26</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>7C2BC4336A268DD8F79733F5E5ED2D13</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKHTTPOperation.m</string>
+			<key>path</key>
+			<string>library/Source/Core/VKHTTPOperation.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7CD3100B805B9A9A79B12BB269DFFD42</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKApiGroups.h</string>
+			<key>path</key>
+			<string>library/Source/API/methods/VKApiGroups.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7D5CA6189EDD8053BF33A1F864ED64BB</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5BAA3F21D5FFC1B90A04B137BC40D0C6</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>7D7540A733ABA88EFC6763251A01A92E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>893D843104BCB1583BE476AB473A9AEE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>7DA4C98805D9307A6880F26385BA48CD</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKImageParameters.h</string>
+			<key>path</key>
+			<string>library/Source/Image/VKImageParameters.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7DB346D0F39D3F0E887471402A8071AB</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>BA6428E9F66FD5A23C0A2E06ED26CD2F</string>
+				<string>433CD3331B6C3787F473C941B61FC68F</string>
+				<string>B191873B81144F5A3803881B9873F8FD</string>
+				<string>FA351229E8A55600BB4E959DC9909281</string>
+				<string>5B72083A728EDB665C830CB055122C6A</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7DCE50CFF3D22A9243BA4DCD1783E5F2</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0E5F40C4F7DE5A809AC79B1A087D26E2</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>7E14D20BCE23117FA84E2477B572257B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>543F0A0D2102D8E633B0031776A79BA8</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>7EB3375AC3660DD8FA10D9632881F469</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKCaptchaView.m</string>
+			<key>path</key>
+			<string>library/Source/Views/VKCaptchaView.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7F09DC6B8B0387347A574620EDD51EF5</key>
+		<dict>
+			<key>containerPortal</key>
+			<string>D41D8CD98F00B204E9800998ECF8427E</string>
+			<key>isa</key>
+			<string>PBXContainerItemProxy</string>
+			<key>proxyType</key>
+			<string>1</string>
+			<key>remoteGlobalIDString</key>
+			<string>47722F3E74404DE8BB8E10C235F9993B</string>
+			<key>remoteInfo</key>
+			<string>SLExpandableTableView</string>
+		</dict>
+		<key>7F5897572F58C65855871AA9DA73E9C4</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>225805EDA56AACDC7813C740038E01F6</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.2</string>
+				<key>MACH_O_TYPE</key>
+				<string>staticlib</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>YES</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PODS_ROOT</key>
+				<string>$(SRCROOT)</string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>7FE1F84861E12E4B2B05C47058B122BA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKApi.h</string>
+			<key>path</key>
+			<string>library/Source/API/VKApi.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>7FF770A3706B923EB7760EA3C914DCB8</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKBundle.h</string>
+			<key>path</key>
+			<string>library/Source/VKBundle.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>809A2BC90C7EB704113D150FFE1190E8</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5F55D7DBD927C57F7AF00385D358932B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>815ACB2FFAA9CB84F3A0F72036F2CEA1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>OrderedDictionary.m</string>
+			<key>path</key>
+			<string>library/Source/Utils/OrderedDictionary.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>82A68984638EABFDA497FA206D12AD1B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>HSDatePickerViewController-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>83728C6D711E44A445DD7AA6E72D38CD</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>libPods-Vidal.a</string>
+			<key>path</key>
+			<string>libPods-Vidal.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>84966FD1F80FB004F26936852C5B6634</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKAudio.h</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKAudio.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8558B0FEA4A0F23D97C7B4960C0737D4</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>B131F99404810225D450DD87E540CC06</string>
+				<string>EE08B57A18576CFC89316757C22EB364</string>
+				<string>D976C7B6111F1A253A1B42B6CBD496A9</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>SLExpandableTableView</string>
+			<key>path</key>
+			<string>SLExpandableTableView</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>85E21191CFE8614E6F604FB06BADF027</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKUploadPhotoBase.h</string>
+			<key>path</key>
+			<string>library/Source/API/upload/VKUploadPhotoBase.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8670EF7C72F5545FFAF7D349A9472D12</key>
+		<dict>
+			<key>fileRef</key>
+			<string>47EE5C5525872C77B2C369517FB6FD48</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>86DD52AA77202A1B16D81017EDB059D1</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>name</key>
+			<string>SLExpandableTableView</string>
+			<key>target</key>
+			<string>47722F3E74404DE8BB8E10C235F9993B</string>
+			<key>targetProxy</key>
+			<string>7F09DC6B8B0387347A574620EDD51EF5</string>
+		</dict>
+		<key>88F584035E507B7A016E6C29659F3E3B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>path</key>
+			<string>SLExpandableTableView-prefix.pch</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>893D843104BCB1583BE476AB473A9AEE</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>NSData+MD5.h</string>
+			<key>path</key>
+			<string>library/Source/Utils/NSData+MD5.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>89892C74AEEB2C96E0EB3E6DC1E81A9F</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>343C45B33C9D2BB1CFFD17BAD5BD5E3C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Resources</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>89BAAB2246BE23490CD385EB2746FA12</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C3B7BDF5CE5CB8F095FE12DA55D9A9BB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>8BBF0466189EB95749A58563F3534C17</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKAccessToken.h</string>
+			<key>path</key>
+			<string>library/Source/VKAccessToken.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8C05E4FA3D4739AAA03621B5B481DC35</key>
+		<dict>
+			<key>fileRef</key>
+			<string>E0A9B40E4BB30FE46BDD0F95113D3AF3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>8CA428903E91262D4FE31C8406FC3404</key>
+		<dict>
+			<key>fileRef</key>
+			<string>BD8D6541835AFFFBC9F5C4A64098A7B3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>8D1534490D941DCA47C62AC4314182AF</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_DYNAMIC_NO_PIC</key>
+				<string>NO</string>
+				<key>GCC_OPTIMIZATION_LEVEL</key>
+				<string>0</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>DEBUG=1</string>
+					<string>$(inherited)</string>
+				</array>
+				<key>GCC_SYMBOLS_PRIVATE_EXTERN</key>
+				<string>NO</string>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.2</string>
+				<key>ONLY_ACTIVE_ARCH</key>
+				<string>YES</string>
+				<key>STRIP_INSTALLED_PRODUCT</key>
+				<string>NO</string>
+				<key>SYMROOT</key>
+				<string>${SRCROOT}/../build</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Debug</string>
+		</dict>
+		<key>8D311D9C7DD2FF70529BD53519F73F26</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKCaptchaView.h</string>
+			<key>path</key>
+			<string>library/Source/Views/VKCaptchaView.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>8EA5C91895349B95AB4072E42E186C2A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1F1D6CE093A951A12349086542A6E288</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>8F102E941B1CB1DE55F7892DC995A9A4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6E7E5AF37923BFA48D6994B9BFC6535F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9048E5F72E794983C15C0CA3CE73CCA3</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3E4638011239E1567355F4E5AB3155E4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>90AE3CA4FA0FE0EC33CD8DFF0789BA3A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C73DA95036A46580E8C984A8717CDFE0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>911E0DD212F740D66C2024704D70060E</key>
+		<dict>
+			<key>fileRef</key>
+			<string>EB613A9F2DBCDE68384A21216F3FB786</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>93E21081E9A4F62DD97A69CDDCC79D10</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKRelative.m</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKRelative.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>94834220324C9F203A376FFEF3DE0085</key>
+		<dict>
+			<key>fileRef</key>
+			<string>85E21191CFE8614E6F604FB06BADF027</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>955BC9D2C5FF2960936745EF3065952B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKSchool.m</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKSchool.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>96180B2D6CEF567012AE1CA9EC55C852</key>
+		<dict>
+			<key>fileRef</key>
+			<string>1B3CACBECB64C2266E089DAC5A0296C0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>961D139C3039A1BD91695D5C35C29F0D</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>699F970A63EEFC517630965C8F5FC185</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>97A35BE01F87AC8A908C64BF38BD9185</key>
+		<dict>
+			<key>fileRef</key>
+			<string>382356A6B4D0D78FDDFE126911BB6248</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>97F9C9D496672050DAA37BAF3F3F3AE0</key>
+		<dict>
+			<key>fileRef</key>
+			<string>31D6CAC1A9B7ADB57CEBAFD09D2E86CA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>986A64A7CEAC8C8B028800770E5B2A23</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKApiWall.h</string>
+			<key>path</key>
+			<string>library/Source/API/methods/VKApiWall.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9880037D4CEBA42EDABF62A3F7E1A82B</key>
+		<dict>
+			<key>baseConfigurationReference</key>
+			<string>6871AB779FEB808BBB7777BE97F6EC22</string>
+			<key>buildSettings</key>
+			<dict>
+				<key>ENABLE_STRICT_OBJC_MSGSEND</key>
+				<string>YES</string>
+				<key>GCC_PREFIX_HEADER</key>
+				<string>Target Support Files/HSDatePickerViewController/HSDatePickerViewController-prefix.pch</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.2</string>
+				<key>MTL_ENABLE_DEBUG_INFO</key>
+				<string>NO</string>
+				<key>OTHER_LDFLAGS</key>
+				<string></string>
+				<key>OTHER_LIBTOOLFLAGS</key>
+				<string></string>
+				<key>PRIVATE_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>PRODUCT_NAME</key>
+				<string>$(TARGET_NAME)</string>
+				<key>PUBLIC_HEADERS_FOLDER_PATH</key>
+				<string></string>
+				<key>SDKROOT</key>
+				<string>iphoneos</string>
+				<key>SKIP_INSTALL</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>98F8D32667F5F59A08081B9B07C12FB5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKAccessToken.m</string>
+			<key>path</key>
+			<string>library/Source/VKAccessToken.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9B70F391801A69C7058721767B3C844C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>23D970CE735FE3654B779B6330B69343</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>9BC9FD4C2E7BB10C516B7806301D3DC5</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKApiConst.m</string>
+			<key>path</key>
+			<string>library/Source/API/methods/VKApiConst.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9DE17AE515D3688B275BAEB5B98AE84D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKUploadPhotoBase.m</string>
+			<key>path</key>
+			<string>library/Source/API/upload/VKUploadPhotoBase.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>9E895B433AE79907FD57D479ADC867AF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6734262E44B76851C8E59BFCCF6F9DEB</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>9F2A9DDEEF8A0F27A1FE06CEC8346521</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKError.m</string>
+			<key>path</key>
+			<string>library/Source/Core/VKError.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A16887899925EACB24273DEF089FA3A8</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>OrderedDictionary.h</string>
+			<key>path</key>
+			<string>library/Source/Utils/OrderedDictionary.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A18EF389786292EC0942548A96EDBB17</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>SLExpandableTableView-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A1ECCD8955317682ED82360E5B7A979A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>527F2DCF264265CD65A5EF7B3286D930</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>A22D7A8119DB766F553807128E5D7D05</key>
+		<dict>
+			<key>fileRef</key>
+			<string>54FB2F7C5991736711AEA7569A2C3CF6</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A30C9D396375DE04B800FEEEDAAD97B1</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>NSData+MD5.m</string>
+			<key>path</key>
+			<string>library/Source/Utils/NSData+MD5.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A3B0172AA86BBEA6BE600520E675E6A1</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>41DEBFF87E8E7082B337B05E83D2E509</string>
+				<string>9880037D4CEBA42EDABF62A3F7E1A82B</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>A4F4CDF09CF33515A031E4FAED148FA2</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKPermissions.m</string>
+			<key>path</key>
+			<string>library/Source/VKPermissions.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>A52412A7C5E27BD504DA1861CB539656</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C41F5FBC83990270752817E703F39168</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A759F393F4A00B076713419222E9C3C2</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A30C9D396375DE04B800FEEEDAAD97B1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>A85BC9FEE8365DBBD4619AD8596A1264</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>9E895B433AE79907FD57D479ADC867AF</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>A8EB92FAFE173FE3C72B624DCFCC8758</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7FF770A3706B923EB7760EA3C914DCB8</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>A8F4C5C84A418CB13BA16A88CB4EA721</key>
+		<dict>
+			<key>fileRef</key>
+			<string>32462FCED57F164E99C7CB8D12BBDF28</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>ABF5670FBCE3D6EC0D689C37737159F0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKRelative.h</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKRelative.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AC559F7868EBB85F9FF46138D2A6D0E6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>NSString+MD5.m</string>
+			<key>path</key>
+			<string>library/Source/Utils/NSString+MD5.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AE3ABAF477A8A67716427EA7D13BE8F7</key>
+		<dict>
+			<key>fileRef</key>
+			<string>34AE7FBFE180596F2FF45E30E58863C4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>AE65D089AF0087BC239E55D63AEC3BEF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>2AF475E187DFA0826C302A200AC790F5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>AFA7586B31051D33A8497E189D3615A3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>NSError+VKError.m</string>
+			<key>path</key>
+			<string>library/Source/Core/NSError+VKError.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>AFF4F1B69A265EF514A46FC2C8D372AA</key>
+		<dict>
+			<key>fileRef</key>
+			<string>C78C9FA0BE1FC0AF4284D53F7B7B1D06</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>B10A06D74AE29383A9C017272C3D9653</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXTargetDependency</string>
+			<key>name</key>
+			<string>HSDatePickerViewController</string>
+			<key>target</key>
+			<string>6B0B9C928B05BA6346AB032DD0260C56</string>
+			<key>targetProxy</key>
+			<string>0022C6258A32828BFF43512E0DB19D60</string>
+		</dict>
+		<key>B131F99404810225D450DD87E540CC06</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>SLExpandableTableView.h</string>
+			<key>path</key>
+			<string>SLExpandableTableView/SLExpandableTableView.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B191873B81144F5A3803881B9873F8FD</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>3C089AE36A8300337677327E5A8AEB9D</string>
+				<string>8558B0FEA4A0F23D97C7B4960C0737D4</string>
+				<string>C92D5504A7FB349D162C22A255D7F709</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Pods</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B19A9ACF5C4AAA87567000648A84ABB7</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKPhoto.h</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKPhoto.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B38C46D96F549392F45E5E64C5688395</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKGroup.m</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKGroup.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B4CAB0091BE8E6642D8E7A68894B60FF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>CF3709DDB86F89A554D9F2966DC1C059</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>B58CE5BC0FA6289D4F26D557F03145F4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKAuthorizeController.h</string>
+			<key>path</key>
+			<string>library/Source/Views/VKAuthorizeController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B682329EDE95117413AB34E604B70445</key>
+		<dict>
+			<key>fileRef</key>
+			<string>30A1EDE568EEBBE4912B1C17903BDD50</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>B6ED017B71AF5D1E7827F9051B950803</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>file.xib</string>
+			<key>name</key>
+			<string>HSDatePickerViewController.xib</string>
+			<key>path</key>
+			<string>HSDatePickerViewControllerDemo/HSDatePickerViewController/HSDatePickerViewController.xib</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>B6FBAD7FDBC8A07DF53F49E4FD75B5D8</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>A759F393F4A00B076713419222E9C3C2</string>
+				<string>BCA01CA75C3309A2C4C604C934AB799C</string>
+				<string>DD256477EFF894C3765D860FFBE92C1C</string>
+				<string>FE972DA15721B8A77E76D76421FA98A4</string>
+				<string>3698ACB6553701F39077D5B67B262379</string>
+				<string>C1CAD9529AF3ACEB7056CAE50A37B7EF</string>
+				<string>3C5C725613F3D4F06B9A7FED20076CBD</string>
+				<string>911E0DD212F740D66C2024704D70060E</string>
+				<string>57424121E8751AB1A8A197C93FF4CA46</string>
+				<string>A22D7A8119DB766F553807128E5D7D05</string>
+				<string>79BA2CC1A6BAC7C3739A2BB522DBE635</string>
+				<string>F01E9787587CC8D1B59B8638ACBEF72F</string>
+				<string>8C05E4FA3D4739AAA03621B5B481DC35</string>
+				<string>56DC3C23D6120911D6520878256B203D</string>
+				<string>031FDBF258939D0D8F2CB6ADB6E3D2F5</string>
+				<string>7DCE50CFF3D22A9243BA4DCD1783E5F2</string>
+				<string>8CA428903E91262D4FE31C8406FC3404</string>
+				<string>DBA457989E5CFA4E71E926A80D5D4B1A</string>
+				<string>3A7D770CC0E6644D35EBD06A83EB9EB7</string>
+				<string>20B828D4DAF379F40399CA2020BF317C</string>
+				<string>19E3D0568D23F53D84A30D9401DF331A</string>
+				<string>42B45B6465494A6B7831300912FF471E</string>
+				<string>0837E69B6CAAFBC95084A425BB9938ED</string>
+				<string>6236453CF5E9176A065D9B6DDBD36CB7</string>
+				<string>AE3ABAF477A8A67716427EA7D13BE8F7</string>
+				<string>6CDE7E66DBDF640C88B977B78EE3A40F</string>
+				<string>4C2F39CB00BD40093E0D71C240A190AB</string>
+				<string>49E55854897D12B0A522216F559EF891</string>
+				<string>5CE68FBDE539C3231475655FAA92633D</string>
+				<string>97A35BE01F87AC8A908C64BF38BD9185</string>
+				<string>97F9C9D496672050DAA37BAF3F3F3AE0</string>
+				<string>AFF4F1B69A265EF514A46FC2C8D372AA</string>
+				<string>344BDE5D581D803601FCF70D605E7FE6</string>
+				<string>4A78C3465C1C4733FA6BF57BEEEF4AE6</string>
+				<string>012690EF350204B244BA7D964DB67354</string>
+				<string>8670EF7C72F5545FFAF7D349A9472D12</string>
+				<string>EFF606535B112B6B691E684C0375BCB1</string>
+				<string>759D28B89D1D47899773198A620E0004</string>
+				<string>8EA5C91895349B95AB4072E42E186C2A</string>
+				<string>A52412A7C5E27BD504DA1861CB539656</string>
+				<string>E62594A9EE1A0724B4A6956E2D81733F</string>
+				<string>BCF90D0D4B437F0DC9E2346330DAD41F</string>
+				<string>C29F05D2BED02E6C23B47B80E15B5AA1</string>
+				<string>1775E7ED3EE43E73D506163F64FB6E63</string>
+				<string>03D921799F2A2EC741F55808A147FB80</string>
+				<string>05DFE798CA8ABDF6CFD78F38CDF3E700</string>
+				<string>C0EA1F5CB81CACD6D98A108ACE7B32B2</string>
+				<string>7AF2FE11C5127C8B69905A317FDA3A28</string>
+				<string>0313267360587D8ACED8DC269A2DC8B9</string>
+				<string>D1483CFA9436238EF0BF8CA143884F09</string>
+				<string>5008C7D40333A46DA663E1FB9E0C7A5F</string>
+				<string>4911DC7EC2F720204760810FDAC5AB31</string>
+				<string>E09448D00988ADEF6E8D2A8E88A3D538</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>B8C124E4C97DE5353DEBAB54AD43DD9B</key>
+		<dict>
+			<key>fileRef</key>
+			<string>DDD330699B25829A7DA0DB39740B1EB4</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>BA6428E9F66FD5A23C0A2E06ED26CD2F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>name</key>
+			<string>Podfile</string>
+			<key>path</key>
+			<string>../Podfile</string>
+			<key>sourceTree</key>
+			<string>SOURCE_ROOT</string>
+			<key>xcLanguageSpecificationIdentifier</key>
+			<string>xcode.lang.ruby</string>
+		</dict>
+		<key>BB1EE96BF2005D7B1C549DA078346153</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKUploadImage.h</string>
+			<key>path</key>
+			<string>library/Source/Image/VKUploadImage.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>BC282A4F9FB0DD9478689674BD085E60</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKPermissions.h</string>
+			<key>path</key>
+			<string>library/Source/VKPermissions.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>BC7E725631A6BB912046DDBEE4BCC9DE</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D0FD35BCDC18EBCE60D0327103DE04BA</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>BCA01CA75C3309A2C4C604C934AB799C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>AFA7586B31051D33A8497E189D3615A3</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>BCF90D0D4B437F0DC9E2346330DAD41F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>955BC9D2C5FF2960936745EF3065952B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>BD8D6541835AFFFBC9F5C4A64098A7B3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKApiUsers.m</string>
+			<key>path</key>
+			<string>library/Source/API/methods/VKApiUsers.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>BE4003A6E773294E28B415176008471C</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text</string>
+			<key>path</key>
+			<string>Pods-Vidal-acknowledgements.markdown</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C0EA1F5CB81CACD6D98A108ACE7B32B2</key>
+		<dict>
+			<key>fileRef</key>
+			<string>36DC478025C5DB13E295992619CB3DD9</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C16CB7B332D14C79BD6BFEAB27F330BB</key>
+		<dict>
+			<key>buildConfigurations</key>
+			<array>
+				<string>7F5897572F58C65855871AA9DA73E9C4</string>
+				<string>20A3BB93DE22A4C13E4C8EEE425FCDA0</string>
+			</array>
+			<key>defaultConfigurationIsVisible</key>
+			<string>0</string>
+			<key>defaultConfigurationName</key>
+			<string>Release</string>
+			<key>isa</key>
+			<string>XCConfigurationList</string>
+		</dict>
+		<key>C1CAD9529AF3ACEB7056CAE50A37B7EF</key>
+		<dict>
+			<key>fileRef</key>
+			<string>98F8D32667F5F59A08081B9B07C12FB5</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C1E19D13B8D6C46A4F1302E7FB34428A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>723ED2DAE18A158BF2568238B48A6CEE</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>C29F05D2BED02E6C23B47B80E15B5AA1</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5F3ED7FC14A91313F3EF15A1EA7ECE1E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>C3B7BDF5CE5CB8F095FE12DA55D9A9BB</key>
+		<dict>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>wrapper.framework</string>
+			<key>name</key>
+			<string>UIKit.framework</string>
+			<key>path</key>
+			<string>Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.0.sdk/System/Library/Frameworks/UIKit.framework</string>
+			<key>sourceTree</key>
+			<string>DEVELOPER_DIR</string>
+		</dict>
+		<key>C41F5FBC83990270752817E703F39168</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKRequestsScheduler.m</string>
+			<key>path</key>
+			<string>library/Source/Core/VKRequestsScheduler.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C5A18280E9321A9268D1C80B7DA43967</key>
+		<dict>
+			<key>buildSettings</key>
+			<dict>
+				<key>ALWAYS_SEARCH_USER_PATHS</key>
+				<string>NO</string>
+				<key>CLANG_CXX_LANGUAGE_STANDARD</key>
+				<string>gnu++0x</string>
+				<key>CLANG_CXX_LIBRARY</key>
+				<string>libc++</string>
+				<key>CLANG_ENABLE_MODULES</key>
+				<string>YES</string>
+				<key>CLANG_ENABLE_OBJC_ARC</key>
+				<string>YES</string>
+				<key>CLANG_WARN_BOOL_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_CONSTANT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_DIRECT_OBJC_ISA_USAGE</key>
+				<string>YES</string>
+				<key>CLANG_WARN_EMPTY_BODY</key>
+				<string>YES</string>
+				<key>CLANG_WARN_ENUM_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_INT_CONVERSION</key>
+				<string>YES</string>
+				<key>CLANG_WARN_OBJC_ROOT_CLASS</key>
+				<string>YES</string>
+				<key>CLANG_WARN_UNREACHABLE_CODE</key>
+				<string>YES</string>
+				<key>CLANG_WARN__DUPLICATE_METHOD_MATCH</key>
+				<string>YES</string>
+				<key>COPY_PHASE_STRIP</key>
+				<string>YES</string>
+				<key>ENABLE_NS_ASSERTIONS</key>
+				<string>NO</string>
+				<key>GCC_C_LANGUAGE_STANDARD</key>
+				<string>gnu99</string>
+				<key>GCC_PREPROCESSOR_DEFINITIONS</key>
+				<array>
+					<string>RELEASE=1</string>
+				</array>
+				<key>GCC_WARN_64_TO_32_BIT_CONVERSION</key>
+				<string>YES</string>
+				<key>GCC_WARN_ABOUT_RETURN_TYPE</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNDECLARED_SELECTOR</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNINITIALIZED_AUTOS</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_FUNCTION</key>
+				<string>YES</string>
+				<key>GCC_WARN_UNUSED_VARIABLE</key>
+				<string>YES</string>
+				<key>IPHONEOS_DEPLOYMENT_TARGET</key>
+				<string>9.2</string>
+				<key>STRIP_INSTALLED_PRODUCT</key>
+				<string>NO</string>
+				<key>SYMROOT</key>
+				<string>${SRCROOT}/../build</string>
+				<key>VALIDATE_PRODUCT</key>
+				<string>YES</string>
+			</dict>
+			<key>isa</key>
+			<string>XCBuildConfiguration</string>
+			<key>name</key>
+			<string>Release</string>
+		</dict>
+		<key>C73DA95036A46580E8C984A8717CDFE0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKUploadWallPhotoRequest.h</string>
+			<key>path</key>
+			<string>library/Source/API/upload/VKUploadWallPhotoRequest.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C78C9FA0BE1FC0AF4284D53F7B7B1D06</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKLikes.m</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKLikes.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C7BB0D115455368CF633BDF22B9A41CA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKError.h</string>
+			<key>path</key>
+			<string>library/Source/Core/VKError.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>C92D5504A7FB349D162C22A255D7F709</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>893D843104BCB1583BE476AB473A9AEE</string>
+				<string>A30C9D396375DE04B800FEEEDAAD97B1</string>
+				<string>5D63F388D1A847A55690187807337F15</string>
+				<string>AFA7586B31051D33A8497E189D3615A3</string>
+				<string>7AB84036B7EBA2D96B27462FE3729C98</string>
+				<string>AC559F7868EBB85F9FF46138D2A6D0E6</string>
+				<string>A16887899925EACB24273DEF089FA3A8</string>
+				<string>815ACB2FFAA9CB84F3A0F72036F2CEA1</string>
+				<string>8BBF0466189EB95749A58563F3534C17</string>
+				<string>98F8D32667F5F59A08081B9B07C12FB5</string>
+				<string>0FFA9EF6EA5FA527F06D6C49C1D7CB54</string>
+				<string>3B6B723F0773DE915743A805F53650F4</string>
+				<string>7FE1F84861E12E4B2B05C47058B122BA</string>
+				<string>EB613A9F2DBCDE68384A21216F3FB786</string>
+				<string>1B3CACBECB64C2266E089DAC5A0296C0</string>
+				<string>20CC39A84B5C3247238D78134E36AC20</string>
+				<string>543F0A0D2102D8E633B0031776A79BA8</string>
+				<string>54FB2F7C5991736711AEA7569A2C3CF6</string>
+				<string>32462FCED57F164E99C7CB8D12BBDF28</string>
+				<string>9BC9FD4C2E7BB10C516B7806301D3DC5</string>
+				<string>032EE8048D2265431673EB1BABFCC492</string>
+				<string>0D717284AA9E521A5570FD89B317E82B</string>
+				<string>7CD3100B805B9A9A79B12BB269DFFD42</string>
+				<string>E0A9B40E4BB30FE46BDD0F95113D3AF3</string>
+				<string>F0B6C16B456162754D17C73F720CE77D</string>
+				<string>6FB79A27865A0A6A6A88DC0884A24E30</string>
+				<string>1F3410CCFA71A8C73817451AE8BA4290</string>
+				<string>D0FD35BCDC18EBCE60D0327103DE04BA</string>
+				<string>1BB925ED3A7311FB81271F42B4A14F5C</string>
+				<string>7769EAA5BC3BCAE7F6435A2583B272EF</string>
+				<string>0E5F40C4F7DE5A809AC79B1A087D26E2</string>
+				<string>5ACCE156C2B74C274AC34D0C05D0103F</string>
+				<string>BD8D6541835AFFFBC9F5C4A64098A7B3</string>
+				<string>986A64A7CEAC8C8B028800770E5B2A23</string>
+				<string>F46BC3E2BD5C4174DA7D9F8B1183E43B</string>
+				<string>84966FD1F80FB004F26936852C5B6634</string>
+				<string>30A7D6560472778309CF65F04B3FF3F9</string>
+				<string>B58CE5BC0FA6289D4F26D557F03145F4</string>
+				<string>65BF8E77B362432AE0D663810DB498A6</string>
+				<string>F3C40048B18BAD12E41608CD880C8851</string>
+				<string>F86EF4418AA7C94B747EC98A2525964A</string>
+				<string>7FF770A3706B923EB7760EA3C914DCB8</string>
+				<string>1E4C62B9A084103F1EBBF9798C1C5015</string>
+				<string>8D311D9C7DD2FF70529BD53519F73F26</string>
+				<string>7EB3375AC3660DD8FA10D9632881F469</string>
+				<string>3E4638011239E1567355F4E5AB3155E4</string>
+				<string>0FA7645ADBF3029EA25A16739543F909</string>
+				<string>5BAA3F21D5FFC1B90A04B137BC40D0C6</string>
+				<string>34AE7FBFE180596F2FF45E30E58863C4</string>
+				<string>C7BB0D115455368CF633BDF22B9A41CA</string>
+				<string>9F2A9DDEEF8A0F27A1FE06CEC8346521</string>
+				<string>6F31AD0804FA2FC23D4533973921497E</string>
+				<string>B38C46D96F549392F45E5E64C5688395</string>
+				<string>5B9FD6ECA1D87769C5BEDB2383E3AE1A</string>
+				<string>66B857397359484B6D5336ADA58783D6</string>
+				<string>3C4B844AA92F8BD1D0D722AF1FC2231C</string>
+				<string>7C2BC4336A268DD8F79733F5E5ED2D13</string>
+				<string>7DA4C98805D9307A6880F26385BA48CD</string>
+				<string>382356A6B4D0D78FDDFE126911BB6248</string>
+				<string>CF3709DDB86F89A554D9F2966DC1C059</string>
+				<string>31D6CAC1A9B7ADB57CEBAFD09D2E86CA</string>
+				<string>5BF14676E26359C397A3AF987E3D08A0</string>
+				<string>C78C9FA0BE1FC0AF4284D53F7B7B1D06</string>
+				<string>2AF475E187DFA0826C302A200AC790F5</string>
+				<string>2319F405B7C35B4A07B66B5BDAE8CCA4</string>
+				<string>DFAD4A9E4BDE65015DA05A1D7FE30535</string>
+				<string>E651BAC7D01288688F779001E3DD51F0</string>
+				<string>BC282A4F9FB0DD9478689674BD085E60</string>
+				<string>A4F4CDF09CF33515A031E4FAED148FA2</string>
+				<string>B19A9ACF5C4AAA87567000648A84ABB7</string>
+				<string>47EE5C5525872C77B2C369517FB6FD48</string>
+				<string>61D0F5FF432430341D0489D25F06B68F</string>
+				<string>4690ADBCFBD7ECBC9F4837DB406A7D52</string>
+				<string>ABF5670FBCE3D6EC0D689C37737159F0</string>
+				<string>93E21081E9A4F62DD97A69CDDCC79D10</string>
+				<string>DDD330699B25829A7DA0DB39740B1EB4</string>
+				<string>1F1D6CE093A951A12349086542A6E288</string>
+				<string>DAC4F3B471FA1C980A9A73E2CA1EADCE</string>
+				<string>C41F5FBC83990270752817E703F39168</string>
+				<string>EC53BBE369B9448B1BE4F266D725ABC6</string>
+				<string>511E364ABD6DBC0C71C8931DEF29662F</string>
+				<string>23D970CE735FE3654B779B6330B69343</string>
+				<string>955BC9D2C5FF2960936745EF3065952B</string>
+				<string>E2DAFDFC8BA09F1273C5377ECD965B45</string>
+				<string>5F3ED7FC14A91313F3EF15A1EA7ECE1E</string>
+				<string>723ED2DAE18A158BF2568238B48A6CEE</string>
+				<string>E97BC77E36EB46C0155E79638228B45F</string>
+				<string>73F0EAD6C2FC061E5317D9B9BDFACC3E</string>
+				<string>53AD47453DFFDAAD3AF4C978B718E3B9</string>
+				<string>1D5771BFF33EBDB3FD00B47B16A15B76</string>
+				<string>527F2DCF264265CD65A5EF7B3286D930</string>
+				<string>6557E31FBFCD3778519E5EABEC898CA1</string>
+				<string>BB1EE96BF2005D7B1C549DA078346153</string>
+				<string>36DC478025C5DB13E295992619CB3DD9</string>
+				<string>3368D004D4E26105F3E121350542AC1E</string>
+				<string>6966E7B79A5FF35B664505CD12B6174B</string>
+				<string>85E21191CFE8614E6F604FB06BADF027</string>
+				<string>9DE17AE515D3688B275BAEB5B98AE84D</string>
+				<string>15B4410A257282C59BE7F76908DF0117</string>
+				<string>D0A980F8CB728B5F83AFEDD5C89289E9</string>
+				<string>C73DA95036A46580E8C984A8717CDFE0</string>
+				<string>52EF97603857863955AA8B0EE40EDBDC</string>
+				<string>4843694F7C3673824FA63D3674919A94</string>
+				<string>FE0C366C852437E971619A9C7FF793CA</string>
+				<string>5F55D7DBD927C57F7AF00385D358932B</string>
+				<string>6A2A0D775B5D1EE6560D71D277A52970</string>
+				<string>89892C74AEEB2C96E0EB3E6DC1E81A9F</string>
+				<string>259D79D991CF17622C7C341B83A230FE</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>VK-ios-sdk</string>
+			<key>path</key>
+			<string>VK-ios-sdk</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CA96567B9CEDE04932324BBFA1912D7A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4843694F7C3673824FA63D3674919A94</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>CC27AECCC874476BA997722357635D3E</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.plist.xml</string>
+			<key>path</key>
+			<string>Pods-Vidal-acknowledgements.plist</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>CF3709DDB86F89A554D9F2966DC1C059</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKJSONOperation.h</string>
+			<key>path</key>
+			<string>library/Source/Core/VKJSONOperation.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D0A980F8CB728B5F83AFEDD5C89289E9</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKUploadPhotoRequest.m</string>
+			<key>path</key>
+			<string>library/Source/API/upload/VKUploadPhotoRequest.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D0FD35BCDC18EBCE60D0327103DE04BA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKApiObjectArray.h</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKApiObjectArray.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D12637F362F61F18E9381671BE3FD1B6</key>
+		<dict>
+			<key>fileRef</key>
+			<string>3368D004D4E26105F3E121350542AC1E</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>D1483CFA9436238EF0BF8CA143884F09</key>
+		<dict>
+			<key>fileRef</key>
+			<string>D0A980F8CB728B5F83AFEDD5C89289E9</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>D2597C4AB8316CB430A3460C98D86D68</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4616AE7115F86872C8D2D854ED154502</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>D28620C06B74650B86C923220E7C3CD4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0FFA9EF6EA5FA527F06D6C49C1D7CB54</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>D2F0C650034EE6870BBC28FAEB240642</key>
+		<dict>
+			<key>fileRef</key>
+			<string>BC282A4F9FB0DD9478689674BD085E60</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>D41D8CD98F00B204E9800998ECF8427E</key>
+		<dict>
+			<key>attributes</key>
+			<dict>
+				<key>LastSwiftUpdateCheck</key>
+				<string>0700</string>
+				<key>LastUpgradeCheck</key>
+				<string>0700</string>
+			</dict>
+			<key>buildConfigurationList</key>
+			<string>2D8E8EC45A3A1A1D94AE762CB5028504</string>
+			<key>compatibilityVersion</key>
+			<string>Xcode 3.2</string>
+			<key>developmentRegion</key>
+			<string>English</string>
+			<key>hasScannedForEncodings</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXProject</string>
+			<key>knownRegions</key>
+			<array>
+				<string>en</string>
+			</array>
+			<key>mainGroup</key>
+			<string>7DB346D0F39D3F0E887471402A8071AB</string>
+			<key>productRefGroup</key>
+			<string>FA351229E8A55600BB4E959DC9909281</string>
+			<key>projectDirPath</key>
+			<string></string>
+			<key>projectReferences</key>
+			<array/>
+			<key>projectRoot</key>
+			<string></string>
+			<key>targets</key>
+			<array>
+				<string>6B0B9C928B05BA6346AB032DD0260C56</string>
+				<string>575F13CA9036D50717EB1EBEFED6D525</string>
+				<string>47722F3E74404DE8BB8E10C235F9993B</string>
+				<string>27008CD6BB37E01A1A72BC9CE8B22FCD</string>
+			</array>
+		</dict>
+		<key>D6128A72348E6E9AB08792D2C6ACF4D5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5ACCE156C2B74C274AC34D0C05D0103F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>D646D2234B48B3EA5209C3F5B5365977</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>537A40F2C8C55B233C338EA879919B0B</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>D6D90F1B37DB58C1911D95BF3F44445F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>032EE8048D2265431673EB1BABFCC492</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>D8C3F0682B51E04C7EE2953EB1BF3D52</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>SLExpandableTableView.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>D976C7B6111F1A253A1B42B6CBD496A9</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>D8C3F0682B51E04C7EE2953EB1BF3D52</string>
+				<string>A18EF389786292EC0942548A96EDBB17</string>
+				<string>88F584035E507B7A016E6C29659F3E3B</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Support Files</string>
+			<key>path</key>
+			<string>../Target Support Files/SLExpandableTableView</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DAC4F3B471FA1C980A9A73E2CA1EADCE</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKRequestsScheduler.h</string>
+			<key>path</key>
+			<string>library/Source/Core/VKRequestsScheduler.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DBA457989E5CFA4E71E926A80D5D4B1A</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F46BC3E2BD5C4174DA7D9F8B1183E43B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DD256477EFF894C3765D860FFBE92C1C</key>
+		<dict>
+			<key>fileRef</key>
+			<string>AC559F7868EBB85F9FF46138D2A6D0E6</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>DDD330699B25829A7DA0DB39740B1EB4</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKRequest.h</string>
+			<key>path</key>
+			<string>library/Source/Core/VKRequest.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>DFAD4A9E4BDE65015DA05A1D7FE30535</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKOperation.h</string>
+			<key>path</key>
+			<string>library/Source/Core/VKOperation.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E0670F27B95AB1F2597B56E1D837731D</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>7873F380EBB90D62BB98741912B517DE</string>
+			</array>
+			<key>isa</key>
+			<string>PBXHeadersBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>E09448D00988ADEF6E8D2A8E88A3D538</key>
+		<dict>
+			<key>fileRef</key>
+			<string>6A2A0D775B5D1EE6560D71D277A52970</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>E0A9B40E4BB30FE46BDD0F95113D3AF3</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKApiGroups.m</string>
+			<key>path</key>
+			<string>library/Source/API/methods/VKApiGroups.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E1267C3B515310F95E7769F96CE4CB76</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>path</key>
+			<string>VK-ios-sdk-dummy.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E1680B7ADF4641F73ECCA41C2F16F125</key>
+		<dict>
+			<key>fileRef</key>
+			<string>15B4410A257282C59BE7F76908DF0117</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>E25BDDECA64B6BEF316757D541560959</key>
+		<dict>
+			<key>fileRef</key>
+			<string>A18EF389786292EC0942548A96EDBB17</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>E2DAFDFC8BA09F1273C5377ECD965B45</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKSdk.h</string>
+			<key>path</key>
+			<string>library/Source/VKSdk.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E3FC446BA6AEBF99DDA8B3920251C919</key>
+		<dict>
+			<key>fileRef</key>
+			<string>B19A9ACF5C4AAA87567000648A84ABB7</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>E4BE19C8AA21A5643561967C8B9765E8</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>text.xcconfig</string>
+			<key>path</key>
+			<string>VK-ios-sdk.xcconfig</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E5750F114E68AD4AF80BC06804AA4EE7</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>6871AB779FEB808BBB7777BE97F6EC22</string>
+				<string>30A1EDE568EEBBE4912B1C17903BDD50</string>
+				<string>82A68984638EABFDA497FA206D12AD1B</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Support Files</string>
+			<key>path</key>
+			<string>../Target Support Files/HSDatePickerViewController</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E62594A9EE1A0724B4A6956E2D81733F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>511E364ABD6DBC0C71C8931DEF29662F</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>E651BAC7D01288688F779001E3DD51F0</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKOperation.m</string>
+			<key>path</key>
+			<string>library/Source/Core/VKOperation.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>E8AE0AC49B336982134EBFD919CEEA9D</key>
+		<dict>
+			<key>fileRef</key>
+			<string>ABF5670FBCE3D6EC0D689C37737159F0</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>E97BC77E36EB46C0155E79638228B45F</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKShareDialogController.h</string>
+			<key>path</key>
+			<string>library/Source/Views/VKShareDialogController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>EAB067F51F54C87448D8EB416471225A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>HSDatePickerViewController.h</string>
+			<key>path</key>
+			<string>HSDatePickerViewControllerDemo/HSDatePickerViewController/HSDatePickerViewController.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>EB613A9F2DBCDE68384A21216F3FB786</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKApi.m</string>
+			<key>path</key>
+			<string>library/Source/API/VKApi.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>EC53BBE369B9448B1BE4F266D725ABC6</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKResponse.h</string>
+			<key>path</key>
+			<string>library/Source/Core/VKResponse.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>ECE77385E89BBB044DA827462C2D0907</key>
+		<dict>
+			<key>fileRef</key>
+			<string>5D63F388D1A847A55690187807337F15</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>EE08B57A18576CFC89316757C22EB364</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>SLExpandableTableView.m</string>
+			<key>path</key>
+			<string>SLExpandableTableView/SLExpandableTableView.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>EE66D69446ABD192BBC1312AF5E45228</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>E25BDDECA64B6BEF316757D541560959</string>
+				<string>6504611142B6F7DE5CCE9F8F3EE0591C</string>
+			</array>
+			<key>isa</key>
+			<string>PBXSourcesBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>EFF606535B112B6B691E684C0375BCB1</key>
+		<dict>
+			<key>fileRef</key>
+			<string>4690ADBCFBD7ECBC9F4837DB406A7D52</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>F01E9787587CC8D1B59B8638ACBEF72F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>0D717284AA9E521A5570FD89B317E82B</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+		<key>F0396D8D10FAFFEFFAB1CFDF045AFB8F</key>
+		<dict>
+			<key>fileRef</key>
+			<string>7DA4C98805D9307A6880F26385BA48CD</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>F0B6C16B456162754D17C73F720CE77D</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKApiModels.h</string>
+			<key>path</key>
+			<string>library/Source/API/methods/VKApiModels.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F2963294B2AF9CE4329E8C1DCAEBED8E</key>
+		<dict>
+			<key>buildActionMask</key>
+			<string>2147483647</string>
+			<key>files</key>
+			<array>
+				<string>8F102E941B1CB1DE55F7892DC995A9A4</string>
+				<string>6A4A6D4C55E2FCA9B609A5C59256E646</string>
+			</array>
+			<key>isa</key>
+			<string>PBXFrameworksBuildPhase</string>
+			<key>runOnlyForDeploymentPostprocessing</key>
+			<string>0</string>
+		</dict>
+		<key>F34AB404123393E0817199D417A81391</key>
+		<dict>
+			<key>explicitFileType</key>
+			<string>archive.ar</string>
+			<key>includeInIndex</key>
+			<string>0</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>name</key>
+			<string>libHSDatePickerViewController.a</string>
+			<key>path</key>
+			<string>libHSDatePickerViewController.a</string>
+			<key>sourceTree</key>
+			<string>BUILT_PRODUCTS_DIR</string>
+		</dict>
+		<key>F3C40048B18BAD12E41608CD880C8851</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.h</string>
+			<key>name</key>
+			<string>VKBatchRequest.h</string>
+			<key>path</key>
+			<string>library/Source/VKBatchRequest.h</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F46BC3E2BD5C4174DA7D9F8B1183E43B</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKApiWall.m</string>
+			<key>path</key>
+			<string>library/Source/API/methods/VKApiWall.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>F571840B3BB942A2B8E2330F09BB7547</key>
+		<dict>
+			<key>fileRef</key>
+			<string>F0B6C16B456162754D17C73F720CE77D</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>F86EF4418AA7C94B747EC98A2525964A</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKBatchRequest.m</string>
+			<key>path</key>
+			<string>library/Source/VKBatchRequest.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FA351229E8A55600BB4E959DC9909281</key>
+		<dict>
+			<key>children</key>
+			<array>
+				<string>F34AB404123393E0817199D417A81391</string>
+				<string>83728C6D711E44A445DD7AA6E72D38CD</string>
+				<string>5E0B4003B2AB94902590B6447B9AEFFB</string>
+				<string>1690C111B683AF9B4B27DB9025FBD850</string>
+			</array>
+			<key>isa</key>
+			<string>PBXGroup</string>
+			<key>name</key>
+			<string>Products</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FC1859E98BCCE709EE4CA15E7CBF16B5</key>
+		<dict>
+			<key>fileRef</key>
+			<string>8BBF0466189EB95749A58563F3534C17</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+			<key>settings</key>
+			<dict>
+				<key>ATTRIBUTES</key>
+				<array>
+					<string>Public</string>
+				</array>
+			</dict>
+		</dict>
+		<key>FE0C366C852437E971619A9C7FF793CA</key>
+		<dict>
+			<key>includeInIndex</key>
+			<string>1</string>
+			<key>isa</key>
+			<string>PBXFileReference</string>
+			<key>lastKnownFileType</key>
+			<string>sourcecode.c.objc</string>
+			<key>name</key>
+			<string>VKUser.m</string>
+			<key>path</key>
+			<string>library/Source/API/models/VKUser.m</string>
+			<key>sourceTree</key>
+			<string>&lt;group&gt;</string>
+		</dict>
+		<key>FE972DA15721B8A77E76D76421FA98A4</key>
+		<dict>
+			<key>fileRef</key>
+			<string>815ACB2FFAA9CB84F3A0F72036F2CEA1</string>
+			<key>isa</key>
+			<string>PBXBuildFile</string>
+		</dict>
+	</dict>
+	<key>rootObject</key>
+	<string>D41D8CD98F00B204E9800998ECF8427E</string>
+</dict>
+</plist>

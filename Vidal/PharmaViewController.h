@@ -10,8 +10,10 @@
 #import <SLExpandableTableView.h>
 #import "PharmaTableViewCell.h"
 
-@interface PharmaViewController : ModelViewController<SLExpandableTableViewDatasource, SLExpandableTableViewDelegate>
+@interface PharmaViewController : ModelViewController<SLExpandableTableViewDatasource, SLExpandableTableViewDelegate, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) IBOutlet SLExpandableTableView *tableView;
+@property (strong, nonatomic) IBOutlet UIView *containerView;
+@property (strong, nonatomic) IBOutlet UIView *darkView;
 
 @end

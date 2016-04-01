@@ -10,6 +10,11 @@
 
 @interface ProducersViewController ()
 
+@property (nonatomic, strong) DBManager *dbManager;
+@property (nonatomic, strong) NSArray *arrPeopleInfo;
+
+-(void)loadData;
+
 @end
 
 @implementation ProducersViewController
@@ -19,6 +24,10 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"vidal.cardio.db3"];
+    
+    [self loadData];
     
     // Do any additional setup after loading the view.
 }
@@ -32,16 +41,38 @@
     return 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-  
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"producersCell"];
+-(ProducersTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+    // Dequeue the cell.
+    ProducersTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"producersCell" forIndexPath:indexPath];
+    
+    NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"LocalName"];
+    NSInteger indexOfLastname = [self.dbManager.arrColumnNames indexOfObject:@"Property"];
+    NSInteger indexOfAge = [self.dbManager.arrColumnNames indexOfObject:@"CountryCode"];
+    
+    // Set the loaded data to the appropriate cell labels.
+    cell.name.text = [NSString stringWithFormat:@"%@ %@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname], [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfLastname]];
+    
+    cell.country.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfAge]];
     
     return cell;
+}
+
+-(void)loadData{
+    // Form the query.
+    NSString *query = [NSString stringWithFormat:@"select * from Company order by Company.LocalName"];
     
+    // Get the results.
+    if (self.arrPeopleInfo != nil) {
+        self.arrPeopleInfo = nil;
+    }
+    self.arrPeopleInfo = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    
+    // Reload the table view.
+    [self.tableView reloadData];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return self.arrPeopleInfo.count;
 }
 
 /*

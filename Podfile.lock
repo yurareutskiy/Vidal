@@ -1,13 +1,16 @@
 PODS:
   - HSDatePickerViewController (1.0.1)
   - SLExpandableTableView (1.3.1)
+  - VK-ios-sdk (1.2.2)
 
 DEPENDENCIES:
   - HSDatePickerViewController (~> 1.0)
   - SLExpandableTableView
+  - VK-ios-sdk
 
 SPEC CHECKSUMS:
   HSDatePickerViewController: b292f2a53b2644a68aa5e1343053d2f3554de64c
   SLExpandableTableView: ff63a4bb4b71c6c3ae2b7cb1cde6a36c1645f23c
+  VK-ios-sdk: f4b7df0d4e277e06d60fef6dc472be4260eeda6d
 
 COCOAPODS: 0.39.0

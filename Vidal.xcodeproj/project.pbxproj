@@ -14,6 +14,15 @@
 		3A0D5CAD1C9C4DA5005E6976 /* ActiveTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0D5CAC1C9C4DA5005E6976 /* ActiveTableViewCell.m */; };
 		3A0D5CB01C9C4E57005E6976 /* NewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0D5CAF1C9C4E57005E6976 /* NewsTableViewCell.m */; };
 		3A0D5CB51C9C6D6E005E6976 /* ExpandNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0D5CB41C9C6D6E005E6976 /* ExpandNewsViewController.m */; };
+		3A1570521CAEA87A00D49C5E /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15704F1CAEA86800D49C5E /* libsqlcipher.a */; };
+		3A1570551CAEA8F800D49C5E /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1570541CAEA8F800D49C5E /* DBManager.m */; };
+		3A1570581CAEA95900D49C5E /* vidal.cardio.crypt.db3 in Resources */ = {isa = PBXBuildFile; fileRef = 3A1570561CAEA95900D49C5E /* vidal.cardio.crypt.db3 */; };
+		3A1570591CAEA95900D49C5E /* vidal.cardio.encrypt.db3 in Resources */ = {isa = PBXBuildFile; fileRef = 3A1570571CAEA95900D49C5E /* vidal.cardio.encrypt.db3 */; };
+		3A15705C1CAEA96A00D49C5E /* SocialNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A15705B1CAEA96A00D49C5E /* SocialNetworkManager.m */; };
+		3A1570601CAEAA2B00D49C5E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15705D1CAEAA2B00D49C5E /* FBSDKCoreKit.framework */; };
+		3A1570611CAEAA2B00D49C5E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15705E1CAEAA2B00D49C5E /* FBSDKLoginKit.framework */; };
+		3A1570621CAEAA2B00D49C5E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15705F1CAEAA2B00D49C5E /* FBSDKShareKit.framework */; };
+		3A1570661CAEAAAF00D49C5E /* OKSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1570651CAEAAAF00D49C5E /* OKSDK.m */; };
 		3A5638581CA19971000A83B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5638571CA19971000A83B5 /* Assets.xcassets */; };
 		3A70F38A1C80B32C00193150 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A70F3891C80B32C00193150 /* CoreGraphics.framework */; };
 		3A78F0FF1C91E7DA008C6BE5 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F0FE1C91E7DA008C6BE5 /* MenuViewController.m */; };
@@ -40,6 +49,23 @@
 		E82C22A1236860E5691C38CA /* libPods-Vidal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 267537716EDB3475C0BE9A2D /* libPods-Vidal.a */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		3A15704E1CAEA86800D49C5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A1570491CAEA86800D49C5E /* sqlcipher.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC046055464E500DB518D;
+			remoteInfo = sqlcipher;
+		};
+		3A1570501CAEA87300D49C5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3A1570491CAEA86800D49C5E /* sqlcipher.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC045055464E500DB518D;
+			remoteInfo = sqlcipher;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		267537716EDB3475C0BE9A2D /* libPods-Vidal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vidal.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EC6DDBDE2C370D5A4C9DA5A /* Pods-Vidal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vidal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vidal/Pods-Vidal.debug.xcconfig"; sourceTree = "<group>"; };
@@ -57,6 +83,18 @@
 		3A0D5CAF1C9C4E57005E6976 /* NewsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NewsTableViewCell.m; sourceTree = "<group>"; };
 		3A0D5CB31C9C6D6E005E6976 /* ExpandNewsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ExpandNewsViewController.h; sourceTree = "<group>"; };
 		3A0D5CB41C9C6D6E005E6976 /* ExpandNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandNewsViewController.m; sourceTree = "<group>"; };
+		3A1570491CAEA86800D49C5E /* sqlcipher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sqlcipher.xcodeproj; path = sqlcipher/sqlcipher.xcodeproj; sourceTree = "<group>"; };
+		3A1570531CAEA8F800D49C5E /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
+		3A1570541CAEA8F800D49C5E /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
+		3A1570561CAEA95900D49C5E /* vidal.cardio.crypt.db3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = vidal.cardio.crypt.db3; sourceTree = "<group>"; };
+		3A1570571CAEA95900D49C5E /* vidal.cardio.encrypt.db3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = vidal.cardio.encrypt.db3; sourceTree = "<group>"; };
+		3A15705A1CAEA96A00D49C5E /* SocialNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialNetworkManager.h; sourceTree = "<group>"; };
+		3A15705B1CAEA96A00D49C5E /* SocialNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialNetworkManager.m; sourceTree = "<group>"; };
+		3A15705D1CAEAA2B00D49C5E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		3A15705E1CAEAA2B00D49C5E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		3A15705F1CAEAA2B00D49C5E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		3A1570641CAEAAAF00D49C5E /* OKSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OKSDK.h; sourceTree = "<group>"; };
+		3A1570651CAEAAAF00D49C5E /* OKSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OKSDK.m; sourceTree = "<group>"; };
 		3A5638571CA19971000A83B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A70F3891C80B32C00193150 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3A78F0FD1C91E7DA008C6BE5 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
@@ -99,6 +137,7 @@
 		3AAAA2C71C833FA3006DEE4E /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
 		3AAAA2C91C8384EB006DEE4E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		3AAAA2CA1C8384EB006DEE4E /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		3AF95C141CA66DA900393C62 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		639C2F57EA1C775AEEFEE2C9 /* Pods-Vidal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vidal.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vidal/Pods-Vidal.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +146,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A1570521CAEA87A00D49C5E /* libsqlcipher.a in Frameworks */,
+				3A1570601CAEAA2B00D49C5E /* FBSDKCoreKit.framework in Frameworks */,
+				3A1570621CAEAA2B00D49C5E /* FBSDKShareKit.framework in Frameworks */,
+				3A1570611CAEAA2B00D49C5E /* FBSDKLoginKit.framework in Frameworks */,
 				3A70F38A1C80B32C00193150 /* CoreGraphics.framework in Frameworks */,
 				E82C22A1236860E5691C38CA /* libPods-Vidal.a in Frameworks */,
 			);
@@ -150,6 +193,14 @@
 				3A0D5CB41C9C6D6E005E6976 /* ExpandNewsViewController.m */,
 			);
 			name = "Second iteration from menu";
+			sourceTree = "<group>";
+		};
+		3A15704A1CAEA86800D49C5E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				3A15704F1CAEA86800D49C5E /* libsqlcipher.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		3A78F1001C91E7E4008C6BE5 /* SWRevealViewController */ = {
@@ -202,7 +253,11 @@
 		3A9E3FC01C80AE330069BDFC = {
 			isa = PBXGroup;
 			children = (
+				3A1570491CAEA86800D49C5E /* sqlcipher.xcodeproj */,
 				3A70F3891C80B32C00193150 /* CoreGraphics.framework */,
+				3A15705D1CAEAA2B00D49C5E /* FBSDKCoreKit.framework */,
+				3A15705E1CAEAA2B00D49C5E /* FBSDKLoginKit.framework */,
+				3A15705F1CAEAA2B00D49C5E /* FBSDKShareKit.framework */,
 				3A9E3FCB1C80AE330069BDFC /* Vidal */,
 				3A9E3FCA1C80AE330069BDFC /* Products */,
 				1059885AE5801E2DA5485E93 /* Pods */,
@@ -223,6 +278,10 @@
 			children = (
 				3A9E3FCF1C80AE330069BDFC /* AppDelegate.h */,
 				3A9E3FD01C80AE330069BDFC /* AppDelegate.m */,
+				3A1570531CAEA8F800D49C5E /* DBManager.h */,
+				3A1570541CAEA8F800D49C5E /* DBManager.m */,
+				3A15705A1CAEA96A00D49C5E /* SocialNetworkManager.h */,
+				3A15705B1CAEA96A00D49C5E /* SocialNetworkManager.m */,
 				3A78F1001C91E7E4008C6BE5 /* SWRevealViewController */,
 				3A78F1071C92051F008C6BE5 /* Models */,
 				3A78F10C1C9206EF008C6BE5 /* From menu */,
@@ -239,6 +298,10 @@
 				3A5638571CA19971000A83B5 /* Assets.xcassets */,
 				3A9E3FE01C80AE330069BDFC /* Info.plist */,
 				3A9E3FD81C80AE330069BDFC /* Vidal.xcdatamodeld */,
+				3A1570561CAEA95900D49C5E /* vidal.cardio.crypt.db3 */,
+				3A1570571CAEA95900D49C5E /* vidal.cardio.encrypt.db3 */,
+				3A1570641CAEAAAF00D49C5E /* OKSDK.h */,
+				3A1570651CAEAAAF00D49C5E /* OKSDK.m */,
 				3A9E3FCC1C80AE330069BDFC /* Supporting Files */,
 			);
 			path = Vidal;
@@ -255,6 +318,7 @@
 		FED137FC56CC9C0ECB250158 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3AF95C141CA66DA900393C62 /* libsqlite3.tbd */,
 				267537716EDB3475C0BE9A2D /* libPods-Vidal.a */,
 			);
 			name = Frameworks;
@@ -277,6 +341,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				3A1570511CAEA87300D49C5E /* PBXTargetDependency */,
 			);
 			name = Vidal;
 			productName = Vidal;
@@ -309,6 +374,12 @@
 			mainGroup = 3A9E3FC01C80AE330069BDFC;
 			productRefGroup = 3A9E3FCA1C80AE330069BDFC /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 3A15704A1CAEA86800D49C5E /* Products */;
+					ProjectRef = 3A1570491CAEA86800D49C5E /* sqlcipher.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				3A9E3FC81C80AE330069BDFC /* Vidal */,
@@ -316,12 +387,24 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		3A15704F1CAEA86800D49C5E /* libsqlcipher.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libsqlcipher.a;
+			remoteRef = 3A15704E1CAEA86800D49C5E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		3A9E3FC71C80AE330069BDFC /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				3A9E3FDF1C80AE330069BDFC /* LaunchScreen.storyboard in Resources */,
+				3A1570591CAEA95900D49C5E /* vidal.cardio.encrypt.db3 in Resources */,
+				3A1570581CAEA95900D49C5E /* vidal.cardio.crypt.db3 in Resources */,
 				3A5638581CA19971000A83B5 /* Assets.xcassets in Resources */,
 				3A9E3FD71C80AE330069BDFC /* Main.storyboard in Resources */,
 			);
@@ -384,6 +467,7 @@
 			files = (
 				3A78F1271C92076D008C6BE5 /* FavouriteViewController.m in Sources */,
 				3A78F1151C920725008C6BE5 /* ActiveViewController.m in Sources */,
+				3A1570661CAEAAAF00D49C5E /* OKSDK.m in Sources */,
 				3A78F11B1C920740008C6BE5 /* PharmaViewController.m in Sources */,
 				3A9E3FD41C80AE330069BDFC /* LoginViewController.m in Sources */,
 				3AAAA2CB1C8384EB006DEE4E /* MainViewController.m in Sources */,
@@ -399,10 +483,12 @@
 				3A78F12A1C920775008C6BE5 /* ReferenceViewController.m in Sources */,
 				3A0D5CA41C9C484A005E6976 /* PharmaTableViewCell.m in Sources */,
 				3A0D5CAD1C9C4DA5005E6976 /* ActiveTableViewCell.m in Sources */,
+				3A15705C1CAEA96A00D49C5E /* SocialNetworkManager.m in Sources */,
 				3A0D5CA11C9C457B005E6976 /* ProducersTableViewCell.m in Sources */,
 				3A78F1211C920756008C6BE5 /* AboutViewController.m in Sources */,
 				3A78F1181C920737008C6BE5 /* InteractionsViewController.m in Sources */,
 				3A78F10F1C920701008C6BE5 /* NewsViewController.m in Sources */,
+				3A1570551CAEA8F800D49C5E /* DBManager.m in Sources */,
 				3AAAA2C81C833FA3006DEE4E /* RegViewController.m in Sources */,
 				3A0D5CB01C9C4E57005E6976 /* NewsTableViewCell.m in Sources */,
 				3A0D5CA71C9C4C5A005E6976 /* DrugsTableViewCell.m in Sources */,
@@ -412,6 +498,14 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		3A1570511CAEA87300D49C5E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = sqlcipher;
+			targetProxy = 3A1570501CAEA87300D49C5E /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3A9E3FD51C80AE330069BDFC /* Main.storyboard */ = {
@@ -519,10 +613,33 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/HSDatePickerViewController\"",
+					"\"${PODS_ROOT}/Headers/Public/SLExpandableTableView\"",
+					./sqlcipher/src,
+				);
 				INFOPLIST_FILE = Vidal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/HSDatePickerViewController\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/SLExpandableTableView\"",
+					"-DSQLITE_HAS_CODEC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = StyleRU.Vidal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -532,10 +649,33 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"\"${PODS_ROOT}/Headers/Public/HSDatePickerViewController\"",
+					"\"${PODS_ROOT}/Headers/Public/SLExpandableTableView\"",
+					./sqlcipher/src,
+				);
 				INFOPLIST_FILE = Vidal/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_CFLAGS = (
+					"$(inherited)",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/HSDatePickerViewController\"",
+					"-isystem",
+					"\"${PODS_ROOT}/Headers/Public/SLExpandableTableView\"",
+					"-DSQLITE_HAS_CODEC",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = StyleRU.Vidal;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

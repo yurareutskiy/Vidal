@@ -7,6 +7,7 @@ target 'Vidal' do
     
     pod 'HSDatePickerViewController', '~> 1.0'
     pod 'SLExpandableTableView'
+    pod 'VK-ios-sdk'
 
 end
 

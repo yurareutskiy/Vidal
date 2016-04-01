@@ -12,5 +12,6 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *name;
 @property (strong, nonatomic) IBOutlet UILabel *country;
+@property (strong, nonatomic) IBOutlet UIImageView *image;
 
 @end

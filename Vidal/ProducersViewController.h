@@ -7,6 +7,8 @@
 //
 
 #import "ModelViewController.h"
+#import "DBManager.h"
+#import "ProducersTableViewCell.h"
 
 @interface ProducersViewController : ModelViewController<UITableViewDelegate, UITableViewDataSource>
 

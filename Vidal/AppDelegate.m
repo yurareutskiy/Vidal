@@ -17,6 +17,18 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                             didFinishLaunchingWithOptions:launchOptions];
+    
+    OKSDKInitSettings *settings = [OKSDKInitSettings new];
+    settings.appKey = @"CBACAOELEBABABABA";
+    settings.appId = @"1246560512";
+    settings.controllerHandler = ^{
+        return self.window.rootViewController;
+    };
+    [OKSDK initWithSettings: settings];
+    
     return YES;
 }
 
@@ -36,12 +48,24 @@
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    [FBSDKAppEvents activateApp];
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
-    // Saves changes in the application's managed object context before the application terminates.
-    [self saveContext];
+}
+
+-(BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
+{
+    [VKSdk processOpenURL:url fromApplication:sourceApplication];
+    
+    [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                   openURL:url
+                                         sourceApplication:sourceApplication
+                                                annotation:annotation];
+    [OKSDK openUrl:url];
+    
+    return YES;
 }
 
 #pragma mark - Core Data stack
@@ -123,5 +147,68 @@
         }
     }
 }
+
+//- (void)viewDidLoad {
+//    [super viewDidLoad];
+//    
+//    self.tblPeople.delegate = self;
+//    self.tblPeople.dataSource = self;
+//    
+//    self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
+//    
+//    [self loadData];
+//    
+//    // Do any additional setup after loading the view, typically from a nib.
+//}
+//
+//- (void)didReceiveMemoryWarning {
+//    [super didReceiveMemoryWarning];
+//    // Dispose of any resources that can be recreated.
+//}
+//
+//-(void)loadData{
+//    // Form the query.
+//    NSString *query = @"select * from Document";
+//    
+//    // Get the results.
+//    if (self.arrPeopleInfo != nil) {
+//        self.arrPeopleInfo = nil;
+//    }
+//    self.arrPeopleInfo = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+//    
+//    // Reload the table view.
+//    [self.tblPeople reloadData];
+//    
+//}
+//
+//-(NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
+//    return 1;
+//}
+//
+//
+//-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+//    return self.arrPeopleInfo.count;
+//}
+//
+//
+//-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    return 60.0;
+//}
+//
+//-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
+//    // Dequeue the cell.
+//    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"testCell" forIndexPath:indexPath];
+//    
+//    NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
+//    NSInteger indexOfLastname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
+//    NSInteger indexOfAge = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
+//    
+//    // Set the loaded data to the appropriate cell labels.
+//    cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname], [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfLastname]];
+//    
+//    cell.detailTextLabel.text = [NSString stringWithFormat:@"Age: %@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfAge]];
+//    
+//    return cell;
+//}
 
 @end

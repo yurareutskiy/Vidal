@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import <CoreData/CoreData.h>
+#import "VKSdk.h"
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
+#import "OKSDK.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
