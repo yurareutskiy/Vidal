@@ -14,6 +14,8 @@
 @property (nonatomic, strong) NSArray *secondSectionStrings;
 @property (nonatomic, strong) NSMutableArray *sectionsArray;
 @property (nonatomic, strong) NSMutableIndexSet *expandableSections;
+@property (nonatomic, strong) DBManager *dbManager;
+@property (nonatomic, strong) NSMutableArray *arrPeopleInfo;
 
 @end
 
@@ -31,6 +33,10 @@
     _expandableSections = [NSMutableIndexSet indexSet];
     
     self.navigationItem.title = @"Указатель активных веществ";
+    
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
+    
+    [self loadData];
     
     // Do any additional setup after loading the view.
 }
@@ -61,7 +67,10 @@
         cell = [[ActiveTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
-    //cell.textLabel.text = [NSString stringWithFormat:@"Section %ld", (long)section];
+    NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
+    
+    // Set the loaded data to the appropriate cell labels.
+    cell.name.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:section] objectAtIndex:indexOfFirstname]];
     
     return cell;
 }
@@ -90,26 +99,25 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.sectionsArray.count;
+//    return self.sectionsArray.count;
+    return self.arrPeopleInfo.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSArray *dataArray = self.sectionsArray[section];
-    return dataArray.count + 1;
+    //NSArray *dataArray = self.sectionsArray[section];
+    //NSArray *dataArray = self.arrPeopleInfo[section];
+    return 3;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    ActiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"activeCell" forIndexPath:indexPath];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
+    NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
     
-    NSArray *dataArray = self.sectionsArray[indexPath.section];
-    cell.textLabel.text = dataArray[indexPath.row - 1];
+    // Set the loaded data to the appropriate cell labels.
+    cell.name.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]];
     
     return cell;
 }
@@ -134,6 +142,20 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
+-(void)loadData{
+    // Form the query.
+    NSString *query = [NSString stringWithFormat:@"select * from Molecule order by Molecule.RusName COLLATE Russian"];
+    
+    // Get the results.
+    if (self.arrPeopleInfo != nil) {
+        self.arrPeopleInfo = nil;
+    }
+    self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    //self.arrPeopleInfo = [self.arrPeopleInfo valueForKey:@"lowercaseString"];
+    
+    // Reload the table view.
+    [self.tableView reloadData];
+}
 
 /*
 #pragma mark - Navigation

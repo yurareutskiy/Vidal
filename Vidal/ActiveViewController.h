@@ -9,6 +9,7 @@
 #import "ModelViewController.h"
 #import <SLExpandableTableView.h>
 #import "ActiveTableViewCell.h"
+#import "DBManager.h"
 
 @interface ActiveViewController : ModelViewController<SLExpandableTableViewDatasource, SLExpandableTableViewDelegate>
 @property (strong, nonatomic) IBOutlet SLExpandableTableView *tableView;

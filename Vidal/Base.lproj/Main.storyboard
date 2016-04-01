@@ -722,6 +722,9 @@
                                                 <constraint firstItem="3OB-LZ-wfl" firstAttribute="leading" secondItem="XiR-Cq-Cjf" secondAttribute="leadingMargin" id="ve5-Xe-B0S"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="name" destination="bup-I2-AMZ" id="Nrq-du-P4b"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
