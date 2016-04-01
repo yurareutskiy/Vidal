@@ -25,7 +25,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    self.dbManager = [[DBManager alloc] initWithDatabaseFilename:@"vidal.cardio.db3"];
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
     [self loadData];
     

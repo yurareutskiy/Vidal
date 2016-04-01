@@ -7,10 +7,19 @@
 //
 
 #import "ModelViewController.h"
+#import "IMQuickSearch.h"
 
-@interface InteractionsViewController : ModelViewController
+@interface InteractionsViewController : ModelViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@property (nonatomic, strong) IMQuickSearch *quickSearch;
 @property (strong, nonatomic) IBOutlet UILabel *info1;
 @property (strong, nonatomic) IBOutlet UILabel *info2;
 @property (strong, nonatomic) IBOutlet UITextField *input;
+@property (strong, nonatomic) IBOutlet UITextField *searchField;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (nonatomic, strong) NSArray *FilteredResults;
+@property (nonatomic, strong) NSArray *hello1;
+@property (strong, nonatomic) IBOutlet UILabel *secondLabel;
+@property (strong, nonatomic) IBOutlet UITextField *secondInput;
+@property (strong, nonatomic) IBOutlet UIView *secondLine;
 
 @end

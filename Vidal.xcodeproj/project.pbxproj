@@ -18,11 +18,11 @@
 		3A1570551CAEA8F800D49C5E /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1570541CAEA8F800D49C5E /* DBManager.m */; };
 		3A1570581CAEA95900D49C5E /* vidal.cardio.crypt.db3 in Resources */ = {isa = PBXBuildFile; fileRef = 3A1570561CAEA95900D49C5E /* vidal.cardio.crypt.db3 */; };
 		3A1570591CAEA95900D49C5E /* vidal.cardio.encrypt.db3 in Resources */ = {isa = PBXBuildFile; fileRef = 3A1570571CAEA95900D49C5E /* vidal.cardio.encrypt.db3 */; };
-		3A15705C1CAEA96A00D49C5E /* SocialNetworkManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A15705B1CAEA96A00D49C5E /* SocialNetworkManager.m */; };
 		3A1570601CAEAA2B00D49C5E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15705D1CAEAA2B00D49C5E /* FBSDKCoreKit.framework */; };
 		3A1570611CAEAA2B00D49C5E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15705E1CAEAA2B00D49C5E /* FBSDKLoginKit.framework */; };
 		3A1570621CAEAA2B00D49C5E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15705F1CAEAA2B00D49C5E /* FBSDKShareKit.framework */; };
 		3A1570661CAEAAAF00D49C5E /* OKSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1570651CAEAAAF00D49C5E /* OKSDK.m */; };
+		3A1570731CAEB0A000D49C5E /* SocialNetworkManagerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1570721CAEB0A000D49C5E /* SocialNetworkManagerVC.m */; };
 		3A5638581CA19971000A83B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5638571CA19971000A83B5 /* Assets.xcassets */; };
 		3A70F38A1C80B32C00193150 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A70F3891C80B32C00193150 /* CoreGraphics.framework */; };
 		3A78F0FF1C91E7DA008C6BE5 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F0FE1C91E7DA008C6BE5 /* MenuViewController.m */; };
@@ -88,13 +88,13 @@
 		3A1570541CAEA8F800D49C5E /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		3A1570561CAEA95900D49C5E /* vidal.cardio.crypt.db3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = vidal.cardio.crypt.db3; sourceTree = "<group>"; };
 		3A1570571CAEA95900D49C5E /* vidal.cardio.encrypt.db3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = vidal.cardio.encrypt.db3; sourceTree = "<group>"; };
-		3A15705A1CAEA96A00D49C5E /* SocialNetworkManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialNetworkManager.h; sourceTree = "<group>"; };
-		3A15705B1CAEA96A00D49C5E /* SocialNetworkManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialNetworkManager.m; sourceTree = "<group>"; };
 		3A15705D1CAEAA2B00D49C5E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		3A15705E1CAEAA2B00D49C5E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		3A15705F1CAEAA2B00D49C5E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		3A1570641CAEAAAF00D49C5E /* OKSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OKSDK.h; path = Vidal/OKSDK.h; sourceTree = "<group>"; };
 		3A1570651CAEAAAF00D49C5E /* OKSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OKSDK.m; path = Vidal/OKSDK.m; sourceTree = "<group>"; };
+		3A1570711CAEB0A000D49C5E /* SocialNetworkManagerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialNetworkManagerVC.h; sourceTree = "<group>"; };
+		3A1570721CAEB0A000D49C5E /* SocialNetworkManagerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialNetworkManagerVC.m; sourceTree = "<group>"; };
 		3A5638571CA19971000A83B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A70F3891C80B32C00193150 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3A78F0FD1C91E7DA008C6BE5 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
@@ -231,8 +231,8 @@
 		3A15706A1CAEAE4800D49C5E /* Social Network */ = {
 			isa = PBXGroup;
 			children = (
-				3A15705A1CAEA96A00D49C5E /* SocialNetworkManager.h */,
-				3A15705B1CAEA96A00D49C5E /* SocialNetworkManager.m */,
+				3A1570711CAEB0A000D49C5E /* SocialNetworkManagerVC.h */,
+				3A1570721CAEB0A000D49C5E /* SocialNetworkManagerVC.m */,
 			);
 			name = "Social Network";
 			sourceTree = "<group>";
@@ -532,8 +532,8 @@
 				3A78F12A1C920775008C6BE5 /* ReferenceViewController.m in Sources */,
 				3A0D5CA41C9C484A005E6976 /* PharmaTableViewCell.m in Sources */,
 				3A0D5CAD1C9C4DA5005E6976 /* ActiveTableViewCell.m in Sources */,
-				3A15705C1CAEA96A00D49C5E /* SocialNetworkManager.m in Sources */,
 				3A0D5CA11C9C457B005E6976 /* ProducersTableViewCell.m in Sources */,
+				3A1570731CAEB0A000D49C5E /* SocialNetworkManagerVC.m in Sources */,
 				3A78F1211C920756008C6BE5 /* AboutViewController.m in Sources */,
 				3A78F1181C920737008C6BE5 /* InteractionsViewController.m in Sources */,
 				3A78F10F1C920701008C6BE5 /* NewsViewController.m in Sources */,

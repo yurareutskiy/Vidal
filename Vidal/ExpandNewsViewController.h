@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 #import "ModelViewController.h"
+#import "SocialNetworkManagerVC.h"
 
 @interface ExpandNewsViewController : ModelViewController
 @property (strong, nonatomic) IBOutlet UILabel *newsText;
 - (IBAction)backAction:(UIButton *)sender;
+- (IBAction)shareNews:(UIButton *)sender;
 
 @end

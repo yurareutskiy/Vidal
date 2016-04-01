@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'EE9D216BFE8B62C0D1EF0A74'
-               BlueprintName = 'Pods-Vidal'
+               BlueprintIdentifier = '085BC2FCF59452D04FD887EE'
+               BlueprintName = 'IMQuickSearch'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libPods-Vidal.a'>
+               BuildableName = 'libIMQuickSearch.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

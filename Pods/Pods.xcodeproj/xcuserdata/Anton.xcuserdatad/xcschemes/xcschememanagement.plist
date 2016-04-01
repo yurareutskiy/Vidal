@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>IMQuickSearch.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Vidal.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,22 +32,27 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>27008CD6BB37E01A1A72BC9CE8B22FCD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>47722F3E74404DE8BB8E10C235F9993B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>575F13CA9036D50717EB1EBEFED6D525</key>
+		<key>09B26A4FAD0174608E2C343522C66FEF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>6B0B9C928B05BA6346AB032DD0260C56</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>725CB4461A41114C24F0A7A2043D4C00</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C7285799FC99D9F12F0269BB30B3CA8F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F4190CFEF5D071A5531F138C2D2C8A37</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -36,7 +36,7 @@
         NSArray *URLs = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
         NSURL *directoryURL = [URLs firstObject];
         //databaseURL = [directoryURL URLByAppendingPathComponent:@"vidal.cardio.crypt.db3"];
-        databaseURL = [NSString stringWithFormat:@"/Users/Anton/Desktop/fuck/fuck/vidal.cardio.crypt.db3"];
+        databaseURL = [NSString stringWithFormat:@"vidal.cardio.crypt.db3"];
         
         NSLog(@"%@", databaseURL);
         
@@ -48,7 +48,7 @@
         self.documentsDirectory = [paths objectAtIndex:0];
         
         // Keep the database filename.
-        self.databaseFilename = @"unencrypted.db3";
+        self.databaseFilename = @"vidal.cardio.encrypt.db3";
         
         // Copy the database file into the documents directory if necessary.
         [self copyDatabaseIntoDocumentsDirectory];

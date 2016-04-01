@@ -12,12 +12,18 @@
 
 @end
 
-@implementation ExpandNewsViewController
+@implementation ExpandNewsViewController {
+    
+    SocialNetworkManagerVC *vc;
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.navigationItem.title = @"Новости";
+    
+    vc = [[SocialNetworkManagerVC alloc] init];
     
     NSString *string = self.newsText.text;
     self.newsText.numberOfLines = 0;
@@ -46,5 +52,11 @@
     
     [self.navigationController popViewControllerAnimated:true];
     
+}
+
+- (IBAction)shareNews:(UIButton *)sender {
+    
+    [self performSegueWithIdentifier:@"share" sender:self];
+    //[self presentViewController:vc animated:YES completion:nil];
 }
 @end

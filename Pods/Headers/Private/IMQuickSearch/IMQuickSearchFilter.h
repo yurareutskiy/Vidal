@@ -1,0 +1,1 @@
+../../../IMQuickSearch/ObjC/IMQuickSearchFilter.h
