@@ -19,17 +19,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>SBJson.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>SLExpandableTableView.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>TypeJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -42,7 +32,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>5B9E48C842F867D7D973DDA116D942D9</key>
+		<key>09B26A4FAD0174608E2C343522C66FEF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,22 +47,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8C35EB985BB83CC77ABFAC3C50F2F51E</key>
+		<key>C7285799FC99D9F12F0269BB30B3CA8F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9A607DDC039862FC885D7E13C418153E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BBC1655E5C414051B5BFFF58DB15BFE1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C146080035538939C33C2DA213A8C6F9</key>
+		<key>F4190CFEF5D071A5531F138C2D2C8A37</key>
 		<dict>
 			<key>primary</key>
 			<true/>

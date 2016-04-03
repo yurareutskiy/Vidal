@@ -1,4 +1,4 @@
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/IMQuickSearch" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/HSDatePickerViewController" "${PODS_ROOT}/Headers/Public/IMQuickSearch" "${PODS_ROOT}/Headers/Public/SBJson" "${PODS_ROOT}/Headers/Public/SLExpandableTableView" "${PODS_ROOT}/Headers/Public/TypeJSON" "${PODS_ROOT}/Headers/Public/VK-ios-sdk"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/IMQuickSearch" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/HSDatePickerViewController" "${PODS_ROOT}/Headers/Public/IMQuickSearch" "${PODS_ROOT}/Headers/Public/SLExpandableTableView" "${PODS_ROOT}/Headers/Public/VK-ios-sdk"
 PODS_ROOT = ${SRCROOT}
 SKIP_INSTALL = YES
