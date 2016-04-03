@@ -9,6 +9,7 @@ target 'Vidal' do
     pod 'SLExpandableTableView'
     pod 'VK-ios-sdk'
     pod 'IMQuickSearch'
+    pod 'AFNetworking'
 
 end
 

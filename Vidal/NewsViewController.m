@@ -12,16 +12,43 @@
 
 @end
 
-@implementation NewsViewController
+@implementation NewsViewController {
+    NSArray *array;
+    NSString *newsID;
+    NSUserDefaults *ud;
+}
+
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    ud = [NSUserDefaults standardUserDefaults];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
     self.navigationItem.title = @"Новости";
 
+    
+    array = [NSArray array];
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    NSURL *URL = [NSURL URLWithString:@"http://www.vidal.ru/api/news"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        } else {
+            NSLog(@"%@ %@", response, responseObject);
+            array = [NSArray arrayWithArray:responseObject];
+            [self.tableView reloadData];
+        }
+    }];
+    [dataTask resume];
     
     // Do any additional setup after loading the view.
 }
@@ -35,16 +62,27 @@
     return 1;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (NewsTableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"newsCell"];
+    NewsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"newsCell"];
+    
+    cell.name.text = [[array objectAtIndex:indexPath.row] objectForKey:@"title"];
+    cell.date.text = [[array objectAtIndex:indexPath.row] objectForKey:@"date"];
     
     return cell;
     
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 10;
+    return [array count];
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    
+    [ud setObject:[[array objectAtIndex:indexPath.row] objectForKey:@"id"] forKey:@"news"];
+    
+    [self performSegueWithIdentifier:@"toExpandNews" sender:self];
 }
 
 /*

@@ -166,6 +166,20 @@
     }
 }
 
+//-(void)loadData:(NSString *)req{
+//    // Form the query.
+//    NSString *query = [NSString stringWithFormat:req];
+//    
+//    // Get the results.
+//    if (self.arrPeopleInfo != nil) {
+//        self.arrPeopleInfo = nil;
+//    }
+//    self.arrPeopleInfo = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+//    
+//    // Reload the table view.
+//    [self.tableView reloadData];
+//}
+
 /*
 #pragma mark - Navigation
 

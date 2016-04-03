@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AFNetworking.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>HSDatePickerViewController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -32,7 +37,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>09B26A4FAD0174608E2C343522C66FEF</key>
+		<key>247FBB271302502296C344D0261E7D57</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>410B25DF16EA5C5B3E2698F74F9625FB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -47,12 +57,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C7285799FC99D9F12F0269BB30B3CA8F</key>
+		<key>97FD0052AF39BC8390016AB4AF49202B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F4190CFEF5D071A5531F138C2D2C8A37</key>
+		<key>B62B18400435927573146E349DDBECE4</key>
 		<dict>
 			<key>primary</key>
 			<true/>

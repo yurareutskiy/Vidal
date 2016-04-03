@@ -31,15 +31,6 @@
     self = [super init];
     if (self) {
         
-        //sqlite3 *db;
-        
-        //NSArray *URLs = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
-        //NSURL *directoryURL = [URLs firstObject];
-        //databaseURL = [directoryURL URLByAppendingPathComponent:@"vidal.cardio.crypt.db3"];
-        //databaseURL = [NSString stringWithFormat:@"vidal.cardio.crypt.db3"];
-        
-        NSLog(@"%@", databaseURL);
-        
         [self encryptDB];
         [self openCipherDB];
         

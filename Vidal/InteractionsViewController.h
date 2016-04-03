@@ -8,9 +8,6 @@
 
 #import "ModelViewController.h"
 #import "IMQuickSearch.h"
-#import "TypeJSON.h"
-#import "SBJson4.h"
-#import "SBJson4Parser.h"
 
 @interface InteractionsViewController : ModelViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (nonatomic, strong) IMQuickSearch *quickSearch;

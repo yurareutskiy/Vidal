@@ -13,7 +13,7 @@
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSArray *arrPeopleInfo;
 
--(void)loadData;
+-(void)loadData:(NSString *)req;
 
 @end
 
@@ -27,7 +27,8 @@
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
-    [self loadData];
+    NSString *request = @"SELECT * FROM Company INNER JOIN Country ON Company.CountryCode = Country.CountryCode ORDER BY Company.LocalName";
+    [self loadData:request];
     
     // Do any additional setup after loading the view.
 }
@@ -47,19 +48,19 @@
     
     NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"LocalName"];
     NSInteger indexOfLastname = [self.dbManager.arrColumnNames indexOfObject:@"Property"];
-    NSInteger indexOfAge = [self.dbManager.arrColumnNames indexOfObject:@"CountryCode"];
+    NSInteger indexOfAge = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
     
     // Set the loaded data to the appropriate cell labels.
-    cell.name.text = [NSString stringWithFormat:@"%@ %@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname], [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfLastname]];
+    cell.name.text = [NSString stringWithFormat:@"%@ %@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname], [[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfLastname] stringByReplacingOccurrencesOfString:@"amp;" withString:@""]];
     
     cell.country.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfAge]];
     
     return cell;
 }
 
--(void)loadData{
+-(void)loadData:(NSString *)req{
     // Form the query.
-    NSString *query = [NSString stringWithFormat:@"select * from Company order by Company.LocalName"];
+    NSString *query = [NSString stringWithFormat:req];
     
     // Get the results.
     if (self.arrPeopleInfo != nil) {

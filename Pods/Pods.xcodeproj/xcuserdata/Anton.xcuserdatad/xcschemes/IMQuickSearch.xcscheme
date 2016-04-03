@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '98FA20F90A81BDCDD29CD6C3'
+               BlueprintIdentifier = '56CA60F5F1667D3C14D96D95'
                BlueprintName = 'IMQuickSearch'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libIMQuickSearch.a'>

@@ -14,6 +14,11 @@
 @property (nonatomic, strong) NSArray *secondSectionStrings;
 @property (nonatomic, strong) NSMutableArray *sectionsArray;
 @property (nonatomic, strong) NSMutableIndexSet *expandableSections;
+@property (nonatomic, strong) DBManager *dbManager;
+@property (nonatomic, strong) NSArray *arrPeopleInfo;
+@property (nonatomic, strong) NSMutableArray *hello1;
+
+-(void)loadData:(NSString *)req;
 
 @end
 
@@ -25,13 +30,24 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    _firstSectionStrings = @[@"Гадовист", @"Галидор", @"Гордокс"];
-    _secondSectionStrings = @[@"Тест", @"Тест", @"Тест"];
-    _sectionsArray = @[_firstSectionStrings, _secondSectionStrings].mutableCopy;
+//    _firstSectionStrings = @[@"Гадовист", @"Галидор", @"Гордокс"];
+//    _secondSectionStrings = @[@"Тест", @"Тест", @"Тест"];
+    
     _expandableSections = [NSMutableIndexSet indexSet];
     
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
 
     self.navigationItem.title = @"Список препаратов";
+    
+    [self loadData:@"SELECT * FROM Document INNER JOIN Product ON Document.DocumentID = Product.ProductID ORDER BY Product.RusName"];
+    
+    self.hello1 = [NSMutableArray array];
+    
+    for (int i = 0; i < [self.arrPeopleInfo count]; i++) {
+        [self.hello1 addObject:[self.arrPeopleInfo[i] objectAtIndex:1]];
+    }
+    
+    _sectionsArray = @[self.hello1].mutableCopy;
     
     // Do any additional setup after loading the view.
 }
@@ -40,29 +56,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-//- (id)initWithStyle:(UITableViewStyle)style
-//{
-//    if (self = [super initWithStyle:style]) {
-//        _firstSectionStrings = @[ @"Section 0 Row 0", @"Section 0 Row 1", @"Section 0 Row 2", @"Section 0 Row 3" ];
-//        _secondSectionStrings = @[ @"Section 1 Row 0", @"Section 1 Row 1", @"Section 1 Row 2", @"Section 1 Row 3", @"Section 1 Row 4" ];
-//        
-//        _sectionsArray = @[ _firstSectionStrings, _secondSectionStrings ].mutableCopy;
-//        _expandableSections = [NSMutableIndexSet indexSet];
-//    }
-//    return self;
-//}
-
-#pragma mark - View lifecycle
-
-//- (void)loadView
-//{
-//    self.tableView = [[SLExpandableTableView alloc] initWithFrame:[UIScreen mainScreen].bounds style:UITableViewStylePlain];
-//    self.tableView.dataSource = self;
-//    self.tableView.delegate = self;
-//    self.tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-//    self.view = self.tableView;
-//}
 
 #pragma mark - SLExpandableTableViewDatasource
 
@@ -85,7 +78,9 @@
         cell = [[DrugsTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
-    //cell.textLabel.text = [NSString stringWithFormat:@"Section %ld", (long)section];
+    NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
+    
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:section] objectAtIndex:indexOfFirstname]];
     
     return cell;
 }
@@ -158,6 +153,17 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
 }
 
+-(void)loadData:(NSString *)req{
+    
+    // Get the results.
+    if (self.arrPeopleInfo != nil) {
+        self.arrPeopleInfo = nil;
+    }
+    self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
+    
+    // Reload the table view.
+    [self.tableView reloadData];
+}
 
 /*
 #pragma mark - Navigation
