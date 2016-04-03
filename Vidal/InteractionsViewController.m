@@ -16,7 +16,10 @@
     
     BOOL textField1;
     BOOL textField2;
-    
+    int inx;
+    int inx2;
+    NSDictionary *array;
+
 }
 
 - (void)viewDidLoad {
@@ -27,11 +30,28 @@
     self.info1.text = string;
     [self.info1 sizeToFit];
     
+    self.result.numberOfLines = 0;
+    [self.result sizeToFit];
+    
     textField1 = false;
     textField2 = false;
     
-    self.hello1 = @[@"hello1", @"heo2", @"helo3", @"helo4", @"hel5", @"hllo6", @"ello7"];
-    [self setUpQuickSearch];
+    NSBundle *mainBundle = [NSBundle mainBundle];
+    NSString *myFile = [mainBundle pathForResource:@"interactions" ofType: @"json"];
+    
+    NSError *error1;
+    NSString *json = [NSString stringWithContentsOfFile:myFile encoding:NSUTF8StringEncoding error:&error1];
+    NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
+    
+    NSError *error2;
+    array = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error2];
+    
+    self.hello1 = [NSMutableArray array];
+    self.hello2 = [NSMutableArray array];
+    
+    for (int i = 0; i < [[array objectForKey:@"interactions"] count]; i++) {
+        [self.hello1 addObject:[[array objectForKey:@"interactions"][i] objectForKey:@"name"]];
+    }
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -44,22 +64,30 @@
     
     self.tableView.hidden = true;
     
+    [self setUpQuickSearch:self.hello1];
     self.FilteredResults = [self.quickSearch filteredObjectsWithValue:nil];
     
     // Do any additional setup after loading the view.
 }
 
-- (void)setUpQuickSearch {
+- (void)setUpQuickSearch:(NSMutableArray *)work {
     // Create Filters
-    IMQuickSearchFilter *peopleFilter = [IMQuickSearchFilter filterWithSearchArray:self.hello1 keys:@[@"description"]];
+    IMQuickSearchFilter *peopleFilter = [IMQuickSearchFilter filterWithSearchArray:work keys:@[@"description"]];
     self.quickSearch = [[IMQuickSearch alloc] initWithFilters:@[peopleFilter]];
 }
 
 - (void)filterResults {
     // Asynchronously
+    if (textField1) {
     [self.quickSearch asynchronouslyFilterObjectsWithValue:self.searchField.text completion:^(NSArray *filteredResults) {
         [self updateTableViewWithNewResults:filteredResults];
     }];
+    }
+    if (textField2) {
+        [self.quickSearch asynchronouslyFilterObjectsWithValue:self.secondInput.text completion:^(NSArray *filteredResults) {
+            [self updateTableViewWithNewResults:filteredResults];
+        }];
+    }
     
     // Synchronously
     //[self updateTableViewWithNewResults:[self.QuickSearch filteredObjectsWithValue:self.searchTextField.text]];
@@ -96,11 +124,42 @@
     return cell;
 }
 
+- (void) findFirstResult:(NSString *) first {
+    
+    for (int i = 0; i < [[array objectForKey:@"interactions"] count]; i++) {
+        if ([[[array objectForKey:@"interactions"] objectAtIndex:i] containsObject:first]) {
+            inx = i;
+            break;
+        }
+    }
+    
+    for (int i = 0; i < [[[array objectForKey:@"interactions"][inx] objectForKey:@"info"] count]; i++) {
+        [self.hello2 addObject:[[[array objectForKey:@"interactions"][inx] objectForKey:@"info"][i] objectForKey:@"coname"]];
+    }
+    
+}
+
+- (NSString *) findSecondResult:(NSString *) second {
+    
+    for (int i = 0; i < [[[array objectForKey:@"interactions"][inx] objectForKey:@"info"] count]; i++) {
+        if ([[[[[array objectForKey:@"interactions"] objectAtIndex:inx] objectForKey:@"info"] objectAtIndex:i]  containsObject:second]) {
+            inx2 = i;
+            break;
+        }
+    }
+    
+    return [NSString stringWithFormat:@"%@", [[[array objectForKey:@"interactions"][inx] objectForKey:@"info"][inx2] objectForKey:@"effect"]];
+    
+}
+
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (textField1) {
         self.searchField.text = self.FilteredResults[indexPath.row];
+        [self findFirstResult:self.FilteredResults[indexPath.row]];
+        [self setUpQuickSearch:self.hello2];
     } else if (textField2) {
         self.secondInput.text = self.FilteredResults[indexPath.row];
+        self.result.text = [self findSecondResult:self.FilteredResults[indexPath.row]];
     }
     self.tableView.hidden = true;
     self.secondInput.hidden = false;
@@ -117,9 +176,11 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if (textField.tag == 1) {
+
         textField1 = true;
         textField2 = false;
     } else if (textField.tag == 2) {
+        
         textField2 = true;
         textField1 = false;
     }

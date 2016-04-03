@@ -33,10 +33,10 @@
         
         //sqlite3 *db;
         
-        NSArray *URLs = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
-        NSURL *directoryURL = [URLs firstObject];
+        //NSArray *URLs = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+        //NSURL *directoryURL = [URLs firstObject];
         //databaseURL = [directoryURL URLByAppendingPathComponent:@"vidal.cardio.crypt.db3"];
-        databaseURL = [NSString stringWithFormat:@"vidal.cardio.crypt.db3"];
+        //databaseURL = [NSString stringWithFormat:@"vidal.cardio.crypt.db3"];
         
         NSLog(@"%@", databaseURL);
         
@@ -64,9 +64,9 @@
     NSLog(@"database path %@", databasePath);
     if (sqlite3_open([databasePath UTF8String], &db) == SQLITE_OK)
     {
-        const char* key = [@"#test_db_key" UTF8String];
+        //const char* key = [@"#test_db_key" UTF8String];
         int sqlite3_key(sqlite3 *db, const void *pKey, int nKey);       //i added this after seeing SO
-        sqlite3_key(db, key, strlen(key));
+        //sqlite3_key(db, key, strlen(key));
         if (sqlite3_exec(db, (const char*) "SELECT count(*) FROM sqlite_master;", NULL, NULL, NULL) == SQLITE_OK) {
             // password is correct, or, database has been initialized
             NSLog(@"database initialize");
@@ -88,7 +88,7 @@
                         stringByAppendingPathComponent:@"unencrypted.db3"];
     
     NSString *sql1 = [NSString stringWithFormat:@"ATTACH DATABASE '%s' AS encrypted KEY '%s';", [databaseURL UTF8String], "#test_db_key"];
-    NSString *sql2 = [NSString stringWithFormat:@"DETACH DATABASE '%s';", [databaseURL UTF8String]];
+    //NSString *sql2 = [NSString stringWithFormat:@"DETACH DATABASE '%s';", [databaseURL UTF8String]];
     
     if (sqlite3_open([path_u UTF8String], &unencrypted_DB) == SQLITE_OK) {
         NSLog(@"Database Opened");

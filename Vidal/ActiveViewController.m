@@ -16,6 +16,9 @@
 @property (nonatomic, strong) NSMutableIndexSet *expandableSections;
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableArray *arrPeopleInfo;
+@property (nonatomic, strong) NSMutableDictionary *info;
+@property (nonatomic, strong) NSArray *keys;
+@property (nonatomic, strong) NSMutableArray *iteration;
 
 @end
 
@@ -71,6 +74,7 @@
     
     // Set the loaded data to the appropriate cell labels.
     cell.name.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:section] objectAtIndex:indexOfFirstname]];
+    cell.letter.text = [[NSString stringWithFormat:@"%@.", self.keys[section]] uppercaseString];
     
     return cell;
 }
@@ -100,14 +104,13 @@
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
 //    return self.sectionsArray.count;
-    return self.arrPeopleInfo.count;
+    //NSLog(@"%@", [self.info count]);
+    return [self.info count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //NSArray *dataArray = self.sectionsArray[section];
-    //NSArray *dataArray = self.arrPeopleInfo[section];
-    return 3;
+    return [self.info[self.keys[section]] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -117,7 +120,8 @@
     NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
     
     // Set the loaded data to the appropriate cell labels.
-    cell.name.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]];
+    cell.name.text = [NSString stringWithFormat:@"%@", [self.info[self.keys[indexPath.row]] objectAtIndex:indexOfFirstname]];
+    cell.letter.text = @"";
     
     return cell;
 }
@@ -144,17 +148,61 @@
 
 -(void)loadData{
     // Form the query.
-    NSString *query = [NSString stringWithFormat:@"select * from Molecule order by Molecule.RusName COLLATE Russian"];
+    NSString *query = [NSString stringWithFormat:@"select * from Molecule order by Molecule.RusName"];
     
     // Get the results.
     if (self.arrPeopleInfo != nil) {
         self.arrPeopleInfo = nil;
     }
     self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
-    //self.arrPeopleInfo = [self.arrPeopleInfo valueForKey:@"lowercaseString"];
+    self.arrPeopleInfo = [self.arrPeopleInfo valueForKey:@"lowercaseString"];
+    
+    self.info = [NSMutableDictionary dictionary];
+    self.iteration = [NSMutableArray array];
+    NSString *keyString;
+    
+    for (NSArray* key in self.arrPeopleInfo) {
+        
+        
+        keyString = [NSString stringWithFormat:@"%@", [key[2] substringToIndex:1]];
+//        if ([self.info objectForKey:keyString] != nil) {
+//            
+//            [self.iteration setArray:[[self.info objectForKey:keyString] arrayByAddingObject:key]];
+//            [self.info setObject:self.iteration forKey:keyString];
+//        } else {
+//            
+//            [self.info setObject:key forKey:keyString];
+//        }
+        [self.info setObject:key forKey:keyString];
+    }
+    
+    //[self sortKeysOnTheBasisOfLanguageAlphabetically:self.info];
+    
+    NSArray *try = [self.info allKeys];
+    self.keys = [try sortedArrayUsingSelector:@selector(compare:)];
     
     // Reload the table view.
     [self.tableView reloadData];
+}
+
+-(void) sortKeysOnTheBasisOfLanguageAlphabetically:(NSDictionary *)check{
+    
+    //Method of NSDictionary class which sorts the keys using the logic given by the comparator block
+    NSArray * sortArray = [check keysSortedByValueUsingComparator: ^(id obj1, id obj2) {
+        
+        //We do case insensitive comparision of two strings as we are not really concerned about
+        //the "content" of the strings (please see sortKeysOnTheBasisOfNationalIncome method where
+        //we would like to do the comparision with numeric search as an extra option)
+        NSComparisonResult result = [[obj1 objectAtIndex:2] caseInsensitiveCompare:[obj2 objectAtIndex:2]];
+        return result;
+    }];
+    
+    //Show Result in the Output Panel: Country Name and its Language Name
+    for (int i = 0; i < [sortArray count]; i++) {
+        NSLog(@"Country Name:%@ -- Language:%@",[sortArray objectAtIndex:i],
+              [[check valueForKey:[sortArray objectAtIndex:i]] objectAtIndex:2]);
+    }
+    
 }
 
 /*

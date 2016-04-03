@@ -8,6 +8,9 @@
 
 #import "ModelViewController.h"
 #import "IMQuickSearch.h"
+#import "TypeJSON.h"
+#import "SBJson4.h"
+#import "SBJson4Parser.h"
 
 @interface InteractionsViewController : ModelViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
 @property (nonatomic, strong) IMQuickSearch *quickSearch;
@@ -17,9 +20,11 @@
 @property (strong, nonatomic) IBOutlet UITextField *searchField;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (nonatomic, strong) NSArray *FilteredResults;
-@property (nonatomic, strong) NSArray *hello1;
+@property (nonatomic, strong) NSMutableArray *hello1;
+@property (nonatomic, strong) NSMutableArray *hello2;
 @property (strong, nonatomic) IBOutlet UILabel *secondLabel;
 @property (strong, nonatomic) IBOutlet UITextField *secondInput;
 @property (strong, nonatomic) IBOutlet UIView *secondLine;
+@property (strong, nonatomic) IBOutlet UILabel *result;
 
 @end

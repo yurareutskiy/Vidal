@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'E0EA78029FAC2B049861821B'
+               BlueprintIdentifier = 'CFC70298E1C7D530A327E05C'
                BlueprintName = 'SLExpandableTableView'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'libSLExpandableTableView.a'>

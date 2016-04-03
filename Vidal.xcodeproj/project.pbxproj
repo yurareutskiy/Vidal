@@ -38,6 +38,7 @@
 		3A78F1241C920762008C6BE5 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F1231C920762008C6BE5 /* ProfileViewController.m */; };
 		3A78F1271C92076D008C6BE5 /* FavouriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F1261C92076D008C6BE5 /* FavouriteViewController.m */; };
 		3A78F12A1C920775008C6BE5 /* ReferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F1291C920775008C6BE5 /* ReferenceViewController.m */; };
+		3A9366671CB176D3004BBE2E /* interactions.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A9366661CB176D3004BBE2E /* interactions.json */; };
 		3A9E3FCE1C80AE330069BDFC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FCD1C80AE330069BDFC /* main.m */; };
 		3A9E3FD11C80AE330069BDFC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FD01C80AE330069BDFC /* AppDelegate.m */; };
 		3A9E3FD41C80AE330069BDFC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FD31C80AE330069BDFC /* LoginViewController.m */; };
@@ -123,6 +124,7 @@
 		3A78F1261C92076D008C6BE5 /* FavouriteViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FavouriteViewController.m; sourceTree = "<group>"; };
 		3A78F1281C920775008C6BE5 /* ReferenceViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ReferenceViewController.h; sourceTree = "<group>"; };
 		3A78F1291C920775008C6BE5 /* ReferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferenceViewController.m; sourceTree = "<group>"; };
+		3A9366661CB176D3004BBE2E /* interactions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = interactions.json; sourceTree = "<group>"; };
 		3A9E3FC91C80AE330069BDFC /* Vidal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vidal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9E3FCD1C80AE330069BDFC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A9E3FCF1C80AE330069BDFC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -224,6 +226,7 @@
 				3A1570541CAEA8F800D49C5E /* DBManager.m */,
 				3A1570561CAEA95900D49C5E /* vidal.cardio.crypt.db3 */,
 				3A1570571CAEA95900D49C5E /* vidal.cardio.encrypt.db3 */,
+				3A9366661CB176D3004BBE2E /* interactions.json */,
 			);
 			name = Database;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				3A1570591CAEA95900D49C5E /* vidal.cardio.encrypt.db3 in Resources */,
 				3A1570581CAEA95900D49C5E /* vidal.cardio.crypt.db3 in Resources */,
 				3A5638581CA19971000A83B5 /* Assets.xcassets in Resources */,
+				3A9366671CB176D3004BBE2E /* interactions.json in Resources */,
 				3A9E3FD71C80AE330069BDFC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
