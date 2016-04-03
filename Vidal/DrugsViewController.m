@@ -22,7 +22,11 @@
 
 @end
 
-@implementation DrugsViewController
+@implementation DrugsViewController {
+    
+    NSMutableDictionary *result;
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -47,7 +51,7 @@
         [self.hello1 addObject:[self.arrPeopleInfo[i] objectAtIndex:1]];
     }
     
-    _sectionsArray = @[self.hello1].mutableCopy;
+    _sectionsArray = @[[result allValues]].mutableCopy;
     
     // Do any additional setup after loading the view.
 }
@@ -160,6 +164,16 @@
         self.arrPeopleInfo = nil;
     }
     self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
+    
+    result = [NSMutableDictionary dictionary];
+    NSString *keyString;
+    
+    for (NSArray* key in self.arrPeopleInfo) {
+        
+        keyString = [NSString stringWithFormat:@"%@", [[key objectAtIndex:1] substringToIndex:1]];
+        NSLog(@"%@", keyString);
+        [result setValue:key forKey:keyString];
+    }
     
     // Reload the table view.
     [self.tableView reloadData];
