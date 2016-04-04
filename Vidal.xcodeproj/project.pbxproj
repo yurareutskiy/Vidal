@@ -411,7 +411,7 @@
 				TargetAttributes = {
 					3A9E3FC81C80AE330069BDFC = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 9W968RZS7A;
+						DevelopmentTeam = 4RWLL37A47;
 					};
 				};
 			};
@@ -679,6 +679,7 @@
 					./sqlcipher/src,
 				);
 				INFOPLIST_FILE = Vidal/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = (
 					"$(inherited)",
@@ -715,6 +716,7 @@
 					./sqlcipher/src,
 				);
 				INFOPLIST_FILE = Vidal/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = (
 					"$(inherited)",

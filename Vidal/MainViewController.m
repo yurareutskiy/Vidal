@@ -17,6 +17,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.bg.layer.masksToBounds = YES;
+    
     // Do any additional setup after loading the view.
 }
 
@@ -34,5 +36,17 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (IBAction)toTakeda:(UIButton *)sender {
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.takeda.com.ru/"]];
+
+}
+
+- (IBAction)toVidal:(UIButton *)sender {
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.vidal.ru"]];
+    
+}
 
 @end

@@ -6,6 +6,12 @@
       "scale" : "1x"
     },
     {
+      "alignment-insets" : {
+        "top" : 10,
+        "left" : 10,
+        "bottom" : 10,
+        "right" : 0
+      },
       "idiom" : "universal",
       "filename" : "Icon-Small@2x.png",
       "scale" : "2x"

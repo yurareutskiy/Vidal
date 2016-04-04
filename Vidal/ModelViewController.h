@@ -12,4 +12,6 @@
 
 @interface ModelViewController : UIViewController
 
+- (void) setLabel:(NSString *)label;
+
 @end

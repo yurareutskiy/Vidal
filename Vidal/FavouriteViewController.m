@@ -20,6 +20,8 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    [super setLabel:@"Избранное"];
+    
     // Do any additional setup after loading the view.
 }
 

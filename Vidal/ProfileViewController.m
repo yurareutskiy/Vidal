@@ -16,6 +16,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [super setLabel:@"Профиль"];
     // Do any additional setup after loading the view.
 }
 

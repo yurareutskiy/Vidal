@@ -31,6 +31,13 @@
     
     self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1];
     self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    self.navigationController.navigationBar.layer.shadowColor = [[UIColor grayColor] CGColor];
+    self.navigationController.navigationBar.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.navigationController.navigationBar.layer.shadowRadius = 1.0f;
+    self.navigationController.navigationBar.layer.shadowOpacity = 0.5f;
     
 }
 
@@ -49,14 +56,16 @@
     
     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    self.navigationController.navigationBar.layer.shadowColor = [[UIColor grayColor] CGColor];
-    self.navigationController.navigationBar.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
-    self.navigationController.navigationBar.layer.shadowRadius = 1.0f;
-    self.navigationController.navigationBar.layer.shadowOpacity = 0.5f;
-    
     self.navigationItem.leftBarButtonItem = self.menuButton;
     
+}
+
+- (void) setLabel:(NSString *)label {
+    UILabel* labelName = [[UILabel alloc] initWithFrame:CGRectMake(0,40,320,40)];
+    labelName.textAlignment = NSTextAlignmentLeft;
+    labelName.text = NSLocalizedString(label, @"");
+    labelName.textColor = [UIColor whiteColor];
+    self.navigationItem.titleView = labelName;
 }
 
 - (void)didReceiveMemoryWarning {

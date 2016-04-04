@@ -29,6 +29,7 @@
     self.drug.text = string2;
     [self.drug sizeToFit];
     
+    [super setLabel:@"О Такеда"];
     
     // Do any additional setup after loading the view.
 }

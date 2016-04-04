@@ -21,14 +21,6 @@
     
 }
 
-- (id) initWithURLString:(NSString*) urlString {
-    self = [super init];
-    if(self) {
-        self.newsId = urlString;
-    }
-    return self;
-}
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -37,10 +29,6 @@
     vc = [[SocialNetworkManagerVC alloc] init];
     ud = [NSUserDefaults standardUserDefaults];
     self.newsId = [ud objectForKey:@"news"];
-    NSString *string = self.newsText.text;
-    self.newsText.numberOfLines = 0;
-    self.newsText.text = string;
-    [self.newsText sizeToFit];
     
     array = [NSDictionary dictionary];
     
@@ -60,15 +48,30 @@
     }];
     [dataTask resume];
     
-    
+    [super setLabel:@"Новости"];
     
     // Do any additional setup after loading the view.
 }
 
+
+
 - (void) viewDidAppear:(BOOL)animated {
-    self.date.text = [array objectForKey:@"date"];
+    
+    NSDateFormatter *date = [[NSDateFormatter alloc] init];
+    [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    NSDate *dateNews = [date dateFromString:[array objectForKey:@"date"]];
+    [date setDateFormat:@"dd MMMM yyyy HH:mm"];
+    NSString *resultDate = [date stringFromDate:dateNews];
+    
+    self.date.text = resultDate;
     self.newsTitle.text = [array objectForKey:@"title"];
     self.newsText.text = [array objectForKey:@"body"];
+    
+    self.newsText.numberOfLines = 0;
+    self.newsTitle.numberOfLines = 0;
+    [self.newsText sizeToFit];
+    [self.newsTitle sizeToFit];
+    
 }
 
 - (void)didReceiveMemoryWarning {

@@ -11,4 +11,8 @@
 
 @interface MainViewController : ModelViewController
 
+@property (weak, nonatomic) IBOutlet UIImageView *bg;
+- (IBAction)toTakeda:(UIButton *)sender;
+- (IBAction)toVidal:(UIButton *)sender;
+
 @end

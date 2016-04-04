@@ -67,6 +67,8 @@
     [self setUpQuickSearch:self.hello1];
     self.FilteredResults = [self.quickSearch filteredObjectsWithValue:nil];
     
+    [super setLabel:@"Лекарственное взаимодействие"];
+    
     // Do any additional setup after loading the view.
 }
 

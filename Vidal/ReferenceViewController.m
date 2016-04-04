@@ -16,13 +16,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+
     self.navigationItem.title = @"Новости";
     
     NSString *string = self.takeda.text;
     self.takeda.numberOfLines = 0;
     self.takeda.text = string;
     [self.takeda sizeToFit];
+    
+    [super setLabel:@"Справка"];
     // Do any additional setup after loading the view.
 }
 
@@ -30,6 +32,8 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+
 
 /*
 #pragma mark - Navigation

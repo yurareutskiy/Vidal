@@ -30,6 +30,8 @@
     NSString *request = @"SELECT * FROM Company INNER JOIN Country ON Company.CountryCode = Country.CountryCode ORDER BY Company.LocalName";
     [self loadData:request];
     
+    [super setLabel:@"Производители"];
+    
     // Do any additional setup after loading the view.
 }
 

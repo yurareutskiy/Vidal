@@ -35,7 +35,7 @@
     _sectionsArray = @[_firstSectionStrings, _secondSectionStrings].mutableCopy;
     _expandableSections = [NSMutableIndexSet indexSet];
     
-    self.navigationItem.title = @"Указатель активных веществ";
+    [super setLabel:@"Указатель активных веществ"];
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     

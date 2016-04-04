@@ -41,7 +41,7 @@
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
 
-    self.navigationItem.title = @"Список препаратов";
+    [super setLabel:@"Список препаратов"];
     
     [self loadData:@"SELECT * FROM Document INNER JOIN Product ON Document.DocumentID = Product.ProductID ORDER BY Product.RusName"];
     

@@ -36,7 +36,7 @@
     _expandableSections = [NSMutableIndexSet indexSet];
     
     
-    self.navigationItem.title = @"Фармаколгические группы";
+    [super setLabel:@"Фармакологические группы"];
     
     self.containerView.hidden = true;
     self.darkView.hidden = true;
