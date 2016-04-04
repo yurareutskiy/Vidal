@@ -9,6 +9,7 @@
 #import "ModelViewController.h"
 #import <SLExpandableTableView.h>
 #import "PharmaTableViewCell.h"
+#import "DBManager.h"
 
 @interface PharmaViewController : ModelViewController<SLExpandableTableViewDatasource, SLExpandableTableViewDelegate, UIGestureRecognizerDelegate>
 

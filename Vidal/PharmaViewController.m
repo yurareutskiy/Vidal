@@ -14,6 +14,9 @@
 @property (nonatomic, strong) NSArray *secondSectionStrings;
 @property (nonatomic, strong) NSMutableArray *sectionsArray;
 @property (nonatomic, strong) NSMutableIndexSet *expandableSections;
+@property (nonatomic, strong) NSMutableArray *arrPeopleInfo;
+@property (nonatomic, strong) DBManager *dbManager;
+@property (nonatomic, strong) NSMutableArray *tryArray;
 
 @end
 
@@ -21,6 +24,7 @@
 
     BOOL container;
     UITapGestureRecognizer *tap;
+    NSUserDefaults *ud;
     
 }
 
@@ -30,11 +34,15 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    ud = [NSUserDefaults standardUserDefaults];
+    
     _firstSectionStrings = @[@"Тест", @"Тест", @"Тест"];
     _secondSectionStrings = @[@"Тест", @"Тест", @"Тест"];
     _sectionsArray = @[_firstSectionStrings, _secondSectionStrings].mutableCopy;
     _expandableSections = [NSMutableIndexSet indexSet];
     
+    
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
     [super setLabel:@"Фармакологические группы"];
     
@@ -45,6 +53,8 @@
     tap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(tableView:didCollapseSection:animated:)];
+    
+    [self segueToBe:1 request:@""];
     
     // Do any additional setup after loading the view.
 }
@@ -166,19 +176,42 @@
     }
 }
 
-//-(void)loadData:(NSString *)req{
-//    // Form the query.
-//    NSString *query = [NSString stringWithFormat:req];
-//    
-//    // Get the results.
-//    if (self.arrPeopleInfo != nil) {
-//        self.arrPeopleInfo = nil;
-//    }
-//    self.arrPeopleInfo = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
-//    
-//    // Reload the table view.
-//    [self.tableView reloadData];
-//}
+- (void) segueToBe:(int)xid request:(NSString *)req {
+    
+    NSString *sql = @"SELECT * FROM Document INNER JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID INNER JOIN ClinicoPhPointers ON Document_ClPhPointers.ClPhPointerID = ClinicoPhPointers.ClPhPointerID WHERE Document.DocumentID = 7";
+    
+    // Get the results.
+    if (self.tryArray != nil) {
+        self.tryArray = nil;
+    }
+    self.tryArray = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:sql]];
+    
+    if ([[self.tryArray objectAtIndex:0] count] == 29) {
+        if ([[[self.tryArray objectAtIndex:0] objectAtIndex:28] isEqualToString:@"1"]) {
+        //делать запрос
+        //открывать контейнер вью
+        }
+    } else {
+        [ud setObject:[[self.tryArray objectAtIndex:0] objectAtIndex:25] forKey:@"level"];
+        [ud setObject:[[self.tryArray objectAtIndex:0] objectAtIndex:26] forKey:@"parent"];
+        [self performSegueWithIdentifier:@"" sender:self];
+    }
+    
+}
+
+-(void)loadData:(NSString *)req{
+    // Form the query.
+    NSString *query = [NSString stringWithFormat:req];
+    
+    // Get the results.
+    if (self.arrPeopleInfo != nil) {
+        self.arrPeopleInfo = nil;
+    }
+    self.arrPeopleInfo = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    
+    // Reload the table view.
+    [self.tableView reloadData];
+}
 
 /*
 #pragma mark - Navigation

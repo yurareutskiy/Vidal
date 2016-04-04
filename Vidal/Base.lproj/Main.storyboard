@@ -817,7 +817,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TpN-AD-tlE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3758" y="-83"/>
+            <point key="canvasLocation" x="3666" y="-83"/>
         </scene>
         <!--Favourite View Controller-->
         <scene sceneID="Hnj-Mp-PAJ">
@@ -1383,7 +1383,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qgt-hX-kyc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3758" y="683"/>
+            <point key="canvasLocation" x="3666" y="683"/>
         </scene>
         <!--Reference View Controller-->
         <scene sceneID="fY5-bf-5fb">
@@ -2902,6 +2902,51 @@ Lactobacillus acidophilus и другие.</string>
             <point key="canvasLocation" x="1390" y="1484"/>
         </scene>
         <!--View Controller-->
+        <scene sceneID="hAp-c5-QSi">
+            <objects>
+                <viewController id="qEJ-ic-t5K" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TTF-KP-K53"/>
+                        <viewControllerLayoutGuide type="bottom" id="xIw-E0-VAG"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="yko-k7-RFn">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MNH-HH-GPw">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.21960784310000001" green="0.21960784310000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYJ-Gf-rC4">
+                                <rect key="frame" x="0.0" y="124" width="600" height="476"/>
+                                <animations/>
+                                <connections>
+                                    <segue destination="sbh-iQ-PXQ" kind="embed" id="4ji-JJ-A5E"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="MNH-HH-GPw" secondAttribute="trailing" constant="-20" id="KBj-wu-tEr"/>
+                            <constraint firstItem="MYJ-Gf-rC4" firstAttribute="top" secondItem="TTF-KP-K53" secondAttribute="bottom" constant="104" id="MIf-6V-5RD"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MYJ-Gf-rC4" secondAttribute="trailing" constant="-20" id="XY7-xb-kG4"/>
+                            <constraint firstItem="xIw-E0-VAG" firstAttribute="top" secondItem="MNH-HH-GPw" secondAttribute="bottom" id="ZyE-tY-5GP"/>
+                            <constraint firstItem="xIw-E0-VAG" firstAttribute="top" secondItem="MYJ-Gf-rC4" secondAttribute="bottom" id="fmh-cD-k6U"/>
+                            <constraint firstItem="MNH-HH-GPw" firstAttribute="top" secondItem="yko-k7-RFn" secondAttribute="topMargin" id="gf2-LV-Bjo"/>
+                            <constraint firstItem="MYJ-Gf-rC4" firstAttribute="leading" secondItem="yko-k7-RFn" secondAttribute="leadingMargin" constant="-20" id="hPz-hY-scC"/>
+                            <constraint firstItem="MYJ-Gf-rC4" firstAttribute="centerX" secondItem="yko-k7-RFn" secondAttribute="centerX" id="oF4-iu-9CQ"/>
+                            <constraint firstItem="MNH-HH-GPw" firstAttribute="centerX" secondItem="yko-k7-RFn" secondAttribute="centerX" id="p3G-Cc-7rR"/>
+                            <constraint firstItem="MNH-HH-GPw" firstAttribute="leading" secondItem="yko-k7-RFn" secondAttribute="leadingMargin" constant="-20" id="s07-Hy-fdz"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uyj-wV-Q7l" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="4570" y="-83"/>
+        </scene>
+        <!--View Controller-->
         <scene sceneID="NtZ-dL-0BP">
             <objects>
                 <viewController id="sbh-iQ-PXQ" sceneMemberID="viewController">
@@ -2999,7 +3044,97 @@ Lactobacillus acidophilus и другие.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dH7-4j-rdo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4518" y="-51"/>
+            <point key="canvasLocation" x="4570" y="621"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Ef4-lN-tLI">
+            <objects>
+                <viewController id="r1w-j0-fsH" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="CUS-G9-e1P"/>
+                        <viewControllerLayoutGuide type="bottom" id="37X-Dv-0CB"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Hur-b7-m1a">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Mw-82-J1T">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.21960784310000001" green="0.21960784310000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Jv-M7-xrW">
+                                <rect key="frame" x="0.0" y="124" width="600" height="476"/>
+                                <animations/>
+                                <connections>
+                                    <segue destination="sbh-iQ-PXQ" kind="embed" id="QSg-4a-D6I"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="2Jv-M7-xrW" firstAttribute="leading" secondItem="Hur-b7-m1a" secondAttribute="leadingMargin" constant="-20" id="0jG-OY-00o"/>
+                            <constraint firstItem="5Mw-82-J1T" firstAttribute="top" secondItem="Hur-b7-m1a" secondAttribute="topMargin" id="8th-dp-hqM"/>
+                            <constraint firstItem="37X-Dv-0CB" firstAttribute="top" secondItem="2Jv-M7-xrW" secondAttribute="bottom" id="Buh-Lj-5bl"/>
+                            <constraint firstItem="2Jv-M7-xrW" firstAttribute="centerX" secondItem="Hur-b7-m1a" secondAttribute="centerX" id="DiV-dG-BKm"/>
+                            <constraint firstItem="5Mw-82-J1T" firstAttribute="centerX" secondItem="Hur-b7-m1a" secondAttribute="centerX" id="Jl2-zj-wGv"/>
+                            <constraint firstItem="37X-Dv-0CB" firstAttribute="top" secondItem="5Mw-82-J1T" secondAttribute="bottom" id="NWl-HV-1ko"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="2Jv-M7-xrW" secondAttribute="trailing" constant="-20" id="U7e-4G-7Sx"/>
+                            <constraint firstItem="2Jv-M7-xrW" firstAttribute="top" secondItem="CUS-G9-e1P" secondAttribute="bottom" constant="104" id="gve-bl-dXi"/>
+                            <constraint firstItem="5Mw-82-J1T" firstAttribute="leading" secondItem="Hur-b7-m1a" secondAttribute="leadingMargin" constant="-20" id="hqG-dD-Php"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="5Mw-82-J1T" secondAttribute="trailing" constant="-20" id="hsN-M4-oVe"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Lb9-BF-23F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5296" y="-83"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="gge-SO-4Va">
+            <objects>
+                <viewController id="9Pq-BS-NIK" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="JBu-a6-uS4"/>
+                        <viewControllerLayoutGuide type="bottom" id="k7j-8i-vDy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="bGV-Jz-vtl">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bLa-xL-QKz">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.21960784310000001" green="0.21960784310000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ncb-2b-t6B">
+                                <rect key="frame" x="0.0" y="124" width="600" height="476"/>
+                                <animations/>
+                                <connections>
+                                    <segue destination="sbh-iQ-PXQ" kind="embed" id="0Eq-Up-zTS"/>
+                                </connections>
+                            </containerView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Ncb-2b-t6B" firstAttribute="centerX" secondItem="bGV-Jz-vtl" secondAttribute="centerX" id="PPA-Za-eVl"/>
+                            <constraint firstItem="k7j-8i-vDy" firstAttribute="top" secondItem="Ncb-2b-t6B" secondAttribute="bottom" id="V0Y-Kq-ydF"/>
+                            <constraint firstItem="bLa-xL-QKz" firstAttribute="leading" secondItem="bGV-Jz-vtl" secondAttribute="leadingMargin" constant="-20" id="Vgl-kv-WUJ"/>
+                            <constraint firstItem="bLa-xL-QKz" firstAttribute="top" secondItem="bGV-Jz-vtl" secondAttribute="topMargin" id="Vrl-h2-rKo"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ncb-2b-t6B" secondAttribute="trailing" constant="-20" id="YT9-Ed-3Ya"/>
+                            <constraint firstItem="k7j-8i-vDy" firstAttribute="top" secondItem="bLa-xL-QKz" secondAttribute="bottom" id="fdf-ze-L46"/>
+                            <constraint firstItem="bLa-xL-QKz" firstAttribute="centerX" secondItem="bGV-Jz-vtl" secondAttribute="centerX" id="uih-Qy-4ES"/>
+                            <constraint firstItem="Ncb-2b-t6B" firstAttribute="top" secondItem="JBu-a6-uS4" secondAttribute="bottom" constant="104" id="z2W-Rf-yah"/>
+                            <constraint firstItem="Ncb-2b-t6B" firstAttribute="leading" secondItem="bGV-Jz-vtl" secondAttribute="leadingMargin" constant="-20" id="zRk-K3-pDQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bLa-xL-QKz" secondAttribute="trailing" constant="-20" id="zkk-WJ-d4c"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="leJ-iF-Pc5" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="6014" y="-83"/>
         </scene>
         <!--Table View Controller-->
         <scene sceneID="Fx7-yZ-fNU">
@@ -3234,7 +3369,7 @@ Lactobacillus acidophilus и другие.</string>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P6A-uR-Wer" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5298" y="34"/>
+            <point key="canvasLocation" x="5296" y="706"/>
         </scene>
     </scenes>
     <resources>
@@ -3263,4 +3398,7 @@ Lactobacillus acidophilus и другие.</string>
         <image name="vidalLogoWhite" width="172" height="36"/>
         <image name="vkLogo" width="50" height="50"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="0Eq-Up-zTS"/>
+    </inferredMetricsTieBreakers>
 </document>
