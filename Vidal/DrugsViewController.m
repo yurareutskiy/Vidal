@@ -51,7 +51,11 @@
         [self.hello1 addObject:[self.arrPeopleInfo[i] objectAtIndex:1]];
     }
     
-    _sectionsArray = @[[result allValues]].mutableCopy;
+    self.sectionsArray = [NSMutableArray array];
+    
+    for (NSArray *key in result) {
+        [self.sectionsArray addObject:key];
+    }
     
     // Do any additional setup after loading the view.
 }
@@ -118,8 +122,9 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSArray *dataArray = self.sectionsArray[section];
-    return dataArray.count + 1;
+//    NSArray *dataArray = self.sectionsArray[section];
+//    return dataArray.length + 1;
+    return 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -167,14 +172,21 @@
     
     result = [NSMutableDictionary dictionary];
     NSString *keyString;
+    NSMutableArray *needit = [NSMutableArray array];
     
     for (NSArray* key in self.arrPeopleInfo) {
         
         keyString = [NSString stringWithFormat:@"%@", [[key objectAtIndex:1] substringToIndex:1]];
         NSLog(@"%@", keyString);
-        [result setValue:key forKey:keyString];
+        if ([result objectForKey:keyString]) {
+            needit = [result objectForKey:keyString];
+            [needit addObject:key];
+            [result setValue:needit forKey:keyString];
+        } else {
+            [result setValue:key forKey:keyString];
+        }
     }
-    
+
     // Reload the table view.
     [self.tableView reloadData];
 }
@@ -188,6 +200,19 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+//for (NSArray* key in self.arrPeopleInfo) {
+//    
+//    keyString = [NSString stringWithFormat:@"%@", [[key objectAtIndex:1] substringToIndex:1]];
+//    NSLog(@"%@", keyString);
+//    if ([result objectForKey:keyString]) {
+//        needit = [[result objectForKey:keyString] mutableCopy];
+//        [needit addObject:key];
+//        [result setValue:needit forKey:keyString];
+//    } else {
+//        [result setValue:key forKey:keyString];
+//    }
+//}
 
 
 @end
