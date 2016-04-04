@@ -49,7 +49,7 @@
         return;
     }
     
-    self.menuButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"burger"]
+    self.menuButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"burger"] scaledToSize:CGSizeMake(30, 20)]
                                                        style:UIBarButtonItemStyleDone
                                                       target:self.revealViewController
                                                       action:@selector(revealToggle:)];
@@ -66,6 +66,14 @@
     labelName.text = NSLocalizedString(label, @"");
     labelName.textColor = [UIColor whiteColor];
     self.navigationItem.titleView = labelName;
+}
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 - (void)didReceiveMemoryWarning {

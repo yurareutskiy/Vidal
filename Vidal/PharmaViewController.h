@@ -7,13 +7,13 @@
 //
 
 #import "ModelViewController.h"
-#import <SLExpandableTableView.h>
+//#import <SLExpandableTableView.h>
 #import "PharmaTableViewCell.h"
 #import "DBManager.h"
 
-@interface PharmaViewController : ModelViewController<SLExpandableTableViewDatasource, SLExpandableTableViewDelegate, UIGestureRecognizerDelegate>
+@interface PharmaViewController : ModelViewController<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 
-@property (strong, nonatomic) IBOutlet SLExpandableTableView *tableView;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UIView *containerView;
 @property (strong, nonatomic) IBOutlet UIView *darkView;
 

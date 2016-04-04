@@ -36,10 +36,10 @@
     
     ud = [NSUserDefaults standardUserDefaults];
     
-    _firstSectionStrings = @[@"Тест", @"Тест", @"Тест"];
-    _secondSectionStrings = @[@"Тест", @"Тест", @"Тест"];
-    _sectionsArray = @[_firstSectionStrings, _secondSectionStrings].mutableCopy;
-    _expandableSections = [NSMutableIndexSet indexSet];
+//    _firstSectionStrings = @[@"Тест", @"Тест", @"Тест"];
+//    _secondSectionStrings = @[@"Тест", @"Тест", @"Тест"];
+//    _sectionsArray = @[_firstSectionStrings, _secondSectionStrings].mutableCopy;
+//    _expandableSections = [NSMutableIndexSet indexSet];
     
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
@@ -54,7 +54,9 @@
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(tableView:didCollapseSection:animated:)];
     
-    [self segueToBe:1 request:@""];
+    //[self segueToBe:1 request:@""];
+    
+    [self loadData:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = 1 ORDER BY ClinicoPhPointers.Name"];
     
     // Do any additional setup after loading the view.
 }
@@ -73,49 +75,49 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (BOOL)tableView:(SLExpandableTableView *)tableView canExpandSection:(NSInteger)section
-{
-    return YES;
-}
+//- (BOOL)tableView:(SLExpandableTableView *)tableView canExpandSection:(NSInteger)section
+//{
+//    return YES;
+//}
+//
+//- (BOOL)tableView:(SLExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section
+//{
+//    return ![self.expandableSections containsIndex:section];
+//}
 
-- (BOOL)tableView:(SLExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section
-{
-    return ![self.expandableSections containsIndex:section];
-}
-
-- (UITableViewCell<UIExpandingTableViewCell> *)tableView:(SLExpandableTableView *)tableView expandingCellForSection:(NSInteger)section
-{
-    static NSString *CellIdentifier = @"pharmaCell";
-    PharmaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (!cell) {
-        cell = [[PharmaTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-    }
-    
-    //cell.textLabel.text = [NSString stringWithFormat:@"Section %ld", (long)section];
-    
-    return cell;
-}
+//- (UITableViewCell<UIExpandingTableViewCell> *)tableView:(SLExpandableTableView *)tableView expandingCellForSection:(NSInteger)section
+//{
+//    static NSString *CellIdentifier = @"pharmaCell";
+//    PharmaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+//    
+//    if (!cell) {
+//        cell = [[PharmaTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+//    }
+//    
+//    //cell.textLabel.text = [NSString stringWithFormat:@"Section %ld", (long)section];
+//    
+//    return cell;
+//}
 
 #pragma mark - SLExpandableTableViewDelegate
 
-- (void)tableView:(SLExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section
-{
-    //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
-    if (!container) {
-        [self.expandableSections addIndex:section];
-        [tableView expandSection:section animated:YES];
-    }
-}
+//- (void)tableView:(SLExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section
+//{
+//    //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+//    if (!container) {
+//        [self.expandableSections addIndex:section];
+//        [tableView expandSection:section animated:YES];
+//    }
+//}
 
-- (void)tableView:(SLExpandableTableView *)tableView didCollapseSection:(NSUInteger)section animated:(BOOL)animated
-{
-    [self.expandableSections removeIndex:section];
-    self.containerView.hidden = true;
-    container = false;
-    [self.darkView removeGestureRecognizer:tap];
-    self.darkView.hidden = true;
-}
+//- (void)tableView:(SLExpandableTableView *)tableView didCollapseSection:(NSUInteger)section animated:(BOOL)animated
+//{
+//    [self.expandableSections removeIndex:section];
+//    self.containerView.hidden = true;
+//    container = false;
+//    [self.darkView removeGestureRecognizer:tap];
+//    self.darkView.hidden = true;
+//}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -126,75 +128,85 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.sectionsArray.count;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSArray *dataArray = self.sectionsArray[section];
-    return dataArray.count + 1;
+    return [self.arrPeopleInfo count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    PharmaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pharmaCell" forIndexPath:indexPath];
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
-    }
+    NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
     
-    NSArray *dataArray = self.sectionsArray[indexPath.section];
-    cell.textLabel.text = dataArray[indexPath.row - 1];
+    // Set the loaded data to the appropriate cell labels.
+    cell.name.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]];
     
     return cell;
 }
-
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == 0) {
-        [self.sectionsArray removeObjectAtIndex:indexPath.section];
-        [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-}
+//
+//- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    return YES;
+//}
+//
+//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+//{
+//    if (indexPath.row == 0) {
+//        [self.sectionsArray removeObjectAtIndex:indexPath.section];
+//        [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+//    }
+//}
 
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (!container) {
-        self.containerView.hidden = false;
-        container = true;
-        self.darkView.hidden = false;
-        [self.darkView addGestureRecognizer:tap];
-    }
+//    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+//    if (!container) {
+//        self.containerView.hidden = false;
+//        container = true;
+//        self.darkView.hidden = false;
+//        [self.darkView addGestureRecognizer:tap];
+//    }
+    
+    [self segueToBe:indexPath.row request:@""];
+    
+    
+    
 }
 
-- (void) segueToBe:(int)xid request:(NSString *)req {
+- (void) segueToBe:(NSInteger)xid request:(NSString *)req {
     
-    NSString *sql = @"SELECT * FROM Document INNER JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID INNER JOIN ClinicoPhPointers ON Document_ClPhPointers.ClPhPointerID = ClinicoPhPointers.ClPhPointerID WHERE Document.DocumentID = 7";
+    NSInteger product = [self.dbManager.arrColumnNames indexOfObject:@"ShowInProduct"];
+    NSInteger parent = [self.dbManager.arrColumnNames indexOfObject:@"Code"];
+    NSInteger level = [self.dbManager.arrColumnNames indexOfObject:@"Level"];
+    
+//    NSString *sql = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = 2 AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", parent];
+    
+    // Set the loaded data to the appropriate cell labels.
+    
+    NSString *productStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:product]];
+    NSString *parentStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:parent]];
+    NSString *levelStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:level]];
     
     // Get the results.
     if (self.tryArray != nil) {
         self.tryArray = nil;
     }
-    self.tryArray = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:sql]];
+    //self.tryArray = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:sql]];
     
-    if ([[self.tryArray objectAtIndex:0] count] == 29) {
-        if ([[[self.tryArray objectAtIndex:0] objectAtIndex:28] isEqualToString:@"1"]) {
+    if ([productStr isEqualToString:@"0"]) {
         //делать запрос
         //открывать контейнер вью
-        }
     } else {
-        [ud setObject:[[self.tryArray objectAtIndex:0] objectAtIndex:25] forKey:@"level"];
-        [ud setObject:[[self.tryArray objectAtIndex:0] objectAtIndex:26] forKey:@"parent"];
-        [self performSegueWithIdentifier:@"" sender:self];
+        [ud setObject:levelStr forKey:@"level"];
+        [ud setObject:parentStr forKey:@"parent"];
+        [self performSegueWithIdentifier:@"toLevel" sender:self];
+        NSLog(@"%d %@", levelStr.intValue + 1, parentStr);
     }
     
 }
