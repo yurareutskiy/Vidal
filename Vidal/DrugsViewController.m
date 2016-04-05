@@ -39,7 +39,7 @@
     
     self.letters = [NSArray arrayWithObjects:@"А", @"Б", @"В", @"Г", @"Д", @"Ж", @"З", @"И", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"С", @"Т", @"У", @"Ф", @"Ц", @"Э", @"Ю", nil];
     
-    _expandableSections = [NSMutableIndexSet indexSet];
+    self.expandableSections = [NSMutableIndexSet indexSet];
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
 

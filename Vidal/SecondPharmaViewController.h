@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "PharmaTableViewCell.h"
 #import "DBManager.h"
+#import "DocumentViewController.h"
 
 @interface SecondPharmaViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 

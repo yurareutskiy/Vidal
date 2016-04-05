@@ -16,7 +16,7 @@
 @property (nonatomic, strong) NSMutableIndexSet *expandableSections;
 @property (nonatomic, strong) NSMutableArray *arrPeopleInfo;
 @property (nonatomic, strong) DBManager *dbManager;
-@property (nonatomic, strong) NSMutableArray *tryArray;
+@property (nonatomic, strong) NSArray *tryArray;
 
 @end
 
@@ -118,21 +118,20 @@
     NSInteger product = [self.dbManager.arrColumnNames indexOfObject:@"ShowInProduct"];
     NSInteger parent = [self.dbManager.arrColumnNames indexOfObject:@"Code"];
     NSInteger level = [self.dbManager.arrColumnNames indexOfObject:@"Level"];
+    NSInteger pointID = [self.dbManager.arrColumnNames indexOfObject:@"ClPhPointerID"];
     
     // Set the loaded data to the appropriate cell labels.
     
     NSString *productStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:product]];
     NSString *parentStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:parent]];
     NSString *levelStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:level]];
+    NSString *pointIDStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:pointID]];
     
-    // Get the results.
-    if (self.tryArray != nil) {
-        self.tryArray = nil;
-    }
+    NSString *req2 = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = %ld AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", [levelStr integerValue] + 1, parentStr];
     
-    NSString *req2 = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = %ld AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", [levelStr integerValue] + 1, [ud objectForKey:@"parent"]];
+    BOOL goNext = [self checkData:req2];
     
-    if ([productStr isEqualToString:req2]) {
+    if (!goNext) {
         if (!container) {
             self.containerView.hidden = false;
             container = true;
@@ -140,11 +139,14 @@
             [self.darkView addGestureRecognizer:tap];
         }
         NSLog(@"лекарств нет");
-    } else {
+        [ud setObject:pointIDStr forKey:@"id"];
+        
+        
+    } else if (goNext){
         [ud setObject:levelStr forKey:@"level"];
         [ud setObject:parentStr forKey:@"parent"];
         [self performSegueWithIdentifier:@"toLevel" sender:self];
-        NSLog(@"%d %@ %@", levelStr.intValue + 1, parentStr, productStr);
+        NSLog(@"%d %@", levelStr.intValue + 1, parentStr);
     }
     
 }
@@ -161,6 +163,23 @@
     
     // Reload the table view.
     [self.tableView reloadData];
+}
+
+-(BOOL)checkData:(NSString *)req {
+    // Form the query.
+    NSString *query = [NSString stringWithFormat:req];
+    
+    // Get the results.
+    if (self.tryArray != nil) {
+        self.tryArray = nil;
+    }
+    self.tryArray = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    
+    if ([self.tryArray count] == 0){
+        return NO;
+    } else {
+        return YES;
+    }
 }
 
 - (void) close {

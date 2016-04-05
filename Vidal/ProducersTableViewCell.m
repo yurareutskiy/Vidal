@@ -12,15 +12,20 @@
 
 - (void)awakeFromNib {
     
-    NSString *string = self.name.text;
-    self.name.numberOfLines = 0;
-    self.name.text = string;
-    [self.name sizeToFit];
+    NSString *string = self.nameUnhid.text;
+    self.nameUnhid.numberOfLines = 0;
+    self.nameUnhid.text = string;
+    [self.nameUnhid sizeToFit];
     
-    NSString *string1 = self.country.text;
-    self.country.numberOfLines = 0;
-    self.country.text = string1;
-    [self.country sizeToFit];
+    NSString *string1 = self.nameHid.text;
+    self.nameHid.numberOfLines = 0;
+    self.nameHid.text = string1;
+    [self.nameHid sizeToFit];
+    
+    NSString *string2 = self.addressHid.text;
+    self.addressHid.numberOfLines = 0;
+    self.addressHid.text = string2;
+    [self.addressHid sizeToFit];
     
     // Initialization code
 }
@@ -31,4 +36,6 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)toListDrugs:(UIButton *)sender {
+}
 @end

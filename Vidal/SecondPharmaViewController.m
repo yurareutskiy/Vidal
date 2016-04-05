@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSMutableArray *secondArray;
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableArray *tryArray;
+@property (nonatomic, strong) NSMutableArray *data;
 
 @end
 
@@ -22,6 +23,7 @@
     UITapGestureRecognizer *tap;
     NSUserDefaults *ud;
     NSString *req;
+
 }
 
 - (void)viewDidLoad {
@@ -48,6 +50,7 @@
     req = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = %ld AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", level + 1, [ud objectForKey:@"parent"]];
     
     [self loadData:req];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -105,12 +108,14 @@
     NSInteger product = [self.dbManager.arrColumnNames indexOfObject:@"ShowInProduct"];
     NSInteger parent = [self.dbManager.arrColumnNames indexOfObject:@"Code"];
     NSInteger level = [self.dbManager.arrColumnNames indexOfObject:@"Level"];
+    NSInteger pointID = [self.dbManager.arrColumnNames indexOfObject:@"ClPhPointerID"];
     
     // Set the loaded data to the appropriate cell labels.
     
     NSString *productStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:product]];
     NSString *parentStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:parent]];
     NSString *levelStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:level]];
+    NSString *pointIDStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:pointID]];
     
     NSString *req2 = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = %ld AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", [levelStr integerValue] + 1, parentStr];
     NSLog(@"%@", req2);
@@ -124,8 +129,12 @@
             self.darkView.hidden = false;
             [self.darkView addGestureRecognizer:tap];
         }
-        NSLog(@"лекарств нет");
+
+        NSString *getInfo = [NSString stringWithFormat:@"SELECT * FROM Document INNER JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID INNER JOIN ClinicoPhPointers ON Document_ClPhPointers.ClPhPointerID = ClinicoPhPointers.ClPhPointerID WHERE ClinicoPhPointers.ClPhPointerID = %ld", [pointIDStr integerValue]];
+        [self getData:getInfo];
         
+        ((DocumentViewController *)self.childViewControllers.lastObject).name.text = @"text";
+        //()((DocumentViewController *)self.childViewControllers.lastObject).childViewControllers.lastObject)
         
     } else if (goNext){
         [ud setObject:levelStr forKey:@"level"];
@@ -165,6 +174,18 @@
     } else {
         return YES;
     }
+}
+
+- (void) getData:(NSString *)req {
+    
+    NSString *query = [NSString stringWithFormat:req];
+    
+    // Get the results.
+    if (self.data != nil) {
+        self.data = nil;
+    }
+    self.data = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    
 }
 
 - (void) close {
