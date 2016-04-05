@@ -16,5 +16,8 @@
 
 @property (nonatomic, readonly) UIExpansionStyle expansionStyle;
 - (void)setExpansionStyle:(UIExpansionStyle)expansionStyle animated:(BOOL)animated;
+@property (weak, nonatomic) IBOutlet UILabel *letter;
+@property (weak, nonatomic) IBOutlet UILabel *name;
+
 
 @end

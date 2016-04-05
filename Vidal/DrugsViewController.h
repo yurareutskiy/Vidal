@@ -13,5 +13,7 @@
 
 @interface DrugsViewController : ModelViewController <SLExpandableTableViewDatasource, SLExpandableTableViewDelegate>
 @property (strong, nonatomic) IBOutlet SLExpandableTableView *tableView;
+@property (weak, nonatomic) IBOutlet UIView *darkView;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
 
 @end

@@ -17,6 +17,7 @@
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSArray *arrPeopleInfo;
 @property (nonatomic, strong) NSMutableArray *hello1;
+@property (nonatomic, strong) NSArray *letters;
 
 -(void)loadData:(NSString *)req;
 
@@ -24,7 +25,9 @@
 
 @implementation DrugsViewController {
     
-    NSMutableDictionary *result;
+    NSMutableArray *result;
+    BOOL container;
+    UITapGestureRecognizer *tap;
     
 }
 
@@ -34,8 +37,7 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-//    _firstSectionStrings = @[@"Гадовист", @"Галидор", @"Гордокс"];
-//    _secondSectionStrings = @[@"Тест", @"Тест", @"Тест"];
+    self.letters = [NSArray arrayWithObjects:@"А", @"Б", @"В", @"Г", @"Д", @"Ж", @"З", @"И", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"С", @"Т", @"У", @"Ф", @"Ц", @"Э", @"Ю", nil];
     
     _expandableSections = [NSMutableIndexSet indexSet];
     
@@ -57,6 +59,14 @@
         [self.sectionsArray addObject:key];
     }
     
+    container = false;
+    self.containerView.hidden = true;
+    self.darkView.hidden = true;
+    
+    tap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(tableView:didCollapseSection:animated:)];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -69,7 +79,9 @@
 
 - (BOOL)tableView:(SLExpandableTableView *)tableView canExpandSection:(NSInteger)section
 {
+
     return YES;
+
 }
 
 - (BOOL)tableView:(SLExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section
@@ -86,9 +98,16 @@
         cell = [[DrugsTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
-    NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
+    NSString *text = [NSString stringWithFormat:@"%@", [[[result objectAtIndex:section] objectAtIndex:0] objectAtIndex:1]];
+    if ([[result objectAtIndex:section] count] > 1) {
+        text = [NSString stringWithFormat:@"%@, %@", text, [[[result objectAtIndex:section] objectAtIndex:1] objectAtIndex:1]];
+        if ([[result objectAtIndex:section] count] > 2) {
+            text = [NSString stringWithFormat:@"%@, %@", text, [[[result objectAtIndex:section] objectAtIndex:2] objectAtIndex:1]];
+        }
+    }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:section] objectAtIndex:indexOfFirstname]];
+    cell.name.text = text;
+    cell.letter.text = [NSString stringWithFormat:@"%@.", [self.letters objectAtIndex:section]];
     
     return cell;
 }
@@ -105,7 +124,23 @@
 
 - (void)tableView:(SLExpandableTableView *)tableView didCollapseSection:(NSUInteger)section animated:(BOOL)animated
 {
-    [self.expandableSections removeIndex:section];
+    if ([[result objectAtIndex:section] count] == 1){
+        if (!container) {
+        
+            self.containerView.hidden = false;
+            container = true;
+            self.darkView.hidden = false;
+            [self.darkView addGestureRecognizer:tap];
+        }
+    } else {
+    
+        //[self.expandableSections removeIndex:section];
+        self.containerView.hidden = true;
+        container = false;
+        [self.darkView removeGestureRecognizer:tap];
+        self.darkView.hidden = true;
+    }
+
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -117,27 +152,27 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return self.sectionsArray.count;
+    return [result count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-//    NSArray *dataArray = self.sectionsArray[section];
-//    return dataArray.length + 1;
-    return 1;
+    return [[result objectAtIndex:section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"Cell";
+    static NSString *CellIdentifier = @"drugsCell";
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    DrugsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    NSArray *dataArray = self.sectionsArray[indexPath.section];
-    cell.textLabel.text = dataArray[indexPath.row - 1];
+    NSArray *dataArray = result[indexPath.section];
+    cell.name.text = [dataArray[indexPath.row - 1] objectAtIndex:1];
+    cell.letter.text = @"";
+    
     
     return cell;
 }
@@ -159,7 +194,17 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        [tableView deselectRowAtIndexPath:indexPath animated:NO];
+        if (!container) {
+            self.containerView.hidden = false;
+            container = true;
+            self.darkView.hidden = false;
+            [self.darkView addGestureRecognizer:tap];
+        }
+    
+    
+    
+    
 }
 
 -(void)loadData:(NSString *)req{
@@ -170,21 +215,20 @@
     }
     self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
     
-    result = [NSMutableDictionary dictionary];
+    result = [NSMutableArray arrayWithCapacity:[self.letters count]];
+    
     NSString *keyString;
-    NSMutableArray *needit = [NSMutableArray array];
+    
+    for (int i = 0; i < [self.letters count]; i++) {
+        NSMutableArray *tempArray = [NSMutableArray array];
+        [result addObject:tempArray];
+    }
     
     for (NSArray* key in self.arrPeopleInfo) {
         
         keyString = [NSString stringWithFormat:@"%@", [[key objectAtIndex:1] substringToIndex:1]];
-        NSLog(@"%@", keyString);
-        if ([result objectForKey:keyString]) {
-            needit = [result objectForKey:keyString];
-            [needit addObject:key];
-            [result setValue:needit forKey:keyString];
-        } else {
-            [result setValue:key forKey:keyString];
-        }
+        NSInteger ind = [self.letters indexOfObject:keyString];
+        [[result objectAtIndex:ind] addObject:key];
     }
 
     // Reload the table view.
@@ -200,19 +244,6 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-//for (NSArray* key in self.arrPeopleInfo) {
-//    
-//    keyString = [NSString stringWithFormat:@"%@", [[key objectAtIndex:1] substringToIndex:1]];
-//    NSLog(@"%@", keyString);
-//    if ([result objectForKey:keyString]) {
-//        needit = [[result objectForKey:keyString] mutableCopy];
-//        [needit addObject:key];
-//        [result setValue:needit forKey:keyString];
-//    } else {
-//        [result setValue:key forKey:keyString];
-//    }
-//}
 
 
 @end

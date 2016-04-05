@@ -165,14 +165,14 @@
         
         
         keyString = [NSString stringWithFormat:@"%@", [key[2] substringToIndex:1]];
-//        if ([self.info objectForKey:keyString] != nil) {
-//            
-//            [self.iteration setArray:[[self.info objectForKey:keyString] arrayByAddingObject:key]];
-//            [self.info setObject:self.iteration forKey:keyString];
-//        } else {
-//            
-//            [self.info setObject:key forKey:keyString];
-//        }
+        if ([self.info objectForKey:keyString] != nil) {
+            
+            [self.iteration setArray:[[self.info objectForKey:keyString] arrayByAddingObject:key]];
+            [self.info setObject:self.iteration forKey:keyString];
+        } else {
+            
+            [self.info setObject:key forKey:keyString];
+        }
         [self.info setObject:key forKey:keyString];
     }
     
