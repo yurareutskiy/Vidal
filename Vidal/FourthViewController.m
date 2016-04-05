@@ -44,7 +44,10 @@
                                             action:@selector(tableView:didCollapseSection:animated:)];
     
     
-    [self loadData:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = 1 ORDER BY ClinicoPhPointers.Name"];
+    NSInteger level = [[ud objectForKey:@"level"] integerValue];
+    NSString *req = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = %ld AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", level + 1, [ud objectForKey:@"parent"]];
+    
+    [self loadData:req];
     // Do any additional setup after loading the view.
 }
 
@@ -93,7 +96,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    [self segueToBe:indexPath.row request:@""];
+    //[self segueToBe:indexPath.row request:@""];
     
     
     

@@ -44,7 +44,10 @@
                                             action:@selector(tableView:didCollapseSection:animated:)];
     
     
-    [self loadData:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = 1 ORDER BY ClinicoPhPointers.Name"];
+    NSInteger level = [[ud objectForKey:@"level"] integerValue];
+    NSString *req = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = %ld AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", level + 1, [ud objectForKey:@"parent"]];
+    
+    [self loadData:req];
     // Do any additional setup after loading the view.
 }
 
@@ -116,14 +119,16 @@
         self.tryArray = nil;
     }
     
-    if ([productStr isEqualToString:@"0"]) {
-        //делать запрос
-        //открывать контейнер вью
+    NSString *req2 = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = %ld AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", [levelStr integerValue] + 1, [ud objectForKey:@"parent"]];
+    
+    if ([productStr isEqualToString:req2]) {
+        
+        NSLog(@"лекарств нет");
     } else {
         [ud setObject:levelStr forKey:@"level"];
         [ud setObject:parentStr forKey:@"parent"];
         [self performSegueWithIdentifier:@"toLevel" sender:self];
-        NSLog(@"%d %@", levelStr.intValue + 1, parentStr);
+        NSLog(@"%d %@ %@", levelStr.intValue + 1, parentStr, productStr);
     }
     
 }

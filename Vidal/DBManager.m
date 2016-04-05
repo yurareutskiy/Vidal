@@ -31,8 +31,8 @@
     self = [super init];
     if (self) {
         
-        [self encryptDB];
-        [self openCipherDB];
+        //[self encryptDB];
+        //[self openCipherDB];
         
         // Set the documents directory path to the documentsDirectory property.
         NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
