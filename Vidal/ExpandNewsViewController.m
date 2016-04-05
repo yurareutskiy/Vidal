@@ -44,6 +44,21 @@
         } else {
             NSLog(@"%@ %@", response, responseObject);
             array = [responseObject copy];
+            
+            NSDateFormatter *date = [[NSDateFormatter alloc] init];
+            [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+            NSDate *dateNews = [date dateFromString:[array objectForKey:@"date"]];
+            [date setDateFormat:@"dd MMMM yyyy HH:mm"];
+            NSString *resultDate = [date stringFromDate:dateNews];
+            
+            self.date.text = resultDate;
+            self.newsTitle.text = [array objectForKey:@"title"];
+            self.newsText.text = [array objectForKey:@"body"];
+            
+            self.newsText.numberOfLines = 0;
+            self.newsTitle.numberOfLines = 0;
+            [self.newsText sizeToFit];
+            [self.newsTitle sizeToFit];
         }
     }];
     [dataTask resume];
@@ -57,20 +72,7 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     
-    NSDateFormatter *date = [[NSDateFormatter alloc] init];
-    [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-    NSDate *dateNews = [date dateFromString:[array objectForKey:@"date"]];
-    [date setDateFormat:@"dd MMMM yyyy HH:mm"];
-    NSString *resultDate = [date stringFromDate:dateNews];
     
-    self.date.text = resultDate;
-    self.newsTitle.text = [array objectForKey:@"title"];
-    self.newsText.text = [array objectForKey:@"body"];
-    
-    self.newsText.numberOfLines = 0;
-    self.newsTitle.numberOfLines = 0;
-    [self.newsText sizeToFit];
-    [self.newsTitle sizeToFit];
     
 }
 
