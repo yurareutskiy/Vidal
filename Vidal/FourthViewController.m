@@ -1,32 +1,27 @@
 //
-//  PharmaViewController.m
+//  FourthViewController.m
 //  Vidal
 //
-//  Created by Anton Scherbakov on 10/03/16.
+//  Created by Test Account on 05/04/16.
 //  Copyright © 2016 StyleRU. All rights reserved.
 //
 
-#import "PharmaViewController.h"
+#import "FourthViewController.h"
 
-@interface PharmaViewController ()
+@interface FourthViewController ()
 
-@property (nonatomic, strong) NSArray *firstSectionStrings;
-@property (nonatomic, strong) NSArray *secondSectionStrings;
-@property (nonatomic, strong) NSMutableArray *sectionsArray;
-@property (nonatomic, strong) NSMutableIndexSet *expandableSections;
 @property (nonatomic, strong) NSMutableArray *arrPeopleInfo;
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableArray *tryArray;
 
 @end
 
-@implementation PharmaViewController {
-
+@implementation FourthViewController{
     BOOL container;
     UITapGestureRecognizer *tap;
     NSUserDefaults *ud;
-    
 }
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,15 +31,9 @@
     
     ud = [NSUserDefaults standardUserDefaults];
     
-//    _firstSectionStrings = @[@"Тест", @"Тест", @"Тест"];
-//    _secondSectionStrings = @[@"Тест", @"Тест", @"Тест"];
-//    _sectionsArray = @[_firstSectionStrings, _secondSectionStrings].mutableCopy;
-//    _expandableSections = [NSMutableIndexSet indexSet];
-    
-    
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
-    [super setLabel:@"Фармакологические группы"];
+    [self setLabel:@"Фармакологические группы"];
     
     self.containerView.hidden = true;
     self.darkView.hidden = true;
@@ -56,17 +45,21 @@
     
     
     [self loadData:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = 1 ORDER BY ClinicoPhPointers.Name"];
-    
     // Do any additional setup after loading the view.
 }
-
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - SLExpandableTableViewDelegate
+- (void) setLabel:(NSString *)label {
+    UILabel* labelName = [[UILabel alloc] initWithFrame:CGRectMake(0,40,320,40)];
+    labelName.textAlignment = NSTextAlignmentLeft;
+    labelName.text = NSLocalizedString(label, @"");
+    labelName.textColor = [UIColor whiteColor];
+    self.navigationItem.titleView = labelName;
+}
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -97,43 +90,12 @@
     return cell;
 }
 
-#pragma mark - UITableViewDelegate
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
     [self segueToBe:indexPath.row request:@""];
     
     
-    
-}
-
-- (void) segueToBe:(NSInteger)xid request:(NSString *)req {
-    
-    NSInteger product = [self.dbManager.arrColumnNames indexOfObject:@"ShowInProduct"];
-    NSInteger parent = [self.dbManager.arrColumnNames indexOfObject:@"Code"];
-    NSInteger level = [self.dbManager.arrColumnNames indexOfObject:@"Level"];
-    
-    // Set the loaded data to the appropriate cell labels.
-    
-    NSString *productStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:product]];
-    NSString *parentStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:parent]];
-    NSString *levelStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:level]];
-    
-    // Get the results.
-    if (self.tryArray != nil) {
-        self.tryArray = nil;
-    }
-    
-    if ([productStr isEqualToString:@"0"]) {
-        //делать запрос
-        //открывать контейнер вью
-    } else {
-        [ud setObject:levelStr forKey:@"level"];
-        [ud setObject:parentStr forKey:@"parent"];
-        [self performSegueWithIdentifier:@"toLevel" sender:self];
-        NSLog(@"%d %@", levelStr.intValue + 1, parentStr);
-    }
     
 }
 

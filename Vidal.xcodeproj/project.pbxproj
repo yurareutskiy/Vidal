@@ -47,6 +47,9 @@
 		3A9E3FDF1C80AE330069BDFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E3FDD1C80AE330069BDFC /* LaunchScreen.storyboard */; };
 		3AAAA2C81C833FA3006DEE4E /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAAA2C71C833FA3006DEE4E /* RegViewController.m */; };
 		3AAAA2CB1C8384EB006DEE4E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAAA2CA1C8384EB006DEE4E /* MainViewController.m */; };
+		52498BC11CB3FD3500E6B96B /* SecondPharmaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52498BC01CB3FD3500E6B96B /* SecondPharmaViewController.m */; settings = {ASSET_TAGS = (); }; };
+		52498BC41CB3FD4000E6B96B /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52498BC31CB3FD4000E6B96B /* ThirdViewController.m */; settings = {ASSET_TAGS = (); }; };
+		52498BC71CB3FD4C00E6B96B /* FourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52498BC61CB3FD4C00E6B96B /* FourthViewController.m */; settings = {ASSET_TAGS = (); }; };
 		E82C22A1236860E5691C38CA /* libPods-Vidal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 267537716EDB3475C0BE9A2D /* libPods-Vidal.a */; };
 /* End PBXBuildFile section */
 
@@ -140,6 +143,12 @@
 		3AAAA2C91C8384EB006DEE4E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		3AAAA2CA1C8384EB006DEE4E /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
 		3AF95C141CA66DA900393C62 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		52498BBF1CB3FD3500E6B96B /* SecondPharmaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondPharmaViewController.h; sourceTree = "<group>"; };
+		52498BC01CB3FD3500E6B96B /* SecondPharmaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondPharmaViewController.m; sourceTree = "<group>"; };
+		52498BC21CB3FD4000E6B96B /* ThirdViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ThirdViewController.h; sourceTree = "<group>"; };
+		52498BC31CB3FD4000E6B96B /* ThirdViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ThirdViewController.m; sourceTree = "<group>"; };
+		52498BC51CB3FD4C00E6B96B /* FourthViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FourthViewController.h; sourceTree = "<group>"; };
+		52498BC61CB3FD4C00E6B96B /* FourthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourthViewController.m; sourceTree = "<group>"; };
 		639C2F57EA1C775AEEFEE2C9 /* Pods-Vidal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vidal.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vidal/Pods-Vidal.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -304,8 +313,7 @@
 				3A78F1141C920725008C6BE5 /* ActiveViewController.m */,
 				3A78F1161C920737008C6BE5 /* InteractionsViewController.h */,
 				3A78F1171C920737008C6BE5 /* InteractionsViewController.m */,
-				3A78F1191C920740008C6BE5 /* PharmaViewController.h */,
-				3A78F11A1C920740008C6BE5 /* PharmaViewController.m */,
+				52498BC81CB3FD5300E6B96B /* PharmaVCs */,
 				3A78F11C1C92074B008C6BE5 /* ProducersViewController.h */,
 				3A78F11D1C92074B008C6BE5 /* ProducersViewController.m */,
 				3A78F11F1C920755008C6BE5 /* AboutViewController.h */,
@@ -365,6 +373,21 @@
 				3A9E3FCD1C80AE330069BDFC /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		52498BC81CB3FD5300E6B96B /* PharmaVCs */ = {
+			isa = PBXGroup;
+			children = (
+				3A78F1191C920740008C6BE5 /* PharmaViewController.h */,
+				3A78F11A1C920740008C6BE5 /* PharmaViewController.m */,
+				52498BBF1CB3FD3500E6B96B /* SecondPharmaViewController.h */,
+				52498BC01CB3FD3500E6B96B /* SecondPharmaViewController.m */,
+				52498BC21CB3FD4000E6B96B /* ThirdViewController.h */,
+				52498BC31CB3FD4000E6B96B /* ThirdViewController.m */,
+				52498BC51CB3FD4C00E6B96B /* FourthViewController.h */,
+				52498BC61CB3FD4C00E6B96B /* FourthViewController.m */,
+			);
+			name = PharmaVCs;
 			sourceTree = "<group>";
 		};
 		FED137FC56CC9C0ECB250158 /* Frameworks */ = {
@@ -526,6 +549,7 @@
 				3AAAA2CB1C8384EB006DEE4E /* MainViewController.m in Sources */,
 				3A9E3FD11C80AE330069BDFC /* AppDelegate.m in Sources */,
 				3A78F1121C92071A008C6BE5 /* DrugsViewController.m in Sources */,
+				52498BC71CB3FD4C00E6B96B /* FourthViewController.m in Sources */,
 				3A0D5CB51C9C6D6E005E6976 /* ExpandNewsViewController.m in Sources */,
 				3A78F1061C91E80A008C6BE5 /* SWRevealViewController.m in Sources */,
 				3A78F10A1C920531008C6BE5 /* ModelViewController.m in Sources */,
@@ -541,8 +565,10 @@
 				3A78F1211C920756008C6BE5 /* AboutViewController.m in Sources */,
 				3A78F1181C920737008C6BE5 /* InteractionsViewController.m in Sources */,
 				3A78F10F1C920701008C6BE5 /* NewsViewController.m in Sources */,
+				52498BC41CB3FD4000E6B96B /* ThirdViewController.m in Sources */,
 				3A1570551CAEA8F800D49C5E /* DBManager.m in Sources */,
 				3AAAA2C81C833FA3006DEE4E /* RegViewController.m in Sources */,
+				52498BC11CB3FD3500E6B96B /* SecondPharmaViewController.m in Sources */,
 				3A0D5CB01C9C4E57005E6976 /* NewsTableViewCell.m in Sources */,
 				3A0D5CA71C9C4C5A005E6976 /* DrugsTableViewCell.m in Sources */,
 				3A9E3FCE1C80AE330069BDFC /* main.m in Sources */,
