@@ -41,7 +41,7 @@
     
     tap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(tableView:didCollapseSection:animated:)];
+                                            action:@selector(close)];
     
     
     NSInteger level = [[ud objectForKey:@"level"] integerValue];
@@ -97,7 +97,12 @@
 {
     
     //[self segueToBe:indexPath.row request:@""];
-    
+    if (!container) {
+        self.containerView.hidden = false;
+        container = true;
+        self.darkView.hidden = false;
+        [self.darkView addGestureRecognizer:tap];
+    }
     
     
 }
@@ -114,6 +119,13 @@
     
     // Reload the table view.
     [self.tableView reloadData];
+}
+
+- (void) close {
+    self.containerView.hidden = true;
+    container = false;
+    [self.darkView removeGestureRecognizer:tap];
+    self.darkView.hidden = true;
 }
 
 /*

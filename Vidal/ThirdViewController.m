@@ -11,6 +11,7 @@
 @interface ThirdViewController ()
 
 @property (nonatomic, strong) NSMutableArray *arrPeopleInfo;
+@property (nonatomic, strong) NSMutableArray *secondArray;
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableArray *tryArray;
 
@@ -20,6 +21,7 @@
     BOOL container;
     UITapGestureRecognizer *tap;
     NSUserDefaults *ud;
+    NSString *req;
 }
 
 
@@ -41,11 +43,11 @@
     
     tap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(tableView:didCollapseSection:animated:)];
+                                            action:@selector(close)];
     
     
     NSInteger level = [[ud objectForKey:@"level"] integerValue];
-    NSString *req = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = %ld AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", level + 1, [ud objectForKey:@"parent"]];
+    req = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = %ld AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", level + 1, [ud objectForKey:@"parent"]];
     
     [self loadData:req];
     // Do any additional setup after loading the view.
@@ -96,13 +98,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
-    [self segueToBe:indexPath.row request:@""];
+    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+    [self segueToBe:indexPath.row];
+    [self loadData:req];
     
     
     
 }
 
-- (void) segueToBe:(NSInteger)xid request:(NSString *)req {
+- (void) segueToBe:(NSInteger)xid {
     
     NSInteger product = [self.dbManager.arrColumnNames indexOfObject:@"ShowInProduct"];
     NSInteger parent = [self.dbManager.arrColumnNames indexOfObject:@"Code"];
@@ -119,10 +123,15 @@
         self.tryArray = nil;
     }
     
-    NSString *req2 = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = %ld AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", [levelStr integerValue] + 1, [ud objectForKey:@"parent"]];
+    NSString *req2 = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = %ld AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", [levelStr integerValue] + 1, parentStr];
     
-    if ([productStr isEqualToString:req2]) {
-        
+    if (![self checkData:req2]) {
+        if (!container) {
+            self.containerView.hidden = false;
+            container = true;
+            self.darkView.hidden = false;
+            [self.darkView addGestureRecognizer:tap];
+        }
         NSLog(@"лекарств нет");
     } else {
         [ud setObject:levelStr forKey:@"level"];
@@ -145,6 +154,30 @@
     
     // Reload the table view.
     [self.tableView reloadData];
+}
+
+-(BOOL)checkData:(NSString *)req {
+    // Form the query.
+    NSString *query = [NSString stringWithFormat:req];
+    
+    // Get the results.
+    if (self.secondArray != nil) {
+        self.secondArray = nil;
+    }
+    self.secondArray = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    
+    if ([self.secondArray count] == 0){
+        return NO;
+    } else {
+        return YES;
+    }
+}
+
+- (void) close {
+    self.containerView.hidden = true;
+    container = false;
+    [self.darkView removeGestureRecognizer:tap];
+    self.darkView.hidden = true;
 }
 
 /*
