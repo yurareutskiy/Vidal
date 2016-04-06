@@ -38,6 +38,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.searchBar.delegate = self;
+    
     ud = [NSUserDefaults standardUserDefaults];
     
     ((DocumentViewController *)self.childViewControllers.lastObject).tableView.delegate = self;
@@ -312,6 +314,11 @@
     self.molecule = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:mol]];
     
     [((DocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
+}
+
+- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    return YES;
 }
 
 /*

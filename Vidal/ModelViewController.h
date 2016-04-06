@@ -17,7 +17,10 @@
 - (void) setLabel:(NSString *)label;
 
 @property (nonatomic, strong) IMQuickSearch *quickSearch;
-@property (nonatomic, strong) NSMutableArray *hello1;
+@property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic, strong) NSMutableArray *hello2;
 @property (nonatomic, strong) NSArray *FilteredResults;
+@property (nonatomic, strong) UITableView *tableView1;
+@property (nonatomic, strong) NSMutableArray *result;
 
 @end

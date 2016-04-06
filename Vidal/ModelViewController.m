@@ -15,17 +15,18 @@
 @property (strong, nonatomic) UIBarButtonItem *searchButton;
 @property (strong, nonatomic) SWRevealViewController *reveal;
 @property (nonatomic, strong) DBManager *dbManager;
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) UISearchBar *searchBar;
 @property (nonatomic, strong) NSArray *letters;
 
 @end
 
 @implementation ModelViewController {
     
-    NSMutableArray *result;
     
 }
+
+@synthesize searchBar;
+@synthesize hello2;
+@synthesize result;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -33,10 +34,10 @@
     [self configureMenu];
     [self customNavBar];
     
-    self.hello1 = [NSMutableArray array];
+    self.hello2 = [NSMutableArray array];
     
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
+    self.tableView1.delegate = self;
+    self.tableView1.dataSource = self;
     self.searchBar.delegate = self;
     
     
@@ -46,16 +47,16 @@
     
     [self loadData:@"select * from Molecule order by Molecule.RusName"];
     
-    [self setUpQuickSearch:result];
+    [self setUpQuickSearch:self.result];
     self.FilteredResults = [self.quickSearch filteredObjectsWithValue:nil];
     
-    // Добавить в Hello1 все по препаратам
+    // Добавить в hello2 все по препаратам
     // Do any additional setup after loading the view.
 }
 
 - (void)setUpQuickSearch:(NSMutableArray *)work {
     // Create Filters
-    IMQuickSearchFilter *peopleFilter = [IMQuickSearchFilter filterWithSearchArray:@[@"hello1", @"hel2", @"elo3", @"helllooo5", @"hello", @"hi", @"hey"] keys:@[@"description"]];
+    IMQuickSearchFilter *peopleFilter = [IMQuickSearchFilter filterWithSearchArray:@[@"hey", @"helloooo", @"heheheh"] keys:@[@"description"]];
     self.quickSearch = [[IMQuickSearch alloc] initWithFilters:@[peopleFilter]];
 }
 
@@ -68,7 +69,7 @@
 
 - (void)updateTableViewWithNewResults:(NSArray *)results {
     self.FilteredResults = results;
-    [self.tableView reloadData];
+    [self.tableView1 reloadData];
 }
 
 #pragma mark - TableView
@@ -138,9 +139,9 @@
 
 - (void) search {
     self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 40.0)];
-    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 40.0, self.view.frame.size.width, self.view.frame.size.height)];
+    self.tableView1 = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 40.0, self.view.frame.size.width, self.view.frame.size.height)];
     [self.view addSubview:self.searchBar];
-    [self.view addSubview:self.tableView];
+    [self.view addSubview:self.tableView1];
     
 }
 
@@ -168,27 +169,27 @@
 -(void)loadData:(NSString *)req{
     
     // Get the results.
-    if (self.hello1 != nil) {
-        self.hello1 = nil;
+    if (self.hello2 != nil) {
+        self.hello2 = nil;
     }
-    self.hello1 = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
+    self.hello2 = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
     
-    result = [NSMutableArray arrayWithCapacity:[self.letters count]];
+    self.result = [NSMutableArray arrayWithCapacity:[self.letters count]];
     
     NSString *keyString;
     
     for (int i = 0; i < [self.letters count]; i++) {
         NSMutableArray *tempArray = [NSMutableArray array];
-        [result addObject:tempArray];
+        [self.result addObject:tempArray];
     }
     
-    self.hello1 = [self.hello1 valueForKey:@"uppercaseString"];
+    self.hello2 = [self.hello2 valueForKey:@"uppercaseString"];
     
-    for (NSArray* key in self.hello1) {
+    for (NSArray* key in self.hello2) {
         
         keyString = [NSString stringWithFormat:@"%@", [[key objectAtIndex:2] substringToIndex:1]];
         NSInteger ind = [self.letters indexOfObject:keyString];
-        [[result objectAtIndex:ind] addObject:key];
+        [[self.result objectAtIndex:ind] addObject:key];
     }
     
     // Reload the table view.

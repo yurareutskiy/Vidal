@@ -11,7 +11,7 @@
 #import "DrugsTableViewCell.h"
 #import "DBManager.h"
 
-@interface DrugsViewController : ModelViewController <SLExpandableTableViewDatasource, SLExpandableTableViewDelegate>
+@interface DrugsViewController : ModelViewController <SLExpandableTableViewDatasource, SLExpandableTableViewDelegate, UISearchBarDelegate>
 @property (strong, nonatomic) IBOutlet SLExpandableTableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *darkView;
 @property (weak, nonatomic) IBOutlet UIView *containerView;

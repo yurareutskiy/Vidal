@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <HSDatePickerViewController.h>
+#import "AFNetworking.h"
 
 @interface RegViewController : UIViewController<HSDatePickerViewControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate>
 

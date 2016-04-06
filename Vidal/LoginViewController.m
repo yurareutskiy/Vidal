@@ -36,8 +36,23 @@
 
 - (IBAction)login:(UIButton *)sender {
     
-    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
-    [self presentViewController:vc animated:false completion:nil];
+    AFHTTPRequestSerializer *requestSerializerTry = [AFHTTPRequestSerializer serializer];
+    [requestSerializerTry setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    manager.requestSerializer = requestSerializerTry;
+
+    NSDictionary *params = @{@"username":@"avscherbakov@icloud.com", //- email участника (bin@bk.ru)
+                             @"password":@"123456"}; //- его пароль в открытом виде (mySuperPw)
+    
+    [manager POST:@"http://vidal.ru/api/user/add" parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        NSString* errResponse = [[NSString alloc] initWithData:(NSData *)error.userInfo[AFNetworkingOperationFailingURLResponseDataErrorKey] encoding:NSUTF8StringEncoding];
+        NSLog(@"%@",errResponse);
+    }];
+    
+//    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
+//    [self presentViewController:vc animated:false completion:nil];
     
 }
 

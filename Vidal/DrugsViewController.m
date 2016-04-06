@@ -24,15 +24,18 @@
 @end
 
 @implementation DrugsViewController {
-    
+
     NSMutableArray *result;
     BOOL container;
     UITapGestureRecognizer *tap;
     
 }
+@synthesize hello2;
+@synthesize result;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -233,6 +236,11 @@
 
     // Reload the table view.
     [self.tableView reloadData];
+}
+
+- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    return YES;
 }
 
 /*

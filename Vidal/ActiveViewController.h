@@ -13,7 +13,7 @@
 #import "DocumentViewController.h"
 #import "DocsTableViewCell.h"
 
-@interface ActiveViewController : ModelViewController<SLExpandableTableViewDatasource, SLExpandableTableViewDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface ActiveViewController : ModelViewController<SLExpandableTableViewDatasource, SLExpandableTableViewDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (strong, nonatomic) IBOutlet SLExpandableTableView *tableView;
 @property (strong, nonatomic) IBOutlet UIView *darkView;
 @property (strong, nonatomic) IBOutlet UIView *containerView;
