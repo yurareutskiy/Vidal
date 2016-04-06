@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'D7B0E6339FF3E288184D696C'
-               BlueprintName = 'AFNetworking'
+               BlueprintIdentifier = '5CB49F4F266F270C2ECC5BA9'
+               BlueprintName = 'AFNetworkActivityLogger'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libAFNetworking.a'>
+               BuildableName = 'libAFNetworkActivityLogger.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

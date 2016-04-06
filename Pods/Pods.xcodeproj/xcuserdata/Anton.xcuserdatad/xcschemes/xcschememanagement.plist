@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AFNetworkActivityLogger.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>AFNetworking.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,12 +42,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>247FBB271302502296C344D0261E7D57</key>
+		<key>4EFD3B9D674C2ED0D82508A8D506282D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>410B25DF16EA5C5B3E2698F74F9625FB</key>
+		<key>5EA94E3357CB6918D14CF6C129484928</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -52,17 +57,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>6B2A886F19EC53970AB1E514F5CCB0D3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>725CB4461A41114C24F0A7A2043D4C00</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>97FD0052AF39BC8390016AB4AF49202B</key>
+		<key>C0BE8BD23EA063D405D9B7BF90274B72</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B62B18400435927573146E349DDBECE4</key>
+		<key>EC0D1D30F031352A2DB09856D4D19BD0</key>
 		<dict>
 			<key>primary</key>
 			<true/>

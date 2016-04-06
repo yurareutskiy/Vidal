@@ -10,6 +10,7 @@ target 'Vidal' do
     pod 'VK-ios-sdk'
     pod 'IMQuickSearch'
     pod 'AFNetworking'
+    pod 'AFNetworkActivityLogger'
 
 end
 

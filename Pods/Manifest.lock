@@ -1,4 +1,7 @@
 PODS:
+  - AFNetworkActivityLogger (2.0.4):
+    - AFNetworking/NSURLConnection (~> 2.0)
+    - AFNetworking/NSURLSession (~> 2.0)
   - AFNetworking (2.6.0):
     - AFNetworking/NSURLConnection (= 2.6.0)
     - AFNetworking/NSURLSession (= 2.6.0)
@@ -26,6 +29,7 @@ PODS:
   - VK-ios-sdk (1.2.2)
 
 DEPENDENCIES:
+  - AFNetworkActivityLogger
   - AFNetworking
   - HSDatePickerViewController (~> 1.0)
   - IMQuickSearch
@@ -33,6 +37,7 @@ DEPENDENCIES:
   - VK-ios-sdk
 
 SPEC CHECKSUMS:
+  AFNetworkActivityLogger: 121486778117d53b3ab1c61d264b88081d0c3eee
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
   HSDatePickerViewController: b292f2a53b2644a68aa5e1343053d2f3554de64c
   IMQuickSearch: 351fda5dcf33428bf04c28213b984d66015b691d

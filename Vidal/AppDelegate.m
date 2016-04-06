@@ -29,6 +29,8 @@
     };
     [OKSDK initWithSettings: settings];
     
+    [[AFNetworkActivityLogger sharedLogger] startLogging];
+    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     
     return YES;

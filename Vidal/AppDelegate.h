@@ -11,6 +11,7 @@
 #import "VKSdk.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "OKSDK.h"
+#import "AFNetworkActivityLogger.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
