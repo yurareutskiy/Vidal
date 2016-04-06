@@ -15,6 +15,7 @@
 		3A0D5CB01C9C4E57005E6976 /* NewsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0D5CAF1C9C4E57005E6976 /* NewsTableViewCell.m */; };
 		3A0D5CB51C9C6D6E005E6976 /* ExpandNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0D5CB41C9C6D6E005E6976 /* ExpandNewsViewController.m */; };
 		3A0DBD861CB45FA800D9BAD3 /* DocumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0DBD851CB45FA800D9BAD3 /* DocumentViewController.m */; };
+		3A0DBD881CB4924300D9BAD3 /* LogOutStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A0DBD871CB4924300D9BAD3 /* LogOutStoryboard.storyboard */; };
 		3A1570521CAEA87A00D49C5E /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15704F1CAEA86800D49C5E /* libsqlcipher.a */; };
 		3A1570551CAEA8F800D49C5E /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1570541CAEA8F800D49C5E /* DBManager.m */; };
 		3A1570581CAEA95900D49C5E /* vidal.cardio.crypt.db3 in Resources */ = {isa = PBXBuildFile; fileRef = 3A1570561CAEA95900D49C5E /* vidal.cardio.crypt.db3 */; };
@@ -91,6 +92,7 @@
 		3A0D5CB41C9C6D6E005E6976 /* ExpandNewsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ExpandNewsViewController.m; sourceTree = "<group>"; };
 		3A0DBD841CB45FA800D9BAD3 /* DocumentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentViewController.h; sourceTree = "<group>"; };
 		3A0DBD851CB45FA800D9BAD3 /* DocumentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentViewController.m; sourceTree = "<group>"; };
+		3A0DBD871CB4924300D9BAD3 /* LogOutStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LogOutStoryboard.storyboard; sourceTree = "<group>"; };
 		3A1570491CAEA86800D49C5E /* sqlcipher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sqlcipher.xcodeproj; path = sqlcipher/sqlcipher.xcodeproj; sourceTree = "<group>"; };
 		3A1570531CAEA8F800D49C5E /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		3A1570541CAEA8F800D49C5E /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
@@ -284,6 +286,7 @@
 			children = (
 				3A9E3FD51C80AE330069BDFC /* Main.storyboard */,
 				3A9E3FDD1C80AE330069BDFC /* LaunchScreen.storyboard */,
+				3A0DBD871CB4924300D9BAD3 /* LogOutStoryboard.storyboard */,
 			);
 			name = Storyboards;
 			sourceTree = "<group>";
@@ -487,6 +490,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A0DBD881CB4924300D9BAD3 /* LogOutStoryboard.storyboard in Resources */,
 				3A9E3FDF1C80AE330069BDFC /* LaunchScreen.storyboard in Resources */,
 				3A1570591CAEA95900D49C5E /* vidal.cardio.encrypt.db3 in Resources */,
 				3A1570581CAEA95900D49C5E /* vidal.cardio.crypt.db3 in Resources */,
