@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FavouriteViewController.h"
 
 @interface DocumentViewController : UIViewController
 

@@ -914,18 +914,37 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fjB-7K-mQG">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.21960784310000001" green="0.21960784310000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mVI-sT-BNO">
+                                <rect key="frame" x="0.0" y="124" width="600" height="476"/>
+                                <animations/>
+                            </containerView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="zlP-wk-pQ5" firstAttribute="top" secondItem="FQI-gN-GOb" secondAttribute="bottom" id="6Rw-SL-LSq"/>
                             <constraint firstItem="FQI-gN-GOb" firstAttribute="top" secondItem="qD7-so-Rsc" secondAttribute="topMargin" id="886-9Q-0ep"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mVI-sT-BNO" secondAttribute="trailing" constant="-20" id="GQY-xA-4Ol"/>
+                            <constraint firstItem="fjB-7K-mQG" firstAttribute="top" secondItem="qD7-so-Rsc" secondAttribute="topMargin" id="JTl-4I-9VZ"/>
+                            <constraint firstItem="fjB-7K-mQG" firstAttribute="leading" secondItem="qD7-so-Rsc" secondAttribute="leadingMargin" constant="-20" id="L8h-Lj-gsr"/>
+                            <constraint firstItem="zlP-wk-pQ5" firstAttribute="top" secondItem="fjB-7K-mQG" secondAttribute="bottom" id="chC-rR-Owx"/>
                             <constraint firstItem="FQI-gN-GOb" firstAttribute="leading" secondItem="qD7-so-Rsc" secondAttribute="leadingMargin" constant="-20" id="d9Y-6Q-PLr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="fjB-7K-mQG" secondAttribute="trailing" constant="-20" id="frB-pZ-WAe"/>
+                            <constraint firstItem="mVI-sT-BNO" firstAttribute="leading" secondItem="qD7-so-Rsc" secondAttribute="leadingMargin" constant="-20" id="kyr-Gm-lKf"/>
+                            <constraint firstItem="zlP-wk-pQ5" firstAttribute="top" secondItem="mVI-sT-BNO" secondAttribute="bottom" id="lWh-Y1-Ong"/>
+                            <constraint firstItem="mVI-sT-BNO" firstAttribute="top" secondItem="swn-9d-eS8" secondAttribute="bottom" constant="60" id="sWj-Ht-OHl"/>
                             <constraint firstAttribute="trailingMargin" secondItem="FQI-gN-GOb" secondAttribute="trailing" constant="-20" id="u3e-Ex-DMj"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Ft8-5b-3m4"/>
                     <connections>
+                        <outlet property="containerView" destination="mVI-sT-BNO" id="Kaa-U0-5jH"/>
+                        <outlet property="darkView" destination="fjB-7K-mQG" id="1Bk-TU-WTk"/>
                         <outlet property="tableView" destination="FQI-gN-GOb" id="rlr-jw-lT3"/>
                     </connections>
                 </viewController>
@@ -3712,6 +3731,6 @@ Lactobacillus acidophilus и другие.</string>
         <image name="vkLogo" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="IZU-WQ-1If"/>
+        <segue reference="4ji-JJ-A5E"/>
     </inferredMetricsTieBreakers>
 </document>

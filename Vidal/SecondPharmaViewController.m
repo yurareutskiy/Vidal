@@ -132,6 +132,7 @@
 
         NSString *getInfo = [NSString stringWithFormat:@"SELECT * FROM Document INNER JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID INNER JOIN ClinicoPhPointers ON Document_ClPhPointers.ClPhPointerID = ClinicoPhPointers.ClPhPointerID WHERE ClinicoPhPointers.ClPhPointerID = %ld", [pointIDStr integerValue]];
         [self getData:getInfo];
+        [ud setObject:pointIDStr forKey:@"id"];
         
         ((DocumentViewController *)self.childViewControllers.lastObject).name.text = @"text";
         //()((DocumentViewController *)self.childViewControllers.lastObject).childViewControllers.lastObject)

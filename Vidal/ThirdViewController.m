@@ -111,12 +111,14 @@
     NSInteger product = [self.dbManager.arrColumnNames indexOfObject:@"ShowInProduct"];
     NSInteger parent = [self.dbManager.arrColumnNames indexOfObject:@"Code"];
     NSInteger level = [self.dbManager.arrColumnNames indexOfObject:@"Level"];
+    NSInteger pointID = [self.dbManager.arrColumnNames indexOfObject:@"ClPhPointerID"];
     
     // Set the loaded data to the appropriate cell labels.
     
     NSString *productStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:product]];
     NSString *parentStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:parent]];
     NSString *levelStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:level]];
+    NSString *pointIDStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:pointID]];
     
     // Get the results.
     if (self.tryArray != nil) {
@@ -133,6 +135,7 @@
             [self.darkView addGestureRecognizer:tap];
         }
         NSLog(@"лекарств нет");
+        [ud setObject:pointIDStr forKey:@"id"];
     } else {
         [ud setObject:levelStr forKey:@"level"];
         [ud setObject:parentStr forKey:@"parent"];

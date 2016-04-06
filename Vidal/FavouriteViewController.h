@@ -7,9 +7,14 @@
 //
 
 #import "ModelViewController.h"
+#import "DBManager.h"
+#import "DocumentViewController.h"
 
 @interface FavouriteViewController : ModelViewController<UITableViewDataSource, UITableViewDelegate>
+
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) NSMutableArray *favs;
+@property (weak, nonatomic) IBOutlet UIView *darkView;
+@property (weak, nonatomic) IBOutlet UIView *containerView;
+
 
 @end

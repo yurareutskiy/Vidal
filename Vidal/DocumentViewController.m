@@ -12,10 +12,16 @@
 
 @end
 
-@implementation DocumentViewController
+@implementation DocumentViewController {
+    FavouriteViewController *fvc;
+    NSUserDefaults *ud;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    ud = [NSUserDefaults standardUserDefaults];
+
     // Do any additional setup after loading the view.
 }
 
@@ -41,6 +47,16 @@
 }
 
 - (IBAction)addToFav:(UIButton *)sender {
+    
+    if ([ud objectForKey:@"favs"] == nil) {
+        [ud setObject:[NSArray array] forKey:@"favs"];
+        [ud setObject:[[ud objectForKey:@"favs"] arrayByAddingObject:[ud objectForKey:@"id"]] forKey:@"favs"];
+    } else {
+        [ud setObject:[[ud objectForKey:@"favs"] arrayByAddingObject:[ud objectForKey:@"id"]] forKey:@"favs"];
+    }
+    
+    NSLog(@"%@", [ud objectForKey:@"favs"]);
+    
 }
 
 - (IBAction)toInter:(UIButton *)sender {

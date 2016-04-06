@@ -96,12 +96,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     
+    NSInteger pointID = [self.dbManager.arrColumnNames indexOfObject:@"ClPhPointerID"];
+    NSString *pointIDStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:pointID]];
     //[self segueToBe:indexPath.row request:@""];
     if (!container) {
         self.containerView.hidden = false;
         container = true;
         self.darkView.hidden = false;
         [self.darkView addGestureRecognizer:tap];
+        [ud setObject:pointIDStr forKey:@"id"];
     }
     
     
