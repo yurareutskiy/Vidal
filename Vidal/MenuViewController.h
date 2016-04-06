@@ -21,5 +21,6 @@
 - (IBAction)toProfile:(UIButton *)sender;
 - (IBAction)toFavourite:(UIButton *)sender;
 - (IBAction)toReference:(UIButton *)sender;
+- (IBAction)registration:(UIButton *)sender;
 
 @end

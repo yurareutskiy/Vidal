@@ -138,9 +138,7 @@
             self.darkView.hidden = false;
             [self.darkView addGestureRecognizer:tap];
         }
-        NSLog(@"лекарств нет");
         [ud setObject:pointIDStr forKey:@"id"];
-        
         
     } else if (goNext){
         [ud setObject:levelStr forKey:@"level"];

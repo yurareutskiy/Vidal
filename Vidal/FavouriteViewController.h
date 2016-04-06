@@ -10,5 +10,6 @@
 
 @interface FavouriteViewController : ModelViewController<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSMutableArray *favs;
 
 @end

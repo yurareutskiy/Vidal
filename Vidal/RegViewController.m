@@ -112,8 +112,10 @@
 
 - (IBAction)regButton:(UIButton *)sender {
     
-    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
-    [self presentViewController:vc animated:false completion:nil];
+//    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
+//    [self presentViewController:vc animated:false completion:nil];
+    
+    [self performSegueWithIdentifier:@"toFullApp" sender:self];
     
 }
 

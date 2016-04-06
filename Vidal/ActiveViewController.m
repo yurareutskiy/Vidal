@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSArray *arrPeopleInfo;
 @property (nonatomic, strong) NSMutableArray *hello1;
 @property (nonatomic, strong) NSArray *letters;
+@property (nonatomic, strong) NSMutableArray *molecule;
 
 -(void)loadData:(NSString *)req;
 
@@ -28,11 +29,20 @@
     NSMutableArray *result;
     BOOL container;
     UITapGestureRecognizer *tap;
+    NSIndexPath *selectedRowIndex;
+    NSUserDefaults *ud;
+    NSString *nextPls;
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    ud = [NSUserDefaults standardUserDefaults];
+    
+    ((DocumentViewController *)self.childViewControllers.lastObject).tableView.delegate = self;
+    ((DocumentViewController *)self.childViewControllers.lastObject).tableView.dataSource = self;
+    [((DocumentViewController *)self.childViewControllers.lastObject).tableView setTag:2];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -119,6 +129,7 @@
     //dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
     [self.expandableSections addIndex:section];
     [tableView expandSection:section animated:YES];
+    
     //});
 }
 
@@ -145,41 +156,79 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60.0;
+    if (tableView.tag == 1){
+        return 60;
+    } else if (tableView.tag == 2) {
+        if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
+            return 300;
+        } else {
+            NSLog(@"%ld", (long)indexPath.row);
+            NSLog(@"%ld", (long)selectedRowIndex.row);
+            return 60;
+        }
+    } else {
+        return 44;
+    }
 }
 
 #pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [result count];
+    if (tableView.tag == 1) {
+        return [result count];
+    } else if (tableView.tag == 2) {
+        return 1;
+    } else {
+        return 1;
+    }
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[result objectAtIndex:section] count];
+    if (tableView.tag == 1) {
+        return [[result objectAtIndex:section] count];
+    } else if (tableView.tag == 2){
+        return [[self.molecule objectAtIndex:0] count];
+    } else {
+        return 1;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"activeCell";
+    if (tableView.tag == 1) {
+        static NSString *CellIdentifier = @"activeCell";
     
-    ActiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (cell == nil) {
-        cell = [[ActiveTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        ActiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[ActiveTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+    
+        NSArray *dataArray = result[indexPath.section];
+            cell.name.text = [dataArray[indexPath.row - 1] objectAtIndex:2];
+        cell.letter.text = @"";
+        
+        return cell;
+    } else if (tableView.tag == 2){
+        static NSString *CellIdentifier = @"docCell";
+        DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (cell == nil) {
+            cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        };
+        
+        cell.title.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
+        cell.desc.text = [[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row];
+        
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
+    } else {
+    
+    return nil;
     }
-    
-    NSArray *dataArray = result[indexPath.section];
-    cell.name.text = [dataArray[indexPath.row - 1] objectAtIndex:2];
-    cell.letter.text = @"";
-    
-    
-    return cell;
-}
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return YES;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -194,16 +243,35 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (tableView.tag == 1){
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (!container) {
         self.containerView.hidden = false;
         container = true;
         self.darkView.hidden = false;
         [self.darkView addGestureRecognizer:tap];
+        
+        nextPls = [result[indexPath.section][indexPath.row - 1] objectAtIndex:0];
+        [ud setObject:nextPls forKey:@"molecule"];
+        NSString *request = [NSString stringWithFormat:@"SELECT * FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID WHERE Molecule.MoleculeID = %@", nextPls];
+        [self getMol:request];
     }
+    }
+    else if (tableView.tag == 2){
+    selectedRowIndex = [indexPath copy];
+
+    [tableView beginUpdates];
     
+    [tableView endUpdates];
+    }
+}
+
+- (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView.tag == 2) {
+    [tableView beginUpdates];
     
-    
+    [tableView endUpdates];
+    }
     
 }
 
@@ -235,6 +303,15 @@
     
     // Reload the table view.
     [self.tableView reloadData];
+}
+
+- (void) getMol:(NSString *)mol {
+    if (self.molecule != nil) {
+        self.molecule = nil;
+    }
+    self.molecule = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:mol]];
+    
+    [((DocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
 }
 
 /*

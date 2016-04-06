@@ -107,17 +107,21 @@
     
     [self.tableView beginUpdates];
     
-    ((ProducersTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).nameUnhid.hidden = true;
-    ((ProducersTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).countryUnhid.hidden = true;
-    ((ProducersTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).nameHid.hidden = false;
-    ((ProducersTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).countryHid.hidden = false;
-    ((ProducersTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).image.hidden = false;
-    ((ProducersTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).addressHid.hidden = false;
-    ((ProducersTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).emailHid.hidden = false;
-    ((ProducersTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).phoneHid.hidden = false;
-    ((ProducersTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).listBtn.hidden = false;
+    ProducersTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+    cell.nameUnhid.hidden = true;
+    cell.countryUnhid.hidden = true;
+    cell.nameHid.hidden = false;
+    cell.countryHid.hidden = false;
+    cell.image.hidden = false;
+    cell.addressHid.hidden = false;
+    cell.emailHid.hidden = false;
+    cell.phoneHid.hidden = false;
+    cell.listBtn.hidden = false;
     
     [self.tableView endUpdates];
+    
+
 }
 
 - (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -135,7 +139,7 @@
     ((ProducersTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).listBtn.hidden = true;
     
     [self.tableView endUpdates];
-    
+
 }
 
 /*

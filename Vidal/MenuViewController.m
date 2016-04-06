@@ -124,4 +124,9 @@
     [self performSegueWithIdentifier:@"toReference" sender:self];
     
 }
+
+- (IBAction)registration:(UIButton *)sender {
+    
+    [self performSegueWithIdentifier:@"toReg" sender:self];
+}
 @end

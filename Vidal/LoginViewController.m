@@ -40,4 +40,10 @@
     [self presentViewController:vc animated:false completion:nil];
     
 }
+
+- (IBAction)withoutReg:(UIButton *)sender {
+    
+    [self performSegueWithIdentifier:@"withoutReg" sender:self];
+    
+}
 @end

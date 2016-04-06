@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UIButton *regButton;
 - (IBAction)registration:(UIButton *)sender;
 - (IBAction)login:(UIButton *)sender;
+- (IBAction)withoutReg:(UIButton *)sender;
 
 @end
 

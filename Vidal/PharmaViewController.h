@@ -10,6 +10,7 @@
 //#import <SLExpandableTableView.h>
 #import "PharmaTableViewCell.h"
 #import "DBManager.h"
+#import "FavouriteViewController.h"
 
 @interface PharmaViewController : ModelViewController<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 

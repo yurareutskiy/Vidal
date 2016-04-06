@@ -11,6 +11,11 @@
 @interface DocumentViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UILabel *name;
+@property (weak, nonatomic) IBOutlet UILabel *registred;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+- (IBAction)toList:(UIButton *)sender;
+- (IBAction)addToFav:(UIButton *)sender;
+- (IBAction)toInter:(UIButton *)sender;
 
 
 @end

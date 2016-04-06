@@ -34,4 +34,15 @@
 }
 */
 
+- (IBAction)toList:(UIButton *)sender {
+    
+    [self performSegueWithIdentifier:@"toList" sender:self];
+    
+}
+
+- (IBAction)addToFav:(UIButton *)sender {
+}
+
+- (IBAction)toInter:(UIButton *)sender {
+}
 @end
