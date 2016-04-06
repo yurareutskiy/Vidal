@@ -1004,17 +1004,37 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TfC-Bs-A8E">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.21960784310000001" green="0.21960784310000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WeX-Qe-BwO">
+                                <rect key="frame" x="0.0" y="124" width="600" height="476"/>
+                                <connections>
+                                    <segue destination="sbh-iQ-PXQ" kind="embed" id="EeH-EH-xNz"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="buO-rW-W2a" firstAttribute="top" secondItem="efm-VP-R7x" secondAttribute="bottom" id="0X5-VU-rnr"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WeX-Qe-BwO" secondAttribute="trailing" constant="-20" id="1u6-Xz-ZAh"/>
+                            <constraint firstItem="buO-rW-W2a" firstAttribute="top" secondItem="WeX-Qe-BwO" secondAttribute="bottom" id="3V7-M2-fQ3"/>
                             <constraint firstItem="efm-VP-R7x" firstAttribute="top" secondItem="RrR-9v-FQB" secondAttribute="topMargin" id="IX9-9z-Fao"/>
+                            <constraint firstItem="buO-rW-W2a" firstAttribute="top" secondItem="TfC-Bs-A8E" secondAttribute="bottom" id="Ylj-Tw-exz"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="TfC-Bs-A8E" secondAttribute="trailing" constant="-20" id="feG-xv-5T3"/>
+                            <constraint firstItem="TfC-Bs-A8E" firstAttribute="leading" secondItem="RrR-9v-FQB" secondAttribute="leadingMargin" constant="-20" id="hfj-GV-bYK"/>
                             <constraint firstAttribute="trailingMargin" secondItem="efm-VP-R7x" secondAttribute="trailing" constant="-20" id="iKh-ia-rEa"/>
+                            <constraint firstItem="WeX-Qe-BwO" firstAttribute="top" secondItem="5Wj-ZJ-P5h" secondAttribute="bottom" constant="60" id="iVy-8e-gt6"/>
+                            <constraint firstItem="WeX-Qe-BwO" firstAttribute="leading" secondItem="RrR-9v-FQB" secondAttribute="leadingMargin" constant="-20" id="puY-Ym-fto"/>
+                            <constraint firstItem="TfC-Bs-A8E" firstAttribute="top" secondItem="RrR-9v-FQB" secondAttribute="topMargin" id="tjh-bE-wLC"/>
                             <constraint firstItem="efm-VP-R7x" firstAttribute="leading" secondItem="RrR-9v-FQB" secondAttribute="leadingMargin" constant="-20" id="xbD-Dr-66Q"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="fpQ-aQ-W24"/>
                     <connections>
+                        <outlet property="containerView" destination="WeX-Qe-BwO" id="7Nj-Wa-0TQ"/>
+                        <outlet property="darkView" destination="TfC-Bs-A8E" id="7aD-c0-BHL"/>
                         <outlet property="tableView" destination="efm-VP-R7x" id="LhE-B3-uQd"/>
                     </connections>
                 </viewController>
@@ -3395,6 +3415,6 @@ Lactobacillus acidophilus и другие.</string>
         <image name="vkLogo" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="0Eq-Up-zTS"/>
+        <segue reference="IZU-WQ-1If"/>
     </inferredMetricsTieBreakers>
 </document>

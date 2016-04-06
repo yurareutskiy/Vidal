@@ -15,14 +15,21 @@
 @property (nonatomic, strong) NSMutableArray *sectionsArray;
 @property (nonatomic, strong) NSMutableIndexSet *expandableSections;
 @property (nonatomic, strong) DBManager *dbManager;
-@property (nonatomic, strong) NSMutableArray *arrPeopleInfo;
-@property (nonatomic, strong) NSMutableDictionary *info;
-@property (nonatomic, strong) NSArray *keys;
-@property (nonatomic, strong) NSMutableArray *iteration;
+@property (nonatomic, strong) NSArray *arrPeopleInfo;
+@property (nonatomic, strong) NSMutableArray *hello1;
+@property (nonatomic, strong) NSArray *letters;
+
+-(void)loadData:(NSString *)req;
 
 @end
 
-@implementation ActiveViewController
+@implementation ActiveViewController {
+    
+    NSMutableArray *result;
+    BOOL container;
+    UITapGestureRecognizer *tap;
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -30,16 +37,35 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
-    _firstSectionStrings = @[@"Тест", @"Тест", @"Тест"];
-    _secondSectionStrings = @[@"Тест", @"Тест", @"Тест"];
-    _sectionsArray = @[_firstSectionStrings, _secondSectionStrings].mutableCopy;
-    _expandableSections = [NSMutableIndexSet indexSet];
+    self.letters = [NSArray arrayWithObjects:@"N", @"А", @"Б", @"В", @"Г", @"Д", @"Е", @"Ж", @"З", @"И", @"Й", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"С", @"Т", @"У", @"Ф", @"Х", @"Ц", @"Ч", @"Ш", @"Э", @"Я", nil];
     
-    [super setLabel:@"Указатель активных веществ"];
+    self.expandableSections = [NSMutableIndexSet indexSet];
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
-    [self loadData];
+    [super setLabel:@"Список препаратов"];
+    
+    [self loadData:@"select * from Molecule order by Molecule.RusName"];
+    
+    self.hello1 = [NSMutableArray array];
+    
+    for (int i = 0; i < [self.arrPeopleInfo count]; i++) {
+        [self.hello1 addObject:[self.arrPeopleInfo[i] objectAtIndex:1]];
+    }
+    
+    self.sectionsArray = [NSMutableArray array];
+    
+    for (NSArray *key in result) {
+        [self.sectionsArray addObject:key];
+    }
+    
+    container = false;
+    self.containerView.hidden = true;
+    self.darkView.hidden = true;
+    
+    tap =
+    [[UITapGestureRecognizer alloc] initWithTarget:self
+                                            action:@selector(tableView:didCollapseSection:animated:)];
     
     // Do any additional setup after loading the view.
 }
@@ -53,7 +79,9 @@
 
 - (BOOL)tableView:(SLExpandableTableView *)tableView canExpandSection:(NSInteger)section
 {
+    
     return YES;
+    
 }
 
 - (BOOL)tableView:(SLExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section
@@ -70,11 +98,16 @@
         cell = [[ActiveTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
-    NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
+    NSString *text = [NSString stringWithFormat:@"%@", [[[result objectAtIndex:section] objectAtIndex:0] objectAtIndex:2]];
+    if ([[result objectAtIndex:section] count] > 1) {
+        text = [NSString stringWithFormat:@"%@, %@", text, [[[result objectAtIndex:section] objectAtIndex:1] objectAtIndex:2]];
+        if ([[result objectAtIndex:section] count] > 2) {
+            text = [NSString stringWithFormat:@"%@, %@", text, [[[result objectAtIndex:section] objectAtIndex:2] objectAtIndex:2]];
+        }
+    }
     
-    // Set the loaded data to the appropriate cell labels.
-    cell.name.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:section] objectAtIndex:indexOfFirstname]];
-    cell.letter.text = [[NSString stringWithFormat:@"%@.", self.keys[section]] uppercaseString];
+    cell.name.text = text;
+    cell.letter.text = [NSString stringWithFormat:@"%@.", [self.letters objectAtIndex:section]];
     
     return cell;
 }
@@ -91,7 +124,23 @@
 
 - (void)tableView:(SLExpandableTableView *)tableView didCollapseSection:(NSUInteger)section animated:(BOOL)animated
 {
-    [self.expandableSections removeIndex:section];
+    if ([[result objectAtIndex:section] count] == 1){
+        if (!container) {
+            
+            self.containerView.hidden = false;
+            container = true;
+            self.darkView.hidden = false;
+            [self.darkView addGestureRecognizer:tap];
+        }
+    } else {
+        
+        //[self.expandableSections removeIndex:section];
+        self.containerView.hidden = true;
+        container = false;
+        [self.darkView removeGestureRecognizer:tap];
+        self.darkView.hidden = true;
+    }
+    
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -103,25 +152,27 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-//    return self.sectionsArray.count;
-    //NSLog(@"%@", [self.info count]);
-    return [self.info count];
+    return [result count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.info[self.keys[section]] count];
+    return [[result objectAtIndex:section] count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ActiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"activeCell" forIndexPath:indexPath];
+    static NSString *CellIdentifier = @"activeCell";
     
-    NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
+    ActiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[ActiveTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
     
-    // Set the loaded data to the appropriate cell labels.
-    cell.name.text = [NSString stringWithFormat:@"%@", [self.info[self.keys[indexPath.row]] objectAtIndex:indexOfFirstname]];
+    NSArray *dataArray = result[indexPath.section];
+    cell.name.text = [dataArray[indexPath.row - 1] objectAtIndex:2];
     cell.letter.text = @"";
+    
     
     return cell;
 }
@@ -144,65 +195,46 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
+    if (!container) {
+        self.containerView.hidden = false;
+        container = true;
+        self.darkView.hidden = false;
+        [self.darkView addGestureRecognizer:tap];
+    }
+    
+    
+    
+    
 }
 
--(void)loadData{
-    // Form the query.
-    NSString *query = [NSString stringWithFormat:@"select * from Molecule order by Molecule.RusName"];
+-(void)loadData:(NSString *)req{
     
     // Get the results.
     if (self.arrPeopleInfo != nil) {
         self.arrPeopleInfo = nil;
     }
-    self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
-    self.arrPeopleInfo = [self.arrPeopleInfo valueForKey:@"lowercaseString"];
+    self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
     
-    self.info = [NSMutableDictionary dictionary];
-    self.iteration = [NSMutableArray array];
+    result = [NSMutableArray arrayWithCapacity:[self.letters count]];
+    
     NSString *keyString;
+    
+    for (int i = 0; i < [self.letters count]; i++) {
+        NSMutableArray *tempArray = [NSMutableArray array];
+        [result addObject:tempArray];
+    }
+    
+    self.arrPeopleInfo = [self.arrPeopleInfo valueForKey:@"uppercaseString"];
     
     for (NSArray* key in self.arrPeopleInfo) {
         
-        
-        keyString = [NSString stringWithFormat:@"%@", [key[2] substringToIndex:1]];
-        if ([self.info objectForKey:keyString] != nil) {
-            
-            [self.iteration setArray:[[self.info objectForKey:keyString] arrayByAddingObject:key]];
-            [self.info setObject:self.iteration forKey:keyString];
-        } else {
-            
-            [self.info setObject:key forKey:keyString];
-        }
-        [self.info setObject:key forKey:keyString];
+        keyString = [NSString stringWithFormat:@"%@", [[key objectAtIndex:2] substringToIndex:1]];
+        NSInteger ind = [self.letters indexOfObject:keyString];
+        [[result objectAtIndex:ind] addObject:key];
     }
-    
-    //[self sortKeysOnTheBasisOfLanguageAlphabetically:self.info];
-    
-    NSArray *try = [self.info allKeys];
-    self.keys = [try sortedArrayUsingSelector:@selector(compare:)];
     
     // Reload the table view.
     [self.tableView reloadData];
-}
-
--(void) sortKeysOnTheBasisOfLanguageAlphabetically:(NSDictionary *)check{
-    
-    //Method of NSDictionary class which sorts the keys using the logic given by the comparator block
-    NSArray * sortArray = [check keysSortedByValueUsingComparator: ^(id obj1, id obj2) {
-        
-        //We do case insensitive comparision of two strings as we are not really concerned about
-        //the "content" of the strings (please see sortKeysOnTheBasisOfNationalIncome method where
-        //we would like to do the comparision with numeric search as an extra option)
-        NSComparisonResult result = [[obj1 objectAtIndex:2] caseInsensitiveCompare:[obj2 objectAtIndex:2]];
-        return result;
-    }];
-    
-    //Show Result in the Output Panel: Country Name and its Language Name
-    for (int i = 0; i < [sortArray count]; i++) {
-        NSLog(@"Country Name:%@ -- Language:%@",[sortArray objectAtIndex:i],
-              [[check valueForKey:[sortArray objectAtIndex:i]] objectAtIndex:2]);
-    }
-    
 }
 
 /*
@@ -214,5 +246,7 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+
 
 @end

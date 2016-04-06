@@ -100,7 +100,7 @@
                   moduleName = "Vidal"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Anton/Documents/XCode/Vidal/Vidal/SecondPharmaViewController.m"
-                  timestampString = "481592624.407513"
+                  timestampString = "481595119.464912"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "139"
@@ -115,7 +115,7 @@
                   moduleName = "Vidal"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Anton/Documents/XCode/Vidal/Vidal/SecondPharmaViewController.m"
-                  timestampString = "481592624.407824"
+                  timestampString = "481595119.46572"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "139"
@@ -123,6 +123,22 @@
                   offsetFromSymbolStart = "2101">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vidal/ActiveViewController.m"
+            timestampString = "481595033.464073"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "233"
+            endingLineNumber = "233"
+            landmarkName = "-loadData:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
