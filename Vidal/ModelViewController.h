@@ -9,9 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "SWRevealViewController.h"
 #import "MenuViewController.h"
+#import "IMQuickSearch.h"
+#import "DBManager.h"
 
-@interface ModelViewController : UIViewController
+@interface ModelViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
 
 - (void) setLabel:(NSString *)label;
+
+@property (nonatomic, strong) IMQuickSearch *quickSearch;
+@property (nonatomic, strong) NSMutableArray *hello1;
+@property (nonatomic, strong) NSArray *FilteredResults;
 
 @end

@@ -12,11 +12,20 @@
 
 @property (strong, nonatomic) MenuViewController *menu;
 @property (strong, nonatomic) UIBarButtonItem *menuButton;
+@property (strong, nonatomic) UIBarButtonItem *searchButton;
 @property (strong, nonatomic) SWRevealViewController *reveal;
+@property (nonatomic, strong) DBManager *dbManager;
+@property (nonatomic, strong) UITableView *tableView;
+@property (nonatomic, strong) UISearchBar *searchBar;
+@property (nonatomic, strong) NSArray *letters;
 
 @end
 
-@implementation ModelViewController
+@implementation ModelViewController {
+    
+    NSMutableArray *result;
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -24,7 +33,68 @@
     [self configureMenu];
     [self customNavBar];
     
+    self.hello1 = [NSMutableArray array];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    self.searchBar.delegate = self;
+    
+    
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
+    
+    self.letters = [NSArray arrayWithObjects:@"N", @"А", @"Б", @"В", @"Г", @"Д", @"Е", @"Ж", @"З", @"И", @"Й", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"С", @"Т", @"У", @"Ф", @"Х", @"Ц", @"Ч", @"Ш", @"Э", @"Я", nil];
+    
+    [self loadData:@"select * from Molecule order by Molecule.RusName"];
+    
+    [self setUpQuickSearch:result];
+    self.FilteredResults = [self.quickSearch filteredObjectsWithValue:nil];
+    
+    // Добавить в Hello1 все по препаратам
     // Do any additional setup after loading the view.
+}
+
+- (void)setUpQuickSearch:(NSMutableArray *)work {
+    // Create Filters
+    IMQuickSearchFilter *peopleFilter = [IMQuickSearchFilter filterWithSearchArray:@[@"hello1", @"hel2", @"elo3", @"helllooo5", @"hello", @"hi", @"hey"] keys:@[@"description"]];
+    self.quickSearch = [[IMQuickSearch alloc] initWithFilters:@[peopleFilter]];
+}
+
+- (void)filterResults {
+    // Asynchronously
+        [self.quickSearch asynchronouslyFilterObjectsWithValue:self.searchBar.text completion:^(NSArray *filteredResults) {
+            [self updateTableViewWithNewResults:filteredResults];
+        }];
+    }
+
+- (void)updateTableViewWithNewResults:(NSArray *)results {
+    self.FilteredResults = results;
+    [self.tableView reloadData];
+}
+
+#pragma mark - TableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.FilteredResults.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchCell"];
+    }
+    
+    // Set Content
+    NSString *title, *subtitle;
+    title = self.FilteredResults[indexPath.row];
+    subtitle = self.FilteredResults[indexPath.row];
+    cell.textLabel.text = title;
+    cell.detailTextLabel.text = subtitle;
+    
+    // Return Cell
+    return cell;
 }
 
 - (void)customNavBar {
@@ -49,6 +119,11 @@
         return;
     }
     
+    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"burger"] scaledToSize:CGSizeMake(30, 20)]
+                                                         style:UIBarButtonItemStyleDone
+                                                        target:self
+                                                        action:@selector(search)];
+    
     self.menuButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"burger"] scaledToSize:CGSizeMake(30, 20)]
                                                        style:UIBarButtonItemStyleDone
                                                       target:self.revealViewController
@@ -56,7 +131,16 @@
     
     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     
+    self.navigationItem.rightBarButtonItem = self.searchButton;
     self.navigationItem.leftBarButtonItem = self.menuButton;
+    
+}
+
+- (void) search {
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 40.0)];
+    self.tableView = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 40.0, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.view addSubview:self.searchBar];
+    [self.view addSubview:self.tableView];
     
 }
 
@@ -79,6 +163,41 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)loadData:(NSString *)req{
+    
+    // Get the results.
+    if (self.hello1 != nil) {
+        self.hello1 = nil;
+    }
+    self.hello1 = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
+    
+    result = [NSMutableArray arrayWithCapacity:[self.letters count]];
+    
+    NSString *keyString;
+    
+    for (int i = 0; i < [self.letters count]; i++) {
+        NSMutableArray *tempArray = [NSMutableArray array];
+        [result addObject:tempArray];
+    }
+    
+    self.hello1 = [self.hello1 valueForKey:@"uppercaseString"];
+    
+    for (NSArray* key in self.hello1) {
+        
+        keyString = [NSString stringWithFormat:@"%@", [[key objectAtIndex:2] substringToIndex:1]];
+        NSInteger ind = [self.letters indexOfObject:keyString];
+        [[result objectAtIndex:ind] addObject:key];
+    }
+    
+    // Reload the table view.
+    //[self.tableView reloadData];
+}
+
+- (BOOL)searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
+    return YES;
 }
 
 /*
