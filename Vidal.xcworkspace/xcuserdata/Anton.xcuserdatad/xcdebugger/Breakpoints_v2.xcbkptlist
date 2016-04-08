@@ -38,11 +38,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vidal/DocumentViewController.m"
-            timestampString = "481581520.158446"
+            timestampString = "481803950.63913"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "@implementation DocumentViewController"
             landmarkType = "3">
          </BreakpointContent>
@@ -54,11 +54,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vidal/DocumentViewController.m"
-            timestampString = "481581522.499383"
+            timestampString = "481803950.63913"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "63"
-            endingLineNumber = "63">
+            startingLineNumber = "85"
+            endingLineNumber = "85"
+            landmarkName = "-toInter:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -100,7 +102,7 @@
                   moduleName = "Vidal"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Anton/Documents/XCode/Vidal/Vidal/SecondPharmaViewController.m"
-                  timestampString = "481644905.218957"
+                  timestampString = "481807087.939904"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "140"
@@ -115,7 +117,7 @@
                   moduleName = "Vidal"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/Anton/Documents/XCode/Vidal/Vidal/SecondPharmaViewController.m"
-                  timestampString = "481644905.219158"
+                  timestampString = "481807087.940151"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "140"
@@ -148,44 +150,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vidal/ActiveViewController.m"
-            timestampString = "481635434.019517"
+            timestampString = "481807087.544406"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "321"
-            endingLineNumber = "321"
-            landmarkName = "-searchBar:shouldChangeTextInRange:replacementText:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vidal/LoginViewController.m"
-            timestampString = "481644500.724347"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "-login:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vidal/LoginViewController.m"
-            timestampString = "481644500.724347"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
-            landmarkName = "-login:"
+            startingLineNumber = "339"
+            endingLineNumber = "339"
+            landmarkName = "-getMol:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

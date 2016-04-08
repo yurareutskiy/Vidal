@@ -32,11 +32,14 @@
     NSIndexPath *selectedRowIndex;
     NSUserDefaults *ud;
     NSString *nextPls;
+    NSMutableIndexSet *toDelete;
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    toDelete = [NSMutableIndexSet indexSet];
     
     self.searchBar.delegate = self;
     
@@ -70,6 +73,8 @@
     for (NSArray *key in result) {
         [self.sectionsArray addObject:key];
     }
+    
+    
     
     container = false;
     self.containerView.hidden = true;
@@ -191,7 +196,12 @@
     if (tableView.tag == 1) {
         return [[result objectAtIndex:section] count];
     } else if (tableView.tag == 2){
-        return [[self.molecule objectAtIndex:0] count];
+        NSInteger x = 0;
+        for (int i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
+            if (![[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""])
+                x++;
+        }
+        return x;
     } else {
         return 1;
     }
@@ -201,25 +211,30 @@
 {
     if (tableView.tag == 1) {
         static NSString *CellIdentifier = @"activeCell";
-    
+        
         ActiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             cell = [[ActiveTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         }
     
         NSArray *dataArray = result[indexPath.section];
-            cell.name.text = [dataArray[indexPath.row - 1] objectAtIndex:2];
+        cell.name.text = [dataArray[indexPath.row - 1] objectAtIndex:2];
         cell.letter.text = @"";
         
         return cell;
     } else if (tableView.tag == 2){
+        
+        if ([[[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row] isEqualToString:@""]) {
+            return nil;
+        }
+        
         static NSString *CellIdentifier = @"docCell";
         DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
         if (cell == nil) {
             cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
         };
         
-        cell.title.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
+        cell.title.text = [NSString stringWithFormat:@"%@", [self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
         cell.desc.text = [[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row];
         
         
@@ -255,7 +270,7 @@
         
         nextPls = [result[indexPath.section][indexPath.row - 1] objectAtIndex:0];
         [ud setObject:nextPls forKey:@"molecule"];
-        NSString *request = [NSString stringWithFormat:@"SELECT * FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID WHERE Molecule.MoleculeID = %@", nextPls];
+        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID WHERE Molecule.MoleculeID = %@", nextPls];
         [self getMol:request];
     }
     }
@@ -312,6 +327,14 @@
         self.molecule = nil;
     }
     self.molecule = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:mol]];
+    
+    for (NSUInteger i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
+        if ([[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""])
+            [toDelete addIndex:i];
+    }
+    
+    [[self.molecule objectAtIndex:0] removeObjectsAtIndexes:toDelete];
+    [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
     
     [((DocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
 }

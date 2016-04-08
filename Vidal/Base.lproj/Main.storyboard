@@ -1205,7 +1205,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.21960784310000001" green="0.21960784310000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cpZ-nE-JCC">
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cpZ-nE-JCC">
                                 <rect key="frame" x="0.0" y="60" width="600" height="540"/>
                                 <connections>
                                     <segue destination="sbh-iQ-PXQ" kind="embed" id="skb-G9-ts9"/>
@@ -3389,12 +3389,11 @@ Lactobacillus acidophilus и другие.</string>
                                         <connections>
                                             <outlet property="desc" destination="JZR-5S-NZp" id="yaD-BG-Dat"/>
                                             <outlet property="title" destination="Kbx-rQ-nZc" id="iT9-Ux-DgX"/>
-                                            <segue destination="18O-Cu-dlW" kind="show" identifier="toList" id="AJR-gV-8Nv"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yYC-sL-R6M">
+                            <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yYC-sL-R6M">
                                 <rect key="frame" x="0.0" y="101" width="600" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>

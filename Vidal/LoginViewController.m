@@ -36,24 +36,24 @@
 
 - (IBAction)login:(UIButton *)sender {
     
-    AFHTTPRequestSerializer *requestSerializerTry = [AFHTTPRequestSerializer serializer];
-    [requestSerializerTry setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager setRequestSerializer:requestSerializerTry];
-    AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
-    [manager setResponseSerializer:responseSerializer];
+//    AFHTTPRequestSerializer *requestSerializerTry = [AFHTTPRequestSerializer serializer];
+//    [requestSerializerTry setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+//    [manager setRequestSerializer:requestSerializerTry];
+//    AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
+//    [manager setResponseSerializer:responseSerializer];
+//    
+//    NSDictionary *params = @{@"username":@"avscherbakov@icloud.com", //- email участника (bin@bk.ru)
+//                             @"password":@"123456"}; //- его пароль в открытом виде (mySuperPw)
+//    
+//    [manager POST:@"http://vidal.ru/api/user/add" parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+//        NSLog(@"JSON: %@", responseObject);
+//    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+//        NSLog(@"%@",error.localizedDescription);
+//    }];
     
-    NSDictionary *params = @{@"username":@"avscherbakov@icloud.com", //- email участника (bin@bk.ru)
-                             @"password":@"123456"}; //- его пароль в открытом виде (mySuperPw)
-    
-    [manager POST:@"http://vidal.ru/api/user/add" parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        NSLog(@"%@",error.localizedDescription);
-    }];
-    
-//    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
-//    [self presentViewController:vc animated:false completion:nil];
+    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
+    [self presentViewController:vc animated:false completion:nil];
     
 }
 

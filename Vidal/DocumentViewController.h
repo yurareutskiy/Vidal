@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "FavouriteViewController.h"
 
-@interface DocumentViewController : UIViewController
+@interface DocumentViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *registred;

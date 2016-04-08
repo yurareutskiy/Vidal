@@ -13,12 +13,17 @@
 @end
 
 @implementation DocumentViewController {
+    
     FavouriteViewController *fvc;
     NSUserDefaults *ud;
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
     
     ud = [NSUserDefaults standardUserDefaults];
 
@@ -28,6 +33,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) viewWillLayoutSubviews {
+    NSLog(@"hello");
 }
 
 /*
@@ -40,9 +49,22 @@
 }
 */
 
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 1;
+}
+
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [[UITableViewCell alloc] init];
+    return cell;
+}
+
 - (IBAction)toList:(UIButton *)sender {
     
-    [self performSegueWithIdentifier:@"toList" sender:self];
+    //[self performSegueWithIdentifier:@"toList" sender:self];
     
 }
 
