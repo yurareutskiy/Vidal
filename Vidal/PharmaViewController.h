@@ -11,6 +11,8 @@
 #import "PharmaTableViewCell.h"
 #import "DBManager.h"
 #import "FavouriteViewController.h"
+#import "SecondDocumentViewController.h"
+#import "DocsTableViewCell.h"
 
 @interface PharmaViewController : ModelViewController<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 

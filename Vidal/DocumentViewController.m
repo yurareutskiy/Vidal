@@ -14,7 +14,6 @@
 
 @implementation DocumentViewController {
     
-    FavouriteViewController *fvc;
     NSUserDefaults *ud;
     
 }
@@ -26,17 +25,13 @@
     self.tableView.dataSource = self;
     
     ud = [NSUserDefaults standardUserDefaults];
-
+    
     // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void) viewWillLayoutSubviews {
-    NSLog(@"hello");
 }
 
 /*
@@ -68,19 +63,4 @@
     
 }
 
-- (IBAction)addToFav:(UIButton *)sender {
-    
-    if ([ud objectForKey:@"favs"] == nil) {
-        [ud setObject:[NSArray array] forKey:@"favs"];
-        [ud setObject:[[ud objectForKey:@"favs"] arrayByAddingObject:[ud objectForKey:@"id"]] forKey:@"favs"];
-    } else {
-        [ud setObject:[[ud objectForKey:@"favs"] arrayByAddingObject:[ud objectForKey:@"id"]] forKey:@"favs"];
-    }
-    
-    NSLog(@"%@", [ud objectForKey:@"favs"]);
-    
-}
-
-- (IBAction)toInter:(UIButton *)sender {
-}
 @end

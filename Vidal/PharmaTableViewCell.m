@@ -11,6 +11,12 @@
 @implementation PharmaTableViewCell
 
 - (void)awakeFromNib {
+    
+    NSString *string = self.name.text;
+    self.name.numberOfLines = 0;
+    self.name.text = string;
+    [self.name sizeToFit];
+    
     // Initialization code
 }
 

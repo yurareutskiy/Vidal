@@ -16,6 +16,7 @@
     NSArray *array;
     NSString *newsID;
     NSUserDefaults *ud;
+    ModelViewController *mvc;
 }
 
 
@@ -24,10 +25,9 @@
     [super viewDidLoad];
     
     ud = [NSUserDefaults standardUserDefaults];
-    
+    mvc = [[ModelViewController alloc] init];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    
     
     [super setLabel:@"Новости"];
 

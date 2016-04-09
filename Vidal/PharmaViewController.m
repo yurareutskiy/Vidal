@@ -17,6 +17,7 @@
 @property (nonatomic, strong) NSMutableArray *arrPeopleInfo;
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSArray *tryArray;
+@property (nonatomic, strong) NSMutableArray *molecule;
 
 @end
 
@@ -26,6 +27,8 @@
     UITapGestureRecognizer *tap;
     NSUserDefaults *ud;
     NSString *req;
+    NSMutableIndexSet *toDelete;
+    NSIndexPath *selectedRowIndex;
     
 }
 
@@ -34,18 +37,17 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    ((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView.delegate = self;
+    ((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView.dataSource = self;
+    [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView setTag:2];
     
     ud = [NSUserDefaults standardUserDefaults];
-    
-//    _firstSectionStrings = @[@"Тест", @"Тест", @"Тест"];
-//    _secondSectionStrings = @[@"Тест", @"Тест", @"Тест"];
-//    _sectionsArray = @[_firstSectionStrings, _secondSectionStrings].mutableCopy;
-//    _expandableSections = [NSMutableIndexSet indexSet];
-    
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
     [super setLabel:@"Фармакологические группы"];
+    
+    toDelete = [NSMutableIndexSet indexSet];
     
     self.containerView.hidden = true;
     self.darkView.hidden = true;
@@ -57,6 +59,8 @@
     
     
     req = @"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = 1 ORDER BY ClinicoPhPointers.Name";
+    
+    
     
     [self loadData:req];
     
@@ -73,7 +77,17 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60.0;
+    if (tableView.tag == 1){
+        return 60;
+    } else if (tableView.tag == 2) {
+        if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
+            return 140;
+        } else {
+            return 60;
+        }
+    } else {
+        return 60;
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -85,19 +99,53 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.arrPeopleInfo count];
+    if (tableView.tag == 1) {
+        return [self.arrPeopleInfo count];
+    } else if (tableView.tag == 2){
+        NSInteger x = 0;
+        for (int i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
+            if (![[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""])
+                x++;
+        }
+        return x;
+    } else {
+        return 1;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (tableView.tag == 1){
+    
     PharmaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pharmaCell" forIndexPath:indexPath];
     
     NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
     
     // Set the loaded data to the appropriate cell labels.
     cell.name.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]];
+        
+        return cell;
+    
+} else if (tableView.tag == 2){
+    
+    if ([[[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row] isEqualToString:@""]) {
+        return nil;
+    }
+    
+    DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"docCell"];
+    if (cell == nil) {
+        cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
+    };
+    
+    cell.title.text = [NSString stringWithFormat:@"%@", [self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
+    cell.desc.text = [[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
+} else {
+    return nil;
+}
+
 }
 
 #pragma mark - UITableViewDelegate
@@ -132,13 +180,19 @@
     BOOL goNext = [self checkData:req2];
     
     if (!goNext) {
+        
+        [ud setObject:pointIDStr forKey:@"id"];
+        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID INNER JOIN ClinicoPhPointers ON Document_ClPhPointers.ClPhPointerID = ClinicoPhPointers.ClPhPointerID WHERE ClinicoPhPointers.ClPhPointerID = %@", pointIDStr];
+        [self getMol:request];
+
+        
         if (!container) {
             self.containerView.hidden = false;
             container = true;
             self.darkView.hidden = false;
             [self.darkView addGestureRecognizer:tap];
         }
-        [ud setObject:pointIDStr forKey:@"id"];
+        
         
     } else if (goNext){
         [ud setObject:levelStr forKey:@"level"];
@@ -185,6 +239,31 @@
     container = false;
     [self.darkView removeGestureRecognizer:tap];
     self.darkView.hidden = true;
+}
+
+- (void) getMol:(NSString *)mol {
+    if (self.molecule != nil) {
+        self.molecule = nil;
+    }
+    self.molecule = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:mol]];
+    
+    for (NSUInteger i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
+        if ([[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
+            || [[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
+            [toDelete addIndex:i];
+    }
+    
+    ((SecondDocumentViewController *)self.childViewControllers.lastObject).latName.text = [[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
+    ((SecondDocumentViewController *)self.childViewControllers.lastObject).name.text = [[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
+    
+    [toDelete addIndex:0];
+    [toDelete addIndex:1];
+    
+    [[self.molecule objectAtIndex:0] removeObjectsAtIndexes:toDelete];
+    [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
+    
+    [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
+    
 }
 
 /*

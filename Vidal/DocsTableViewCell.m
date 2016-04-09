@@ -11,6 +11,17 @@
 @implementation DocsTableViewCell
 
 - (void)awakeFromNib {
+    
+//    NSString *string = self.title.text;
+//    self.title.numberOfLines = 0;
+//    self.title.text = string;
+//    [self.title sizeToFit];
+//    
+//    NSString *string1 = self.desc.text;
+//    self.desc.numberOfLines = 0;
+//    self.desc.text = string1;
+//    [self.desc sizeToFit];
+    
     // Initialization code
 }
 

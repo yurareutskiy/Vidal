@@ -159,6 +159,7 @@
         self.searchField.text = self.FilteredResults[indexPath.row];
         [self findFirstResult:self.FilteredResults[indexPath.row]];
         [self setUpQuickSearch:self.hello2];
+        
     } else if (textField2) {
         self.secondInput.text = self.FilteredResults[indexPath.row];
         self.result.text = [self findSecondResult:self.FilteredResults[indexPath.row]];
@@ -182,10 +183,11 @@
         textField1 = true;
         textField2 = false;
     } else if (textField.tag == 2) {
-        
         textField2 = true;
         textField1 = false;
+        
     }
+    [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
     self.tableView.hidden = false;
     return YES;
 }

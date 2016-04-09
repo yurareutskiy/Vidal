@@ -15,6 +15,7 @@
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableArray *tryArray;
 @property (nonatomic, strong) NSMutableArray *data;
+@property (nonatomic, strong) NSMutableArray *molecule;
 
 @end
 
@@ -23,6 +24,8 @@
     UITapGestureRecognizer *tap;
     NSUserDefaults *ud;
     NSString *req;
+    NSMutableIndexSet *toDelete;
+    NSIndexPath *selectedRowIndex;
 
 }
 
@@ -31,12 +34,17 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    ((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView.delegate = self;
+    ((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView.dataSource = self;
+    [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView setTag:2];
     
     ud = [NSUserDefaults standardUserDefaults];
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
     [self setLabel:@"Фармакологические группы"];
+    
+    toDelete = [NSMutableIndexSet indexSet];
     
     self.containerView.hidden = true;
     self.darkView.hidden = true;
@@ -67,9 +75,21 @@
     self.navigationItem.titleView = labelName;
 }
 
+#pragma mark - SLExpandableTableViewDelegate
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 60.0;
+    if (tableView.tag == 1){
+        return 60;
+    } else if (tableView.tag == 2) {
+        if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
+            return 140;
+        } else {
+            return 60;
+        }
+    } else {
+        return 60;
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -81,29 +101,76 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.arrPeopleInfo count];
+    if (tableView.tag == 1) {
+        return [self.arrPeopleInfo count];
+    } else if (tableView.tag == 2){
+        NSInteger x = 0;
+        for (int i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
+            if (![[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
+                || ![[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
+                x++;
+        }
+        return x;
+    } else {
+        return 1;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    PharmaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pharmaCell" forIndexPath:indexPath];
+    if (tableView.tag == 1){
+        
+        PharmaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pharmaCell" forIndexPath:indexPath];
+        
+        NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
+        
+        // Set the loaded data to the appropriate cell labels.
+        cell.name.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]];
+        
+        return cell;
+        
+    } else if (tableView.tag == 2){
+        
+        if ([[[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row] isEqualToString:@""]) {
+            return nil;
+        }
+        
+        DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"docCell"];
+        if (cell == nil) {
+            cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
+        };
+        
+        cell.title.text = [NSString stringWithFormat:@"%@", [self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
+        cell.desc.text = [[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        return cell;
+    } else {
+        return nil;
+    }
     
-    NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
-    
-    // Set the loaded data to the appropriate cell labels.
-    cell.name.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]];
-    
-    return cell;
 }
+
+#pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if (tableView.tag == 1) {
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     [self segueToBe:indexPath.row];
-    [self loadData:req];
+    //[self loadData:req];
+    } else if (tableView.tag == 2){
+        selectedRowIndex = [indexPath copy];
+        
+        [tableView beginUpdates];
+        
+        [tableView endUpdates];
+    }
+    
 }
 
-- (void) segueToBe:(NSInteger)xid  {
+- (void) segueToBe:(NSInteger)xid
+{
     
     NSInteger product = [self.dbManager.arrColumnNames indexOfObject:@"ShowInProduct"];
     NSInteger parent = [self.dbManager.arrColumnNames indexOfObject:@"Code"];
@@ -118,24 +185,23 @@
     NSString *pointIDStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:pointID]];
     
     NSString *req2 = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = %ld AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", [levelStr integerValue] + 1, parentStr];
-    NSLog(@"%@", req2);
     
     BOOL goNext = [self checkData:req2];
     
     if (!goNext) {
+        
+        [ud setObject:pointIDStr forKey:@"id"];
+        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID INNER JOIN ClinicoPhPointers ON Document_ClPhPointers.ClPhPointerID = ClinicoPhPointers.ClPhPointerID WHERE ClinicoPhPointers.ClPhPointerID = %@", pointIDStr];
+        [self getMol:request];
+        
+        
         if (!container) {
             self.containerView.hidden = false;
             container = true;
             self.darkView.hidden = false;
             [self.darkView addGestureRecognizer:tap];
         }
-
-        NSString *getInfo = [NSString stringWithFormat:@"SELECT * FROM Document INNER JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID INNER JOIN ClinicoPhPointers ON Document_ClPhPointers.ClPhPointerID = ClinicoPhPointers.ClPhPointerID WHERE ClinicoPhPointers.ClPhPointerID = %ld", [pointIDStr integerValue]];
-        [self getData:getInfo];
-        [ud setObject:pointIDStr forKey:@"id"];
         
-        ((DocumentViewController *)self.childViewControllers.lastObject).name.text = @"text";
-        //()((DocumentViewController *)self.childViewControllers.lastObject).childViewControllers.lastObject)
         
     } else if (goNext){
         [ud setObject:levelStr forKey:@"level"];
@@ -165,28 +231,16 @@
     NSString *query = [NSString stringWithFormat:req];
     
     // Get the results.
-    if (self.secondArray != nil) {
-        self.secondArray = nil;
+    if (self.tryArray != nil) {
+        self.tryArray = nil;
     }
-    self.secondArray = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    self.tryArray = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     
-    if ([self.secondArray count] == 0){
+    if ([self.tryArray count] == 0){
         return NO;
     } else {
         return YES;
     }
-}
-
-- (void) getData:(NSString *)req {
-    
-    NSString *query = [NSString stringWithFormat:req];
-    
-    // Get the results.
-    if (self.data != nil) {
-        self.data = nil;
-    }
-    self.data = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
-    
 }
 
 - (void) close {
@@ -194,6 +248,31 @@
     container = false;
     [self.darkView removeGestureRecognizer:tap];
     self.darkView.hidden = true;
+}
+
+- (void) getMol:(NSString *)mol {
+    if (self.molecule != nil) {
+        self.molecule = nil;
+    }
+    self.molecule = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:mol]];
+    
+    for (NSUInteger i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
+        if ([[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
+            || [[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
+            [toDelete addIndex:i];
+    }
+    
+    ((SecondDocumentViewController *)self.childViewControllers.lastObject).latName.text = [[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
+    ((SecondDocumentViewController *)self.childViewControllers.lastObject).name.text = [[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
+    
+    [toDelete addIndex:0];
+    [toDelete addIndex:1];
+    
+    [[self.molecule objectAtIndex:0] removeObjectsAtIndexes:toDelete];
+    [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
+    
+    [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
+    
 }
 
 /*

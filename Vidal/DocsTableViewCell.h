@@ -11,5 +11,6 @@
 @interface DocsTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *title;
 @property (weak, nonatomic) IBOutlet UILabel *desc;
+@property (strong, nonatomic) IBOutlet UIImageView *image;
 
 @end

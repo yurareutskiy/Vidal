@@ -10,6 +10,8 @@
 #import <SLExpandableTableView.h>
 #import "DrugsTableViewCell.h"
 #import "DBManager.h"
+#import "DocsTableViewCell.h"
+#import "SecondDocumentViewController.h"
 
 @interface DrugsViewController : ModelViewController <SLExpandableTableViewDatasource, SLExpandableTableViewDelegate, UISearchBarDelegate>
 @property (strong, nonatomic) IBOutlet SLExpandableTableView *tableView;
