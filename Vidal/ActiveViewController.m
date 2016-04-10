@@ -44,35 +44,39 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    self.mvc = [[ModelViewController alloc] init];
+
+    [super setLabel:@"Список препаратов"];
     
-    self.forS = [NSMutableArray array];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
     ((DocumentViewController *)self.childViewControllers.lastObject).tableView.delegate = self;
     ((DocumentViewController *)self.childViewControllers.lastObject).tableView.dataSource = self;
     [((DocumentViewController *)self.childViewControllers.lastObject).tableView setTag:2];
-    self.forSearch = [NSMutableArray array];
-    
     self.tableView1.delegate = self;
     self.tableView1.dataSource = self;
     self.searchBar.delegate = self;
-    self.searchBar.hidden = true;
+    
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
+    
+    self.forS = [NSMutableArray array];
+    self.forSearch = [NSMutableArray array];
     toDelete = [NSMutableIndexSet indexSet];
     ud = [NSUserDefaults standardUserDefaults];
     self.expandableSections = [NSMutableIndexSet indexSet];
     self.hello1 = [NSMutableArray array];
     self.sectionsArray = [NSMutableArray array];
-    self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     self.letters = [NSArray arrayWithObjects:@"N", @"А", @"Б", @"В", @"Г", @"Д", @"Е", @"Ж", @"З", @"И", @"Й", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"С", @"Т", @"У", @"Ф", @"Х", @"Ц", @"Ч", @"Ш", @"Э", @"Я", nil];
-    self.tableView1.hidden = true;
-    [super setLabel:@"Список препаратов"];
-    [self loadData:@"select * from Molecule order by Molecule.RusName"];
-    [self loadData2:@"select * from Molecule order by Molecule.RusName"];
+    
+    self.searchBar.hidden = true;
     container = false;
     self.containerView.hidden = true;
     self.darkView.hidden = true;
+    self.tableView1.hidden = true;
+    
+    [self loadData:@"select * from Molecule order by Molecule.RusName"];
+    [self loadData2:@"select * from Molecule order by Molecule.RusName"];
+    
     
     for (int i = 0; i < [self.arrPeopleInfo count]; i++) {
         [self.hello1 addObject:[self.arrPeopleInfo[i] objectAtIndex:1]];
@@ -164,6 +168,8 @@
     }
 }
 
+#pragma mark - UITableViewDataSource
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView.tag == 1){
@@ -178,8 +184,6 @@
         return 60;
     }
 }
-
-#pragma mark - UITableViewDataSource
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
@@ -265,14 +269,6 @@
 
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == 0) {
-        [self.sectionsArray removeObjectAtIndex:indexPath.section];
-        [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-}
-
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -308,6 +304,8 @@
     
 }
 
+#pragma MARK - Database Methods
+
 -(void)loadData:(NSString *)req{
     
     // Get the results.
@@ -325,7 +323,7 @@
         [result addObject:tempArray];
     }
     
-//    self.arrPeopleInfo = [self.arrPeopleInfo valueForKey:@"uppercaseString"];
+    //    self.arrPeopleInfo = [self.arrPeopleInfo valueForKey:@"uppercaseString"];
     
     for (NSArray* key in self.arrPeopleInfo) {
         
@@ -337,6 +335,25 @@
     
     // Reload the table view.
     [self.tableView reloadData];
+}
+
+-(void)loadData2:(NSString *)req{
+    
+    // Get the results.
+    if (self.forSearch != nil) {
+        self.forSearch = nil;
+    }
+    self.forSearch = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
+    
+    self.forSearch = [self.forSearch valueForKey:@"lowercaseString"];
+    
+    for (NSArray *key in self.forSearch) {
+        
+        [self.forS addObject:[key objectAtIndex:1]];
+    }
+    
+    // Reload the table view.
+    [self.tableView1 reloadData];
 }
 
 - (void) getMol:(NSString *)mol {
@@ -364,12 +381,7 @@
     
 }
 
-- (BOOL) searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    
-    [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
-    
-    return YES;
-}
+#pragma MAKR - IMQuickSearch Methods
 
 - (void)setUpQuickSearch:(NSMutableArray *)work {
     // Create Filters
@@ -379,23 +391,34 @@
 
 - (void)filterResults {
     // Asynchronously
-        [self.quickSearch asynchronouslyFilterObjectsWithValue:self.searchBar.text completion:^(NSArray *filteredResults) {
-            [self updateTableViewWithNewResults:filteredResults];
-        }];
-    }
+    [self.quickSearch asynchronouslyFilterObjectsWithValue:self.searchBar.text completion:^(NSArray *filteredResults) {
+        [self updateTableViewWithNewResults:filteredResults];
+    }];
+}
 
 - (void)updateTableViewWithNewResults:(NSArray *)results {
     self.FilteredResults = results;
     [self.tableView1 reloadData];
 }
 
-- (void) search {
-    self.searchBar.frame = CGRectMake(0.0, 40.0, self.view.frame.size.width, 40.0);
-    self.tableView1.frame = CGRectMake(0.0, 80.0, self.view.frame.size.width, self.view.frame.size.height);
-    self.tableView1.hidden = false;
-    self.searchBar.hidden = false;
-    
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.row == 0) {
+        [self.sectionsArray removeObjectAtIndex:indexPath.section];
+        [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
+    }
 }
+
+#pragma MARK - SearchBar Delegate
+
+- (BOOL) searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
+    
+    return YES;
+}
+
+#pragma MARK - Additional Methods
 
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
     UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
@@ -405,25 +428,13 @@
     return newImage;
 }
 
--(void)loadData2:(NSString *)req{
-
-    // Get the results.
-    if (self.forSearch != nil) {
-        self.forSearch = nil;
-    }
-    self.forSearch = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
-
-    self.forSearch = [self.forSearch valueForKey:@"lowercaseString"];
-
-    for (NSArray *key in self.forSearch) {
-        
-        [self.forS addObject:[key objectAtIndex:1]];
-    }
+- (void) search {
+    self.searchBar.frame = CGRectMake(0.0, 40.0, self.view.frame.size.width, 40.0);
+    self.tableView1.frame = CGRectMake(0.0, 80.0, self.view.frame.size.width, self.view.frame.size.height);
+    self.tableView1.hidden = false;
+    self.searchBar.hidden = false;
     
-    // Reload the table view.
-    [self.tableView1 reloadData];
 }
-
 
 
 /*
