@@ -116,10 +116,10 @@
         return;
     }
     
-//    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"burger"] scaledToSize:CGSizeMake(30, 20)]
-//                                                         style:UIBarButtonItemStyleDone
-//                                                        target:self
-//                                                        action:@selector(search)];
+    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"burger"] scaledToSize:CGSizeMake(30, 20)]
+                                                         style:UIBarButtonItemStyleDone
+                                                        target:self
+                                                        action:@selector(search)];
     
     self.menuButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"burger"] scaledToSize:CGSizeMake(30, 20)]
                                                        style:UIBarButtonItemStyleDone
@@ -128,18 +128,18 @@
     
     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     
-//    self.navigationItem.rightBarButtonItem = self.searchButton;
+    self.navigationItem.rightBarButtonItem = self.searchButton;
     self.navigationItem.leftBarButtonItem = self.menuButton;
     
 }
 
-//- (void) search {
-//    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 40.0)];
-//    self.tableView1 = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 40.0, self.view.frame.size.width, self.view.frame.size.height)];
-//    [self.view addSubview:self.searchBar];
-//    [self.view addSubview:self.tableView1];
-//    
-//}
+- (void) search {
+    self.searchBar = [[UISearchBar alloc] initWithFrame:CGRectMake(0.0, 0.0, self.view.frame.size.width, 40.0)];
+    self.tableView1 = [[UITableView alloc] initWithFrame:CGRectMake(0.0, 40.0, self.view.frame.size.width, self.view.frame.size.height)];
+    [self.view addSubview:self.searchBar];
+    [self.view addSubview:self.tableView1];
+    
+}
 
 - (void) setLabel:(NSString *)label {
     UILabel* labelName = [[UILabel alloc] initWithFrame:CGRectMake(0,40,320,40)];

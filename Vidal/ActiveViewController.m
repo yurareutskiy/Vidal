@@ -15,6 +15,7 @@
 @property (nonatomic, strong) NSMutableArray *sectionsArray;
 @property (nonatomic, strong) NSMutableIndexSet *expandableSections;
 @property (nonatomic, strong) DBManager *dbManager;
+@property (nonatomic, strong) ModelViewController *mvc;
 @property (nonatomic, strong) NSArray *arrPeopleInfo;
 @property (nonatomic, strong) NSMutableArray *hello1;
 @property (nonatomic, strong) NSArray *letters;
@@ -38,10 +39,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.mvc = [[ModelViewController alloc] init];
+    
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-//    self.searchBar.delegate = self;
+    self.searchBar.delegate = self;
     ((DocumentViewController *)self.childViewControllers.lastObject).tableView.delegate = self;
     ((DocumentViewController *)self.childViewControllers.lastObject).tableView.dataSource = self;
     [((DocumentViewController *)self.childViewControllers.lastObject).tableView setTag:2];
@@ -319,6 +322,10 @@
     
     [((DocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
     
+}
+
+- (BOOL) searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    return YES;
 }
 
 /*

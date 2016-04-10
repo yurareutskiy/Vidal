@@ -17,5 +17,6 @@
 @property (strong, nonatomic) IBOutlet SLExpandableTableView *tableView;
 @property (strong, nonatomic) IBOutlet UIView *darkView;
 @property (strong, nonatomic) IBOutlet UIView *containerView;
+@property (nonatomic, strong) UISearchBar *searchBar1;
 
 @end

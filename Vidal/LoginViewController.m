@@ -10,6 +10,8 @@
 
 @interface LoginViewController ()
 
+@property (nonatomic, strong) Server *serverManager;
+
 @end
 
 @implementation LoginViewController
@@ -20,6 +22,12 @@
     self.regButton.layer.borderWidth = 1.0;
     self.regButton.layer.borderColor = [UIColor colorWithRed:148.0/255.0 green:0 blue:0 alpha:1.0].CGColor;
     
+    self.serverManager = [[Server alloc] init];
+    
+    [self.serverManager getSpec];
+//    [self.serverManager getUniver];
+    self.result = [[NSDictionary alloc] initWithDictionary:[self.serverManager getSpec]];
+    NSLog(@"%@", [self.result allKeys]);
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -35,22 +43,6 @@
 }
 
 - (IBAction)login:(UIButton *)sender {
-    
-//    AFHTTPRequestSerializer *requestSerializerTry = [AFHTTPRequestSerializer serializer];
-//    [requestSerializerTry setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
-//    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-//    [manager setRequestSerializer:requestSerializerTry];
-//    AFJSONResponseSerializer *responseSerializer = [AFJSONResponseSerializer serializerWithReadingOptions:NSJSONReadingAllowFragments];
-//    [manager setResponseSerializer:responseSerializer];
-//    
-//    NSDictionary *params = @{@"username":@"avscherbakov@icloud.com", //- email участника (bin@bk.ru)
-//                             @"password":@"123456"}; //- его пароль в открытом виде (mySuperPw)
-//    
-//    [manager POST:@"http://vidal.ru/api/user/add" parameters:params success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-//        NSLog(@"JSON: %@", responseObject);
-//    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-//        NSLog(@"%@",error.localizedDescription);
-//    }];
     
     UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
     [self presentViewController:vc animated:false completion:nil];

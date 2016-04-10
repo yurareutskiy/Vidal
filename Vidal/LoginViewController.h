@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AFNetworking.h"
+#import "Server.h"
 
 @interface LoginViewController : UIViewController
 
@@ -15,6 +16,7 @@
 - (IBAction)registration:(UIButton *)sender;
 - (IBAction)login:(UIButton *)sender;
 - (IBAction)withoutReg:(UIButton *)sender;
+@property (strong, nonatomic) NSDictionary *result;
 
 @end
 

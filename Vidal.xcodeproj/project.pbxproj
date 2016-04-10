@@ -25,6 +25,7 @@
 		3A1570621CAEAA2B00D49C5E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15705F1CAEAA2B00D49C5E /* FBSDKShareKit.framework */; };
 		3A1570661CAEAAAF00D49C5E /* OKSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1570651CAEAAAF00D49C5E /* OKSDK.m */; };
 		3A1570731CAEB0A000D49C5E /* SocialNetworkManagerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1570721CAEB0A000D49C5E /* SocialNetworkManagerVC.m */; };
+		3A2D8E7E1CBA827C00F43A76 /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2D8E7D1CBA827C00F43A76 /* Server.m */; };
 		3A5638581CA19971000A83B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5638571CA19971000A83B5 /* Assets.xcassets */; };
 		3A70F38A1C80B32C00193150 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A70F3891C80B32C00193150 /* CoreGraphics.framework */; };
 		3A78F0FF1C91E7DA008C6BE5 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F0FE1C91E7DA008C6BE5 /* MenuViewController.m */; };
@@ -108,6 +109,8 @@
 		3A1570651CAEAAAF00D49C5E /* OKSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OKSDK.m; path = Vidal/OKSDK.m; sourceTree = "<group>"; };
 		3A1570711CAEB0A000D49C5E /* SocialNetworkManagerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialNetworkManagerVC.h; sourceTree = "<group>"; };
 		3A1570721CAEB0A000D49C5E /* SocialNetworkManagerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialNetworkManagerVC.m; sourceTree = "<group>"; };
+		3A2D8E7C1CBA827C00F43A76 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
+		3A2D8E7D1CBA827C00F43A76 /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
 		3A5638571CA19971000A83B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A70F3891C80B32C00193150 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3A78F0FD1C91E7DA008C6BE5 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
@@ -253,16 +256,18 @@
 			name = Libraries;
 			sourceTree = "<group>";
 		};
-		3A1570691CAEAE3D00D49C5E /* Database */ = {
+		3A1570691CAEAE3D00D49C5E /* Database & Server */ = {
 			isa = PBXGroup;
 			children = (
 				3A1570531CAEA8F800D49C5E /* DBManager.h */,
 				3A1570541CAEA8F800D49C5E /* DBManager.m */,
+				3A2D8E7C1CBA827C00F43A76 /* Server.h */,
+				3A2D8E7D1CBA827C00F43A76 /* Server.m */,
 				3A1570561CAEA95900D49C5E /* vidal.cardio.crypt.db3 */,
 				3A1570571CAEA95900D49C5E /* vidal.cardio.encrypt.db3 */,
 				3A9366661CB176D3004BBE2E /* interactions.json */,
 			);
-			name = Database;
+			name = "Database & Server";
 			sourceTree = "<group>";
 		};
 		3A15706A1CAEAE4800D49C5E /* Social Network */ = {
@@ -381,7 +386,7 @@
 			children = (
 				3A9E3FCF1C80AE330069BDFC /* AppDelegate.h */,
 				3A9E3FD01C80AE330069BDFC /* AppDelegate.m */,
-				3A1570691CAEAE3D00D49C5E /* Database */,
+				3A1570691CAEAE3D00D49C5E /* Database & Server */,
 				3A15706A1CAEAE4800D49C5E /* Social Network */,
 				3A78F1071C92051F008C6BE5 /* Additional Files */,
 				3A78F10C1C9206EF008C6BE5 /* Main Screens */,
@@ -598,6 +603,7 @@
 				3A78F1181C920737008C6BE5 /* InteractionsViewController.m in Sources */,
 				3A78F10F1C920701008C6BE5 /* NewsViewController.m in Sources */,
 				52498BC41CB3FD4000E6B96B /* ThirdViewController.m in Sources */,
+				3A2D8E7E1CBA827C00F43A76 /* Server.m in Sources */,
 				3A8C251F1CB999AD00CFA905 /* SecondDocumentViewController.m in Sources */,
 				3A1570551CAEA8F800D49C5E /* DBManager.m in Sources */,
 				3AAAA2C81C833FA3006DEE4E /* RegViewController.m in Sources */,
