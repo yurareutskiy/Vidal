@@ -41,6 +41,7 @@
 		3A78F1271C92076D008C6BE5 /* FavouriteViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F1261C92076D008C6BE5 /* FavouriteViewController.m */; };
 		3A78F12A1C920775008C6BE5 /* ReferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F1291C920775008C6BE5 /* ReferenceViewController.m */; };
 		3A8C251F1CB999AD00CFA905 /* SecondDocumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8C251E1CB999AD00CFA905 /* SecondDocumentViewController.m */; };
+		3A8C25231CBA2E8C00CFA905 /* ListOfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8C25221CBA2E8C00CFA905 /* ListOfViewController.m */; };
 		3A9366671CB176D3004BBE2E /* interactions.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A9366661CB176D3004BBE2E /* interactions.json */; };
 		3A9E3FCE1C80AE330069BDFC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FCD1C80AE330069BDFC /* main.m */; };
 		3A9E3FD11C80AE330069BDFC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FD01C80AE330069BDFC /* AppDelegate.m */; };
@@ -137,6 +138,8 @@
 		3A78F1291C920775008C6BE5 /* ReferenceViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ReferenceViewController.m; sourceTree = "<group>"; };
 		3A8C251D1CB999AD00CFA905 /* SecondDocumentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondDocumentViewController.h; sourceTree = "<group>"; };
 		3A8C251E1CB999AD00CFA905 /* SecondDocumentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondDocumentViewController.m; sourceTree = "<group>"; };
+		3A8C25211CBA2E8C00CFA905 /* ListOfViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListOfViewController.h; sourceTree = "<group>"; };
+		3A8C25221CBA2E8C00CFA905 /* ListOfViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListOfViewController.m; sourceTree = "<group>"; };
 		3A9366661CB176D3004BBE2E /* interactions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = interactions.json; sourceTree = "<group>"; };
 		3A9E3FC91C80AE330069BDFC /* Vidal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vidal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9E3FCD1C80AE330069BDFC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -222,6 +225,8 @@
 				3A0DBD851CB45FA800D9BAD3 /* DocumentViewController.m */,
 				3A8C251D1CB999AD00CFA905 /* SecondDocumentViewController.h */,
 				3A8C251E1CB999AD00CFA905 /* SecondDocumentViewController.m */,
+				3A8C25211CBA2E8C00CFA905 /* ListOfViewController.h */,
+				3A8C25221CBA2E8C00CFA905 /* ListOfViewController.m */,
 			);
 			name = "From Main Screens";
 			sourceTree = "<group>";
@@ -575,6 +580,7 @@
 				3A78F1121C92071A008C6BE5 /* DrugsViewController.m in Sources */,
 				52498BC71CB3FD4C00E6B96B /* FourthViewController.m in Sources */,
 				3A0D5CB51C9C6D6E005E6976 /* ExpandNewsViewController.m in Sources */,
+				3A8C25231CBA2E8C00CFA905 /* ListOfViewController.m in Sources */,
 				3A0DBD861CB45FA800D9BAD3 /* DocumentViewController.m in Sources */,
 				3A78F1061C91E80A008C6BE5 /* SWRevealViewController.m in Sources */,
 				3A78F10A1C920531008C6BE5 /* ModelViewController.m in Sources */,

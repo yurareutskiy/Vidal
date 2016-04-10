@@ -59,7 +59,7 @@
 
 - (IBAction)toList:(UIButton *)sender {
     
-    //[self performSegueWithIdentifier:@"toList" sender:self];
+    [self performSegueWithIdentifier:@"toList" sender:self];
     
 }
 
