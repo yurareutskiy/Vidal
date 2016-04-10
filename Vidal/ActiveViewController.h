@@ -14,9 +14,13 @@
 #import "DocsTableViewCell.h"
 
 @interface ActiveViewController : ModelViewController<SLExpandableTableViewDatasource, SLExpandableTableViewDelegate, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
+
 @property (strong, nonatomic) IBOutlet SLExpandableTableView *tableView;
 @property (strong, nonatomic) IBOutlet UIView *darkView;
 @property (strong, nonatomic) IBOutlet UIView *containerView;
-@property (nonatomic, strong) UISearchBar *searchBar1;
+@property (nonatomic, strong) IBOutlet UITableView *tableView1;
+@property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
+
+
 
 @end

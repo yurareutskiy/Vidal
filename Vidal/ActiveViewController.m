@@ -20,6 +20,11 @@
 @property (nonatomic, strong) NSMutableArray *hello1;
 @property (nonatomic, strong) NSArray *letters;
 @property (nonatomic, strong) NSMutableArray *molecule;
+@property (nonatomic, strong) NSMutableArray *forSearch;
+@property (strong, nonatomic) UIBarButtonItem *searchButton;
+@property (nonatomic, strong) IMQuickSearch *quickSearch;
+@property (nonatomic, strong) NSArray *FilteredResults;
+@property (nonatomic, strong) NSMutableArray *forS;
 
 -(void)loadData:(NSString *)req;
 
@@ -41,14 +46,19 @@
     [super viewDidLoad];
     self.mvc = [[ModelViewController alloc] init];
     
-    
+    self.forS = [NSMutableArray array];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     self.searchBar.delegate = self;
     ((DocumentViewController *)self.childViewControllers.lastObject).tableView.delegate = self;
     ((DocumentViewController *)self.childViewControllers.lastObject).tableView.dataSource = self;
     [((DocumentViewController *)self.childViewControllers.lastObject).tableView setTag:2];
+    self.forSearch = [NSMutableArray array];
     
+    self.tableView1.delegate = self;
+    self.tableView1.dataSource = self;
+    self.searchBar.delegate = self;
+    self.searchBar.hidden = true;
     toDelete = [NSMutableIndexSet indexSet];
     ud = [NSUserDefaults standardUserDefaults];
     self.expandableSections = [NSMutableIndexSet indexSet];
@@ -56,10 +66,10 @@
     self.sectionsArray = [NSMutableArray array];
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     self.letters = [NSArray arrayWithObjects:@"N", @"А", @"Б", @"В", @"Г", @"Д", @"Е", @"Ж", @"З", @"И", @"Й", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"С", @"Т", @"У", @"Ф", @"Х", @"Ц", @"Ч", @"Ш", @"Э", @"Я", nil];
-    
+    self.tableView1.hidden = true;
     [super setLabel:@"Список препаратов"];
     [self loadData:@"select * from Molecule order by Molecule.RusName"];
-    
+    [self loadData2:@"select * from Molecule order by Molecule.RusName"];
     container = false;
     self.containerView.hidden = true;
     self.darkView.hidden = true;
@@ -75,6 +85,16 @@
     tap =
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(tableView:didCollapseSection:animated:)];
+    
+    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"burger"] scaledToSize:CGSizeMake(30, 20)]
+                                                         style:UIBarButtonItemStyleDone
+                                                        target:self
+                                                        action:@selector(search)];
+    
+    self.navigationItem.rightBarButtonItem = self.searchButton;
+    
+    [self setUpQuickSearch:self.forS];
+    self.FilteredResults = [self.quickSearch filteredObjectsWithValue:nil];
     
     // Do any additional setup after loading the view.
 }
@@ -167,6 +187,8 @@
         return [result count];
     } else if (tableView.tag == 2) {
         return 1;
+    } else if (tableView.tag == 3){
+        return 1;
     } else {
         return 1;
     }
@@ -183,6 +205,8 @@
                 x++;
         }
         return x;
+    } else if (tableView.tag == 3){
+        return self.FilteredResults.count;
     } else {
         return 1;
     }
@@ -190,6 +214,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if (tableView.tag == 1) {
         
         ActiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"activeCell"];
@@ -219,6 +244,21 @@
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
+    } else if (tableView.tag == 3) {
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
+            if (!cell) {
+                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchCell"];
+            }
+        
+            // Set Content
+            NSString *title, *subtitle;
+            title = self.FilteredResults[indexPath.row];
+            subtitle = self.FilteredResults[indexPath.row];
+            cell.textLabel.text = title;
+            cell.detailTextLabel.text = subtitle;
+        
+            // Return Cell
+            return cell;
     } else {
         return nil;
     }
@@ -325,8 +365,66 @@
 }
 
 - (BOOL) searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
+    
+    [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
+    
     return YES;
 }
+
+- (void)setUpQuickSearch:(NSMutableArray *)work {
+    // Create Filters
+    IMQuickSearchFilter *peopleFilter = [IMQuickSearchFilter filterWithSearchArray:work keys:@[@"description"]];
+    self.quickSearch = [[IMQuickSearch alloc] initWithFilters:@[peopleFilter]];
+}
+
+- (void)filterResults {
+    // Asynchronously
+        [self.quickSearch asynchronouslyFilterObjectsWithValue:self.searchBar.text completion:^(NSArray *filteredResults) {
+            [self updateTableViewWithNewResults:filteredResults];
+        }];
+    }
+
+- (void)updateTableViewWithNewResults:(NSArray *)results {
+    self.FilteredResults = results;
+    [self.tableView1 reloadData];
+}
+
+- (void) search {
+    self.searchBar.frame = CGRectMake(0.0, 40.0, self.view.frame.size.width, 40.0);
+    self.tableView1.frame = CGRectMake(0.0, 80.0, self.view.frame.size.width, self.view.frame.size.height);
+    self.tableView1.hidden = false;
+    self.searchBar.hidden = false;
+    
+}
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+-(void)loadData2:(NSString *)req{
+
+    // Get the results.
+    if (self.forSearch != nil) {
+        self.forSearch = nil;
+    }
+    self.forSearch = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
+
+    self.forSearch = [self.forSearch valueForKey:@"lowercaseString"];
+
+    for (NSArray *key in self.forSearch) {
+        
+        [self.forS addObject:[key objectAtIndex:1]];
+    }
+    
+    // Reload the table view.
+    [self.tableView1 reloadData];
+}
+
+
 
 /*
 #pragma mark - Navigation

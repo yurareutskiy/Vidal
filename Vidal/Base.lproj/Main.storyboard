@@ -1037,13 +1037,34 @@
                                     <segue destination="2Fp-GW-eNp" kind="embed" id="cv4-ub-x0C"/>
                                 </connections>
                             </containerView>
+                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nzp-5X-xaY">
+                                <rect key="frame" x="0.0" y="278" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                            <tableView clipsSubviews="YES" tag="3" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U4r-1R-pxE">
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="aOE-eN-fgQ">
+                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aOE-eN-fgQ" id="bJF-KB-EhL">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="buO-rW-W2a" firstAttribute="top" secondItem="efm-VP-R7x" secondAttribute="bottom" id="0X5-VU-rnr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WeX-Qe-BwO" secondAttribute="trailing" constant="-20" id="1u6-Xz-ZAh"/>
                             <constraint firstItem="buO-rW-W2a" firstAttribute="top" secondItem="WeX-Qe-BwO" secondAttribute="bottom" id="3V7-M2-fQ3"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="U4r-1R-pxE" secondAttribute="trailing" constant="-20" id="4eW-Ix-Pfd"/>
                             <constraint firstItem="efm-VP-R7x" firstAttribute="top" secondItem="RrR-9v-FQB" secondAttribute="topMargin" id="IX9-9z-Fao"/>
+                            <constraint firstItem="U4r-1R-pxE" firstAttribute="leading" secondItem="RrR-9v-FQB" secondAttribute="leadingMargin" constant="-20" id="MFD-jc-f23"/>
+                            <constraint firstItem="U4r-1R-pxE" firstAttribute="top" secondItem="5Wj-ZJ-P5h" secondAttribute="bottom" id="UZy-hh-jZe"/>
                             <constraint firstItem="buO-rW-W2a" firstAttribute="top" secondItem="TfC-Bs-A8E" secondAttribute="bottom" id="Ylj-Tw-exz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TfC-Bs-A8E" secondAttribute="trailing" constant="-20" id="feG-xv-5T3"/>
                             <constraint firstItem="TfC-Bs-A8E" firstAttribute="leading" secondItem="RrR-9v-FQB" secondAttribute="leadingMargin" constant="-20" id="hfj-GV-bYK"/>
@@ -1051,6 +1072,7 @@
                             <constraint firstItem="WeX-Qe-BwO" firstAttribute="top" secondItem="5Wj-ZJ-P5h" secondAttribute="bottom" constant="60" id="iVy-8e-gt6"/>
                             <constraint firstItem="WeX-Qe-BwO" firstAttribute="leading" secondItem="RrR-9v-FQB" secondAttribute="leadingMargin" constant="-20" id="puY-Ym-fto"/>
                             <constraint firstItem="TfC-Bs-A8E" firstAttribute="top" secondItem="RrR-9v-FQB" secondAttribute="topMargin" id="tjh-bE-wLC"/>
+                            <constraint firstItem="buO-rW-W2a" firstAttribute="top" secondItem="U4r-1R-pxE" secondAttribute="bottom" id="wOC-gu-n3g"/>
                             <constraint firstItem="efm-VP-R7x" firstAttribute="leading" secondItem="RrR-9v-FQB" secondAttribute="leadingMargin" constant="-20" id="xbD-Dr-66Q"/>
                         </constraints>
                     </view>
@@ -1058,7 +1080,9 @@
                     <connections>
                         <outlet property="containerView" destination="WeX-Qe-BwO" id="7Nj-Wa-0TQ"/>
                         <outlet property="darkView" destination="TfC-Bs-A8E" id="7aD-c0-BHL"/>
+                        <outlet property="searchBar" destination="nzp-5X-xaY" id="ALQ-qY-Rqh"/>
                         <outlet property="tableView" destination="efm-VP-R7x" id="LhE-B3-uQd"/>
+                        <outlet property="tableView1" destination="U4r-1R-pxE" id="b7w-9L-sze"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cwm-4w-Dta" userLabel="First Responder" sceneMemberID="firstResponder"/>
