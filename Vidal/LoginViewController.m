@@ -21,13 +21,7 @@
     
     self.regButton.layer.borderWidth = 1.0;
     self.regButton.layer.borderColor = [UIColor colorWithRed:148.0/255.0 green:0 blue:0 alpha:1.0].CGColor;
-    
-    self.serverManager = [[Server alloc] init];
-    
-    [self.serverManager getSpec];
-//    [self.serverManager getUniver];
-    self.result = [[NSDictionary alloc] initWithDictionary:[self.serverManager getSpec]];
-    NSLog(@"%@", [self.result allKeys]);
+
     // Do any additional setup after loading the view, typically from a nib.
 }
 

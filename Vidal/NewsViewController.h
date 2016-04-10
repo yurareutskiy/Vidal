@@ -10,6 +10,7 @@
 #import "AFNetworking.h"
 #import "NewsTableViewCell.h"
 #import "ExpandNewsViewController.h"
+#import "Server.h"
 
 @interface NewsViewController : ModelViewController<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;

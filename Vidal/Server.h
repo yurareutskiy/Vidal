@@ -11,11 +11,13 @@
 
 @interface Server : NSObject
 
-@property (strong, nonatomic) NSDictionary *dictSpec;
+@property (strong, nonatomic) NSArray *dictSpec;
+@property (strong, nonatomic) NSArray *dictUni;
+@property (strong, nonatomic) NSArray *dictNews;
 
 - (void) registration:(NSDictionary *)data;
 - (void) login:(NSDictionary *)data;
-- (id) getSpec;
-- (NSDictionary *) getUniver;
+- (NSArray *) getSpec;
+- (NSArray *) getUniver;
 
 @end

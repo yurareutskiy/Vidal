@@ -16,7 +16,7 @@
 - (IBAction)registration:(UIButton *)sender;
 - (IBAction)login:(UIButton *)sender;
 - (IBAction)withoutReg:(UIButton *)sender;
-@property (strong, nonatomic) NSDictionary *result;
+
 
 @end
 

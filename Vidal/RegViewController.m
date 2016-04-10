@@ -10,6 +10,8 @@
 
 @interface RegViewController ()
 
+@property (nonatomic, strong) Server *serverManager;
+
 @end
 
 @implementation RegViewController {
@@ -30,6 +32,9 @@
     }
     
     
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
     svos = self.scrollView.contentOffset;
     datePicker.dateFormatter.dateFormat = @"Y";
     
@@ -40,7 +45,96 @@
     singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
     [self.scrollView addGestureRecognizer:singleTap];
     
+    self.serverManager = [[Server alloc] init];
+    
+    [self getSpec];
+    
     // Do any additional setup after loading the view.
+}
+
+- (void)setUpQuickSearch:(NSMutableArray *)work {
+    // Create Filters
+    IMQuickSearchFilter *peopleFilter = [IMQuickSearchFilter filterWithSearchArray:work keys:@[@"description"]];
+    self.quickSearch = [[IMQuickSearch alloc] initWithFilters:@[peopleFilter]];
+}
+
+- (void)filterResults {
+    // Asynchronously
+
+    [self.quickSearch asynchronouslyFilterObjectsWithValue:((UITextField *)[self.view viewWithTag:6]).text completion:^(NSArray *filteredResults) {
+            [self updateTableViewWithNewResults:filteredResults];
+        }];
+    
+    // Synchronously
+    //[self updateTableViewWithNewResults:[self.QuickSearch filteredObjectsWithValue:self.searchTextField.text]];
+}
+
+- (void)updateTableViewWithNewResults:(NSArray *)results {
+    self.FilteredResults = results;
+    [self.tableView reloadData];
+}
+
+#pragma mark - TableView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.FilteredResults.count;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchCell"];
+    }
+    
+    // Set Content
+    NSString *title, *subtitle;
+    title = self.FilteredResults[indexPath.row];
+    subtitle = self.FilteredResults[indexPath.row];
+    cell.textLabel.text = title;
+    cell.detailTextLabel.text = subtitle;
+    
+    // Return Cell
+    return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    ((UITextField *)[self.view viewWithTag:6]).text = self.FilteredResults[indexPath.row];
+    self.tableView.hidden = true;
+}
+
+#pragma mark - TextField Delegate
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
+    NSInteger i = textField.tag;
+    
+    if (textField.tag < 4) {
+        [[self.view viewWithTag:i+1] becomeFirstResponder];
+        i += 1;
+    } else if (textField.tag == 6) {
+        [textField resignFirstResponder];
+        self.tableView.hidden = true;
+    }else {
+        [[self.view viewWithTag:i] resignFirstResponder];
+        [self.scrollView setContentOffset:self.view.frame.origin animated:YES];
+    }
+    
+    return YES;
+}
+
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+
+    [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
+    self.tableView.hidden = false;
+    return YES;
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+    [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
+    return YES;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
@@ -72,23 +166,6 @@
     }
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    NSInteger i = textField.tag;
-    
-    if (textField.tag < 4) {
-        [[self.view viewWithTag:i+1] becomeFirstResponder];
-        i += 1;
-    } else {
-        [[self.view viewWithTag:i] resignFirstResponder];
-        [self.scrollView setContentOffset:self.view.frame.origin animated:YES];
-    }
-    
-    
-    
-    return true;
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
@@ -112,26 +189,10 @@
 
 - (IBAction)regButton:(UIButton *)sender {
     
-//    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
-//    [self presentViewController:vc animated:false completion:nil];
+    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
+    [self presentViewController:vc animated:false completion:nil];
     
-    //[self performSegueWithIdentifier:@"toFullApp" sender:self];
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSDictionary *params = @{@"register[username]":@"avscherbakov@icloud.com", //- email участника (bin@bk.ru)
-                             @"register[password]":@"mySuperPw", //- его пароль в открытом виде (mySuperPw)
-                             @"register[firstName]":@"Щербаков", //- фамилия (Иван)
-                             @"register[lastName]":@"Антон", //- имя (Иванов)
-                             @"register[birthdate][day]":@"2", //- это день (1-31)
-                             @"register[birthdate][month]":@"12", //- это номер месяца (1-12)
-                             @"register[birthdate][year]":@"1996", //- это год (1999)
-                             @"register[city]":@"Москва", //- это название города, см. выше (Москва)
-                             @"register[primarySpecialty]":@"11"};
-    [manager POST:@"http://vidal.ru/api/user/add" parameters:params success:^(AFHTTPRequestOperation *operation, id responseObject) {
-        NSLog(@"JSON: %@", responseObject);
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        NSLog(@"Error: %@", error);
-    }];
+    [self performSegueWithIdentifier:@"toFullApp" sender:self];
     
 }
 
@@ -183,6 +244,27 @@
         
     }
 }
+
+- (void) getSpec {
+    
+    self.namesSpec = [NSMutableArray array];
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager GET:@"http://www.vidal.ru/api/specialties" parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, NSArray *responseObject) {
+        NSLog(@"JSON: %@", responseObject);
+        self.dictSpec = [[NSMutableArray alloc] initWithArray:responseObject];
+        for (NSDictionary *key in self.dictSpec) {
+            [self.namesSpec addObject:[key objectForKey:@"doctorName"]];
+        }
+        [self setUpQuickSearch:self.namesSpec];
+        self.FilteredResults = [self.quickSearch filteredObjectsWithValue:nil];
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        NSLog(@"%@",error.localizedDescription);
+    }];
+
+}
+
+
 
 //-(void)keyboardWillHide:(NSNotification *)notification
 //{

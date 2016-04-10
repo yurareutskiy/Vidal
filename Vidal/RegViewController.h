@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 #import <HSDatePickerViewController.h>
 #import "AFNetworking.h"
+#import "Server.h"
+#import "IMQuickSearch.h"
 
-@interface RegViewController : UIViewController<HSDatePickerViewControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate>
+@interface RegViewController : UIViewController<HSDatePickerViewControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UILabel *day;
 @property (strong, nonatomic) IBOutlet UILabel *month;
@@ -20,6 +22,13 @@
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 @property (strong, nonatomic) IBOutlet UIButton *agree;
 @property (strong, nonatomic) IBOutlet UIButton *worker;
+@property (nonatomic, strong) NSArray *FilteredResults;
+
+@property (nonatomic, strong) IMQuickSearch *quickSearch;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+
+@property (strong, nonatomic) NSMutableArray *dictSpec;
+@property (strong, nonatomic) NSMutableArray *namesSpec;
 
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 
