@@ -97,6 +97,20 @@
     }
     self.arrPeopleInfo = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     
+    if ([self.arrPeopleInfo count] == 0) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Alert title" message:@"Alert message" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                             {
+                                 //Do some thing here
+                                 [self.navigationController popViewControllerAnimated:YES];
+                                 
+                             }];
+        [alertController addAction:ok];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    
     // Reload the table view.
     [self.tableView reloadData];
 }
