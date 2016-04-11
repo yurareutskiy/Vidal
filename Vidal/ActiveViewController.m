@@ -83,7 +83,7 @@
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(tableView:didCollapseSection:animated:)];
     
-    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"burger"] scaledToSize:CGSizeMake(30, 20)]
+    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(30, 20)]
                                                          style:UIBarButtonItemStyleDone
                                                         target:self
                                                         action:@selector(search)];
@@ -93,13 +93,21 @@
     // Do any additional setup after loading the view.
 }
 
+- (void) search {
+    [self performSegueWithIdentifier:@"toSearch" sender:self];
+}
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void) search {
-    [self performSegueWithIdentifier:@"toSearch" sender:self];
 }
 
 #pragma mark - SLExpandableTableViewDatasource
@@ -362,14 +370,6 @@
         [self.sectionsArray removeObjectAtIndex:indexPath.section];
         [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
     }
-}
-
-- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
-    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
-    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
-    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
-    return newImage;
 }
 
 /*

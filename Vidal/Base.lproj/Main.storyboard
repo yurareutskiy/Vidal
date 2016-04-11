@@ -873,6 +873,7 @@
                         <outlet property="containerView" destination="mVI-sT-BNO" id="Kaa-U0-5jH"/>
                         <outlet property="darkView" destination="fjB-7K-mQG" id="1Bk-TU-WTk"/>
                         <outlet property="tableView" destination="FQI-gN-GOb" id="rlr-jw-lT3"/>
+                        <segue destination="Olq-6Q-xtB" kind="show" identifier="toSearch" animates="NO" id="GOH-Jc-352"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="S8A-5d-4Ku" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -940,9 +941,6 @@
                             </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="iRu-0r-KTd">
                                 <rect key="frame" x="0.0" y="124" width="600" height="476"/>
-                                <connections>
-                                    <segue destination="sbh-iQ-PXQ" kind="embed" id="IZU-WQ-1If"/>
-                                </connections>
                             </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -966,11 +964,12 @@
                         <outlet property="containerView" destination="iRu-0r-KTd" id="IeJ-MU-wGU"/>
                         <outlet property="darkView" destination="TF0-Os-VtB" id="icn-5C-f1v"/>
                         <outlet property="tableView" destination="l8L-Gr-ekb" id="pgg-f9-bGs"/>
+                        <segue destination="Olq-6Q-xtB" kind="show" identifier="toSearch" animates="NO" id="5BT-LG-ntp"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IhX-ki-hQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3830" y="-887"/>
+            <point key="canvasLocation" x="3758" y="-887"/>
         </scene>
         <!--Active View Controller-->
         <scene sceneID="Fqe-TZ-8ic">
@@ -1371,6 +1370,7 @@
                         <outlet property="secondLabel" destination="3bj-QI-igY" id="Qqi-uh-oUZ"/>
                         <outlet property="secondLine" destination="yYB-1k-prK" id="fMR-qw-Zfb"/>
                         <outlet property="tableView" destination="S7X-ty-W7f" id="b0C-2R-kdK"/>
+                        <segue destination="Olq-6Q-xtB" kind="show" identifier="toSearch" animates="NO" id="U2K-4z-eWk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RoC-YJ-f6H" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2172,6 +2172,7 @@ Lactobacillus acidophilus и другие.</string>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
                         <outlet property="bg" destination="8vg-LA-zBo" id="IDx-Pk-fJZ"/>
+                        <segue destination="Olq-6Q-xtB" kind="show" identifier="toSearch" animates="NO" id="QYA-id-OEe"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dRo-En-hqc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3547,7 +3548,7 @@ Lactobacillus acidophilus и другие.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Oc-m2-v6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3758" y="-2394"/>
+            <point key="canvasLocation" x="3858" y="-2598"/>
         </scene>
         <!--List Of View Controller-->
         <scene sceneID="PoU-CR-qRd">
@@ -3852,6 +3853,7 @@ Lactobacillus acidophilus и другие.</string>
                         <outlet property="containerView" destination="Twj-bo-WVr" id="VaX-1j-0ZP"/>
                         <outlet property="darkView" destination="kiM-Lw-05J" id="RWC-HA-2QM"/>
                         <outlet property="tableView" destination="2h1-lr-Mu9" id="I79-S0-VK2"/>
+                        <segue destination="Olq-6Q-xtB" kind="show" identifier="toSearch" animates="NO" id="0Pg-ID-UwG"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mQ7-fm-Obb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3965,6 +3967,7 @@ Lactobacillus acidophilus и другие.</string>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="lKn-4N-Xsx"/>
+        <segue reference="0Pg-ID-UwG"/>
         <segue reference="SEA-Lc-XAD"/>
     </inferredMetricsTieBreakers>
 </document>

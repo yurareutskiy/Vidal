@@ -10,6 +10,8 @@
 
 @interface InteractionsViewController ()
 
+@property (strong, nonatomic) UIBarButtonItem *searchButton;
+
 @end
 
 @implementation InteractionsViewController {
@@ -69,7 +71,26 @@
     
     [super setLabel:@"Лекарственное взаимодействие"];
     
+    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(30, 20)]
+                                                         style:UIBarButtonItemStyleDone
+                                                        target:self
+                                                        action:@selector(search)];
+    
+    self.navigationItem.rightBarButtonItem = self.searchButton;
+    
     // Do any additional setup after loading the view.
+}
+
+- (void) search {
+    [self performSegueWithIdentifier:@"toSearch" sender:self];
+}
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 - (void)setUpQuickSearch:(NSMutableArray *)work {

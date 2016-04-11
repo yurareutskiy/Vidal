@@ -77,7 +77,7 @@
     [self loadData:@"SELECT * FROM Document INNER JOIN Product ON Document.DocumentID = Product.ProductID ORDER BY Product.RusName"
          loadData2:@"SELECT * FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID ORDER BY Molecule.RusName"];
     
-    self.closeButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"burger"] scaledToSize:CGSizeMake(30, 20)]
+    self.closeButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"close"] scaledToSize:CGSizeMake(20, 25)]
                                                         style:UIBarButtonItemStyleDone
                                                        target:self
                                                        action:@selector(close)];
