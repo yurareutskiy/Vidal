@@ -1037,34 +1037,13 @@
                                     <segue destination="2Fp-GW-eNp" kind="embed" id="cv4-ub-x0C"/>
                                 </connections>
                             </containerView>
-                            <searchBar contentMode="redraw" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nzp-5X-xaY">
-                                <rect key="frame" x="0.0" y="278" width="600" height="44"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </searchBar>
-                            <tableView clipsSubviews="YES" tag="3" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="U4r-1R-pxE">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="aOE-eN-fgQ">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="44"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="aOE-eN-fgQ" id="bJF-KB-EhL">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                        </tableViewCellContentView>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="buO-rW-W2a" firstAttribute="top" secondItem="efm-VP-R7x" secondAttribute="bottom" id="0X5-VU-rnr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="WeX-Qe-BwO" secondAttribute="trailing" constant="-20" id="1u6-Xz-ZAh"/>
                             <constraint firstItem="buO-rW-W2a" firstAttribute="top" secondItem="WeX-Qe-BwO" secondAttribute="bottom" id="3V7-M2-fQ3"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="U4r-1R-pxE" secondAttribute="trailing" constant="-20" id="4eW-Ix-Pfd"/>
                             <constraint firstItem="efm-VP-R7x" firstAttribute="top" secondItem="RrR-9v-FQB" secondAttribute="topMargin" id="IX9-9z-Fao"/>
-                            <constraint firstItem="U4r-1R-pxE" firstAttribute="leading" secondItem="RrR-9v-FQB" secondAttribute="leadingMargin" constant="-20" id="MFD-jc-f23"/>
-                            <constraint firstItem="U4r-1R-pxE" firstAttribute="top" secondItem="5Wj-ZJ-P5h" secondAttribute="bottom" id="UZy-hh-jZe"/>
                             <constraint firstItem="buO-rW-W2a" firstAttribute="top" secondItem="TfC-Bs-A8E" secondAttribute="bottom" id="Ylj-Tw-exz"/>
                             <constraint firstAttribute="trailingMargin" secondItem="TfC-Bs-A8E" secondAttribute="trailing" constant="-20" id="feG-xv-5T3"/>
                             <constraint firstItem="TfC-Bs-A8E" firstAttribute="leading" secondItem="RrR-9v-FQB" secondAttribute="leadingMargin" constant="-20" id="hfj-GV-bYK"/>
@@ -1072,7 +1051,6 @@
                             <constraint firstItem="WeX-Qe-BwO" firstAttribute="top" secondItem="5Wj-ZJ-P5h" secondAttribute="bottom" constant="60" id="iVy-8e-gt6"/>
                             <constraint firstItem="WeX-Qe-BwO" firstAttribute="leading" secondItem="RrR-9v-FQB" secondAttribute="leadingMargin" constant="-20" id="puY-Ym-fto"/>
                             <constraint firstItem="TfC-Bs-A8E" firstAttribute="top" secondItem="RrR-9v-FQB" secondAttribute="topMargin" id="tjh-bE-wLC"/>
-                            <constraint firstItem="buO-rW-W2a" firstAttribute="top" secondItem="U4r-1R-pxE" secondAttribute="bottom" id="wOC-gu-n3g"/>
                             <constraint firstItem="efm-VP-R7x" firstAttribute="leading" secondItem="RrR-9v-FQB" secondAttribute="leadingMargin" constant="-20" id="xbD-Dr-66Q"/>
                         </constraints>
                     </view>
@@ -1080,14 +1058,13 @@
                     <connections>
                         <outlet property="containerView" destination="WeX-Qe-BwO" id="7Nj-Wa-0TQ"/>
                         <outlet property="darkView" destination="TfC-Bs-A8E" id="7aD-c0-BHL"/>
-                        <outlet property="searchBar" destination="nzp-5X-xaY" id="ALQ-qY-Rqh"/>
                         <outlet property="tableView" destination="efm-VP-R7x" id="LhE-B3-uQd"/>
-                        <outlet property="tableView1" destination="U4r-1R-pxE" id="b7w-9L-sze"/>
+                        <segue destination="Olq-6Q-xtB" kind="show" identifier="toSearch" animates="NO" id="Bf0-3e-nJt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cwm-4w-Dta" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3758" y="-1681"/>
+            <point key="canvasLocation" x="3758" y="-1697"/>
         </scene>
         <!--News View Controller-->
         <scene sceneID="dBf-fH-sRc">
@@ -3093,7 +3070,7 @@ Lactobacillus acidophilus и другие.</string>
                         <viewControllerLayoutGuide type="bottom" id="qkI-gU-txH"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9B6-ff-9rP">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="540"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="382"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Гадовист" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyD-IW-vHv">
@@ -3146,7 +3123,7 @@ Lactobacillus acidophilus и другие.</string>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mKH-o8-D9E">
-                                <rect key="frame" x="0.0" y="175" width="600" height="365"/>
+                                <rect key="frame" x="0.0" y="175" width="600" height="207"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="docCell" id="Naj-6E-xog" customClass="DocsTableViewCell">
@@ -3424,6 +3401,154 @@ Lactobacillus acidophilus и другие.</string>
             </objects>
             <point key="canvasLocation" x="6014" y="-83"/>
         </scene>
+        <!--Search View Controller-->
+        <scene sceneID="OXv-Y4-kvF">
+            <objects>
+                <viewController id="Olq-6Q-xtB" customClass="SearchViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="d9j-eY-XL3"/>
+                        <viewControllerLayoutGuide type="bottom" id="3ad-lt-LbW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qrX-L6-NGk">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o34-Mj-V2T">
+                                <rect key="frame" x="300" y="108" width="300" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="zBK-oe-MuT"/>
+                                </constraints>
+                                <state key="normal" title="Препараты">
+                                    <color key="titleColor" red="0.58039215690000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="toDrugs:" destination="Olq-6Q-xtB" eventType="touchUpInside" id="Wkk-Wj-xsp"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uJy-ke-hNJ">
+                                <rect key="frame" x="0.0" y="108" width="300" height="50"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="lup-h6-Lgk"/>
+                                </constraints>
+                                <state key="normal" title="Вещества">
+                                    <color key="titleColor" red="0.58039215690000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="toMolecule:" destination="Olq-6Q-xtB" eventType="touchUpInside" id="NDe-kE-9qk"/>
+                                </connections>
+                            </button>
+                            <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wO8-eY-JRB">
+                                <rect key="frame" x="20" y="158" width="560" height="442"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="KhK-bn-mEC">
+                                        <rect key="frame" x="0.0" y="28" width="560" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KhK-bn-mEC" id="5bQ-Sz-KCA">
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mZ9-6w-jLi">
+                                <rect key="frame" x="20" y="158" width="560" height="442"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="GkB-n6-3IX">
+                                        <rect key="frame" x="0.0" y="28" width="560" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GkB-n6-3IX" id="ArM-kz-7xI">
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CgU-xy-mHS">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" red="0.2196078431372549" green="0.2196078431372549" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="sFm-Ek-COx">
+                                <rect key="frame" x="0.0" y="218" width="600" height="382"/>
+                                <connections>
+                                    <segue destination="2Fp-GW-eNp" kind="embed" id="lKn-4N-Xsx"/>
+                                </connections>
+                            </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MRg-zN-WVc">
+                                <rect key="frame" x="0.0" y="218" width="600" height="382"/>
+                                <connections>
+                                    <segue destination="sbh-iQ-PXQ" kind="embed" id="SEA-Lc-XAD"/>
+                                </connections>
+                            </containerView>
+                            <searchBar contentMode="redraw" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a5O-tU-nQw">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="wO8-eY-JRB" secondAttribute="trailing" id="0X5-88-0tl"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="sFm-Ek-COx" secondAttribute="trailing" constant="-20" id="5SV-aZ-sFx"/>
+                            <constraint firstItem="MRg-zN-WVc" firstAttribute="leading" secondItem="qrX-L6-NGk" secondAttribute="leadingMargin" constant="-20" id="6Eg-EL-6EY"/>
+                            <constraint firstItem="uJy-ke-hNJ" firstAttribute="top" secondItem="a5O-tU-nQw" secondAttribute="bottom" id="6cU-DS-7mT"/>
+                            <constraint firstItem="CgU-xy-mHS" firstAttribute="top" secondItem="qrX-L6-NGk" secondAttribute="topMargin" id="9Zi-G4-uv3"/>
+                            <constraint firstItem="o34-Mj-V2T" firstAttribute="leading" secondItem="uJy-ke-hNJ" secondAttribute="trailing" id="AP4-Xa-Z5d"/>
+                            <constraint firstItem="o34-Mj-V2T" firstAttribute="top" secondItem="a5O-tU-nQw" secondAttribute="bottom" id="BlZ-4D-v4J"/>
+                            <constraint firstItem="wO8-eY-JRB" firstAttribute="top" secondItem="uJy-ke-hNJ" secondAttribute="bottom" id="D2l-j1-mBK"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="a5O-tU-nQw" secondAttribute="trailing" constant="-20" id="DbF-ua-2gp"/>
+                            <constraint firstItem="3ad-lt-LbW" firstAttribute="top" secondItem="wO8-eY-JRB" secondAttribute="bottom" id="F2n-ak-B1O"/>
+                            <constraint firstItem="3ad-lt-LbW" firstAttribute="top" secondItem="MRg-zN-WVc" secondAttribute="bottom" id="FaV-YQ-F37"/>
+                            <constraint firstItem="a5O-tU-nQw" firstAttribute="top" secondItem="d9j-eY-XL3" secondAttribute="bottom" id="G5F-DN-AjB"/>
+                            <constraint firstItem="a5O-tU-nQw" firstAttribute="leading" secondItem="qrX-L6-NGk" secondAttribute="leadingMargin" constant="-20" id="G8Y-rM-chO"/>
+                            <constraint firstItem="uJy-ke-hNJ" firstAttribute="top" secondItem="a5O-tU-nQw" secondAttribute="bottom" id="LCI-wX-Vx1"/>
+                            <constraint firstItem="uJy-ke-hNJ" firstAttribute="top" secondItem="a5O-tU-nQw" secondAttribute="bottom" id="NrI-Ln-oCj"/>
+                            <constraint firstItem="o34-Mj-V2T" firstAttribute="leading" secondItem="uJy-ke-hNJ" secondAttribute="trailing" id="PO5-2X-Lv4"/>
+                            <constraint firstItem="sFm-Ek-COx" firstAttribute="leading" secondItem="qrX-L6-NGk" secondAttribute="leadingMargin" constant="-20" id="R5Q-G4-arI"/>
+                            <constraint firstItem="3ad-lt-LbW" firstAttribute="top" secondItem="mZ9-6w-jLi" secondAttribute="bottom" id="UhP-nT-dUJ"/>
+                            <constraint firstItem="mZ9-6w-jLi" firstAttribute="leading" secondItem="qrX-L6-NGk" secondAttribute="leadingMargin" id="VmV-g4-dkd"/>
+                            <constraint firstItem="o34-Mj-V2T" firstAttribute="top" secondItem="a5O-tU-nQw" secondAttribute="bottom" id="WoW-hC-QJi"/>
+                            <constraint firstItem="uJy-ke-hNJ" firstAttribute="leading" secondItem="qrX-L6-NGk" secondAttribute="leadingMargin" constant="-20" id="ZDz-hz-sgA"/>
+                            <constraint firstItem="3ad-lt-LbW" firstAttribute="top" secondItem="CgU-xy-mHS" secondAttribute="bottom" id="akg-1P-YIT"/>
+                            <constraint firstItem="MRg-zN-WVc" firstAttribute="top" secondItem="uJy-ke-hNJ" secondAttribute="bottom" constant="60" id="cBD-bH-nVZ"/>
+                            <constraint firstItem="wO8-eY-JRB" firstAttribute="leading" secondItem="qrX-L6-NGk" secondAttribute="leadingMargin" id="cmA-Nk-n6Z"/>
+                            <constraint firstItem="sFm-Ek-COx" firstAttribute="top" secondItem="uJy-ke-hNJ" secondAttribute="bottom" constant="60" id="ewI-0a-tKd"/>
+                            <constraint firstItem="mZ9-6w-jLi" firstAttribute="top" secondItem="o34-Mj-V2T" secondAttribute="bottom" id="fI6-UO-mLE"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="MRg-zN-WVc" secondAttribute="trailing" constant="-20" id="fqS-9F-HTS"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="CgU-xy-mHS" secondAttribute="trailing" constant="-20" id="gRk-jH-kDI"/>
+                            <constraint firstItem="3ad-lt-LbW" firstAttribute="top" secondItem="sFm-Ek-COx" secondAttribute="bottom" id="lNF-Yi-Jiq"/>
+                            <constraint firstItem="CgU-xy-mHS" firstAttribute="leading" secondItem="qrX-L6-NGk" secondAttribute="leadingMargin" constant="-20" id="nkN-4O-esb"/>
+                            <constraint firstItem="o34-Mj-V2T" firstAttribute="width" secondItem="uJy-ke-hNJ" secondAttribute="width" id="oH1-CS-Fdg"/>
+                            <constraint firstItem="a5O-tU-nQw" firstAttribute="top" secondItem="qrX-L6-NGk" secondAttribute="topMargin" id="sOf-Pj-mV4"/>
+                            <constraint firstItem="o34-Mj-V2T" firstAttribute="leading" secondItem="uJy-ke-hNJ" secondAttribute="trailing" id="ucv-eG-vFw"/>
+                            <constraint firstItem="wO8-eY-JRB" firstAttribute="top" secondItem="uJy-ke-hNJ" secondAttribute="bottom" id="v6e-1u-Z2F"/>
+                            <constraint firstItem="mZ9-6w-jLi" firstAttribute="top" secondItem="uJy-ke-hNJ" secondAttribute="bottom" id="xev-3Q-nLg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="o34-Mj-V2T" secondAttribute="trailing" constant="-20" id="xzA-S7-nfs"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="mZ9-6w-jLi" secondAttribute="trailing" id="yPo-TT-uVQ"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="sOf-Pj-mV4"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="button1" destination="o34-Mj-V2T" id="s5t-SK-Bm4"/>
+                        <outlet property="button2" destination="uJy-ke-hNJ" id="AaA-uo-hxp"/>
+                        <outlet property="containerView1" destination="sFm-Ek-COx" id="dVM-VX-2gK"/>
+                        <outlet property="containerView2" destination="MRg-zN-WVc" id="J8F-Nr-cAl"/>
+                        <outlet property="darkView" destination="CgU-xy-mHS" id="Pzh-XD-fYz"/>
+                        <outlet property="searchBar" destination="a5O-tU-nQw" id="ULw-iq-noz"/>
+                        <outlet property="tableView1" destination="wO8-eY-JRB" id="Ccm-BA-RGY"/>
+                        <outlet property="tableView2" destination="mZ9-6w-jLi" id="DRc-Ps-5Xg"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0Oc-m2-v6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3758" y="-2394"/>
+        </scene>
         <!--List Of View Controller-->
         <scene sceneID="PoU-CR-qRd">
             <objects>
@@ -3514,7 +3639,7 @@ Lactobacillus acidophilus и другие.</string>
                         <viewControllerLayoutGuide type="bottom" id="TRU-X0-RRV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="211-dZ-SJ9">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="476"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="382"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Гадовист" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ock-oq-hUK">
@@ -3534,7 +3659,7 @@ Lactobacillus acidophilus и другие.</string>
                                 <state key="normal" title="Поделиться"/>
                             </button>
                             <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lBn-KM-PfN">
-                                <rect key="frame" x="0.0" y="160" width="600" height="316"/>
+                                <rect key="frame" x="0.0" y="160" width="600" height="222"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="docCell" id="l87-0y-HSO" customClass="DocsTableViewCell">
@@ -3839,6 +3964,7 @@ Lactobacillus acidophilus и другие.</string>
         <image name="vkLogo" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Eqj-Sr-YVk"/>
+        <segue reference="lKn-4N-Xsx"/>
+        <segue reference="SEA-Lc-XAD"/>
     </inferredMetricsTieBreakers>
 </document>

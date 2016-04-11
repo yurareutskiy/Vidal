@@ -49,13 +49,9 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    self.searchBar.delegate = self;
     ((DocumentViewController *)self.childViewControllers.lastObject).tableView.delegate = self;
     ((DocumentViewController *)self.childViewControllers.lastObject).tableView.dataSource = self;
     [((DocumentViewController *)self.childViewControllers.lastObject).tableView setTag:2];
-    self.tableView1.delegate = self;
-    self.tableView1.dataSource = self;
-    self.searchBar.delegate = self;
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
@@ -68,14 +64,11 @@
     self.sectionsArray = [NSMutableArray array];
     self.letters = [NSArray arrayWithObjects:@"N", @"А", @"Б", @"В", @"Г", @"Д", @"Е", @"Ж", @"З", @"И", @"Й", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"С", @"Т", @"У", @"Ф", @"Х", @"Ц", @"Ч", @"Ш", @"Э", @"Я", nil];
     
-    self.searchBar.hidden = true;
     container = false;
     self.containerView.hidden = true;
     self.darkView.hidden = true;
-    self.tableView1.hidden = true;
     
     [self loadData:@"select * from Molecule order by Molecule.RusName"];
-    [self loadData2:@"select * from Molecule order by Molecule.RusName"];
     
     
     for (int i = 0; i < [self.arrPeopleInfo count]; i++) {
@@ -97,15 +90,16 @@
     
     self.navigationItem.rightBarButtonItem = self.searchButton;
     
-    [self setUpQuickSearch:self.forS];
-    self.FilteredResults = [self.quickSearch filteredObjectsWithValue:nil];
-    
     // Do any additional setup after loading the view.
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) search {
+    [self performSegueWithIdentifier:@"toSearch" sender:self];
 }
 
 #pragma mark - SLExpandableTableViewDatasource
@@ -337,25 +331,6 @@
     [self.tableView reloadData];
 }
 
--(void)loadData2:(NSString *)req{
-    
-    // Get the results.
-    if (self.forSearch != nil) {
-        self.forSearch = nil;
-    }
-    self.forSearch = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
-    
-    self.forSearch = [self.forSearch valueForKey:@"lowercaseString"];
-    
-    for (NSArray *key in self.forSearch) {
-        
-        [self.forS addObject:[key objectAtIndex:1]];
-    }
-    
-    // Reload the table view.
-    [self.tableView1 reloadData];
-}
-
 - (void) getMol:(NSString *)mol {
     if (self.molecule != nil) {
         self.molecule = nil;
@@ -381,26 +356,6 @@
     
 }
 
-#pragma MAKR - IMQuickSearch Methods
-
-- (void)setUpQuickSearch:(NSMutableArray *)work {
-    // Create Filters
-    IMQuickSearchFilter *peopleFilter = [IMQuickSearchFilter filterWithSearchArray:work keys:@[@"description"]];
-    self.quickSearch = [[IMQuickSearch alloc] initWithFilters:@[peopleFilter]];
-}
-
-- (void)filterResults {
-    // Asynchronously
-    [self.quickSearch asynchronouslyFilterObjectsWithValue:self.searchBar.text completion:^(NSArray *filteredResults) {
-        [self updateTableViewWithNewResults:filteredResults];
-    }];
-}
-
-- (void)updateTableViewWithNewResults:(NSArray *)results {
-    self.FilteredResults = results;
-    [self.tableView1 reloadData];
-}
-
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.row == 0) {
@@ -409,17 +364,6 @@
     }
 }
 
-#pragma MARK - SearchBar Delegate
-
-- (BOOL) searchBar:(UISearchBar *)searchBar shouldChangeTextInRange:(NSRange)range replacementText:(NSString *)text {
-    
-    [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
-    
-    return YES;
-}
-
-#pragma MARK - Additional Methods
-
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
     UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
     [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
@@ -427,15 +371,6 @@
     UIGraphicsEndImageContext();
     return newImage;
 }
-
-- (void) search {
-    self.searchBar.frame = CGRectMake(0.0, 40.0, self.view.frame.size.width, 40.0);
-    self.tableView1.frame = CGRectMake(0.0, 80.0, self.view.frame.size.width, self.view.frame.size.height);
-    self.tableView1.hidden = false;
-    self.searchBar.hidden = false;
-    
-}
-
 
 /*
 #pragma mark - Navigation

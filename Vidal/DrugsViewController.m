@@ -307,6 +307,7 @@
 }
 
 - (void) getMol:(NSString *)mol {
+    
     if (self.molecule != nil) {
         self.molecule = nil;
     }

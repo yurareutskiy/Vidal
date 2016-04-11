@@ -50,6 +50,7 @@
 		3A9E3FD71C80AE330069BDFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E3FD51C80AE330069BDFC /* Main.storyboard */; };
 		3A9E3FDA1C80AE330069BDFC /* Vidal.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FD81C80AE330069BDFC /* Vidal.xcdatamodeld */; };
 		3A9E3FDF1C80AE330069BDFC /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A9E3FDD1C80AE330069BDFC /* LaunchScreen.storyboard */; };
+		3AA6AC391CBB0B35005AAD85 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA6AC381CBB0B35005AAD85 /* SearchViewController.m */; };
 		3AAAA2C81C833FA3006DEE4E /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAAA2C71C833FA3006DEE4E /* RegViewController.m */; };
 		3AAAA2CB1C8384EB006DEE4E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAAA2CA1C8384EB006DEE4E /* MainViewController.m */; };
 		52498BC11CB3FD3500E6B96B /* SecondPharmaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52498BC01CB3FD3500E6B96B /* SecondPharmaViewController.m */; };
@@ -154,6 +155,8 @@
 		3A9E3FD91C80AE330069BDFC /* Vidal.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Vidal.xcdatamodel; sourceTree = "<group>"; };
 		3A9E3FDE1C80AE330069BDFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3A9E3FE01C80AE330069BDFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3AA6AC371CBB0B35005AAD85 /* SearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchViewController.h; sourceTree = "<group>"; };
+		3AA6AC381CBB0B35005AAD85 /* SearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchViewController.m; sourceTree = "<group>"; };
 		3AAAA2C61C833FA3006DEE4E /* RegViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegViewController.h; sourceTree = "<group>"; };
 		3AAAA2C71C833FA3006DEE4E /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
 		3AAAA2C91C8384EB006DEE4E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
@@ -326,6 +329,8 @@
 			children = (
 				3A0D5C9E1C9C455A005E6976 /* TableCells */,
 				3A15706B1CAEAE7800D49C5E /* Models */,
+				3AA6AC371CBB0B35005AAD85 /* SearchViewController.h */,
+				3AA6AC381CBB0B35005AAD85 /* SearchViewController.m */,
 			);
 			name = "Additional Files";
 			sourceTree = "<group>";
@@ -576,6 +581,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A78F1271C92076D008C6BE5 /* FavouriteViewController.m in Sources */,
+				3AA6AC391CBB0B35005AAD85 /* SearchViewController.m in Sources */,
 				3A78F1151C920725008C6BE5 /* ActiveViewController.m in Sources */,
 				3A1570661CAEAAAF00D49C5E /* OKSDK.m in Sources */,
 				3A78F11B1C920740008C6BE5 /* PharmaViewController.m in Sources */,
