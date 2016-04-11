@@ -6,6 +6,9 @@
 //  Copyright © 2016 StyleRU. All rights reserved.
 //
 
+// ПОПРАВИТЬ DIDSELECTCELLAIINDEX
+// НЕПРАВИЛЬНО ВЫБИРАЕТСЯ ИНДЕКС ЯЧЕЙКИ
+
 #import "SearchViewController.h"
 
 @interface SearchViewController ()
@@ -16,8 +19,8 @@
 @property (nonatomic, strong) NSMutableArray *drugsSearch;
 @property (nonatomic, strong) NSMutableArray *drugsFull;
 @property (nonatomic, strong) NSMutableArray *moleculeFull;
-@property (strong, nonatomic) UIBarButtonItem *searchButton;
-@property (strong, nonatomic) UIBarButtonItem *closeButton;
+@property (nonatomic, strong) UIBarButtonItem *searchButton;
+@property (nonatomic, strong) UIBarButtonItem *closeButton;
 @property (nonatomic, strong) NSArray *FilteredResults;
 @property (nonatomic, strong) NSMutableArray *data;
 @property (nonatomic, strong) NSMutableIndexSet *toDelete;
@@ -33,6 +36,7 @@
     NSUserDefaults *ud;
     UITapGestureRecognizer *tap;
     NSIndexPath *selectedRowIndex;
+    NSString *next;
     
 }
 
@@ -45,8 +49,8 @@
     self.toDelete = [NSMutableIndexSet indexSet];
     
     container = false;
-    tableView1b = false;
-    tableView2b = true;
+    tableView1b = true;
+    tableView2b = false;
     
     self.tableView1.delegate = self;
     self.tableView1.dataSource = self;
@@ -70,8 +74,8 @@
     self.tableView1.hidden = true;
     self.tableView2.hidden = true;
     
-    [self loadData:@"select * from Molecule order by Molecule.RusName"
-         loadData2:@"select * from Product order by Product.RusName"];
+    [self loadData:@"SELECT * FROM Document INNER JOIN Product ON Document.DocumentID = Product.ProductID ORDER BY Product.RusName"
+         loadData2:@"SELECT * FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID ORDER BY Molecule.RusName"];
     
     self.closeButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"burger"] scaledToSize:CGSizeMake(30, 20)]
                                                         style:UIBarButtonItemStyleDone
@@ -84,14 +88,14 @@
     [self setUpQuickSearch:self.moleculeSearch];
     self.FilteredResults = [self.quickSearch filteredObjectsWithValue:nil];
     
-    self.tableView2.hidden = false;
-    self.tableView1.hidden = true;
+    self.tableView1.hidden = false;
+    self.tableView2.hidden = true;
     
-    [self.button1 setBackgroundColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1]];
-    [self.button1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.button2 setBackgroundColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1]];
+    [self.button2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     
-    [self.button2 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
-    [self.button2 setBackgroundColor:[UIColor whiteColor]];
+    [self.button1 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
+    [self.button1 setBackgroundColor:[UIColor whiteColor]];
     
     self.darkView.hidden = true;
     self.containerView1.hidden = true;
@@ -147,12 +151,16 @@
         return self.FilteredResults.count;
         
     } else if (tableView.tag == 3 || tableView.tag == 4) {
-        NSInteger x = 0;
-        for (int i = 0; i < [[self.data objectAtIndex:0] count]; i++) {
-            if (![[[self.data objectAtIndex:0] objectAtIndex:i] isEqualToString:@""])
-                x++;
-        }
+        if ([self.data count] != 0) {
+            NSInteger x = 0;
+            for (int i = 0; i < [[self.data objectAtIndex:0] count]; i++) {
+                if (![[[self.data objectAtIndex:0] objectAtIndex:i] isEqualToString:@""])
+                    x++;
+            }
         return x;
+        } else {
+            return 1;
+        }
     } else {
         return 1;
     }
@@ -178,22 +186,28 @@
         return cell;
         
     } else if (tableView.tag == 3 || tableView.tag == 4) {
+        if ([self.data count] != 0) {
+            if ([[[self.data objectAtIndex:0] objectAtIndex:indexPath.row] isEqualToString:@""]) {
+                return nil;
+            }
         
-        if ([[[self.data objectAtIndex:0] objectAtIndex:indexPath.row] isEqualToString:@""]) {
-            return nil;
+            DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"docCell"];
+            if (cell == nil) {
+                cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
+            };
+        
+            cell.title.text = [NSString stringWithFormat:@"%@", [self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
+            cell.desc.text = [[self.data objectAtIndex:0] objectAtIndex:indexPath.row];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+            return cell;
+        } else {
+            DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"docCell"];
+            if (cell == nil) {
+                cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
+            };
+            return cell;
         }
-        
-        DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"docCell"];
-        if (cell == nil) {
-            cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
-        };
-        
-        cell.title.text = [NSString stringWithFormat:@"%@", [self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
-        cell.desc.text = [[self.data objectAtIndex:0] objectAtIndex:indexPath.row];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        return cell;
-        
     } else {
         return nil;
     }
@@ -202,14 +216,20 @@
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    if (tableView.tag == 1 || tableView.tag == 2) {
     if (tableView1b) {
         
         for (int i = 0; i < [self.moleculeSearch count]; i++) {
-            if ([[[self.moleculeSearch objectAtIndex:i] objectAtIndex:1] isEqualToString:self.FilteredResults[indexPath.row]]) {
+            if ([[self.moleculeSearch objectAtIndex:i] isEqualToString:self.FilteredResults[indexPath.row]]) {
                 index = i;
                 break;
             }
         }
+        
+        next = [self.moleculeFull[indexPath.row] objectAtIndex:26];
+        [ud setObject:next forKey:@"molecule"];
+        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID WHERE Molecule.MoleculeID = %@", next];
+        [self getInfo:request];
         
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         self.darkView.hidden = false;
@@ -218,18 +238,31 @@
         
     } else if (tableView2b) {
         
-        for (int i = 0; i < [self.moleculeSearch count]; i++) {
-            if ([[[self.moleculeSearch objectAtIndex:i] objectAtIndex:1] isEqualToString:self.FilteredResults[indexPath.row]]) {
+        for (int i = 0; i < [self.drugsSearch count]; i++) {
+            if ([[self.drugsSearch objectAtIndex:i] isEqualToString:self.FilteredResults[indexPath.row]]) {
                 index = i;
                 break;
             }
         }
+        
+        next = [self.drugsFull[indexPath.row] objectAtIndex:24];
+        [ud setObject:next forKey:@"molecule"];
+        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Product ON Document.DocumentID = Product.DocumentID WHERE Product.ProductID = %@", next];
+        [self getInfo:request];
         
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         self.darkView.hidden = false;
         self.containerView2.hidden = false;
         [self.view addGestureRecognizer:tap];
         
+    }
+    
+    } else if (tableView.tag == 3 || tableView.tag == 4) {
+        selectedRowIndex = [indexPath copy];
+    
+        [tableView beginUpdates];
+            
+        [tableView endUpdates];
     }
     
 }
@@ -240,7 +273,7 @@
         self.moleculeFull = nil;
     }
     
-    self.moleculeFull = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
+    self.moleculeFull = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req2]];
     self.moleculeFull = [self.moleculeFull valueForKey:@"lowercaseString"];
     
     for (NSArray *key in self.moleculeFull) {
@@ -251,7 +284,7 @@
         self.drugsFull = nil;
     }
     
-    self.drugsFull = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req2]];
+    self.drugsFull = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
     self.drugsFull = [self.drugsFull valueForKey:@"lowercaseString"];
     
     for (NSArray *key in self.drugsFull) {
@@ -310,31 +343,31 @@
 - (IBAction)toDrugs:(UIButton *)sender {
     [self setUpQuickSearch:self.drugsSearch];
     self.FilteredResults = [self.quickSearch filteredObjectsWithValue:nil];
-    [self.tableView1 reloadData];
-    self.tableView1.hidden = false;
-    self.tableView2.hidden = true;
+    [self.tableView2 reloadData];
+    self.tableView2.hidden = false;
+    self.tableView1.hidden = true;
     self.searchBar.text = @"";
     [self.button1 setBackgroundColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1]];
     [self.button1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.button2 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
     [self.button2 setBackgroundColor:[UIColor whiteColor]];
-    tableView1b = true;
-    tableView2b = false;
+    tableView2b = true;
+    tableView1b = false;
 }
 
 - (IBAction)toMolecule:(UIButton *)sender {
     [self setUpQuickSearch:self.moleculeSearch];
     self.FilteredResults = [self.quickSearch filteredObjectsWithValue:nil];
-    [self.tableView2 reloadData];
-    self.tableView2.hidden = false;
-    self.tableView1.hidden = true;
+    [self.tableView1 reloadData];
+    self.tableView1.hidden = false;
+    self.tableView2.hidden = true;
     self.searchBar.text = @"";
     [self.button2 setBackgroundColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1]];
     [self.button2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.button1 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
     [self.button1 setBackgroundColor:[UIColor whiteColor]];
-    tableView1b = false;
-    tableView2b = true;
+    tableView2b = false;
+    tableView1b = true;
 }
 
 - (void) getInfo:(NSString *)req {
@@ -345,7 +378,7 @@
             self.data = nil;
         }
         self.data = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
-    
+
         for (NSUInteger i = 0; i < [[self.data objectAtIndex:0] count]; i++) {
             if ([[[self.data objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
                 || [[[self.data objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
