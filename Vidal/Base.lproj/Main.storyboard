@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5fu-Bl-9V5">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
@@ -24,46 +24,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="E-mail*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5S-SN-Lw9">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="E-mail*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j5S-SN-Lw9">
                                 <rect key="frame" x="40" y="191" width="48" height="17"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <color key="textColor" red="0.50980392156862742" green="0.50980392156862742" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="catzwolf@catzwolf.ru" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rhb-am-lck">
+                            <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="catzwolf@catzwolf.ru" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rhb-am-lck">
                                 <rect key="frame" x="40" y="218" width="520" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <segue destination="sDu-zh-5Ai" kind="show" identifier="toReg" id="E1I-Qb-GAf"/>
-                                </connections>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no"/>
                             </textField>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="49g-Mf-6lH">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="49g-Mf-6lH">
                                 <rect key="frame" x="40" y="246" width="520" height="1"/>
                                 <color key="backgroundColor" red="0.69411764710000001" green="0.69411764710000001" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="LKe-Dc-nLJ"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3Wv-xs-jD5">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3Wv-xs-jD5">
                                 <rect key="frame" x="40" y="313" width="520" height="1"/>
                                 <color key="backgroundColor" red="0.69411764710000001" green="0.69411764710000001" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="1" id="Ov6-v7-mTU"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Пароль" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fF-XT-PSN">
-                                <rect key="frame" x="40" y="257" width="53" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Пароль*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3fF-XT-PSN">
+                                <rect key="frame" x="40" y="257" width="61" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xEr-bK-ug9">
+                            <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Пароль" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xEr-bK-ug9">
                                 <rect key="frame" x="40" y="285" width="520" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4bW-ey-mnx">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4bW-ey-mnx">
                                 <rect key="frame" x="80" y="438" width="440" height="60"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="jT2-hY-UhD"/>
@@ -76,7 +73,7 @@
                                     <action selector="registration:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YLN-Uf-k2X"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lBQ-dW-H2d">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lBQ-dW-H2d">
                                 <rect key="frame" x="137" y="533" width="326" height="29"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <state key="normal" title="Я не являюсь специалистом здравоохранения &gt;">
@@ -86,14 +83,14 @@
                                     <action selector="withoutReg:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Aje-PS-PMz"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Авторизация" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T9e-jL-KHj">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Авторизация" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T9e-jL-KHj">
                                 <rect key="frame" x="233" y="55" width="135" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="22"/>
                                 <color key="textColor" red="0.58039215686274503" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cuH-73-Wcc">
-                                <rect key="frame" x="137" y="117" width="326" height="54"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cuH-73-Wcc">
+                                <rect key="frame" x="40" y="117" width="520" height="54"/>
                                 <string key="text">Чтобы получить доступ к функционалу
 приложения, пожалуйста, авторизуйтесь или
 зарегистрируйте аккаунт.</string>
@@ -101,14 +98,14 @@
                                 <color key="textColor" red="0.69411764705882351" green="0.69411764705882351" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vhj-PO-Bpr">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vhj-PO-Bpr">
                                 <rect key="frame" x="245" y="324" width="110" height="29"/>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                 <state key="normal" title="Забыли пароль?">
                                     <color key="titleColor" red="0.50980392159999999" green="0.50980392159999999" blue="0.50980392159999999" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gUC-Lf-jJm">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gUC-Lf-jJm">
                                 <rect key="frame" x="80" y="363" width="440" height="60"/>
                                 <color key="backgroundColor" red="0.58039215690000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -127,6 +124,7 @@
                         <constraints>
                             <constraint firstItem="3fF-XT-PSN" firstAttribute="leading" secondItem="j5S-SN-Lw9" secondAttribute="leading" id="1hJ-Xv-fqF"/>
                             <constraint firstItem="xEr-bK-ug9" firstAttribute="trailing" secondItem="rhb-am-lck" secondAttribute="trailing" id="7Vn-UR-WDy"/>
+                            <constraint firstItem="cuH-73-Wcc" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="C6Q-si-AmU"/>
                             <constraint firstItem="gUC-Lf-jJm" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="DXw-MS-ugA"/>
                             <constraint firstItem="49g-Mf-6lH" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="20" id="G1I-ye-rAR"/>
                             <constraint firstItem="vhj-PO-Bpr" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="IBv-Ko-pbz"/>
@@ -157,18 +155,25 @@
                             <constraint firstItem="3fF-XT-PSN" firstAttribute="top" secondItem="49g-Mf-6lH" secondAttribute="bottom" constant="10" id="vy3-WL-BkB"/>
                             <constraint firstItem="4bW-ey-mnx" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="60" id="wbO-ow-ciS"/>
                             <constraint firstItem="vhj-PO-Bpr" firstAttribute="top" secondItem="3Wv-xs-jD5" secondAttribute="bottom" constant="10" id="xXi-Uy-oy8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="cuH-73-Wcc" secondAttribute="trailing" constant="20" id="y2E-VH-m8N"/>
                             <constraint firstItem="3Wv-xs-jD5" firstAttribute="trailing" secondItem="rhb-am-lck" secondAttribute="trailing" id="zRQ-4T-60K"/>
                             <constraint firstAttribute="trailingMargin" secondItem="49g-Mf-6lH" secondAttribute="trailing" constant="20" id="zk9-7r-wdT"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="Gi4-Zx-SMS"/>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="emailInput" destination="rhb-am-lck" id="cpT-A4-hTc"/>
+                        <outlet property="lead" destination="cuH-73-Wcc" id="NCL-dY-OxJ"/>
+                        <outlet property="passInput" destination="xEr-bK-ug9" id="ooy-nL-wrO"/>
                         <outlet property="regButton" destination="4bW-ey-mnx" id="6Ek-6Q-L1z"/>
                         <segue destination="K7S-Mm-AX1" kind="show" identifier="withoutReg" id="1GH-eG-4VB"/>
+                        <segue destination="sDu-zh-5Ai" kind="show" identifier="toReg" id="nAn-SV-e0M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="388" y="683"/>
+            <point key="canvasLocation" x="1200" y="683"/>
         </scene>
         <!--revealMenu-->
         <scene sceneID="Gze-gA-Wa5">
@@ -176,7 +181,7 @@
                 <viewControllerPlaceholder storyboardName="LogOutStoryboard" bundleIdentifier="StyleRU.Vidal" referencedIdentifier="revealMenu" id="K7S-Mm-AX1" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ScQ-4o-27D" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="897" y="683"/>
+            <point key="canvasLocation" x="1709" y="683"/>
         </scene>
         <!--Reveal View Controller-->
         <scene sceneID="rnk-Jg-Ewk">
@@ -1529,7 +1534,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qgt-hX-kyc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3666" y="683"/>
+            <point key="canvasLocation" x="4478" y="683"/>
         </scene>
         <!--Reference View Controller-->
         <scene sceneID="fY5-bf-5fb">
@@ -2177,7 +2182,7 @@ Lactobacillus acidophilus и другие.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dRo-En-hqc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2206" y="683"/>
+            <point key="canvasLocation" x="3018" y="683"/>
         </scene>
         <!--Reg View Controller-->
         <scene sceneID="U0Y-jA-QkI">
@@ -2259,9 +2264,20 @@ Lactobacillus acidophilus и другие.</string>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2YC-UI-XGR">
                                         <rect key="frame" x="278" y="712" width="44" height="30"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="wHU-ql-zgX"/>
+                                        </constraints>
                                         <state key="normal" title="Назад">
                                             <color key="titleColor" red="0.69411764710000001" green="0.69411764710000001" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
                                         </state>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="wHU-ql-zgX"/>
+                                            </mask>
+                                        </variation>
+                                        <connections>
+                                            <action selector="backButton:" destination="sDu-zh-5Ai" eventType="touchUpInside" id="sc1-7J-E7n"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8Iu-OG-fWS">
                                         <rect key="frame" x="50" y="597" width="530" height="30"/>
@@ -2460,14 +2476,18 @@ Lactobacillus acidophilus и другие.</string>
                                             <action selector="regButton:" destination="sDu-zh-5Ai" eventType="touchUpInside" id="sr3-hj-fbn"/>
                                         </connections>
                                     </button>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="6" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yck-oH-HRz">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yck-oH-HRz">
                                         <rect key="frame" x="20" y="512" width="97" height="22"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4RS-bx-1eD">
-                                        <rect key="frame" x="0.0" y="542" width="600" height="205"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4RS-bx-1eD">
+                                        <rect key="frame" x="0.0" y="542" width="600" height="200"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="150" id="2nk-f7-zK0"/>
+                                            <constraint firstAttribute="height" constant="200" id="umU-HB-Oao"/>
+                                        </constraints>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="Yge-YW-Bhc">
                                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
@@ -2478,6 +2498,12 @@ Lactobacillus acidophilus и другие.</string>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
                                         </prototypes>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="2nk-f7-zK0"/>
+                                                <exclude reference="umU-HB-Oao"/>
+                                            </mask>
+                                        </variation>
                                     </tableView>
                                 </subviews>
                                 <constraints>
@@ -2524,7 +2550,7 @@ Lactobacillus acidophilus и другие.</string>
                                     <constraint firstItem="rzR-Vh-ufB" firstAttribute="trailing" secondItem="nHj-XA-Aca" secondAttribute="trailing" id="PJe-FW-khO"/>
                                     <constraint firstItem="iVI-ss-hUr" firstAttribute="top" secondItem="iB0-dC-cwQ" secondAttribute="bottom" constant="10" id="Rej-nH-HPN"/>
                                     <constraint firstItem="MU0-J4-Etb" firstAttribute="centerY" secondItem="k3g-bZ-RKV" secondAttribute="centerY" id="S4U-fq-elB"/>
-                                    <constraint firstAttribute="bottom" secondItem="2YC-UI-XGR" secondAttribute="bottom" constant="5" id="SDY-eE-UIk"/>
+                                    <constraint firstAttribute="bottom" secondItem="2YC-UI-XGR" secondAttribute="bottom" constant="10" id="SDY-eE-UIk"/>
                                     <constraint firstItem="MU0-J4-Etb" firstAttribute="leading" secondItem="k3g-bZ-RKV" secondAttribute="trailing" constant="10" id="Sgf-G1-tRG"/>
                                     <constraint firstItem="opU-aR-0I0" firstAttribute="top" secondItem="nH0-lD-snR" secondAttribute="bottom" constant="20" id="TUe-rk-gJO"/>
                                     <constraint firstItem="opU-aR-0I0" firstAttribute="centerX" secondItem="niM-nr-LyU" secondAttribute="centerX" id="VvO-06-zCO"/>
@@ -2532,6 +2558,7 @@ Lactobacillus acidophilus и другие.</string>
                                     <constraint firstItem="aDE-h7-CDL" firstAttribute="trailing" secondItem="jo6-H8-Qfo" secondAttribute="trailing" id="XEm-i0-CUd"/>
                                     <constraint firstItem="nH0-lD-snR" firstAttribute="leading" secondItem="GXS-nf-Hd3" secondAttribute="leading" id="XGT-PB-Lg2"/>
                                     <constraint firstItem="ZRp-mu-aog" firstAttribute="top" secondItem="8BQ-eU-2SQ" secondAttribute="bottom" constant="8" id="Y6g-bt-jl7"/>
+                                    <constraint firstAttribute="bottom" secondItem="4RS-bx-1eD" secondAttribute="bottom" id="YK9-Z8-NJY"/>
                                     <constraint firstItem="MU0-J4-Etb" firstAttribute="leading" secondItem="k3g-bZ-RKV" secondAttribute="trailing" constant="20" id="Z9x-pU-Bl5"/>
                                     <constraint firstItem="xJh-Iq-2kP" firstAttribute="leading" secondItem="Eh6-RD-sHO" secondAttribute="leading" id="afv-bw-HAY"/>
                                     <constraint firstItem="PUk-QT-dyp" firstAttribute="trailing" secondItem="baT-ao-CM3" secondAttribute="trailing" id="ah4-4Y-5ga"/>
@@ -2586,6 +2613,7 @@ Lactobacillus acidophilus и другие.</string>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="lty-Tb-RZf"/>
                                         <exclude reference="0cM-hA-ZoU"/>
                                         <exclude reference="Z9x-pU-Bl5"/>
                                         <exclude reference="gte-b5-qdX"/>
@@ -2619,6 +2647,7 @@ Lactobacillus acidophilus и другие.</string>
                             </mask>
                         </variation>
                     </view>
+                    <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="750"/>
                     <connections>
@@ -2632,6 +2661,7 @@ Lactobacillus acidophilus и другие.</string>
                         <outletCollection property="textFields" destination="iVI-ss-hUr" id="cfY-7Z-nJo"/>
                         <outletCollection property="textFields" destination="baT-ao-CM3" id="EIz-TI-w4T"/>
                         <outletCollection property="textFields" destination="yck-oH-HRz" id="fJM-JW-BR7"/>
+                        <segue destination="5fu-Bl-9V5" kind="show" identifier="back" id="aQb-iZ-XLT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Tzz-ph-r6F" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2656,7 +2686,7 @@ Lactobacillus acidophilus и другие.</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ezI-QL-YMG" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1390" y="683"/>
+            <point key="canvasLocation" x="2202" y="683"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="1g7-oz-I7N">
@@ -2899,7 +2929,7 @@ Lactobacillus acidophilus и другие.</string>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Z1T-QC-Gmp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2946" y="683"/>
+            <point key="canvasLocation" x="3758" y="683"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="V3E-co-sj8">
@@ -3235,7 +3265,7 @@ Lactobacillus acidophilus и другие.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dH7-4j-rdo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4570" y="621"/>
+            <point key="canvasLocation" x="5382" y="621"/>
         </scene>
         <!--Third View Controller-->
         <scene sceneID="Ef4-lN-tLI">
@@ -3937,6 +3967,24 @@ Lactobacillus acidophilus и другие.</string>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1HN-w2-qcj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3736" y="-93"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Goy-Ox-yPq">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="5fu-Bl-9V5" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RNz-hQ-wuM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="DrH-sQ-z8o"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2yJ-sP-K96" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="388" y="683"/>
         </scene>
     </scenes>
     <resources>

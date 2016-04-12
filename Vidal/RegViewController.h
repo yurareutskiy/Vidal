@@ -35,5 +35,6 @@
 - (IBAction)callDatePicker:(UIButton*)sender;
 - (IBAction)regButton:(UIButton *)sender;
 
+- (IBAction)backButton:(id)sender;
 
 @end

@@ -10,13 +10,16 @@
 #import "AFNetworking.h"
 #import "Server.h"
 
-@interface LoginViewController : UIViewController
+@interface LoginViewController : UIViewController <UITextFieldDelegate>
 
 @property (strong, nonatomic) IBOutlet UIButton *regButton;
 - (IBAction)registration:(UIButton *)sender;
-- (IBAction)login:(UIButton *)sender;
+- (IBAction)login:(id)sender;
 - (IBAction)withoutReg:(UIButton *)sender;
 
+@property (strong, nonatomic) IBOutlet UILabel *lead;
+@property (strong, nonatomic) IBOutlet UITextField *emailInput;
+@property (strong, nonatomic) IBOutlet UITextField *passInput;
 
 @end
 

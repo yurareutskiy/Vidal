@@ -35,6 +35,8 @@
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    self.tableView.hidden = true;
+    
     svos = self.scrollView.contentOffset;
     datePicker.dateFormatter.dateFormat = @"Y";
     
@@ -44,6 +46,7 @@
     
     singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
     [self.scrollView addGestureRecognizer:singleTap];
+    [self.tableView removeGestureRecognizer:singleTap];
     
     self.serverManager = [[Server alloc] init];
     
@@ -61,7 +64,7 @@
 - (void)filterResults {
     // Asynchronously
 
-    [self.quickSearch asynchronouslyFilterObjectsWithValue:((UITextField *)[self.view viewWithTag:6]).text completion:^(NSArray *filteredResults) {
+    [self.quickSearch asynchronouslyFilterObjectsWithValue:((UITextField *)[self.view viewWithTag:5]).text completion:^(NSArray *filteredResults) {
             [self updateTableViewWithNewResults:filteredResults];
         }];
     
@@ -102,23 +105,53 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    ((UITextField *)[self.view viewWithTag:6]).text = self.FilteredResults[indexPath.row];
+    NSLog(@"%@ %@", indexPath, self.FilteredResults[indexPath.row]);
+    ((UITextField *)[self.view viewWithTag:5]).text = self.FilteredResults[indexPath.row];
     self.tableView.hidden = true;
 }
+
+- (void)viewWillAppear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+//#pragma mark - keyboard movements
+//- (void)keyboardWillShow:(NSNotification *)notification
+//{
+//    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+//    
+//    [UIView animateWithDuration:0.3 animations:^{
+//        CGRect f = self.view.frame;
+//        f.origin.y = -keyboardSize.height;
+//        self.view.frame = f;
+//    }];
+//}
+//
+//-(void)keyboardWillHide:(NSNotification *)notification
+//{
+//    [UIView animateWithDuration:0.3 animations:^{
+//        CGRect f = self.view.frame;
+//        f.origin.y = 0.0f;
+//        self.view.frame = f;
+//    }];
+//}
 
 #pragma mark - TextField Delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     
     NSInteger i = textField.tag;
     
-    if (textField.tag < 4) {
+    if (textField.tag < 5) {
         [[self.view viewWithTag:i+1] becomeFirstResponder];
         i += 1;
-    } else if (textField.tag == 6) {
+    } else if (textField.tag == 5) {
         [textField resignFirstResponder];
         self.tableView.hidden = true;
-    }else {
-        [[self.view viewWithTag:i] resignFirstResponder];
         [self.scrollView setContentOffset:self.view.frame.origin animated:YES];
     }
     
@@ -126,9 +159,10 @@
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-
-    [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
-    self.tableView.hidden = false;
+    if (textField.tag == 5) {
+        [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
+        self.tableView.hidden = false;
+    }
     return YES;
 }
 
@@ -138,14 +172,16 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    svos = self.scrollView.contentOffset;
-    CGPoint pt;
-    CGRect rc = [textField bounds];
-    rc = [textField convertRect:rc toView:self.scrollView];
-    pt = rc.origin;
-    pt.x = 0;
-    pt.y -= 300;
-    [self.scrollView setContentOffset:pt animated:YES];
+    if (textField.tag >= 3) {
+        svos = self.scrollView.contentOffset;
+        CGPoint pt;
+        CGRect rc = [textField bounds];
+        rc = [textField convertRect:rc toView:self.scrollView];
+        pt = rc.origin;
+        pt.x = 0;
+        pt.y -= 300;
+        [self.scrollView setContentOffset:pt animated:YES];
+    }
 }
 
 //- (void)viewWillAppear:(BOOL)animated {
@@ -161,8 +197,18 @@
 - (void)singleTapGestureCaptured:(UITapGestureRecognizer *)gesture
 {
     for (UITextField *textField in self.textFields){
-        [textField resignFirstResponder];
-        [self.scrollView setContentOffset:self.view.frame.origin animated:YES];
+        if (self.tableView.hidden == false) {
+            NSLog(@"1");
+            NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
+            [self tableView:self.tableView didSelectRowAtIndexPath:selectedIndexPath];
+            [self.scrollView setContentOffset:self.view.frame.origin animated:YES];
+            break;
+        } else {
+            [textField resignFirstResponder];
+            NSLog(@"2");
+            self.tableView.hidden = true;
+            [self.scrollView setContentOffset:self.view.frame.origin animated:YES];
+        }
     }
 }
 
@@ -193,6 +239,12 @@
     [self presentViewController:vc animated:false completion:nil];
     
     [self performSegueWithIdentifier:@"toFullApp" sender:self];
+    
+}
+
+- (IBAction)backButton:(id)sender {
+    
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 
@@ -231,16 +283,12 @@
             }
         }
         
-        UIView *thatNeed = [self.view viewWithTag:tag];
-        NSLog(@"%f", thatNeed.frame.origin.y);
-        [self.scrollView scrollRectToVisible:CGRectMake(thatNeed.frame.origin.x, thatNeed.frame.origin.y, thatNeed.frame.size.width, thatNeed.frame.size.height)  animated:YES];
-        NSLog(@"%f", self.scrollView.frame.origin.y);
-            
-//            [UIView animateWithDuration:0.3 animations:^{
-//                self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y - keyboardSize.height, self.view.frame.size.width, self.view.frame.size.height);
-//            }];
-        
-        
+        if (tag == 6) {
+            UIView *thatNeed = [self.view viewWithTag:tag];
+            NSLog(@"%f", thatNeed.frame.origin.y);
+            [self.scrollView scrollRectToVisible:CGRectMake(thatNeed.frame.origin.x, thatNeed.frame.origin.y + self.tableView.frame.size.height, thatNeed.frame.size.width, thatNeed.frame.size.height)  animated:YES];
+            NSLog(@"%f", self.scrollView.frame.origin.y);
+        }
         
     }
 }
