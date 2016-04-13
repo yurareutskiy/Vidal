@@ -21,11 +21,14 @@
     int inx;
     int inx2;
     NSDictionary *array;
+    NSUserDefaults *ud;
 
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    ud = [NSUserDefaults standardUserDefaults];
     
     NSString *string = self.info1.text;
     self.info1.numberOfLines = 0;
@@ -83,6 +86,22 @@
 
 - (void) search {
     [self performSegueWithIdentifier:@"toSearch" sender:self];
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    
+    self.input.text = [ud objectForKey:@"toInter"];
+    [self findFirstResult:[ud objectForKey:@"toInter"]];
+    [self setUpQuickSearch:self.hello2];
+    self.tableView.hidden = true;
+    self.secondInput.hidden = false;
+    self.secondLine.hidden = false;
+    self.secondLabel.hidden = false;
+    
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [ud removeObjectForKey:@"toInter"];
 }
 
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {

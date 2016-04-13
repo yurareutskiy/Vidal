@@ -62,6 +62,8 @@
 
 - (IBAction)toInter:(UIButton *)sender {
     
+    [ud setObject:self.name.text forKey:@"toInter"];
+    [self performSegueWithIdentifier:@"knowAbout" sender:self];
     
 }
 

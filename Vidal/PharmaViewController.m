@@ -101,7 +101,8 @@
         return 60;
     } else if (tableView.tag == 2) {
         if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
-            return 140;
+            self.tableView.rowHeight = UITableViewAutomaticDimension;
+            return self.tableView.rowHeight;
         } else {
             return 60;
         }
@@ -259,6 +260,7 @@
     container = false;
     [self.darkView removeGestureRecognizer:tap];
     self.darkView.hidden = true;
+    [((UITableView *)[self.view viewWithTag:2]) deselectRowAtIndexPath:selectedRowIndex animated:YES];
 }
 
 - (void) getMol:(NSString *)mol {

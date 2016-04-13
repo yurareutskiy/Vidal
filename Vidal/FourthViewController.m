@@ -129,6 +129,7 @@
     container = false;
     [self.darkView removeGestureRecognizer:tap];
     self.darkView.hidden = true;
+    
 }
 
 /*

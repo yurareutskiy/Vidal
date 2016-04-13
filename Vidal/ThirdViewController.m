@@ -181,6 +181,7 @@
     container = false;
     [self.darkView removeGestureRecognizer:tap];
     self.darkView.hidden = true;
+//    [((UITableView *)[self.view viewWithTag:2]) deselectRowAtIndexPath:selectedRowIndex animated:YES];
 }
 
 /*
