@@ -18,6 +18,7 @@
     NSDictionary *array;
     NSString *pls;
     NSUserDefaults *ud;
+    CAGradientLayer *gradient;
     
 }
 
@@ -25,6 +26,10 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"Новости";
+    
+    gradient = [CAGradientLayer layer];
+    gradient.frame = self.backView.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:208.0/255.0 green:208.0/255.0 blue:208.0/255.0 alpha:1.0] CGColor], (id)[[UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1.0] CGColor], nil];
     
     vc = [[SocialNetworkManagerVC alloc] init];
     ud = [NSUserDefaults standardUserDefaults];
@@ -53,7 +58,7 @@
             
             self.date.text = resultDate;
             self.newsTitle.text = [array objectForKey:@"title"];
-            self.newsText.text = [array objectForKey:@"body"];
+            self.newsText.text = [self stringByStrippingHTML:[array objectForKey:@"body"]];
             
             self.newsText.numberOfLines = 0;
             self.newsTitle.numberOfLines = 0;
@@ -65,15 +70,40 @@
     
     [super setLabel:@"Новости"];
     
+    [self.backView setImage:[self imageWithImage:[UIImage imageNamed:@"back"] scaledToSize:CGSizeMake(15.0, 15.0)] forState:UIControlStateNormal];
+    
+//    [self imageWithImage:[UIImage imageNamed:@"burger"] scaledToSize:CGSizeMake(30, 20)]
+    
+    self.backView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    self.backView.titleLabel.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    self.backView.imageView.transform = CGAffineTransformMakeScale(-1.0, 1.0);
+    [self.backView.layer insertSublayer:gradient atIndex:0];
+    
+    self.backView.layer.masksToBounds = NO;
+    self.backView.layer.shadowColor = [UIColor blackColor].CGColor;
+    self.backView.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.backView.layer.shadowOpacity = 0.5f;
+    
     // Do any additional setup after loading the view.
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+    [gradient removeFromSuperlayer];
+}
 
+-(NSString *) stringByStrippingHTML: (NSString *)news {
+    NSRange r;
+    while ((r = [news rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+        news = [news stringByReplacingCharactersInRange:r withString:@""];
+    return news;
+}
 
-- (void) viewDidAppear:(BOOL)animated {
-    
-    
-    
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
 }
 
 - (void)didReceiveMemoryWarning {

@@ -180,10 +180,12 @@
         self.searchField.text = self.FilteredResults[indexPath.row];
         [self findFirstResult:self.FilteredResults[indexPath.row]];
         [self setUpQuickSearch:self.hello2];
-        
+        // ИНОГДА ПАДАЕТ [;
     } else if (textField2) {
         self.secondInput.text = self.FilteredResults[indexPath.row];
         self.result.text = [self findSecondResult:self.FilteredResults[indexPath.row]];
+        self.result.hidden = false;
+        [self.secondInput resignFirstResponder];
     }
     self.tableView.hidden = true;
     self.secondInput.hidden = false;
@@ -200,13 +202,16 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     if (textField.tag == 1) {
-
+        [self setUpQuickSearch:self.hello1];
         textField1 = true;
         textField2 = false;
+        self.secondInput.text = @"";
+        self.input.text = @"";
+        self.result.text = @"";
     } else if (textField.tag == 2) {
         textField2 = true;
         textField1 = false;
-        
+        self.secondInput.text = @"";
     }
     [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
     self.tableView.hidden = false;
@@ -226,6 +231,39 @@
 -(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
 {
     [self.input resignFirstResponder];
+    [self.secondInput resignFirstResponder];
+    self.tableView.hidden = true;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
+
+#pragma mark - keyboard movements
+- (void)keyboardWillShow:(NSNotification *)notification
+{
+//    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
+
+    [UIView animateWithDuration:0.3 animations:^{
+        CGRect f = self.view.frame;
+        f.origin.y = -150.0;
+        self.view.frame = f;
+    }];
+}
+
+-(void)keyboardWillHide:(NSNotification *)notification
+{
+    [UIView animateWithDuration:0.3 animations:^{
+        CGRect f = self.view.frame;
+        f.origin.y = +self.navigationController.navigationBar.frame.size.height + 20.0;
+        self.view.frame = f;
+    }];
 }
 
 /*

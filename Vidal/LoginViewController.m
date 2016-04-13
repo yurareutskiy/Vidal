@@ -123,24 +123,24 @@
 }
 
 - (IBAction)login:(id)sender {
-    if ([self.emailInput.text isEqualToString:@""] || [self.passInput.text isEqualToString:@""]) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Неправильный данные" message:@"Повторите ввод" preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
-                             {
-                                 //Do some thing here
-                                 [self.navigationController popViewControllerAnimated:YES];
-                                 
-                             }];
-        [alertController addAction:ok];
-        
-        [self presentViewController:alertController animated:YES completion:nil];
-    } else {
-        NSLog(@"im here");
-    }
+//    if ([self.emailInput.text isEqualToString:@""] || [self.passInput.text isEqualToString:@""]) {
+//        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Неправильный данные" message:@"Повторите ввод" preferredStyle:UIAlertControllerStyleAlert];
+//        
+//        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+//                             {
+//                                 //Do some thing here
+//                                 [self.navigationController popViewControllerAnimated:YES];
+//                                 
+//                             }];
+//        [alertController addAction:ok];
+//        
+//        [self presentViewController:alertController animated:YES completion:nil];
+//    } else {
+//        NSLog(@"im here");
+//    }
     
-//    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
-//    [self presentViewController:vc animated:false completion:nil];
+    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
+    [self presentViewController:vc animated:false completion:nil];
     
 }
 

@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "DocsTableViewCell.h"
 
 @interface SecondDocumentViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 

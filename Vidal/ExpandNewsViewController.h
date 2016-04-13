@@ -19,5 +19,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *newsTitle;
 @property (strong, nonatomic) IBOutlet UILabel *date;
 - (id) initWithURLString:(NSString*) urlString;
+@property (strong, nonatomic) IBOutlet UIButton *backView;
 
 @end
