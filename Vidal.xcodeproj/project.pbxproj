@@ -56,6 +56,7 @@
 		52498BC71CB3FD4C00E6B96B /* FourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52498BC61CB3FD4C00E6B96B /* FourthViewController.m */; };
 		524EDF951CB4E4E900A3BB2F /* DocsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 524EDF941CB4E4E900A3BB2F /* DocsTableViewCell.m */; };
 		524EDF991CB4E9EC00A3BB2F /* MoleculeDrugsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 524EDF981CB4E9EC00A3BB2F /* MoleculeDrugsViewController.m */; };
+		BF9A12221CBFE8EB00B65F68 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF9A12211CBFE8EB00B65F68 /* GoogleService-Info.plist */; };
 		E82C22A1236860E5691C38CA /* libPods-Vidal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 267537716EDB3475C0BE9A2D /* libPods-Vidal.a */; };
 /* End PBXBuildFile section */
 
@@ -167,6 +168,7 @@
 		524EDF971CB4E9EC00A3BB2F /* MoleculeDrugsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoleculeDrugsViewController.h; sourceTree = "<group>"; };
 		524EDF981CB4E9EC00A3BB2F /* MoleculeDrugsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoleculeDrugsViewController.m; sourceTree = "<group>"; };
 		639C2F57EA1C775AEEFEE2C9 /* Pods-Vidal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vidal.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vidal/Pods-Vidal.release.xcconfig"; sourceTree = "<group>"; };
+		BF9A12211CBFE8EB00B65F68 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -359,6 +361,7 @@
 		3A9E3FC01C80AE330069BDFC = {
 			isa = PBXGroup;
 			children = (
+				BF9A12211CBFE8EB00B65F68 /* GoogleService-Info.plist */,
 				3A1570491CAEA86800D49C5E /* sqlcipher.xcodeproj */,
 				3A1570681CAEAE2900D49C5E /* Libraries */,
 				3A9E3FCB1C80AE330069BDFC /* Vidal */,
@@ -463,6 +466,14 @@
 					3A9E3FC81C80AE330069BDFC = {
 						CreatedOnToolsVersion = 7.2;
 						DevelopmentTeam = 9W968RZS7A;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -506,6 +517,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A0DBD881CB4924300D9BAD3 /* LogOutStoryboard.storyboard in Resources */,
+				BF9A12221CBFE8EB00B65F68 /* GoogleService-Info.plist in Resources */,
 				3A9E3FDF1C80AE330069BDFC /* LaunchScreen.storyboard in Resources */,
 				3A1570591CAEA95900D49C5E /* vidal.cardio.encrypt.db3 in Resources */,
 				3A1570581CAEA95900D49C5E /* vidal.cardio.crypt.db3 in Resources */,
@@ -727,6 +739,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -739,7 +752,7 @@
 					./sqlcipher/src,
 				);
 				INFOPLIST_FILE = Vidal/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = (
 					"$(inherited)",
@@ -764,6 +777,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
@@ -776,7 +790,7 @@
 					./sqlcipher/src,
 				);
 				INFOPLIST_FILE = Vidal/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = (
 					"$(inherited)",
