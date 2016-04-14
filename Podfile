@@ -11,6 +11,6 @@ target 'Vidal' do
     pod 'IMQuickSearch'
     pod 'AFNetworking'
     pod 'AFNetworkActivityLogger'
-
+    pod 'Google/CloudMessaging'
 end
 
