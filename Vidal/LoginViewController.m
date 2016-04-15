@@ -10,14 +10,16 @@
 
 @interface LoginViewController ()
 
-@property (nonatomic, strong) Server *serverManager;
-
 @end
 
-@implementation LoginViewController
+@implementation LoginViewController {
+    NSUserDefaults *ud;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    ud = [NSUserDefaults standardUserDefaults];
     
     self.emailInput.delegate = self;
     self.passInput.delegate = self;
@@ -136,12 +138,53 @@
 //        
 //        [self presentViewController:alertController animated:YES completion:nil];
 //    } else {
-//        NSLog(@"im here");
-//    }
+
+    NSString *email = self.emailInput.text;
+    NSLog(@"%@", email);
+    NSString *pass = [self reverse:self.passInput.text];
+    NSLog(@"%@", pass);
     
-    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
-    [self presentViewController:vc animated:false completion:nil];
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
+        [manager POST:@"http://www.vidal.ru/api/user/auth" parameters:@{
+                                                                        @"username":email,
+                                                                        @"password":pass}
+              success:^(AFHTTPRequestOperation * _Nonnull operation, id responseObject) {
+            
+            NSLog(@"%@", responseObject);
+            [ud setObject:[responseObject valueForKey:@"token"] forKey:@"archToken"];
+            UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
+            [self presentViewController:vc animated:true completion:nil];
+            
+        } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+            
+            NSLog(@"%@", error);
+            NSLog(@"%@", error.localizedDescription);
+            
+            NSLog(@"%@", operation.responseSerializer);
+            NSLog(@"%@", operation.responseObject);
+            NSLog(@"%@", operation.responseData);
+            NSLog(@"%@", operation.responseString);
+        }];
+    
+}
+
+- (NSString *) reverse:(NSString *) input {
+    
+    NSMutableString *output = [NSMutableString string];
+    NSInteger charIndex = [input length];
+    while (charIndex > 0) {
+        charIndex--;
+        NSRange subStrRange = NSMakeRange(charIndex, 1);
+        [output appendString:[input substringWithRange:subStrRange]];
+    }
+    
+    NSData *check = [output dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *result= [check base64EncodedStringWithOptions:0];
+    NSLog(@"%@", result);
+    
+    return result;
 }
 
 - (IBAction)withoutReg:(UIButton *)sender {

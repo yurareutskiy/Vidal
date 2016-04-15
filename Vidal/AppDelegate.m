@@ -310,6 +310,7 @@ fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))handler {
                                                         object:nil
                                                       userInfo:userInfo];
     handler(UIBackgroundFetchResultNoData);
+    
     // [END_EXCLUDE]
 }
 // [END ack_message_reception]

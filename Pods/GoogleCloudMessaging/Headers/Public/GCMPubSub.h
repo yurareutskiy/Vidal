@@ -19,10 +19,14 @@ typedef void(^GCMPubSubCompletion)(NSError *error);
  *  are automatically created when publishing or subscribing.
  *
  *  Messages published to the topic will be received as regular GCM messages
- *  with `"from"` set to `"/topics/myTopic"`.
+ *  with 'from' set to "/topics/myTopic".
  *
- *  Only topic names that match the pattern `"/topics/[a-zA-Z0-9-_.~%]{1,900}"`
+ *  Only topic names that match the pattern "/topics/[a-zA-Z0-9-_.~%]{1,900}"
  *  are allowed for subscribing and publishing.
+ *
+ *  To publish to a topic, see
+ *  {@link <a href="https://developer.android.com/google/gcm/server.html">
+ *  GCM server documentation</a>}.
  */
 @interface GCMPubSub : NSObject
 
@@ -38,20 +42,20 @@ typedef void(^GCMPubSubCompletion)(NSError *error);
  *  Subscribes an app instance to a topic, enabling it to receive messages
  *  sent to that topic.
  *
- *  This is an asynchronous call. If subscription fails, GCM
- *  invokes the completion callback with the appropriate error.
+ *  This is an asynchronous call. In case the subscribe fails for some reason we
+ *  invoke the completion callback with the appropriate error.
  *
- *  Call this function from the main thread. GCM is not thread safe.
+ *  Call this function from the main thread since GCM is not thread safe.
  *
  *  @see GCMPubSub unsubscribeWithToken:topic:handler:
  *
- *  @param token    The registration token as received from the InstanceID
- *                   library for a given `authorizedEntity` and "gcm" scope.
+ *  @param token    The registration token as received from the InstanceID library
+ *                  for a given `authorizedEntity` and "gcm" scope.
  *  @param topic    The topic to subscribe to. Should be of the form
- *                  `"/topics/<topic-name>"`.
- *  @param handler  The callback handler invoked when the subscribe call
- *                  ends. In case of success, a nil error is returned. Otherwise,
- *                  an appropriate error object is returned.
+ *                  "/topics/<topic-name>".
+ *  @param handler  The callback handler which is invoked when the subscribe call
+ *                  ends. In case of success nil error is returned else an
+ *                  appropriate error object is returned.
  */
 - (void)subscribeWithToken:(NSString *)token
                      topic:(NSString *)topic
@@ -63,16 +67,16 @@ typedef void(^GCMPubSubCompletion)(NSError *error);
  *  Unsubscribes an app instance from a topic, stopping it from receiving
  *  any further messages sent to that topic.
  *
- *  This is an asynchronous call. If the attempt to unsubscribe fails,
+ *  This is an asynchronous call. In case the `unsubscribe` fails for some reason
  *  we invoke the `completion` callback passed in with an appropriate error.
  *
  *  Call this function from the main thread.
  *
- *  @param token   The token used to subscribe to this topic.
+ *  @param token   The token used to subscribe to this topic to.
  *  @param topic   The topic to unsubscribe from.
  *  @param handler The handler that is invoked once the unsubscribe call ends.
- *                 In case of success, nil error is returned. Otherwise, an
- *                  appropriate error object is returned.
+ *                 In case of error an appropriate error object is returned else
+ *                 error is nil.
  */
 - (void)unsubscribeWithToken:(NSString *)token
                        topic:(NSString *)topic

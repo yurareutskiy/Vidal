@@ -48,14 +48,6 @@ typedef NS_ENUM(NSUInteger, GCMServiceErrorCode) {
   kGCMServiceErrorCodeUnknown = 7,
 
   /**
-   *  Generic errors.
-   */
-
-  // Device seems to be missing a valid deviceID. Cannot authenticate
-  // device requests.
-  kGCMServiceErrorMissingDeviceID = 501,
-
-  /**
    *  Upstream Send errors
    */
 
@@ -100,18 +92,25 @@ typedef NS_ENUM(NSUInteger, GCMServiceErrorCode) {
  *  using simple messages.
  *
  *  To send or receive messages, the app must get a
- *  registration token from GGLInstanceID, which authorizes an
- *  app server to send messages to an app instance. Pass your sender ID and
- *  `kGGLInstanceIDScopeGCM` as parameters to the method.
+ *  registrationToken from GGLInstanceID, which authorizes an
+ *  app server to send messages to an app instance. Pass sender ID and
+ *  INSTANCE_ID_SCOPE as parameters to the method.
  *
- *  A sender ID is a project number created when you configure your API project.
- *  It is labeled "Project Number" in the Google Developers Console.
+ *  A sender ID is a project number acquired from the API console, as described in
+ *  <a href="http://developer.android.com/google/gcm/gs.html">Getting Started</a>.
  *
  *  In order to receive GCM messages, declare application:didReceiveRemoteNotification:
  *
  *  Client apps can send upstream messages back to the app server using the XMPP-based
- *  <a href="http://developers.google.com/cloud-messaging/ccs.html">Cloud Connection Server</a>,
+ *  <a href="http://developer.android.com/google/gcm/ccs.html">Cloud Connection Server</a>,
+ *  For example:
  *
+ *  [[GCMService sharedInstance] sendMessage:msg
+ *                                        to:@"sender@gcm.googleapis.com"
+ *                                    withId:msgID];
+ *
+ *  See <a href="http://developer.android.com/google/gcm/client.html">Implementing GCM Client</a>
+ *  for more details.
  */
 @interface GCMService : NSObject
 
@@ -123,8 +122,8 @@ typedef NS_ENUM(NSUInteger, GCMServiceErrorCode) {
 + (instancetype)sharedInstance;
 
 /**
- *  Start the `GCMService` with config. This starts the `GCMService` and
- *  allocates the required resources.
+ *  Start the `GCMService` with config. This would start the `GCMService` and
+ *  allocate the required resources.
  *
  *  @see GCMConfig
  *
@@ -133,16 +132,16 @@ typedef NS_ENUM(NSUInteger, GCMServiceErrorCode) {
 - (void)startWithConfig:(GCMConfig *)config;
 
 /**
- *  Teardown the GCM connection and free all the resources owned by GCM.
+ *  Call this to free all the resources owned by GCM.
  *
- *  Call this when you don't need the GCM connection or to cancel all
- *  subscribe/unsubscribe requests. If GCM connection is alive before
- *  calling this, it would implicitly disconnect the connection.
- *
- *  Calling `disconect` before invoking this method is useful but not required.
- *  Once you call this you won't be able to use `GCMService` for this session
- *  of your app. Therefore call this only when the app is going to exit.
- *  In case of background you should rather use `disconnect` and then
+ *  You should call this when you don't need the GCM connection and also want
+ *  to cancel all the subscribe/unsubscribe requests. If you have an alive GCM
+ *  connection before calling this, it would implicitly disconnect the
+ *  connection too. Calling `disconect` before invoking this method is useful
+ *  but not required. Once you call this you won't be able to use `GCMService`
+ *  for this session of your app. Therefore you should call this only when the
+ *  app is going to exit or in case you're sure you won't need `GCMService`
+ *  anymore. In case of background you should rather use `disconnect` and then
  *  if the app comes to the foreground again you can call `connect` again to
  *  establish a new connection.
  */
@@ -151,16 +150,12 @@ typedef NS_ENUM(NSUInteger, GCMServiceErrorCode) {
 #pragma mark - Messages
 
 /**
- *  Call this to let GCM know that the app received a downstream message. Used
- *  to detect duplicate messages and to track message delivery for messages
- *  with different routes.
+ *  Call this to let GCM know that you received a downstream message. Used
+ *  to track message delivery for messages with different routes.
  *
  *  @param message The downstream message received by the app.
- *
- *  @return For APNs messages this always returns FALSE. For other messages,
- *          this returns FALSE for new, non-duplicated messages.
  */
-- (BOOL)appDidReceiveMessage:(NSDictionary *)message;
+- (void)appDidReceiveMessage:(NSDictionary *)message;
 
   #pragma mark - Connect
 
@@ -169,25 +164,27 @@ typedef NS_ENUM(NSUInteger, GCMServiceErrorCode) {
  *  send by your server. It will also be used to send ACKS and other messages based
  *  on the GCM ACKS and other messages based  on the GCM protocol.
  *
- *  Use the `disconnect` method to disconnect the connection.
+ *  You can use the `disconnect` method to disconnect the connection.
  *
  *  @see GCMService disconnect
  *
  *  @param handler  The handler to be invoked once the connection is established.
- *                  If the connection fails we invoke the handler with an
- *                  appropriate error code letting you know why it failed. At
- *                  the same time, GCM performs exponential backoff to retry
- *                  establishing a connection and invoke the handler when successful.
+ *                  If the connection fails for some reason we would invoke the
+ *                  handler with an appropriate error code letting you know why
+ *                  it failed and at the same time we would do an exponential
+ *                  backoff to retry establishing a connection and invoke the
+ *                  handler when successful.
  */
 - (void)connectWithHandler:(GCMServiceConnectCompletion)handler;
 
 /**
- *  Disconnect the current GCM data connection. This stops any attempts to
- *  connect to GCM. Calling this on an already disconnected client is a no-op.
+ *  Disconnect the current GCM data connection. If the connection hasn't been
+ *  setup  we will stop the exponential backoff retries to connect. Calling this
+ *  on an already disconnected client is a `no-op`.
  *
- *  Call this before `teardown` when your app is going to the background.
- *  Since the GCM connection won't be allowed to live when in background it is
- *  prudent to close the connection.
+ *  You should call this before `teardown` when your app is going to the
+ *  background. Since the GCM connection won't be allowed to live when in
+ *  background it is prudent to close the connection.
  *
  *  @see GCMService teardown
  */

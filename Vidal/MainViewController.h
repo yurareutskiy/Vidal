@@ -8,6 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ModelViewController.h"
+#import "AFNetworking.h"
+#import "ZipArchive.h"
+#import <CommonCrypto/CommonDigest.h>
 
 @interface MainViewController : ModelViewController
 

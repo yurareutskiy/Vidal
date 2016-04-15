@@ -10,8 +10,6 @@
 
 @interface RegViewController ()
 
-@property (nonatomic, strong) Server *serverManager;
-
 @end
 
 @implementation RegViewController {
@@ -19,10 +17,12 @@
     UITapGestureRecognizer *singleTap;
     BOOL keyboard;
     CGPoint svos;
+    
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+
     
     datePicker = [[HSDatePickerViewController alloc] init];
     datePicker.delegate = self;
@@ -47,8 +47,6 @@
     singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
     [self.scrollView addGestureRecognizer:singleTap];
     [self.tableView removeGestureRecognizer:singleTap];
-    
-    self.serverManager = [[Server alloc] init];
     
     [self getSpec];
     
@@ -235,11 +233,61 @@
 
 - (IBAction)regButton:(UIButton *)sender {
     
-    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
-    [self presentViewController:vc animated:false completion:nil];
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
-    [self performSegueWithIdentifier:@"toFullApp" sender:self];
+    [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
+    NSString *email = ((UITextField *)[self.textFields objectAtIndex:1]).text;
+    NSLog(@"%@", email);
+    NSString *pass = [self reverse:((UITextField *)[self.textFields objectAtIndex:2]).text];
+    NSLog(@"%@", pass);
+    NSString *name = ((UITextField *)[self.textFields objectAtIndex:4]).text;
+    NSLog(@"%@", name);
+    NSString *surname = ((UITextField *)[self.textFields objectAtIndex:3]).text;
+    NSLog(@"%@", surname);
+    NSString *city = ((UITextField *)[self.textFields objectAtIndex:0]).text;
+    NSLog(@"%@", city);
+    
+    
+    [manager POST:@"http://www.vidal.ru/api/user/add" parameters:
+     @{@"register[username]":email,
+    @"register[password]":pass,
+    @"register[firstName]":name,
+    @"register[lastName]":surname,
+    @"register[birthdate][day]":@"2",
+    @"register[birthdate][month]":@"12",
+    @"register[birthdate][year]":@"1996",
+    @"register[city]":city,
+    @"register[primarySpecialty]":@"11"}
+          success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+              NSLog(@"Responce is :%@",responseObject);
+        
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        NSLog(@"%@", error);
+    }];
+    
+//    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
+//    [self presentViewController:vc animated:false completion:nil];
+//    
+//    [self performSegueWithIdentifier:@"toFullApp" sender:self];
+    
+}
+
+- (NSString *) reverse:(NSString *) input {
+    
+    NSMutableString *output = [NSMutableString string];
+    NSInteger charIndex = [input length];
+    while (charIndex > 0) {
+        charIndex--;
+        NSRange subStrRange = NSMakeRange(charIndex, 1);
+        [output appendString:[input substringWithRange:subStrRange]];
+    }
+    
+    NSData *check = [output dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *result= [check base64EncodedStringWithOptions:0];
+    NSLog(@"%@", result);
+    
+    return result;
 }
 
 - (IBAction)backButton:(id)sender {
@@ -299,7 +347,7 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://www.vidal.ru/api/specialties" parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, NSArray *responseObject) {
-        NSLog(@"JSON: %@", responseObject);
+//        NSLog(@"JSON: %@", responseObject);
         self.dictSpec = [[NSMutableArray alloc] initWithArray:responseObject];
         for (NSDictionary *key in self.dictSpec) {
             [self.namesSpec addObject:[key objectForKey:@"doctorName"]];

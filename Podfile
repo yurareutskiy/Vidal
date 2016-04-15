@@ -12,5 +12,7 @@ target 'Vidal' do
     pod 'AFNetworking'
     pod 'AFNetworkActivityLogger'
     pod 'Google/CloudMessaging'
+    pod 'ZipArchive'
+    
 end
 

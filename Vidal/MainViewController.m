@@ -14,10 +14,19 @@
 
 @end
 
-@implementation MainViewController
+@implementation MainViewController {
+    
+    NSString *secret_key;
+    NSUserDefaults *ud;
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    ud = [NSUserDefaults standardUserDefaults];
+    
+    secret_key = @"uX04xN12Tk1654Qz";
     
     self.bg.layer.masksToBounds = YES;
     
@@ -28,7 +37,98 @@
     
     self.navigationItem.rightBarButtonItem = self.searchButton;
     
+    [self getLink];
+    [self getKey];
+    
     // Do any additional setup after loading the view.
+}
+
+- (NSString *) md5:(NSString *) input
+{
+    const char *cStr = [input UTF8String];
+    unsigned char digest[CC_MD5_DIGEST_LENGTH];
+    CC_MD5(cStr, (int)strlen(cStr), digest); // This is the md5 call
+    
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    
+    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+        [output appendFormat:@"%02x", digest[i]];
+    
+    return output;
+}
+
+- (void) getLink {
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:@"http://www.vidal.ru/api/db/update" parameters:@{@"token":[ud valueForKey:@"archToken"], @"version":@"20160410", @"tag":@"cardio"} success:^(AFHTTPRequestOperation * _Nonnull operation, id responseObject) {
+        
+        NSLog(@"%@", responseObject);
+        
+        [self downloadDB:[responseObject valueForKey:@"url"]];
+        
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+    
+}
+
+- (void) getKey {
+    
+    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    [manager POST:@"http://www.vidal.ru/api/db/auth" parameters:@{@"token":[ud valueForKey:@"archToken"], @"version":@"20160410", @"tag":@"cardio"} success:^(AFHTTPRequestOperation * _Nonnull operation, id responseObject) {
+        
+        NSLog(@"%@", responseObject);
+        
+        NSString *pass = [[self md5:[NSString stringWithFormat:@"%@%@", secret_key,[responseObject valueForKey:@"key"]]] substringToIndex:16];
+        NSLog(@"%@", [responseObject valueForKey:@"key"]);
+        NSLog(@"%@", secret_key);
+        [ud setObject:pass forKey:@"pass"];
+        NSLog(@"%@", pass);
+    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+        
+        NSLog(@"%@", error);
+        
+    }];
+    
+}
+
+- (void) downloadDB:(NSString *) link {
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSLog(@"Downloading Started");
+        NSString *urlToDownload = link;
+        NSURL  *url = [NSURL URLWithString:urlToDownload];
+        NSData *urlData = [NSData dataWithContentsOfURL:url];
+        if ( urlData )
+        {
+            NSArray       *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString  *documentsDirectory = [paths objectAtIndex:0];
+            
+            NSString  *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"vidalDatabase.zip"];
+            NSLog(@"%@", documentsDirectory);
+            //saving is done on main thread
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [urlData writeToFile:filePath atomically:YES];
+                NSLog(@"File Saved !");
+
+                ZipArchive *zipArchive = [[ZipArchive alloc] init];
+                [zipArchive UnzipOpenFile:filePath];
+                
+                NSArray       *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                NSString  *documentsDirectory = [paths objectAtIndex:0];
+                
+                [zipArchive UnzipFileTo:documentsDirectory overWrite:YES];
+                [zipArchive UnzipCloseFile];
+
+            });
+        } else {
+            NSLog(@"Download failed");
+        }
+        
+    });
+    
 }
 
 - (void) search {

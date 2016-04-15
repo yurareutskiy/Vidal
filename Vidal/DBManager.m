@@ -13,8 +13,6 @@
 @property (nonatomic, strong) NSString *documentsDirectory;
 @property (nonatomic, strong) NSString *databaseFilename;
 
--(void)copyDatabaseIntoDocumentsDirectory;
-
 @property (nonatomic, strong) NSMutableArray *arrResults;
 
 -(void)runQuery:(const char *)query isQueryExecutable:(BOOL)queryExecutable;
@@ -25,111 +23,20 @@
     sqlite3 *db;
     sqlite3 *unencrypted_DB;
     NSString *databaseURL;
+    NSUserDefaults *ud;
 }
 
 -(instancetype)initWithDatabaseFilename{
     self = [super init];
     if (self) {
         
-        //[self encryptDB];
-        //[self openCipherDB];
-        
-        // Set the documents directory path to the documentsDirectory property.
-        NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-        self.documentsDirectory = [paths objectAtIndex:0];
-        
-        // Keep the database filename.
-        self.databaseFilename = @"vidal.cardio.encrypt.db3";
-        
-        // Copy the database file into the documents directory if necessary.
-        [self copyDatabaseIntoDocumentsDirectory];
-        
     }
     return self;
 }
 
-- (void) openCipherDB
-{
-    NSString *databasePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
-                              stringByAppendingPathComponent: @"unencrypted.db3"];
-    NSLog(@"database path %@", databasePath);
-    if (sqlite3_open([databasePath UTF8String], &db) == SQLITE_OK)
-    {
-        //const char* key = [@"#test_db_key" UTF8String];
-        int sqlite3_key(sqlite3 *db, const void *pKey, int nKey);       //i added this after seeing SO
-        //sqlite3_key(db, key, strlen(key));
-        if (sqlite3_exec(db, (const char*) "SELECT count(*) FROM sqlite_master;", NULL, NULL, NULL) == SQLITE_OK) {
-            // password is correct, or, database has been initialized
-            NSLog(@"database initialize");
-        }
-        else
-        {
-            NSLog(@"incorrect pass");
-            // incorrect password!
-        }
-        
-        sqlite3_close(db);
-    }
-}
-
-- (void)encryptDB
-{
-    //sqlite3 *unencrypted_DB;
-    NSString *path_u = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
-                        stringByAppendingPathComponent:@"unencrypted.db3"];
-    
-    NSString *sql1 = [NSString stringWithFormat:@"ATTACH DATABASE '%s' AS encrypted KEY '%s';", [databaseURL UTF8String], "#test_db_key"];
-    //NSString *sql2 = [NSString stringWithFormat:@"DETACH DATABASE '%s';", [databaseURL UTF8String]];
-    
-    if (sqlite3_open([path_u UTF8String], &unencrypted_DB) == SQLITE_OK) {
-        NSLog(@"Database Opened");
-        // Attach empty encrypted database to unencrypted database
-        NSLog(@"String is %@", sql1);
-        sqlite3_exec(unencrypted_DB, [sql1 UTF8String], NULL, NULL, NULL);
-        
-        NSLog(@"%s", sqlite3_errmsg(unencrypted_DB));
-        
-        // export database
-        sqlite3_exec(unencrypted_DB, "SELECT sqlcipher_export('encrypted');", NULL, NULL, NULL);
-        
-        NSLog(@"%s", sqlite3_errmsg(unencrypted_DB));
-        
-        // Detach encrypted database
-        sqlite3_exec(unencrypted_DB, "DETACH DATABASE encrypted;", NULL, NULL, NULL);
-        
-        NSLog(@"%s", sqlite3_errmsg(unencrypted_DB));
-        
-        NSLog (@"End database copying");
-        sqlite3_close(unencrypted_DB);
-    }
-    else {
-        sqlite3_close(unencrypted_DB);
-        NSAssert1(NO, @"Failed to open database with message '%s'.", sqlite3_errmsg(unencrypted_DB));
-    }
-}
-
--(void)copyDatabaseIntoDocumentsDirectory{
-    // Check if the database file exists in the documents directory.
-    NSString *destinationPath = [self.documentsDirectory stringByAppendingPathComponent:self.databaseFilename];
-    if (![[NSFileManager defaultManager] fileExistsAtPath:destinationPath]) {
-        // The database file does not exist in the documents directory, so copy it from the main bundle now.
-        NSString *sourcePath = [[[NSBundle mainBundle] resourcePath] stringByAppendingPathComponent:self.databaseFilename];
-        NSError *error;
-        [[NSFileManager defaultManager] copyItemAtPath:sourcePath toPath:destinationPath error:&error];
-        
-        // Check if any error occurred during copying and display it.
-        if (error != nil) {
-            NSLog(@"%@", [error localizedDescription]);
-        }
-    }
-}
-
 -(void)runQuery:(const char *)query isQueryExecutable:(BOOL)queryExecutable{
-    // Create a sqlite object.
-    //sqlite3 *sqlite3Database;
     
     // Set the database file path.
-    NSString *databasePath = [self.documentsDirectory stringByAppendingPathComponent:self.databaseFilename];
     
     // Initialize the results array.
     if (self.arrResults != nil) {
@@ -146,9 +53,20 @@
     self.arrColumnNames = [[NSMutableArray alloc] init];
     
     
+    
+    NSString *databasePath = [[NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0]
+                              stringByAppendingPathComponent: @"vidal.cardio.db3"];
+    NSLog(@"database path %@", databasePath);
+    
+    ud = [NSUserDefaults standardUserDefaults];
+    
     // Open the database.
     BOOL openDatabaseResult = sqlite3_open([databasePath UTF8String], &db);
     if(openDatabaseResult == SQLITE_OK) {
+        
+        const char* key = [[ud valueForKey:@"pass"] UTF8String];
+        sqlite3_key(db, key, (int)strlen(key));
+        
         // Declare a sqlite3_stmt object in which will be stored the query after having been compiled into a SQLite statement.
         sqlite3_stmt *compiledStatement;
         

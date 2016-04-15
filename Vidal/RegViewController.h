@@ -9,7 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <HSDatePickerViewController.h>
 #import "AFNetworking.h"
-#import "Server.h"
 #import "IMQuickSearch.h"
 
 @interface RegViewController : UIViewController<HSDatePickerViewControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>

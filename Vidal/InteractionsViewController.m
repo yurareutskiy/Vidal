@@ -41,11 +41,13 @@
     textField1 = false;
     textField2 = false;
     
-    NSBundle *mainBundle = [NSBundle mainBundle];
-    NSString *myFile = [mainBundle pathForResource:@"interactions" ofType: @"json"];
+    NSArray       *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString  *documentsDirectory = [paths objectAtIndex:0];
+    
+    NSString  *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"interactions.min.json"];
     
     NSError *error1;
-    NSString *json = [NSString stringWithContentsOfFile:myFile encoding:NSUTF8StringEncoding error:&error1];
+    NSString *json = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:&error1];
     NSData *data = [json dataUsingEncoding:NSUTF8StringEncoding];
     
     NSError *error2;
@@ -98,10 +100,6 @@
     self.secondLine.hidden = false;
     self.secondLabel.hidden = false;
     
-}
-
-- (void) viewDidDisappear:(BOOL)animated {
-    [ud removeObjectForKey:@"toInter"];
 }
 
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
@@ -260,6 +258,9 @@
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
+    self.input.text = @"";
+    [ud removeObjectForKey:@"toInter"];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }

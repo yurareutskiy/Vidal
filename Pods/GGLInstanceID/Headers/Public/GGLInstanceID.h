@@ -1,33 +1,35 @@
+#if GMP_NO_MODULES
 #import <Foundation/Foundation.h>
+#else
+@import Foundation;
+#endif
 
 @class GGLInstanceIDConfig;
 
 /**
- *  @memberof GGLInstanceID
+ *  Options.
  *
  *  The key for APNS token to be included in the options dictionary when
  *  registering for GCM (Google Cloud Messaging). The value should be a
  *  NSData object that represents the APNS token for the app. This
  *  key is required to get a GCM token.
  */
-FOUNDATION_EXPORT NSString *const kGGLInstanceIDRegisterAPNSOption;
+extern NSString *const kGGLInstanceIDRegisterAPNSOption;
 
 /**
- *  @memberof GGLInstanceID
- *
  *  The key to specify if the APNS token type is sandbox or production. Set
  *  to YES if the app was built with Sandbox certificate else NO for production.
  *  At any point of time InstanceID library will support only one type of token.
  */
-FOUNDATION_EXPORT NSString *const kGGLInstanceIDAPNSServerTypeSandboxOption;
+extern NSString *const kGGLInstanceIDAPNSServerTypeSandboxOption;
 
 /**
- *  @memberof GGLInstanceID
+ *  Scopes
  *
  *  The scope to be used when fetching/deleting a token for
  *  GCM (Google Cloud Messaging).
  */
-FOUNDATION_EXPORT NSString *const kGGLInstanceIDScopeGCM;
+extern NSString *const kGGLInstanceIDScopeGCM;
 
 /**
  *  @related GGLInstanceID
@@ -108,19 +110,8 @@ typedef NS_ENUM(NSUInteger, GGLInstanceIDOperationErrorCode) {
   /// Unknown error.
   kGGLInstanceIDOperationErrorCodeUnknown = 7,
 
+
   // InstanceID specific errors
-
-  /*
-   *  Generic errors.
-   */
-
-  // Device seems to be missing a valid deviceID. Cannot
-  // authenticate device requests.
-  kGGLInstanceIDOperationErrorCodeMissingDeviceID = 501,
-
-  /**
-   *  Token specific errors.
-   */
 
   /// GCM token request is missing APNS token.
   kGGLInstanceIDOperationErrorCodeMissingAPNSToken = 1001,
@@ -139,10 +130,6 @@ typedef NS_ENUM(NSUInteger, GGLInstanceIDOperationErrorCode) {
 
   /// KeyPair access error.
   kGGLInstanceIDOperationErrorCodeInvalidKeyPair = 1006,
-
-  /**
-   *  Identity specific errors.
-   */
 
   /// Missing KeyPair.
   kGGLInstanceIDOperationErrorCodeMissingKeyPair = 2001,

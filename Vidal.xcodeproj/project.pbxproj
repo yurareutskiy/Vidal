@@ -18,14 +18,11 @@
 		3A0DBD881CB4924300D9BAD3 /* LogOutStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A0DBD871CB4924300D9BAD3 /* LogOutStoryboard.storyboard */; };
 		3A1570521CAEA87A00D49C5E /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15704F1CAEA86800D49C5E /* libsqlcipher.a */; };
 		3A1570551CAEA8F800D49C5E /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1570541CAEA8F800D49C5E /* DBManager.m */; };
-		3A1570581CAEA95900D49C5E /* vidal.cardio.crypt.db3 in Resources */ = {isa = PBXBuildFile; fileRef = 3A1570561CAEA95900D49C5E /* vidal.cardio.crypt.db3 */; };
-		3A1570591CAEA95900D49C5E /* vidal.cardio.encrypt.db3 in Resources */ = {isa = PBXBuildFile; fileRef = 3A1570571CAEA95900D49C5E /* vidal.cardio.encrypt.db3 */; };
 		3A1570601CAEAA2B00D49C5E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15705D1CAEAA2B00D49C5E /* FBSDKCoreKit.framework */; };
 		3A1570611CAEAA2B00D49C5E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15705E1CAEAA2B00D49C5E /* FBSDKLoginKit.framework */; };
 		3A1570621CAEAA2B00D49C5E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15705F1CAEAA2B00D49C5E /* FBSDKShareKit.framework */; };
 		3A1570661CAEAAAF00D49C5E /* OKSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1570651CAEAAAF00D49C5E /* OKSDK.m */; };
 		3A1570731CAEB0A000D49C5E /* SocialNetworkManagerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1570721CAEB0A000D49C5E /* SocialNetworkManagerVC.m */; };
-		3A2D8E7E1CBA827C00F43A76 /* Server.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A2D8E7D1CBA827C00F43A76 /* Server.m */; };
 		3A5638581CA19971000A83B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5638571CA19971000A83B5 /* Assets.xcassets */; };
 		3A70F38A1C80B32C00193150 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A70F3891C80B32C00193150 /* CoreGraphics.framework */; };
 		3A78F0FF1C91E7DA008C6BE5 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F0FE1C91E7DA008C6BE5 /* MenuViewController.m */; };
@@ -43,7 +40,6 @@
 		3A78F12A1C920775008C6BE5 /* ReferenceViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F1291C920775008C6BE5 /* ReferenceViewController.m */; };
 		3A8C251F1CB999AD00CFA905 /* SecondDocumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8C251E1CB999AD00CFA905 /* SecondDocumentViewController.m */; };
 		3A8C25231CBA2E8C00CFA905 /* ListOfViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A8C25221CBA2E8C00CFA905 /* ListOfViewController.m */; };
-		3A9366671CB176D3004BBE2E /* interactions.json in Resources */ = {isa = PBXBuildFile; fileRef = 3A9366661CB176D3004BBE2E /* interactions.json */; };
 		3A9E3FCE1C80AE330069BDFC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FCD1C80AE330069BDFC /* main.m */; };
 		3A9E3FD11C80AE330069BDFC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FD01C80AE330069BDFC /* AppDelegate.m */; };
 		3A9E3FD41C80AE330069BDFC /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A9E3FD31C80AE330069BDFC /* LoginViewController.m */; };
@@ -102,8 +98,6 @@
 		3A1570491CAEA86800D49C5E /* sqlcipher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sqlcipher.xcodeproj; path = sqlcipher/sqlcipher.xcodeproj; sourceTree = "<group>"; };
 		3A1570531CAEA8F800D49C5E /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		3A1570541CAEA8F800D49C5E /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
-		3A1570561CAEA95900D49C5E /* vidal.cardio.crypt.db3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = vidal.cardio.crypt.db3; sourceTree = "<group>"; };
-		3A1570571CAEA95900D49C5E /* vidal.cardio.encrypt.db3 */ = {isa = PBXFileReference; lastKnownFileType = file; path = vidal.cardio.encrypt.db3; sourceTree = "<group>"; };
 		3A15705D1CAEAA2B00D49C5E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		3A15705E1CAEAA2B00D49C5E /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		3A15705F1CAEAA2B00D49C5E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -111,8 +105,6 @@
 		3A1570651CAEAAAF00D49C5E /* OKSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OKSDK.m; path = Vidal/OKSDK.m; sourceTree = "<group>"; };
 		3A1570711CAEB0A000D49C5E /* SocialNetworkManagerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialNetworkManagerVC.h; sourceTree = "<group>"; };
 		3A1570721CAEB0A000D49C5E /* SocialNetworkManagerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialNetworkManagerVC.m; sourceTree = "<group>"; };
-		3A2D8E7C1CBA827C00F43A76 /* Server.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Server.h; sourceTree = "<group>"; };
-		3A2D8E7D1CBA827C00F43A76 /* Server.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Server.m; sourceTree = "<group>"; };
 		3A5638571CA19971000A83B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A70F3891C80B32C00193150 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3A78F0FD1C91E7DA008C6BE5 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
@@ -145,7 +137,6 @@
 		3A8C251E1CB999AD00CFA905 /* SecondDocumentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondDocumentViewController.m; sourceTree = "<group>"; };
 		3A8C25211CBA2E8C00CFA905 /* ListOfViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListOfViewController.h; sourceTree = "<group>"; };
 		3A8C25221CBA2E8C00CFA905 /* ListOfViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListOfViewController.m; sourceTree = "<group>"; };
-		3A9366661CB176D3004BBE2E /* interactions.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = interactions.json; sourceTree = "<group>"; };
 		3A9E3FC91C80AE330069BDFC /* Vidal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vidal.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9E3FCD1C80AE330069BDFC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A9E3FCF1C80AE330069BDFC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -266,11 +257,6 @@
 			children = (
 				3A1570531CAEA8F800D49C5E /* DBManager.h */,
 				3A1570541CAEA8F800D49C5E /* DBManager.m */,
-				3A2D8E7C1CBA827C00F43A76 /* Server.h */,
-				3A2D8E7D1CBA827C00F43A76 /* Server.m */,
-				3A1570561CAEA95900D49C5E /* vidal.cardio.crypt.db3 */,
-				3A1570571CAEA95900D49C5E /* vidal.cardio.encrypt.db3 */,
-				3A9366661CB176D3004BBE2E /* interactions.json */,
 			);
 			name = "Database & Server";
 			sourceTree = "<group>";
@@ -475,7 +461,7 @@
 				TargetAttributes = {
 					3A9E3FC81C80AE330069BDFC = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 9W968RZS7A;
+						DevelopmentTeam = YB6CSEXGXA;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -529,10 +515,7 @@
 				3A0DBD881CB4924300D9BAD3 /* LogOutStoryboard.storyboard in Resources */,
 				BF9A12221CBFE8EB00B65F68 /* GoogleService-Info.plist in Resources */,
 				3A9E3FDF1C80AE330069BDFC /* LaunchScreen.storyboard in Resources */,
-				3A1570591CAEA95900D49C5E /* vidal.cardio.encrypt.db3 in Resources */,
-				3A1570581CAEA95900D49C5E /* vidal.cardio.crypt.db3 in Resources */,
 				3A5638581CA19971000A83B5 /* Assets.xcassets in Resources */,
-				3A9366671CB176D3004BBE2E /* interactions.json in Resources */,
 				3A9E3FD71C80AE330069BDFC /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -621,7 +604,6 @@
 				3A78F1181C920737008C6BE5 /* InteractionsViewController.m in Sources */,
 				3A78F10F1C920701008C6BE5 /* NewsViewController.m in Sources */,
 				52498BC41CB3FD4000E6B96B /* ThirdViewController.m in Sources */,
-				3A2D8E7E1CBA827C00F43A76 /* Server.m in Sources */,
 				3A8C251F1CB999AD00CFA905 /* SecondDocumentViewController.m in Sources */,
 				3A1570551CAEA8F800D49C5E /* DBManager.m in Sources */,
 				3AAAA2C81C833FA3006DEE4E /* RegViewController.m in Sources */,
@@ -776,7 +758,7 @@
 					"\"${PODS_ROOT}/Headers/Public/SLExpandableTableView\"",
 					"-DSQLITE_HAS_CODEC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = StyleRU.Vidal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vidal.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -814,7 +796,7 @@
 					"\"${PODS_ROOT}/Headers/Public/SLExpandableTableView\"",
 					"-DSQLITE_HAS_CODEC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = StyleRU.Vidal;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vidal.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};

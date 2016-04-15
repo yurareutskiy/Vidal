@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "AFNetworking.h"
-#import "Server.h"
 
 @interface LoginViewController : UIViewController <UITextFieldDelegate>
 

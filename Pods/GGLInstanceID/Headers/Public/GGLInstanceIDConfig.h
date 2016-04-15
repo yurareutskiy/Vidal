@@ -10,7 +10,7 @@ typedef NS_ENUM(int8_t, GGLInstanceIDLogLevel) {
 /**
  *  The config used to configure different options in GGLInstanceID library.
  */
-@interface GGLInstanceIDConfig : NSObject <NSCopying, NSMutableCopying>
+@interface GGLInstanceIDConfig : NSObject
 
 /**
  *  Set the GGLInstanceIDDelegate to receive callbacks.
