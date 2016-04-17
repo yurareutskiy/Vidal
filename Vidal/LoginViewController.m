@@ -25,7 +25,7 @@
     self.passInput.delegate = self;
     
     self.regButton.layer.borderWidth = 1.0;
-    self.regButton.layer.borderColor = [UIColor colorWithRed:148.0/255.0 green:0 blue:0 alpha:1.0].CGColor;
+    self.regButton.layer.borderColor = [UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0].CGColor;
     
     NSString *string = self.lead.text;
     self.lead.numberOfLines = 0;

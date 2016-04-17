@@ -23,4 +23,14 @@
 - (IBAction)toReference:(UIButton *)sender;
 - (IBAction)registration:(UIButton *)sender;
 
+@property (strong, nonatomic) IBOutlet UIImageView *news;
+@property (strong, nonatomic) IBOutlet UIImageView *drugs;
+@property (strong, nonatomic) IBOutlet UIImageView *active;
+@property (strong, nonatomic) IBOutlet UIImageView *inter;
+@property (strong, nonatomic) IBOutlet UIImageView *pharma;
+@property (strong, nonatomic) IBOutlet UIImageView *producer;
+@property (strong, nonatomic) IBOutlet UIImageView *info;
+@property (strong, nonatomic) IBOutlet UIImageView *profile;
+@property (strong, nonatomic) IBOutlet UIImageView *fave;
+
 @end

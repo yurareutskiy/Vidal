@@ -24,6 +24,7 @@
 		3A1570661CAEAAAF00D49C5E /* OKSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1570651CAEAAAF00D49C5E /* OKSDK.m */; };
 		3A1570731CAEB0A000D49C5E /* SocialNetworkManagerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1570721CAEB0A000D49C5E /* SocialNetworkManagerVC.m */; };
 		3A5638581CA19971000A83B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5638571CA19971000A83B5 /* Assets.xcassets */; };
+		3A5D44901CC26DCD00BDC183 /* lucida_grande.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A5D448F1CC26DCD00BDC183 /* lucida_grande.ttf */; };
 		3A70F38A1C80B32C00193150 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A70F3891C80B32C00193150 /* CoreGraphics.framework */; };
 		3A78F0FF1C91E7DA008C6BE5 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F0FE1C91E7DA008C6BE5 /* MenuViewController.m */; };
 		3A78F1061C91E80A008C6BE5 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F1051C91E80A008C6BE5 /* SWRevealViewController.m */; };
@@ -106,6 +107,7 @@
 		3A1570711CAEB0A000D49C5E /* SocialNetworkManagerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialNetworkManagerVC.h; sourceTree = "<group>"; };
 		3A1570721CAEB0A000D49C5E /* SocialNetworkManagerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialNetworkManagerVC.m; sourceTree = "<group>"; };
 		3A5638571CA19971000A83B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		3A5D448F1CC26DCD00BDC183 /* lucida_grande.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lucida_grande.ttf; sourceTree = "<group>"; };
 		3A70F3891C80B32C00193150 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3A78F0FD1C91E7DA008C6BE5 /* MenuViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuViewController.h; sourceTree = "<group>"; };
 		3A78F0FE1C91E7DA008C6BE5 /* MenuViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuViewController.m; sourceTree = "<group>"; };
@@ -319,6 +321,7 @@
 				3A15706B1CAEAE7800D49C5E /* Models */,
 				3AA6AC371CBB0B35005AAD85 /* SearchViewController.h */,
 				3AA6AC381CBB0B35005AAD85 /* SearchViewController.m */,
+				3A5D448F1CC26DCD00BDC183 /* lucida_grande.ttf */,
 			);
 			name = "Additional Files";
 			sourceTree = "<group>";
@@ -515,6 +518,7 @@
 				3A0DBD881CB4924300D9BAD3 /* LogOutStoryboard.storyboard in Resources */,
 				BF9A12221CBFE8EB00B65F68 /* GoogleService-Info.plist in Resources */,
 				3A9E3FDF1C80AE330069BDFC /* LaunchScreen.storyboard in Resources */,
+				3A5D44901CC26DCD00BDC183 /* lucida_grande.ttf in Resources */,
 				3A5638581CA19971000A83B5 /* Assets.xcassets in Resources */,
 				3A9E3FD71C80AE330069BDFC /* Main.storyboard in Resources */,
 			);

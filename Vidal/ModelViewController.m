@@ -96,7 +96,7 @@
 
 - (void)customNavBar {
     
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1];
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:183.0/255.0 green:0.0/255.0 blue:57.0/255.0 alpha:1];
     self.navigationController.navigationBar.translucent = NO;
     self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
     [self.navigationController.navigationBar setTitleTextAttributes:

@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSMutableArray *secondArray;
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSMutableArray *tryArray;
+@property (nonatomic, strong) NSMutableArray *molecule;
 
 @end
 
@@ -22,6 +23,7 @@
     UITapGestureRecognizer *tap;
     NSUserDefaults *ud;
     NSString *req;
+    NSMutableIndexSet *toDelete;
 }
 
 
@@ -106,7 +108,8 @@
     
 }
 
-- (void) segueToBe:(NSInteger)xid {
+- (void) segueToBe:(NSInteger)xid
+{
     
     NSInteger product = [self.dbManager.arrColumnNames indexOfObject:@"ShowInProduct"];
     NSInteger parent = [self.dbManager.arrColumnNames indexOfObject:@"Code"];
@@ -120,27 +123,30 @@
     NSString *levelStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:level]];
     NSString *pointIDStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:pointID]];
     
-    // Get the results.
-    if (self.tryArray != nil) {
-        self.tryArray = nil;
-    }
-    
     NSString *req2 = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = %ld AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", [levelStr integerValue] + 1, parentStr];
     
-    if (![self checkData:req2]) {
+    BOOL goNext = [self checkData:req2];
+    
+    if (!goNext) {
+        
+        [ud setObject:pointIDStr forKey:@"id"];
+        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID INNER JOIN ClinicoPhPointers ON Document_ClPhPointers.ClPhPointerID = ClinicoPhPointers.ClPhPointerID WHERE ClinicoPhPointers.ClPhPointerID = %@", pointIDStr];
+        [self getMol:request];
+        
+        
         if (!container) {
             self.containerView.hidden = false;
             container = true;
             self.darkView.hidden = false;
             [self.darkView addGestureRecognizer:tap];
         }
-        NSLog(@"лекарств нет");
-        [ud setObject:pointIDStr forKey:@"id"];
-    } else {
+        
+        
+    } else if (goNext){
         [ud setObject:levelStr forKey:@"level"];
         [ud setObject:parentStr forKey:@"parent"];
         [self performSegueWithIdentifier:@"toLevel" sender:self];
-        NSLog(@"%d %@ %@", levelStr.intValue + 1, parentStr, productStr);
+        NSLog(@"%d %@", levelStr.intValue + 1, parentStr);
     }
     
 }
@@ -182,6 +188,43 @@
     [self.darkView removeGestureRecognizer:tap];
     self.darkView.hidden = true;
 //    [((UITableView *)[self.view viewWithTag:2]) deselectRowAtIndexPath:selectedRowIndex animated:YES];
+}
+
+- (void) getMol:(NSString *)mol {
+    if (self.molecule != nil) {
+        self.molecule = nil;
+    }
+    self.molecule = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:mol]];
+    if ([self.molecule count] != 0) {
+        for (NSUInteger i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
+            if ([[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
+                || [[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
+                [toDelete addIndex:i];
+        }
+        
+        ((SecondDocumentViewController *)self.childViewControllers.lastObject).latName.text = [[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
+        ((SecondDocumentViewController *)self.childViewControllers.lastObject).name.text = [[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
+        
+        [toDelete addIndex:0];
+        [toDelete addIndex:1];
+        
+        [[self.molecule objectAtIndex:0] removeObjectsAtIndexes:toDelete];
+        [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
+        
+        [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
+    } else {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Неправильный данные" message:@"Повторите ввод" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                             {
+                                 
+                             }];
+        [alertController addAction:ok];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    
+    
 }
 
 /*

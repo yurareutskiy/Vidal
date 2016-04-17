@@ -92,14 +92,23 @@
 
 - (void) viewDidAppear:(BOOL)animated {
     
-    self.input.text = [ud objectForKey:@"toInter"];
-    [self findFirstResult:[ud objectForKey:@"toInter"]];
-    [self setUpQuickSearch:self.hello2];
-    self.tableView.hidden = true;
-    self.secondInput.hidden = false;
-    self.secondLine.hidden = false;
-    self.secondLabel.hidden = false;
+    if ([ud objectForKey:@"toInter"]) {
+        self.input.text = [ud objectForKey:@"toInter"];
+        [self findFirstResult:[ud objectForKey:@"toInter"]];
+        [self setUpQuickSearch:self.hello2];
+        self.tableView.hidden = true;
+        self.secondInput.hidden = false;
+        self.secondLine.hidden = false;
+        self.secondLabel.hidden = false;
+    }
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    self.input.text = @"";
+    [ud removeObjectForKey:@"toInter"];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
@@ -255,14 +264,6 @@
 - (void)viewWillAppear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    self.input.text = @"";
-    [ud removeObjectForKey:@"toInter"];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 #pragma mark - keyboard movements

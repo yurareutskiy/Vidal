@@ -62,7 +62,7 @@
     self.expandableSections = [NSMutableIndexSet indexSet];
     self.hello1 = [NSMutableArray array];
     self.sectionsArray = [NSMutableArray array];
-    self.letters = [NSArray arrayWithObjects:@"N", @"А", @"Б", @"В", @"Г", @"Д", @"Е", @"Ж", @"З", @"И", @"Й", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"С", @"Т", @"У", @"Ф", @"Х", @"Ц", @"Ч", @"Ш", @"Э", @"Я", nil];
+    self.letters = [NSArray arrayWithObjects:@"Z", @"А", @"Б", @"В", @"Г", @"Д", @"Ж", @"З", @"И", @"Й", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"С", @"Т", @"У", @"Ф", @"Х", @"Ц", @"Э", @"Я", nil];
     
     container = false;
     self.containerView.hidden = true;
@@ -280,15 +280,18 @@
     if (tableView.tag == 1){
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (!container) {
-        self.containerView.hidden = false;
-        container = true;
-        self.darkView.hidden = false;
-        [self.darkView addGestureRecognizer:tap];
         
         nextPls = [result[indexPath.section][indexPath.row - 1] objectAtIndex:0];
         [ud setObject:nextPls forKey:@"molecule"];
         NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID WHERE Molecule.MoleculeID = %@", nextPls];
         [self getMol:request];
+        
+        if ([self.molecule count] != 0) {
+            self.containerView.hidden = false;
+            container = true;
+            self.darkView.hidden = false;
+            [self.darkView addGestureRecognizer:tap];
+        }
         }
     } else if (tableView.tag == 2){
         selectedRowIndex = [indexPath copy];
@@ -330,8 +333,11 @@
     //    self.arrPeopleInfo = [self.arrPeopleInfo valueForKey:@"uppercaseString"];
     
     for (NSArray* key in self.arrPeopleInfo) {
-        
-        keyString = [NSString stringWithFormat:@"%@", [[key objectAtIndex:2] substringToIndex:1]];
+        if (![[key objectAtIndex:2] isEqualToString:@""]) {
+            keyString = [NSString stringWithFormat:@"%@", [[key objectAtIndex:2] substringToIndex:1]];
+        } else {
+            keyString = [NSString stringWithFormat:@"%@", [[key objectAtIndex:1] substringToIndex:1]];
+        }
         keyString = [keyString valueForKey:@"uppercaseString"];
         NSInteger ind = [self.letters indexOfObject:keyString];
         [[result objectAtIndex:ind] addObject:key];
@@ -346,6 +352,8 @@
         self.molecule = nil;
     }
     self.molecule = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:mol]];
+    
+    if ([self.molecule count] != 0) {
     
     for (NSUInteger i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
         if ([[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
@@ -363,6 +371,17 @@
     [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
     
     [((DocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
+    } else {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Неправильный данные" message:@"Повторите ввод" preferredStyle:UIAlertControllerStyleAlert];
+        
+                UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                     {
+        
+                                     }];
+                [alertController addAction:ok];
+        
+                [self presentViewController:alertController animated:YES completion:nil];
+    }
     
 }
 

@@ -268,7 +268,7 @@
         self.molecule = nil;
     }
     self.molecule = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:mol]];
-    
+    if ([self.molecule count] != 0) {
     for (NSUInteger i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
         if ([[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
             || [[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
@@ -285,7 +285,17 @@
     [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
     
     [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
+    } else {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Неправильный данные" message:@"Повторите ввод" preferredStyle:UIAlertControllerStyleAlert];
     
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                         {
+                             
+                         }];
+    [alertController addAction:ok];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+    }
 }
 
 /*

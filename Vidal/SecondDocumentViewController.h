@@ -15,6 +15,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *registred;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UILabel *latName;
+@property (strong, nonatomic) IBOutlet UIButton *fav;
 
 - (IBAction)addToFav:(UIButton *)sender;
 - (IBAction)toInter:(UIButton *)sender;
