@@ -12,4 +12,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *takeda;
 @property (strong, nonatomic) IBOutlet UILabel *drug;
 
+- (IBAction)toList:(UIButton *)sender;
+
 @end

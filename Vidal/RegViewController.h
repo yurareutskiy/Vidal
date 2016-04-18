@@ -31,9 +31,13 @@
 
 @property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
 
+@property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
+@property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
+
 - (IBAction)callDatePicker:(UIButton*)sender;
 - (IBAction)regButton:(UIButton *)sender;
 
 - (IBAction)backButton:(id)sender;
+- (IBAction)getData:(UIBarButtonItem *)sender;
 
 @end

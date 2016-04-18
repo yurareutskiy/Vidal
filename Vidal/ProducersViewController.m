@@ -31,7 +31,7 @@
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
-    NSString *request = @"SELECT InfoPage.RusName AS Name, InfoPage.RusAddress, InfoPage.PhoneNumber, InfoPage.Email, Country.RusName FROM InfoPage INNER JOIN InfoPage_Picture ON InfoPage.InfoPageID = InfoPage_Picture.InfoPageID INNER JOIN Picture ON InfoPage_Picture.PictureID = Picture.PictureID INNER JOIN Country ON InfoPage.CountryCode = Country.CountryCode ORDER BY Name";
+    NSString *request = @"SELECT InfoPage.RusName AS Name, InfoPage.RusAddress, InfoPage.PhoneNumber, InfoPage.Email, Country.RusName FROM InfoPage INNER JOIN Picture ON InfoPage.PictureID = Picture.PictureID INNER JOIN Country ON InfoPage.CountryCode = Country.CountryCode ORDER BY Name";
     [self loadData:request];
     
     [super setLabel:@"Производители"];
@@ -111,6 +111,7 @@
     
     cell.nameUnhid.hidden = true;
     cell.countryUnhid.hidden = true;
+    
     cell.nameHid.hidden = false;
     cell.countryHid.hidden = false;
     cell.image.hidden = false;
@@ -128,15 +129,18 @@
     
     [self.tableView beginUpdates];
     
-    ((ProducersTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).nameUnhid.hidden = false;
-    ((ProducersTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).countryUnhid.hidden = false;
-    ((ProducersTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).nameHid.hidden = true;
-    ((ProducersTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).countryHid.hidden = true;
-    ((ProducersTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).image.hidden = true;
-    ((ProducersTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).addressHid.hidden = true;
-    ((ProducersTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).emailHid.hidden = true;
-    ((ProducersTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).phoneHid.hidden = true;
-    ((ProducersTableViewCell *)[self.tableView cellForRowAtIndexPath:indexPath]).listBtn.hidden = true;
+    ProducersTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+    cell.nameUnhid.hidden = false;
+    cell.countryUnhid.hidden = false;
+    
+    cell.nameHid.hidden = true;
+    cell.countryHid.hidden = true;
+    cell.image.hidden = true;
+    cell.addressHid.hidden = true;
+    cell.emailHid.hidden = true;
+    cell.phoneHid.hidden = true;
+    cell.listBtn.hidden = true;
     
     [self.tableView endUpdates];
 

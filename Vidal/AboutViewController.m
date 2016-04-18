@@ -12,11 +12,14 @@
 
 @end
 
-@implementation AboutViewController
+@implementation AboutViewController {
+    NSUserDefaults *ud;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    ud = [NSUserDefaults standardUserDefaults];
     self.navigationItem.title = @"О Такеда";
     
     NSString *string1 = self.takeda.text;
@@ -49,4 +52,10 @@
 }
 */
 
+- (IBAction)toList:(UIButton *)sender {
+    
+    [ud setObject:@"6057" forKey:@"comp"];
+    [self performSegueWithIdentifier:@"toList" sender:self];
+    
+}
 @end

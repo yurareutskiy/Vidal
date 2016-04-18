@@ -13,7 +13,7 @@
 @end
 
 @implementation RegViewController {
-    HSDatePickerViewController *datePicker;
+    
     UITapGestureRecognizer *singleTap;
     BOOL keyboard;
     CGPoint svos;
@@ -24,13 +24,16 @@
     [super viewDidLoad];
 
     
-    datePicker = [[HSDatePickerViewController alloc] init];
-    datePicker.delegate = self;
+//    datePicker = [[HSDatePickerViewController alloc] init];
+//    datePicker.delegate = self;
     self.scrollView.delegate = self;
     for (UITextField *textField in self.textFields) {
         textField.delegate = self;
     }
     
+    self.datePicker.hidden = true;
+    [self.datePicker setBackgroundColor:[UIColor whiteColor]];
+    self.toolbar.hidden = true;
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -38,7 +41,7 @@
     self.tableView.hidden = true;
     
     svos = self.scrollView.contentOffset;
-    datePicker.dateFormatter.dateFormat = @"Y";
+//    datePicker.dateFormatter.dateFormat = @"Y";
     
     self.agree.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     
@@ -208,6 +211,7 @@
             [self.scrollView setContentOffset:self.view.frame.origin animated:YES];
         }
     }
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -227,7 +231,9 @@
 
 - (IBAction)callDatePicker:(UIButton*)sender {
     
-    [self presentViewController:datePicker animated:YES completion:nil];
+//    [self presentViewController:datePicker animated:YES completion:nil];
+    self.datePicker.hidden = false;
+    self.toolbar.hidden = false;
     
 }
 
@@ -254,9 +260,9 @@
     @"register[password]":pass,
     @"register[firstName]":name,
     @"register[lastName]":surname,
-    @"register[birthdate][day]":@"2",
+    @"register[birthdate][day]":self.day.text,
     @"register[birthdate][month]":@"12",
-    @"register[birthdate][year]":@"1996",
+    @"register[birthdate][year]":self.year.text,
     @"register[city]":city,
     @"register[primarySpecialty]":@"11"}
           success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
@@ -293,6 +299,22 @@
 - (IBAction)backButton:(id)sender {
     
     [self.navigationController popViewControllerAnimated:YES];
+    
+}
+
+- (IBAction)getData:(UIBarButtonItem *)sender {
+    
+    self.datePicker.hidden = true;
+    self.toolbar.hidden = true;
+    NSDate *bd = [self.datePicker date];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"Y"];
+    self.year.text = [formatter stringFromDate:bd];
+    [formatter setDateFormat:@"MMMM"];
+    self.month.text = [formatter stringFromDate:bd];
+    [formatter setDateFormat:@"d"];
+    self.day.text = [formatter stringFromDate:bd];
     
 }
 

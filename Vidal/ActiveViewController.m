@@ -155,20 +155,20 @@
 
 - (void)tableView:(SLExpandableTableView *)tableView didCollapseSection:(NSUInteger)section animated:(BOOL)animated
 {
-    if ([[result objectAtIndex:section] count] == 1){
-        if (!container) {
-            self.containerView.hidden = false;
-            container = true;
-            self.darkView.hidden = false;
-            [self.darkView addGestureRecognizer:tap];
-        }
-    } else {
+//    if ([[result objectAtIndex:section] count] == 1){
+//        if (!container) {
+//            self.containerView.hidden = false;
+//            container = true;
+//            self.darkView.hidden = false;
+//            [self.darkView addGestureRecognizer:tap];
+//        }
+//    } else {
         self.containerView.hidden = true;
         container = false;
         [self.darkView removeGestureRecognizer:tap];
         self.darkView.hidden = true;
         [((UITableView *)[self.view viewWithTag:2]) deselectRowAtIndexPath:selectedRowIndex animated:YES];
-    }
+//    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -205,7 +205,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView.tag == 1) {
-        return [[result objectAtIndex:section] count];
+        return [[result objectAtIndex:section] count] + 1;
     } else if (tableView.tag == 2){
         NSInteger x = 0;
         for (int i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {

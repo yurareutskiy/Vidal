@@ -48,7 +48,7 @@
     ((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView.dataSource = self;
     [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView setTag:2];
     
-    self.letters = [NSArray arrayWithObjects:@"А", @"Б", @"В", @"Г", @"Д", @"Ж", @"З", @"И", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"С", @"Т", @"У", @"Ф", @"Ц", @"Э", @"Ю", nil];
+    self.letters = [NSArray arrayWithObjects:@"А", @"Б", @"В", @"Г", @"Д", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"Т", @"Ф", @"Ц", @"Э", nil];
     
     toDelete = [NSMutableIndexSet indexSet];
     ud = [NSUserDefaults standardUserDefaults];
@@ -157,21 +157,22 @@
 
 - (void)tableView:(SLExpandableTableView *)tableView didCollapseSection:(NSUInteger)section animated:(BOOL)animated
 {
-    if ([[result objectAtIndex:section] count] == 1){
-        if (!container) {
-        
-            self.containerView.hidden = false;
-            container = true;
-            self.darkView.hidden = false;
-            [self.darkView addGestureRecognizer:tap];
-        }
-    } else {
+    
+//    if ([[result objectAtIndex:section] count] == 1){
+//        if (!container) {
+//        
+//            self.containerView.hidden = false;
+//            container = true;
+//            self.darkView.hidden = false;
+//            [self.darkView addGestureRecognizer:tap];
+//        }
+//    } else {
         self.containerView.hidden = true;
         container = false;
         [self.darkView removeGestureRecognizer:tap];
         self.darkView.hidden = true;
         [((UITableView *)[self.view viewWithTag:2]) deselectRowAtIndexPath:selectedRowIndex animated:YES];
-    }
+//    }
 
 }
 
@@ -207,7 +208,7 @@
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     if (tableView.tag == 1) {
-        return [[result objectAtIndex:section] count];
+        return [[result objectAtIndex:section] count] + 1;
     } else if (tableView.tag == 2){
         NSInteger x = 0;
         for (int i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {

@@ -17,5 +17,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *bg;
 - (IBAction)toTakeda:(UIButton *)sender;
 - (IBAction)toVidal:(UIButton *)sender;
+- (IBAction)toList:(UIButton *)sender;
 
 @end

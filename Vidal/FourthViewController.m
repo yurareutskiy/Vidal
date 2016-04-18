@@ -148,6 +148,7 @@
         
         ((SecondDocumentViewController *)self.childViewControllers.lastObject).latName.text = [[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
         ((SecondDocumentViewController *)self.childViewControllers.lastObject).name.text = [[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
+        [ud setObject:[self.molecule objectAtIndex:0] forKey:@"id"];
         
         [toDelete addIndex:0];
         [toDelete addIndex:1];

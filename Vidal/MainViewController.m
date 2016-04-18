@@ -170,4 +170,9 @@
     
 }
 
+- (IBAction)toList:(UIButton *)sender {
+    [ud setObject:@"6057" forKey:@"comp"];
+    [self performSegueWithIdentifier:@"toList" sender:self];
+}
+
 @end
