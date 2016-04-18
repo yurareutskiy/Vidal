@@ -90,6 +90,10 @@
 - (void) downloadDB:(NSString *) link {
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        UIView *dark = [[UIView alloc] initWithFrame:self.view.frame];
+        [dark setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:0.5]];
+        dark.userInteractionEnabled = false;
+        [self.view addSubview:dark];
         NSLog(@"Downloading Started");
         NSString *urlToDownload = link;
         NSURL  *url = [NSURL URLWithString:urlToDownload];
@@ -114,7 +118,7 @@
                 
                 [zipArchive UnzipFileTo:documentsDirectory overWrite:YES];
                 [zipArchive UnzipCloseFile];
-
+                [dark removeFromSuperview];
             });
         } else {
             NSLog(@"Download failed");
