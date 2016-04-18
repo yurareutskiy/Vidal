@@ -30,13 +30,6 @@
     
     self.bg.layer.masksToBounds = YES;
     
-    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(30, 20)]
-                                                         style:UIBarButtonItemStyleDone
-                                                        target:self
-                                                        action:@selector(search)];
-    
-    self.navigationItem.rightBarButtonItem = self.searchButton;
-    
     [self getLink];
     [self getKey];
     

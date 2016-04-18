@@ -11,14 +11,12 @@
 #import "AFNetworking.h"
 #import "IMQuickSearch.h"
 
-@interface RegViewController : UIViewController<HSDatePickerViewControllerDelegate, UIScrollViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface RegViewController : UIViewController<UIScrollViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UILabel *day;
 @property (strong, nonatomic) IBOutlet UILabel *month;
 @property (strong, nonatomic) IBOutlet UILabel *year;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
-@property (strong, nonatomic) IBOutlet UIView *contentSize;
-@property (strong, nonatomic) IBOutlet UIButton *backButton;
 @property (strong, nonatomic) IBOutlet UIButton *agree;
 @property (strong, nonatomic) IBOutlet UIButton *worker;
 @property (nonatomic, strong) NSArray *FilteredResults;
@@ -28,11 +26,20 @@
 
 @property (strong, nonatomic) NSMutableArray *dictSpec;
 @property (strong, nonatomic) NSMutableArray *namesSpec;
-
-@property (strong, nonatomic) IBOutletCollection(UITextField) NSArray *textFields;
+@property (strong, nonatomic) IBOutlet UITextField *special;
+@property (strong, nonatomic) IBOutlet UITextField *emailText;
+@property (strong, nonatomic) IBOutlet UITextField *passText;
+@property (strong, nonatomic) IBOutlet UITextField *nameText;
+@property (strong, nonatomic) IBOutlet UITextField *surnameText;
+@property (strong, nonatomic) IBOutlet UITextField *cityText;
 
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (strong, nonatomic) IBOutlet UIButton *check1;
+@property (strong, nonatomic) IBOutlet UIButton *check2;
+
+- (IBAction)button1:(UIButton *)sender;
+- (IBAction)button2:(UIButton *)sender;
 
 - (IBAction)callDatePicker:(UIButton*)sender;
 - (IBAction)regButton:(UIButton *)sender;

@@ -77,7 +77,7 @@
     [self loadData:@"SELECT * FROM Document INNER JOIN Product ON Document.DocumentID = Product.ProductID ORDER BY Product.RusName"
          loadData2:@"SELECT * FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID ORDER BY Molecule.RusName"];
     
-    self.closeButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"close"] scaledToSize:CGSizeMake(20, 25)]
+    self.closeButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"close"] scaledToSize:CGSizeMake(20, 20)]
                                                         style:UIBarButtonItemStyleDone
                                                        target:self
                                                        action:@selector(close)];
@@ -346,7 +346,6 @@
     [self.tableView2 reloadData];
     self.tableView2.hidden = false;
     self.tableView1.hidden = true;
-    self.searchBar.text = @"";
     [self.button1 setBackgroundColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1]];
     [self.button1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.button2 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
@@ -361,7 +360,6 @@
     [self.tableView1 reloadData];
     self.tableView1.hidden = false;
     self.tableView2.hidden = true;
-    self.searchBar.text = @"";
     [self.button2 setBackgroundColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1]];
     [self.button2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.button1 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];

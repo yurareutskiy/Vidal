@@ -17,19 +17,22 @@
     UITapGestureRecognizer *singleTap;
     BOOL keyboard;
     CGPoint svos;
+    NSString *monthYeah;
+    int job;
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
 
-    
-//    datePicker = [[HSDatePickerViewController alloc] init];
-//    datePicker.delegate = self;
     self.scrollView.delegate = self;
-    for (UITextField *textField in self.textFields) {
-        textField.delegate = self;
-    }
+    
+    self.special.delegate = self;
+    self.emailText.delegate = self;
+    self.passText.delegate = self;
+    self.surnameText.delegate = self;
+    self.nameText.delegate = self;
+    self.cityText.delegate = self;
     
     self.datePicker.hidden = true;
     [self.datePicker setBackgroundColor:[UIColor whiteColor]];
@@ -41,15 +44,9 @@
     self.tableView.hidden = true;
     
     svos = self.scrollView.contentOffset;
-//    datePicker.dateFormatter.dateFormat = @"Y";
     
     self.agree.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    
     self.worker.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    
-    singleTap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(singleTapGestureCaptured:)];
-    [self.scrollView addGestureRecognizer:singleTap];
-    [self.tableView removeGestureRecognizer:singleTap];
     
     [self getSpec];
     
@@ -106,9 +103,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    NSLog(@"%@ %@", indexPath, self.FilteredResults[indexPath.row]);
-    ((UITextField *)[self.view viewWithTag:5]).text = self.FilteredResults[indexPath.row];
+    
+    NSLog(@"HELLO %ld %@", (long)indexPath.row, self.FilteredResults[indexPath.row]);
+    self.special.text = self.FilteredResults[indexPath.row];
     self.tableView.hidden = true;
+    for (NSDictionary *key in self.dictSpec) {
+        if ([[key objectForKey:@"doctorName"] isEqualToString:self.FilteredResults[indexPath.row]])
+            job = (int)[key objectForKey:@"id"];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -120,27 +122,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
-
-//#pragma mark - keyboard movements
-//- (void)keyboardWillShow:(NSNotification *)notification
-//{
-//    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-//    
-//    [UIView animateWithDuration:0.3 animations:^{
-//        CGRect f = self.view.frame;
-//        f.origin.y = -keyboardSize.height;
-//        self.view.frame = f;
-//    }];
-//}
-//
-//-(void)keyboardWillHide:(NSNotification *)notification
-//{
-//    [UIView animateWithDuration:0.3 animations:^{
-//        CGRect f = self.view.frame;
-//        f.origin.y = 0.0f;
-//        self.view.frame = f;
-//    }];
-//}
 
 #pragma mark - TextField Delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -173,7 +154,16 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    if (textField.tag >= 3) {
+    if (textField.tag == 5) {
+        svos = self.scrollView.contentOffset;
+        CGPoint pt;
+        CGRect rc = [textField bounds];
+        rc = [textField convertRect:rc toView:self.scrollView];
+        pt = rc.origin;
+        pt.x = 0;
+        pt.y -= 180;
+        [self.scrollView setContentOffset:pt animated:YES];
+    } else if (textField.tag == 3 || textField.tag == 4) {
         svos = self.scrollView.contentOffset;
         CGPoint pt;
         CGRect rc = [textField bounds];
@@ -185,33 +175,11 @@
     }
 }
 
-//- (void)viewWillAppear:(BOOL)animated {
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-//}
-//
-//- (void)viewWillDisappear:(BOOL)animated {
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-//}
-
-- (void)singleTapGestureCaptured:(UITapGestureRecognizer *)gesture
-{
-    for (UITextField *textField in self.textFields){
-        if (self.tableView.hidden == false) {
-            NSLog(@"1");
-            NSIndexPath *selectedIndexPath = self.tableView.indexPathForSelectedRow;
-            [self tableView:self.tableView didSelectRowAtIndexPath:selectedIndexPath];
-            [self.scrollView setContentOffset:self.view.frame.origin animated:YES];
-            break;
-        } else {
-            [textField resignFirstResponder];
-            NSLog(@"2");
-            self.tableView.hidden = true;
-            [self.scrollView setContentOffset:self.view.frame.origin animated:YES];
-        }
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [[event allTouches] anyObject];
+    if ([[touch.view class] isSubclassOfClass:[UITextField class]]) {
+        [touch.view resignFirstResponder];
     }
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -229,6 +197,12 @@
 }
 */
 
+- (IBAction)button1:(UIButton *)sender {
+}
+
+- (IBAction)button2:(UIButton *)sender {
+}
+
 - (IBAction)callDatePicker:(UIButton*)sender {
     
 //    [self presentViewController:datePicker animated:YES completion:nil];
@@ -243,17 +217,11 @@
     
     [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
     
-    NSString *email = ((UITextField *)[self.textFields objectAtIndex:1]).text;
-    NSLog(@"%@", email);
-    NSString *pass = [self reverse:((UITextField *)[self.textFields objectAtIndex:2]).text];
-    NSLog(@"%@", pass);
-    NSString *name = ((UITextField *)[self.textFields objectAtIndex:4]).text;
-    NSLog(@"%@", name);
-    NSString *surname = ((UITextField *)[self.textFields objectAtIndex:3]).text;
-    NSLog(@"%@", surname);
-    NSString *city = ((UITextField *)[self.textFields objectAtIndex:0]).text;
-    NSLog(@"%@", city);
-    
+    NSString *email = self.emailText.text;
+    NSString *pass = [self reverse:self.passText.text];
+    NSString *name = self.nameText.text;
+    NSString *surname = self.surnameText.text;
+    NSString *city = self.cityText.text;
     
     [manager POST:@"http://www.vidal.ru/api/user/add" parameters:
      @{@"register[username]":email,
@@ -261,20 +229,22 @@
     @"register[firstName]":name,
     @"register[lastName]":surname,
     @"register[birthdate][day]":self.day.text,
-    @"register[birthdate][month]":@"12",
+    @"register[birthdate][month]":monthYeah,
     @"register[birthdate][year]":self.year.text,
     @"register[city]":city,
-    @"register[primarySpecialty]":@"11"}
+    @"register[primarySpecialty]":[NSString stringWithFormat:@"%d", job]}
           success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
               NSLog(@"Responce is :%@",responseObject);
+              UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
+              [self presentViewController:vc animated:false completion:nil];
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         NSLog(@"%@", error);
     }];
     
-//    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
-//    [self presentViewController:vc animated:false completion:nil];
-//    
+    UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
+    [self presentViewController:vc animated:false completion:nil];
+
 //    [self performSegueWithIdentifier:@"toFullApp" sender:self];
     
 }
@@ -315,26 +285,9 @@
     self.month.text = [formatter stringFromDate:bd];
     [formatter setDateFormat:@"d"];
     self.day.text = [formatter stringFromDate:bd];
-    
-}
-
--(void)hsDatePickerPickedDate:(NSDate *)date {
-    
-    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitDay | NSCalendarUnitMonth | NSCalendarUnitYear fromDate:[NSDate date]];
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"Y"];
-    NSString *y = [formatter stringFromDate:date];
-    [formatter setDateFormat:@"MMMM"];
-    NSString *m = [formatter stringFromDate:date];
-    [formatter setDateFormat:@"d"];
-    NSString *d = [formatter stringFromDate:date];
-    
-    [self.day setText:[NSString stringWithFormat:@"%@", d]];
-    [self.month setText:[NSString stringWithFormat:@"%@", m]];
-    [self.year setText:[NSString stringWithFormat:@"%@", y]];
-    
-    NSLog(@"%ld", (long)components.year);
+    [formatter setDateFormat:@"M"];
+    monthYeah = [formatter stringFromDate:bd];
+    NSLog(@"%@", monthYeah);
     
 }
 
@@ -345,10 +298,10 @@
         keyboard = true;
         
         NSInteger tag = 0;
-        
-        for (UITextField *textField in self.textFields) {
-            if (textField.isFirstResponder) {
-                tag = textField.tag;
+    
+        for (UIView *subView in self.view.subviews) {
+            if ([subView isFirstResponder]) {
+                tag = subView.tag;
                 break;
             }
         }
@@ -369,7 +322,6 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     [manager GET:@"http://www.vidal.ru/api/specialties" parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, NSArray *responseObject) {
-//        NSLog(@"JSON: %@", responseObject);
         self.dictSpec = [[NSMutableArray alloc] initWithArray:responseObject];
         for (NSDictionary *key in self.dictSpec) {
             [self.namesSpec addObject:[key objectForKey:@"doctorName"]];
@@ -381,18 +333,5 @@
     }];
 
 }
-
-
-
-//-(void)keyboardWillHide:(NSNotification *)notification
-//{
-//    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-//    if (keyboard){
-//        keyboard = false;
-//        [UIView animateWithDuration:0.3 animations:^{
-//            self.view.frame = CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y + keyboardSize.height, self.view.frame.size.width, self.view.frame.size.height);
-//        }];
-//    }
-//}
 
 @end

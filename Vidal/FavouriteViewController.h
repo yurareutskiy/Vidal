@@ -8,7 +8,7 @@
 
 #import "ModelViewController.h"
 #import "DBManager.h"
-#import "DocumentViewController.h"
+#import "SecondDocumentViewController.h"
 
 @interface FavouriteViewController : ModelViewController<UITableViewDataSource, UITableViewDelegate>
 
