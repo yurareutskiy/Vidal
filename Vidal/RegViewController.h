@@ -23,9 +23,11 @@
 
 @property (nonatomic, strong) IMQuickSearch *quickSearch;
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) IBOutlet UITableView *tableView2;
 
 @property (strong, nonatomic) NSMutableArray *dictSpec;
 @property (strong, nonatomic) NSMutableArray *namesSpec;
+@property (strong, nonatomic) NSMutableArray *namesCity;
 @property (strong, nonatomic) IBOutlet UITextField *special;
 @property (strong, nonatomic) IBOutlet UITextField *emailText;
 @property (strong, nonatomic) IBOutlet UITextField *passText;

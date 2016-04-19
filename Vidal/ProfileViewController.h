@@ -9,5 +9,11 @@
 #import "ModelViewController.h"
 
 @interface ProfileViewController : ModelViewController
+@property (strong, nonatomic) IBOutlet UITextField *surname;
+@property (strong, nonatomic) IBOutlet UITextField *name;
+@property (strong, nonatomic) IBOutlet UITextField *email;
+@property (strong, nonatomic) IBOutlet UILabel *bd;
+@property (strong, nonatomic) IBOutlet UILabel *city;
+@property (strong, nonatomic) IBOutlet UITextField *spec;
 
 @end

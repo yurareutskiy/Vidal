@@ -166,15 +166,32 @@
                 [toDelete addIndex:i];
         }
         
-        ((SecondDocumentViewController *)self.childViewControllers.lastObject).latName.text = [[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
-        ((SecondDocumentViewController *)self.childViewControllers.lastObject).name.text = [[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
-        [ud setObject:[self.molecule objectAtIndex:0] forKey:@"id"];
+        ((SecondDocumentViewController *)self.childViewControllers.lastObject).latName.text = [[[self.molecule objectAtIndex:0] objectAtIndex:2] valueForKey:@"lowercaseString"];
+        ((SecondDocumentViewController *)self.childViewControllers.lastObject).name.text = [[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
+        if (![[[self.molecule objectAtIndex:0] objectAtIndex:3] isEqualToString:@""]) {
+            ((SecondDocumentViewController *)self.childViewControllers.lastObject).registred.text = [[self.molecule objectAtIndex:0] objectAtIndex:2];
+            [toDelete addIndex:2];
+        }
+        
+        [ud setObject:[[self.molecule objectAtIndex:0] objectAtIndex:0] forKey:@"id"];
         
         [toDelete addIndex:0];
         [toDelete addIndex:1];
         
         [[self.molecule objectAtIndex:0] removeObjectsAtIndexes:toDelete];
         [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
+        
+        if ([((NSArray *)[ud objectForKey:@"favs"]) containsObject:[ud objectForKey:@"id"]]) {
+            NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithString:((SecondDocumentViewController *)self.childViewControllers.lastObject).fav.titleLabel.text attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:187.0/255.0 green:0.0 blue:57.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
+            
+            [((SecondDocumentViewController *)self.childViewControllers.lastObject).fav setAttributedTitle:result forState:UIControlStateNormal];
+            [((SecondDocumentViewController *)self.childViewControllers.lastObject).fav setImage:[UIImage imageNamed:@"favRed"] forState:UIControlStateNormal];
+        } else {
+            NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithString:((SecondDocumentViewController *)self.childViewControllers.lastObject).fav.titleLabel.text attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:213.0/255.0 green:213.0/255.0 blue:213.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
+            
+            [((SecondDocumentViewController *)self.childViewControllers.lastObject).fav setAttributedTitle:result forState:UIControlStateNormal];
+            [((SecondDocumentViewController *)self.childViewControllers.lastObject).fav setImage:[UIImage imageNamed:@"favGrey"] forState:UIControlStateNormal];
+        }
         
         [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
     } else {

@@ -35,6 +35,7 @@
     NSUserDefaults *ud;
     NSString *nextPls;
     NSMutableIndexSet *toDelete;
+    CGFloat sizeCell;
     
 }
 
@@ -182,8 +183,7 @@
         return 60;
     } else if (tableView.tag == 2) {
         if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
-            self.tableView.rowHeight = UITableViewAutomaticDimension;
-            return self.tableView.rowHeight;
+            return sizeCell;
         } else {
             return 60;
         }
@@ -285,7 +285,7 @@
             
             nextPls = [result[indexPath.section][indexPath.row - 1] objectAtIndex:0];
             [ud setObject:nextPls forKey:@"molecule"];
-            NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document WHERE Document.DocumentID = %@", nextPls];
+            NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document WHERE Document.DocumentID = %@", nextPls];
 //            INNER JOIN Product ON Document.DocumentID = Product.DocumentID
             NSLog(@"%@", request);
             [self getMol:request];
@@ -293,13 +293,28 @@
     } else if (tableView.tag == 2){
         selectedRowIndex = [indexPath copy];
         
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 40, 0)];
+        NSString *string = [[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row];
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineSpacing:6];
+        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [string length])];
+        label.attributedText = attributedString;
+        label.lineBreakMode = NSLineBreakByWordWrapping;
+        label.numberOfLines = 0;
+        label.font = [UIFont fontWithName:@"Lucida_Grande-Regular" size:17.f];
+        [label sizeToFit];
+        sizeCell = label.frame.size.height + 5;
+        NSLog(@"%f", sizeCell);
+        
         [tableView beginUpdates];
         
         [tableView endUpdates];
+        
     }
 }
 
--(void)loadData:(NSString *)req{
+-(void)loadData:(NSString *)req {
     
     // Get the results.
     if (self.arrPeopleInfo != nil) {
@@ -345,6 +360,10 @@
     
     ((SecondDocumentViewController *)self.childViewControllers.lastObject).latName.text = [[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
     ((SecondDocumentViewController *)self.childViewControllers.lastObject).name.text = [[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
+    if (![[[self.molecule objectAtIndex:0] objectAtIndex:2] isEqualToString:@""]) {
+        ((SecondDocumentViewController *)self.childViewControllers.lastObject).registred.text = [[self.molecule objectAtIndex:0] objectAtIndex:2];
+        [toDelete addIndex:2];
+    }
     
     [toDelete addIndex:0];
     [toDelete addIndex:1];

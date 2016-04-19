@@ -20,6 +20,7 @@
 @implementation ProducersViewController {
     
     NSIndexPath *selectedRowIndex;
+    CGFloat sizeCell;
     
 }
 
@@ -49,7 +50,7 @@
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     //check if the index actually exists
     if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
-        return 400;
+        return sizeCell;
     }
     return 80;
 
@@ -108,6 +109,20 @@
     [self.tableView beginUpdates];
     
     ProducersTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 40, 0)];
+    NSString *string = cell.phoneHid.text;
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:6];
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [string length])];
+    label.attributedText = attributedString;
+    label.lineBreakMode = NSLineBreakByWordWrapping;
+    label.numberOfLines = 0;
+    label.font = [UIFont fontWithName:@"Lucida_Grande-Regular" size:17.f];
+    [label sizeToFit];
+    sizeCell = cell.phoneHid.frame.origin.y + label.frame.size.height + 5;
+    NSLog(@"%f", sizeCell);
     
     cell.nameUnhid.hidden = true;
     cell.countryUnhid.hidden = true;

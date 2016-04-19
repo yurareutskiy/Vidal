@@ -30,8 +30,10 @@
     
     self.bg.layer.masksToBounds = YES;
     
-    [self getLink];
-    [self getKey];
+    if ([[ud valueForKey:@"reg"] isEqualToString:@"1"]) {
+        [self getLink];
+        [self getKey];
+    }
     
     // Do any additional setup after loading the view.
 }

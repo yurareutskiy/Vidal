@@ -72,37 +72,6 @@
     }];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
-}
-
-#pragma mark - keyboard movements
-- (void)keyboardWillShow:(NSNotification *)notification
-{
-    CGSize keyboardSize = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue].size;
-    
-    [UIView animateWithDuration:0.3 animations:^{
-        CGRect f = self.view.frame;
-        f.origin.y = -keyboardSize.height;
-        self.view.frame = f;
-    }];
-}
-
--(void)keyboardWillHide:(NSNotification *)notification
-{
-    [UIView animateWithDuration:0.3 animations:^{
-        CGRect f = self.view.frame;
-        f.origin.y = 0.0f;
-        self.view.frame = f;
-    }];
-}
-
 -(BOOL) NSStringIsValidEmail:(NSString *)checkString
 {
     BOOL stricterFilter = NO; // Discussion http://blog.logichigh.com/2010/09/02/validating-an-e-mail-address/
@@ -120,54 +89,72 @@
 
 - (IBAction)registration:(UIButton *)sender {
     
+    [ud setObject:@"1" forKey:@"reg"];
     [self performSegueWithIdentifier:@"toReg" sender:self];
     
 }
 
 - (IBAction)login:(id)sender {
-//    if ([self.emailInput.text isEqualToString:@""] || [self.passInput.text isEqualToString:@""]) {
-//        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Неправильный данные" message:@"Повторите ввод" preferredStyle:UIAlertControllerStyleAlert];
-//        
-//        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
-//                             {
-//                                 //Do some thing here
-//                                 [self.navigationController popViewControllerAnimated:YES];
-//                                 
-//                             }];
-//        [alertController addAction:ok];
-//        
-//        [self presentViewController:alertController animated:YES completion:nil];
-//    } else {
+    if ([self NSStringIsValidEmail:self.emailInput.text] && ![self.emailInput.text isEqualToString:@""]) {
+        if ([self.passInput.text length] >= 6 && [self.passInput.text length] <= 255 && ![self hasRussianCharacters:self.passInput.text]) {
+            NSString *email = self.emailInput.text;
+            NSString *pass = [self reverse:self.passInput.text];
+            
+            AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+            [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+            
+            [manager POST:@"http://www.vidal.ru/api/user/auth" parameters:@{
+                                                                            @"username":email,
+                                                                            @"password":pass}
+                  success:^(AFHTTPRequestOperation * _Nonnull operation, id responseObject) {
+                      
+                      NSLog(@"%@", responseObject);
+                      
+                      [ud setObject:[responseObject valueForKey:@"lastName"] forKey:@"surname"];
+                      [ud setObject:[responseObject valueForKey:@"firstName"] forKey:@"manName"];
+                      [ud setObject:self.emailInput.text forKey:@"email"];
+                      [ud setObject:[responseObject valueForKey:@"birthdate"] forKey:@"birthDay"];
+                      [ud setObject:[responseObject valueForKey:@"city"] forKey:@"city"];
+                      [ud setObject:[responseObject valueForKey:@"primarySpecialty"] forKey:@"spec"];
+                      
+                      [ud setObject:@"1" forKey:@"reg"];
+                      [ud setObject:[responseObject valueForKey:@"token"] forKey:@"archToken"];
+                      UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
+                      [self presentViewController:vc animated:true completion:nil];
+                      
+                  } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                      
+                      [self showAlert:@"Ошибка входа" mess:@"Проверьте правильность данных" check:NO];
+                  }];
 
-    NSString *email = self.emailInput.text;
-    NSLog(@"%@", email);
-    NSString *pass = [self reverse:self.passInput.text];
-    NSLog(@"%@", pass);
+        } else {
+            [self showAlert:@"Ошибка ввода данных" mess:@"Пароль не должен содержать русских символов. Длина пароля должна быть от 6 до 255 символов." check:NO];
+        }
+    } else {
+        [self showAlert:@"Ошибка ввода данных" mess:@"Введите валидный Email" check:NO];
+    }
+}
+        
+- (BOOL)hasRussianCharacters:(NSString *) input {
+            
+            NSCharacterSet * set = [NSCharacterSet characterSetWithCharactersInString:@"абвгдеёжзийклмнопрстуфхцчшщъыьэюяАБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ"];
+            return [input rangeOfCharacterFromSet:set].location != NSNotFound;
+            
+        }
+
+- (void) showAlert:(NSString *)alert  mess:(NSString *)mess check:(BOOL) yep {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alert message:mess preferredStyle:UIAlertControllerStyleAlert];
     
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                         {
+                             if (yep) {
+                                 [self.navigationController popViewControllerAnimated:YES];
+                             }
+                             
+                         }];
+    [alertController addAction:ok];
     
-        [manager POST:@"http://www.vidal.ru/api/user/auth" parameters:@{
-                                                                        @"username":email,
-                                                                        @"password":pass}
-              success:^(AFHTTPRequestOperation * _Nonnull operation, id responseObject) {
-            
-            NSLog(@"%@", responseObject);
-            [ud setObject:[responseObject valueForKey:@"token"] forKey:@"archToken"];
-            UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
-            [self presentViewController:vc animated:true completion:nil];
-            
-        } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-            
-            NSLog(@"%@", error);
-            NSLog(@"%@", error.localizedDescription);
-            
-            NSLog(@"%@", operation.responseSerializer);
-            NSLog(@"%@", operation.responseObject);
-            NSLog(@"%@", operation.responseData);
-            NSLog(@"%@", operation.responseString);
-        }];
-    
+    [self presentViewController:alertController animated:YES completion:nil];
 }
 
 - (NSString *) reverse:(NSString *) input {
@@ -189,6 +176,7 @@
 
 - (IBAction)withoutReg:(UIButton *)sender {
     
+    [ud setObject:@"0" forKey:@"reg"];
     [self performSegueWithIdentifier:@"withoutReg" sender:self];
     
 }

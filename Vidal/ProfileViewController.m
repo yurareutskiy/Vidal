@@ -12,12 +12,33 @@
 
 @end
 
-@implementation ProfileViewController
+@implementation ProfileViewController {
+    
+    NSUserDefaults *ud;
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     [super setLabel:@"Профиль"];
+    
+    ud = [NSUserDefaults standardUserDefaults];
+    
+    NSString *surname = [ud valueForKey:@"surname"];
+    NSString *name = [ud valueForKey:@"manName"];
+    NSString *email = [ud valueForKey:@"email"];
+    NSString *bd = [ud valueForKey:@"birthDay"];
+    NSString *city = [ud valueForKey:@"city"];
+    NSString *spec = [ud valueForKey:@"spec"];
+    
+    [self.surname setText:surname];
+    [self.name setText:name];
+    [self.email setText:email];
+    [self.bd setText:bd];
+    [self.city setText:city];
+    [self.spec setText:spec];
+    
     // Do any additional setup after loading the view.
 }
 

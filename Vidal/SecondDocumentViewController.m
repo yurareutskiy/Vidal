@@ -15,23 +15,11 @@
 @implementation SecondDocumentViewController {
     
     NSUserDefaults *ud;
-    BOOL fav;
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    
-    if ([((NSArray *)[ud objectForKey:@"favs"]) containsObject:[ud objectForKey:@"id"]]) {
-        NSMutableAttributedString *text = [[NSMutableAttributedString alloc]initWithAttributedString:self.fav.titleLabel.attributedText];
-        
-        [text addAttribute:NSForegroundColorAttributeName
-                     value:[UIColor colorWithRed:187.0/255.0 green:0.0 blue:57.0/255.0 alpha:1] range:NSRangeFromString(text.string)];
-        [self.fav.titleLabel setAttributedText: text];
-    } else {
-        [self.fav setTitleColor:[UIColor colorWithRed:213.0/255.0 green:213.0/255.0 blue:213.0/255.0 alpha:1.0] forState:UIControlStateNormal];
-    }
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -51,20 +39,24 @@
     if ([ud objectForKey:@"favs"] == nil) {
         [ud setObject:[NSArray array] forKey:@"favs"];
         [ud setObject:[[ud objectForKey:@"favs"] arrayByAddingObject:[ud objectForKey:@"id"]] forKey:@"favs"];
+        [self.fav setImage:[UIImage imageNamed:@"favRed"] forState:UIControlStateNormal];
     } else {
         if (![((NSArray *)[ud objectForKey:@"favs"]) containsObject:[ud objectForKey:@"id"]]) {
             [ud setObject:[[ud objectForKey:@"favs"] arrayByAddingObject:[ud objectForKey:@"id"]] forKey:@"favs"];
-//            [self.fav setTitleColor:[UIColor colorWithRed:187.0/255.0 green:0.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
-            NSMutableAttributedString *text = [[NSMutableAttributedString alloc]initWithAttributedString:self.fav.titleLabel.attributedText];
             
-            [text addAttribute:NSForegroundColorAttributeName
-                         value:[UIColor colorWithRed:187.0/255.0 green:0.0 blue:57.0/255.0 alpha:1] range:NSRangeFromString(text.string)];
-            [self.fav setAttributedTitle:text forState:UIControlStateNormal];
+            NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithString:self.fav.titleLabel.text attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:187.0/255.0 green:0.0 blue:57.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
+            
+            [self.fav setAttributedTitle:result forState:UIControlStateNormal];
+            [self.fav setImage:[UIImage imageNamed:@"favRed"] forState:UIControlStateNormal];
         } else {
             NSMutableArray *check = [NSMutableArray arrayWithArray:[ud objectForKey:@"favs"]];
             [check removeObject:[ud objectForKey:@"id"]];
             [ud setObject:check forKey:@"favs"];
-            [self.fav setTitleColor:[UIColor colorWithRed:213.0/255.0 green:213.0/255.0 blue:213.0/255.0 alpha:1.0] forState:UIControlStateNormal];
+            
+            NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithString:self.fav.titleLabel.text attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:213.0/255.0 green:213.0/255.0 blue:213.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
+            
+            [self.fav setAttributedTitle:result forState:UIControlStateNormal];
+            [self.fav setImage:[UIImage imageNamed:@"favGrey"] forState:UIControlStateNormal];
         }
     }
     
