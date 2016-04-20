@@ -150,9 +150,11 @@
 
 - (void)tableView:(SLExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section
 {
+    [ud setObject:result[section] forKey:@"workWith"];
     
-        [self.expandableSections addIndex:section];
-        [tableView expandSection:section animated:YES];
+    [self performSegueWithIdentifier:@"newWindow" sender:self];
+//        [self.expandableSections addIndex:section];
+//        [tableView expandSection:section animated:YES];
 
 }
 

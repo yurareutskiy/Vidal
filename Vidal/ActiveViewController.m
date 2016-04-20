@@ -150,8 +150,11 @@
 
 - (void)tableView:(SLExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section
 {
-    [self.expandableSections addIndex:section];
-    [tableView expandSection:section animated:YES];
+    [ud setObject:result[section] forKey:@"workActive"];
+    
+    [self performSegueWithIdentifier:@"newWindow" sender:self];
+    //        [self.expandableSections addIndex:section];
+    //        [tableView expandSection:section animated:YES];
 }
 
 - (void)tableView:(SLExpandableTableView *)tableView didCollapseSection:(NSUInteger)section animated:(BOOL)animated

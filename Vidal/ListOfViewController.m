@@ -37,10 +37,17 @@
     toDelete = [NSMutableIndexSet indexSet];
     [self.tableView setTag:1];
     
-    ((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView.delegate = self;
-    ((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView.dataSource = self;
-    [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView setTag:2];
+    ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).tableView.delegate = self;
+    ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).tableView.dataSource = self;
+    [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).tableView setTag:2];
     
+    ((DocumentViewController *)[self.childViewControllers objectAtIndex:1]).tableView.delegate = self;
+    ((DocumentViewController *)[self.childViewControllers objectAtIndex:1]).tableView.dataSource = self;
+    [((DocumentViewController *)[self.childViewControllers objectAtIndex:1]).tableView setTag:3];
+    
+    NSLog(@"%@", self.childViewControllers);
+    
+    self.containerView2.hidden = true;
     self.containerView.hidden = true;
     self.darkView.hidden = true;
     container = false;
@@ -52,27 +59,47 @@
                                             action:@selector(close)];
     if ([ud objectForKey:@"molecule"]) {
     req = [NSString stringWithFormat:@"SELECT Product.DocumentID, Product.RusName AS 'Продукт', Molecule.RusName, Molecule.MoleculeID FROM Molecule INNER JOIN Product_Molecule ON Molecule.MoleculeID = Product_Molecule.MoleculeID INNER JOIN Product ON Product_Molecule.ProductID = Product.ProductID WHERE Molecule.MoleculeID = %@ ORDER BY Molecule.RusName", [ud objectForKey:@"molecule"]];
+        
+        [self loadData:req];
     } else if ([ud objectForKey:@"comp"]) {
         req = [NSString stringWithFormat:@"SELECT Product.DocumentID,  Product.RusName AS 'Продукт' FROM Product WHERE Product.CompanyID = %@ ORDER BY Product.RusName", [ud objectForKey:@"comp"]];
+        
+        [self loadData:req];
     } else if ([ud objectForKey:@"info"]) {
         req = [NSString stringWithFormat:@"SELECT * FROM Document INNER JOIN Document_InfoPage ON Document.DocumentID = Document_InfoPage.DocumentID WHERE Document_InfoPage.InfoPageID = %@", [ud objectForKey:@"info"]];
+        
+        [self loadData:req];
+    } else if ([ud valueForKey:@"workWith"]) {
+        req = @"";
+        self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[ud valueForKey:@"workWith"]];
+        
+    } else if ([ud valueForKey:@"workActive"]) {
+        
+        req = @"";
+        self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[ud valueForKey:@"workActive"]];
+        
+    } else {
+        req = @"";
+        [self loadData:req];
     }
-    
-    [self loadData:req];
     
     // Do any additional setup after loading the view.
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
+    
     [ud removeObjectForKey:@"info"];
     [ud removeObjectForKey:@"molecule"];
     [ud removeObjectForKey:@"comp"];
+    [ud removeObjectForKey:@"workWith"];
+    [ud removeObjectForKey:@"workActive"];
+    
 }
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView.tag == 1){
         return 60;
-    } else if (tableView.tag == 2) {
+    } else if (tableView.tag == 2 || tableView.tag == 3) {
         if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
             return 400;
         } else {
@@ -92,7 +119,7 @@
 {
     if (tableView.tag == 1) {
         return [self.arrPeopleInfo count];
-    } else if (tableView.tag == 2){
+    } else if (tableView.tag == 2 || tableView.tag == 3){
         NSInteger x = 0;
         for (int i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
             if (![[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""])
@@ -112,13 +139,14 @@
         cell = [[PharmaTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
     };
     
-    NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"Продукт"];
+//    NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"Продукт"];
+        NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
         
         // Set the loaded data to the appropriate cell labels.
-    cell.name.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]];
+    cell.name.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]];
         
     return cell;
-    } else if (tableView.tag == 2){
+    } else if (tableView.tag == 2 || tableView.tag == 3){
         
         if (self.molecule == nil) {
             return nil;
@@ -143,6 +171,7 @@
     if (tableView.tag == 1) {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (!container) {
+        if ([ud valueForKey:@"workWith"]) {
         self.containerView.hidden = false;
         container = true;
         self.darkView.hidden = false;
@@ -153,6 +182,22 @@
         //            INNER JOIN Product ON Document.DocumentID = Product.DocumentID
         NSLog(@"%@", request);
         [self getMol:request];
+        } else if ([ud valueForKey:@"workActive"]) {
+            
+            
+            
+                self.containerView2.hidden = false;
+                container = true;
+                self.darkView.hidden = false;
+                [self.darkView addGestureRecognizer:tap];
+                
+                [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:0] forKey:@"drug"];
+                NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID WHERE Document.DocumentID = %@", [ud objectForKey:@"drug"]];
+                //            INNER JOIN Product ON Document.DocumentID = Product.DocumentID
+                NSLog(@"%@", request);
+                [self getMol:request];
+
+        }
     }} else if (tableView.tag == 2){
         selectedRowIndex = [indexPath copy];
         
@@ -171,6 +216,7 @@
 
 - (void) close {
     self.containerView.hidden = true;
+    self.containerView2.hidden = true;
     container = false;
     [self.darkView removeGestureRecognizer:tap];
     self.darkView.hidden = true;
@@ -216,7 +262,7 @@
             || [[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
             [toDelete addIndex:i];
     }
-    
+    if ([ud valueForKey:@"workWith"]) {
     ((SecondDocumentViewController *)self.childViewControllers.lastObject).latName.text = [[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
     ((SecondDocumentViewController *)self.childViewControllers.lastObject).name.text = [[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
     
@@ -227,6 +273,18 @@
     [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
     
     [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
+    } else if ([ud valueForKey:@"workActive"]) {
+        ((DocumentViewController *)self.childViewControllers.lastObject).latName.text = [[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
+        ((DocumentViewController *)self.childViewControllers.lastObject).name.text = [[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
+        
+        [toDelete addIndex:0];
+        [toDelete addIndex:1];
+        
+        [[self.molecule objectAtIndex:0] removeObjectsAtIndexes:toDelete];
+        [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
+        
+        [((DocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
+    }
     
 }
 

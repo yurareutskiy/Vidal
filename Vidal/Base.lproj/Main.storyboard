@@ -1107,6 +1107,7 @@
                         <outlet property="darkView" destination="TF0-Os-VtB" id="icn-5C-f1v"/>
                         <outlet property="tableView" destination="l8L-Gr-ekb" id="pgg-f9-bGs"/>
                         <segue destination="Olq-6Q-xtB" kind="show" identifier="toSearch" animates="NO" id="5BT-LG-ntp"/>
+                        <segue destination="jFz-ci-plm" kind="show" identifier="newWindow" id="xTd-vC-f8Y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IhX-ki-hQn" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1201,6 +1202,7 @@
                         <outlet property="darkView" destination="TfC-Bs-A8E" id="7aD-c0-BHL"/>
                         <outlet property="tableView" destination="efm-VP-R7x" id="LhE-B3-uQd"/>
                         <segue destination="Olq-6Q-xtB" kind="show" identifier="toSearch" animates="NO" id="Bf0-3e-nJt"/>
+                        <segue destination="jFz-ci-plm" kind="show" identifier="newWindow" id="pXe-Qe-NJ7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="cwm-4w-Dta" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1388,7 +1390,7 @@
                         <viewControllerLayoutGuide type="bottom" id="WKc-D4-zEg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="LBm-7j-jiE">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="476"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="540"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takedaPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="bNT-vg-vKY">
@@ -1452,7 +1454,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="S7X-ty-W7f">
-                                <rect key="frame" x="0.0" y="250" width="600" height="226"/>
+                                <rect key="frame" x="0.0" y="250" width="600" height="290"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="8Xj-hx-ooz"/>
@@ -3579,7 +3581,7 @@ Lactobacillus acidophilus и другие.</string>
                         <viewControllerLayoutGuide type="bottom" id="qkI-gU-txH"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9B6-ff-9rP">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="476"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="540"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Гадовист" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyD-IW-vHv">
@@ -3665,7 +3667,7 @@ Lactobacillus acidophilus и другие.</string>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mKH-o8-D9E">
-                                <rect key="frame" x="0.0" y="156" width="600" height="320"/>
+                                <rect key="frame" x="0.0" y="156" width="600" height="384"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="docCell" id="Naj-6E-xog" customClass="DocsTableViewCell">
@@ -4140,14 +4142,24 @@ Lactobacillus acidophilus и другие.</string>
                                     <segue destination="sbh-iQ-PXQ" kind="embed" id="Eqj-Sr-YVk"/>
                                 </connections>
                             </containerView>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WsL-vn-b9G">
+                                <rect key="frame" x="0.0" y="124" width="600" height="476"/>
+                                <connections>
+                                    <segue destination="2Fp-GW-eNp" kind="embed" id="H7S-Pi-VdB"/>
+                                </connections>
+                            </containerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="lXI-He-IgW" firstAttribute="leading" secondItem="xWA-EW-XWx" secondAttribute="leadingMargin" constant="-20" id="0f0-hl-jph"/>
                             <constraint firstItem="K4X-3x-77f" firstAttribute="leading" secondItem="xWA-EW-XWx" secondAttribute="leadingMargin" constant="-20" id="AIE-bv-CY9"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WsL-vn-b9G" secondAttribute="trailing" constant="-20" id="AYd-bz-qkB"/>
                             <constraint firstItem="DpZ-id-LUy" firstAttribute="top" secondItem="lXI-He-IgW" secondAttribute="bottom" id="Bug-Oq-gzc"/>
                             <constraint firstItem="DpZ-id-LUy" firstAttribute="top" secondItem="K62-tK-Mw8" secondAttribute="bottom" id="CzG-bk-zIM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="K62-tK-Mw8" secondAttribute="trailing" constant="-20" id="JxE-zq-ow7"/>
+                            <constraint firstItem="WsL-vn-b9G" firstAttribute="top" secondItem="bcu-ZE-tN0" secondAttribute="bottom" constant="60" id="Mvp-8S-XtB"/>
+                            <constraint firstItem="DpZ-id-LUy" firstAttribute="top" secondItem="WsL-vn-b9G" secondAttribute="bottom" id="VID-og-QA7"/>
+                            <constraint firstItem="WsL-vn-b9G" firstAttribute="leading" secondItem="xWA-EW-XWx" secondAttribute="leadingMargin" constant="-20" id="Xur-Oo-obB"/>
                             <constraint firstItem="lXI-He-IgW" firstAttribute="top" secondItem="bcu-ZE-tN0" secondAttribute="bottom" constant="60" id="daq-Bf-uVU"/>
                             <constraint firstItem="K62-tK-Mw8" firstAttribute="leading" secondItem="xWA-EW-XWx" secondAttribute="leadingMargin" constant="-20" id="e6F-c7-7kM"/>
                             <constraint firstAttribute="trailingMargin" secondItem="K4X-3x-77f" secondAttribute="trailing" constant="-20" id="hnY-wr-G96"/>
@@ -4161,6 +4173,7 @@ Lactobacillus acidophilus и другие.</string>
                     <size key="freeformSize" width="600" height="600"/>
                     <connections>
                         <outlet property="containerView" destination="lXI-He-IgW" id="cHh-db-8xg"/>
+                        <outlet property="containerView2" destination="WsL-vn-b9G" id="NS5-Rl-oqL"/>
                         <outlet property="darkView" destination="K62-tK-Mw8" id="G7O-Fl-lqa"/>
                         <outlet property="tableView" destination="K4X-3x-77f" id="lS0-9b-RBK"/>
                     </connections>
@@ -4178,7 +4191,7 @@ Lactobacillus acidophilus и другие.</string>
                         <viewControllerLayoutGuide type="bottom" id="TRU-X0-RRV"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="211-dZ-SJ9">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="382"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="476"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Гадовист" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ock-oq-hUK">
@@ -4208,7 +4221,7 @@ Lactobacillus acidophilus и другие.</string>
                                 </state>
                             </button>
                             <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lBn-KM-PfN">
-                                <rect key="frame" x="0.0" y="145" width="600" height="237"/>
+                                <rect key="frame" x="0.0" y="145" width="600" height="331"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="docCell" id="l87-0y-HSO" customClass="DocsTableViewCell">
@@ -4503,6 +4516,19 @@ Lactobacillus acidophilus и другие.</string>
             </objects>
             <point key="canvasLocation" x="388" y="683"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="2KN-VX-TsT">
+            <objects>
+                <viewController id="N5f-Oj-GB6" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="3YZ-wy-kId">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mv4-vT-VSY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+        </scene>
     </scenes>
     <resources>
         <image name="arrowDownRed" width="20" height="9"/>
@@ -4533,10 +4559,10 @@ Lactobacillus acidophilus и другие.</string>
         <image name="vkLogo" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Osd-iN-YAf"/>
-        <segue reference="GOH-Jc-352"/>
+        <segue reference="pXe-Qe-NJ7"/>
+        <segue reference="Bf0-3e-nJt"/>
+        <segue reference="Eqj-Sr-YVk"/>
+        <segue reference="H7S-Pi-VdB"/>
         <segue reference="Spl-RC-YMp"/>
-        <segue reference="lKn-4N-Xsx"/>
-        <segue reference="cPF-cF-nnw"/>
     </inferredMetricsTieBreakers>
 </document>
