@@ -88,7 +88,7 @@
     
     
     [ud setObject:[[array objectAtIndex:indexPath.row] objectForKey:@"id"] forKey:@"news"];
-    
+    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
     [self performSegueWithIdentifier:@"toExpandNews" sender:self];
 }
 

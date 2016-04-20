@@ -93,9 +93,45 @@
 
 -(NSString *) stringByStrippingHTML: (NSString *)news {
     NSRange r;
-    while ((r = [news rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+    while ((r = [news rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound) {
         news = [news stringByReplacingCharactersInRange:r withString:@""];
-    return news;
+    }
+        
+        NSString *text = news;
+        
+        text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+        text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+        text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
+        text = [text stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+        text = [text stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+        text = [text stringByReplacingOccurrencesOfString:@"&-nb-sp;" withString:@" "];
+        text = [text stringByReplacingOccurrencesOfString:@"&ndash;" withString:@"–"];
+        text = [text stringByReplacingOccurrencesOfString:@"&mdash;" withString:@"–"];
+        text = [text stringByReplacingOccurrencesOfString:@"&ldquo;" withString:@"“"];
+        text = [text stringByReplacingOccurrencesOfString:@"&loz;" withString:@"◊"];
+        text = [text stringByReplacingOccurrencesOfString:@"&rdquo;" withString:@"”"];
+        text = [text stringByReplacingOccurrencesOfString:@"<SUP>&reg;</SUP>" withString:@"®"];
+        text = [text stringByReplacingOccurrencesOfString:@"<P>" withString:@""];
+        text = [text stringByReplacingOccurrencesOfString:@"<B>" withString:@""];
+        text = [text stringByReplacingOccurrencesOfString:@"<I>" withString:@""];
+        text = [text stringByReplacingOccurrencesOfString:@"<TR>" withString:@""];
+        text = [text stringByReplacingOccurrencesOfString:@"<TD>" withString:@""];
+        text = [text stringByReplacingOccurrencesOfString:@"</P>" withString:@""];
+        text = [text stringByReplacingOccurrencesOfString:@"</B>" withString:@""];
+        text = [text stringByReplacingOccurrencesOfString:@"<BR />" withString:@"\n"];
+        text = [text stringByReplacingOccurrencesOfString:@"<FONT class=\"F7\">" withString:@""];
+        text = [text stringByReplacingOccurrencesOfString:@"</FONT>" withString:@""];
+        text = [text stringByReplacingOccurrencesOfString:@"</I>" withString:@""];
+        text = [text stringByReplacingOccurrencesOfString:@"</TR>" withString:@""];
+        text = [text stringByReplacingOccurrencesOfString:@"</TD>" withString:@""];
+        text = [text stringByReplacingOccurrencesOfString:@"<TABLE width=\"100%\" border=\"1\">" withString:@""];
+        text = [text stringByReplacingOccurrencesOfString:@"</TABLE>" withString:@""];
+        text = [text stringByReplacingOccurrencesOfString:@"</SUB>" withString:@""];
+        text = [text stringByReplacingOccurrencesOfString:@"<SUB>" withString:@""];
+        text = [text stringByReplacingOccurrencesOfString:@"<P class=\"F7\">" withString:@""];
+        text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
+    
+    return text;
 }
 
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {

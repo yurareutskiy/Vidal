@@ -32,6 +32,11 @@
     self.lead.text = string;
     [self.lead sizeToFit];
 
+    if ([[ud valueForKey:@"reg"] isEqualToString:@"2"]) {
+        UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
+        [self presentViewController:vc animated:true completion:nil];
+    }
+    
     // Do any additional setup after loading the view, typically from a nib.
 }
 
@@ -117,7 +122,7 @@
                       [ud setObject:[responseObject valueForKey:@"city"] forKey:@"city"];
                       [ud setObject:[responseObject valueForKey:@"primarySpecialty"] forKey:@"spec"];
                       
-                      [ud setObject:@"1" forKey:@"reg"];
+                      [ud setObject:@"2" forKey:@"reg"];
                       [ud setObject:[responseObject valueForKey:@"token"] forKey:@"archToken"];
                       UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
                       [self presentViewController:vc animated:true completion:nil];

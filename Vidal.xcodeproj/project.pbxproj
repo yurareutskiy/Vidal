@@ -139,7 +139,7 @@
 		3A8C251E1CB999AD00CFA905 /* SecondDocumentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondDocumentViewController.m; sourceTree = "<group>"; };
 		3A8C25211CBA2E8C00CFA905 /* ListOfViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ListOfViewController.h; sourceTree = "<group>"; };
 		3A8C25221CBA2E8C00CFA905 /* ListOfViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ListOfViewController.m; sourceTree = "<group>"; };
-		3A9E3FC91C80AE330069BDFC /* Vidal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Vidal.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3A9E3FC91C80AE330069BDFC /* Кардиология.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Кардиология.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A9E3FCD1C80AE330069BDFC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		3A9E3FCF1C80AE330069BDFC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		3A9E3FD01C80AE330069BDFC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -373,7 +373,7 @@
 		3A9E3FCA1C80AE330069BDFC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3A9E3FC91C80AE330069BDFC /* Vidal.app */,
+				3A9E3FC91C80AE330069BDFC /* Кардиология.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -450,7 +450,7 @@
 			);
 			name = Vidal;
 			productName = Vidal;
-			productReference = 3A9E3FC91C80AE330069BDFC /* Vidal.app */;
+			productReference = 3A9E3FC91C80AE330069BDFC /* Кардиология.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -763,7 +763,7 @@
 					"-DSQLITE_HAS_CODEC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vidal.app;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Кардиология";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
@@ -801,7 +801,7 @@
 					"-DSQLITE_HAS_CODEC",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.vidal.app;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Кардиология";
 				PROVISIONING_PROFILE = "";
 			};
 			name = Release;

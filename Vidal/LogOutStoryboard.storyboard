@@ -247,7 +247,7 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="newsCell" id="mfW-af-yT4" customClass="NewsTableViewCell">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="120"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="120"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="mfW-af-yT4" id="QPF-zt-RGC">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="119"/>
@@ -328,8 +328,8 @@
                                 <state key="normal" image="fbLogo"/>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="aYQ-aH-d1r"/>
                                         <exclude reference="EKt-Se-Mwz"/>
+                                        <exclude reference="aYQ-aH-d1r"/>
                                     </mask>
                                 </variation>
                                 <connections>
@@ -824,7 +824,7 @@
                                             </mask>
                                         </variation>
                                     </view>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="catzwolf@catzwolf.ru" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dGc-fi-KvS">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email@vidal.ru" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dGc-fi-KvS">
                                         <rect key="frame" x="25" y="89" width="550" height="15"/>
                                         <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="16"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
@@ -1151,11 +1151,11 @@
                                         <exclude reference="28J-2V-EvV"/>
                                         <exclude reference="gzs-bW-ki0"/>
                                         <exclude reference="NxL-sG-aH4"/>
-                                        <exclude reference="ab9-ZR-bsa"/>
                                         <exclude reference="Wwy-Zq-ELC"/>
-                                        <exclude reference="fml-TO-UuC"/>
+                                        <exclude reference="ab9-ZR-bsa"/>
                                         <exclude reference="VKh-tf-AlW"/>
                                         <exclude reference="fNB-bf-NZ9"/>
+                                        <exclude reference="fml-TO-UuC"/>
                                         <exclude reference="Llr-OZ-tgJ"/>
                                     </mask>
                                 </variation>
@@ -1175,9 +1175,9 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="krJ-II-9o1"/>
-                                <exclude reference="DKg-EL-Ltw"/>
                                 <exclude reference="8wH-ho-d4U"/>
+                                <exclude reference="DKg-EL-Ltw"/>
+                                <exclude reference="krJ-II-9o1"/>
                             </mask>
                         </variation>
                     </view>
@@ -1205,7 +1205,7 @@
                         <outlet property="worker" destination="kzQ-pf-yWS" id="4TI-Of-9d0"/>
                         <outlet property="year" destination="oMU-EG-lnC" id="KQp-Ei-wkq"/>
                         <segue destination="gnv-x4-Tcx" kind="show" identifier="toFullApp" id="DD8-rC-D1v"/>
-                        <segue destination="LR8-Lc-RiD" kind="show" id="EjU-WU-FgC"/>
+                        <segue destination="LR8-Lc-RiD" kind="show" identifier="back" id="EjU-WU-FgC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="y71-MY-kaV" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1250,7 +1250,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ab3-Ju-Sbo">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ab3-Ju-Sbo">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дата" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JCP-0M-ETX">
@@ -1313,21 +1313,21 @@
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="r46-UU-MSc"/>
-                                        <exclude reference="GeD-Tr-1Lo"/>
+                                        <exclude reference="0aW-zL-hIL"/>
                                         <exclude reference="Ei7-c8-hUu"/>
-                                        <exclude reference="iVu-PD-ket"/>
-                                        <exclude reference="s9Y-Ar-cGE"/>
+                                        <exclude reference="GeD-Tr-1Lo"/>
                                         <exclude reference="bQu-ux-Byi"/>
                                         <exclude reference="cUL-7f-rSV"/>
-                                        <exclude reference="0aW-zL-hIL"/>
+                                        <exclude reference="iVu-PD-ket"/>
                                         <exclude reference="k4o-9A-EMG"/>
                                         <exclude reference="o2O-4J-qe2"/>
+                                        <exclude reference="s9Y-Ar-cGE"/>
                                         <exclude reference="08t-1b-vu9"/>
                                         <exclude reference="QG9-nm-L9c"/>
                                     </mask>
                                 </variation>
                             </scrollView>
-                            <button alpha="0.94999998807907104" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2OW-cr-bUk">
+                            <button alpha="0.94999998807907104" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2OW-cr-bUk">
                                 <rect key="frame" x="0.0" y="64" width="600" height="40"/>
                                 <color key="backgroundColor" red="0.85098039219999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1367,8 +1367,8 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
-                                <exclude reference="dv9-oi-eMA"/>
                                 <exclude reference="MTL-T5-maS"/>
+                                <exclude reference="dv9-oi-eMA"/>
                             </mask>
                         </variation>
                     </view>

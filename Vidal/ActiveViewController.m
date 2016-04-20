@@ -63,13 +63,13 @@
     self.expandableSections = [NSMutableIndexSet indexSet];
     self.hello1 = [NSMutableArray array];
     self.sectionsArray = [NSMutableArray array];
-    self.letters = [NSArray arrayWithObjects:@"Z", @"А", @"Б", @"В", @"Г", @"Д", @"Ж", @"З", @"И", @"Й", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"С", @"Т", @"У", @"Ф", @"Х", @"Ц", @"Э", @"Я", nil];
+    self.letters = [NSArray arrayWithObjects:@"А", @"Б", @"В", @"Г", @"Д", @"З", @"И", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"С", @"Т", @"У", @"Ф", @"Х", @"Ц", @"Э", nil];
     
     container = false;
     self.containerView.hidden = true;
     self.darkView.hidden = true;
     
-    [self loadData:@"select * from Molecule order by Molecule.RusName"];
+    [self loadData:@"Select Document.*, Molecule_Document.*, ClinicoPhPointers.Name as Category  FROM Document INNER JOIN Molecule_Document ON Molecule_Document.DocumentID = Document.DocumentID INNER JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID INNER JOIN ClinicoPhPointers ON ClinicoPhPointers.ClPhPointerID = Document_ClPhPointers.SrcClPhPointerID"];
     
     
     for (int i = 0; i < [self.arrPeopleInfo count]; i++) {
@@ -132,11 +132,11 @@
         cell = [[ActiveTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
-    NSString *text = [NSString stringWithFormat:@"%@", [[[result objectAtIndex:section] objectAtIndex:0] objectAtIndex:2]];
+    NSString *text = [NSString stringWithFormat:@"%@", [[[result objectAtIndex:section] objectAtIndex:0] objectAtIndex:1]];
     if ([[result objectAtIndex:section] count] > 1) {
-        text = [NSString stringWithFormat:@"%@, %@", text, [[[result objectAtIndex:section] objectAtIndex:1] objectAtIndex:2]];
+        text = [NSString stringWithFormat:@"%@, %@", text, [[[result objectAtIndex:section] objectAtIndex:1] objectAtIndex:1]];
         if ([[result objectAtIndex:section] count] > 2) {
-            text = [NSString stringWithFormat:@"%@, %@", text, [[[result objectAtIndex:section] objectAtIndex:2] objectAtIndex:2]];
+            text = [NSString stringWithFormat:@"%@, %@", text, [[[result objectAtIndex:section] objectAtIndex:2] objectAtIndex:1]];
         }
     }
     
@@ -231,7 +231,7 @@
         }
     
         NSArray *dataArray = result[indexPath.section];
-        cell.name.text = [dataArray[indexPath.row - 1] objectAtIndex:2];
+        cell.name.text = [dataArray[indexPath.row - 1] objectAtIndex:1];
         cell.letter.text = @"";
         
         return cell;
@@ -283,7 +283,7 @@
         
         nextPls = [result[indexPath.section][indexPath.row - 1] objectAtIndex:0];
         [ud setObject:nextPls forKey:@"molecule"];
-        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID WHERE Molecule.MoleculeID = %@", nextPls];
+        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID WHERE Document.DocumentID = %@", nextPls];
         [self getMol:request];
         
         if ([self.molecule count] != 0) {
@@ -313,6 +313,12 @@
         [tableView beginUpdates];
 
         [tableView endUpdates];
+    }
+}
+
+- (void) viewDidAppear:(BOOL)animated {
+    if (nextPls) {
+        [ud setObject:nextPls forKey:@"molecule"];
     }
 }
 
@@ -347,12 +353,13 @@
     //    self.arrPeopleInfo = [self.arrPeopleInfo valueForKey:@"uppercaseString"];
     
     for (NSArray* key in self.arrPeopleInfo) {
-        if (![[key objectAtIndex:2] isEqualToString:@""]) {
-            keyString = [NSString stringWithFormat:@"%@", [[key objectAtIndex:2] substringToIndex:1]];
-        } else {
+//        if (![[key objectAtIndex:2] isEqualToString:@""]) {
+//            keyString = [NSString stringWithFormat:@"%@", [[key objectAtIndex:2] substringToIndex:1]];
+//        } else {
             keyString = [NSString stringWithFormat:@"%@", [[key objectAtIndex:1] substringToIndex:1]];
-        }
+//        }
         keyString = [keyString valueForKey:@"uppercaseString"];
+        NSLog(@"%@", keyString);
         NSInteger ind = [self.letters indexOfObject:keyString];
         [[result objectAtIndex:ind] addObject:key];
     }
