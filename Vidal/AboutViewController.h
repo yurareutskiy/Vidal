@@ -7,11 +7,16 @@
 //
 
 #import "ModelViewController.h"
+#import "DBManager.h"
 
 @interface AboutViewController : ModelViewController
 @property (strong, nonatomic) IBOutlet UILabel *takeda;
 @property (strong, nonatomic) IBOutlet UILabel *drug;
+@property (strong, nonatomic) IBOutlet UIImageView *image;
+@property (strong, nonatomic) IBOutlet UILabel *name;
 
 - (IBAction)toList:(UIButton *)sender;
+- (IBAction)right:(UIButton *)sender;
+- (IBAction)left:(UIButton *)sender;
 
 @end

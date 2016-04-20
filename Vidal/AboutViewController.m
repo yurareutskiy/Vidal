@@ -10,14 +10,24 @@
 
 @interface AboutViewController ()
 
+@property (nonatomic, strong) DBManager *dbManager;
+@property (nonatomic, strong) NSArray *arrPeopleInfo;
+@property (nonatomic, strong) NSMutableArray *results;
+
+-(void)loadData:(NSString *)req;
+
 @end
 
 @implementation AboutViewController {
+    
     NSUserDefaults *ud;
+    int ind;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    ind = 0;
     
     ud = [NSUserDefaults standardUserDefaults];
     self.navigationItem.title = @"О Такеда";
@@ -34,7 +44,72 @@
     
     [super setLabel:@"О Такеда"];
     
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
+    
+    NSString *request = @"SELECT Product.* FROM Product JOIN Product_Picture ON Product_Picture.ProductID = Product.ProductID JOIN Picture ON Picture.PictureID = Product_Picture.PictureID WHERE Product.CompanyID = 6057 GROUP BY Product.DocumentID";
+    [self loadData:request];
+    
     // Do any additional setup after loading the view.
+}
+
+-(void)loadData:(NSString *)req{
+    // Form the query.
+    NSString *query = [NSString stringWithFormat:req];
+    
+    // Get the results.
+    if (self.arrPeopleInfo != nil) {
+        self.arrPeopleInfo = nil;
+    }
+    self.arrPeopleInfo = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    
+    self.results = [NSMutableArray array];
+    for (NSArray *key in self.arrPeopleInfo) {
+        NSMutableDictionary *material = [NSMutableDictionary dictionary];
+        [material setValue:[self clearString:[key objectAtIndex:1]] forKey:@"nameOf"];
+        [material setValue:[self clearString:[key objectAtIndex:6]] forKey:@"drug"];
+        [self.results addObject:material];
+    }
+
+}
+
+- (NSString *) clearString:(NSString *) input {
+    
+    NSString *text = input;
+    
+    text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+    text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+    text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
+    text = [text stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+    text = [text stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"&-nb-sp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"&ndash;" withString:@"–"];
+    text = [text stringByReplacingOccurrencesOfString:@"&mdash;" withString:@"–"];
+    text = [text stringByReplacingOccurrencesOfString:@"&ldquo;" withString:@"“"];
+    text = [text stringByReplacingOccurrencesOfString:@"&loz;" withString:@"◊"];
+    text = [text stringByReplacingOccurrencesOfString:@"&rdquo;" withString:@"”"];
+    text = [text stringByReplacingOccurrencesOfString:@"<SUP>&reg;</SUP>" withString:@"®"];
+    text = [text stringByReplacingOccurrencesOfString:@"<P>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<B>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<I>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TR>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TD>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</P>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</B>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<BR />" withString:@"\n"];
+    text = [text stringByReplacingOccurrencesOfString:@"<FONT class=\"F7\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</FONT>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</I>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TR>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TD>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TABLE width=\"100%\" border=\"1\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TABLE>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</SUB>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<SUB>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<P class=\"F7\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
+    
+    return text;
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -56,6 +131,56 @@
     
     [ud setObject:@"6057" forKey:@"comp"];
     [self performSegueWithIdentifier:@"toList" sender:self];
+    
+}
+
+- (IBAction)right:(UIButton *)sender {
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.image setAlpha:0.0];
+        [self.name setAlpha:0.0];
+        [self.drug setAlpha:0.0];
+    } completion:^(BOOL finished) {
+        if (ind < [self.results count] - 1) {
+            [self.name setText:[self.results[ind+1] valueForKey:@"nameOf"]];
+            [self.drug setText:[self.results[ind+1] valueForKey:@"drug"]];
+            ind++;
+        } else if (ind == [self.results count] - 1) {
+            [self.name setText:[self.results[0] valueForKey:@"nameOf"]];
+            [self.drug setText:[self.results[0] valueForKey:@"drug"]];
+            ind = 0;
+        }
+        [UIView animateWithDuration:0.5 animations:^{
+            [self.image setAlpha:1.0];
+            [self.name setAlpha:1.0];
+            [self.drug setAlpha:1.0];
+        }];
+    }];
+    
+}
+
+- (IBAction)left:(UIButton *)sender {
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        [self.image setAlpha:0.0];
+        [self.name setAlpha:0.0];
+        [self.drug setAlpha:0.0];
+    } completion:^(BOOL finished) {
+        if (ind > 0) {
+            [self.name setText:[self.results[ind-1] valueForKey:@"nameOf"]];
+            [self.drug setText:[self.results[ind-1] valueForKey:@"drug"]];
+            ind--;
+        } else if (ind == 0) {
+            [self.name setText:[self.results[[self.results count] - 1] valueForKey:@"nameOf"]];
+            [self.drug setText:[self.results[[self.results count] - 1] valueForKey:@"drug"]];
+            ind = (int)[self.results count] - 1;
+        }
+        [UIView animateWithDuration:0.5 animations:^{
+            [self.image setAlpha:1.0];
+            [self.name setAlpha:1.0];
+            [self.drug setAlpha:1.0];
+        }];
+    }];
     
 }
 @end

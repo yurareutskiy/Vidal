@@ -54,6 +54,8 @@
     req = [NSString stringWithFormat:@"SELECT Product.DocumentID, Product.RusName AS 'Продукт', Molecule.RusName, Molecule.MoleculeID FROM Molecule INNER JOIN Product_Molecule ON Molecule.MoleculeID = Product_Molecule.MoleculeID INNER JOIN Product ON Product_Molecule.ProductID = Product.ProductID WHERE Molecule.MoleculeID = %@ ORDER BY Molecule.RusName", [ud objectForKey:@"molecule"]];
     } else if ([ud objectForKey:@"comp"]) {
         req = [NSString stringWithFormat:@"SELECT Product.DocumentID,  Product.RusName AS 'Продукт' FROM Product WHERE Product.CompanyID = %@ ORDER BY Product.RusName", [ud objectForKey:@"comp"]];
+    } else if ([ud objectForKey:@"info"]) {
+        req = [NSString stringWithFormat:@"SELECT * FROM Document INNER JOIN Document_InfoPage ON Document.DocumentID = Document_InfoPage.DocumentID WHERE Document_InfoPage.InfoPageID = %@", [ud objectForKey:@"info"]];
     }
     
     [self loadData:req];
@@ -62,6 +64,7 @@
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
+    [ud removeObjectForKey:@"info"];
     [ud removeObjectForKey:@"molecule"];
     [ud removeObjectForKey:@"comp"];
 }

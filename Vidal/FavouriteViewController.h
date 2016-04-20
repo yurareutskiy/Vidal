@@ -9,8 +9,9 @@
 #import "ModelViewController.h"
 #import "DBManager.h"
 #import "SecondDocumentViewController.h"
+#import "FavTableViewCell.h"
 
-@interface FavouriteViewController : ModelViewController<UITableViewDataSource, UITableViewDelegate>
+@interface FavouriteViewController : ModelViewController<UITableViewDataSource, UITableViewDelegate, FavTableViewCellDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (weak, nonatomic) IBOutlet UIView *darkView;

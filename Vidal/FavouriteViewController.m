@@ -11,7 +11,7 @@
 @interface FavouriteViewController ()
 
 @property (nonatomic, strong) DBManager *dbManager;
-@property (nonatomic, strong) NSArray *arrPeopleInfo;
+@property (nonatomic, strong) NSMutableArray *arrPeopleInfo;
 @property (strong, nonatomic) UIBarButtonItem *searchButton;
 @property (nonatomic, strong) NSMutableArray *molecule;
 
@@ -52,12 +52,12 @@
     NSLog(@"%@", [ud objectForKey:@"favs"]);
     NSLog(@"%@", data);
     if ([data count] == 1) {
-        request = [NSString stringWithFormat:@"SELECT * FROM ClinicoPhPointers WHERE ClinicoPhPointers.ClPhPointerID = %@", [data objectAtIndex:0]];
+        request = [NSString stringWithFormat:@"SELECT * FROM Document WHERE Document.DocumentID = %@", [data objectAtIndex:0]];
     }
     if ([data count] > 1) {
-        request = [NSString stringWithFormat:@"SELECT * FROM ClinicoPhPointers WHERE ClinicoPhPointers.ClPhPointerID = %@", [data objectAtIndex:0]];
+        request = [NSString stringWithFormat:@"SELECT * FROM Document WHERE Document.DocumentID = %@", [data objectAtIndex:0]];
         for (int i = 1; i < [data count]; i++) {
-            request = [NSString stringWithFormat:@"%@ OR ClinicoPhPointers.ClPhPointerID = %@", request, [data objectAtIndex:i]];
+            request = [NSString stringWithFormat:@"%@ OR Document.DocumentID = %@", request, [data objectAtIndex:i]];
         }
     }
     [self loadData:request];
@@ -158,18 +158,19 @@
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
     // Dequeue the cell.
     if (tableView.tag == 1) {
-    static NSString *CellIdentifier = @"activeCell";
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    static NSString *CellIdentifier = @"favCell";
+    FavTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
     
     if (!cell) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
+        cell = [[FavTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
     }
     
-    NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
+    NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
     
+    cell.delegate = self;
     
     // Set the loaded data to the appropriate cell labels.
-    cell.textLabel.text = [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName];
+    cell.information.text = [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -230,7 +231,7 @@
     if (self.arrPeopleInfo != nil) {
         self.arrPeopleInfo = nil;
     }
-    self.arrPeopleInfo = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     
     if ([self.arrPeopleInfo count] == 0) {
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Alert title" message:@"Alert message" preferredStyle:UIAlertControllerStyleAlert];
@@ -274,6 +275,19 @@
     [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
     
     [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
+    
+}
+
+- (void) del:(FavTableViewCell *)sender {
+    
+    // ПРИДУМАТЬ КАК ПЕРЕДАВАТЬ ИНДЕКС
+    
+    NSMutableArray *check = [NSMutableArray arrayWithArray:[ud objectForKey:@"favs"]];
+    [check removeObjectAtIndex:0];
+    [self.arrPeopleInfo removeObjectAtIndex:0];
+    [ud setObject:check forKey:@"favs"];
+    
+    [self.tableView reloadData];
     
 }
 

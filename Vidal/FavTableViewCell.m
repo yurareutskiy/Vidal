@@ -9,6 +9,7 @@
 #import "FavTableViewCell.h"
 
 @implementation FavTableViewCell
+@synthesize delegate;
 
 - (void)awakeFromNib {
     
@@ -26,4 +27,9 @@
     // Configure the view for the selected state
 }
 
+- (IBAction)delete:(UIButton *)sender {
+    
+    [self.delegate del:self];
+    
+}
 @end

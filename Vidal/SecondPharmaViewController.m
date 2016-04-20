@@ -27,6 +27,7 @@
     NSString *req;
     NSMutableIndexSet *toDelete;
     NSIndexPath *selectedRowIndex;
+    CGFloat sizeCell;
 
 }
 
@@ -103,8 +104,7 @@
         return 60;
     } else if (tableView.tag == 2) {
         if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
-            self.tableView.rowHeight = UITableViewAutomaticDimension;
-            return self.tableView.rowHeight;
+            return sizeCell;
         } else {
             return 60;
         }
@@ -182,6 +182,20 @@
     //[self loadData:req];
     } else if (tableView.tag == 2){
         selectedRowIndex = [indexPath copy];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 40, 0)];
+        NSString *string = [[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row];
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineSpacing:6];
+        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [string length])];
+        label.attributedText = attributedString;
+        label.lineBreakMode = NSLineBreakByWordWrapping;
+        label.numberOfLines = 0;
+        label.font = [UIFont fontWithName:@"Lucida_Grande-Regular" size:17.f];
+        [label sizeToFit];
+        sizeCell = label.frame.size.height + 5;
+        NSLog(@"%f", sizeCell);
         
         [tableView beginUpdates];
         

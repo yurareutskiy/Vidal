@@ -9,6 +9,7 @@
 #import "ProducersTableViewCell.h"
 
 @implementation ProducersTableViewCell
+@synthesize delegate;
 
 - (void)awakeFromNib {
     
@@ -37,5 +38,8 @@
 }
 
 - (IBAction)toListDrugs:(UIButton *)sender {
+    
+    [self.delegate perfSeg:self];
+    
 }
 @end

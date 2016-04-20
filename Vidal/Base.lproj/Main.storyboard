@@ -946,6 +946,9 @@
                                                     <state key="normal" title="Убрать из избранного">
                                                         <color key="titleColor" red="0.74509803919999995" green="0.74509803919999995" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="delete:" destination="qsq-8T-3XL" eventType="touchUpInside" id="uwB-US-kEn"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -1385,7 +1388,7 @@
                         <viewControllerLayoutGuide type="bottom" id="WKc-D4-zEg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="LBm-7j-jiE">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="540"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="476"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takedaPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="bNT-vg-vKY">
@@ -1449,7 +1452,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="S7X-ty-W7f">
-                                <rect key="frame" x="0.0" y="250" width="600" height="290"/>
+                                <rect key="frame" x="0.0" y="250" width="600" height="226"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="8Xj-hx-ooz"/>
@@ -1685,6 +1688,7 @@
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="gxo-HG-hvf" id="sd7-L7-uvN"/>
+                        <segue destination="jFz-ci-plm" kind="show" identifier="toList" id="06Y-aa-wrD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qgt-hX-kyc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1778,17 +1782,6 @@
                                             <constraint firstAttribute="height" constant="50" id="bNK-Dh-dLi"/>
                                         </constraints>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9e-Al-j9y">
-                                        <rect key="frame" x="20" y="90" width="560" height="16"/>
-                                        <string key="text">Такеда Россия-СНГ (ранее "Никомед Россия-СНГ") входит в состав Takeda Pharmaceutical Company Limited (Takeda) 
-с сентября 2011 года. Как крупнейшая фармацевтическая компания в Японии 
-и один из мировых лидеров индустрии, Takeda придерживается стремления 
-к улучшению здоровья пациентов 
-по всему миру путем внедрения ведущих инноваций в области медицины.</string>
-                                        <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
-                                        <color key="textColor" red="0.68235294117647061" green="0.68235294117647061" blue="0.68235294117647061" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Риофлора" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F9D-U7-BZw">
                                         <rect key="frame" x="20" y="186" width="560" height="16"/>
                                         <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
@@ -1805,16 +1798,33 @@ Lactobacillus acidophilus и другие.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="At8-ML-VGa">
-                                        <rect key="frame" x="15" y="130" width="14" height="31"/>
+                                        <rect key="frame" x="30" y="130" width="14" height="31"/>
                                         <state key="normal" image="arrowLeftRed"/>
+                                        <connections>
+                                            <action selector="left:" destination="ir5-gk-GIB" eventType="touchUpInside" id="sQk-zM-ATB"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CKf-rP-oPZ">
-                                        <rect key="frame" x="571" y="130" width="14" height="31"/>
+                                        <rect key="frame" x="556" y="130" width="14" height="31"/>
                                         <state key="normal" image="rightArrowRed"/>
+                                        <connections>
+                                            <action selector="right:" destination="ir5-gk-GIB" eventType="touchUpInside" id="3BH-iY-5Ri"/>
+                                        </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b9e-Al-j9y">
+                                        <rect key="frame" x="20" y="90" width="560" height="16"/>
+                                        <string key="text">Такеда Россия-СНГ (ранее "Никомед Россия-СНГ") входит в состав Takeda Pharmaceutical Company Limited (Takeda) 
+с сентября 2011 года. Как крупнейшая фармацевтическая компания в Японии 
+и один из мировых лидеров индустрии, Takeda придерживается стремления 
+к улучшению здоровья пациентов 
+по всему миру путем внедрения ведущих инноваций в области медицины.</string>
+                                        <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
+                                        <color key="textColor" red="0.68235294117647061" green="0.68235294117647061" blue="0.68235294117647061" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="CKf-rP-oPZ" secondAttribute="trailing" constant="15" id="5oB-bV-PZv"/>
+                                    <constraint firstAttribute="trailing" secondItem="CKf-rP-oPZ" secondAttribute="trailing" constant="30" id="5oB-bV-PZv"/>
                                     <constraint firstItem="bMn-Xp-X7Q" firstAttribute="leading" secondItem="XjF-h0-rUk" secondAttribute="leading" constant="20" id="6Ve-pq-XWF"/>
                                     <constraint firstAttribute="trailing" secondItem="gi5-2M-9S1" secondAttribute="trailing" constant="20" id="8ob-Ss-v3L"/>
                                     <constraint firstItem="NTb-Dk-uuN" firstAttribute="top" secondItem="b9e-Al-j9y" secondAttribute="bottom" constant="15" id="CR3-uh-BIj"/>
@@ -1834,7 +1844,7 @@ Lactobacillus acidophilus и другие.</string>
                                     <constraint firstItem="CKf-rP-oPZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NTb-Dk-uuN" secondAttribute="trailing" constant="15" id="a8u-Yy-pCO"/>
                                     <constraint firstItem="bMn-Xp-X7Q" firstAttribute="top" secondItem="XjF-h0-rUk" secondAttribute="top" constant="15" id="aBA-oW-SsW"/>
                                     <constraint firstItem="NTb-Dk-uuN" firstAttribute="centerY" secondItem="At8-ML-VGa" secondAttribute="centerY" id="bfu-R0-aJU"/>
-                                    <constraint firstItem="At8-ML-VGa" firstAttribute="leading" secondItem="XjF-h0-rUk" secondAttribute="leading" constant="15" id="cfo-1z-wQ7"/>
+                                    <constraint firstItem="At8-ML-VGa" firstAttribute="leading" secondItem="XjF-h0-rUk" secondAttribute="leading" constant="30" id="cfo-1z-wQ7"/>
                                     <constraint firstItem="bMn-Xp-X7Q" firstAttribute="centerX" secondItem="XjF-h0-rUk" secondAttribute="centerX" id="jQa-5G-Mb1"/>
                                     <constraint firstAttribute="trailing" secondItem="b9e-Al-j9y" secondAttribute="trailing" constant="20" id="jWU-6C-E8T"/>
                                     <constraint firstItem="F9D-U7-BZw" firstAttribute="top" secondItem="NTb-Dk-uuN" secondAttribute="bottom" constant="15" id="l8X-Ez-41h"/>
@@ -1888,6 +1898,8 @@ Lactobacillus acidophilus и другие.</string>
                     <navigationItem key="navigationItem" id="ANR-Bu-r6M"/>
                     <connections>
                         <outlet property="drug" destination="gi5-2M-9S1" id="QON-04-0hk"/>
+                        <outlet property="image" destination="NTb-Dk-uuN" id="mgr-Y8-ElI"/>
+                        <outlet property="name" destination="F9D-U7-BZw" id="vfG-o9-bF1"/>
                         <outlet property="takeda" destination="b9e-Al-j9y" id="r82-lZ-GW2"/>
                         <segue destination="jFz-ci-plm" kind="show" identifier="toList" id="cPF-cF-nnw"/>
                     </connections>
@@ -3567,7 +3579,7 @@ Lactobacillus acidophilus и другие.</string>
                         <viewControllerLayoutGuide type="bottom" id="qkI-gU-txH"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9B6-ff-9rP">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="540"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="476"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Гадовист" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyD-IW-vHv">
@@ -3652,7 +3664,7 @@ Lactobacillus acidophilus и другие.</string>
                                     <constraint firstItem="cJx-Qx-EVT" firstAttribute="centerY" secondItem="uDv-OR-Sgm" secondAttribute="centerY" id="xUZ-xX-dXz"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mKH-o8-D9E">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mKH-o8-D9E">
                                 <rect key="frame" x="0.0" y="156" width="600" height="320"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -4093,7 +4105,7 @@ Lactobacillus acidophilus и другие.</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pharmaCell" id="a8M-rX-p3K" customClass="PharmaTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="60"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a8M-rX-p3K" id="QUp-yE-pG5">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
@@ -4122,7 +4134,7 @@ Lactobacillus acidophilus и другие.</string>
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" red="0.21960784310000001" green="0.21960784310000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lXI-He-IgW">
+                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lXI-He-IgW">
                                 <rect key="frame" x="0.0" y="60" width="600" height="540"/>
                                 <connections>
                                     <segue destination="sbh-iQ-PXQ" kind="embed" id="Eqj-Sr-YVk"/>
@@ -4521,10 +4533,10 @@ Lactobacillus acidophilus и другие.</string>
         <image name="vkLogo" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QYA-id-OEe"/>
-        <segue reference="lKn-4N-Xsx"/>
-        <segue reference="A53-FK-YbD"/>
-        <segue reference="skb-G9-ts9"/>
+        <segue reference="Osd-iN-YAf"/>
+        <segue reference="GOH-Jc-352"/>
         <segue reference="Spl-RC-YMp"/>
+        <segue reference="lKn-4N-Xsx"/>
+        <segue reference="cPF-cF-nnw"/>
     </inferredMetricsTieBreakers>
 </document>

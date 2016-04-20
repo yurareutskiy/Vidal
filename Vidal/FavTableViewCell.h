@@ -8,7 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class FavTableViewCell;
+@protocol FavTableViewCellDelegate <NSObject>
+
+- (void) del: (FavTableViewCell *) sender;
+
+@end
+
 @interface FavTableViewCell : UITableViewCell
 @property (strong, nonatomic) IBOutlet UILabel *information;
+@property (nonatomic, weak) id <FavTableViewCellDelegate> delegate;
+- (IBAction)delete:(UIButton *)sender;
 
 @end

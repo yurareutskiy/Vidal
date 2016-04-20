@@ -8,7 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ProducersTableViewCell : UITableViewCell 
+@class ProducersTableViewCell;
+@protocol ProducersTableViewCellDelegate <NSObject>
+
+- (void) perfSeg: (ProducersTableViewCell *) sender;
+
+@end
+
+@interface ProducersTableViewCell : UITableViewCell
 
 @property (strong, nonatomic) IBOutlet UILabel *nameUnhid;
 @property (strong, nonatomic) IBOutlet UILabel *countryUnhid;
@@ -19,6 +26,8 @@
 @property (strong, nonatomic) IBOutlet UILabel *emailHid;
 @property (strong, nonatomic) IBOutlet UILabel *phoneHid;
 @property (strong, nonatomic) IBOutlet UIButton *listBtn;
+
+@property (nonatomic, weak) id <ProducersTableViewCellDelegate> delegate;
 
 - (IBAction)toListDrugs:(UIButton *)sender;
 
