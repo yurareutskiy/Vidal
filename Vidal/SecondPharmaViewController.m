@@ -57,7 +57,7 @@
                                             action:@selector(close)];
     
     NSInteger level = [[ud objectForKey:@"level"] integerValue];
-    req = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = %ld AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", level + 1, [ud objectForKey:@"parent"]];
+    req = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", [ud objectForKey:@"parent"]];
     
     [self loadData:req];
     
@@ -98,8 +98,7 @@
 
 #pragma mark - SLExpandableTableViewDelegate
 
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView.tag == 1){
         return 60;
     } else if (tableView.tag == 2) {
@@ -115,13 +114,11 @@
 
 #pragma mark - UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView.tag == 1) {
         return [self.arrPeopleInfo count];
     } else if (tableView.tag == 2){
@@ -137,8 +134,7 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView.tag == 1){
         
         PharmaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pharmaCell" forIndexPath:indexPath];
@@ -174,11 +170,10 @@
 
 #pragma mark - UITableViewDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView.tag == 1) {
-    [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
-    [self segueToBe:indexPath.row];
+        [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
+        [self segueToBe:indexPath.row];
     //[self loadData:req];
     } else if (tableView.tag == 2){
         selectedRowIndex = [indexPath copy];
@@ -204,8 +199,7 @@
     
 }
 
-- (void) segueToBe:(NSInteger)xid
-{
+- (void) segueToBe:(NSInteger)xid {
     
     NSInteger product = [self.dbManager.arrColumnNames indexOfObject:@"ShowInProduct"];
     NSInteger parent = [self.dbManager.arrColumnNames indexOfObject:@"Code"];
@@ -219,7 +213,7 @@
     NSString *levelStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:level]];
     NSString *pointIDStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:xid] objectAtIndex:pointID]];
     
-    NSString *req2 = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = %ld AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", [levelStr integerValue] + 1, parentStr];
+    NSString *req2 = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", parentStr];
     
     BOOL goNext = [self checkData:req2];
     
