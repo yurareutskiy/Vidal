@@ -68,12 +68,28 @@
     self.agree.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.worker.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     
+    
+    
     [self getSpec];
     
     tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideEver)];
     [self.scrollView addGestureRecognizer:tap];
     
+    [self prefersStatusBarHidden];
+    [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+    
+    UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
+    [self.backView addGestureRecognizer:tapRecognizer];
+    
     // Do any additional setup after loading the view.
+}
+
+-(void) hideKeyboard {
+    [self.view endEditing:YES];
+}
+
+-(BOOL)prefersStatusBarHidden {
+    return YES;
 }
 
 - (void)setUpQuickSearch:(NSMutableArray *)work {
@@ -230,8 +246,12 @@
         CGRect rc = [textField bounds];
         rc = [textField convertRect:rc toView:self.scrollView];
         pt = rc.origin;
-        pt.x = 0;
-        pt.y -= 300;
+        pt.x = self.scrollView.contentOffset.x;
+        if (self.view.frame.size.height == 736) {
+            pt.y -= 200;
+        } else {
+            pt.y -= 180;
+        }
         [self.scrollView setContentOffset:pt animated:YES];
     }
     
@@ -477,7 +497,16 @@
         [self.cityText resignFirstResponder];
         [self.special resignFirstResponder];
         self.tableView.hidden = true;
-        [self.scrollView setContentOffset:self.view.frame.origin animated:YES];
+        
+        CGPoint point = self.scrollView.frame.origin;
+        if (self.view.frame.size.height == 568) {
+            point.y = self.datePicker.frame.origin.y - 240;
+        } else {
+            point.y = 0;
+        }
+        [self.scrollView setContentOffset:point animated:YES];
+
+        
     }];
 }
 

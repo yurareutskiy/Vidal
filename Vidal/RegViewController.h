@@ -13,6 +13,8 @@
 
 @interface RegViewController : UIViewController<UIScrollViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
 
+@property (weak, nonatomic) IBOutlet UIView *backView;
+@property (weak, nonatomic) IBOutlet UIPickerView *specialistPickerView;
 @property (strong, nonatomic) IBOutlet UILabel *day;
 @property (strong, nonatomic) IBOutlet UILabel *month;
 @property (strong, nonatomic) IBOutlet UILabel *year;
