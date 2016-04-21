@@ -9,13 +9,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Vidal/ActiveViewController.m"
-            timestampString = "482884170.610058"
+            filePath = "Vidal/ListOfViewController.m"
+            timestampString = "482938538.082752"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "154"
-            endingLineNumber = "154"
-            landmarkName = "-tableView:downloadDataForExpandableSection:"
+            startingLineNumber = "312"
+            endingLineNumber = "312"
+            landmarkName = "-getMol:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

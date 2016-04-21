@@ -52,10 +52,13 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     //check if the index actually exists
+    
+    
     if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
         return sizeCell;
+    } else {
+        return 90;
     }
-    return 80;
 
 }
 
@@ -75,13 +78,13 @@
     
     
     // Set the loaded data to the appropriate cell labels.
-    cell.nameUnhid.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]];
-    cell.countryUnhid.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfRusName]];
-    cell.nameHid.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]];
-    cell.countryHid.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfRusName]];
-    cell.addressHid.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfAddress]];
-    cell.emailHid.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEmail]];
-    cell.phoneHid.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfPhone]];
+    cell.nameUnhid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]]];
+    cell.countryUnhid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfRusName]]];
+    cell.nameHid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]]];
+    cell.countryHid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfRusName]]];
+    cell.addressHid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfAddress]]];
+    cell.emailHid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEmail]]];
+    cell.phoneHid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfPhone]]];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -115,22 +118,24 @@
     
     ProducersTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     
-    sizeCell = [self labelSize:cell.nameHid.text] + [self labelSize:cell.countryHid.text] + cell.listBtn.frame.size.height + [self labelSize:cell.addressHid.text] + [self labelSize:cell.emailHid.text] + [self labelSize:cell.phoneHid.text] + 25;
+//    sizeCell = [self labelSize:cell.nameHid.text] + [self labelSize:cell.countryHid.text] + cell.listBtn.frame.size.height + [self labelSize:cell.addressHid.text] + [self labelSize:cell.emailHid.text] + [self labelSize:cell.phoneHid.text] + 25;
+    
+    sizeCell = 10.0 + 70.0 + 15.0 + 60.0 + 15.0 + [self labelSize:cell.addressHid.text] + 20.0 + [self labelSize:cell.emailHid.text] + 5.0 + [self labelSize:cell.phoneHid.text] + 5.0;
     
     NSInteger indexOfID = [self.dbManager.arrColumnNames indexOfObject:@"InfoPageID"];
     
     [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfID] forKey:@"info"];
     
-    cell.nameUnhid.hidden = true;
-    cell.countryUnhid.hidden = true;
-    
-    cell.nameHid.hidden = false;
-    cell.countryHid.hidden = false;
-    cell.image.hidden = false;
-    cell.addressHid.hidden = false;
-    cell.emailHid.hidden = false;
-    cell.phoneHid.hidden = false;
-    cell.listBtn.hidden = false;
+//    cell.nameUnhid.hidden = true;
+//    cell.countryUnhid.hidden = true;
+//    
+//    cell.nameHid.hidden = false;
+//    cell.countryHid.hidden = false;
+//    cell.image.hidden = false;
+//    cell.addressHid.hidden = false;
+//    cell.emailHid.hidden = false;
+//    cell.phoneHid.hidden = false;
+//    cell.listBtn.hidden = false;
     
     [self.tableView endUpdates];
     
@@ -150,7 +155,7 @@
     label.numberOfLines = 0;
     label.font = [UIFont fontWithName:@"Lucida_Grande-Regular" size:17.f];
     [label sizeToFit];
-    CGFloat result = label.frame.size.height + 5;
+    CGFloat result = label.frame.size.height;
     
     return result;
 }
@@ -159,18 +164,18 @@
     
     [self.tableView beginUpdates];
     
-    ProducersTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    
-    cell.nameUnhid.hidden = false;
-    cell.countryUnhid.hidden = false;
-    
-    cell.nameHid.hidden = true;
-    cell.countryHid.hidden = true;
-    cell.image.hidden = true;
-    cell.addressHid.hidden = true;
-    cell.emailHid.hidden = true;
-    cell.phoneHid.hidden = true;
-    cell.listBtn.hidden = true;
+//    ProducersTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+//    
+//    cell.nameUnhid.hidden = false;
+//    cell.countryUnhid.hidden = false;
+//    
+//    cell.nameHid.hidden = true;
+//    cell.countryHid.hidden = true;
+//    cell.image.hidden = true;
+//    cell.addressHid.hidden = true;
+//    cell.emailHid.hidden = true;
+//    cell.phoneHid.hidden = true;
+//    cell.listBtn.hidden = true;
     
     [self.tableView endUpdates];
 
@@ -179,6 +184,47 @@
 - (void) perfSeg: (ProducersViewController *) sender {
     
     [self performSegueWithIdentifier:@"toList" sender:self];
+    
+}
+
+- (NSString *) clearString:(NSString *) input {
+    
+    NSString *text = input;
+    
+    text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+    text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+    text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
+    text = [text stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+    text = [text stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"&-nb-sp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"&ndash;" withString:@"–"];
+    text = [text stringByReplacingOccurrencesOfString:@"&mdash;" withString:@"–"];
+    text = [text stringByReplacingOccurrencesOfString:@"&ldquo;" withString:@"“"];
+    text = [text stringByReplacingOccurrencesOfString:@"&loz;" withString:@"◊"];
+    text = [text stringByReplacingOccurrencesOfString:@"&rdquo;" withString:@"”"];
+    text = [text stringByReplacingOccurrencesOfString:@"<SUP>&reg;</SUP>" withString:@"®"];
+    text = [text stringByReplacingOccurrencesOfString:@"<sup>&reg;</sup>" withString:@"®"];
+    text = [text stringByReplacingOccurrencesOfString:@"<P>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<B>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<I>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TR>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TD>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</P>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</B>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<BR />" withString:@"\n"];
+    text = [text stringByReplacingOccurrencesOfString:@"<FONT class=\"F7\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</FONT>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</I>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TR>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TD>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TABLE width=\"100%\" border=\"1\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TABLE>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</SUB>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<SUB>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<P class=\"F7\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
+    
+    return text;
     
 }
 

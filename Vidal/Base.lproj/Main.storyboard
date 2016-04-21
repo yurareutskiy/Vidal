@@ -927,24 +927,31 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Зарегистрировано и произведено BAYER SCHERING PHARMA (Германия)" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yh-Lh-637">
                                                     <rect key="frame" x="18" y="43" width="564" height="38"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
                                                     <color key="textColor" red="0.68235294120000001" green="0.68235294120000001" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Гадовист" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3j-Al-XGX">
-                                                    <rect key="frame" x="18" y="18" width="73" height="20"/>
+                                                    <rect key="frame" x="18" y="18" width="77" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="20" id="z96-sD-v4l"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4Om-PT-8hM">
-                                                    <rect key="frame" x="96" y="13" width="486" height="30"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                    <state key="normal" title="Убрать из избранного">
-                                                        <color key="titleColor" red="0.74509803919999995" green="0.74509803919999995" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Om-PT-8hM">
+                                                    <rect key="frame" x="100" y="15" width="482" height="26"/>
+                                                    <state key="normal">
+                                                        <attributedString key="attributedTitle">
+                                                            <fragment content="Убрать из избранного">
+                                                                <attributes>
+                                                                    <color key="NSColor" red="0.74509803919999995" green="0.74509803919999995" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <font key="NSFont" size="15" name="LucidaGrande"/>
+                                                                    <integer key="NSUnderline" value="1"/>
+                                                                </attributes>
+                                                            </fragment>
+                                                        </attributedString>
                                                     </state>
                                                     <connections>
                                                         <action selector="delete:" destination="qsq-8T-3XL" eventType="touchUpInside" id="uwB-US-kEn"/>
@@ -976,6 +983,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="information" destination="0yh-Lh-637" id="fTv-kM-p7O"/>
+                                            <outlet property="name" destination="p3j-Al-XGX" id="w7k-UM-fdf"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1390,7 +1398,7 @@
                         <viewControllerLayoutGuide type="bottom" id="WKc-D4-zEg"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="LBm-7j-jiE">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="540"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="476"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takedaPhoto" translatesAutoresizingMaskIntoConstraints="NO" id="bNT-vg-vKY">
@@ -1454,7 +1462,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="S7X-ty-W7f">
-                                <rect key="frame" x="0.0" y="250" width="600" height="290"/>
+                                <rect key="frame" x="0.0" y="250" width="600" height="226"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="150" id="8Xj-hx-ooz"/>
@@ -1550,50 +1558,50 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gxo-HG-hvf">
+                            <tableView clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" showsSelectionImmediatelyOnTouchBegin="NO" rowHeight="300" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="gxo-HG-hvf">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="producersCell" id="ntv-na-WlI" customClass="ProducersTableViewCell">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="60"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" tableViewCell="ntv-na-WlI" id="4FQ-px-jHr">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ntv-na-WlI" id="4FQ-px-jHr">
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="299"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wa5-vV-4h6">
-                                                    <rect key="frame" x="18" y="188" width="564" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wa5-vV-4h6">
+                                                    <rect key="frame" x="18" y="178" width="564" height="14"/>
                                                     <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32d-WM-iWW">
-                                                    <rect key="frame" x="18" y="229" width="564" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="32d-WM-iWW">
+                                                    <rect key="frame" x="18" y="212" width="564" height="14"/>
                                                     <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="takedaLogo" translatesAutoresizingMaskIntoConstraints="NO" id="xSW-Zp-AHa">
-                                                    <rect key="frame" x="18" y="18" width="130" height="80"/>
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takedaLogo" translatesAutoresizingMaskIntoConstraints="NO" id="xSW-Zp-AHa">
+                                                    <rect key="frame" x="18" y="18" width="130" height="70"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="130" id="8oX-IZ-a2G"/>
-                                                        <constraint firstAttribute="height" constant="80" id="yHh-MV-7i4"/>
+                                                        <constraint firstAttribute="height" constant="70" id="yHh-MV-7i4"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6G-Yo-N3t">
-                                                    <rect key="frame" x="158" y="23" width="424" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6G-Yo-N3t">
+                                                    <rect key="frame" x="158" y="23" width="424" height="16"/>
+                                                    <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
+                                                    <color key="textColor" red="0.71764705880000002" green="0.0" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHV-Bv-uV4">
+                                                    <rect key="frame" x="158" y="47" width="424" height="16"/>
                                                     <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHV-Bv-uV4">
-                                                    <rect key="frame" x="158" y="52" width="424" height="21"/>
-                                                    <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TtG-eS-Ith">
-                                                    <rect key="frame" x="0.0" y="113" width="600" height="60"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TtG-eS-Ith">
+                                                    <rect key="frame" x="0.0" y="103" width="600" height="60"/>
                                                     <color key="backgroundColor" red="0.73333333329999995" green="0.0" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="60" id="NYa-OZ-eZa"/>
@@ -1606,31 +1614,15 @@
                                                         <action selector="toListDrugs:" destination="ntv-na-WlI" eventType="touchUpInside" id="RO2-Tf-ZQw"/>
                                                     </connections>
                                                 </button>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8tT-JY-VEI">
-                                                    <rect key="frame" x="18" y="255" width="564" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8tT-JY-VEI">
+                                                    <rect key="frame" x="18" y="231" width="564" height="14"/>
                                                     <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="15"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eO0-If-1AY">
-                                                    <rect key="frame" x="18" y="19" width="504" height="21"/>
-                                                    <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
-                                                    <color key="textColor" red="0.58039215690000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EXL-US-Hqh">
-                                                    <rect key="frame" x="532" y="19" width="70" height="21"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" constant="100" id="Qtk-Tz-7iI"/>
-                                                    </constraints>
-                                                    <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailingMargin" secondItem="8tT-JY-VEI" secondAttribute="trailing" constant="10" id="00g-HS-h4S"/>
-                                                <constraint firstItem="EXL-US-Hqh" firstAttribute="centerY" secondItem="4FQ-px-jHr" secondAttribute="centerY" id="0bw-qC-kWu"/>
                                                 <constraint firstItem="Wa5-vV-4h6" firstAttribute="top" secondItem="TtG-eS-Ith" secondAttribute="bottom" constant="15" id="1gi-dE-oIc"/>
                                                 <constraint firstItem="32d-WM-iWW" firstAttribute="leading" secondItem="4FQ-px-jHr" secondAttribute="leadingMargin" constant="10" id="Buz-pd-FTF"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="32d-WM-iWW" secondAttribute="bottom" constant="10" id="Cgh-2p-fXx"/>
@@ -1641,20 +1633,17 @@
                                                 <constraint firstItem="TtG-eS-Ith" firstAttribute="leading" secondItem="4FQ-px-jHr" secondAttribute="leadingMargin" constant="-8" id="IKJ-Ri-vxO"/>
                                                 <constraint firstItem="pHV-Bv-uV4" firstAttribute="leading" secondItem="S6G-Yo-N3t" secondAttribute="leading" id="Jdr-To-BA4"/>
                                                 <constraint firstItem="pHV-Bv-uV4" firstAttribute="trailing" secondItem="S6G-Yo-N3t" secondAttribute="trailing" id="Ml6-lD-NBW"/>
-                                                <constraint firstItem="eO0-If-1AY" firstAttribute="centerY" secondItem="4FQ-px-jHr" secondAttribute="centerY" id="Rfg-hM-4Gb"/>
                                                 <constraint firstItem="pHV-Bv-uV4" firstAttribute="top" secondItem="S6G-Yo-N3t" secondAttribute="bottom" constant="8" id="SVK-r2-h0n"/>
                                                 <constraint firstItem="S6G-Yo-N3t" firstAttribute="leading" secondItem="xSW-Zp-AHa" secondAttribute="trailing" constant="10" id="VId-9n-sid"/>
+                                                <constraint firstItem="TtG-eS-Ith" firstAttribute="top" relation="greaterThanOrEqual" secondItem="pHV-Bv-uV4" secondAttribute="bottom" constant="15" id="XyR-GJ-eNi"/>
                                                 <constraint firstItem="S6G-Yo-N3t" firstAttribute="top" secondItem="4FQ-px-jHr" secondAttribute="topMargin" constant="15" id="bI6-oJ-pGr"/>
                                                 <constraint firstItem="xSW-Zp-AHa" firstAttribute="leading" secondItem="4FQ-px-jHr" secondAttribute="leadingMargin" constant="10" id="cpd-He-U43"/>
                                                 <constraint firstItem="Wa5-vV-4h6" firstAttribute="leading" secondItem="4FQ-px-jHr" secondAttribute="leadingMargin" constant="10" id="dYz-Mu-7qP"/>
                                                 <constraint firstItem="8tT-JY-VEI" firstAttribute="leading" secondItem="4FQ-px-jHr" secondAttribute="leadingMargin" constant="10" id="ecL-rT-374"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="S6G-Yo-N3t" secondAttribute="trailing" constant="10" id="f7U-sN-Tgz"/>
-                                                <constraint firstItem="EXL-US-Hqh" firstAttribute="leading" secondItem="eO0-If-1AY" secondAttribute="trailing" constant="10" id="f9E-Qu-MkU"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="TtG-eS-Ith" secondAttribute="trailing" constant="-8" id="gCh-vm-vSD"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="32d-WM-iWW" secondAttribute="trailing" constant="10" id="hul-wJ-JSo"/>
                                                 <constraint firstItem="32d-WM-iWW" firstAttribute="top" secondItem="Wa5-vV-4h6" secondAttribute="bottom" constant="20" id="iH9-a4-2iL"/>
-                                                <constraint firstItem="eO0-If-1AY" firstAttribute="leading" secondItem="4FQ-px-jHr" secondAttribute="leadingMargin" constant="10" id="j5g-Ta-1zQ"/>
-                                                <constraint firstItem="EXL-US-Hqh" firstAttribute="trailing" secondItem="4FQ-px-jHr" secondAttribute="trailingMargin" constant="10" id="lQY-15-bZR"/>
                                                 <constraint firstItem="TtG-eS-Ith" firstAttribute="top" secondItem="xSW-Zp-AHa" secondAttribute="bottom" constant="15" id="rIQ-EA-g5b"/>
                                             </constraints>
                                             <variation key="default">
@@ -1666,12 +1655,10 @@
                                         <connections>
                                             <outlet property="addressHid" destination="Wa5-vV-4h6" id="Wvi-p1-N2I"/>
                                             <outlet property="countryHid" destination="pHV-Bv-uV4" id="r8F-7B-leA"/>
-                                            <outlet property="countryUnhid" destination="EXL-US-Hqh" id="BO8-hM-tJP"/>
                                             <outlet property="emailHid" destination="32d-WM-iWW" id="y71-Fa-qr0"/>
                                             <outlet property="image" destination="xSW-Zp-AHa" id="CE9-lP-uT1"/>
                                             <outlet property="listBtn" destination="TtG-eS-Ith" id="L8S-di-oKV"/>
                                             <outlet property="nameHid" destination="S6G-Yo-N3t" id="uTd-T9-Jf6"/>
-                                            <outlet property="nameUnhid" destination="eO0-If-1AY" id="WN0-6o-5Fd"/>
                                             <outlet property="phoneHid" destination="8tT-JY-VEI" id="gfb-H0-TPx"/>
                                         </connections>
                                     </tableViewCell>
@@ -3581,7 +3568,7 @@ Lactobacillus acidophilus и другие.</string>
                         <viewControllerLayoutGuide type="bottom" id="qkI-gU-txH"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="9B6-ff-9rP">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="540"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="476"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Гадовист" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyD-IW-vHv">
@@ -3667,7 +3654,7 @@ Lactobacillus acidophilus и другие.</string>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mKH-o8-D9E">
-                                <rect key="frame" x="0.0" y="156" width="600" height="384"/>
+                                <rect key="frame" x="0.0" y="156" width="600" height="320"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="docCell" id="Naj-6E-xog" customClass="DocsTableViewCell">
@@ -4559,10 +4546,10 @@ Lactobacillus acidophilus и другие.</string>
         <image name="vkLogo" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pXe-Qe-NJ7"/>
-        <segue reference="Bf0-3e-nJt"/>
-        <segue reference="Eqj-Sr-YVk"/>
+        <segue reference="06Y-aa-wrD"/>
         <segue reference="H7S-Pi-VdB"/>
+        <segue reference="GOH-Jc-352"/>
+        <segue reference="Osd-iN-YAf"/>
         <segue reference="Spl-RC-YMp"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -24,6 +24,7 @@
     NSString *req;
     NSMutableIndexSet *toDelete;
     NSIndexPath *selectedRowIndex;
+    CGFloat sizeCell;
     
 }
 
@@ -101,7 +102,7 @@
         return 60;
     } else if (tableView.tag == 2 || tableView.tag == 3) {
         if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
-            return 400;
+            return sizeCell;
         } else {
             return 60;
         }
@@ -171,13 +172,14 @@
     if (tableView.tag == 1) {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (!container) {
-        if ([ud valueForKey:@"workWith"]) {
+        if ([ud valueForKey:@"workWith"] || [ud valueForKey:@"comp"]) {
         self.containerView.hidden = false;
         container = true;
         self.darkView.hidden = false;
         [self.darkView addGestureRecognizer:tap];
         
         [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:0] forKey:@"drug"];
+        [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:0] forKey:@"id"];
         NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document WHERE Document.DocumentID = %@", [ud objectForKey:@"drug"]];
         //            INNER JOIN Product ON Document.DocumentID = Product.DocumentID
         NSLog(@"%@", request);
@@ -198,8 +200,22 @@
                 [self getMol:request];
 
         }
-    }} else if (tableView.tag == 2){
+    }} else if (tableView.tag == 2 || tableView.tag == 3){
         selectedRowIndex = [indexPath copy];
+        
+        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 40, 0)];
+        NSString *string = [[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row];
+        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+        [paragraphStyle setLineSpacing:6];
+        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [string length])];
+        label.attributedText = attributedString;
+        label.lineBreakMode = NSLineBreakByWordWrapping;
+        label.numberOfLines = 0;
+        label.font = [UIFont fontWithName:@"Lucida_Grande-Regular" size:17.f];
+        [label sizeToFit];
+        sizeCell = label.frame.size.height + 5;
+        NSLog(@"%f", sizeCell);
         
         [tableView beginUpdates];
         
@@ -262,18 +278,38 @@
             || [[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
             [toDelete addIndex:i];
     }
-    if ([ud valueForKey:@"workWith"]) {
-    ((SecondDocumentViewController *)self.childViewControllers.lastObject).latName.text = [[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
-    ((SecondDocumentViewController *)self.childViewControllers.lastObject).name.text = [[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
-    
-    [toDelete addIndex:0];
-    [toDelete addIndex:1];
-    
-    [[self.molecule objectAtIndex:0] removeObjectsAtIndexes:toDelete];
-    [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
-    
-    [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
-    } else if ([ud valueForKey:@"workActive"]) {
+    if ([ud valueForKey:@"workWith"] || [ud valueForKey:@"comp"]) {
+        ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).latName.text = [self clearString:[[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"]];
+        ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).name.text = [self clearString:[[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"]];
+        if (![[[self.molecule objectAtIndex:0] objectAtIndex:2] isEqualToString:@""]) {
+            ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).registred.text = [self clearString:[[self.molecule objectAtIndex:0] objectAtIndex:2]];
+            [toDelete addIndex:2];
+        }
+        
+        if ([((NSArray *)[ud objectForKey:@"favs"]) containsObject:[ud objectForKey:@"id"]]) {
+            NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav.titleLabel.text attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:187.0/255.0 green:0.0 blue:57.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
+            
+            [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setAttributedTitle:resultText forState:UIControlStateNormal];
+            [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setImage:[UIImage imageNamed:@"favRed"] forState:UIControlStateNormal];
+        } else {
+            NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav.titleLabel.text attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:213.0/255.0 green:213.0/255.0 blue:213.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
+            
+            [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setAttributedTitle:resultText forState:UIControlStateNormal];
+            [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setImage:[UIImage imageNamed:@"favGrey"] forState:UIControlStateNormal];
+        }
+        
+        
+        [toDelete addIndex:0];
+        [toDelete addIndex:1];
+        
+        [[self.molecule objectAtIndex:0] removeObjectsAtIndexes:toDelete];
+        [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
+        
+        [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).tableView reloadData];
+    } else if ([ud valueForKey:@"workActive"])
+    {
+        
+        
         ((DocumentViewController *)self.childViewControllers.lastObject).latName.text = [[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
         ((DocumentViewController *)self.childViewControllers.lastObject).name.text = [[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
         
@@ -285,6 +321,47 @@
         
         [((DocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
     }
+    
+}
+
+- (NSString *) clearString:(NSString *) input {
+    
+    NSString *text = input;
+    
+    text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+    text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+    text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
+    text = [text stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+    text = [text stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"&-nb-sp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"&ndash;" withString:@"–"];
+    text = [text stringByReplacingOccurrencesOfString:@"&mdash;" withString:@"–"];
+    text = [text stringByReplacingOccurrencesOfString:@"&ldquo;" withString:@"“"];
+    text = [text stringByReplacingOccurrencesOfString:@"&loz;" withString:@"◊"];
+    text = [text stringByReplacingOccurrencesOfString:@"&rdquo;" withString:@"”"];
+    text = [text stringByReplacingOccurrencesOfString:@"<SUP>&reg;</SUP>" withString:@"®"];
+    text = [text stringByReplacingOccurrencesOfString:@"<sup>&reg;</sup>" withString:@"®"];
+    text = [text stringByReplacingOccurrencesOfString:@"<P>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<B>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<I>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TR>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TD>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</P>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</B>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<BR />" withString:@"\n"];
+    text = [text stringByReplacingOccurrencesOfString:@"<FONT class=\"F7\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</FONT>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</I>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TR>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TD>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TABLE width=\"100%\" border=\"1\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TABLE>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</SUB>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<SUB>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<P class=\"F7\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
+    
+    return text;
     
 }
 

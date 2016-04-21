@@ -26,6 +26,7 @@
     NSUserDefaults *ud;
     NSMutableIndexSet *toDelete;
     NSIndexPath *selectedRowIndex;
+    CGFloat sizeCell;
     
 }
 
@@ -73,7 +74,7 @@
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(close)];
     
-    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(30, 20)]
+    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
                                                          style:UIBarButtonItemStyleDone
                                                         target:self
                                                         action:@selector(search)];
@@ -123,10 +124,10 @@
 
 - (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (tableView.tag == 1){
-        return 60;
+        return 100;
     } else if (tableView.tag == 2) {
         if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
-            return 400;
+            return sizeCell;
         } else {
             return 60;
         }
@@ -168,9 +169,10 @@
     NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
     
     cell.delegate = self;
-    
+        [cell setTag:indexPath.row];
+        
     // Set the loaded data to the appropriate cell labels.
-    cell.information.text = [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName];
+        cell.name.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -186,7 +188,7 @@
             cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
         };
         
-        cell.title.text = [NSString stringWithFormat:@"%@", [self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
+        cell.title.text = [self clearString:[NSString stringWithFormat:@"%@", [self.dbManager.arrColumnNames objectAtIndex:indexPath.row]]];
         cell.desc.text = [[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
@@ -207,13 +209,27 @@
             [self.darkView addGestureRecognizer:tap];
             
             [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:0] forKey:@"drug"];
-            NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document WHERE Document.DocumentID = 1958"];
+            NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document WHERE Document.DocumentID = %@", [ud objectForKey:@"drug"]];
 //                                 %@", [ud objectForKey:@"drug"]];
 //            INNER JOIN Product ON Document.DocumentID = Product.DocumentID
             NSLog(@"%@", request);
             [self getMol:request];
         }} else if (tableView.tag == 2){
             selectedRowIndex = [indexPath copy];
+            
+            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 40, 0)];
+            NSString *string = [[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row];
+            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+            NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+            [paragraphStyle setLineSpacing:6];
+            [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [string length])];
+            label.attributedText = attributedString;
+            label.lineBreakMode = NSLineBreakByWordWrapping;
+            label.numberOfLines = 0;
+            label.font = [UIFont fontWithName:@"Lucida_Grande-Regular" size:17.f];
+            [label sizeToFit];
+            sizeCell = label.frame.size.height + 5;
+            NSLog(@"%f", sizeCell);
             
             [tableView beginUpdates];
             
@@ -265,8 +281,21 @@
             [toDelete addIndex:i];
     }
     
-    ((SecondDocumentViewController *)self.childViewControllers.lastObject).latName.text = [[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
-    ((SecondDocumentViewController *)self.childViewControllers.lastObject).name.text = [[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
+    if ([((NSArray *)[ud objectForKey:@"favs"]) containsObject:[ud objectForKey:@"id"]]) {
+        NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav.titleLabel.text attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:187.0/255.0 green:0.0 blue:57.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
+        
+        [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setAttributedTitle:resultText forState:UIControlStateNormal];
+        [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setImage:[UIImage imageNamed:@"favRed"] forState:UIControlStateNormal];
+    } else {
+        NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav.titleLabel.text attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:213.0/255.0 green:213.0/255.0 blue:213.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
+        
+        [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setAttributedTitle:resultText forState:UIControlStateNormal];
+        [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setImage:[UIImage imageNamed:@"favGrey"] forState:UIControlStateNormal];
+    }
+
+    
+    ((SecondDocumentViewController *)self.childViewControllers.lastObject).latName.text = [self clearString:[[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"]];
+    ((SecondDocumentViewController *)self.childViewControllers.lastObject).name.text = [self clearString:[[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"]];
     
     [toDelete addIndex:0];
     [toDelete addIndex:1];
@@ -283,11 +312,53 @@
     // ПРИДУМАТЬ КАК ПЕРЕДАВАТЬ ИНДЕКС
     
     NSMutableArray *check = [NSMutableArray arrayWithArray:[ud objectForKey:@"favs"]];
-    [check removeObjectAtIndex:0];
-    [self.arrPeopleInfo removeObjectAtIndex:0];
+    NSLog(@"%ld", (long)sender.tag);
+    [check removeObjectAtIndex:sender.tag];
+    [self.arrPeopleInfo removeObjectAtIndex:sender.tag];
     [ud setObject:check forKey:@"favs"];
     
     [self.tableView reloadData];
+    
+}
+
+- (NSString *) clearString:(NSString *) input {
+    
+    NSString *text = input;
+    
+    text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+    text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+    text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
+    text = [text stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+    text = [text stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"&-nb-sp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"&ndash;" withString:@"–"];
+    text = [text stringByReplacingOccurrencesOfString:@"&mdash;" withString:@"–"];
+    text = [text stringByReplacingOccurrencesOfString:@"&ldquo;" withString:@"“"];
+    text = [text stringByReplacingOccurrencesOfString:@"&loz;" withString:@"◊"];
+    text = [text stringByReplacingOccurrencesOfString:@"&rdquo;" withString:@"”"];
+    text = [text stringByReplacingOccurrencesOfString:@"<SUP>&reg;</SUP>" withString:@"®"];
+    text = [text stringByReplacingOccurrencesOfString:@"<sup>&reg;</sup>" withString:@"®"];
+    text = [text stringByReplacingOccurrencesOfString:@"<P>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<B>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<I>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TR>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TD>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</P>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</B>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<BR />" withString:@"\n"];
+    text = [text stringByReplacingOccurrencesOfString:@"<FONT class=\"F7\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</FONT>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</I>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TR>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TD>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TABLE width=\"100%\" border=\"1\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TABLE>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</SUB>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<SUB>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<P class=\"F7\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
+    
+    return text;
     
 }
 
