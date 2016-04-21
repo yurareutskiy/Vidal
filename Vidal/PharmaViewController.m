@@ -55,9 +55,8 @@
     self.darkView.hidden = true;
     container = false;
     
-    tap =
-    [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(close)];
+    tap = [[UITapGestureRecognizer alloc] initWithTarget:self
+                                                  action:@selector(close)];
     
     
     req = @"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = 1 ORDER BY ClinicoPhPointers.Name";
@@ -113,13 +112,11 @@
 
 #pragma mark - UITableViewDataSource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (tableView.tag == 1) {
         return [self.arrPeopleInfo count];
     } else if (tableView.tag == 2){
@@ -134,45 +131,43 @@
     }
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (tableView.tag == 1){
-    
-    PharmaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pharmaCell" forIndexPath:indexPath];
-    
-    NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
-    
-    // Set the loaded data to the appropriate cell labels.
-    cell.name.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (tableView.tag == 1) {
+        
+            PharmaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pharmaCell" forIndexPath:indexPath];
+            
+            NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
+            
+            // Set the loaded data to the appropriate cell labels.
+            cell.name.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]];
+            
+            return cell;
+        
+        } else if (tableView.tag == 2){
+        
+        if ([[[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row] isEqualToString:@""]) {
+            return nil;
+        }
+        
+        DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"docCell"];
+        if (cell == nil) {
+            cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
+        };
+        
+        cell.title.text = [NSString stringWithFormat:@"%@", [self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
+        cell.desc.text = [[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
-    
-} else if (tableView.tag == 2){
-    
-    if ([[[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row] isEqualToString:@""]) {
+    } else {
         return nil;
     }
-    
-    DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"docCell"];
-    if (cell == nil) {
-        cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
-    };
-    
-    cell.title.text = [NSString stringWithFormat:@"%@", [self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
-    cell.desc.text = [[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    return cell;
-} else {
-    return nil;
-}
 
 }
 
 #pragma mark - UITableViewDelegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     [self segueToBe:indexPath.row];
@@ -181,8 +176,7 @@
     
 }
 
-- (void) segueToBe:(NSInteger)xid
-{
+- (void) segueToBe:(NSInteger)xid {
     
     NSInteger product = [self.dbManager.arrColumnNames indexOfObject:@"ShowInProduct"];
     NSInteger parent = [self.dbManager.arrColumnNames indexOfObject:@"Code"];
@@ -223,7 +217,7 @@
     
 }
 
--(void)loadData:(NSString *)req{
+-(void)loadData:(NSString *)req {
     // Form the query.
     NSString *query = [NSString stringWithFormat:req];
     
@@ -269,19 +263,19 @@
     self.molecule = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:mol]];
     if ([self.molecule count] != 0) {
     for (NSUInteger i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
-        if ([[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
-            || [[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
+        if ([[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""] || [[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"]) {
             [toDelete addIndex:i];
+        }
     }
     
     ((SecondDocumentViewController *)self.childViewControllers.lastObject).latName.text = [[[self.molecule objectAtIndex:0] objectAtIndex:2] valueForKey:@"lowercaseString"];
     ((SecondDocumentViewController *)self.childViewControllers.lastObject).name.text = [[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
-        if (![[[self.molecule objectAtIndex:0] objectAtIndex:3] isEqualToString:@""]) {
-            ((SecondDocumentViewController *)self.childViewControllers.lastObject).registred.text = [[self.molecule objectAtIndex:0] objectAtIndex:2];
-            [toDelete addIndex:2];
-        }
+    if (![[[self.molecule objectAtIndex:0] objectAtIndex:3] isEqualToString:@""]) {
+        ((SecondDocumentViewController *)self.childViewControllers.lastObject).registred.text = [[self.molecule objectAtIndex:0] objectAtIndex:2];
+        [toDelete addIndex:2];
+    }
 
-        [ud setObject:[[self.molecule objectAtIndex:0] objectAtIndex:0] forKey:@"id"];
+    [ud setObject:[[self.molecule objectAtIndex:0] objectAtIndex:0] forKey:@"id"];
     [toDelete addIndex:0];
     [toDelete addIndex:1];
     
@@ -302,15 +296,15 @@
         
     [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
     } else {
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Неправильный данные" message:@"Повторите ввод" preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
-                         {
-                             
-                         }];
-    [alertController addAction:ok];
-    
-    [self presentViewController:alertController animated:YES completion:nil];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Пустая категория" message:@"Для этой категории отсутствуют препараты" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                             {
+                                 
+                             }];
+        [alertController addAction:ok];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
     }
 }
 
