@@ -46,6 +46,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
 
+    
     [super setLabel:@"Список препаратов"];
     
     self.tableView.delegate = self;
@@ -60,6 +61,8 @@
     self.forSearch = [NSMutableArray array];
     toDelete = [NSMutableIndexSet indexSet];
     ud = [NSUserDefaults standardUserDefaults];
+    [ud removeObjectForKey:@"listOfDrugs"];
+    [ud removeObjectForKey:@"listOfDrugs"];
     self.expandableSections = [NSMutableIndexSet indexSet];
     self.hello1 = [NSMutableArray array];
     self.sectionsArray = [NSMutableArray array];

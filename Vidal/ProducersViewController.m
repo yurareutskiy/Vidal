@@ -30,6 +30,9 @@
     
     ud = [NSUserDefaults standardUserDefaults];
     
+        [ud removeObjectForKey:@"listOfDrugs"];
+    [ud removeObjectForKey:@"listOfDrugs"];
+    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     

@@ -154,14 +154,16 @@
         
         if (isEmptyDrugsList) {
             return;
+        } else {
+            [self performSegueWithIdentifier:@"toList" sender:self];
         }
         
-        if (!container) {
-            self.containerView.hidden = false;
-            container = true;
-            self.darkView.hidden = false;
-            [self.darkView addGestureRecognizer:tap];
-        }
+//        if (!container) {
+//            self.containerView.hidden = false;
+//            container = true;
+//            self.darkView.hidden = false;
+//            [self.darkView addGestureRecognizer:tap];
+//        }
         
         
     } else if (goNext){
@@ -218,6 +220,9 @@
     }
     self.molecule = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:mol]];
     if ([self.molecule count] != 0) {
+        
+        [ud setObject:self.molecule forKey:@"pharmaList"];
+        
         for (NSUInteger i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
             if ([[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""] || [[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"]) {
                 [toDelete addIndex:i];

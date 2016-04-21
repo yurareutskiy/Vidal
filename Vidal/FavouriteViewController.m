@@ -35,6 +35,9 @@
     
     ud = [NSUserDefaults standardUserDefaults];
     
+        [ud removeObjectForKey:@"listOfDrugs"];
+    [ud removeObjectForKey:@"listOfDrugs"];
+    
     ((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView.delegate = self;
     ((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView.dataSource = self;
     [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView setTag:2];

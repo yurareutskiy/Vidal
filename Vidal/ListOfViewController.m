@@ -62,6 +62,11 @@
     req = [NSString stringWithFormat:@"SELECT Product.DocumentID, Product.RusName AS 'Продукт', Molecule.RusName, Molecule.MoleculeID FROM Molecule INNER JOIN Product_Molecule ON Molecule.MoleculeID = Product_Molecule.MoleculeID INNER JOIN Product ON Product_Molecule.ProductID = Product.ProductID WHERE Molecule.MoleculeID = %@ ORDER BY Molecule.RusName", [ud objectForKey:@"molecule"]];
         
         [self loadData:req];
+    } else if ([ud valueForKey:@"pharmaList"]) {
+        
+        req = @"";
+        self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[ud valueForKey:@"pharmaList"]];
+        
     } else if ([ud objectForKey:@"comp"]) {
         req = [NSString stringWithFormat:@"SELECT Product.DocumentID,  Product.RusName AS 'Продукт' FROM Product WHERE Product.CompanyID = %@ ORDER BY Product.RusName", [ud objectForKey:@"comp"]];
         
@@ -75,25 +80,51 @@
         self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[ud valueForKey:@"workWith"]];
         
     } else if ([ud valueForKey:@"workActive"]) {
-        
-        req = @"";
-        self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[ud valueForKey:@"workActive"]];
+        if ([ud valueForKey:@"listOfDrugs"]) {
+            req = [NSString stringWithFormat:@"SELECT Document.*, ClinicoPhPointers.Name as Category FROM Document LEFT JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID LEFT JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID LEFT JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID LEFT JOIN ClinicoPhPointers ON ClinicoPhPointers.ClPhPointerID = Document_ClPhPointers.SrcClPhPointerID WHERE Molecule.MoleculeID = %@", [ud objectForKey:@"listOfDrugs"]];
+            NSLog(@"%@", req);
+            
+            [self loadData:req];
+        } else {
+            req = @"";
+            self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[ud valueForKey:@"workActive"]];
+        }
         
     } else {
         req = @"";
         [self loadData:req];
-    }
+    } 
     
     // Do any additional setup after loading the view.
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
     
+    [ud removeObjectForKey:@"pharmaList"];
     [ud removeObjectForKey:@"info"];
     [ud removeObjectForKey:@"molecule"];
     [ud removeObjectForKey:@"comp"];
     [ud removeObjectForKey:@"workWith"];
-    [ud removeObjectForKey:@"workActive"];
+    if ([ud valueForKey:@"listOfDrugs"]) {
+        
+    } else {
+        [ud removeObjectForKey:@"workActive"];
+    }
+    
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+   
+    [ud removeObjectForKey:@"pharmaList"];
+    [ud removeObjectForKey:@"info"];
+    [ud removeObjectForKey:@"molecule"];
+    [ud removeObjectForKey:@"comp"];
+    [ud removeObjectForKey:@"workWith"];
+    if ([ud valueForKey:@"listOfDrugs"]) {
+        
+    } else {
+        [ud removeObjectForKey:@"workActive"];
+    }
     
 }
 
@@ -172,7 +203,7 @@
     if (tableView.tag == 1) {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
     if (!container) {
-        if ([ud valueForKey:@"workWith"] || [ud valueForKey:@"comp"]) {
+        if ([ud valueForKey:@"workWith"] || [ud valueForKey:@"comp"] || [ud valueForKey:@"pharmaList"]) {
         self.containerView.hidden = false;
         container = true;
         self.darkView.hidden = false;
@@ -194,6 +225,9 @@
                 [self.darkView addGestureRecognizer:tap];
                 
                 [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:0] forKey:@"drug"];
+            
+                [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:19] forKey:@"listOfDrugs"];
+            
                 NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID WHERE Document.DocumentID = %@", [ud objectForKey:@"drug"]];
                 //            INNER JOIN Product ON Document.DocumentID = Product.DocumentID
                 NSLog(@"%@", request);
@@ -272,18 +306,20 @@
         self.molecule = nil;
     }
     self.molecule = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:mol]];
+
     
-    for (NSUInteger i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
-        if ([[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
-            || [[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
-            [toDelete addIndex:i];
-    }
-    if ([ud valueForKey:@"workWith"] || [ud valueForKey:@"comp"]) {
+    if ([ud valueForKey:@"workWith"] || [ud valueForKey:@"comp"] || [ud valueForKey:@"pharmaList"]) {
         ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).latName.text = [self clearString:[[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"]];
         ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).name.text = [self clearString:[[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"]];
-        if (![[[self.molecule objectAtIndex:0] objectAtIndex:2] isEqualToString:@""]) {
-            ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).registred.text = [self clearString:[[self.molecule objectAtIndex:0] objectAtIndex:2]];
-            [toDelete addIndex:2];
+//        if (![[[self.molecule objectAtIndex:0] objectAtIndex:2] isEqualToString:@""]) {
+//            ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).registred.text = [self clearString:[[self.molecule objectAtIndex:0] objectAtIndex:2]];
+//            [toDelete addIndex:2];
+//        }
+        
+        for (NSUInteger i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
+            if ([[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
+                || [[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
+                [toDelete addIndex:i];
         }
         
         if ([((NSArray *)[ud objectForKey:@"favs"]) containsObject:[ud objectForKey:@"id"]]) {
@@ -312,6 +348,12 @@
         
         ((DocumentViewController *)self.childViewControllers.lastObject).latName.text = [[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
         ((DocumentViewController *)self.childViewControllers.lastObject).name.text = [[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
+        
+        for (NSUInteger i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
+            if ([[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
+                || [[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
+                [toDelete addIndex:i];
+        }
         
         [toDelete addIndex:0];
         [toDelete addIndex:1];

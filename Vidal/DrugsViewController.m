@@ -42,7 +42,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     ((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView.delegate = self;
@@ -53,6 +52,8 @@
     
     toDelete = [NSMutableIndexSet indexSet];
     ud = [NSUserDefaults standardUserDefaults];
+    [ud removeObjectForKey:@"workActive"];
+    [ud removeObjectForKey:@"listOfDrugs"];
     
     self.expandableSections = [NSMutableIndexSet indexSet];
     

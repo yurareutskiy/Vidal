@@ -222,13 +222,14 @@
         NSString *request = [NSString stringWithFormat:@"SELECT Document.DocumentID, Document.RusName, Document.EngName, Document.CompaniesDescription, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID INNER JOIN ClinicoPhPointers ON Document_ClPhPointers.ClPhPointerID = ClinicoPhPointers.ClPhPointerID WHERE ClinicoPhPointers.ClPhPointerID = %@", pointIDStr];
         [self getMol:request];
         
+        [self performSegueWithIdentifier:@"toList" sender:self];
         
-        if (!container) {
-            self.containerView.hidden = false;
-            container = true;
-            self.darkView.hidden = false;
-            [self.darkView addGestureRecognizer:tap];
-        }
+//        if (!container) {
+//            self.containerView.hidden = false;
+//            container = true;
+//            self.darkView.hidden = false;
+//            [self.darkView addGestureRecognizer:tap];
+//        }
         
         
     } else if (goNext){
@@ -284,12 +285,16 @@
         self.molecule = nil;
     }
     self.molecule = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:mol]];
+    
     if ([self.molecule count] != 0) {
+        [ud setObject:self.molecule forKey:@"pharmaList"];
         for (NSUInteger i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
             if ([[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
                 || [[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
                 [toDelete addIndex:i];
         }
+        
+        
         
         ((SecondDocumentViewController *)self.childViewControllers.lastObject).latName.text = [[[self.molecule objectAtIndex:0] objectAtIndex:2] valueForKey:@"lowercaseString"];
         ((SecondDocumentViewController *)self.childViewControllers.lastObject).name.text = [[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];

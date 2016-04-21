@@ -19,4 +19,7 @@
 - (IBAction)toVidal:(UIButton *)sender;
 - (IBAction)toList:(UIButton *)sender;
 
+@property (strong, nonatomic) IBOutlet UIButton *name;
+
+
 @end
