@@ -35,7 +35,9 @@
     self.info1.text = string;
     [self.info1 sizeToFit];
     
-    self.result.numberOfLines = 0;
+    self.result.hidden = true;
+    
+//    self.result.numberOfLines = 0;
     [self.result sizeToFit];
     
     textField1 = false;
@@ -76,12 +78,12 @@
     
     [super setLabel:@"Лекарственное взаимодействие"];
     
-    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
-                                                         style:UIBarButtonItemStyleDone
-                                                        target:self
-                                                        action:@selector(search)];
+    //    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
+    //                                                         style:UIBarButtonItemStyleDone
+    //                                                        target:self
+    //                                                        action:@selector(search)];
     
-    self.navigationItem.rightBarButtonItem = self.searchButton;
+    //    self.navigationItem.rightBarButtonItem = self.searchButton;
     
     // Do any additional setup after loading the view.
 }
@@ -285,6 +287,47 @@
         f.origin.y = +self.navigationController.navigationBar.frame.size.height + 20.0;
         self.view.frame = f;
     }];
+}
+
+- (NSString *) clearString:(NSString *) input {
+    
+    NSString *text = input;
+    
+    text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+    text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+    text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
+    text = [text stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+    text = [text stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"&-nb-sp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"&ndash;" withString:@"–"];
+    text = [text stringByReplacingOccurrencesOfString:@"&mdash;" withString:@"–"];
+    text = [text stringByReplacingOccurrencesOfString:@"&ldquo;" withString:@"“"];
+    text = [text stringByReplacingOccurrencesOfString:@"&loz;" withString:@"◊"];
+    text = [text stringByReplacingOccurrencesOfString:@"&rdquo;" withString:@"”"];
+    text = [text stringByReplacingOccurrencesOfString:@"<SUP>&reg;</SUP>" withString:@"®"];
+    text = [text stringByReplacingOccurrencesOfString:@"<sup>&reg;</sup>" withString:@"®"];
+    text = [text stringByReplacingOccurrencesOfString:@"<P>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<B>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<I>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TR>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TD>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</P>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</B>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<BR />" withString:@"\n"];
+    text = [text stringByReplacingOccurrencesOfString:@"<FONT class=\"F7\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</FONT>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</I>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TR>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TD>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TABLE width=\"100%\" border=\"1\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TABLE>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</SUB>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<SUB>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<P class=\"F7\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
+    
+    return text;
+    
 }
 
 /*

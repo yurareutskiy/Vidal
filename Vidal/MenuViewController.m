@@ -21,7 +21,7 @@
     
     self.revealViewController.delegate = self;
     
-    
+    [[self.vidal imageView] setContentMode:UIViewContentModeScaleAspectFit];
     
     // Do any additional setup after loading the view.
 }

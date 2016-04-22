@@ -44,6 +44,7 @@
     [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView setTag:2];
     
     ud = [NSUserDefaults standardUserDefaults];
+        [ud removeObjectForKey:@"info"];
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
@@ -59,18 +60,12 @@
                                                   action:@selector(close)];
     
     
-    req = @"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = 1 ORDER BY ClinicoPhPointers.Name";
+    //    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
+    //                                                         style:UIBarButtonItemStyleDone
+    //                                                        target:self
+    //                                                        action:@selector(search)];
     
-    
-    
-    [self loadData:req];
-    
-    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
-                                                         style:UIBarButtonItemStyleDone
-                                                        target:self
-                                                        action:@selector(search)];
-    
-    self.navigationItem.rightBarButtonItem = self.searchButton;
+    //    self.navigationItem.rightBarButtonItem = self.searchButton;
     
     // Do any additional setup after loading the view.
 }
@@ -91,6 +86,16 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    
+    req = @"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = 1 ORDER BY ClinicoPhPointers.Name";
+    
+    
+    
+    [self loadData:req];
+    
 }
 
 #pragma mark - SLExpandableTableViewDelegate
@@ -139,7 +144,7 @@
             NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
             
             // Set the loaded data to the appropriate cell labels.
-            cell.name.text = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]];
+        cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]]];
             
             return cell;
         
@@ -154,8 +159,8 @@
             cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
         };
         
-        cell.title.text = [NSString stringWithFormat:@"%@", [self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
-        cell.desc.text = [[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row];
+        cell.title.text = [self clearString:[NSString stringWithFormat:@"%@", [self.dbManager.arrColumnNames objectAtIndex:indexPath.row]]];
+        cell.desc.text = [self clearString:[[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
@@ -307,6 +312,47 @@
         
         [self presentViewController:alertController animated:YES completion:nil];
     }
+}
+
+- (NSString *) clearString:(NSString *) input {
+    
+    NSString *text = input;
+    
+    text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+    text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+    text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
+    text = [text stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+    text = [text stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"&-nb-sp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"&ndash;" withString:@"–"];
+    text = [text stringByReplacingOccurrencesOfString:@"&mdash;" withString:@"–"];
+    text = [text stringByReplacingOccurrencesOfString:@"&ldquo;" withString:@"“"];
+    text = [text stringByReplacingOccurrencesOfString:@"&loz;" withString:@"◊"];
+    text = [text stringByReplacingOccurrencesOfString:@"&rdquo;" withString:@"”"];
+    text = [text stringByReplacingOccurrencesOfString:@"<SUP>&reg;</SUP>" withString:@"®"];
+    text = [text stringByReplacingOccurrencesOfString:@"<sup>&reg;</sup>" withString:@"®"];
+    text = [text stringByReplacingOccurrencesOfString:@"<P>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<B>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<I>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TR>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TD>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</P>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</B>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<BR />" withString:@"\n"];
+    text = [text stringByReplacingOccurrencesOfString:@"<FONT class=\"F7\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</FONT>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</I>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TR>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TD>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TABLE width=\"100%\" border=\"1\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TABLE>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</SUB>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<SUB>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<P class=\"F7\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
+    
+    return text;
+    
 }
 
 /*

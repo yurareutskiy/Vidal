@@ -32,5 +32,6 @@
 @property (strong, nonatomic) IBOutlet UIImageView *info;
 @property (strong, nonatomic) IBOutlet UIImageView *profile;
 @property (strong, nonatomic) IBOutlet UIImageView *fave;
+@property (strong, nonatomic) IBOutlet UIButton *vidal;
 
 @end

@@ -35,6 +35,8 @@
     if ([[ud valueForKey:@"reg"] isEqualToString:@"2"]) {
         UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
         [self presentViewController:vc animated:true completion:nil];
+    } else {
+        [self showAlert:@"Внимание!" mess:@"При первом входе в приложение требуется скачать объемное количество информации (30Мб)." check:NO];
     }
     
     // Do any additional setup after loading the view, typically from a nib.
@@ -185,4 +187,6 @@
     [self performSegueWithIdentifier:@"withoutReg" sender:self];
     
 }
+
+
 @end

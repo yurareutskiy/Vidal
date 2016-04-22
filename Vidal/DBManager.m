@@ -91,12 +91,45 @@
                     // Go through all columns and fetch each column data.
                     for (int i=0; i<totalColumns; i++){
                         // Convert the column data to text (characters).
-                        char *dbDataAsChars = (char *)sqlite3_column_text(compiledStatement, i);
+                        char *dbDataAsChars;
+                        NSData *data;
+                        
+                        if ([[ud valueForKey:@"howTo"] isEqualToString:@"about"]) {
+                            if (i == 9) {
+//                            dbDataAsChars = (char *)sqlite3_column_blob(compiledStatement, i);
+                                data = [[NSData alloc] initWithBytes:sqlite3_column_blob(compiledStatement, i) length:sqlite3_column_bytes(compiledStatement, i)];
+                            } else {
+                                dbDataAsChars = (char *)sqlite3_column_text(compiledStatement, i);
+                            }
+                        } else if ([[ud valueForKey:@"howTo"] isEqualToString:@"prod"]) {
+                            if (i == 0) {
+                                //                            dbDataAsChars = (char *)sqlite3_column_blob(compiledStatement, i);
+                                data = [[NSData alloc] initWithBytes:sqlite3_column_blob(compiledStatement, i) length:sqlite3_column_bytes(compiledStatement, i)];
+                            } else {
+                                dbDataAsChars = (char *)sqlite3_column_text(compiledStatement, i);
+                            }
+                        } else {
+                            dbDataAsChars = (char *)sqlite3_column_text(compiledStatement, i);
+                        }
                         
                         // If there are contents in the currenct column (field) then add them to the current row array.
                         if (dbDataAsChars != NULL) {
                             // Convert the characters to string.
-                            [arrDataRow addObject:[NSString  stringWithUTF8String:dbDataAsChars]];
+                            if ([[ud valueForKey:@"howTo"] isEqualToString:@"about"]) {
+                                if (i == 9) {
+                                    [arrDataRow addObject:data];
+                                } else {
+                                    [arrDataRow addObject:[NSString  stringWithUTF8String:dbDataAsChars]];
+                                }
+                            } else if ([[ud valueForKey:@"howTo"] isEqualToString:@"prod"]) {
+                                if (i == 0) {
+                                    [arrDataRow addObject:data];
+                                } else {
+                                    [arrDataRow addObject:[NSString  stringWithUTF8String:dbDataAsChars]];
+                                }
+                            } else {
+                                [arrDataRow addObject:[NSString  stringWithUTF8String:dbDataAsChars]];
+                            }
                         } else {
                             [arrDataRow addObject:@""];
                         }

@@ -30,6 +30,7 @@
     ind = 0;
     
     ud = [NSUserDefaults standardUserDefaults];
+    [ud setValue:@"about" forKey:@"howTo"];
     self.navigationItem.title = @"О Такеда";
     
     NSString *string1 = self.takeda.text;
@@ -46,10 +47,18 @@
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
-    NSString *request = @"SELECT Product.* FROM Product JOIN Product_Picture ON Product_Picture.ProductID = Product.ProductID JOIN Picture ON Picture.PictureID = Product_Picture.PictureID WHERE Product.CompanyID = 6057 GROUP BY Product.DocumentID";
+    NSString *request = @"SELECT Product.*, Picture.Image FROM Product JOIN Product_Picture ON Product_Picture.ProductID = Product.ProductID JOIN Picture ON Picture.PictureID = Product_Picture.PictureID WHERE Product.CompanyID = 6057 GROUP BY Product.DocumentID";
     [self loadData:request];
     
+    [self.image setImage:[UIImage imageWithData:[self.results[0] valueForKey:@"image"]]];
+    [self.name setText:[self.results[0] valueForKey:@"nameOf"]];
+    [self.drug setText:[self.results[0] valueForKey:@"drug"]];
+    
     // Do any additional setup after loading the view.
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [ud setValue:@"0" forKey:@"howTo"];
 }
 
 -(void)loadData:(NSString *)req{
@@ -67,6 +76,7 @@
         NSMutableDictionary *material = [NSMutableDictionary dictionary];
         [material setValue:[self clearString:[key objectAtIndex:1]] forKey:@"nameOf"];
         [material setValue:[self clearString:[key objectAtIndex:6]] forKey:@"drug"];
+        [material setValue:[key objectAtIndex:9] forKey:@"image"];
         [self.results addObject:material];
     }
 
@@ -75,6 +85,8 @@
 - (NSString *) clearString:(NSString *) input {
     
     NSString *text = input;
+    
+    
     
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
@@ -142,10 +154,12 @@
         [self.drug setAlpha:0.0];
     } completion:^(BOOL finished) {
         if (ind < [self.results count] - 1) {
+            [self.image setImage:[UIImage imageWithData:[self.results[ind+1] valueForKey:@"image"]]];
             [self.name setText:[self.results[ind+1] valueForKey:@"nameOf"]];
             [self.drug setText:[self.results[ind+1] valueForKey:@"drug"]];
             ind++;
         } else if (ind == [self.results count] - 1) {
+            [self.image setImage:[UIImage imageWithData:[self.results[0] valueForKey:@"image"]]];
             [self.name setText:[self.results[0] valueForKey:@"nameOf"]];
             [self.drug setText:[self.results[0] valueForKey:@"drug"]];
             ind = 0;
@@ -167,10 +181,12 @@
         [self.drug setAlpha:0.0];
     } completion:^(BOOL finished) {
         if (ind > 0) {
+            [self.image setImage:[UIImage imageWithData:[self.results[ind-1] valueForKey:@"image"]]];
             [self.name setText:[self.results[ind-1] valueForKey:@"nameOf"]];
             [self.drug setText:[self.results[ind-1] valueForKey:@"drug"]];
             ind--;
         } else if (ind == 0) {
+            [self.image setImage:[UIImage imageWithData:[self.results[[self.results count] - 1] valueForKey:@"image"]]];
             [self.name setText:[self.results[[self.results count] - 1] valueForKey:@"nameOf"]];
             [self.drug setText:[self.results[[self.results count] - 1] valueForKey:@"drug"]];
             ind = (int)[self.results count] - 1;

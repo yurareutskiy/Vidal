@@ -36,6 +36,7 @@
     NSString *nextPls;
     NSMutableIndexSet *toDelete;
     CGFloat sizeCell;
+    int check;
     
 }
 
@@ -48,12 +49,13 @@
     ((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView.dataSource = self;
     [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView setTag:2];
     
-    self.letters = [NSArray arrayWithObjects:@"А", @"Б", @"В", @"Г", @"Д", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"Т", @"Ф", @"Ц", @"Э", nil];
+    self.letters = [NSArray arrayWithObjects:@"А", @"Б", @"В", @"Г", @"Д", @"Ж", @"З", @"И", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"С", @"Т", @"У", @"Ф", @"Х", @"Ц", @"Э", @"Ю", @"L", nil];
     
     toDelete = [NSMutableIndexSet indexSet];
     ud = [NSUserDefaults standardUserDefaults];
     [ud removeObjectForKey:@"workActive"];
     [ud removeObjectForKey:@"listOfDrugs"];
+        [ud removeObjectForKey:@"info"];
     
     self.expandableSections = [NSMutableIndexSet indexSet];
     
@@ -61,7 +63,7 @@
 
     [super setLabel:@"Список препаратов"];
     
-    [self loadData:@"SELECT * FROM Document INNER JOIN Product ON Document.DocumentID = Product.ProductID ORDER BY Product.RusName"];
+    [self loadData:@"SELECT * FROM Document INNER JOIN Product ON Document.DocumentID = Product.DocumentID GROUP BY Product.RusName"];
     
     self.hello1 = [NSMutableArray array];
     
@@ -83,12 +85,12 @@
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(tableView:didCollapseSection:animated:)];
     
-    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
-                                                         style:UIBarButtonItemStyleDone
-                                                        target:self
-                                                        action:@selector(search)];
+//    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
+//                                                         style:UIBarButtonItemStyleDone
+//                                                        target:self
+//                                                        action:@selector(search)];
     
-    self.navigationItem.rightBarButtonItem = self.searchButton;
+//    self.navigationItem.rightBarButtonItem = self.searchButton;
     
     // Do any additional setup after loading the view.
 }
@@ -255,14 +257,6 @@
     return YES;
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == 0) {
-        [self.sectionsArray removeObjectAtIndex:indexPath.section];
-        [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
-}
-
 #pragma mark - UITableViewDelegate
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -309,6 +303,8 @@
 
 -(void)loadData:(NSString *)req {
     
+    check = 0;
+    
     // Get the results.
     if (self.arrPeopleInfo != nil) {
         self.arrPeopleInfo = nil;
@@ -332,6 +328,8 @@
         keyString = [keyString valueForKey:@"uppercaseString"];
         NSInteger ind = [self.letters indexOfObject:keyString];
         [[result objectAtIndex:ind] addObject:key];
+        check++;
+        NSLog(@"%d", check);
     }
 
     // Reload the table view.

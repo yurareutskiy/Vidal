@@ -22,6 +22,7 @@
     NSIndexPath *selectedRowIndex;
     CGFloat sizeCell;
     NSUserDefaults *ud;
+    BOOL open;
     
 }
 
@@ -30,15 +31,19 @@
     
     ud = [NSUserDefaults standardUserDefaults];
     
-        [ud removeObjectForKey:@"listOfDrugs"];
+    open = false;
+    
     [ud removeObjectForKey:@"listOfDrugs"];
+    [ud removeObjectForKey:@"listOfDrugs"];
+    
+    [ud setValue:@"prod" forKey:@"howTo"];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
-    NSString *request = @"SELECT InfoPage.InfoPageID, InfoPage.RusName AS Name, InfoPage.RusAddress, InfoPage.PhoneNumber, InfoPage.Email, Country.RusName FROM InfoPage INNER JOIN Picture ON InfoPage.PictureID = Picture.PictureID INNER JOIN Country ON InfoPage.CountryCode = Country.CountryCode ORDER BY Name";
+    NSString *request = @"SELECT Picture.Image, InfoPage.InfoPageID, InfoPage.RusName AS Name, InfoPage.RusAddress, InfoPage.PhoneNumber, InfoPage.Email, Country.RusName FROM InfoPage INNER JOIN Picture ON InfoPage.PictureID = Picture.PictureID INNER JOIN Country ON InfoPage.CountryCode = Country.CountryCode ORDER BY Name";
     [self loadData:request];
     
     [super setLabel:@"Производители"];
@@ -46,6 +51,18 @@
     
     
     // Do any additional setup after loading the view.
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    [ud setValue:@"prod" forKey:@"howTo"];
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [ud setValue:@"0" forKey:@"howTo"];
+}
+
+- (void) viewWillDisappear:(BOOL)animated {
+    [ud setValue:@"0" forKey:@"howTo"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -58,7 +75,11 @@
     
     
     if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
-        return sizeCell;
+        if (open) {
+            return sizeCell;
+        } else {
+            return 90;
+        }
     } else {
         return 90;
     }
@@ -78,7 +99,7 @@
     NSInteger indexOfRusName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
     NSInteger indexOfEmail = [self.dbManager.arrColumnNames indexOfObject:@"Email"];
     NSInteger indexOfPhone = [self.dbManager.arrColumnNames indexOfObject:@"PhoneNumber"];
-    
+    NSInteger indexOfImage = [self.dbManager.arrColumnNames indexOfObject:@"Image"];
     
     // Set the loaded data to the appropriate cell labels.
     cell.nameUnhid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]]];
@@ -88,6 +109,7 @@
     cell.addressHid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfAddress]]];
     cell.emailHid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEmail]]];
     cell.phoneHid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfPhone]]];
+    [cell.image setImage:[UIImage imageWithData:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfImage]]];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -129,6 +151,12 @@
     
     [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfID] forKey:@"info"];
     
+    if (!open) {
+        open = true;
+    } else {
+        open = false;
+    }
+    
 //    cell.nameUnhid.hidden = true;
 //    cell.countryUnhid.hidden = true;
 //    
@@ -151,12 +179,12 @@
     NSString *string = text;
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle setLineSpacing:6];
+    [paragraphStyle setLineSpacing:0.5];
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [string length])];
     label.attributedText = attributedString;
     label.lineBreakMode = NSLineBreakByWordWrapping;
     label.numberOfLines = 0;
-    label.font = [UIFont fontWithName:@"Lucida_Grande-Regular" size:17.f];
+    label.font = [UIFont fontWithName:@"Lucida_Grande-Regular" size:15.f];
     [label sizeToFit];
     CGFloat result = label.frame.size.height;
     

@@ -35,7 +35,6 @@
     
     ud = [NSUserDefaults standardUserDefaults];
     
-        [ud removeObjectForKey:@"listOfDrugs"];
     [ud removeObjectForKey:@"listOfDrugs"];
     
     ((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView.delegate = self;
@@ -67,7 +66,7 @@
     [self loadData:request];
     
     
-    [self setLabel:@"Список препаратов"];
+    [self setLabel:@"Избранное"];
     
     container = false;
     self.containerView.hidden = true;
@@ -77,12 +76,12 @@
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(close)];
     
-    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
-                                                         style:UIBarButtonItemStyleDone
-                                                        target:self
-                                                        action:@selector(search)];
+    //    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
+    //                                                         style:UIBarButtonItemStyleDone
+    //                                                        target:self
+    //                                                        action:@selector(search)];
     
-    self.navigationItem.rightBarButtonItem = self.searchButton;
+    //    self.navigationItem.rightBarButtonItem = self.searchButton;
     
     // Do any additional setup after loading the view.
 }
@@ -170,12 +169,18 @@
     }
     
     NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
+        NSInteger indexOfComp = [self.dbManager.arrColumnNames indexOfObject:@"CompaniesDescription"];
     
     cell.delegate = self;
         [cell setTag:indexPath.row];
         
     // Set the loaded data to the appropriate cell labels.
         cell.name.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]];
+        if (![[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfComp] isEqualToString:@""]) {
+        cell.information.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfComp]];
+        } else {
+            cell.information.text = @"Нет информации о производителе";
+        }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -192,7 +197,7 @@
         };
         
         cell.title.text = [self clearString:[NSString stringWithFormat:@"%@", [self.dbManager.arrColumnNames objectAtIndex:indexPath.row]]];
-        cell.desc.text = [[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row];
+        cell.desc.text = [self clearString:[[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
@@ -212,7 +217,7 @@
             [self.darkView addGestureRecognizer:tap];
             
             [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:0] forKey:@"drug"];
-            NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document WHERE Document.DocumentID = %@", [ud objectForKey:@"drug"]];
+            NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document WHERE Document.DocumentID = %@", [ud objectForKey:@"drug"]];
 //                                 %@", [ud objectForKey:@"drug"]];
 //            INNER JOIN Product ON Document.DocumentID = Product.DocumentID
             NSLog(@"%@", request);
@@ -253,7 +258,7 @@
     self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
     
     if ([self.arrPeopleInfo count] == 0) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Alert title" message:@"Alert message" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Пустой список" message:@"Вы не добавляли препараты в избранное" preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
                              {
@@ -299,6 +304,13 @@
     
     ((SecondDocumentViewController *)self.childViewControllers.lastObject).latName.text = [self clearString:[[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"]];
     ((SecondDocumentViewController *)self.childViewControllers.lastObject).name.text = [self clearString:[[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"]];
+    
+    if (![[[self.molecule objectAtIndex:0] objectAtIndex:2] isEqualToString:@""]) {
+        ((SecondDocumentViewController *)self.childViewControllers.lastObject).registred.text = [self clearString:[[self.molecule objectAtIndex:0] objectAtIndex:2]];
+        [toDelete addIndex:2];
+    } else {
+        [toDelete addIndex:2];
+    }
     
     [toDelete addIndex:0];
     [toDelete addIndex:1];

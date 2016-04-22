@@ -18,6 +18,7 @@
     
     NSString *secret_key;
     NSUserDefaults *ud;
+    BOOL exists;
     
 }
 
@@ -25,17 +26,64 @@
     [super viewDidLoad];
     
     ud = [NSUserDefaults standardUserDefaults];
+    [ud setValue:@"0" forKey:@"howTo"];
+    
     
     secret_key = @"uX04xN12Tk1654Qz";
     
     self.bg.layer.masksToBounds = YES;
     
-    if ([[ud valueForKey:@"reg"] isEqualToString:@"1"]) {
+    NSArray *URLs = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+    NSURL *directoryURL = [URLs firstObject];
+    NSURL *databaseURL = [directoryURL URLByAppendingPathComponent:@"vidalDatabase.zip"];
+    NSError *error = nil;
+    exists = [databaseURL checkResourceIsReachableAndReturnError:&error];
+    
+    if (!exists) {
+        [self checkBool];
         [self getLink];
         [self getKey];
     }
     
     // Do any additional setup after loading the view.
+}
+
+- (void) checkBool {
+    NSLog(@"HELLOOOOOOOOOOO");
+    if (!exists) {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Архив начал скачиваться" message:@"Подождите 15-30 секунд. Элементы взаимодействия недоступны, пожалуйста, не выключайте приложение." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                             {
+                                 
+                             }];
+        [alertController addAction:ok];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+        self.name.enabled = NO;
+        self.navigationItem.leftBarButtonItem.enabled = NO;
+    } else {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Архив скачался" message:@"Можете пользоваться приложением." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                             {
+                                 
+                             }];
+        [alertController addAction:ok];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+        
+        self.name.enabled = YES;
+        self.navigationItem.leftBarButtonItem.enabled = YES;
+    }
+    
+}
+
+- (void) showAlert {
+    
 }
 
 - (NSString *) md5:(NSString *) input
@@ -93,7 +141,7 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
-        
+        if (!exists) {
         NSLog(@"Downloading Started");
         NSString *urlToDownload = link;
         NSURL  *url = [NSURL URLWithString:urlToDownload];
@@ -109,7 +157,8 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [urlData writeToFile:filePath atomically:YES];
                 NSLog(@"File Saved !");
-
+                exists = true;
+                [self checkBool];
                 ZipArchive *zipArchive = [[ZipArchive alloc] init];
                 [zipArchive UnzipOpenFile:filePath];
                 
@@ -118,12 +167,13 @@
                 
                 [zipArchive UnzipFileTo:documentsDirectory overWrite:YES];
                 [zipArchive UnzipCloseFile];
-            
             });
         } else {
             NSLog(@"Download failed");
         }
-        
+        } else {
+            NSLog(@"OKay");
+        }
         
     });
     

@@ -47,7 +47,7 @@
     [super viewDidLoad];
 
     
-    [super setLabel:@"Список препаратов"];
+    [super setLabel:@"Список активных веществ"];
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -63,16 +63,17 @@
     ud = [NSUserDefaults standardUserDefaults];
     [ud removeObjectForKey:@"listOfDrugs"];
     [ud removeObjectForKey:@"listOfDrugs"];
+        [ud removeObjectForKey:@"info"];
     self.expandableSections = [NSMutableIndexSet indexSet];
     self.hello1 = [NSMutableArray array];
     self.sectionsArray = [NSMutableArray array];
-    self.letters = [NSArray arrayWithObjects:@"А", @"Б", @"В", @"Г", @"Д", @"З", @"И", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"С", @"Т", @"У", @"Ф", @"Х", @"Ц", @"Э", nil];
+    self.letters = [NSArray arrayWithObjects:@"А", @"Б", @"В", @"Г", @"Д", @"Ж", @"З", @"И", @"Й", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"С", @"Т", @"У", @"Ф", @"Х", @"Ц", @"Э", @"Я", nil];
     
     container = false;
     self.containerView.hidden = true;
     self.darkView.hidden = true;
     
-    [self loadData:@"Select Document.*, Molecule_Document.*, ClinicoPhPointers.Name as Category  FROM Document INNER JOIN Molecule_Document ON Molecule_Document.DocumentID = Document.DocumentID INNER JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID INNER JOIN ClinicoPhPointers ON ClinicoPhPointers.ClPhPointerID = Document_ClPhPointers.SrcClPhPointerID"];
+    [self loadData:@"Select Document.*, Molecule_Document.* FROM Document INNER JOIN Molecule_Document ON Molecule_Document.DocumentID = Document.DocumentID"];
     
     
     for (int i = 0; i < [self.arrPeopleInfo count]; i++) {
@@ -87,12 +88,12 @@
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(tableView:didCollapseSection:animated:)];
     
-    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
-                                                         style:UIBarButtonItemStyleDone
-                                                        target:self
-                                                        action:@selector(search)];
+    //    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
+    //                                                         style:UIBarButtonItemStyleDone
+    //                                                        target:self
+    //                                                        action:@selector(search)];
     
-    self.navigationItem.rightBarButtonItem = self.searchButton;
+    //    self.navigationItem.rightBarButtonItem = self.searchButton;
     
     // Do any additional setup after loading the view.
 }
@@ -143,7 +144,7 @@
         }
     }
     
-    cell.name.text = text;
+    cell.name.text = [self clearString:text];
     cell.letter.text = [NSString stringWithFormat:@"%@.", [self.letters objectAtIndex:section]];
     
     return cell;
@@ -237,7 +238,7 @@
         }
     
         NSArray *dataArray = result[indexPath.section];
-        cell.name.text = [dataArray[indexPath.row - 1] objectAtIndex:1];
+        cell.name.text = [self clearString:[dataArray[indexPath.row - 1] objectAtIndex:1]];
         cell.letter.text = @"";
         
         return cell;
@@ -268,8 +269,8 @@
             NSString *title, *subtitle;
             title = self.FilteredResults[indexPath.row];
             subtitle = self.FilteredResults[indexPath.row];
-            cell.textLabel.text = title;
-            cell.detailTextLabel.text = subtitle;
+            cell.textLabel.text = [self clearString:title];
+            cell.detailTextLabel.text = [self clearString:subtitle];
         
             // Return Cell
             return cell;
@@ -388,10 +389,10 @@
             [toDelete addIndex:i];
     }
     
-    ((DocumentViewController *)self.childViewControllers.lastObject).latName.text = [[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
-    ((DocumentViewController *)self.childViewControllers.lastObject).name.text = [[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
-    if (![[[self.molecule objectAtIndex:0] objectAtIndex:2] isEqualToString:@""]) {
-        ((DocumentViewController *)self.childViewControllers.lastObject).registred.text = [[self.molecule objectAtIndex:0] objectAtIndex:2];
+    ((DocumentViewController *)self.childViewControllers.lastObject).latName.text = [self clearString:[[[self.molecule objectAtIndex:0] objectAtIndex:2] valueForKey:@"lowercaseString"]];
+    ((DocumentViewController *)self.childViewControllers.lastObject).name.text = [self clearString:[[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"]];
+    if (![[[self.molecule objectAtIndex:0] objectAtIndex:6] isEqualToString:@""]) {
+        ((DocumentViewController *)self.childViewControllers.lastObject).registred.text = [self clearString:[[self.molecule objectAtIndex:6] objectAtIndex:2]];
         [toDelete addIndex:2];
     }
 
@@ -417,12 +418,45 @@
     
 }
 
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (indexPath.row == 0) {
-        [self.sectionsArray removeObjectAtIndex:indexPath.section];
-        [tableView deleteSections:[NSIndexSet indexSetWithIndex:indexPath.section] withRowAnimation:UITableViewRowAnimationAutomatic];
-    }
+- (NSString *) clearString:(NSString *) input {
+    
+    NSString *text = input;
+    
+    text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+    text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+    text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
+    text = [text stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+    text = [text stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"&-nb-sp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"&ndash;" withString:@"–"];
+    text = [text stringByReplacingOccurrencesOfString:@"&mdash;" withString:@"–"];
+    text = [text stringByReplacingOccurrencesOfString:@"&ldquo;" withString:@"“"];
+    text = [text stringByReplacingOccurrencesOfString:@"&loz;" withString:@"◊"];
+    text = [text stringByReplacingOccurrencesOfString:@"&rdquo;" withString:@"”"];
+    text = [text stringByReplacingOccurrencesOfString:@"<SUP>&reg;</SUP>" withString:@"®"];
+    text = [text stringByReplacingOccurrencesOfString:@"<sup>&reg;</sup>" withString:@"®"];
+    text = [text stringByReplacingOccurrencesOfString:@"<P>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<B>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<I>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TR>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TD>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</P>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</B>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<BR />" withString:@"\n"];
+    text = [text stringByReplacingOccurrencesOfString:@"<FONT class=\"F7\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</FONT>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</I>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TR>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TD>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TABLE width=\"100%\" border=\"1\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TABLE>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</SUB>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<SUB>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<P class=\"F7\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
+    
+    return text;
+    
 }
 
 /*
