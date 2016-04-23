@@ -95,7 +95,7 @@
                         NSData *data;
                         
                         if ([[ud valueForKey:@"howTo"] isEqualToString:@"about"]) {
-                            if (i == 9) {
+                            if (i == 2) {
 //                            dbDataAsChars = (char *)sqlite3_column_blob(compiledStatement, i);
                                 data = [[NSData alloc] initWithBytes:sqlite3_column_blob(compiledStatement, i) length:sqlite3_column_bytes(compiledStatement, i)];
                             } else {
@@ -116,7 +116,7 @@
                         if (dbDataAsChars != NULL) {
                             // Convert the characters to string.
                             if ([[ud valueForKey:@"howTo"] isEqualToString:@"about"]) {
-                                if (i == 9) {
+                                if (i == 2) {
                                     [arrDataRow addObject:data];
                                 } else {
                                     [arrDataRow addObject:[NSString  stringWithUTF8String:dbDataAsChars]];

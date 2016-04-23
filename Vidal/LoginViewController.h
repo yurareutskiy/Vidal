@@ -15,6 +15,7 @@
 - (IBAction)registration:(UIButton *)sender;
 - (IBAction)login:(id)sender;
 - (IBAction)withoutReg:(UIButton *)sender;
+- (IBAction)forget:(UIButton *)sender;
 
 @property (strong, nonatomic) IBOutlet UILabel *lead;
 @property (strong, nonatomic) IBOutlet UITextField *emailInput;

@@ -24,5 +24,6 @@
 @property (strong, nonatomic) IBOutlet UIView *secondLine;
 @property (strong, nonatomic) IBOutlet UITextView *result;
 @property (strong, nonatomic) IBOutlet UIImageView *topImage;
+@property (weak, nonatomic) IBOutlet UILabel *lead;
 
 @end

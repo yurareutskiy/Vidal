@@ -36,9 +36,11 @@
     [self.info1 sizeToFit];
     
     self.result.hidden = true;
-    
+    self.lead.hidden = true;
 //    self.result.numberOfLines = 0;
     [self.result sizeToFit];
+    
+
     
     textField1 = false;
     textField2 = false;
@@ -102,6 +104,8 @@
         self.secondInput.hidden = false;
         self.secondLine.hidden = false;
         self.secondLabel.hidden = false;
+        self.lead.hidden = true;
+
     }
 }
 
@@ -213,18 +217,22 @@
         self.secondInput.text = self.FilteredResults[indexPath.row];
         self.result.text = [self findSecondResult:self.FilteredResults[indexPath.row]];
         self.result.hidden = false;
+        self.lead.hidden = false;
         [self.secondInput resignFirstResponder];
     }
     self.tableView.hidden = true;
     self.secondInput.hidden = false;
     self.secondLine.hidden = false;
     self.secondLabel.hidden = false;
+    self.lead.hidden = false;
+
 }
 
 #pragma mark - TextField Delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     self.tableView.hidden = true;
+    self.lead.hidden = false;
     return YES;
 }
 
@@ -243,6 +251,7 @@
     }
     [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
     self.tableView.hidden = false;
+    self.lead.hidden = false;
     return YES;
 }
 
@@ -261,6 +270,7 @@
     [self.input resignFirstResponder];
     [self.secondInput resignFirstResponder];
     self.tableView.hidden = true;
+    
 }
 
 - (void)viewWillAppear:(BOOL)animated {

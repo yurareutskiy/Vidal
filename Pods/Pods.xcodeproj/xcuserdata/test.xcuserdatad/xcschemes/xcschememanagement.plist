@@ -4,6 +4,11 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AFNetworkActivityLogger.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>9</integer>
+		</dict>
 		<key>AFNetworking.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -34,6 +39,11 @@
 			<key>orderHint</key>
 			<integer>8</integer>
 		</dict>
+		<key>ZipArchive.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>10</integer>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -42,7 +52,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>24C548A512989169CA5DC0B57214F279</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>410B25DF16EA5C5B3E2698F74F9625FB</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5EA94E3357CB6918D14CF6C129484928</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,12 +77,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>73D37E0A3C6A6629FC284D24F9512B13</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>81AA875FF30FAC729262B9674796B8E2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>97FD0052AF39BC8390016AB4AF49202B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>B62B18400435927573146E349DDBECE4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EC0D1D30F031352A2DB09856D4D19BD0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>F0ECBF5B52D7CCEA2E989A7E2C53A682</key>
 		<dict>
 			<key>primary</key>
 			<true/>

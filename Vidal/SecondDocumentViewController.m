@@ -37,30 +37,48 @@
 - (IBAction)addToFav:(UIButton *)sender {
     
     if ([ud objectForKey:@"favs"] == nil) {
+        
         [ud setObject:[NSArray array] forKey:@"favs"];
         [ud setObject:[[ud objectForKey:@"favs"] arrayByAddingObject:[ud objectForKey:@"id"]] forKey:@"favs"];
-        [self.fav setImage:[UIImage imageNamed:@"favRed"] forState:UIControlStateNormal];
+        
+        UIColor *color = [UIColor colorWithRed:187.0/255.0 green:0.0/255.0 blue:57.0/255.0 alpha:1];
+        
+        [self changeButton:@"Препарат в избранном" image:@"favRed" color:color];
+        
     } else {
         if (![((NSArray *)[ud objectForKey:@"favs"]) containsObject:[ud objectForKey:@"id"]]) {
+            
             [ud setObject:[[ud objectForKey:@"favs"] arrayByAddingObject:[ud objectForKey:@"id"]] forKey:@"favs"];
             
-            NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithString:self.fav.titleLabel.text attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:187.0/255.0 green:0.0 blue:57.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
+            UIColor *color = [UIColor colorWithRed:187.0/255.0 green:0.0/255.0 blue:57.0/255.0 alpha:1];
             
-            [self.fav setAttributedTitle:result forState:UIControlStateNormal];
-            [self.fav setImage:[UIImage imageNamed:@"favRed"] forState:UIControlStateNormal];
+            [self changeButton:@"Препарат в избранном" image:@"favRed" color:color];
+            
         } else {
+            
             NSMutableArray *check = [NSMutableArray arrayWithArray:[ud objectForKey:@"favs"]];
             [check removeObject:[ud objectForKey:@"id"]];
             [ud setObject:check forKey:@"favs"];
             
-            NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithString:self.fav.titleLabel.text attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:213.0/255.0 green:213.0/255.0 blue:213.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
+            UIColor *color = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1];
+
             
-            [self.fav setAttributedTitle:result forState:UIControlStateNormal];
-            [self.fav setImage:[UIImage imageNamed:@"favGrey"] forState:UIControlStateNormal];
+            [self changeButton:@"Добавить в избранное" image:@"favGrey" color:color];
+            
         }
     }
     
     NSLog(@"%@", [ud objectForKey:@"favs"]);
+    
+}
+
+- (void) changeButton: (NSString *) name image:(NSString *) image color: (UIColor *) color{
+    
+    NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithString:name attributes:@{NSForegroundColorAttributeName:color, NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
+    
+    [self.fav setAttributedTitle:result forState:UIControlStateNormal];
+    [self.fav setImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
+    self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0);
     
 }
 

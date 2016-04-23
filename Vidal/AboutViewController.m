@@ -47,7 +47,9 @@
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
-    NSString *request = @"SELECT Product.*, Picture.Image FROM Product JOIN Product_Picture ON Product_Picture.ProductID = Product.ProductID JOIN Picture ON Picture.PictureID = Product_Picture.PictureID WHERE Product.CompanyID = 6057 GROUP BY Product.DocumentID";
+    NSString *request = @"SELECT Document.RusName, Document.CompiledComposition, Picture.Image FROM Document INNER JOIN Document_InfoPage ON Document.DocumentID = Document_InfoPage.DocumentID INNER JOIN InfoPage ON Document_InfoPage.InfoPageID = InfoPage.InfoPageID INNER JOIN Product ON Document.DocumentID = Product.DocumentID INNER JOIN Product_Picture ON Product.ProductID  = Product_Picture.ProductID INNER JOIN Picture ON Product_Picture.PictureID = Picture.PictureID WHERE InfoPage.InfoPageID = 63 GROUP BY Document.RusName"; // GROUP BY Product.DocumentID Аналогично при нажатии на кнопку список препаратов
+//    NSString *request = @"SELECT * FROM Document INNER JOIN Document_InfoPage ON Document.DocumentID = Document_InfoPage.DocumentID WHERE Document_InfoPage.InfoPageID = 63";
+    
     [self loadData:request];
     
     [self.image setImage:[UIImage imageWithData:[self.results[0] valueForKey:@"image"]]];
@@ -74,9 +76,9 @@
     self.results = [NSMutableArray array];
     for (NSArray *key in self.arrPeopleInfo) {
         NSMutableDictionary *material = [NSMutableDictionary dictionary];
-        [material setValue:[self clearString:[key objectAtIndex:1]] forKey:@"nameOf"];
-        [material setValue:[self clearString:[key objectAtIndex:6]] forKey:@"drug"];
-        [material setValue:[key objectAtIndex:9] forKey:@"image"];
+        [material setValue:[self clearString:[key objectAtIndex:0]] forKey:@"nameOf"];
+        [material setValue:[self clearString:[key objectAtIndex:1]] forKey:@"drug"];
+        [material setValue:[key objectAtIndex:2] forKey:@"image"];
         [self.results addObject:material];
     }
 

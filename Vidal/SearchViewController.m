@@ -57,12 +57,14 @@
     self.tableView2.delegate = self;
     self.tableView2.dataSource = self;
     self.searchBar.delegate = self;
+    
     ((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView.delegate = self;
     ((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView.dataSource = self;
     [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView setTag:3];
-    ((DocumentViewController *)self.childViewControllers.lastObject).tableView.delegate = self;
-    ((DocumentViewController *)self.childViewControllers.lastObject).tableView.dataSource = self;
-    [((DocumentViewController *)self.childViewControllers.lastObject).tableView setTag:4];
+    
+    ((DocumentViewController *)[self.childViewControllers objectAtIndex:0]).tableView.delegate = self;
+    ((DocumentViewController *)[self.childViewControllers objectAtIndex:0]).tableView.dataSource = self;
+    [((DocumentViewController *)[self.childViewControllers objectAtIndex:0]).tableView setTag:4];
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
@@ -118,7 +120,7 @@
     self.darkView.hidden = true;
     self.containerView2.hidden = true;
     self.containerView1.hidden = true;
-    [self.view removeGestureRecognizer:tap];
+    [self.darkView removeGestureRecognizer:tap];
     
 }
 
@@ -186,6 +188,8 @@
         return cell;
         
     } else if (tableView.tag == 3 || tableView.tag == 4) {
+        
+        
         if ([self.data count] != 0) {
             if ([[[self.data objectAtIndex:0] objectAtIndex:indexPath.row] isEqualToString:@""]) {
                 return nil;
@@ -226,15 +230,15 @@
             }
         }
         
-        next = [self.moleculeFull[indexPath.row] objectAtIndex:21];
+        next = [self.moleculeFull[index] objectAtIndex:0];
         [ud setObject:next forKey:@"molecule"];
-        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID WHERE Molecule.MoleculeID = %@", next];
+        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID WHERE Document.DocumentID = %@", next];
         [self getInfo:request];
         
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         self.darkView.hidden = false;
         self.containerView1.hidden = false;
-        [self.view addGestureRecognizer:tap];
+        [self.darkView addGestureRecognizer:tap];
         
     } else if (tableView2b) {
         
@@ -245,18 +249,18 @@
             }
         }
         
-        next = [self.drugsFull[indexPath.row] objectAtIndex:27];
+        next = [self.drugsFull[index] objectAtIndex:0];
         [ud setObject:next forKey:@"molecule"];
+        [ud setObject:next forKey:@"id"];
         NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document WHERE Document.DocumentID = %@", next];
         [self getInfo:request];
         
         [tableView deselectRowAtIndexPath:indexPath animated:YES];
         self.darkView.hidden = false;
         self.containerView2.hidden = false;
-        [self.view addGestureRecognizer:tap];
+        [self.darkView addGestureRecognizer:tap];
         
     }
-    
     } else if (tableView.tag == 3 || tableView.tag == 4) {
         selectedRowIndex = [indexPath copy];
     
@@ -383,8 +387,8 @@
                 [self.toDelete addIndex:i];
         }
     
-        ((DocumentViewController *)self.childViewControllers.lastObject).latName.text = [[[self.data objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
-        ((DocumentViewController *)self.childViewControllers.lastObject).name.text = [[[self.data objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
+        ((DocumentViewController *)[self.childViewControllers objectAtIndex:0]).latName.text = [[[self.data objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
+        ((DocumentViewController *)[self.childViewControllers objectAtIndex:0]).name.text = [[[self.data objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
     
         [self.toDelete addIndex:0];
         [self.toDelete addIndex:1];
@@ -392,7 +396,7 @@
         [[self.data objectAtIndex:0] removeObjectsAtIndexes:self.toDelete];
         [self.dbManager.arrColumnNames removeObjectsAtIndexes:self.toDelete];
     
-        [((DocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
+        [((DocumentViewController *)[self.childViewControllers objectAtIndex:0]).tableView reloadData];
         
     } else if (tableView2b) {
         

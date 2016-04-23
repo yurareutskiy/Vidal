@@ -188,5 +188,11 @@
     
 }
 
+- (IBAction)forget:(UIButton *)sender {
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.vidal.ru/password-reset"]];
+    
+}
+
 
 @end

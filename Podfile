@@ -5,12 +5,10 @@
 
 target 'Vidal' do
     
-    pod 'HSDatePickerViewController', '~> 1.0'
     pod 'SLExpandableTableView'
     pod 'VK-ios-sdk'
     pod 'IMQuickSearch'
     pod 'AFNetworking'
-    pod 'AFNetworkActivityLogger'
     pod 'Google/CloudMessaging'
     pod 'ZipArchive'
     

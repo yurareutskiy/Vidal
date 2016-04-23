@@ -48,20 +48,27 @@
     self.surnameText.delegate = self;
     self.nameText.delegate = self;
     self.cityText.delegate = self;
+    self.specialistPickerView.dataSource = self;
+    self.specialistPickerView.delegate = self;
     
 
     self.datePicker.hidden = true;
     [self.datePicker setBackgroundColor:[UIColor whiteColor]];
+    self.specialistPickerView.hidden = true;
+    [self.specialistPickerView setBackgroundColor:[UIColor whiteColor]];
     self.toolbar.hidden = true;
     
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-    [self.tableView setTag:1];
+//    self.tableView.delegate = self;
+//    self.tableView.dataSource = self;
+//    [self.tableView setTag:1];
+    
     self.tableView2.delegate = self;
     self.tableView2.dataSource = self;
     [self.tableView2 setTag:2];
     self.tableView.hidden = true;
     self.tableView2.hidden = true;
+    
+    
     
     svos = self.scrollView.contentOffset;
     
@@ -115,32 +122,36 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (tableView.tag == 1) {
-        return self.FilteredResults.count - 1;
-    } else if (tableView.tag == 2) {
-        NSLog(@"%lu", (unsigned long)self.namesCity.count);
+//    if (tableView.tag == 1) {
+//        return self.FilteredResults.count - 1;
+//    } else if (tableView.tag == 2) {
+//        NSLog(@"%lu", (unsigned long)self.namesCity.count);
+    
         return self.namesCity.count;
-    } else {
-        return 1;
-    }
+    
+//    } else {
+//        return 1;
+//    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (tableView.tag == 1) {
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchCell"];
-        }
+//    if (tableView.tag == 1) {
+//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
+//        if (!cell) {
+//            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchCell"];
+//        }
+//    
+//        // Set Content
+//        NSString *title;
+//        title = self.FilteredResults[indexPath.row + 1];
+//        cell.textLabel.text = title;
+//    
+//        // Return Cell
+//        return cell;
+//    } else if (tableView.tag == 2) {
     
-        // Set Content
-        NSString *title;
-        title = self.FilteredResults[indexPath.row + 1];
-        cell.textLabel.text = title;
     
-        // Return Cell
-        return cell;
-    } else if (tableView.tag == 2) {
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchCell"];
@@ -153,31 +164,35 @@
         
         // Return Cell
         return cell;
-    } else {
-        return nil;
-    }
+    
+    
+//    } else {
+//        return nil;
+//    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (tableView.tag == 1) {
-        self.special.text = self.FilteredResults[indexPath.row + 1];
-        self.tableView.hidden = true;
-        for (NSDictionary *key in self.dictSpec) {
-            if ([[key objectForKey:@"doctorName"] isEqualToString:self.FilteredResults[indexPath.row + 1]]) {
-                job = [key objectForKey:@"id"];
-                break;
-            }
-        }
-        [self hideEver];
-        [self.scrollView addGestureRecognizer:tap];
-    } else if (tableView.tag == 2) {
+//    if (tableView.tag == 1) {
+//        self.special.text = self.FilteredResults[indexPath.row + 1];
+//        self.tableView.hidden = true;
+//        for (NSDictionary *key in self.dictSpec) {
+//            if ([[key objectForKey:@"doctorName"] isEqualToString:self.FilteredResults[indexPath.row + 1]]) {
+//                job = [key objectForKey:@"id"];
+//                break;
+//            }
+//        }
+//        [self hideEver];
+//        [self.scrollView addGestureRecognizer:tap];
+//    } else if (tableView.tag == 2) {
+    
         self.cityText.text = self.namesCity[indexPath.row];
         self.tableView2.hidden = true;
         cityCheck = self.namesCity[indexPath.row];
         [self hideEver];
         [self.scrollView addGestureRecognizer:tap];
-    }
+    
+//    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -196,23 +211,26 @@
         i += 1;
         if (textField.tag == 4) {
             self.tableView2.hidden = true;
+            [textField resignFirstResponder];
+            
+//            self.tableView.hidden = true;
+            
+            [self.scrollView setContentOffset:self.view.frame.origin animated:YES];
+            [self.scrollView addGestureRecognizer:tap];
         }
-    } else if (textField.tag == 5) {
-        [textField resignFirstResponder];
-        self.tableView.hidden = true;
-        [self.scrollView setContentOffset:self.view.frame.origin animated:YES];
-        [self.scrollView addGestureRecognizer:tap];
     }
-    
     return YES;
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    if (textField.tag == 5) {
-        [self.scrollView removeGestureRecognizer:tap];
-        [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
-        self.tableView.hidden = false;
-    } else if (textField.tag == 4) {
+    
+//    if (textField.tag == 5) {
+//        [self.scrollView removeGestureRecognizer:tap];
+//        [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
+//        self.tableView.hidden = false;
+//    } else
+    
+    if (textField.tag == 4) {
         [self.scrollView removeGestureRecognizer:tap];
         self.tableView2.hidden = false;
     }
@@ -220,9 +238,11 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (textField.tag == 5) {
-        [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
-    } else if (textField.tag == 4) {
+//    if (textField.tag == 5) {
+//        [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
+//    } else
+    
+    if (textField.tag == 4) {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         
         [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
@@ -295,9 +315,10 @@
 
 - (IBAction)callDatePicker:(UIButton*)sender {
     
+    [self hideEver];
     self.datePicker.hidden = false;
     self.toolbar.hidden = false;
-    [self hideEver];
+    
 }
 
 - (IBAction)regButton:(UIButton *)sender {
@@ -446,6 +467,27 @@
     monthYeah = [formatter stringFromDate:bd];
     NSLog(@"%@", monthYeah);
     
+    
+    self.specialistPickerView.hidden = true;
+    self.toolbar.hidden = true;
+    self.special.text = self.namesSpec[[self.specialistPickerView selectedRowInComponent:0] + 1];
+    for (NSDictionary *key in self.dictSpec) {
+        if ([[key objectForKey:@"doctorName"] isEqualToString:self.namesSpec[[self.specialistPickerView selectedRowInComponent:0] + 1]]) {
+            job = [key objectForKey:@"id"];
+            break;
+        }
+    }
+    NSLog(@"%d %@", (int)[self.specialistPickerView selectedRowInComponent:0], self.namesSpec[[self.specialistPickerView selectedRowInComponent:0]]);
+    [self hideEver];
+    [self.scrollView addGestureRecognizer:tap];
+    
+}
+
+- (IBAction)showPicker:(UIButton *)sender {
+    
+    self.specialistPickerView.hidden = false;
+    self.toolbar.hidden = false;
+    
 }
 
 - (NSString *)urlencode:(NSString *) input {
@@ -480,8 +522,11 @@
         for (NSDictionary *key in self.dictSpec) {
             [self.namesSpec addObject:[key objectForKey:@"doctorName"]];
         }
-        [self setUpQuickSearch:self.namesSpec];
-        self.FilteredResults = [self.quickSearch filteredObjectsWithValue:nil];
+        self.namesSpec = [[self.namesSpec sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] mutableCopy];
+//        [self setUpQuickSearch:self.namesSpec];
+//        self.FilteredResults = [self.quickSearch filteredObjectsWithValue:nil];
+        
+        [self.specialistPickerView reloadAllComponents];
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         NSLog(@"%@",error.localizedDescription);
     }];
@@ -497,6 +542,8 @@
         [self.cityText resignFirstResponder];
         [self.special resignFirstResponder];
         self.tableView.hidden = true;
+        self.specialistPickerView.hidden = true;
+        self.toolbar.hidden = true;
         
         CGPoint point = self.scrollView.frame.origin;
         if (self.view.frame.size.height == 568) {
@@ -509,6 +556,30 @@
         
     }];
 }
+
+// returns the number of 'columns' to display.
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    
+    return 1;
+    
+}
+
+// returns the # of rows in each component..
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    
+    return [self.namesSpec count] - 1;
+    
+}
+
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    
+    return self.namesSpec[row + 1];
+    
+}
+
+
+
 
 
 @end

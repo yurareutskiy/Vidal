@@ -391,10 +391,6 @@
     
     ((DocumentViewController *)self.childViewControllers.lastObject).latName.text = [self clearString:[[[self.molecule objectAtIndex:0] objectAtIndex:2] valueForKey:@"lowercaseString"]];
     ((DocumentViewController *)self.childViewControllers.lastObject).name.text = [self clearString:[[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"]];
-    if (![[[self.molecule objectAtIndex:0] objectAtIndex:6] isEqualToString:@""]) {
-        ((DocumentViewController *)self.childViewControllers.lastObject).registred.text = [self clearString:[[self.molecule objectAtIndex:6] objectAtIndex:2]];
-        [toDelete addIndex:2];
-    }
 
         
     [toDelete addIndex:0];

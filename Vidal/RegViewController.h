@@ -11,7 +11,7 @@
 #import "AFNetworking.h"
 #import "IMQuickSearch.h"
 
-@interface RegViewController : UIViewController<UIScrollViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface RegViewController : UIViewController<UIScrollViewDelegate, UITextFieldDelegate, UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *backView;
 @property (weak, nonatomic) IBOutlet UIPickerView *specialistPickerView;
@@ -50,5 +50,7 @@
 
 - (IBAction)backButton:(id)sender;
 - (IBAction)getData:(UIBarButtonItem *)sender;
+
+- (IBAction)showPicker:(UIButton *)sender;
 
 @end
