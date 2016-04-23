@@ -137,38 +137,41 @@
 }
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    selectedRowIndex = [indexPath copy];
     
-    [self.tableView beginUpdates];
+    [self performSegueWithIdentifier:@"toCompany" sender:self];
     
-    ProducersTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-    
-//    sizeCell = [self labelSize:cell.nameHid.text] + [self labelSize:cell.countryHid.text] + cell.listBtn.frame.size.height + [self labelSize:cell.addressHid.text] + [self labelSize:cell.emailHid.text] + [self labelSize:cell.phoneHid.text] + 25;
-    
-    sizeCell = 10.0 + 70.0 + 15.0 + 60.0 + 15.0 + [self labelSize:cell.addressHid.text] + 20.0 + [self labelSize:cell.emailHid.text] + 5.0 + [self labelSize:cell.phoneHid.text] + 5.0;
-    
-    NSInteger indexOfID = [self.dbManager.arrColumnNames indexOfObject:@"InfoPageID"];
-    
-    [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfID] forKey:@"info"];
-    
-    if (!open) {
-        open = true;
-    } else {
-        open = false;
-    }
-    
-//    cell.nameUnhid.hidden = true;
-//    cell.countryUnhid.hidden = true;
+//    selectedRowIndex = [indexPath copy];
 //    
-//    cell.nameHid.hidden = false;
-//    cell.countryHid.hidden = false;
-//    cell.image.hidden = false;
-//    cell.addressHid.hidden = false;
-//    cell.emailHid.hidden = false;
-//    cell.phoneHid.hidden = false;
-//    cell.listBtn.hidden = false;
-    
-    [self.tableView endUpdates];
+//    [self.tableView beginUpdates];
+//    
+//    ProducersTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+//    
+////    sizeCell = [self labelSize:cell.nameHid.text] + [self labelSize:cell.countryHid.text] + cell.listBtn.frame.size.height + [self labelSize:cell.addressHid.text] + [self labelSize:cell.emailHid.text] + [self labelSize:cell.phoneHid.text] + 25;
+//    
+//    sizeCell = 10.0 + 70.0 + 15.0 + 60.0 + 15.0 + [self labelSize:cell.addressHid.text] + 20.0 + [self labelSize:cell.emailHid.text] + 5.0 + [self labelSize:cell.phoneHid.text] + 5.0;
+//    
+//    NSInteger indexOfID = [self.dbManager.arrColumnNames indexOfObject:@"InfoPageID"];
+//    
+//    [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfID] forKey:@"info"];
+//    
+//    if (!open) {
+//        open = true;
+//    } else {
+//        open = false;
+//    }
+//    
+////    cell.nameUnhid.hidden = true;
+////    cell.countryUnhid.hidden = true;
+////    
+////    cell.nameHid.hidden = false;
+////    cell.countryHid.hidden = false;
+////    cell.image.hidden = false;
+////    cell.addressHid.hidden = false;
+////    cell.emailHid.hidden = false;
+////    cell.phoneHid.hidden = false;
+////    cell.listBtn.hidden = false;
+//    
+//    [self.tableView endUpdates];
     
 
 }

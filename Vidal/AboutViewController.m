@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    ind = 0;
+    ind = 2;
     
     ud = [NSUserDefaults standardUserDefaults];
     [ud setValue:@"about" forKey:@"howTo"];
@@ -52,9 +52,9 @@
     
     [self loadData:request];
     
-    [self.image setImage:[UIImage imageWithData:[self.results[0] valueForKey:@"image"]]];
-    [self.name setText:[self.results[0] valueForKey:@"nameOf"]];
-    [self.drug setText:[self.results[0] valueForKey:@"drug"]];
+    [self.image setImage:[UIImage imageWithData:[self.results[2] valueForKey:@"image"]]];
+    [self.name setText:[self.results[2] valueForKey:@"nameOf"]];
+    [self.drug setText:[self.results[2] valueForKey:@"drug"]];
     
     // Do any additional setup after loading the view.
 }

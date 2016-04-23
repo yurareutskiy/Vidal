@@ -28,7 +28,25 @@
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
 
+    [self.delegate perfSeg:self];
+    
     // Configure the view for the selected state
+}
+
+- (void) rotateImage: (double) degree {
+    
+    [UIView animateWithDuration:0.3 animations:^{
+        self.image.transform = CGAffineTransformMakeRotation(degree);
+    }];
+}
+
+-(void)prepareForReuse {
+    NSLog(@"%@", self.expanded);
+    if ([self.expanded isEqualToString:@"0"]){
+        [self rotateImage:0];
+    } else if ([self.expanded isEqualToString:@"1"]) {
+        [self rotateImage:M_PI_2];
+    }
 }
 
 @end

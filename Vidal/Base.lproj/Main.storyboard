@@ -55,6 +55,11 @@
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
             <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
+            <string>LucidaGrande</string>
         </mutableArray>
         <mutableArray key="lucida_grande_bold.ttf">
             <string>LucidaGrande-Bold</string>
@@ -282,6 +287,7 @@
                     <navigationItem key="navigationItem" id="Gi4-Zx-SMS"/>
                     <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>
                     <connections>
+                        <outlet property="email" destination="j5S-SN-Lw9" id="aY3-9h-z9g"/>
                         <outlet property="emailInput" destination="rhb-am-lck" id="cpT-A4-hTc"/>
                         <outlet property="lead" destination="cuH-73-Wcc" id="NCL-dY-OxJ"/>
                         <outlet property="passInput" destination="xEr-bK-ug9" id="ooy-nL-wrO"/>
@@ -1781,6 +1787,7 @@
                     <connections>
                         <outlet property="tableView" destination="gxo-HG-hvf" id="sd7-L7-uvN"/>
                         <segue destination="jFz-ci-plm" kind="show" identifier="toList" id="06Y-aa-wrD"/>
+                        <segue destination="Nmi-tU-4XC" kind="show" identifier="toCompany" id="rW2-fw-XxZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qgt-hX-kyc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1802,15 +1809,8 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0ba-nE-HXd">
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Компания в России" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QJP-gW-2Rt">
-                                        <rect key="frame" x="20" y="20" width="561" height="21"/>
-                                        <animations/>
-                                        <fontDescription key="fontDescription" name="LucidaGrande-Bold" family="Lucida Grande" pointSize="17"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XgV-TR-9hg">
-                                        <rect key="frame" x="20" y="61" width="561" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XgV-TR-9hg">
+                                        <rect key="frame" x="20" y="20" width="560" height="16"/>
                                         <animations/>
                                         <mutableString key="text">Информация о препаратах, отпускаемых по рецепту, размещенная в приложении, предназначена только для специалистов. Информация, содержащаяся в приложении, не должна использоваться пациентами для принятия самостоятельного решения о применении представленных лекарственных препаратов и не может служить заменой очной консультации врача.</mutableString>
                                         <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="17"/>
@@ -1820,13 +1820,9 @@
                                 </subviews>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstItem="QJP-gW-2Rt" firstAttribute="leading" secondItem="0ba-nE-HXd" secondAttribute="leading" constant="20" id="72x-Ot-EfO"/>
+                                    <constraint firstItem="XgV-TR-9hg" firstAttribute="centerX" secondItem="0ba-nE-HXd" secondAttribute="centerX" id="4sK-Tm-PYv"/>
                                     <constraint firstAttribute="bottom" secondItem="XgV-TR-9hg" secondAttribute="bottom" constant="20" id="7WV-XP-DgO"/>
-                                    <constraint firstAttribute="trailing" secondItem="QJP-gW-2Rt" secondAttribute="trailing" constant="20" id="BEs-x8-rNE"/>
-                                    <constraint firstItem="XgV-TR-9hg" firstAttribute="top" secondItem="QJP-gW-2Rt" secondAttribute="bottom" constant="20" id="Ccc-hq-wLL"/>
-                                    <constraint firstItem="QJP-gW-2Rt" firstAttribute="centerX" secondItem="0ba-nE-HXd" secondAttribute="centerX" id="bON-bT-2dJ"/>
-                                    <constraint firstItem="QJP-gW-2Rt" firstAttribute="top" secondItem="0ba-nE-HXd" secondAttribute="top" constant="20" id="d26-PP-Bhh"/>
-                                    <constraint firstItem="XgV-TR-9hg" firstAttribute="top" secondItem="QJP-gW-2Rt" secondAttribute="bottom" constant="20" id="eWh-Zy-vFR"/>
+                                    <constraint firstItem="XgV-TR-9hg" firstAttribute="top" secondItem="0ba-nE-HXd" secondAttribute="top" constant="20" id="Jrj-3e-Oh7"/>
                                     <constraint firstItem="XgV-TR-9hg" firstAttribute="leading" secondItem="0ba-nE-HXd" secondAttribute="leading" constant="20" id="g1R-uG-cz0"/>
                                     <constraint firstAttribute="trailing" secondItem="XgV-TR-9hg" secondAttribute="trailing" constant="20" id="qhu-YO-CZS"/>
                                 </constraints>
@@ -1897,17 +1893,23 @@ Lactobacillus acidophilus и другие.</string>
                                         <color key="textColor" red="0.74509803921568629" green="0.74509803921568629" blue="0.74509803921568629" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="At8-ML-VGa">
-                                        <rect key="frame" x="30" y="130" width="14" height="31"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="At8-ML-VGa">
+                                        <rect key="frame" x="15" y="130" width="40" height="31"/>
                                         <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="P9C-Pk-QNm"/>
+                                        </constraints>
                                         <state key="normal" image="arrowLeftRed"/>
                                         <connections>
                                             <action selector="left:" destination="ir5-gk-GIB" eventType="touchUpInside" id="sQk-zM-ATB"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CKf-rP-oPZ">
-                                        <rect key="frame" x="556" y="130" width="14" height="31"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CKf-rP-oPZ">
+                                        <rect key="frame" x="545" y="130" width="40" height="31"/>
                                         <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="adX-Eo-Syk"/>
+                                        </constraints>
                                         <state key="normal" image="rightArrowRed"/>
                                         <connections>
                                             <action selector="right:" destination="ir5-gk-GIB" eventType="touchUpInside" id="3BH-iY-5Ri"/>
@@ -1928,7 +1930,7 @@ Lactobacillus acidophilus и другие.</string>
                                 </subviews>
                                 <animations/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="CKf-rP-oPZ" secondAttribute="trailing" constant="30" id="5oB-bV-PZv"/>
+                                    <constraint firstAttribute="trailing" secondItem="CKf-rP-oPZ" secondAttribute="trailing" constant="15" id="5oB-bV-PZv"/>
                                     <constraint firstItem="bMn-Xp-X7Q" firstAttribute="leading" secondItem="XjF-h0-rUk" secondAttribute="leading" constant="20" id="6Ve-pq-XWF"/>
                                     <constraint firstAttribute="trailing" secondItem="gi5-2M-9S1" secondAttribute="trailing" constant="20" id="8ob-Ss-v3L"/>
                                     <constraint firstItem="NTb-Dk-uuN" firstAttribute="top" secondItem="b9e-Al-j9y" secondAttribute="bottom" constant="15" id="CR3-uh-BIj"/>
@@ -1948,7 +1950,7 @@ Lactobacillus acidophilus и другие.</string>
                                     <constraint firstItem="CKf-rP-oPZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NTb-Dk-uuN" secondAttribute="trailing" constant="15" id="a8u-Yy-pCO"/>
                                     <constraint firstItem="bMn-Xp-X7Q" firstAttribute="top" secondItem="XjF-h0-rUk" secondAttribute="top" constant="15" id="aBA-oW-SsW"/>
                                     <constraint firstItem="NTb-Dk-uuN" firstAttribute="centerY" secondItem="At8-ML-VGa" secondAttribute="centerY" id="bfu-R0-aJU"/>
-                                    <constraint firstItem="At8-ML-VGa" firstAttribute="leading" secondItem="XjF-h0-rUk" secondAttribute="leading" constant="30" id="cfo-1z-wQ7"/>
+                                    <constraint firstItem="At8-ML-VGa" firstAttribute="leading" secondItem="XjF-h0-rUk" secondAttribute="leading" constant="15" id="cfo-1z-wQ7"/>
                                     <constraint firstItem="bMn-Xp-X7Q" firstAttribute="centerX" secondItem="XjF-h0-rUk" secondAttribute="centerX" id="jQa-5G-Mb1"/>
                                     <constraint firstAttribute="trailing" secondItem="b9e-Al-j9y" secondAttribute="trailing" constant="20" id="jWU-6C-E8T"/>
                                     <constraint firstItem="F9D-U7-BZw" firstAttribute="top" secondItem="NTb-Dk-uuN" secondAttribute="bottom" constant="15" id="l8X-Ez-41h"/>
@@ -2012,7 +2014,111 @@ Lactobacillus acidophilus и другие.</string>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QSJ-Pv-PoD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5382" y="1484"/>
+            <point key="canvasLocation" x="5316" y="1724"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="Eq7-8M-07e">
+            <objects>
+                <viewController id="Nmi-tU-4XC" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="NNT-Rc-tYE"/>
+                        <viewControllerLayoutGuide type="bottom" id="fuh-yH-KCb"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hOL-C5-WO7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IO4-j0-r6q">
+                                <rect key="frame" x="170" y="105.5" width="55" height="15"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="16"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3m7-7I-CMV">
+                                <rect key="frame" x="0.0" y="157" width="600" height="60"/>
+                                <animations/>
+                                <color key="backgroundColor" red="0.73333333329999995" green="0.0" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="08x-A9-Yo7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="15"/>
+                                <state key="normal" title="Список препаратов">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="toListDrugs:" destination="ntv-na-WlI" eventType="touchUpInside" id="szR-Nq-VbP"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="87A-93-DT1">
+                                <rect key="frame" x="18" y="285" width="564" height="14"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pKU-Jj-08m">
+                                <rect key="frame" x="18" y="232" width="564" height="14"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cFB-7t-4SZ">
+                                <rect key="frame" x="170" y="79" width="55" height="18.5"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="LucidaGrande-Bold" family="Lucida Grande" pointSize="20"/>
+                                <color key="textColor" red="0.71764705880000002" green="0.0" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I0c-C1-3Qr">
+                                <rect key="frame" x="18" y="266" width="564" height="14"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="15"/>
+                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takedaLogo" translatesAutoresizingMaskIntoConstraints="NO" id="TlV-RB-zbf">
+                                <rect key="frame" x="30" y="74" width="130" height="101"/>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="130" id="YZ9-wM-MiR"/>
+                                    <constraint firstAttribute="height" constant="70" id="rYP-Jj-MoR"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="rYP-Jj-MoR"/>
+                                    </mask>
+                                </variation>
+                            </imageView>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="I0c-C1-3Qr" firstAttribute="top" secondItem="pKU-Jj-08m" secondAttribute="bottom" constant="20" id="09a-Qw-0nS"/>
+                            <constraint firstItem="cFB-7t-4SZ" firstAttribute="leading" secondItem="TlV-RB-zbf" secondAttribute="trailing" constant="10" id="5ur-fk-QPr"/>
+                            <constraint firstItem="87A-93-DT1" firstAttribute="top" secondItem="I0c-C1-3Qr" secondAttribute="bottom" constant="5" id="8jv-ZR-S2H"/>
+                            <constraint firstItem="TlV-RB-zbf" firstAttribute="top" secondItem="NNT-Rc-tYE" secondAttribute="bottom" constant="10" id="C1I-aF-A1E"/>
+                            <constraint firstItem="cFB-7t-4SZ" firstAttribute="top" secondItem="NNT-Rc-tYE" secondAttribute="bottom" constant="15" id="HDF-v7-pNG"/>
+                            <constraint firstItem="IO4-j0-r6q" firstAttribute="trailing" secondItem="cFB-7t-4SZ" secondAttribute="trailing" id="Id3-VD-kmx"/>
+                            <constraint firstItem="TlV-RB-zbf" firstAttribute="leading" secondItem="hOL-C5-WO7" secondAttribute="leadingMargin" constant="10" id="Nkp-yV-8Yd"/>
+                            <constraint firstItem="pKU-Jj-08m" firstAttribute="top" secondItem="3m7-7I-CMV" secondAttribute="bottom" constant="15" id="aC9-c7-tvc"/>
+                            <constraint firstItem="3m7-7I-CMV" firstAttribute="top" secondItem="TlV-RB-zbf" secondAttribute="bottom" constant="15" id="eSw-AE-Dfa"/>
+                            <constraint firstItem="3m7-7I-CMV" firstAttribute="top" relation="greaterThanOrEqual" secondItem="IO4-j0-r6q" secondAttribute="bottom" constant="15" id="jlv-Lz-IsK"/>
+                            <constraint firstItem="IO4-j0-r6q" firstAttribute="leading" secondItem="cFB-7t-4SZ" secondAttribute="leading" id="sEn-T3-YrE"/>
+                            <constraint firstItem="cFB-7t-4SZ" firstAttribute="leading" secondItem="TlV-RB-zbf" secondAttribute="trailing" constant="10" id="tid-3a-bsp"/>
+                            <constraint firstItem="IO4-j0-r6q" firstAttribute="top" secondItem="cFB-7t-4SZ" secondAttribute="bottom" constant="8" id="veR-hC-kgU"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="5ur-fk-QPr"/>
+                            </mask>
+                        </variation>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ZJH-5c-XhB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="5280" y="1147"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="K33-ml-dh3">
@@ -4395,6 +4501,11 @@ Lactobacillus acidophilus и другие.</string>
                             <constraint firstAttribute="trailingMargin" secondItem="mZ9-6w-jLi" secondAttribute="trailing" id="yPo-TT-uVQ"/>
                         </constraints>
                         <variation key="default">
+                            <mask key="subviews">
+                                <exclude reference="CgU-xy-mHS"/>
+                                <exclude reference="sFm-Ek-COx"/>
+                                <exclude reference="MRg-zN-WVc"/>
+                            </mask>
                             <mask key="constraints">
                                 <exclude reference="sOf-Pj-mV4"/>
                             </mask>
@@ -4433,7 +4544,7 @@ Lactobacillus acidophilus и другие.</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pharmaCell" id="a8M-rX-p3K" customClass="PharmaTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="60"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a8M-rX-p3K" id="QUp-yE-pG5">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
@@ -4473,7 +4584,7 @@ Lactobacillus acidophilus и другие.</string>
                                     <segue destination="sbh-iQ-PXQ" kind="embed" id="Eqj-Sr-YVk"/>
                                 </connections>
                             </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WsL-vn-b9G">
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WsL-vn-b9G">
                                 <rect key="frame" x="0.0" y="124" width="600" height="476"/>
                                 <animations/>
                                 <connections>
@@ -4913,10 +5024,10 @@ Lactobacillus acidophilus и другие.</string>
         <image name="vkLogo" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="06Y-aa-wrD"/>
         <segue reference="Spl-RC-YMp"/>
         <segue reference="SEA-Lc-XAD"/>
         <segue reference="U2K-4z-eWk"/>
         <segue reference="lKn-4N-Xsx"/>
-        <segue reference="A53-FK-YbD"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -212,10 +212,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     if (tableView.tag == 1) {
-    PharmaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pharmaCell"];
-    if (cell == nil) {
-        cell = [[PharmaTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-    };
+        PharmaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pharmaCell"];
+        if (cell == nil) {
+            cell = [[PharmaTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+        };
     
 //    NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"Продукт"];
         NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
@@ -224,23 +224,27 @@
         cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]]];
         [cell.name setTextColor:[UIColor blackColor]];
         
-    return cell;
+        return cell;
+        
     } else if (tableView.tag == 2 || tableView.tag == 3){
         
         if (self.molecule == nil) {
             return nil;
         }
         
-        DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"docCell"];
+        DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"docCell" forIndexPath:indexPath];
         if (cell == nil) {
             cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
         };
         
+        cell.delegate = self;
+        cell.expanded = @"0";
         cell.title.text = [self clearString:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
         cell.desc.text = [self clearString:[[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         return cell;
+        
     } else {
         return nil;
     }
@@ -285,8 +289,13 @@
         selectedRowIndex = [indexPath copy];
         if (!open) {
             open = true;
+            DocsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            [self perfSeg:cell];
+            
         } else {
             open = false;
+            DocsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+            [self perfSeg:cell];
         }
         
         UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.containerView.frame.size.width - 40, 0)];
@@ -309,6 +318,14 @@
         [tableView endUpdates];
     } else {
         NSLog(@"hello");
+    }
+}
+
+- (void) perfSeg:(DocsTableViewCell *)sender {
+    if (open) {
+        sender.image.transform = CGAffineTransformMakeRotation(M_PI_2);
+    } else {
+        sender.image.transform = CGAffineTransformMakeRotation(0.0);
     }
 }
 

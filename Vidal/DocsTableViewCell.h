@@ -8,9 +8,21 @@
 
 #import <UIKit/UIKit.h>
 
+@class DocsTableViewCell;
+@protocol DocsTableViewCellDelegate <NSObject>
+
+- (void) perfSeg: (DocsTableViewCell *) sender;
+
+@end
+
 @interface DocsTableViewCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *title;
 @property (weak, nonatomic) IBOutlet UILabel *desc;
 @property (strong, nonatomic) IBOutlet UIImageView *image;
+@property (weak, nonatomic) NSString *expanded;
+
+- (void) rotateImage: (double) degree;
+
+@property (nonatomic, weak) id <DocsTableViewCellDelegate> delegate;
 
 @end

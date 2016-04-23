@@ -20,6 +20,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *lead;
 @property (strong, nonatomic) IBOutlet UITextField *emailInput;
 @property (strong, nonatomic) IBOutlet UITextField *passInput;
+@property (weak, nonatomic) IBOutlet UILabel *email;
 
 @end
 
