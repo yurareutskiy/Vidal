@@ -73,8 +73,7 @@
     self.containerView.hidden = true;
     self.darkView.hidden = true;
     
-    [self loadData:@"Select Document.*, Molecule_Document.* FROM Document INNER JOIN Molecule_Document ON Molecule_Document.DocumentID = Document.DocumentID"];
-    
+    [self loadData:@"Select Document.*, Molecule_Document.*, ClinicoPhPointers.Name as Category FROM Document INNER JOIN Molecule_Document ON Molecule_Document.DocumentID = Document.DocumentID LEFT JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID LEFT JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID LEFT JOIN ClinicoPhPointers ON ClinicoPhPointers.ClPhPointerID = Document_ClPhPointers.SrcClPhPointerID"];
     
     for (int i = 0; i < [self.arrPeopleInfo count]; i++) {
         [self.hello1 addObject:[self.arrPeopleInfo[i] objectAtIndex:1]];
@@ -154,6 +153,8 @@
 
 - (void)tableView:(SLExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section
 {
+    
+    
     [ud setObject:result[section] forKey:@"workActive"];
     
     [self performSegueWithIdentifier:@"newWindow" sender:self];

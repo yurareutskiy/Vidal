@@ -57,7 +57,6 @@
 		52498BC41CB3FD4000E6B96B /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52498BC31CB3FD4000E6B96B /* ThirdViewController.m */; };
 		52498BC71CB3FD4C00E6B96B /* FourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52498BC61CB3FD4C00E6B96B /* FourthViewController.m */; };
 		524EDF951CB4E4E900A3BB2F /* DocsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 524EDF941CB4E4E900A3BB2F /* DocsTableViewCell.m */; };
-		524EDF991CB4E9EC00A3BB2F /* MoleculeDrugsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 524EDF981CB4E9EC00A3BB2F /* MoleculeDrugsViewController.m */; };
 		BF9A12221CBFE8EB00B65F68 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF9A12211CBFE8EB00B65F68 /* GoogleService-Info.plist */; };
 		E82C22A1236860E5691C38CA /* libPods-Vidal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 267537716EDB3475C0BE9A2D /* libPods-Vidal.a */; };
 /* End PBXBuildFile section */
@@ -172,8 +171,6 @@
 		52498BC61CB3FD4C00E6B96B /* FourthViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FourthViewController.m; sourceTree = "<group>"; };
 		524EDF931CB4E4E900A3BB2F /* DocsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocsTableViewCell.h; sourceTree = "<group>"; };
 		524EDF941CB4E4E900A3BB2F /* DocsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocsTableViewCell.m; sourceTree = "<group>"; };
-		524EDF971CB4E9EC00A3BB2F /* MoleculeDrugsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoleculeDrugsViewController.h; sourceTree = "<group>"; };
-		524EDF981CB4E9EC00A3BB2F /* MoleculeDrugsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoleculeDrugsViewController.m; sourceTree = "<group>"; };
 		639C2F57EA1C775AEEFEE2C9 /* Pods-Vidal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vidal.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vidal/Pods-Vidal.release.xcconfig"; sourceTree = "<group>"; };
 		BF9A12211CBFE8EB00B65F68 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -362,8 +359,6 @@
 				3A78F1261C92076D008C6BE5 /* FavouriteViewController.m */,
 				3A78F1281C920775008C6BE5 /* ReferenceViewController.h */,
 				3A78F1291C920775008C6BE5 /* ReferenceViewController.m */,
-				524EDF971CB4E9EC00A3BB2F /* MoleculeDrugsViewController.h */,
-				524EDF981CB4E9EC00A3BB2F /* MoleculeDrugsViewController.m */,
 				3AB2A3211CCCF50800731088 /* VidalViewController.h */,
 				3AB2A3221CCCF50800731088 /* VidalViewController.m */,
 			);
@@ -631,7 +626,6 @@
 				3A0D5CB01C9C4E57005E6976 /* NewsTableViewCell.m in Sources */,
 				3A0D5CA71C9C4C5A005E6976 /* DrugsTableViewCell.m in Sources */,
 				3A9E3FCE1C80AE330069BDFC /* main.m in Sources */,
-				524EDF991CB4E9EC00A3BB2F /* MoleculeDrugsViewController.m in Sources */,
 				3A78F11E1C92074B008C6BE5 /* ProducersViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

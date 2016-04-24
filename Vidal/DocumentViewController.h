@@ -17,5 +17,6 @@
 - (IBAction)toList:(UIButton *)sender;
 @property (strong, nonatomic) IBOutlet UILabel *latName;
 
+@property (strong, nonatomic) NSMutableArray *info;
 
 @end

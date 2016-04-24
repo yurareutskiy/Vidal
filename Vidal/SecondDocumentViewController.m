@@ -15,6 +15,7 @@
 @implementation SecondDocumentViewController {
     
     NSUserDefaults *ud;
+    NSMutableIndexSet *toDelete;
     
 }
 
@@ -25,8 +26,57 @@
     self.tableView.dataSource = self;
     
     ud = [NSUserDefaults standardUserDefaults];
+    toDelete = [NSMutableIndexSet indexSet];
     
     // Do any additional setup after loading the view.
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    
+            self.latName.text = [self clearString:[[[self.info objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"]];
+            self.name.text = [self clearString:[[[self.info objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"]];
+    
+            NSString *string = [self clearString:[[[self.info objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"]];
+            self.name.numberOfLines = 0;
+            self.name.text = string;
+            [self.name sizeToFit];
+    
+            if (![[[self.info objectAtIndex:0] objectAtIndex:2] isEqualToString:@""]) {
+                self.registred.text = [self clearString:[[self.info objectAtIndex:0] objectAtIndex:2]];
+                [toDelete addIndex:2];
+            } else {
+                [toDelete addIndex:2];
+            }
+    
+            for (NSUInteger i = 0; i < [[self.info objectAtIndex:0] count]; i++) {
+                if ([[[self.info objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
+                    || [[[self.info objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
+                    [toDelete addIndex:i];
+            }
+    
+            if ([((NSArray *)[ud objectForKey:@"favs"]) containsObject:[ud objectForKey:@"id"]]) {
+                NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:@"Препарат в избранном" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:187.0/255.0 green:0.0 blue:57.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
+    
+                [self.fav setAttributedTitle:resultText forState:UIControlStateNormal];
+                [self.fav setImage:[UIImage imageNamed:@"favRed"] forState:UIControlStateNormal];
+                self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0);
+            } else {
+                NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:@"Добавить в избранное" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
+    
+                [self.fav setAttributedTitle:resultText forState:UIControlStateNormal];
+                [self.fav setImage:[UIImage imageNamed:@"favGrey"] forState:UIControlStateNormal];
+                self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0);
+            }
+    
+    
+            [toDelete addIndex:0];
+            [toDelete addIndex:1];
+    
+            [[self.info objectAtIndex:0] removeObjectsAtIndexes:toDelete];
+//            [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
+    
+            [self.tableView reloadData];
+    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -91,14 +141,72 @@
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [[UITableViewCell alloc] init];
+    if (self.info == nil) {
+        return nil;
+    }
+    
+    DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"docCell" forIndexPath:indexPath];
+    if (cell == nil) {
+        cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
+    };
+    
+    cell.delegate = self;
+    cell.expanded = @"0";
+    cell.title.text = [self clearString:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
+    cell.desc.text = [self clearString:[[self.info objectAtIndex:0] objectAtIndex:indexPath.row]];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
+
 }
 
 - (IBAction)toInter:(UIButton *)sender {
     
     [ud setObject:self.name.text forKey:@"toInter"];
     [self performSegueWithIdentifier:@"knowAbout" sender:self];
+    
+}
+
+- (NSString *) clearString:(NSString *) input {
+    
+    NSString *text = input;
+    
+    NSRange range = NSMakeRange(0, 1);
+    text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
+    text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+    text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+    text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
+    text = [text stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
+    text = [text stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"&-nb-sp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"&ndash;" withString:@"–"];
+    text = [text stringByReplacingOccurrencesOfString:@"&mdash;" withString:@"–"];
+    text = [text stringByReplacingOccurrencesOfString:@"&ldquo;" withString:@"“"];
+    text = [text stringByReplacingOccurrencesOfString:@"&loz;" withString:@"◊"];
+    text = [text stringByReplacingOccurrencesOfString:@"&rdquo;" withString:@"”"];
+    text = [text stringByReplacingOccurrencesOfString:@"<SUP>&reg;</SUP>" withString:@"®"];
+    text = [text stringByReplacingOccurrencesOfString:@"<sup>&reg;</sup>" withString:@"®"];
+    text = [text stringByReplacingOccurrencesOfString:@"<P>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<B>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<I>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TR>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TD>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</P>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</B>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<BR />" withString:@"\n"];
+    text = [text stringByReplacingOccurrencesOfString:@"<FONT class=\"F7\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</FONT>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</I>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TR>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TD>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TABLE width=\"100%\" border=\"1\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</TABLE>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</SUB>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<SUB>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<P class=\"F7\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
+    
+    return text;
     
 }
 
