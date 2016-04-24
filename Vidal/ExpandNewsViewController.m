@@ -68,7 +68,7 @@
     }];
     [dataTask resume];
     
-    [super setLabel:@"Новости"];
+//    [super setLabel:@"Новости"];
     
     [self.backView setImage:[self imageWithImage:[UIImage imageNamed:@"back"] scaledToSize:CGSizeMake(15.0, 15.0)] forState:UIControlStateNormal];
     

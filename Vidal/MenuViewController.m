@@ -139,4 +139,9 @@
     
     [self performSegueWithIdentifier:@"toReg" sender:self];
 }
+
+- (IBAction)toVidal:(UIButton *)sender {
+    
+    [self performSegueWithIdentifier:@"toVidal" sender:self];
+}
 @end

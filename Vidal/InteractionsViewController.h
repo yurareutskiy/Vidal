@@ -9,7 +9,7 @@
 #import "ModelViewController.h"
 #import "IMQuickSearch.h"
 
-@interface InteractionsViewController : ModelViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate>
+@interface InteractionsViewController : ModelViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPickerViewDelegate>
 @property (nonatomic, strong) IMQuickSearch *quickSearch;
 @property (strong, nonatomic) IBOutlet UILabel *info1;
 @property (strong, nonatomic) IBOutlet UILabel *info2;
@@ -25,5 +25,10 @@
 @property (strong, nonatomic) IBOutlet UITextView *result;
 @property (strong, nonatomic) IBOutlet UIImageView *topImage;
 @property (weak, nonatomic) IBOutlet UILabel *lead;
+
+@property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
+@property (strong, nonatomic) IBOutlet UIPickerView *secondLinePicker;
+
+- (IBAction)getData:(UIBarButtonItem *)sender;
 
 @end

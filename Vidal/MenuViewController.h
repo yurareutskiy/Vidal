@@ -22,6 +22,7 @@
 - (IBAction)toFavourite:(UIButton *)sender;
 - (IBAction)toReference:(UIButton *)sender;
 - (IBAction)registration:(UIButton *)sender;
+- (IBAction)toVidal:(UIButton *)sender;
 
 @property (strong, nonatomic) IBOutlet UIImageView *news;
 @property (strong, nonatomic) IBOutlet UIImageView *drugs;

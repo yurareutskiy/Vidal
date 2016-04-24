@@ -57,4 +57,9 @@
 }
 */
 
+- (IBAction)change:(UIButton *)sender {
+    
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.vidal.ru/profile"]];
+    
+}
 @end

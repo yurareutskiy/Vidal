@@ -13,11 +13,6 @@
 
 - (void)awakeFromNib {
     
-    NSString *string = self.nameUnhid.text;
-    self.nameUnhid.numberOfLines = 0;
-    self.nameUnhid.text = string;
-    [self.nameUnhid sizeToFit];
-    
     NSString *string1 = self.nameHid.text;
     self.nameHid.numberOfLines = 0;
     self.nameHid.text = string1;

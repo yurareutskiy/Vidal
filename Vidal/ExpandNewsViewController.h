@@ -11,7 +11,7 @@
 #import "SocialNetworkManagerVC.h"
 #import "AFNetworking.h"
 
-@interface ExpandNewsViewController : ModelViewController
+@interface ExpandNewsViewController : UIViewController
 @property (strong, nonatomic) IBOutlet UILabel *newsText;
 - (IBAction)backAction:(UIButton *)sender;
 - (IBAction)shareNews:(UIButton *)sender;

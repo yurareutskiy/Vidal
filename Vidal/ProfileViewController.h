@@ -16,4 +16,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *city;
 @property (strong, nonatomic) IBOutlet UITextField *spec;
 
+- (IBAction)change:(UIButton *)sender;
+
 @end

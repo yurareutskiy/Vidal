@@ -24,6 +24,13 @@
     NSUserDefaults *ud;
     BOOL open;
     
+    NSString *nameToPass;
+    NSString *countryToPass;
+    NSString *addressToPass;
+    NSString *emailToPass;
+    NSString *phoneToPass;
+    UIImage *imageToPass;
+    
 }
 
 - (void)viewDidLoad {
@@ -70,21 +77,21 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    //check if the index actually exists
-    
-    
-    if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
-        if (open) {
-            return sizeCell;
-        } else {
-            return 90;
-        }
-    } else {
-        return 90;
-    }
-
-}
+//- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    //check if the index actually exists
+//    
+//    
+//    if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
+//        if (open) {
+//            return sizeCell;
+//        } else {
+//            return 90;
+//        }
+//    } else {
+//        return 90;
+//    }
+//
+//}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -95,20 +102,14 @@
     ProducersTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"producersCell" forIndexPath:indexPath];
     
     NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
-    NSInteger indexOfAddress = [self.dbManager.arrColumnNames indexOfObject:@"RusAddress"];
+
     NSInteger indexOfRusName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
-    NSInteger indexOfEmail = [self.dbManager.arrColumnNames indexOfObject:@"Email"];
-    NSInteger indexOfPhone = [self.dbManager.arrColumnNames indexOfObject:@"PhoneNumber"];
+
     NSInteger indexOfImage = [self.dbManager.arrColumnNames indexOfObject:@"Image"];
     
     // Set the loaded data to the appropriate cell labels.
-    cell.nameUnhid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]]];
-    cell.countryUnhid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfRusName]]];
     cell.nameHid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]]];
     cell.countryHid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfRusName]]];
-    cell.addressHid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfAddress]]];
-    cell.emailHid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEmail]]];
-    cell.phoneHid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfPhone]]];
     [cell.image setImage:[UIImage imageWithData:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfImage]]];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -138,6 +139,23 @@
 
 -(void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    ProducersTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
+    
+    NSInteger indexOfAddress = [self.dbManager.arrColumnNames indexOfObject:@"RusAddress"];
+    NSInteger indexOfEmail = [self.dbManager.arrColumnNames indexOfObject:@"Email"];
+    NSInteger indexOfPhone = [self.dbManager.arrColumnNames indexOfObject:@"PhoneNumber"];
+    
+    nameToPass = cell.nameHid.text;
+    countryToPass = cell.countryHid.text;
+    addressToPass = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfAddress]]];
+    emailToPass = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEmail]]];
+    phoneToPass = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfPhone]]];
+    imageToPass = cell.image.image;
+    
+    NSInteger indexOfID = [self.dbManager.arrColumnNames indexOfObject:@"InfoPageID"];
+    
+    [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfID] forKey:@"info"];
+    
     [self performSegueWithIdentifier:@"toCompany" sender:self];
     
 //    selectedRowIndex = [indexPath copy];
@@ -150,10 +168,8 @@
 //    
 //    sizeCell = 10.0 + 70.0 + 15.0 + 60.0 + 15.0 + [self labelSize:cell.addressHid.text] + 20.0 + [self labelSize:cell.emailHid.text] + 5.0 + [self labelSize:cell.phoneHid.text] + 5.0;
 //    
-//    NSInteger indexOfID = [self.dbManager.arrColumnNames indexOfObject:@"InfoPageID"];
-//    
-//    [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfID] forKey:@"info"];
-//    
+    
+//
 //    if (!open) {
 //        open = true;
 //    } else {
@@ -259,6 +275,22 @@
     text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
     
     return text;
+    
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"toCompany"]) {
+        CompanyViewController *cvc = [segue destinationViewController];
+        
+        cvc.name = nameToPass;
+        cvc.country = countryToPass;
+        cvc.address = addressToPass;
+        cvc.email = emailToPass;
+        cvc.phone = phoneToPass;
+        cvc.logo = imageToPass;
+    
+    }
     
 }
 

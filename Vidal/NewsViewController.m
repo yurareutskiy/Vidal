@@ -69,6 +69,10 @@
     
     cell.name.text = [[array objectAtIndex:indexPath.row] objectForKey:@"title"];
     
+    UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0.0, cell.frame.size.height - 1.0, self.view.frame.size.width + 5.0, 1.0)];
+    [line setBackgroundColor:[UIColor lightGrayColor]];
+    [cell addSubview:line];
+    
     NSDateFormatter *date = [[NSDateFormatter alloc] init];
     [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *dateNews = [date dateFromString:[[array objectAtIndex:indexPath.row] objectForKey:@"date"]];

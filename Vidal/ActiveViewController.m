@@ -418,6 +418,8 @@
     
     NSString *text = input;
     
+    NSRange range = NSMakeRange(0, 1);
+    text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];

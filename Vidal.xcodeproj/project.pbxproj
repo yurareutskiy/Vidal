@@ -51,6 +51,8 @@
 		3AA6AC391CBB0B35005AAD85 /* SearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AA6AC381CBB0B35005AAD85 /* SearchViewController.m */; };
 		3AAAA2C81C833FA3006DEE4E /* RegViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAAA2C71C833FA3006DEE4E /* RegViewController.m */; };
 		3AAAA2CB1C8384EB006DEE4E /* MainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AAAA2CA1C8384EB006DEE4E /* MainViewController.m */; };
+		3AB2A31F1CCCE8D000731088 /* CompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB2A31E1CCCE8D000731088 /* CompanyViewController.m */; };
+		3AB2A3231CCCF50800731088 /* VidalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB2A3221CCCF50800731088 /* VidalViewController.m */; };
 		52498BC11CB3FD3500E6B96B /* SecondPharmaViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52498BC01CB3FD3500E6B96B /* SecondPharmaViewController.m */; };
 		52498BC41CB3FD4000E6B96B /* ThirdViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52498BC31CB3FD4000E6B96B /* ThirdViewController.m */; };
 		52498BC71CB3FD4C00E6B96B /* FourthViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 52498BC61CB3FD4C00E6B96B /* FourthViewController.m */; };
@@ -157,6 +159,10 @@
 		3AAAA2C71C833FA3006DEE4E /* RegViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegViewController.m; sourceTree = "<group>"; };
 		3AAAA2C91C8384EB006DEE4E /* MainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MainViewController.h; sourceTree = "<group>"; };
 		3AAAA2CA1C8384EB006DEE4E /* MainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MainViewController.m; sourceTree = "<group>"; };
+		3AB2A31D1CCCE8D000731088 /* CompanyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompanyViewController.h; sourceTree = "<group>"; };
+		3AB2A31E1CCCE8D000731088 /* CompanyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompanyViewController.m; sourceTree = "<group>"; };
+		3AB2A3211CCCF50800731088 /* VidalViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VidalViewController.h; sourceTree = "<group>"; };
+		3AB2A3221CCCF50800731088 /* VidalViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VidalViewController.m; sourceTree = "<group>"; };
 		3AF95C141CA66DA900393C62 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		52498BBF1CB3FD3500E6B96B /* SecondPharmaViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondPharmaViewController.h; sourceTree = "<group>"; };
 		52498BC01CB3FD3500E6B96B /* SecondPharmaViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondPharmaViewController.m; sourceTree = "<group>"; };
@@ -230,6 +236,8 @@
 				3A8C251E1CB999AD00CFA905 /* SecondDocumentViewController.m */,
 				3A8C25211CBA2E8C00CFA905 /* ListOfViewController.h */,
 				3A8C25221CBA2E8C00CFA905 /* ListOfViewController.m */,
+				3AB2A31D1CCCE8D000731088 /* CompanyViewController.h */,
+				3AB2A31E1CCCE8D000731088 /* CompanyViewController.m */,
 			);
 			name = "From Main Screens";
 			sourceTree = "<group>";
@@ -356,6 +364,8 @@
 				3A78F1291C920775008C6BE5 /* ReferenceViewController.m */,
 				524EDF971CB4E9EC00A3BB2F /* MoleculeDrugsViewController.h */,
 				524EDF981CB4E9EC00A3BB2F /* MoleculeDrugsViewController.m */,
+				3AB2A3211CCCF50800731088 /* VidalViewController.h */,
+				3AB2A3221CCCF50800731088 /* VidalViewController.m */,
 			);
 			name = "Main Screens";
 			sourceTree = "<group>";
@@ -583,6 +593,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3AB2A31F1CCCE8D000731088 /* CompanyViewController.m in Sources */,
 				3A78F1271C92076D008C6BE5 /* FavouriteViewController.m in Sources */,
 				3AA6AC391CBB0B35005AAD85 /* SearchViewController.m in Sources */,
 				3A78F1151C920725008C6BE5 /* ActiveViewController.m in Sources */,
@@ -613,6 +624,7 @@
 				3A78F10F1C920701008C6BE5 /* NewsViewController.m in Sources */,
 				52498BC41CB3FD4000E6B96B /* ThirdViewController.m in Sources */,
 				3A8C251F1CB999AD00CFA905 /* SecondDocumentViewController.m in Sources */,
+				3AB2A3231CCCF50800731088 /* VidalViewController.m in Sources */,
 				3A1570551CAEA8F800D49C5E /* DBManager.m in Sources */,
 				3AAAA2C81C833FA3006DEE4E /* RegViewController.m in Sources */,
 				52498BC11CB3FD3500E6B96B /* SecondPharmaViewController.m in Sources */,

@@ -1,21 +1,14 @@
 //
-//  ProducersTableViewCell.h
+//  CompanyViewController.h
 //  Vidal
 //
-//  Created by Anton Scherbakov on 18/03/16.
+//  Created by Anton Scherbakov on 24/04/16.
 //  Copyright © 2016 StyleRU. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 
-@class ProducersTableViewCell;
-@protocol ProducersTableViewCellDelegate <NSObject>
-
-- (void) perfSeg: (ProducersTableViewCell *) sender;
-
-@end
-
-@interface ProducersTableViewCell : UITableViewCell
+@interface CompanyViewController : UIViewController
 
 @property (strong, nonatomic) IBOutlet UIImageView *image;
 @property (strong, nonatomic) IBOutlet UILabel *nameHid;
@@ -25,9 +18,13 @@
 @property (strong, nonatomic) IBOutlet UILabel *phoneHid;
 @property (strong, nonatomic) IBOutlet UIButton *listBtn;
 
-@property (nonatomic, weak) id <ProducersTableViewCellDelegate> delegate;
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *country;
+@property (strong, nonatomic) NSString *address;
+@property (strong, nonatomic) NSString *email;
+@property (strong, nonatomic) NSString *phone;
+@property (strong, nonatomic) UIImage *logo;
 
 - (IBAction)toListDrugs:(UIButton *)sender;
-
 
 @end

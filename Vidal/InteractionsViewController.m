@@ -37,10 +37,11 @@
     
     self.result.hidden = true;
     self.lead.hidden = true;
-//    self.result.numberOfLines = 0;
     [self.result sizeToFit];
     
-
+    self.secondLinePicker.delegate = self;
+    self.secondLinePicker.hidden = true;
+    self.toolbar.hidden = true;
     
     textField1 = false;
     textField2 = false;
@@ -99,12 +100,14 @@
     if ([ud objectForKey:@"toInter"]) {
         self.input.text = [ud objectForKey:@"toInter"];
         [self findFirstResult:[ud objectForKey:@"toInter"]];
-        [self setUpQuickSearch:self.hello2];
+//        [self setUpQuickSearch:self.hello2];
         self.tableView.hidden = true;
         self.secondInput.hidden = false;
         self.secondLine.hidden = false;
         self.secondLabel.hidden = false;
         self.lead.hidden = true;
+        self.toolbar.hidden = false;
+        self.secondLinePicker.hidden = false;
 
     }
 }
@@ -151,6 +154,7 @@
 - (void)updateTableViewWithNewResults:(NSArray *)results {
     self.FilteredResults = results;
     [self.tableView reloadData];
+    [self.secondLinePicker reloadAllComponents];
 }
 
 #pragma mark - TableView
@@ -169,11 +173,9 @@
     }
     
     // Set Content
-    NSString *title, *subtitle;
+    NSString *title;
     title = self.FilteredResults[indexPath.row];
-    subtitle = self.FilteredResults[indexPath.row];
     cell.textLabel.text = title;
-    cell.detailTextLabel.text = subtitle;
     
     // Return Cell
     return cell;
@@ -214,11 +216,7 @@
         [self setUpQuickSearch:self.hello2];
         // ИНОГДА ПАДАЕТ [;
     } else if (textField2) {
-        self.secondInput.text = self.FilteredResults[indexPath.row];
-        self.result.text = [self findSecondResult:self.FilteredResults[indexPath.row]];
-        self.result.hidden = false;
-        self.lead.hidden = false;
-        [self.secondInput resignFirstResponder];
+        
     }
     self.tableView.hidden = true;
     self.secondInput.hidden = false;
@@ -228,10 +226,28 @@
 
 }
 
+- (IBAction)getData:(UIBarButtonItem *)sender {
+    
+    self.secondInput.text = self.hello2[[self.secondLinePicker selectedRowInComponent:0]];
+    self.result.text = [self findSecondResult:self.hello2[[self.secondLinePicker selectedRowInComponent:0]]];
+    self.result.hidden = false;
+    self.lead.hidden = false;
+    [self.secondInput resignFirstResponder];
+    self.tableView.hidden = true;
+    self.secondInput.hidden = false;
+    self.secondLine.hidden = false;
+    self.secondLabel.hidden = false;
+    self.lead.hidden = false;
+    self.toolbar.hidden = true;
+    self.secondLinePicker.hidden = true;
+    
+}
+
 #pragma mark - TextField Delegate
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     self.tableView.hidden = true;
+    self.secondLinePicker.hidden = true;
     self.lead.hidden = false;
     return YES;
 }
@@ -244,13 +260,16 @@
         self.secondInput.text = @"";
         self.input.text = @"";
         self.result.text = @"";
+        self.tableView.hidden = false;
     } else if (textField.tag == 2) {
         textField2 = true;
         textField1 = false;
         self.secondInput.text = @"";
+        self.secondLinePicker.hidden = false;
+        self.toolbar.hidden = false;
     }
     [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
-    self.tableView.hidden = false;
+    
     self.lead.hidden = false;
     return YES;
 }
@@ -270,6 +289,8 @@
     [self.input resignFirstResponder];
     [self.secondInput resignFirstResponder];
     self.tableView.hidden = true;
+    self.secondLinePicker.hidden = true;
+    self.toolbar.hidden = true;
     
 }
 
@@ -337,6 +358,22 @@
     text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
     
     return text;
+    
+}
+
+// returns the number of 'columns' to display.
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 1;
+}
+
+// returns the # of rows in each component..
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return self.hello2.count;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    
+    return self.hello2[row];
     
 }
 
