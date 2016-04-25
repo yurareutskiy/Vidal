@@ -55,6 +55,13 @@
     
     [super setLabel:@"Производители"];
     
+    [ud removeObjectForKey:@"workWith"];
+    [ud removeObjectForKey:@"workActive"];
+    [ud removeObjectForKey:@"activeID"];
+    [ud removeObjectForKey:@"pharmaList"];
+    [ud removeObjectForKey:@"comp"];
+    [ud removeObjectForKey:@"from"];
+    
     
     
     // Do any additional setup after loading the view.

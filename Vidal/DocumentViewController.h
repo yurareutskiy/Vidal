@@ -10,6 +10,7 @@
 #import "FavouriteViewController.h"
 #import "DocsTableViewCell.h"
 #import "DBManager.h"
+#import "ListOfViewController.h"
 
 @interface DocumentViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
@@ -21,5 +22,6 @@
 
 @property (strong, nonatomic) NSMutableArray *info;
 @property (strong, nonatomic) NSMutableArray *columns;
+@property (strong, nonatomic) NSString *activeID;
 
 @end

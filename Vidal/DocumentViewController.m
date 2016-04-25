@@ -35,6 +35,11 @@
     
     // Do any additional setup after loading the view.
 }
+- (void) viewWillDisappear:(BOOL)animated {
+    if (self.isMovingFromParentViewController) {
+        [ud removeObjectForKey:@"activeID"];
+    }
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -43,6 +48,8 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     
+    if ([[ud valueForKey:@"from"] isEqualToString:@"active"]) {
+        
             self.latName.text = [[[self.info objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
     
             self.name.text = [[[self.info objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
@@ -66,7 +73,10 @@
             [self.columns removeObjectsAtIndexes:toDelete];
     
             [self.tableView reloadData];
-    
+        
+    } else if ([[ud valueForKey:@"from"] isEqualToString:@"drug"]) {
+        
+    }
 }
 
 /*
@@ -201,6 +211,18 @@
 - (IBAction)toList:(UIButton *)sender {
     
     [self performSegueWithIdentifier:@"toList" sender:self];
+    
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"toList"]) {
+        
+        ListOfViewController *lovc = [segue destinationViewController];
+        
+        lovc.activeID = self.activeID;
+        
+    }
     
 }
 

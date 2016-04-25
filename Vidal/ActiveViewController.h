@@ -12,6 +12,7 @@
 #import "DBManager.h"
 #import "DocumentViewController.h"
 #import "DocsTableViewCell.h"
+#import "ListOfViewController.h"
 
 @interface ActiveViewController : ModelViewController<SLExpandableTableViewDatasource, SLExpandableTableViewDelegate, UITableViewDataSource, UITableViewDelegate>
 

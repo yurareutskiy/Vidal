@@ -92,6 +92,13 @@
     
     self.navigationItem.rightBarButtonItem = self.searchButton;
     
+    [ud removeObjectForKey:@"workActive"];
+    [ud removeObjectForKey:@"activeID"];
+    [ud removeObjectForKey:@"pharmaList"];
+    [ud removeObjectForKey:@"comp"];
+    [ud removeObjectForKey:@"info"];
+    [ud removeObjectForKey:@"from"];
+    
     // Do any additional setup after loading the view.
 }
 
@@ -156,6 +163,7 @@
     [ud setObject:result[section] forKey:@"workWith"];
     
     [self performSegueWithIdentifier:@"newWindow" sender:self];
+    
 //        [self.expandableSections addIndex:section];
 //        [tableView expandSection:section animated:YES];
 
@@ -419,6 +427,17 @@
     [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
     
     [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
+    
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"newWindow"]) {
+        
+        ListOfViewController *lovc = [segue destinationViewController];
+        
+        lovc.dataBase = self.dbManager.arrColumnNames;
+    }
     
 }
 

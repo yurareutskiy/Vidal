@@ -11,14 +11,13 @@
 #import "PharmaTableViewCell.h"
 #import "SecondDocumentViewController.h"
 #import "DocumentViewController.h"
-#import "DocsTableViewCell.h"
 
-@interface ListOfViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate, DocsTableViewCellDelegate>
+@interface ListOfViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UIView *containerView;
-@property (strong, nonatomic) IBOutlet UIView *containerView2;
-@property (strong, nonatomic) IBOutlet UIView *darkView;
+
+@property (strong, nonatomic) NSMutableArray *dataBase;
+@property (strong, nonatomic) NSString *activeID;
 
 
 @end

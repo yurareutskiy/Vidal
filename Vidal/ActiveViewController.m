@@ -95,15 +95,24 @@
     //    self.navigationItem.rightBarButtonItem = self.searchButton;
     
     // Do any additional setup after loading the view.
+    
+    [ud removeObjectForKey:@"workWith"];
+    [ud removeObjectForKey:@"activeID"];
+    [ud removeObjectForKey:@"pharmaList"];
+    [ud removeObjectForKey:@"comp"];
+    [ud removeObjectForKey:@"info"];
+    [ud removeObjectForKey:@"from"];
+    
 }
 
 - (void) search {
     [self performSegueWithIdentifier:@"toSearch" sender:self];
 }
 
-- (void) viewDidAppear:(BOOL)animated {
+- (void) viewWillAppear:(BOOL)animated {
     
     [ud removeObjectForKey:@"workWith"];
+    [ud removeObjectForKey:@"activeID"];
     
     if (nextPls) {
         [ud setObject:nextPls forKey:@"molecule"];
@@ -459,6 +468,17 @@
     text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
     
     return text;
+    
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"newWindow"]) {
+        
+        ListOfViewController *lovc = [segue destinationViewController];
+        
+        lovc.dataBase = self.dbManager.arrColumnNames;
+    }
     
 }
 

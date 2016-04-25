@@ -64,6 +64,8 @@
         
         self.name.enabled = NO;
         self.navigationItem.leftBarButtonItem.enabled = NO;
+        self.revealViewController.panGestureRecognizer.enabled = NO;
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     } else {
         
         UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Архив скачался" message:@"Можете пользоваться приложением." preferredStyle:UIAlertControllerStyleAlert];
@@ -78,6 +80,8 @@
         
         self.name.enabled = YES;
         self.navigationItem.leftBarButtonItem.enabled = YES;
+        self.revealViewController.panGestureRecognizer.enabled = YES;
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }
     
 }

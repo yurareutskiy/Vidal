@@ -56,6 +56,13 @@
     [self.name setText:[self.results[2] valueForKey:@"nameOf"]];
     [self.drug setText:[self.results[2] valueForKey:@"drug"]];
     
+    [ud removeObjectForKey:@"workWith"];
+    [ud removeObjectForKey:@"workActive"];
+    [ud removeObjectForKey:@"activeID"];
+    [ud removeObjectForKey:@"pharmaList"];
+    [ud removeObjectForKey:@"info"];
+    [ud removeObjectForKey:@"from"];
+    
     // Do any additional setup after loading the view.
 }
 

@@ -68,6 +68,15 @@
     //    self.navigationItem.rightBarButtonItem = self.searchButton;
     
     // Do any additional setup after loading the view.
+    
+    [ud removeObjectForKey:@"workWith"];
+    [ud removeObjectForKey:@"workActive"];
+    [ud removeObjectForKey:@"activeID"];
+//    [ud removeObjectForKey:@"pharmaList"];
+    [ud removeObjectForKey:@"comp"];
+    [ud removeObjectForKey:@"info"];
+    [ud removeObjectForKey:@"from"];
+    
 }
 
 - (void) search {
