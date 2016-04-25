@@ -18,12 +18,9 @@
     [super viewDidLoad];
     
     self.text.delegate = self;
-//    self.text.text = @"http://webvidal.ru/";
-//    self.text.scrollEnabled = NO;
     self.text.editable = NO;
     self.text.selectable = YES;
     self.text.dataDetectorTypes = UIDataDetectorTypeLink;
-//    self.text.attributedText = [self clearString:[self.text.attributedText mutableCopy]];
     
     // Do any additional setup after loading the view.
 }

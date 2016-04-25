@@ -22,7 +22,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *secondLabel;
 @property (strong, nonatomic) IBOutlet UITextField *secondInput;
 @property (strong, nonatomic) IBOutlet UIView *secondLine;
-@property (strong, nonatomic) IBOutlet UITextView *result;
+@property (strong, nonatomic) IBOutlet UILabel *result;
 @property (strong, nonatomic) IBOutlet UIImageView *topImage;
 @property (weak, nonatomic) IBOutlet UILabel *lead;
 

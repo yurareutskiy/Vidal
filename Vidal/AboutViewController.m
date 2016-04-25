@@ -27,7 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    ind = 2;
+    ind = 4;
     
     ud = [NSUserDefaults standardUserDefaults];
     [ud setValue:@"about" forKey:@"howTo"];
@@ -47,14 +47,14 @@
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
-    NSString *request = @"SELECT Document.RusName, Document.CompiledComposition, Picture.Image FROM Document INNER JOIN Document_InfoPage ON Document.DocumentID = Document_InfoPage.DocumentID INNER JOIN InfoPage ON Document_InfoPage.InfoPageID = InfoPage.InfoPageID INNER JOIN Product ON Document.DocumentID = Product.DocumentID INNER JOIN Product_Picture ON Product.ProductID  = Product_Picture.ProductID INNER JOIN Picture ON Product_Picture.PictureID = Picture.PictureID WHERE InfoPage.InfoPageID = 63 GROUP BY Document.RusName"; // GROUP BY Product.DocumentID Аналогично при нажатии на кнопку список препаратов
+    NSString *request = @"SELECT Document.RusName, Document.CompiledComposition, Picture.Image FROM Document INNER JOIN Document_InfoPage ON Document.DocumentID = Document_InfoPage.DocumentID INNER JOIN InfoPage ON Document_InfoPage.InfoPageID = InfoPage.InfoPageID INNER JOIN Product ON Document.DocumentID = Product.DocumentID INNER JOIN Product_Picture ON Product.ProductID  = Product_Picture.ProductID INNER JOIN Picture ON Product_Picture.PictureID = Picture.PictureID WHERE InfoPage.InfoPageID = 63 GROUP BY Document.DocumentID"; // GROUP BY Product.DocumentID Аналогично при нажатии на кнопку список препаратов
 //    NSString *request = @"SELECT * FROM Document INNER JOIN Document_InfoPage ON Document.DocumentID = Document_InfoPage.DocumentID WHERE Document_InfoPage.InfoPageID = 63";
     
     [self loadData:request];
     
-    [self.image setImage:[UIImage imageWithData:[self.results[2] valueForKey:@"image"]]];
-    [self.name setText:[self.results[2] valueForKey:@"nameOf"]];
-    [self.drug setText:[self.results[2] valueForKey:@"drug"]];
+    [self.image setImage:[UIImage imageWithData:[self.results[4] valueForKey:@"image"]]];
+    [self.name setText:[self.results[4] valueForKey:@"nameOf"]];
+    [self.drug setText:[self.results[4] valueForKey:@"drug"]];
     
     [ud removeObjectForKey:@"workWith"];
     [ud removeObjectForKey:@"workActive"];

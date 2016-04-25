@@ -73,8 +73,15 @@
     self.containerView.hidden = true;
     self.darkView.hidden = true;
     
-    [self loadData:@"Select Document.*, Molecule_Document.*, ClinicoPhPointers.Name as Category FROM Document INNER JOIN Molecule_Document ON Molecule_Document.DocumentID = Document.DocumentID LEFT JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID LEFT JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID LEFT JOIN ClinicoPhPointers ON ClinicoPhPointers.ClPhPointerID = Document_ClPhPointers.SrcClPhPointerID"];
-    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        [self loadData:@"Select Document.*, Molecule_Document.*, ClinicoPhPointers.Name as Category FROM Document INNER JOIN Molecule_Document ON Molecule_Document.DocumentID = Document.DocumentID LEFT JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID LEFT JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID LEFT JOIN ClinicoPhPointers ON ClinicoPhPointers.ClPhPointerID = Document_ClPhPointers.SrcClPhPointerID"];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        });
+    });
+
     for (int i = 0; i < [self.arrPeopleInfo count]; i++) {
         [self.hello1 addObject:[self.arrPeopleInfo[i] objectAtIndex:1]];
     }

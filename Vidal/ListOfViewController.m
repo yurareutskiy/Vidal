@@ -61,11 +61,9 @@
         self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[ud valueForKey:@"pharmaList"]];
         
     } else if ([ud objectForKey:@"comp"]) {
-        req = [NSString stringWithFormat:@"SELECT Product.DocumentID,  Product.RusName AS 'Продукт' FROM Product WHERE Product.CompanyID = %@ GROUP BY Product.DocumentID", [ud objectForKey:@"comp"]];
+        req = [NSString stringWithFormat:@"SELECT Document.DocumentID, Document.RusName, Document.CompiledComposition, Picture.Image FROM Document INNER JOIN Document_InfoPage ON Document.DocumentID = Document_InfoPage.DocumentID INNER JOIN InfoPage ON Document_InfoPage.InfoPageID = InfoPage.InfoPageID INNER JOIN Product ON Document.DocumentID = Product.DocumentID INNER JOIN Product_Picture ON Product.ProductID  = Product_Picture.ProductID INNER JOIN Picture ON Product_Picture.PictureID = Picture.PictureID WHERE InfoPage.InfoPageID = 63 GROUP BY Document.DocumentID"];
         
-        [self loadData:req];
-    } else if ([ud objectForKey:@"info"]) {
-        req = [NSString stringWithFormat:@"SELECT * FROM Document INNER JOIN Document_InfoPage ON Document.DocumentID = Document_InfoPage.DocumentID WHERE Document_InfoPage.InfoPageID = %@", [ud objectForKey:@"info"]];
+//        req = [NSString stringWithFormat:@"SELECT Product.DocumentID,  Product.RusName AS 'Продукт' FROM Product WHERE Product.CompanyID = %@ GROUP BY Product.DocumentID", [ud objectForKey:@"comp"]];
         
         [self loadData:req];
     } else if ([ud valueForKey:@"workWith"]) {
@@ -147,6 +145,10 @@
             cell.category.text = @"";
             
         } else if ([ud valueForKey:@"pharmaList"]) {
+            cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]]];
+            [cell.name setTextColor:[UIColor blackColor]];
+            cell.category.text = @"";
+        } else if ([ud valueForKey:@"comp"]) {
             cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]]];
             [cell.name setTextColor:[UIColor blackColor]];
             cell.category.text = @"";

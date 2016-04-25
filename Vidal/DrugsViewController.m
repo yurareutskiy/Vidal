@@ -63,7 +63,14 @@
 
     [super setLabel:@"Препараты"];
     
-    [self loadData:@"SELECT * FROM Document INNER JOIN Product ON Document.DocumentID = Product.DocumentID GROUP BY Product.RusName"];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        [self loadData:@"SELECT * FROM Document INNER JOIN Product ON Document.DocumentID = Product.DocumentID GROUP BY Product.RusName"];
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            [self.tableView reloadData];
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        });
+    });
     
     self.hello1 = [NSMutableArray array];
     
@@ -341,7 +348,7 @@
     }
 
     // Reload the table view.
-    [self.tableView reloadData];
+//    [self.tableView reloadData];
 }
 
 - (NSString *) clearString:(NSString *) input {

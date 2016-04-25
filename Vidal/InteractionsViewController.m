@@ -73,8 +73,13 @@
     self.secondInput.hidden = true;
     self.secondLine.hidden = true;
     self.secondLabel.hidden = true;
+    [self.input setTag:1];
     
     self.tableView.hidden = true;
+    self.tableView.frame = CGRectMake(0.0, self.input.frame.origin.y + self.input.frame.size.height, self.view.frame.size.width, self.view.frame.size.height - (self.input.frame.origin.y + self.input.frame.size.height));
+    
+
+    
     
     [self setUpQuickSearch:self.hello1];
     self.FilteredResults = [self.quickSearch filteredObjectsWithValue:nil];
@@ -217,6 +222,7 @@
         self.searchField.text = self.FilteredResults[indexPath.row];
         [self findFirstResult:self.FilteredResults[indexPath.row]];
         [self setUpQuickSearch:self.hello2];
+        
         // ИНОГДА ПАДАЕТ [;
     } else if (textField2) {
         
@@ -264,22 +270,29 @@
         self.input.text = @"";
         self.result.text = @"";
         self.tableView.hidden = false;
+        [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
+        return YES;
     } else if (textField.tag == 2) {
         textField2 = true;
         textField1 = false;
         self.secondInput.text = @"";
         self.secondLinePicker.hidden = false;
         self.toolbar.hidden = false;
+        self.lead.hidden = false;
+        [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
+        return NO;
+    } else {
+        return YES;
     }
-    [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
-    
-    self.lead.hidden = false;
-    return YES;
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
-    return YES;
+    if (textField.tag == 1) {
+        [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
