@@ -9,8 +9,10 @@
 #import "ModelViewController.h"
 #import "PharmaTableViewCell.h"
 #import "DBManager.h"
+#import "SWRevealViewController.h"
+#import "MenuViewController.h"
 
-@interface PharmaViewController : ModelViewController<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
+@interface PharmaViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 

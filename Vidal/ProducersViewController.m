@@ -127,14 +127,12 @@
 }
 
 -(void)loadData:(NSString *)req{
-    // Form the query.
-    NSString *query = [NSString stringWithFormat:req];
     
     // Get the results.
     if (self.arrPeopleInfo != nil) {
         self.arrPeopleInfo = nil;
     }
-    self.arrPeopleInfo = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:query]];
+    self.arrPeopleInfo = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
     
     // Reload the table view.
     [self.tableView reloadData];
@@ -164,38 +162,6 @@
     [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfID] forKey:@"info"];
     
     [self performSegueWithIdentifier:@"toCompany" sender:self];
-    
-//    selectedRowIndex = [indexPath copy];
-//    
-//    [self.tableView beginUpdates];
-//    
-//    ProducersTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-//    
-////    sizeCell = [self labelSize:cell.nameHid.text] + [self labelSize:cell.countryHid.text] + cell.listBtn.frame.size.height + [self labelSize:cell.addressHid.text] + [self labelSize:cell.emailHid.text] + [self labelSize:cell.phoneHid.text] + 25;
-//    
-//    sizeCell = 10.0 + 70.0 + 15.0 + 60.0 + 15.0 + [self labelSize:cell.addressHid.text] + 20.0 + [self labelSize:cell.emailHid.text] + 5.0 + [self labelSize:cell.phoneHid.text] + 5.0;
-//    
-    
-//
-//    if (!open) {
-//        open = true;
-//    } else {
-//        open = false;
-//    }
-//    
-////    cell.nameUnhid.hidden = true;
-////    cell.countryUnhid.hidden = true;
-////    
-////    cell.nameHid.hidden = false;
-////    cell.countryHid.hidden = false;
-////    cell.image.hidden = false;
-////    cell.addressHid.hidden = false;
-////    cell.emailHid.hidden = false;
-////    cell.phoneHid.hidden = false;
-////    cell.listBtn.hidden = false;
-//    
-//    [self.tableView endUpdates];
-    
 
 }
 

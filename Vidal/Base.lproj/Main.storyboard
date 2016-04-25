@@ -4013,43 +4013,13 @@ Lactobacillus acidophilus и другие.</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o34-Mj-V2T">
-                                <rect key="frame" x="300" y="44" width="300" height="50"/>
-                                <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="zBK-oe-MuT"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="Препараты">
-                                    <color key="titleColor" red="0.58039215690000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="toDrugs:" destination="Olq-6Q-xtB" eventType="touchUpInside" id="Wkk-Wj-xsp"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uJy-ke-hNJ">
-                                <rect key="frame" x="0.0" y="44" width="300" height="50"/>
-                                <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="lup-h6-Lgk"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                <state key="normal" title="Вещества">
-                                    <color key="titleColor" red="0.58039215690000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="toMolecule:" destination="Olq-6Q-xtB" eventType="touchUpInside" id="NDe-kE-9qk"/>
-                                </connections>
-                            </button>
-                            <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wO8-eY-JRB">
-                                <rect key="frame" x="20" y="94" width="560" height="426"/>
+                            <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wO8-eY-JRB">
+                                <rect key="frame" x="20" y="158" width="560" height="442"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="KhK-bn-mEC">
-                                        <rect key="frame" x="0.0" y="28" width="560" height="44"/>
+                                        <rect key="frame" x="0.0" y="92" width="560" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KhK-bn-mEC" id="5bQ-Sz-KCA">
                                             <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
@@ -4060,8 +4030,8 @@ Lactobacillus acidophilus и другие.</string>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mZ9-6w-jLi">
-                                <rect key="frame" x="20" y="94" width="560" height="426"/>
+                            <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mZ9-6w-jLi">
+                                <rect key="frame" x="20" y="158" width="560" height="442"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -4077,78 +4047,166 @@ Lactobacillus acidophilus и другие.</string>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view alpha="0.59999999999999998" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CgU-xy-mHS">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ca1-ZK-7gB">
+                                <rect key="frame" x="20" y="158" width="560" height="442"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.2196078431372549" green="0.2196078431372549" blue="0.2196078431372549" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sFm-Ek-COx">
-                                <rect key="frame" x="0.0" y="218" width="600" height="382"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="cV6-wI-QUe">
+                                        <rect key="frame" x="0.0" y="28" width="560" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cV6-wI-QUe" id="Meb-G9-pSQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G44-5j-ylM">
+                                <rect key="frame" x="20" y="158" width="560" height="442"/>
                                 <animations/>
-                                <connections>
-                                    <segue destination="2Fp-GW-eNp" kind="embed" id="lKn-4N-Xsx"/>
-                                </connections>
-                            </containerView>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MRg-zN-WVc">
-                                <rect key="frame" x="0.0" y="218" width="600" height="382"/>
-                                <animations/>
-                                <connections>
-                                    <segue destination="sbh-iQ-PXQ" kind="embed" id="SEA-Lc-XAD"/>
-                                </connections>
-                            </containerView>
-                            <searchBar contentMode="redraw" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a5O-tU-nQw">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="0zP-9w-VGn">
+                                        <rect key="frame" x="0.0" y="28" width="560" height="44"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0zP-9w-VGn" id="wgP-Gw-a3E">
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
+                                        </tableViewCellContentView>
+                                        <animations/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="a5O-tU-nQw">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <animations/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qp-qf-Vuk">
+                                <rect key="frame" x="0.0" y="108" width="600" height="50"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uJy-ke-hNJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="150" height="50"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="150" id="dbc-LW-4QC"/>
+                                            <constraint firstAttribute="height" constant="50" id="lup-h6-Lgk"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="Вещества">
+                                            <color key="titleColor" red="0.58039215690000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="toMolecule:" destination="Olq-6Q-xtB" eventType="touchUpInside" id="NDe-kE-9qk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o34-Mj-V2T">
+                                        <rect key="frame" x="150" y="0.0" width="150" height="50"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="zBK-oe-MuT"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="Препараты">
+                                            <color key="titleColor" red="0.58039215690000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="toDrugs:" destination="Olq-6Q-xtB" eventType="touchUpInside" id="Wkk-Wj-xsp"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ft3-PE-8bu">
+                                        <rect key="frame" x="300" y="0.0" width="150" height="50"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="RE8-u9-QM7"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal">
+                                            <string key="title">Фарм
+группы</string>
+                                            <color key="titleColor" red="0.58039215690000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="toPharma:" destination="Olq-6Q-xtB" eventType="touchUpInside" id="dcM-X4-Ygp"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="5Hl-iz-XF4">
+                                        <rect key="frame" x="450" y="0.0" width="150" height="50"/>
+                                        <animations/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="DqD-Ty-W6F"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                        <state key="normal" title="Производители">
+                                            <color key="titleColor" red="0.58039215690000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="toProd:" destination="Olq-6Q-xtB" eventType="touchUpInside" id="WAe-BW-gfp"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <animations/>
+                                <constraints>
+                                    <constraint firstItem="ft3-PE-8bu" firstAttribute="leading" secondItem="o34-Mj-V2T" secondAttribute="trailing" id="0WI-nk-8Y7"/>
+                                    <constraint firstAttribute="trailing" secondItem="5Hl-iz-XF4" secondAttribute="trailing" id="5gH-eL-x13"/>
+                                    <constraint firstItem="5Hl-iz-XF4" firstAttribute="top" secondItem="9qp-qf-Vuk" secondAttribute="top" id="7ki-c4-5E2"/>
+                                    <constraint firstAttribute="bottom" secondItem="5Hl-iz-XF4" secondAttribute="bottom" id="CdM-K6-rFz"/>
+                                    <constraint firstItem="o34-Mj-V2T" firstAttribute="leading" secondItem="uJy-ke-hNJ" secondAttribute="trailing" id="CfW-2o-Pkm"/>
+                                    <constraint firstItem="5Hl-iz-XF4" firstAttribute="leading" secondItem="ft3-PE-8bu" secondAttribute="trailing" id="E9V-oI-Qiu"/>
+                                    <constraint firstAttribute="bottom" secondItem="o34-Mj-V2T" secondAttribute="bottom" id="Kd4-Dg-4V7"/>
+                                    <constraint firstItem="uJy-ke-hNJ" firstAttribute="leading" secondItem="9qp-qf-Vuk" secondAttribute="leading" id="QgF-mv-wZK"/>
+                                    <constraint firstAttribute="height" constant="50" id="Ri9-mQ-uxr"/>
+                                    <constraint firstItem="5Hl-iz-XF4" firstAttribute="width" secondItem="uJy-ke-hNJ" secondAttribute="width" id="ZHM-6G-B8J"/>
+                                    <constraint firstItem="o34-Mj-V2T" firstAttribute="leading" secondItem="uJy-ke-hNJ" secondAttribute="trailing" id="bIl-Rh-lMT"/>
+                                    <constraint firstAttribute="bottom" secondItem="uJy-ke-hNJ" secondAttribute="bottom" id="c57-0g-nlA"/>
+                                    <constraint firstAttribute="bottom" secondItem="ft3-PE-8bu" secondAttribute="bottom" id="ft5-p7-bqa"/>
+                                    <constraint firstItem="o34-Mj-V2T" firstAttribute="width" secondItem="uJy-ke-hNJ" secondAttribute="width" id="hy8-L8-tfw"/>
+                                    <constraint firstItem="ft3-PE-8bu" firstAttribute="top" secondItem="9qp-qf-Vuk" secondAttribute="top" id="jbO-4G-tLB"/>
+                                    <constraint firstItem="o34-Mj-V2T" firstAttribute="top" secondItem="9qp-qf-Vuk" secondAttribute="top" id="mu1-2j-nps"/>
+                                    <constraint firstItem="ft3-PE-8bu" firstAttribute="leading" secondItem="o34-Mj-V2T" secondAttribute="trailing" id="qrq-6Z-2bj"/>
+                                    <constraint firstItem="5Hl-iz-XF4" firstAttribute="leading" secondItem="ft3-PE-8bu" secondAttribute="trailing" id="uQg-uo-WSg"/>
+                                    <constraint firstItem="uJy-ke-hNJ" firstAttribute="top" secondItem="9qp-qf-Vuk" secondAttribute="top" id="vhE-pI-7i1"/>
+                                    <constraint firstItem="ft3-PE-8bu" firstAttribute="width" secondItem="uJy-ke-hNJ" secondAttribute="width" id="xeF-Cj-sb2"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="G44-5j-ylM" firstAttribute="top" secondItem="9qp-qf-Vuk" secondAttribute="bottom" id="0Vo-fH-o3H"/>
                             <constraint firstAttribute="trailingMargin" secondItem="wO8-eY-JRB" secondAttribute="trailing" id="0X5-88-0tl"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="sFm-Ek-COx" secondAttribute="trailing" constant="-20" id="5SV-aZ-sFx"/>
-                            <constraint firstItem="MRg-zN-WVc" firstAttribute="leading" secondItem="qrX-L6-NGk" secondAttribute="leadingMargin" constant="-20" id="6Eg-EL-6EY"/>
-                            <constraint firstItem="uJy-ke-hNJ" firstAttribute="top" secondItem="a5O-tU-nQw" secondAttribute="bottom" id="6cU-DS-7mT"/>
-                            <constraint firstItem="CgU-xy-mHS" firstAttribute="top" secondItem="qrX-L6-NGk" secondAttribute="topMargin" id="9Zi-G4-uv3"/>
-                            <constraint firstItem="o34-Mj-V2T" firstAttribute="leading" secondItem="uJy-ke-hNJ" secondAttribute="trailing" id="AP4-Xa-Z5d"/>
-                            <constraint firstItem="o34-Mj-V2T" firstAttribute="top" secondItem="a5O-tU-nQw" secondAttribute="bottom" id="BlZ-4D-v4J"/>
-                            <constraint firstItem="wO8-eY-JRB" firstAttribute="top" secondItem="uJy-ke-hNJ" secondAttribute="bottom" id="D2l-j1-mBK"/>
+                            <constraint firstItem="Ca1-ZK-7gB" firstAttribute="top" secondItem="9qp-qf-Vuk" secondAttribute="bottom" id="1Xa-YI-oqe"/>
+                            <constraint firstItem="G44-5j-ylM" firstAttribute="leading" secondItem="qrX-L6-NGk" secondAttribute="leadingMargin" id="26u-Zw-92W"/>
+                            <constraint firstItem="mZ9-6w-jLi" firstAttribute="top" secondItem="9qp-qf-Vuk" secondAttribute="bottom" id="6NR-mW-eMC"/>
+                            <constraint firstItem="3ad-lt-LbW" firstAttribute="top" secondItem="Ca1-ZK-7gB" secondAttribute="bottom" id="BTH-AI-ng8"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="G44-5j-ylM" secondAttribute="trailing" id="BVF-XA-Ctw"/>
                             <constraint firstAttribute="trailingMargin" secondItem="a5O-tU-nQw" secondAttribute="trailing" constant="-20" id="DbF-ua-2gp"/>
                             <constraint firstItem="3ad-lt-LbW" firstAttribute="top" secondItem="wO8-eY-JRB" secondAttribute="bottom" id="F2n-ak-B1O"/>
-                            <constraint firstItem="3ad-lt-LbW" firstAttribute="top" secondItem="MRg-zN-WVc" secondAttribute="bottom" id="FaV-YQ-F37"/>
+                            <constraint firstItem="9qp-qf-Vuk" firstAttribute="leading" secondItem="qrX-L6-NGk" secondAttribute="leadingMargin" constant="-20" id="FyR-T2-VQC"/>
                             <constraint firstItem="a5O-tU-nQw" firstAttribute="top" secondItem="d9j-eY-XL3" secondAttribute="bottom" id="G5F-DN-AjB"/>
                             <constraint firstItem="a5O-tU-nQw" firstAttribute="leading" secondItem="qrX-L6-NGk" secondAttribute="leadingMargin" constant="-20" id="G8Y-rM-chO"/>
-                            <constraint firstItem="uJy-ke-hNJ" firstAttribute="top" secondItem="a5O-tU-nQw" secondAttribute="bottom" id="LCI-wX-Vx1"/>
-                            <constraint firstItem="uJy-ke-hNJ" firstAttribute="top" secondItem="a5O-tU-nQw" secondAttribute="bottom" id="NrI-Ln-oCj"/>
-                            <constraint firstItem="o34-Mj-V2T" firstAttribute="leading" secondItem="uJy-ke-hNJ" secondAttribute="trailing" id="PO5-2X-Lv4"/>
-                            <constraint firstItem="sFm-Ek-COx" firstAttribute="leading" secondItem="qrX-L6-NGk" secondAttribute="leadingMargin" constant="-20" id="R5Q-G4-arI"/>
                             <constraint firstItem="3ad-lt-LbW" firstAttribute="top" secondItem="mZ9-6w-jLi" secondAttribute="bottom" id="UhP-nT-dUJ"/>
                             <constraint firstItem="mZ9-6w-jLi" firstAttribute="leading" secondItem="qrX-L6-NGk" secondAttribute="leadingMargin" id="VmV-g4-dkd"/>
-                            <constraint firstItem="o34-Mj-V2T" firstAttribute="top" secondItem="a5O-tU-nQw" secondAttribute="bottom" id="WoW-hC-QJi"/>
-                            <constraint firstItem="uJy-ke-hNJ" firstAttribute="leading" secondItem="qrX-L6-NGk" secondAttribute="leadingMargin" constant="-20" id="ZDz-hz-sgA"/>
-                            <constraint firstItem="3ad-lt-LbW" firstAttribute="top" secondItem="CgU-xy-mHS" secondAttribute="bottom" id="akg-1P-YIT"/>
-                            <constraint firstItem="MRg-zN-WVc" firstAttribute="top" secondItem="uJy-ke-hNJ" secondAttribute="bottom" constant="60" id="cBD-bH-nVZ"/>
                             <constraint firstItem="wO8-eY-JRB" firstAttribute="leading" secondItem="qrX-L6-NGk" secondAttribute="leadingMargin" id="cmA-Nk-n6Z"/>
-                            <constraint firstItem="sFm-Ek-COx" firstAttribute="top" secondItem="uJy-ke-hNJ" secondAttribute="bottom" constant="60" id="ewI-0a-tKd"/>
-                            <constraint firstItem="mZ9-6w-jLi" firstAttribute="top" secondItem="o34-Mj-V2T" secondAttribute="bottom" id="fI6-UO-mLE"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="MRg-zN-WVc" secondAttribute="trailing" constant="-20" id="fqS-9F-HTS"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="CgU-xy-mHS" secondAttribute="trailing" constant="-20" id="gRk-jH-kDI"/>
-                            <constraint firstItem="3ad-lt-LbW" firstAttribute="top" secondItem="sFm-Ek-COx" secondAttribute="bottom" id="lNF-Yi-Jiq"/>
-                            <constraint firstItem="CgU-xy-mHS" firstAttribute="leading" secondItem="qrX-L6-NGk" secondAttribute="leadingMargin" constant="-20" id="nkN-4O-esb"/>
-                            <constraint firstItem="o34-Mj-V2T" firstAttribute="width" secondItem="uJy-ke-hNJ" secondAttribute="width" id="oH1-CS-Fdg"/>
+                            <constraint firstItem="3ad-lt-LbW" firstAttribute="top" secondItem="G44-5j-ylM" secondAttribute="bottom" id="hIa-sE-cdk"/>
+                            <constraint firstItem="G44-5j-ylM" firstAttribute="top" secondItem="9qp-qf-Vuk" secondAttribute="bottom" id="nnY-2B-BXH"/>
+                            <constraint firstItem="Ca1-ZK-7gB" firstAttribute="leading" secondItem="qrX-L6-NGk" secondAttribute="leadingMargin" id="oRL-dF-qlg"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="9qp-qf-Vuk" secondAttribute="trailing" constant="-20" id="pvy-NW-bmw"/>
                             <constraint firstItem="a5O-tU-nQw" firstAttribute="top" secondItem="qrX-L6-NGk" secondAttribute="topMargin" id="sOf-Pj-mV4"/>
-                            <constraint firstItem="o34-Mj-V2T" firstAttribute="leading" secondItem="uJy-ke-hNJ" secondAttribute="trailing" id="ucv-eG-vFw"/>
-                            <constraint firstItem="wO8-eY-JRB" firstAttribute="top" secondItem="uJy-ke-hNJ" secondAttribute="bottom" id="v6e-1u-Z2F"/>
-                            <constraint firstItem="mZ9-6w-jLi" firstAttribute="top" secondItem="uJy-ke-hNJ" secondAttribute="bottom" id="xev-3Q-nLg"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="o34-Mj-V2T" secondAttribute="trailing" constant="-20" id="xzA-S7-nfs"/>
+                            <constraint firstItem="wO8-eY-JRB" firstAttribute="top" secondItem="9qp-qf-Vuk" secondAttribute="bottom" id="vEk-ie-r2d"/>
                             <constraint firstAttribute="trailingMargin" secondItem="mZ9-6w-jLi" secondAttribute="trailing" id="yPo-TT-uVQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="Ca1-ZK-7gB" secondAttribute="trailing" id="z4e-c1-B31"/>
+                            <constraint firstItem="9qp-qf-Vuk" firstAttribute="top" secondItem="a5O-tU-nQw" secondAttribute="bottom" id="z7q-eT-yyb"/>
                         </constraints>
                         <variation key="default">
-                            <mask key="subviews">
-                                <exclude reference="CgU-xy-mHS"/>
-                                <exclude reference="sFm-Ek-COx"/>
-                                <exclude reference="MRg-zN-WVc"/>
-                            </mask>
                             <mask key="constraints">
                                 <exclude reference="sOf-Pj-mV4"/>
                             </mask>
@@ -4157,17 +4215,22 @@ Lactobacillus acidophilus и другие.</string>
                     <connections>
                         <outlet property="button1" destination="o34-Mj-V2T" id="s5t-SK-Bm4"/>
                         <outlet property="button2" destination="uJy-ke-hNJ" id="AaA-uo-hxp"/>
-                        <outlet property="containerView1" destination="sFm-Ek-COx" id="dVM-VX-2gK"/>
-                        <outlet property="containerView2" destination="MRg-zN-WVc" id="J8F-Nr-cAl"/>
-                        <outlet property="darkView" destination="CgU-xy-mHS" id="Pzh-XD-fYz"/>
+                        <outlet property="button3" destination="ft3-PE-8bu" id="Vtr-i0-k3I"/>
+                        <outlet property="button4" destination="5Hl-iz-XF4" id="PKn-Ob-y2D"/>
                         <outlet property="searchBar" destination="a5O-tU-nQw" id="ULw-iq-noz"/>
                         <outlet property="tableView1" destination="wO8-eY-JRB" id="Ccm-BA-RGY"/>
                         <outlet property="tableView2" destination="mZ9-6w-jLi" id="DRc-Ps-5Xg"/>
+                        <outlet property="tableView3" destination="Ca1-ZK-7gB" id="C9v-ai-Y9W"/>
+                        <outlet property="tableView4" destination="G44-5j-ylM" id="aBF-Ef-HWc"/>
+                        <segue destination="Nmi-tU-4XC" kind="show" identifier="toCompany" id="Scd-nN-kzm"/>
+                        <segue destination="keu-DC-fSh" kind="show" identifier="toPharma" id="iWp-6B-1Aa"/>
+                        <segue destination="2Fp-GW-eNp" kind="show" identifier="toDoc" id="fgw-Jt-fIP"/>
+                        <segue destination="sbh-iQ-PXQ" kind="show" identifier="toSecDoc" id="bgK-tD-ymA"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0Oc-m2-v6c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3722" y="-3782"/>
+            <point key="canvasLocation" x="5018" y="160"/>
         </scene>
         <!--List Of View Controller-->
         <scene sceneID="PoU-CR-qRd">
@@ -4268,7 +4331,7 @@ Lactobacillus acidophilus и другие.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Гадовист" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ock-oq-hUK">
-                                <rect key="frame" x="40" y="20" width="94" height="24"/>
+                                <rect key="frame" x="40" y="20" width="93.5" height="24"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" red="0.73333333329999995" green="0.0" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
@@ -4380,7 +4443,7 @@ Lactobacillus acidophilus и другие.</string>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="o5q-sN-vir">
-                                <rect key="frame" x="518" y="21" width="42" height="21"/>
+                                <rect key="frame" x="518" y="21" width="42" height="20.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.64313725490196072" green="0.64313725490196072" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
@@ -4492,10 +4555,12 @@ Lactobacillus acidophilus и другие.</string>
         <image name="vkLogo" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="iWp-6B-1Aa"/>
         <segue reference="YGI-Mw-N5I"/>
-        <segue reference="qlc-TP-7yR"/>
-        <segue reference="u0a-AY-sbi"/>
-        <segue reference="qBz-Jy-uvX"/>
+        <segue reference="fgw-Jt-fIP"/>
+        <segue reference="bgK-tD-ymA"/>
+        <segue reference="Scd-nN-kzm"/>
         <segue reference="Spl-RC-YMp"/>
+        <segue reference="qlc-TP-7yR"/>
     </inferredMetricsTieBreakers>
 </document>

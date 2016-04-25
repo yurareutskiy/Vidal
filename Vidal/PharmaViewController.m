@@ -18,6 +18,8 @@
 @property (nonatomic, strong) NSArray *tryArray;
 @property (nonatomic, strong) NSMutableArray *data;
 @property (strong, nonatomic) UIBarButtonItem *backButton;
+@property (strong, nonatomic) UIBarButtonItem *menuButton;
+@property (strong, nonatomic) SWRevealViewController *reveal;
 
 @end
 
@@ -42,7 +44,7 @@
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
-    [super setLabel:@"Фармакологические группы"];
+    [self setLabel:@"Фармакологические группы"];
     
     self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
                                                             style:UIBarButtonItemStyleDone
@@ -50,8 +52,13 @@
                                                             action:@selector(search)];
     
     self.navigationItem.rightBarButtonItem = self.searchButton;
-    
-    [ud removeObjectForKey:@"level"];
+    if ([[ud valueForKey:@"howTo"] isEqualToString:@"search"]) {
+        [self customNavBar];
+    } else {
+        [ud removeObjectForKey:@"level"];
+        [self customNavBar];
+        [self configureMenu];
+    }
     [ud removeObjectForKey:@"workWith"];
     [ud removeObjectForKey:@"workActive"];
     [ud removeObjectForKey:@"activeID"];
@@ -65,6 +72,11 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [self refreshDb];
+}
+
+- (void) viewDidDisappear:(BOOL)animated {
+    [ud removeObjectForKey:@"howTo"];
+    [ud removeObjectForKey:@"level"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -295,7 +307,7 @@
     [self refreshDb];
     if ([[ud objectForKey:@"level"] integerValue] == 0) {
         self.navigationItem.leftBarButtonItem = nil;
-        [super configureMenu];
+        [self configureMenu];
     }
 }
 
@@ -307,6 +319,47 @@
                     animations:^(void) {
                         [self.tableView reloadData];
                     } completion:nil];
+    
+}
+
+- (void) setLabel:(NSString *)label {
+    UILabel* labelName = [[UILabel alloc] initWithFrame:CGRectMake(0,40,320,40)];
+    labelName.textAlignment = NSTextAlignmentLeft;
+    labelName.text = NSLocalizedString(label, @"");
+    labelName.textColor = [UIColor whiteColor];
+    self.navigationItem.titleView = labelName;
+}
+
+- (void)customNavBar {
+    
+    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:183.0/255.0 green:0.0/255.0 blue:57.0/255.0 alpha:1];
+    self.navigationController.navigationBar.translucent = NO;
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    [self.navigationController.navigationBar setTitleTextAttributes:
+     @{NSForegroundColorAttributeName:[UIColor whiteColor]}];
+    self.navigationController.navigationBar.layer.shadowColor = [[UIColor grayColor] CGColor];
+    self.navigationController.navigationBar.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
+    self.navigationController.navigationBar.layer.shadowRadius = 1.0f;
+    self.navigationController.navigationBar.layer.shadowOpacity = 0.5f;
+    
+}
+
+- (void)configureMenu {
+    
+    self.reveal = self.revealViewController;
+    
+    if (!self.reveal) {
+        return;
+    }
+    
+    self.menuButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"burger"] scaledToSize:CGSizeMake(20, 20)]
+                                                       style:UIBarButtonItemStyleDone
+                                                      target:self.revealViewController
+                                                      action:@selector(revealToggle:)];
+    
+    [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
+    
+    self.navigationItem.leftBarButtonItem = self.menuButton;
     
 }
 
