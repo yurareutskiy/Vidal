@@ -867,11 +867,13 @@
                         <outlet property="darkView" destination="Iaw-dV-Aky" id="Bjh-SY-DsT"/>
                         <outlet property="tableView" destination="PQj-NJ-r9l" id="eNB-L7-ccK"/>
                         <segue destination="qEJ-ic-t5K" kind="show" identifier="toLevel" id="SUB-yT-opL"/>
+                        <segue destination="Olq-6Q-xtB" kind="show" identifier="toSearch" id="YGI-Mw-N5I"/>
+                        <segue destination="jFz-ci-plm" kind="show" identifier="toList" id="qlc-TP-7yR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TpN-AD-tlE" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2870" y="77"/>
+            <point key="canvasLocation" x="2814" y="77"/>
         </scene>
         <!--Favourite View Controller-->
         <scene sceneID="Hnj-Mp-PAJ">
@@ -4486,7 +4488,7 @@ Lactobacillus acidophilus и другие.</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pharmaCell" id="a8M-rX-p3K" customClass="PharmaTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="80"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a8M-rX-p3K" id="QUp-yE-pG5">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="79.5"/>
@@ -4722,94 +4724,6 @@ Lactobacillus acidophilus и другие.</string>
             </objects>
             <point key="canvasLocation" x="6369" y="182"/>
         </scene>
-        <!--Pharma View Controller-->
-        <scene sceneID="DV8-cf-RPm">
-            <objects>
-                <viewController id="udb-gu-pL4" customClass="PharmaViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="IXJ-72-YTd"/>
-                        <viewControllerLayoutGuide type="bottom" id="cZp-vD-wGp"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="aVZ-ZK-YnO">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="2h1-lr-Mu9">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <animations/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pharmaCell" id="gIM-8y-kUD" customClass="PharmaTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="60"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gIM-8y-kUD" id="GpC-6w-jyp">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Анксиолитики" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="4" translatesAutoresizingMaskIntoConstraints="NO" id="CUO-4e-mIz">
-                                                    <rect key="frame" x="18" y="20" width="564" height="20"/>
-                                                    <animations/>
-                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
-                                                    <color key="textColor" red="0.58039215690000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <animations/>
-                                            <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="CUO-4e-mIz" secondAttribute="trailing" constant="10" id="wmA-aJ-vKd"/>
-                                                <constraint firstItem="CUO-4e-mIz" firstAttribute="centerY" secondItem="GpC-6w-jyp" secondAttribute="centerY" id="xPg-zx-QkD"/>
-                                                <constraint firstItem="CUO-4e-mIz" firstAttribute="leading" secondItem="GpC-6w-jyp" secondAttribute="leadingMargin" constant="10" id="zxD-lA-23a"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <animations/>
-                                        <connections>
-                                            <outlet property="name" destination="CUO-4e-mIz" id="KFs-pL-xVr"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                            </tableView>
-                            <view alpha="0.60000002384185791" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kiM-Lw-05J">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <animations/>
-                                <color key="backgroundColor" red="0.21960784310000001" green="0.21960784310000001" blue="0.21960784310000001" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Twj-bo-WVr">
-                                <rect key="frame" x="0.0" y="80" width="600" height="520"/>
-                                <animations/>
-                            </containerView>
-                        </subviews>
-                        <animations/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="cZp-vD-wGp" firstAttribute="top" secondItem="kiM-Lw-05J" secondAttribute="bottom" id="2dr-9s-frR"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="kiM-Lw-05J" secondAttribute="trailing" constant="-20" id="AES-eb-IUz"/>
-                            <constraint firstItem="2h1-lr-Mu9" firstAttribute="centerX" secondItem="aVZ-ZK-YnO" secondAttribute="centerX" id="CUZ-RH-sDP"/>
-                            <constraint firstItem="2h1-lr-Mu9" firstAttribute="top" secondItem="aVZ-ZK-YnO" secondAttribute="topMargin" id="Cf3-B8-zTC"/>
-                            <constraint firstItem="cZp-vD-wGp" firstAttribute="top" secondItem="2h1-lr-Mu9" secondAttribute="bottom" id="Oef-6C-diz"/>
-                            <constraint firstItem="kiM-Lw-05J" firstAttribute="leading" secondItem="aVZ-ZK-YnO" secondAttribute="leadingMargin" constant="-20" id="QjF-ze-WNl"/>
-                            <constraint firstItem="Twj-bo-WVr" firstAttribute="leading" secondItem="aVZ-ZK-YnO" secondAttribute="leadingMargin" constant="-20" id="XOZ-60-PJm"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="2h1-lr-Mu9" secondAttribute="trailing" constant="-20" id="ave-Af-hyC"/>
-                            <constraint firstItem="Twj-bo-WVr" firstAttribute="top" secondItem="IXJ-72-YTd" secondAttribute="bottom" constant="60" id="eLq-yv-yMk"/>
-                            <constraint firstItem="cZp-vD-wGp" firstAttribute="top" secondItem="Twj-bo-WVr" secondAttribute="bottom" id="lnh-sJ-NVD"/>
-                            <constraint firstItem="kiM-Lw-05J" firstAttribute="top" secondItem="aVZ-ZK-YnO" secondAttribute="topMargin" id="syE-MU-oog"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="Twj-bo-WVr" secondAttribute="trailing" constant="-20" id="uOl-MT-2sM"/>
-                            <constraint firstItem="2h1-lr-Mu9" firstAttribute="leading" secondItem="aVZ-ZK-YnO" secondAttribute="leadingMargin" constant="-20" id="xv5-ib-bH3"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" id="65F-J2-t18"/>
-                    <connections>
-                        <outlet property="containerView" destination="Twj-bo-WVr" id="VaX-1j-0ZP"/>
-                        <outlet property="darkView" destination="kiM-Lw-05J" id="RWC-HA-2QM"/>
-                        <outlet property="tableView" destination="2h1-lr-Mu9" id="I79-S0-VK2"/>
-                        <segue destination="Olq-6Q-xtB" kind="show" identifier="toSearch" animates="NO" id="0Pg-ID-UwG"/>
-                        <segue destination="Olq-6Q-xtB" kind="show" identifier="toSearch" animates="NO" id="J2e-Ic-CVc"/>
-                        <segue destination="jFz-ci-plm" kind="show" identifier="toList" id="rJg-Wa-6jH"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="mQ7-fm-Obb" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3810" y="991"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="Goy-Ox-yPq">
             <objects>
@@ -4879,9 +4793,9 @@ Lactobacillus acidophilus и другие.</string>
         <image name="vkLogo" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Bf0-3e-nJt"/>
+        <segue reference="YGI-Mw-N5I"/>
+        <segue reference="qlc-TP-7yR"/>
         <segue reference="u0a-AY-sbi"/>
-        <segue reference="A53-FK-YbD"/>
         <segue reference="qBz-Jy-uvX"/>
         <segue reference="Spl-RC-YMp"/>
     </inferredMetricsTieBreakers>
