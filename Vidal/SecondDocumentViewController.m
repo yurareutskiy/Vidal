@@ -141,12 +141,8 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
-        if (open) {
-            return sizeCell;
-        } else {
-            return 60;
-        }
+    if (selectedRowIndex && indexPath.row == selectedRowIndex.row && open) {
+        return sizeCell;
     } else {
         return 60;
     }
@@ -190,19 +186,20 @@
         //                [self perfSeg:cell];
     }
     
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 40, 0)];
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width - 40, 0)];
     NSString *string = [self clearString:[[self.info objectAtIndex:0] objectAtIndex:indexPath.row]];
     NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
     NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle setLineSpacing:0.1];
+    [paragraphStyle setLineSpacing:1.1];
+    [paragraphStyle setLineBreakMode:NSLineBreakByWordWrapping];
+    [paragraphStyle setAlignment:NSTextAlignmentLeft];
+    [label setFont:[UIFont systemFontOfSize:17.0]];
+    [label setNumberOfLines:0];
     [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [string length])];
     label.attributedText = attributedString;
-    label.lineBreakMode = NSLineBreakByWordWrapping;
-    label.textAlignment = NSTextAlignmentLeft;
-    label.numberOfLines = 0;
-    label.font = [UIFont fontWithName:@"Lucida Grande-Regular" size:17.f];
     [label sizeToFit];
-    sizeCell = label.frame.size.height + 60.0;
+    sizeCell = label.frame.size.height + 95.0;
+    NSLog(@"%f", sizeCell);
     
     [tableView beginUpdates];
     

@@ -3894,7 +3894,7 @@ Lactobacillus acidophilus и другие.</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CgE-Hq-71P">
-                                                    <rect key="frame" x="28" y="18" width="47" height="30"/>
+                                                    <rect key="frame" x="28" y="18" width="46.5" height="30"/>
                                                     <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="AZD-cd-GYS"/>
@@ -3910,7 +3910,7 @@ Lactobacillus acidophilus и другие.</string>
                                                     </variation>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowRightRed" translatesAutoresizingMaskIntoConstraints="NO" id="0y0-Tf-0XA">
-                                                    <rect key="frame" x="85" y="25" width="10" height="15"/>
+                                                    <rect key="frame" x="84.5" y="25" width="10" height="15"/>
                                                     <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="10" id="THz-tE-8cb"/>
@@ -3918,7 +3918,7 @@ Lactobacillus acidophilus и другие.</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="none" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6cL-if-tOv">
-                                                    <rect key="frame" x="28" y="63" width="544" height="21"/>
+                                                    <rect key="frame" x="28" y="53" width="544" height="20.5"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.64313725490196072" green="0.64313725490196072" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
@@ -3935,7 +3935,7 @@ Lactobacillus acidophilus и другие.</string>
                                                 <constraint firstItem="0y0-Tf-0XA" firstAttribute="leading" secondItem="CgE-Hq-71P" secondAttribute="trailing" constant="10" id="O3u-9I-q4g"/>
                                                 <constraint firstItem="0y0-Tf-0XA" firstAttribute="leading" secondItem="CgE-Hq-71P" secondAttribute="trailing" constant="10" id="QgV-im-d0e"/>
                                                 <constraint firstItem="0y0-Tf-0XA" firstAttribute="centerY" secondItem="CgE-Hq-71P" secondAttribute="centerY" id="SbQ-wU-N8w"/>
-                                                <constraint firstItem="6cL-if-tOv" firstAttribute="top" secondItem="iNQ-1D-Zy8" secondAttribute="topMargin" constant="55" id="Xo7-oX-81V"/>
+                                                <constraint firstItem="6cL-if-tOv" firstAttribute="top" secondItem="iNQ-1D-Zy8" secondAttribute="topMargin" constant="45" id="Xo7-oX-81V"/>
                                                 <constraint firstItem="CgE-Hq-71P" firstAttribute="top" secondItem="iNQ-1D-Zy8" secondAttribute="topMargin" constant="10" id="brn-eV-i3j"/>
                                                 <constraint firstItem="6cL-if-tOv" firstAttribute="leading" secondItem="iNQ-1D-Zy8" secondAttribute="leadingMargin" constant="20" id="gyj-p1-akg"/>
                                                 <constraint firstItem="0y0-Tf-0XA" firstAttribute="centerY" secondItem="CgE-Hq-71P" secondAttribute="centerY" id="vCl-a1-E91"/>
@@ -4250,7 +4250,7 @@ Lactobacillus acidophilus и другие.</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pharmaCell" id="a8M-rX-p3K" customClass="PharmaTableViewCell">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="80"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a8M-rX-p3K" id="QUp-yE-pG5">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="79.5"/>
@@ -4365,7 +4365,7 @@ Lactobacillus acidophilus и другие.</string>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kbx-rQ-nZc">
-                                                    <rect key="frame" x="28" y="18" width="47" height="30"/>
+                                                    <rect key="frame" x="28" y="18" width="46.5" height="30"/>
                                                     <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="idN-un-T96"/>
@@ -4375,7 +4375,7 @@ Lactobacillus acidophilus и другие.</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowRightRed" translatesAutoresizingMaskIntoConstraints="NO" id="wYk-hG-T0x">
-                                                    <rect key="frame" x="85" y="26" width="10" height="15"/>
+                                                    <rect key="frame" x="84.5" y="26" width="10" height="15"/>
                                                     <animations/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="C3H-sS-7KD"/>
@@ -4383,7 +4383,7 @@ Lactobacillus acidophilus и другие.</string>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JZR-5S-NZp">
-                                                    <rect key="frame" x="28" y="63" width="544" height="21"/>
+                                                    <rect key="frame" x="28" y="53" width="544" height="20.5"/>
                                                     <animations/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" red="0.64313725490196072" green="0.64313725490196072" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
@@ -4402,7 +4402,7 @@ Lactobacillus acidophilus и другие.</string>
                                                 <constraint firstItem="JZR-5S-NZp" firstAttribute="leading" secondItem="tMs-Lt-HY2" secondAttribute="leadingMargin" constant="20" id="Slh-iU-PaB"/>
                                                 <constraint firstItem="Kbx-rQ-nZc" firstAttribute="top" secondItem="tMs-Lt-HY2" secondAttribute="topMargin" constant="10" id="TGU-cJ-Bp0"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="Kbx-rQ-nZc" secondAttribute="trailing" constant="50" id="hRR-UU-XG7"/>
-                                                <constraint firstItem="JZR-5S-NZp" firstAttribute="top" secondItem="tMs-Lt-HY2" secondAttribute="topMargin" constant="55" id="iBP-Ip-jju"/>
+                                                <constraint firstItem="JZR-5S-NZp" firstAttribute="top" secondItem="tMs-Lt-HY2" secondAttribute="topMargin" constant="45" id="iBP-Ip-jju"/>
                                                 <constraint firstItem="Kbx-rQ-nZc" firstAttribute="centerY" secondItem="tMs-Lt-HY2" secondAttribute="centerY" id="msM-gZ-9V0"/>
                                                 <constraint firstAttribute="bottomMargin" relation="greaterThanOrEqual" secondItem="JZR-5S-NZp" secondAttribute="bottom" constant="15" id="s3k-TT-QlH"/>
                                                 <constraint firstItem="JZR-5S-NZp" firstAttribute="top" secondItem="Kbx-rQ-nZc" secondAttribute="bottom" constant="15" id="wNT-i9-MR5"/>
@@ -4560,7 +4560,7 @@ Lactobacillus acidophilus и другие.</string>
         <segue reference="fgw-Jt-fIP"/>
         <segue reference="bgK-tD-ymA"/>
         <segue reference="Scd-nN-kzm"/>
+        <segue reference="A53-FK-YbD"/>
         <segue reference="Spl-RC-YMp"/>
-        <segue reference="qlc-TP-7yR"/>
     </inferredMetricsTieBreakers>
 </document>
