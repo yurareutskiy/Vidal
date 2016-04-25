@@ -7,17 +7,11 @@
 //
 
 #import "ModelViewController.h"
-//#import <SLExpandableTableView.h>
 #import "PharmaTableViewCell.h"
 #import "DBManager.h"
-#import "FavouriteViewController.h"
-#import "SecondDocumentViewController.h"
-#import "DocsTableViewCell.h"
 
 @interface PharmaViewController : ModelViewController<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
-@property (strong, nonatomic) IBOutlet UIView *containerView;
-@property (strong, nonatomic) IBOutlet UIView *darkView;
 
 @end

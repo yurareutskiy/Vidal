@@ -14,5 +14,6 @@
 
 @interface ModelViewController : UIViewController
 - (void) setLabel:(NSString *)label;
+- (void) configureMenu;
 
 @end

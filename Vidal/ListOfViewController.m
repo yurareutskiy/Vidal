@@ -146,6 +146,10 @@
             [cell.name setTextColor:[UIColor blackColor]];
             cell.category.text = @"";
             
+        } else if ([ud valueForKey:@"pharmaList"]) {
+            cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]]];
+            [cell.name setTextColor:[UIColor blackColor]];
+            cell.category.text = @"";
         } else {
             cell.category.text = @"";
         }
