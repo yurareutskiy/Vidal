@@ -212,8 +212,18 @@
 
 - (IBAction)toInter:(UIButton *)sender {
     
-    [ud setObject:self.name.text forKey:@"toInter"];
+    [ud setObject:[self clearToInter:self.name.text] forKey:@"toInter"];
     [self performSegueWithIdentifier:@"knowAbout" sender:self];
+    
+}
+
+- (NSString *) clearToInter:(NSString *) input {
+    
+    NSString *text = input;
+    
+    text = [text stringByReplacingOccurrencesOfString:@"®" withString:@""];
+    
+    return text;
     
 }
 

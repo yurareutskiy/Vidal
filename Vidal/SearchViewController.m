@@ -269,7 +269,7 @@
         [ud setObject:next forKey:@"info"];
         
         [ud setObject:@"prod" forKey:@"howTo"];
-        NSString *request = [NSString stringWithFormat:@"SELECT Picture.Image, InfoPage.InfoPageID, InfoPage.RusName AS Name, InfoPage.RusAddress, InfoPage.PhoneNumber, InfoPage.Email, Country.RusName FROM InfoPage INNER JOIN Picture ON InfoPage.PictureID = Picture.PictureID INNER JOIN Country ON InfoPage.CountryCode = Country.CountryCode WHERE InfoPage.InfoPageID = %@", next];
+        NSString *request = [NSString stringWithFormat:@"SELECT Picture.Image, InfoPage.InfoPageID, InfoPage.RusName AS Name, InfoPage.RusAddress, InfoPage.PhoneNumber, InfoPage.Email, Country.RusName FROM InfoPage LEFT JOIN Picture ON InfoPage.PictureID = Picture.PictureID LEFT JOIN Country ON InfoPage.CountryCode = Country.CountryCode WHERE InfoPage.InfoPageID = %@", next];
         [self getInfo:request];
         [ud removeObjectForKey:@"howTo"];
         
@@ -537,6 +537,7 @@
         }
         self.data = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
 
+        
         [ud setObject:@"active" forKey:@"from"];
         
     } else if (tableView2b) {

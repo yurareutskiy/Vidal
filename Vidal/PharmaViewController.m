@@ -51,6 +51,10 @@
                                                             target:self
                                                             action:@selector(search)];
     
+    if ([ud valueForKey:@"level"] != 0 && ![[ud valueForKey:@"howTo"] isEqualToString:@"search"]) {
+        [self addBackButton];
+    }
+    
     self.navigationItem.rightBarButtonItem = self.searchButton;
     if ([[ud valueForKey:@"howTo"] isEqualToString:@"search"]) {
         [self customNavBar];
@@ -66,6 +70,7 @@
     [ud removeObjectForKey:@"comp"];
     [ud removeObjectForKey:@"info"];
     [ud removeObjectForKey:@"from"];
+    [ud removeObjectForKey:@"molecule"];
     
 }
 
@@ -76,7 +81,7 @@
 
 - (void) viewDidDisappear:(BOOL)animated {
     [ud removeObjectForKey:@"howTo"];
-    [ud removeObjectForKey:@"level"];
+//    [ud removeObjectForKey:@"level"];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -102,6 +102,7 @@
     [ud removeObjectForKey:@"comp"];
     [ud removeObjectForKey:@"info"];
     [ud removeObjectForKey:@"from"];
+    [ud removeObjectForKey:@"molecule"];
     
 }
 

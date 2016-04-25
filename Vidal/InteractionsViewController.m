@@ -81,12 +81,15 @@
     
     [super setLabel:@"Лекарственное взаимодействие"];
     
-    //    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
-    //                                                         style:UIBarButtonItemStyleDone
-    //                                                        target:self
-    //                                                        action:@selector(search)];
+        self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
+                                                             style:UIBarButtonItemStyleDone
+                                                            target:self
+                                                            action:@selector(search)];
     
-    //    self.navigationItem.rightBarButtonItem = self.searchButton;
+        self.navigationItem.rightBarButtonItem = self.searchButton;
+    
+    [self.secondLinePicker setBackgroundColor:[UIColor whiteColor]];
+
     
     // Do any additional setup after loading the view.
 }
@@ -108,7 +111,7 @@
         self.lead.hidden = true;
         self.toolbar.hidden = false;
         self.secondLinePicker.hidden = false;
-
+        [self.secondLinePicker reloadAllComponents];
     }
 }
 
