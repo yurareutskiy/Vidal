@@ -101,6 +101,16 @@
     [self performSegueWithIdentifier:@"toSearch" sender:self];
 }
 
+- (void) viewDidAppear:(BOOL)animated {
+    
+    [ud removeObjectForKey:@"workWith"];
+    
+    if (nextPls) {
+        [ud setObject:nextPls forKey:@"molecule"];
+    }
+    
+}
+
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
     UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
     [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
@@ -321,12 +331,6 @@
         [tableView beginUpdates];
 
         [tableView endUpdates];
-    }
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-    if (nextPls) {
-        [ud setObject:nextPls forKey:@"molecule"];
     }
 }
 

@@ -16,6 +16,9 @@
     
     NSUserDefaults *ud;
     NSMutableIndexSet *toDelete;
+    NSIndexPath *selectedRowIndex;
+    BOOL open;
+    CGFloat sizeCell;
     
 }
 
@@ -73,7 +76,7 @@
             [toDelete addIndex:1];
     
             [[self.info objectAtIndex:0] removeObjectsAtIndexes:toDelete];
-//            [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
+            [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
     
             [self.tableView reloadData];
     
@@ -136,8 +139,21 @@
     return 1;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
+        if (open) {
+            return sizeCell;
+        } else {
+            return 60;
+        }
+    } else {
+        return 60;
+    }
+}
+
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 1;
+    return [self.dbManager.arrColumnNames count];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -158,6 +174,40 @@
     
     return cell;
 
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    selectedRowIndex = [indexPath copy];
+    if (!open) {
+        open = true;
+        //                DocsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        //                [self perfSeg:cell];
+        
+    } else {
+        open = false;
+        //                DocsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        //                [self perfSeg:cell];
+    }
+    
+    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 40, 0)];
+    NSString *string = [self clearString:[[self.info objectAtIndex:0] objectAtIndex:indexPath.row]];
+    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+    [paragraphStyle setLineSpacing:0.1];
+    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [string length])];
+    label.attributedText = attributedString;
+    label.lineBreakMode = NSLineBreakByWordWrapping;
+    label.textAlignment = NSTextAlignmentLeft;
+    label.numberOfLines = 0;
+    label.font = [UIFont fontWithName:@"Lucida Grande-Regular" size:17.f];
+    [label sizeToFit];
+    sizeCell = label.frame.size.height + 60.0;
+    
+    [tableView beginUpdates];
+    
+    [tableView endUpdates];
+    
 }
 
 - (IBAction)toInter:(UIButton *)sender {
@@ -207,6 +257,9 @@
     text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
     
     return text;
+    
+}
+- (void) perfSeg:(DocsTableViewCell *)sender {
     
 }
 

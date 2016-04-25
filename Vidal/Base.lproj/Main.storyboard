@@ -2217,8 +2217,8 @@ Lactobacillus acidophilus и другие.</string>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="9Rq-1r-or4"/>
-                                        <exclude reference="U3z-KR-KwT"/>
                                         <exclude reference="yUF-gw-12o"/>
+                                        <exclude reference="U3z-KR-KwT"/>
                                     </mask>
                                 </variation>
                             </scrollView>

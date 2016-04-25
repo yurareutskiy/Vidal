@@ -99,24 +99,24 @@
         self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[ud valueForKey:@"workWith"]];
         
     } else if ([ud valueForKey:@"workActive"]) {
-        if ([ud valueForKey:@"listOfDrugs"]) {
-            
-            [ud setValue:@"2" forKey:@"screen"];
-            
-//            req = [NSString stringWithFormat:@"SELECT Document.*, ClinicoPhPointers.Name as Category FROM Document LEFT JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID LEFT JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID LEFT JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID LEFT JOIN ClinicoPhPointers ON ClinicoPhPointers.ClPhPointerID = Document_ClPhPointers.SrcClPhPointerID WHERE Molecule.MoleculeID = %@", [ud objectForKey:@"listOfDrugs"]];
-            
-            req = [NSString stringWithFormat:@"SELECT Product.DocumentID, Product.RusName FROM Document LEFT JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID LEFT JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID INNER JOIN Product_Molecule ON Molecule.MoleculeID = Product_Molecule.MoleculeID INNER JOIN Product ON Product_Molecule.ProductID = Product.ProductID WHERE Molecule.MoleculeID = %@ ORDER BY Document.RusName", [ud objectForKey:@"listOfDrugs"]];
-
-            
-            [self loadData:req];
-        } else {
-            
-            [ud setValue:@"1" forKey:@"screen"];
-            
+//        if ([ud valueForKey:@"listOfDrugs"]) {
+//            
+//            [ud setValue:@"2" forKey:@"screen"];
+//            
+////            req = [NSString stringWithFormat:@"SELECT Document.*, ClinicoPhPointers.Name as Category FROM Document LEFT JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID LEFT JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID LEFT JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID LEFT JOIN ClinicoPhPointers ON ClinicoPhPointers.ClPhPointerID = Document_ClPhPointers.SrcClPhPointerID WHERE Molecule.MoleculeID = %@", [ud objectForKey:@"listOfDrugs"]];
+//            
+//            req = [NSString stringWithFormat:@"SELECT Product.DocumentID, Product.RusName FROM Document LEFT JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID LEFT JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID INNER JOIN Product_Molecule ON Molecule.MoleculeID = Product_Molecule.MoleculeID INNER JOIN Product ON Product_Molecule.ProductID = Product.ProductID WHERE Molecule.MoleculeID = %@ ORDER BY Document.RusName", [ud objectForKey:@"listOfDrugs"]];
+//
+//            
+//            [self loadData:req];
+//        } else {
+        
+//            [ud setValue:@"1" forKey:@"screen"];
+        
             req = @"";
             self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[ud valueForKey:@"workActive"]];
             
-        }
+        
         
     } else {
         req = @"";
@@ -125,22 +125,29 @@
     
 }
 
+- (void) viewWillAppear:(BOOL)animated {
+    
+    [self refreshDb];
+    [self.tableView reloadData];
+    
+}
+
 - (void) viewWillDisappear:(BOOL)animated {
     
-    [ud removeObjectForKey:@"pharmaList"];
-    [ud removeObjectForKey:@"molecule"];
-    [ud removeObjectForKey:@"comp"];
-    [ud removeObjectForKey:@"workWith"];
-    if ([ud valueForKey:@"listOfDrugs"]) {
-        
-    } else {
-        [ud removeObjectForKey:@"workActive"];
-    }
-    
-    if ([[ud valueForKey:@"screen"] isEqualToString:@"2"]) {
-//        [ud removeObjectForKey:@"listOfDrugs"];
-        rly = true;
-    }
+//    [ud removeObjectForKey:@"pharmaList"];
+//    [ud removeObjectForKey:@"molecule"];
+//    [ud removeObjectForKey:@"comp"];
+////    [ud removeObjectForKey:@"workWith"];
+//    if ([ud valueForKey:@"listOfDrugs"]) {
+//        
+//    } else {
+//        [ud removeObjectForKey:@"workActive"];
+//    }
+//    
+//    if ([[ud valueForKey:@"screen"] isEqualToString:@"2"]) {
+////        [ud removeObjectForKey:@"listOfDrugs"];
+//        rly = true;
+//    }
 }
 
 //    if ([[ud valueForKey:@"screen"] isEqualToString:@"2"]) {
@@ -221,12 +228,13 @@
     
 //    NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"Продукт"];
         NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
+        NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"Category"];
         
         // Set the loaded data to the appropriate cell labels.
         cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]]];
         [cell.name setTextColor:[UIColor blackColor]];
-        if (![[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:21] isEqualToString:@""]) {
-            cell.category.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:21]]];
+        if (![[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory] isEqualToString:@""]) {
+            cell.category.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]]];
             [cell.category setTextColor:[UIColor lightGrayColor]];
         } else {
             cell.category.text = @"";
@@ -259,9 +267,9 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (tableView.tag == 1) {
+//    if (tableView.tag == 1) {
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (!container) {
+//    if (!container) {
         if ([ud valueForKey:@"workWith"] || [ud valueForKey:@"comp"] || [ud valueForKey:@"pharmaList"] || [ud valueForKey:@"listOfDrugs"] || [ud valueForKey:@"info"]) {
         self.containerView.hidden = false;
         container = true;
@@ -291,42 +299,42 @@
                 [self getMol:request];
             
             [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:19] forKey:@"listOfDrugs"];
-
-        }
-    }} else if (tableView.tag == 2 || tableView.tag == 3){
-        selectedRowIndex = [indexPath copy];
-        if (!open) {
-            open = true;
-            DocsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-            [self perfSeg:cell];
-            
-        } else {
-            open = false;
-            DocsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-            [self perfSeg:cell];
         }
         
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.containerView.frame.size.width - 40, 0)];
-        NSString *string = [self clearString:[[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row]];
-        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
-        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        [paragraphStyle setLineSpacing:0.1];
-        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [string length])];
-        label.attributedText = attributedString;
-        label.lineBreakMode = NSLineBreakByWordWrapping;
-        label.textAlignment = NSTextAlignmentLeft;
-        label.numberOfLines = 0;
-        label.font = [UIFont fontWithName:@"Lucida Grande-Regular" size:17.f];
-        [label sizeToFit];
-        sizeCell = label.frame.size.height + 60.0;
-        NSLog(@"%f", sizeCell);
-        
-        [tableView beginUpdates];
-        
-        [tableView endUpdates];
-    } else {
-        NSLog(@"hello");
-    }
+//    }} else if (tableView.tag == 2 || tableView.tag == 3){
+//        selectedRowIndex = [indexPath copy];
+//        if (!open) {
+//            open = true;
+//            DocsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//            [self perfSeg:cell];
+//            
+//        } else {
+//            open = false;
+//            DocsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+//            [self perfSeg:cell];
+//        }
+//        
+//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.containerView.frame.size.width - 40, 0)];
+//        NSString *string = [self clearString:[[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row]];
+//        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
+//        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
+//        [paragraphStyle setLineSpacing:0.1];
+//        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [string length])];
+//        label.attributedText = attributedString;
+//        label.lineBreakMode = NSLineBreakByWordWrapping;
+//        label.textAlignment = NSTextAlignmentLeft;
+//        label.numberOfLines = 0;
+//        label.font = [UIFont fontWithName:@"Lucida Grande-Regular" size:17.f];
+//        [label sizeToFit];
+//        sizeCell = label.frame.size.height + 60.0;
+//        NSLog(@"%f", sizeCell);
+//        
+//        [tableView beginUpdates];
+//        
+//        [tableView endUpdates];
+//    } else {
+//        NSLog(@"hello");
+//    }
 }
 
 - (void) perfSeg:(DocsTableViewCell *)sender {
@@ -595,6 +603,7 @@
         DocumentViewController *dvc = [segue destinationViewController];
         
         dvc.info = self.molecule;
+        dvc.columns = [self.dbManager.arrColumnNames copy];
         
     }
     
