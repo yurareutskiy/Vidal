@@ -94,12 +94,12 @@
     [[UITapGestureRecognizer alloc] initWithTarget:self
                                             action:@selector(tableView:didCollapseSection:animated:)];
     
-    //    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
-    //                                                         style:UIBarButtonItemStyleDone
-    //                                                        target:self
-    //                                                        action:@selector(search)];
+        self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
+                                                             style:UIBarButtonItemStyleDone
+                                                            target:self
+                                                            action:@selector(search)];
     
-    //    self.navigationItem.rightBarButtonItem = self.searchButton;
+        self.navigationItem.rightBarButtonItem = self.searchButton;
     
     // Do any additional setup after loading the view.
     

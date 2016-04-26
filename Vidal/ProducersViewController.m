@@ -114,6 +114,7 @@
 
     NSInteger indexOfImage = [self.dbManager.arrColumnNames indexOfObject:@"Image"];
     
+    
     // Set the loaded data to the appropriate cell labels.
     cell.nameHid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]]];
     cell.countryHid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfRusName]]];

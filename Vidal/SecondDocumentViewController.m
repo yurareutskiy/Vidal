@@ -62,13 +62,13 @@
     
                 [self.fav setAttributedTitle:resultText forState:UIControlStateNormal];
                 [self.fav setImage:[UIImage imageNamed:@"favRed"] forState:UIControlStateNormal];
-                self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0);
+//                self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0);
             } else {
                 NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:@"Добавить в избранное" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
     
                 [self.fav setAttributedTitle:resultText forState:UIControlStateNormal];
                 [self.fav setImage:[UIImage imageNamed:@"favGrey"] forState:UIControlStateNormal];
-                self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0);
+//                self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0);
             }
     
     
