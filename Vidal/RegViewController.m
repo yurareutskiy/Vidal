@@ -88,6 +88,14 @@
     UITapGestureRecognizer *tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideKeyboard)];
     [self.backView addGestureRecognizer:tapRecognizer];
     
+    for (UILabel *name in self.nameLabels) {
+        [name setFont:[UIFont systemFontOfSize:14.0]];
+    }
+    
+    for (UIButton *button in self.buttonLabels) {
+        [button.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
+    }
+    
     // Do any additional setup after loading the view.
 }
 
@@ -267,10 +275,14 @@
         rc = [textField convertRect:rc toView:self.scrollView];
         pt = rc.origin;
         pt.x = self.scrollView.contentOffset.x;
-        if (self.view.frame.size.height == 736) {
-            pt.y -= 200;
+        if (textField.tag == 5) {
+            pt.y -= 216;
         } else {
-            pt.y -= 180;
+            if (self.view.frame.size.height == 736) {
+                pt.y -= 200;
+            } else {
+                pt.y -= 180;
+            }
         }
         [self.scrollView setContentOffset:pt animated:YES];
     }

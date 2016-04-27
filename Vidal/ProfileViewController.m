@@ -39,6 +39,10 @@
     [self.city setText:city];
     [self.spec setText:spec];
     
+    
+    NSLog(@"%f", self.changeButton.imageView.image.size.width);
+    [self.changeButton setImage:[self imageWithImage:[UIImage imageNamed:@"edit"] scaledToSize:CGSizeMake(16, 20)]  forState:UIControlStateNormal];
+    NSLog(@"%f", self.changeButton.imageView.image.size.width);
     // Do any additional setup after loading the view.
 }
 
@@ -60,6 +64,16 @@
 - (IBAction)change:(UIButton *)sender {
     
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.vidal.ru/profile"]];
+    
+}
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
     
 }
 @end

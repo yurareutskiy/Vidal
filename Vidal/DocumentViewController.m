@@ -19,6 +19,7 @@
     NSIndexPath *selectedRowIndex;
     BOOL open;
     CGFloat sizeCell;
+    NSMutableDictionary *tapsOnCell;
     
 }
 
@@ -30,9 +31,14 @@
     
     ud = [NSUserDefaults standardUserDefaults];
     toDelete = [NSMutableIndexSet indexSet];
+    tapsOnCell = [NSMutableDictionary dictionary];
     
     open = false;
     
+    self.navigationItem.title = @"Вещество";
+    [self.shareButton.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
+    
+    self.tableView.estimatedRowHeight = 60.0;
     // Do any additional setup after loading the view.
 }
 - (void) viewWillDisappear:(BOOL)animated {
@@ -95,14 +101,10 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
-        if (open) {
-            return sizeCell;
-        } else {
-            return 60;
-        }
+    if ([[tapsOnCell valueForKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]] isEqualToString:@"1"]) {
+        return UITableViewAutomaticDimension;
     } else {
-        return 60;
+        return 60.0;
     }
 }
 
@@ -133,17 +135,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-            selectedRowIndex = [indexPath copy];
-            if (!open) {
-                open = true;
-//                DocsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//                [self perfSeg:cell];
-    
-            } else {
-                open = false;
-//                DocsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//                [self perfSeg:cell];
-            }
+    if ([[tapsOnCell valueForKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]] isEqualToString:@"0"]) {
+        
+        for (NSString *value in [tapsOnCell allKeys]) {
+            [tapsOnCell setObject:@"0" forKey:value];
+        }
+        
+        [tapsOnCell setObject:@"1" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
+        
+        
+        
+    } else {
+        [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
+    }
     
             UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width - 40, 0)];
         NSString *string = [self clearString:[[self.info objectAtIndex:0] objectAtIndex:indexPath.row]];
@@ -226,6 +230,19 @@
         lovc.activeID = self.activeID;
         
     }
+    
+}
+
+- (IBAction)share:(UIButton *)sender {
+    
+    NSString *text = self.name.text;
+    
+    UIActivityViewController *controller =
+    [[UIActivityViewController alloc]
+     initWithActivityItems:@[text, @"Я узнал об этом веществе через приложение Видаль-кардиология", @"vidal.ru"]
+     applicationActivities:nil];
+    
+    [self presentViewController:controller animated:YES completion:nil];
     
 }
 

@@ -11,8 +11,9 @@
 #import "PharmaTableViewCell.h"
 #import "SecondDocumentViewController.h"
 #import "DocumentViewController.h"
+#import "SecondModelViewController.h"
 
-@interface ListOfViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
+@interface ListOfViewController : SecondModelViewController<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 

@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "SecondModelViewController.h"
 
-@interface CompanyViewController : UIViewController
+@interface CompanyViewController : SecondModelViewController
 
 @property (strong, nonatomic) IBOutlet UIImageView *image;
 @property (strong, nonatomic) IBOutlet UILabel *nameHid;

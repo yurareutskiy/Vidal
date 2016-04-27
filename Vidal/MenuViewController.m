@@ -22,6 +22,8 @@
     self.revealViewController.delegate = self;
     
     [[self.vidal imageView] setContentMode:UIViewContentModeScaleAspectFit];
+    self.revealViewController.rearViewRevealWidth = self.view.frame.size.width - 80.0;
+    
     
     // Do any additional setup after loading the view.
 }

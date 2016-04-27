@@ -10,8 +10,9 @@
 #import "ModelViewController.h"
 #import "SocialNetworkManagerVC.h"
 #import "AFNetworking.h"
+#import "SecondModelViewController.h"
 
-@interface ExpandNewsViewController : UIViewController
+@interface ExpandNewsViewController : SecondModelViewController
 @property (strong, nonatomic) IBOutlet UILabel *newsText;
 - (IBAction)backAction:(UIButton *)sender;
 - (IBAction)shareNews:(UIButton *)sender;
@@ -20,5 +21,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *date;
 - (id) initWithURLString:(NSString*) urlString;
 @property (strong, nonatomic) IBOutlet UIButton *backView;
+@property (strong, nonatomic) IBOutlet UIButton *shareButton;
 
 @end

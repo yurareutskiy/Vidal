@@ -9,8 +9,9 @@
 #import <UIKit/UIKit.h>
 #import "DocsTableViewCell.h"
 #import "DBManager.h"
+#import "SecondModelViewController.h"
 
-@interface SecondDocumentViewController : UIViewController <UITableViewDelegate, UITableViewDataSource, DocsTableViewCellDelegate>
+@interface SecondDocumentViewController : SecondModelViewController <UITableViewDelegate, UITableViewDataSource, DocsTableViewCellDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *registred;
@@ -23,5 +24,7 @@
 
 - (IBAction)addToFav:(UIButton *)sender;
 - (IBAction)toInter:(UIButton *)sender;
+@property (strong, nonatomic) IBOutlet UIButton *shareButton;
+- (IBAction)share:(UIButton *)sender;
 
 @end

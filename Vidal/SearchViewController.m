@@ -43,6 +43,8 @@
     BOOL tableView3b;
     BOOL tableView4b;
     int index;
+    int buttonNumber;
+    
     NSUserDefaults *ud;
     NSString *next;
     
@@ -61,9 +63,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    //[super setLabel:@"Список препаратов"];
-    
     self.data = [NSMutableArray array];
+    
+    buttonNumber = 0;
     
     tableView1b = true;
     tableView2b = false;
@@ -115,18 +117,8 @@
     self.tableView3.hidden = true;
     self.tableView4.hidden = true;
     
-    [self.button2 setBackgroundColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1]];
-    [self.button2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    
-    [self.button1 setBackgroundColor:[UIColor whiteColor]];
-    [self.button1 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
-    
-    [self.button3 setBackgroundColor:[UIColor whiteColor]];
-    [self.button3 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
-    
-    [self.button4 setBackgroundColor:[UIColor whiteColor]];
-    [self.button4 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
-    
+    self.navigationItem.title = @"Поиск";
+
     
     // Do any additional setup after loading the view.
 }
@@ -213,7 +205,7 @@
 
         next = [self.moleculeFull[index] objectAtIndex:0];
         [ud setObject:next forKey:@"molecule"];
-        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Molecule.MoleculeID, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID WHERE Document.DocumentID = %@", next];
+        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Molecule.MoleculeID, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозирования', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID WHERE Document.DocumentID = %@", next];
         [self getInfo:request];
         
         [self.tableView1 deselectRowAtIndexPath:indexPath animated:NO];
@@ -231,7 +223,7 @@
         next = [self.drugsFull[index] objectAtIndex:0];
         [ud setObject:next forKey:@"molecule"];
         [ud setObject:next forKey:@"id"];
-        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document WHERE Document.DocumentID = %@", next];
+        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозирования', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document WHERE Document.DocumentID = %@", next];
         [self getInfo:request];
         
         [self.tableView2 deselectRowAtIndexPath:indexPath animated:NO];
@@ -388,15 +380,6 @@
     self.tableView3.hidden = true;
     self.tableView4.hidden = true;
     
-    [self.button1 setBackgroundColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1]];
-    [self.button1 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.button2 setBackgroundColor:[UIColor whiteColor]];
-    [self.button2 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
-    [self.button3 setBackgroundColor:[UIColor whiteColor]];
-    [self.button3 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
-    [self.button4 setBackgroundColor:[UIColor whiteColor]];
-    [self.button4 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
-    
     tableView2b = true;
     tableView1b = false;
     tableView3b = false;
@@ -414,15 +397,6 @@
     self.tableView2.hidden = true;
     self.tableView3.hidden = true;
     self.tableView4.hidden = true;
-    
-    [self.button2 setBackgroundColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1]];
-    [self.button2 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.button1 setBackgroundColor:[UIColor whiteColor]];
-    [self.button1 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
-    [self.button3 setBackgroundColor:[UIColor whiteColor]];
-    [self.button3 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
-    [self.button4 setBackgroundColor:[UIColor whiteColor]];
-    [self.button4 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
     
     tableView2b = false;
     tableView1b = true;
@@ -442,15 +416,6 @@
     self.tableView3.hidden = false;
     self.tableView4.hidden = true;
     
-    [self.button3 setBackgroundColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1]];
-    [self.button3 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.button1 setBackgroundColor:[UIColor whiteColor]];
-    [self.button1 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
-    [self.button2 setBackgroundColor:[UIColor whiteColor]];
-    [self.button2 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
-    [self.button4 setBackgroundColor:[UIColor whiteColor]];
-    [self.button4 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
-    
     tableView2b = false;
     tableView1b = false;
     tableView3b = true;
@@ -469,21 +434,15 @@
     self.tableView3.hidden = true;
     self.tableView4.hidden = false;
     
-    [self.button4 setBackgroundColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1]];
-    [self.button4 setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [self.button1 setBackgroundColor:[UIColor whiteColor]];
-    [self.button1 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
-    [self.button3 setBackgroundColor:[UIColor whiteColor]];
-    [self.button3 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
-    [self.button2 setBackgroundColor:[UIColor whiteColor]];
-    [self.button2 setTitleColor:[UIColor colorWithRed:183.0/255.0 green:1.0/255.0 blue:57.0/255.0 alpha:1] forState:UIControlStateNormal];
-    
     tableView2b = false;
     tableView1b = false;
     tableView3b = false;
     tableView4b = true;
     
     [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.0];
+    
+    
+    
 }
 
 - (NSString *) clearString:(NSString *) input {
@@ -539,7 +498,7 @@
 
         [ud setObject:[[self.data objectAtIndex:0] objectAtIndex:3] forKey:@"activeID"];
         [[self.data objectAtIndex:0] removeObjectAtIndex:3];
-        [[self.dbManager.arrColumnNames objectAtIndex:0] removeObjectAtIndex:3];
+        [self.dbManager.arrColumnNames removeObjectAtIndex:3];
         [ud setObject:@"active" forKey:@"from"];
         
     } else if (tableView2b) {
@@ -592,4 +551,107 @@
     }
     
 }
+
+- (IBAction)left:(UIButton *)sender {
+    
+    if (buttonNumber == 0) {
+        
+        buttonNumber = 3;
+        [self toProd:nil];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 3, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+            [self.line setFrame:CGRectMake(self.button4.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
+        } completion:^(BOOL finished) {
+
+        }];
+        
+    } else if (buttonNumber == 1) {
+        
+        buttonNumber = 0;
+        [self toMolecule:nil];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.scrollView scrollRectToVisible:CGRectMake(0.0, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+            [self.line setFrame:CGRectMake(self.button2.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+    } else if (buttonNumber == 2) {
+        
+        buttonNumber = 1;
+        [self toDrugs:nil];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 1, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+            [self.line setFrame:CGRectMake(self.button2.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
+        } completion:^(BOOL finished) {
+
+        }];
+        
+    } else if (buttonNumber == 3) {
+        
+        buttonNumber = 2;
+        [self toPharma:nil];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 2, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+            [self.line setFrame:CGRectMake(self.button3.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
+        } completion:^(BOOL finished) {
+
+        }];
+        
+    }
+    
+}
+- (IBAction)right:(UIButton *)sender {
+    
+    if (buttonNumber == 0) {
+        
+        buttonNumber = 1;
+        [self toDrugs:nil];
+        
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 1, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+            [self.line setFrame:CGRectMake(self.button2.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+        
+        
+    } else if (buttonNumber == 1) {
+        
+        buttonNumber = 2;
+        [self toPharma:nil];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 2, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+            [self.line setFrame:CGRectMake(self.button3.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+        
+        
+    } else if (buttonNumber == 2) {
+        
+        buttonNumber = 3;
+        [self toProd:nil];
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 3, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+            [self.line setFrame:CGRectMake(self.button4.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+    } else if (buttonNumber == 3) {
+        
+        buttonNumber = 0;
+        [UIView animateWithDuration:0.3 animations:^{
+            [self.scrollView scrollRectToVisible:CGRectMake(0.0, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+            [self.line setFrame:CGRectMake(self.button2.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+    
+}
+
 @end

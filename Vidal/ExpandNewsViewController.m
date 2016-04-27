@@ -27,6 +27,8 @@
     
     self.navigationItem.title = @"Новости";
     
+    [self.shareButton.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
+    
     gradient = [CAGradientLayer layer];
     gradient.frame = self.backView.bounds;
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:208.0/255.0 green:208.0/255.0 blue:208.0/255.0 alpha:1.0] CGColor], (id)[[UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1.0] CGColor], nil];
@@ -83,6 +85,8 @@
     self.backView.layer.shadowColor = [UIColor blackColor].CGColor;
     self.backView.layer.shadowOffset = CGSizeMake(0.0f, 1.0f);
     self.backView.layer.shadowOpacity = 0.5f;
+    
+    
     
     // Do any additional setup after loading the view.
 }
@@ -165,7 +169,18 @@
 
 - (IBAction)shareNews:(UIButton *)sender {
     
-    [self performSegueWithIdentifier:@"share" sender:self];
+//    [self performSegueWithIdentifier:@"share" sender:self];
     //[self presentViewController:vc animated:YES completion:nil];
+    
+    
+    NSString *text = self.newsText.text;
+    
+    UIActivityViewController *controller =
+    [[UIActivityViewController alloc]
+     initWithActivityItems:@[text, @"Я узнал это через приложение Видаль-кардиология", @"vidal.ru"]
+     applicationActivities:nil];
+    
+    [self presentViewController:controller animated:YES completion:nil];
+    
 }
 @end

@@ -27,7 +27,7 @@
     
     ud = [NSUserDefaults standardUserDefaults];
     [ud setValue:@"0" forKey:@"howTo"];
-    
+    [ud removeObjectForKey:@"toInter"];
     
     secret_key = @"uX04xN12Tk1654Qz";
     
@@ -47,6 +47,14 @@
     
     // Do any additional setup after loading the view.
 }
+
+/*
+
+ ;sodghfsd;ofh;s
+ sdifgousdh
+ 
+ 
+ sdfdsh */
 
 - (void) checkBool {
     NSLog(@"HELLOOOOOOOOOOO");

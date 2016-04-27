@@ -53,4 +53,7 @@
 
 - (IBAction)showPicker:(UIButton *)sender;
 
+@property (strong, nonatomic) IBOutletCollection(UILabel) NSArray *nameLabels;
+@property (strong, nonatomic) IBOutletCollection(UIButton) NSArray *buttonLabels;
+
 @end

@@ -30,7 +30,6 @@
     self.tableView.dataSource = self;
     
     [super setLabel:@"Новости"];
-
     
     array = [NSArray array];
     

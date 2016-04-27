@@ -1,38 +1,25 @@
 //
-//  CompanyViewController.m
+//  SecondModelViewController.m
 //  Vidal
 //
-//  Created by Anton Scherbakov on 24/04/16.
+//  Created by Anton Scherbakov on 27/04/16.
 //  Copyright © 2016 StyleRU. All rights reserved.
 //
 
-#import "CompanyViewController.h"
+#import "SecondModelViewController.h"
 
-@interface CompanyViewController ()
+@interface SecondModelViewController ()
 
 @end
 
-@implementation CompanyViewController 
+@implementation SecondModelViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationItem.title = @"Компания";
+    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
     
     // Do any additional setup after loading the view.
-}
-
-- (void) viewWillAppear:(BOOL)animated {
-    
-    self.nameHid.text = self.name;
-    self.countryHid.text = self.country;
-    self.addressHid.text = self.address;
-    self.emailHid.text = self.email;
-    self.phoneHid.text = self.phone;
-    self.image.image = self.logo;
-    
-    NSLog(@"%@", self.name);
-    
 }
 
 - (void)didReceiveMemoryWarning {
@@ -49,11 +36,5 @@
     // Pass the selected object to the new view controller.
 }
 */
-
-- (IBAction) toListDrugs:(UIButton *)sender {
-    
-    [self performSegueWithIdentifier:@"toList" sender:self];
-    
-}
 
 @end

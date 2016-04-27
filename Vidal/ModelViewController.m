@@ -128,11 +128,12 @@
 }
 
 - (void) setLabel:(NSString *)label {
-    UILabel* labelName = [[UILabel alloc] initWithFrame:CGRectMake(0,40,320,40)];
-    labelName.textAlignment = NSTextAlignmentLeft;
-    labelName.text = NSLocalizedString(label, @"");
-    labelName.textColor = [UIColor whiteColor];
-    self.navigationItem.titleView = labelName;
+//    UILabel* labelName = [[UILabel alloc] initWithFrame:CGRectMake(0,40,320,40)];
+//    labelName.textAlignment = NSTextAlignmentCenter;
+//    labelName.text = NSLocalizedString(label, @"");
+//    labelName.textColor = [UIColor whiteColor];
+//    self.navigationItem.titleView = labelName;
+    self.navigationItem.title = label;
 }
 
 - (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {

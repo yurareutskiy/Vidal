@@ -108,7 +108,7 @@
     if ([ud objectForKey:@"toInter"]) {
         self.input.text = [ud objectForKey:@"toInter"];
         [self findFirstResult:[ud objectForKey:@"toInter"]];
-//        [self setUpQuickSearch:self.hello2];
+        [self setUpQuickSearch:self.hello2];
         self.tableView.hidden = true;
         self.secondInput.hidden = false;
         self.secondLine.hidden = false;
@@ -120,8 +120,10 @@
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+- (void)viewDidDisappear:(BOOL)animated {
     self.input.text = @"";
+    self.lead.hidden = true;
+    self.secondLinePicker.hidden = true;
     [ud removeObjectForKey:@"toInter"];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
@@ -200,7 +202,9 @@
     
     for (int i = 0; i < [[[array objectForKey:@"interactions"][inx] objectForKey:@"info"] count]; i++) {
         [self.hello2 addObject:[[[array objectForKey:@"interactions"][inx] objectForKey:@"info"][i] objectForKey:@"coname"]];
+        [self.secondLinePicker reloadAllComponents];
     }
+    
     
 }
 
@@ -222,7 +226,9 @@
         self.searchField.text = self.FilteredResults[indexPath.row];
         [self findFirstResult:self.FilteredResults[indexPath.row]];
         [self setUpQuickSearch:self.hello2];
-        
+        [self.input resignFirstResponder];
+        [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
+        [self.secondLinePicker reloadAllComponents];
         // ИНОГДА ПАДАЕТ [;
     } else if (textField2) {
         
@@ -273,6 +279,7 @@
         [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
         return YES;
     } else if (textField.tag == 2) {
+        if (![self.input.text isEqualToString:@""]) {
         textField2 = true;
         textField1 = false;
         self.secondInput.text = @"";
@@ -280,7 +287,11 @@
         self.toolbar.hidden = false;
         self.lead.hidden = false;
         [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
+            [self.secondLinePicker reloadAllComponents];
         return NO;
+        } else {
+            return NO;
+        }
     } else {
         return YES;
     }
@@ -385,6 +396,7 @@
 // returns the # of rows in each component..
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     return self.hello2.count;
+    
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {

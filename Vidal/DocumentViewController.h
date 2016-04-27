@@ -11,8 +11,9 @@
 #import "DocsTableViewCell.h"
 #import "DBManager.h"
 #import "ListOfViewController.h"
+#import "SecondModelViewController.h"
 
-@interface DocumentViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@interface DocumentViewController : SecondModelViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (strong, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *registred;
@@ -23,5 +24,8 @@
 @property (strong, nonatomic) NSMutableArray *info;
 @property (strong, nonatomic) NSMutableArray *columns;
 @property (strong, nonatomic) NSString *activeID;
+
+@property (strong, nonatomic) IBOutlet UIButton *shareButton;
+- (IBAction)share:(UIButton *)sender;
 
 @end

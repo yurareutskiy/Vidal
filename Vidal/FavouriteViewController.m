@@ -214,17 +214,16 @@
     if (tableView.tag == 1) {
         [tableView deselectRowAtIndexPath:indexPath animated:NO];
         if (!container) {
-            self.containerView.hidden = false;
-            container = true;
-            self.darkView.hidden = false;
-            [self.darkView addGestureRecognizer:tap];
             
             [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:0] forKey:@"drug"];
-            NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозировки', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document WHERE Document.DocumentID = %@", [ud objectForKey:@"drug"]];
+            NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозирования', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document WHERE Document.DocumentID = %@", [ud objectForKey:@"drug"]];
 //                                 %@", [ud objectForKey:@"drug"]];
 //            INNER JOIN Product ON Document.DocumentID = Product.DocumentID
             NSLog(@"%@", request);
             [self getMol:request];
+            
+            [self performSegueWithIdentifier:@"toList" sender:self];
+            
         }} else if (tableView.tag == 2){
             selectedRowIndex = [indexPath copy];
             
@@ -286,44 +285,44 @@
     }
     self.molecule = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:mol]];
     
-    for (NSUInteger i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
-        if ([[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
-            || [[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
-            [toDelete addIndex:i];
-    }
-    
-    if ([((NSArray *)[ud objectForKey:@"favs"]) containsObject:[ud objectForKey:@"id"]]) {
-        NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:@"Препарат в избранном" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:187.0/255.0 green:0.0 blue:57.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
-        
-        [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setAttributedTitle:resultText forState:UIControlStateNormal];
-        [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setImage:[UIImage imageNamed:@"favRed"] forState:UIControlStateNormal];
-        ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0);
-    } else {
-        NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:@"Добавить в избранное" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
-        
-        [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setAttributedTitle:resultText forState:UIControlStateNormal];
-        [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setImage:[UIImage imageNamed:@"favGrey"] forState:UIControlStateNormal];
-        ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0);
-    }
-
-    
-    ((SecondDocumentViewController *)self.childViewControllers.lastObject).latName.text = [self clearString:[[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"]];
-    ((SecondDocumentViewController *)self.childViewControllers.lastObject).name.text = [self clearString:[[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"]];
-    
-    if (![[[self.molecule objectAtIndex:0] objectAtIndex:2] isEqualToString:@""]) {
-        ((SecondDocumentViewController *)self.childViewControllers.lastObject).registred.text = [self clearString:[[self.molecule objectAtIndex:0] objectAtIndex:2]];
-        [toDelete addIndex:2];
-    } else {
-        [toDelete addIndex:2];
-    }
-    
-    [toDelete addIndex:0];
-    [toDelete addIndex:1];
-    
-    [[self.molecule objectAtIndex:0] removeObjectsAtIndexes:toDelete];
-    [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
-    
-    [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
+//    for (NSUInteger i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
+//        if ([[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
+//            || [[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
+//            [toDelete addIndex:i];
+//    }
+//    
+//    if ([((NSArray *)[ud objectForKey:@"favs"]) containsObject:[ud objectForKey:@"id"]]) {
+//        NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:@"Препарат в избранном" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:187.0/255.0 green:0.0 blue:57.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
+//        
+//        [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setAttributedTitle:resultText forState:UIControlStateNormal];
+//        [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setImage:[UIImage imageNamed:@"favRed"] forState:UIControlStateNormal];
+//        ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0);
+//    } else {
+//        NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:@"Добавить в избранное" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
+//        
+//        [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setAttributedTitle:resultText forState:UIControlStateNormal];
+//        [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setImage:[UIImage imageNamed:@"favGrey"] forState:UIControlStateNormal];
+//        ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0);
+//    }
+//
+//    
+//    ((SecondDocumentViewController *)self.childViewControllers.lastObject).latName.text = [self clearString:[[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"]];
+//    ((SecondDocumentViewController *)self.childViewControllers.lastObject).name.text = [self clearString:[[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"]];
+//    
+//    if (![[[self.molecule objectAtIndex:0] objectAtIndex:2] isEqualToString:@""]) {
+//        ((SecondDocumentViewController *)self.childViewControllers.lastObject).registred.text = [self clearString:[[self.molecule objectAtIndex:0] objectAtIndex:2]];
+//        [toDelete addIndex:2];
+//    } else {
+//        [toDelete addIndex:2];
+//    }
+//    
+//    [toDelete addIndex:0];
+//    [toDelete addIndex:1];
+//    
+//    [[self.molecule objectAtIndex:0] removeObjectsAtIndexes:toDelete];
+//    [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
+//    
+//    [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
     
 }
 
@@ -379,6 +378,19 @@
     text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
     
     return text;
+    
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"toList"]) {
+        
+        SecondDocumentViewController *sdvc = [segue destinationViewController];
+        
+        sdvc.info = self.molecule;
+        sdvc.dbManager = self.dbManager;
+        
+    }
     
 }
 
