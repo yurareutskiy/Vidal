@@ -108,7 +108,7 @@
     if ([ud objectForKey:@"toInter"]) {
         self.input.text = [ud objectForKey:@"toInter"];
         [self findFirstResult:[ud objectForKey:@"toInter"]];
-        [self setUpQuickSearch:self.hello2];
+//        [self setUpQuickSearch:self.hello2];
         self.tableView.hidden = true;
         self.secondInput.hidden = false;
         self.secondLine.hidden = false;
@@ -116,7 +116,7 @@
         self.lead.hidden = true;
         self.toolbar.hidden = false;
         self.secondLinePicker.hidden = false;
-        [self.secondLinePicker reloadAllComponents];
+//        [self.secondLinePicker reloadAllComponents];
     }
 }
 
@@ -146,16 +146,16 @@
 
 - (void)filterResults {
     // Asynchronously
-    if (textField1) {
+//    if (textField1) {
     [self.quickSearch asynchronouslyFilterObjectsWithValue:self.searchField.text completion:^(NSArray *filteredResults) {
         [self updateTableViewWithNewResults:filteredResults];
     }];
-    }
-    if (textField2) {
-        [self.quickSearch asynchronouslyFilterObjectsWithValue:self.secondInput.text completion:^(NSArray *filteredResults) {
-            [self updateTableViewWithNewResults:filteredResults];
-        }];
-    }
+//    }
+//    if (textField2) {
+//        [self.quickSearch asynchronouslyFilterObjectsWithValue:self.secondInput.text completion:^(NSArray *filteredResults) {
+//            [self updateTableViewWithNewResults:filteredResults];
+//        }];
+//    }
     
     // Synchronously
     //[self updateTableViewWithNewResults:[self.QuickSearch filteredObjectsWithValue:self.searchTextField.text]];
@@ -164,7 +164,7 @@
 - (void)updateTableViewWithNewResults:(NSArray *)results {
     self.FilteredResults = results;
     [self.tableView reloadData];
-    [self.secondLinePicker reloadAllComponents];
+//    [self.secondLinePicker reloadAllComponents];
 }
 
 #pragma mark - TableView
@@ -200,12 +200,16 @@
         }
     }
     
+    self.hello2 = [NSMutableArray array];
+    
     for (int i = 0; i < [[[array objectForKey:@"interactions"][inx] objectForKey:@"info"] count]; i++) {
         [self.hello2 addObject:[[[array objectForKey:@"interactions"][inx] objectForKey:@"info"][i] objectForKey:@"coname"]];
-        [self.secondLinePicker reloadAllComponents];
+        NSLog(@"%@", [[[array objectForKey:@"interactions"][inx] objectForKey:@"info"][i] objectForKey:@"coname"]);
     }
     
+    NSLog(@"%d", (int)self.hello2.count);
     
+    [self.secondLinePicker reloadAllComponents];
 }
 
 - (NSString *) findSecondResult:(NSString *) second {
@@ -222,17 +226,18 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (textField1) {
+//    if (textField1) {
         self.searchField.text = self.FilteredResults[indexPath.row];
         [self findFirstResult:self.FilteredResults[indexPath.row]];
-        [self setUpQuickSearch:self.hello2];
+//        [self setUpQuickSearch:self.hello2];
         [self.input resignFirstResponder];
-        [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
-        [self.secondLinePicker reloadAllComponents];
+    
+//        [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
+//        [self.secondLinePicker reloadAllComponents];
         // ИНОГДА ПАДАЕТ [;
-    } else if (textField2) {
-        
-    }
+//    } else if (textField2) {
+//        
+//    }
     self.tableView.hidden = true;
     self.secondInput.hidden = false;
     self.secondLine.hidden = false;
@@ -276,19 +281,19 @@
         self.input.text = @"";
         self.result.text = @"";
         self.tableView.hidden = false;
-        [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
+//        [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
         return YES;
     } else if (textField.tag == 2) {
         if (![self.input.text isEqualToString:@""]) {
-        textField2 = true;
-        textField1 = false;
-        self.secondInput.text = @"";
-        self.secondLinePicker.hidden = false;
-        self.toolbar.hidden = false;
-        self.lead.hidden = false;
-        [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
+            textField2 = true;
+            textField1 = false;
+            self.secondInput.text = @"";
+            self.secondLinePicker.hidden = false;
+            self.toolbar.hidden = false;
+            self.lead.hidden = false;
+//            [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
             [self.secondLinePicker reloadAllComponents];
-        return NO;
+            return NO;
         } else {
             return NO;
         }
@@ -298,12 +303,12 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-    if (textField.tag == 1) {
+//    if (textField.tag == 1) {
         [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
         return YES;
-    } else {
-        return NO;
-    }
+//    } else {
+//        return NO;
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -323,7 +328,7 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
 #pragma mark - keyboard movements

@@ -115,13 +115,14 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    isEmptyDrugsList = false;
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     
     NSString *parentStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]];
     NSString *levelStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:3]];
     NSString *pointIDStr = [NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:0]];
     
-    NSString *req2 = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = %ld AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", [levelStr integerValue] + 1, parentStr];
+    NSString *req2 = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = %d AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", (int)[levelStr integerValue] + 1, parentStr];
     
     BOOL goNext = [self checkData:req2];
     

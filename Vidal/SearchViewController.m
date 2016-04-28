@@ -610,9 +610,10 @@
         
         [UIView animateWithDuration:0.3 animations:^{
             [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 1, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
-            [self.line setFrame:CGRectMake(self.button2.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
         } completion:^(BOOL finished) {
-            
+            [UIView animateWithDuration:0.3 animations:^{
+                [self.line setFrame:CGRectMake(self.button2.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
+            }];
         }];
         
         
@@ -623,9 +624,10 @@
         [self toPharma:nil];
         [UIView animateWithDuration:0.3 animations:^{
             [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 2, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
-            [self.line setFrame:CGRectMake(self.button3.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
         } completion:^(BOOL finished) {
-            
+            [UIView animateWithDuration:0.3 animations:^{
+                [self.line setFrame:CGRectMake(self.button3.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
+            }];
         }];
         
         
@@ -636,9 +638,10 @@
         [self toProd:nil];
         [UIView animateWithDuration:0.3 animations:^{
             [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 3, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
-            [self.line setFrame:CGRectMake(self.button4.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
         } completion:^(BOOL finished) {
-            
+            [UIView animateWithDuration:0.3 animations:^{
+                [self.line setFrame:CGRectMake(self.button4.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
+            }];
         }];
         
     } else if (buttonNumber == 3) {
@@ -646,9 +649,10 @@
         buttonNumber = 0;
         [UIView animateWithDuration:0.3 animations:^{
             [self.scrollView scrollRectToVisible:CGRectMake(0.0, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
-            [self.line setFrame:CGRectMake(self.button2.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
         } completion:^(BOOL finished) {
-            
+            [UIView animateWithDuration:0.3 animations:^{
+                [self.line setFrame:CGRectMake(self.button2.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
+            }];
         }];
     }
     

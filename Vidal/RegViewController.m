@@ -129,78 +129,37 @@
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-//    if (tableView.tag == 1) {
-//        return self.FilteredResults.count - 1;
-//    } else if (tableView.tag == 2) {
-//        NSLog(@"%lu", (unsigned long)self.namesCity.count);
-    
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
         return self.namesCity.count;
-    
-//    } else {
-//        return 1;
-//    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-//    if (tableView.tag == 1) {
-//        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
-//        if (!cell) {
-//            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchCell"];
-//        }
-//    
-//        // Set Content
-//        NSString *title;
-//        title = self.FilteredResults[indexPath.row + 1];
-//        cell.textLabel.text = title;
-//    
-//        // Return Cell
-//        return cell;
-//    } else if (tableView.tag == 2) {
-    
     
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
         if (!cell) {
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchCell"];
         }
-        
-        // Set Content
+    
         NSString *title;
         title = self.namesCity[indexPath.row];
         cell.textLabel.text = title;
-        
-        // Return Cell
+
         return cell;
-    
-    
-//    } else {
-//        return nil;
-//    }
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-//    if (tableView.tag == 1) {
-//        self.special.text = self.FilteredResults[indexPath.row + 1];
-//        self.tableView.hidden = true;
-//        for (NSDictionary *key in self.dictSpec) {
-//            if ([[key objectForKey:@"doctorName"] isEqualToString:self.FilteredResults[indexPath.row + 1]]) {
-//                job = [key objectForKey:@"id"];
-//                break;
-//            }
-//        }
-//        [self hideEver];
-//        [self.scrollView addGestureRecognizer:tap];
-//    } else if (tableView.tag == 2) {
-    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
         self.cityText.text = self.namesCity[indexPath.row];
         self.tableView2.hidden = true;
         cityCheck = self.namesCity[indexPath.row];
-        [self hideEver];
+//        [self hideEver];
+    [self.cityText resignFirstResponder];
         [self.scrollView addGestureRecognizer:tap];
+    self.special.userInteractionEnabled = YES;
+    self.special.enabled = YES;
     
-//    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -218,12 +177,10 @@
         [[self.view viewWithTag:i+1] becomeFirstResponder];
         i += 1;
         if (textField.tag == 4) {
-            self.tableView2.hidden = true;
+            [self hideEver];
             [textField resignFirstResponder];
-            
-//            self.tableView.hidden = true;
-            
-            [self.scrollView setContentOffset:self.view.frame.origin animated:YES];
+            [[self.view viewWithTag:i+1] becomeFirstResponder];
+//            [self.scrollView setContentOffset:self.view.frame.origin animated:YES];
             [self.scrollView addGestureRecognizer:tap];
         }
     }
@@ -232,13 +189,12 @@
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
     
-//    if (textField.tag == 5) {
-//        [self.scrollView removeGestureRecognizer:tap];
-//        [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
-//        self.tableView.hidden = false;
-//    } else
-    
     if (textField.tag == 4) {
+        self.namesCity = [NSMutableArray array];
+        self.special.userInteractionEnabled = NO;
+        self.special.enabled = NO;
+        [self.tableView2 reloadData];
+        self.cityText.text = @"";
         [self.scrollView removeGestureRecognizer:tap];
         self.tableView2.hidden = false;
     }
@@ -246,9 +202,6 @@
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
-//    if (textField.tag == 5) {
-//        [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
-//    } else
     
     if (textField.tag == 4) {
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
@@ -268,22 +221,24 @@
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    if (textField.tag >= 3) {
+    if (textField.tag == 3 || textField.tag == 4) {
         svos = self.scrollView.contentOffset;
         CGPoint pt;
         CGRect rc = [textField bounds];
         rc = [textField convertRect:rc toView:self.scrollView];
         pt = rc.origin;
         pt.x = self.scrollView.contentOffset.x;
-        if (textField.tag == 5) {
-            pt.y -= 216;
-        } else {
-            if (self.view.frame.size.height == 736) {
-                pt.y -= 200;
-            } else {
-                pt.y -= 180;
-            }
-        }
+        pt.y -= 200;
+//        } else {
+//            if (self.view.frame.size.height == 736) {
+//                pt.y -= 200;
+//            } else {
+//                pt.y -= 180;
+//            }
+//        }
+//        } else if (textField.tag == 6) {
+//            pt.y = 0;
+//        }
         [self.scrollView setContentOffset:pt animated:YES];
     }
     
@@ -293,6 +248,8 @@
     
     if (textField.tag != 4) {
         self.tableView2.hidden = true;
+    } else {
+        [self.scrollView removeGestureRecognizer:tap];
     }
 }
 
@@ -399,7 +356,7 @@
     }];
 }
      
-     - (void) showAlert:(NSString *)alert  mess:(NSString *)mess check:(BOOL) yep {
+- (void) showAlert:(NSString *)alert  mess:(NSString *)mess check:(BOOL) yep {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alert message:mess preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
@@ -554,44 +511,38 @@
         [self.cityText resignFirstResponder];
         [self.special resignFirstResponder];
         self.tableView.hidden = true;
+        self.tableView2.hidden = true;
         self.specialistPickerView.hidden = true;
         self.toolbar.hidden = true;
+        self.special.userInteractionEnabled = YES;
+        self.special.enabled = YES;
+//        CGPoint point = self.scrollView.frame.origin;
+//        point.y = 0;
         
-        CGPoint point = self.scrollView.frame.origin;
-        if (self.view.frame.size.height == 568) {
-            point.y = self.datePicker.frame.origin.y - 240;
-        } else {
-            point.y = 0;
-        }
-        [self.scrollView setContentOffset:point animated:YES];
-
-        
+        svos = self.scrollView.contentOffset;
+        CGPoint pt;
+        pt.x = svos.x;
+        pt.y = 0;
+        [self.scrollView setContentOffset:pt animated:YES];
     }];
 }
 
 // returns the number of 'columns' to display.
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
+{
     return 1;
-    
 }
 
 // returns the # of rows in each component..
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
+{
     return [self.namesSpec count] - 1;
-    
 }
 
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
+{
     return self.namesSpec[row + 1];
-    
 }
-
-
-
-
 
 @end
