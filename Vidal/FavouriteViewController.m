@@ -49,23 +49,6 @@
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
-    
-    NSString *request = @"";
-    NSArray *data = [NSArray arrayWithArray:[ud objectForKey:@"favs"]];
-    NSLog(@"%@", [ud objectForKey:@"favs"]);
-    NSLog(@"%@", data);
-    if ([data count] == 1) {
-        request = [NSString stringWithFormat:@"SELECT * FROM Document WHERE Document.DocumentID = %@", [data objectAtIndex:0]];
-    }
-    if ([data count] > 1) {
-        request = [NSString stringWithFormat:@"SELECT * FROM Document WHERE Document.DocumentID = %@", [data objectAtIndex:0]];
-        for (int i = 1; i < [data count]; i++) {
-            request = [NSString stringWithFormat:@"%@ OR Document.DocumentID = %@", request, [data objectAtIndex:i]];
-        }
-    }
-    [self loadData:request];
-    
-    
     self.navigationItem.title = @"Избранное";
     
     container = false;
@@ -84,6 +67,28 @@
     self.navigationItem.rightBarButtonItem = self.searchButton;
     
     // Do any additional setup after loading the view.
+}
+
+- (void) viewWillAppear:(BOOL)animated {
+    
+    NSString *request = @"";
+    NSArray *data = [NSArray arrayWithArray:[ud objectForKey:@"favs"]];
+    NSLog(@"%@", [ud objectForKey:@"favs"]);
+    NSLog(@"%@", data);
+    if ([data count] == 1) {
+        request = [NSString stringWithFormat:@"select * from DocumentListView where DocumentID = %@ order by RusName", [data objectAtIndex:0]];
+    }
+    if ([data count] > 1) {
+        request = [NSString stringWithFormat:@"select * from DocumentListView where DocumentID = '%@'", [data objectAtIndex:0]];
+        for (int i = 1; i < [data count]; i++) {
+            request = [NSString stringWithFormat:@"%@ or DocumentID = %@", request, [data objectAtIndex:i]];
+        }
+        request = [NSString stringWithFormat:@"%@  order by RusName", request];
+    }
+    
+    
+    [self loadData:request];
+    
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -145,18 +150,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView.tag == 1) {
-        return [self.arrPeopleInfo count];
-    } else if (tableView.tag == 2){
-        NSInteger x = 0;
-        for (int i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
-            if (![[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""])
-                x++;
-        }
-        return x;
-    } else {
-        return 1;
-    }
+    return [self.arrPeopleInfo count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
@@ -172,10 +166,10 @@
         [[cell.favButton imageView] setContentMode:UIViewContentModeScaleAspectFit];
     
     NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
-        NSInteger indexOfComp = [self.dbManager.arrColumnNames indexOfObject:@"CompaniesDescription"];
+    NSInteger indexOfComp = [self.dbManager.arrColumnNames indexOfObject:@"CompaniesDescription"];
     
-    cell.delegate = self;
-        [cell setTag:indexPath.row];
+        cell.delegate = self;
+    [cell setTag:indexPath.row];
         
     // Set the loaded data to the appropriate cell labels.
         cell.name.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]];
@@ -211,42 +205,13 @@
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (tableView.tag == 1) {
-        [tableView deselectRowAtIndexPath:indexPath animated:NO];
-        if (!container) {
-            
-            [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:0] forKey:@"drug"];
-            NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозирования', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document WHERE Document.DocumentID = %@", [ud objectForKey:@"drug"]];
-//                                 %@", [ud objectForKey:@"drug"]];
-//            INNER JOIN Product ON Document.DocumentID = Product.DocumentID
-            NSLog(@"%@", request);
-            [self getMol:request];
-            
-            [self performSegueWithIdentifier:@"toList" sender:self];
-            
-        }} else if (tableView.tag == 2){
-            selectedRowIndex = [indexPath copy];
-            
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 40, 0)];
-            NSString *string = [[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row];
-            NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
-            NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-            [paragraphStyle setLineSpacing:6];
-            [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [string length])];
-            label.attributedText = attributedString;
-            label.lineBreakMode = NSLineBreakByWordWrapping;
-            label.numberOfLines = 0;
-            label.font = [UIFont fontWithName:@"Lucida_Grande-Regular" size:17.f];
-            [label sizeToFit];
-            sizeCell = label.frame.size.height + 5;
-            NSLog(@"%f", sizeCell);
-            
-            [tableView beginUpdates];
-            
-            [tableView endUpdates];
-        } else {
-            NSLog(@"hello");
-        }
+    
+        NSInteger indexOfDocumentID = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
+    
+        self.molecule = [NSMutableArray arrayWithArray:[self.arrPeopleInfo objectAtIndex:indexPath.row]];
+        [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfDocumentID] forKey:@"id"];
+        [self performSegueWithIdentifier:@"toSecDoc" sender:self];
+
 }
 
 -(void)loadData:(NSString *)req{
@@ -284,7 +249,20 @@
         self.molecule = nil;
     }
     self.molecule = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:mol]];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
+    if ([segue.identifier isEqualToString:@"toSecDoc"]) {
+        
+        SecondDocumentViewController *sdvc = [segue destinationViewController];
+        
+        sdvc.info = self.molecule;
+        sdvc.dbManager = self.dbManager;
+        
+    }
+    
+}
 //    for (NSUInteger i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
 //        if ([[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
 //            || [[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
@@ -324,16 +302,16 @@
 //    
 //    [((SecondDocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
     
-}
 
 - (void) del:(FavTableViewCell *)sender {
     
-    // ПРИДУМАТЬ КАК ПЕРЕДАВАТЬ ИНДЕКС
     
     NSMutableArray *check = [NSMutableArray arrayWithArray:[ud objectForKey:@"favs"]];
-    NSLog(@"%ld", (long)sender.tag);
+    NSLog(@"%@", check);
     [check removeObjectAtIndex:sender.tag];
+    NSLog(@"%@", check);
     [self.arrPeopleInfo removeObjectAtIndex:sender.tag];
+    NSLog(@"%@", self.arrPeopleInfo);
     [ud setObject:check forKey:@"favs"];
     
     [self.tableView reloadData];
@@ -378,19 +356,6 @@
     text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
     
     return text;
-    
-}
-
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    if ([segue.identifier isEqualToString:@"toList"]) {
-        
-        SecondDocumentViewController *sdvc = [segue destinationViewController];
-        
-        sdvc.info = self.molecule;
-        sdvc.dbManager = self.dbManager;
-        
-    }
     
 }
 

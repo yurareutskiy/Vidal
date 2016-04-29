@@ -171,7 +171,7 @@
         
         DocumentViewController *dvc = [segue destinationViewController];
         dvc.info = self.data;
-        dvc.columns = self.dbManager.arrColumnNames;
+        dvc.dbManager = self.dbManager;
         
     } else if ([segue.identifier isEqualToString:@"toSecDoc"]) {
         

@@ -61,6 +61,7 @@
     [ud removeObjectForKey:@"pharmaList"];
     [ud removeObjectForKey:@"comp"];
     [ud removeObjectForKey:@"from"];
+    [ud removeObjectForKey:@"letterActive"];
     
     
     
@@ -84,23 +85,8 @@
     // Dispose of any resources that can be recreated.
 }
 
-//- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-//    //check if the index actually exists
-//    
-//    
-//    if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
-//        if (open) {
-//            return sizeCell;
-//        } else {
-//            return 90;
-//        }
-//    } else {
-//        return 90;
-//    }
-//
-//}
-
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 

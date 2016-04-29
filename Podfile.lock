@@ -1,7 +1,4 @@
 PODS:
-  - AFNetworkActivityLogger (2.0.4):
-    - AFNetworking/NSURLConnection (~> 2.0)
-    - AFNetworking/NSURLSession (~> 2.0)
   - AFNetworking (2.6.0):
     - AFNetworking/NSURLConnection (= 2.6.0)
     - AFNetworking/NSURLSession (= 2.6.0)
@@ -23,6 +20,11 @@ PODS:
   - AFNetworking/UIKit (2.6.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - FMDB (2.5):
+    - FMDB/standard (= 2.5)
+  - FMDB/common (2.5)
+  - FMDB/standard (2.5):
+    - FMDB/common
   - GGLInstanceID (1.0.0):
     - GoogleNetworkingUtilities (~> 1.0)
     - GoogleSymbolUtilities (~> 1.0)
@@ -48,25 +50,35 @@ PODS:
   - GoogleSymbolUtilities (1.0.0)
   - GoogleUtilities (1.1.0):
     - GoogleSymbolUtilities (~> 1.0.0)
-  - HSDatePickerViewController (1.0.1)
   - IMQuickSearch (1.2.0)
+  - KSCrash/Recording (0.0.5)
+  - KSCrash/Reporting/Filters/AppleFmt (0.0.5):
+    - KSCrash/Recording
+    - KSCrash/Reporting/Filters/Base
+  - KSCrash/Reporting/Filters/Base (0.0.5):
+    - KSCrash/Recording
+  - protobuf-c (1.0.1)
   - SLExpandableTableView (1.3.1)
   - VK-ios-sdk (1.2.2)
+  - YandexMobileMetrica (2.0.0):
+    - FMDB (~> 2.2)
+    - KSCrash/Recording (~> 0.0.4)
+    - KSCrash/Reporting/Filters/AppleFmt (~> 0.0.4)
+    - protobuf-c (~> 1.0.1)
   - ZipArchive (1.4.0)
 
 DEPENDENCIES:
-  - AFNetworkActivityLogger
   - AFNetworking
   - Google/CloudMessaging
-  - HSDatePickerViewController (~> 1.0)
   - IMQuickSearch
   - SLExpandableTableView
   - VK-ios-sdk
+  - YandexMobileMetrica
   - ZipArchive
 
 SPEC CHECKSUMS:
-  AFNetworkActivityLogger: 121486778117d53b3ab1c61d264b88081d0c3eee
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
+  FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
   GGLInstanceID: 3f2a20acbb91408d45a5696b7722bf44cb410e0b
   Google: ec6c7729037b9579e52a4880ba06eb38ddb1de68
   GoogleCloudMessaging: 0d64d357dd8db2b6f6a3bd63301b04dd556320f9
@@ -74,10 +86,12 @@ SPEC CHECKSUMS:
   GoogleNetworkingUtilities: 292992ab31b7b4ba32809a0e8b40e324cdfb2c0c
   GoogleSymbolUtilities: a7b0feed1fe667c8d5e647177938d0ecd62d6948
   GoogleUtilities: 8ed9134debe11719097881711464752900668f10
-  HSDatePickerViewController: b292f2a53b2644a68aa5e1343053d2f3554de64c
   IMQuickSearch: 351fda5dcf33428bf04c28213b984d66015b691d
+  KSCrash: 18820e0eedbe54404ddc54e6d022c247932d9323
+  protobuf-c: 87088f5a154d5293d9c75b44fc48b497056f4e76
   SLExpandableTableView: ff63a4bb4b71c6c3ae2b7cb1cde6a36c1645f23c
   VK-ios-sdk: f4b7df0d4e277e06d60fef6dc472be4260eeda6d
+  YandexMobileMetrica: 09b508688e95cd16ee472c6afdd01f3c78f05365
   ZipArchive: e25a4373192673e3229ac8d6e9f64a3e5713c966
 
 COCOAPODS: 0.39.0

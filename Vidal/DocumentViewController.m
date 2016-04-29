@@ -10,6 +10,8 @@
 
 @interface DocumentViewController ()
 
+@property (strong, nonatomic) NSMutableArray *arrPeopleInfo;
+
 @end
 
 @implementation DocumentViewController {
@@ -41,8 +43,13 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shareArrow"] style:UIBarButtonItemStylePlain target:self action:@selector(share:)];
     
     self.tableView.estimatedRowHeight = 60.0;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
+    self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
+
     // Do any additional setup after loading the view.
 }
+
 - (void) viewWillDisappear:(BOOL)animated {
     if (self.isMovingFromParentViewController) {
         [ud removeObjectForKey:@"activeID"];
@@ -56,35 +63,31 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     
-    if ([[ud valueForKey:@"from"] isEqualToString:@"active"]) {
-        
-            self.latName.text = [[[self.info objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
+    NSString *request = @"select * from (select inf.*, cnt.RusName as CountryRusName, cnt.EngName as CountryEngName, p.Image from InfoPage inf left join Country cnt on inf.CountryCode = cnt.CountryCode left join Picture p on inf.PictureID = p.PictureID) order by RusName";
+    [self loadData:request];
     
-            self.name.text = [[[self.info objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
+    NSInteger indexOfLatName = [self.dbManager.arrColumnNames indexOfObject:@"LatName"];
+    NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
+    NSInteger indexOfMolecule = [self.dbManager.arrColumnNames indexOfObject:@"MoleculeID"];
     
-            NSString *string = [[[self.info objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
-            self.name.numberOfLines = 0;
-            self.name.text = string;
-            [self.name sizeToFit];
+    self.latName.text = [self clearString:[self.info objectAtIndex:indexOfLatName]];
+    self.name.text = [self clearString:[self.info objectAtIndex:indexOfName]];
     
-    
-            for (NSUInteger i = 0; i < [[self.info objectAtIndex:0] count]; i++) {
-                if ([[[self.info objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
-                    || [[[self.info objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
-                    [toDelete addIndex:i];
-            }
-    
-            [toDelete addIndex:0];
-            [toDelete addIndex:1];
-    
-            [[self.info objectAtIndex:0] removeObjectsAtIndexes:toDelete];
-            [self.columns removeObjectsAtIndexes:toDelete];
-    
-            [self.tableView reloadData];
-        
-    } else if ([[ud valueForKey:@"from"] isEqualToString:@"drug"]) {
-        
+    for (NSUInteger i = 0; i < [self.info count]; i++) {
+        if ([[self.info objectAtIndex:i] isEqualToString:@""]
+            || [[self.info objectAtIndex:i] isEqualToString:@"0"])
+            [toDelete addIndex:i];
     }
+    
+    [ud setObject:[self.info objectAtIndex:indexOfMolecule] forKey:@"activeID"];
+    
+    [toDelete addIndex:indexOfLatName];
+    [toDelete addIndex:indexOfName];
+    
+    [self.info removeObjectsAtIndexes:toDelete];
+    [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
+    
+    [self.tableView reloadData];
 }
 
 /*
@@ -110,10 +113,9 @@
     }
 }
 
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    return [self.columns count];
-    
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [self.dbManager.arrColumnNames count];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -126,10 +128,15 @@
         cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
     };
     
-//    cell.delegate = self;
-    cell.expanded = @"0";
-    cell.title.text = [self clearString:[self.columns objectAtIndex:indexPath.row]];
-    cell.desc.text = [self clearString:[[self.info objectAtIndex:0] objectAtIndex:indexPath.row]];
+    if (indexPath.row > 0) {
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0.0, 1.0, self.view.frame.size.width + 5.0, 1.0)];
+        [line setBackgroundColor:[UIColor colorWithRed:164.0/255.0 green:164.0/255.0 blue:164.0/255.0 alpha:1.0]];
+        [cell addSubview:line];
+    }
+    
+    cell.title.text = [self clearString:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
+    cell.desc.text = [self clearString:[self.info objectAtIndex:indexPath.row]];
+    
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -150,21 +157,7 @@
     } else {
         [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
     }
-    
-            UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width - 40, 0)];
-        NSString *string = [self clearString:[[self.info objectAtIndex:0] objectAtIndex:indexPath.row]];
-        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
-        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        [paragraphStyle setLineSpacing:1.1];
-        [paragraphStyle setLineBreakMode:NSLineBreakByWordWrapping];
-        [paragraphStyle setAlignment:NSTextAlignmentLeft];
-        [label setFont:[UIFont systemFontOfSize:17.0]];
-        [label setNumberOfLines:0];
-        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [string length])];
-        label.attributedText = attributedString;
-        [label sizeToFit];
-        sizeCell = label.frame.size.height + 85.0;
-        NSLog(@"%f", sizeCell);
+
     
 
     
@@ -223,18 +216,6 @@
     
 }
 
-- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
-    if ([segue.identifier isEqualToString:@"toList"]) {
-        
-        ListOfViewController *lovc = [segue destinationViewController];
-        
-        lovc.activeID = self.activeID;
-        
-    }
-    
-}
-
 - (IBAction)share:(UIButton *)sender {
     
     NSString *text = self.name.text;
@@ -246,6 +227,17 @@
     
     [self presentViewController:controller animated:YES completion:nil];
     
+}
+
+-(void)loadData:(NSString *)req{
+    
+    // Get the results.
+    if (self.arrPeopleInfo != nil) {
+        self.arrPeopleInfo = nil;
+    }
+    self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
+    
+    // Reload the table view.
 }
 
 @end

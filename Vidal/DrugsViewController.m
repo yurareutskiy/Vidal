@@ -143,8 +143,11 @@
         cell = [[DrugsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
     }
     
-    cell.name.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]];
-    cell.letter.text = [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:0];
+    NSInteger indexOfLetter = [self.dbManager.arrColumnNames indexOfObject:@"Letter"];
+    NSInteger indexOfTitle = [self.dbManager.arrColumnNames indexOfObject:@"Title"];
+    
+    cell.name.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfTitle]];
+    cell.letter.text = [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfLetter];
         
         return cell;
     

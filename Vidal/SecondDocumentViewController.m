@@ -39,6 +39,8 @@
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shareArrow"] style:UIBarButtonItemStylePlain target:self action:@selector(share:)];
     
     self.tableView.estimatedRowHeight = 60.0;
+    self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    
     // Do any additional setup after loading the view.
 }
 
@@ -175,11 +177,19 @@
         cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
     };
     
+    if (indexPath.row > 0) {
+        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0.0, 1.0, self.view.frame.size.width + 5.0, 1.0)];
+        [line setBackgroundColor:[UIColor colorWithRed:164.0/255.0 green:164.0/255.0 blue:164.0/255.0 alpha:1.0]];
+        [cell addSubview:line];
+    }
+    
     [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
     
     cell.title.text = [self clearString:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
     cell.desc.text = [self clearString:[self.info objectAtIndex:indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    NSLog(@"%d", (int)cell.frame.size.height - ((int)cell.desc.frame.origin.x + (int)cell.desc.frame.size.height));
     
     return cell;
 

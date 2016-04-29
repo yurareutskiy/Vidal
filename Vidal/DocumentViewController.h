@@ -22,7 +22,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *latName;
 
 @property (strong, nonatomic) NSMutableArray *info;
-@property (strong, nonatomic) NSMutableArray *columns;
+@property (strong, nonatomic) DBManager *dbManager;
 @property (strong, nonatomic) NSString *activeID;
 
 @property (strong, nonatomic) IBOutlet UIButton *shareButton;

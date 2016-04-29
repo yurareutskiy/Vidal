@@ -35,8 +35,6 @@ NSString *const SubscriptionTopic = @"/topics/global";
     };
     [OKSDK initWithSettings: settings];
     
-    [[AFNetworkActivityLogger sharedLogger] startLogging];
-    
     [[UIApplication sharedApplication] setStatusBarStyle:UIStatusBarStyleLightContent];
     // [START_EXCLUDE]
     _registrationKey = @"onRegistrationCompleted";
@@ -89,6 +87,13 @@ NSString *const SubscriptionTopic = @"/topics/global";
         }
     };
     return YES;
+}
+
++ (void)initialize
+{
+    if ([self class] == [AppDelegate class]) {
+        [YMMYandexMetrica activateWithApiKey:@"08c34940-d2a4-42fa-bf89-d0721a4ffa05"];
+    }
 }
 
 - (void)subscribeToTopic {

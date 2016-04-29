@@ -12,7 +12,11 @@
 
 @end
 
-@implementation CompanyViewController 
+@implementation CompanyViewController {
+    
+    NSUserDefaults *ud;
+    
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];

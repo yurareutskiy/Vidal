@@ -11,8 +11,8 @@
 #import "VKSdk.h"
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import "OKSDK.h"
-#import "AFNetworkActivityLogger.h"
 #import <Google/CloudMessaging.h>
+#import "YMMYandexMetrica.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, GGLInstanceIDDelegate, GCMReceiverDelegate>
 

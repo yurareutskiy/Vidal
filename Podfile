@@ -11,6 +11,7 @@ target 'Vidal' do
     pod 'AFNetworking'
     pod 'Google/CloudMessaging'
     pod 'ZipArchive'
+    pod 'YandexMobileMetrica'
     
 end
 

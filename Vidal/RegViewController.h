@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <HSDatePickerViewController.h>
 #import "AFNetworking.h"
 #import "IMQuickSearch.h"
 
