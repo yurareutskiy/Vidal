@@ -52,9 +52,6 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
-    ((DocumentViewController *)self.childViewControllers.lastObject).tableView.delegate = self;
-    ((DocumentViewController *)self.childViewControllers.lastObject).tableView.dataSource = self;
-    [((DocumentViewController *)self.childViewControllers.lastObject).tableView setTag:2];
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
@@ -70,21 +67,17 @@
     self.sectionsArray = [NSMutableArray array];
     self.letters = [NSArray arrayWithObjects:@"А", @"Б", @"В", @"Г", @"Д", @"Ж", @"З", @"И", @"Й", @"К", @"Л", @"М", @"Н", @"О", @"П", @"Р", @"С", @"Т", @"У", @"Ф", @"Х", @"Ц", @"Э", @"Я", nil];
     
-    container = false;
-    self.containerView.hidden = true;
-    self.darkView.hidden = true;
-    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
         
         activityView = [[UIActivityIndicatorView alloc]
                         initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
         
-        activityView.center = self.view.center;
+        activityView.center = CGPointMake([[UIScreen mainScreen] bounds].size.width / 2, [[UIScreen mainScreen] bounds].size.height / 2 - 80.0);
         [activityView startAnimating];
         [self.tableView addSubview:activityView];
         
-        [self loadData:@"Select Document.*, Molecule_Document.*, ClinicoPhPointers.Name as Category FROM Document INNER JOIN Molecule_Document ON Molecule_Document.DocumentID = Document.DocumentID LEFT JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID LEFT JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID LEFT JOIN ClinicoPhPointers ON ClinicoPhPointers.ClPhPointerID = Document_ClPhPointers.SrcClPhPointerID"];
+        [self loadData:@"select Letter, Title from (select m.Letter, (select group_concat(t.RusName,', ') || '..'  from (select sm.RusName from (select upper(substr(m.RusName, 1, 1)) as Letter, m.MoleculeID, upper(substr(m.RusName, 1, 1)) || lower(substr(m.RusName, 2)) as RusName, upper(substr(m.LatName, 1, 1)) || lower(substr(m.LatName, 2)) as LatName, doc.DocumentID from Molecule_Document md inner join Molecule m on m.MoleculeID = md.MoleculeID inner join Document doc on doc.DocumentID = md.DocumentID where doc.ArticleID = 1) sm where sm.Letter = m.Letter order by sm.RusName limit 3) t) as Title from (select upper(substr(m.RusName, 1, 1)) as Letter, m.MoleculeID, upper(substr(m.RusName, 1, 1)) || lower(substr(m.RusName, 2)) as RusName, upper(substr(m.LatName, 1, 1)) || lower(substr(m.LatName, 2)) as LatName, doc.DocumentID from Molecule_Document md inner join Molecule m on m.MoleculeID = md.MoleculeID inner join Document doc on doc.DocumentID = md.DocumentID where doc.ArticleID = 1) m group by m.Letter) order by Letter"];
         dispatch_sync(dispatch_get_main_queue(), ^{
             
             [self.tableView reloadData];
@@ -95,17 +88,6 @@
         });
     });
 
-    for (int i = 0; i < [self.arrPeopleInfo count]; i++) {
-        [self.hello1 addObject:[self.arrPeopleInfo[i] objectAtIndex:1]];
-    }
-
-    for (NSArray *key in result) {
-        [self.sectionsArray addObject:key];
-    }
-    
-    tap =
-    [[UITapGestureRecognizer alloc] initWithTarget:self
-                                            action:@selector(tableView:didCollapseSection:animated:)];
     
         self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
                                                              style:UIBarButtonItemStyleDone
@@ -123,6 +105,7 @@
     [ud removeObjectForKey:@"info"];
     [ud removeObjectForKey:@"from"];
     [ud removeObjectForKey:@"molecule"];
+    [ud removeObjectForKey:@"letterDrug"];
     
 }
 
@@ -154,170 +137,36 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - SLExpandableTableViewDatasource
-
-- (BOOL)tableView:(SLExpandableTableView *)tableView canExpandSection:(NSInteger)section
-{
-    return YES;
-}
-
-- (BOOL)tableView:(SLExpandableTableView *)tableView needsToDownloadDataForExpandableSection:(NSInteger)section
-{
-    return ![self.expandableSections containsIndex:section];
-}
-
-- (UITableViewCell<UIExpandingTableViewCell> *)tableView:(SLExpandableTableView *)tableView expandingCellForSection:(NSInteger)section
-{
-    static NSString *CellIdentifier = @"activeCell";
-    ActiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    
-    if (!cell) {
-        cell = [[ActiveTableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:CellIdentifier];
-    }
-    
-    NSString *text = [NSString stringWithFormat:@"%@", [[[result objectAtIndex:section] objectAtIndex:0] objectAtIndex:1]];
-    if ([[result objectAtIndex:section] count] > 1) {
-        text = [NSString stringWithFormat:@"%@, %@", text, [[[result objectAtIndex:section] objectAtIndex:1] objectAtIndex:1]];
-        if ([[result objectAtIndex:section] count] > 2) {
-            text = [NSString stringWithFormat:@"%@, %@", text, [[[result objectAtIndex:section] objectAtIndex:2] objectAtIndex:1]];
-        }
-    }
-    
-    cell.name.text = [self clearString:text];
-    cell.letter.text = [NSString stringWithFormat:@"%@.", [self.letters objectAtIndex:section]];
-    
-    return cell;
-}
-
-#pragma mark - SLExpandableTableViewDelegate
-
-- (void)tableView:(SLExpandableTableView *)tableView downloadDataForExpandableSection:(NSInteger)section
-{
-    
-    
-    [ud setObject:result[section] forKey:@"workActive"];
-    
-    [self performSegueWithIdentifier:@"newWindow" sender:self];
-    //        [self.expandableSections addIndex:section];
-    //        [tableView expandSection:section animated:YES];
-}
-
-- (void)tableView:(SLExpandableTableView *)tableView didCollapseSection:(NSUInteger)section animated:(BOOL)animated
-{
-//    if ([[result objectAtIndex:section] count] == 1){
-//        if (!container) {
-//            self.containerView.hidden = false;
-//            container = true;
-//            self.darkView.hidden = false;
-//            [self.darkView addGestureRecognizer:tap];
-//        }
-//    } else {
-        self.containerView.hidden = true;
-        container = false;
-        [self.darkView removeGestureRecognizer:tap];
-        self.darkView.hidden = true;
-        [((UITableView *)[self.view viewWithTag:2]) deselectRowAtIndexPath:selectedRowIndex animated:YES];
-//    }
-}
-
 #pragma mark - UITableViewDataSource
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView.tag == 1){
-        return 60;
-    } else if (tableView.tag == 2) {
-        if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
-            return sizeCell;
-        } else {
-            return 60;
-        }
-    } else {
-        return 60;
-    }
+    return 60.0;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if (tableView.tag == 1) {
-        return [result count];
-    } else if (tableView.tag == 2) {
-        return 1;
-    } else if (tableView.tag == 3){
-        return 1;
-    } else {
-        return 1;
-    }
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (tableView.tag == 1) {
-        return [[result objectAtIndex:section] count] + 1;
-    } else if (tableView.tag == 2){
-        NSInteger x = 0;
-        for (int i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
-            if (![[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""])
-                x++;
-        }
-        return x;
-    } else if (tableView.tag == 3){
-        return self.FilteredResults.count;
-    } else {
-        return 1;
-    }
+    return [self.arrPeopleInfo count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    
-    if (tableView.tag == 1) {
         
         ActiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"activeCell"];
         if (cell == nil) {
             cell = [[ActiveTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"activeCell"];
         }
     
-        NSArray *dataArray = result[indexPath.section];
-        cell.name.text = [self clearString:[dataArray[indexPath.row - 1] objectAtIndex:1]];
-        cell.letter.text = @"";
+    cell.name.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]];
+        cell.letter.text = [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:0];
         
         return cell;
-        
-    } else if (tableView.tag == 2){
-        
-        if ([[[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row] isEqualToString:@""]) {
-            return nil;
-        }
-        
-        DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"docCell"];
-        if (cell == nil) {
-            cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
-        };
-        
-        cell.title.text = [NSString stringWithFormat:@"%@", [self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
-        cell.desc.text = [[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        
-        return cell;
-    } else if (tableView.tag == 3) {
-            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
-            if (!cell) {
-                cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchCell"];
-            }
-        
-            // Set Content
-            NSString *title, *subtitle;
-            title = self.FilteredResults[indexPath.row];
-            subtitle = self.FilteredResults[indexPath.row];
-            cell.textLabel.text = [self clearString:title];
-            cell.detailTextLabel.text = [self clearString:subtitle];
-        
-            // Return Cell
-            return cell;
-    } else {
-        return nil;
-    }
+    
 
 }
 
@@ -325,53 +174,20 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (tableView.tag == 1){
+
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-    if (!container) {
-        
-        nextPls = [result[indexPath.section][indexPath.row - 1] objectAtIndex:0];
-        [ud setObject:nextPls forKey:@"molecule"];
-        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозирования', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID WHERE Document.DocumentID = %@", nextPls];
-        [self getMol:request];
-        
-        if ([self.molecule count] != 0) {
-            self.containerView.hidden = false;
-            container = true;
-            self.darkView.hidden = false;
-            [self.darkView addGestureRecognizer:tap];
-        }
-        }
-    } else if (tableView.tag == 2){
-        selectedRowIndex = [indexPath copy];
-        
-        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 40, 0)];
-        NSString *string = [[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row];
-        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
-        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-        [paragraphStyle setLineSpacing:6];
-        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [string length])];
-        label.attributedText = attributedString;
-        label.lineBreakMode = NSLineBreakByWordWrapping;
-        label.numberOfLines = 0;
-        label.font = [UIFont fontWithName:@"Lucida_Grande-Regular" size:17.f];
-        [label sizeToFit];
-        sizeCell = label.frame.size.height + 5;
-        NSLog(@"%f", sizeCell);
-
-        [tableView beginUpdates];
-
-        [tableView endUpdates];
-    }
-}
-
-- (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (tableView.tag == 2) {
-        [tableView beginUpdates];
+//
+//        
+//        nextPls = [result[indexPath.section][indexPath.row - 1] objectAtIndex:0];
+//        [ud setObject:nextPls forKey:@"molecule"];
+//        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозирования', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID WHERE Document.DocumentID = %@", nextPls];
+//        [self getMol:request];
     
-        [tableView endUpdates];
-    }
+    [self performSegueWithIdentifier:@"newWindow" sender:self];
+    [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:0] forKey:@"letterActive"];
     
 }
+
 
 #pragma MARK - Database Methods
 

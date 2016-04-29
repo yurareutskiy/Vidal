@@ -35,8 +35,10 @@
     
     open = false;
     
-    self.navigationItem.title = @"Вещество";
+    self.navigationItem.title = @"Активное вещество";
     [self.shareButton.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shareArrow"] style:UIBarButtonItemStylePlain target:self action:@selector(share:)];
     
     self.tableView.estimatedRowHeight = 60.0;
     // Do any additional setup after loading the view.
@@ -167,7 +169,7 @@
 
     
             [tableView beginUpdates];
-            
+    
             [tableView endUpdates];
     
 }

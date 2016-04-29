@@ -14,9 +14,7 @@
 #import "SecondDocumentViewController.h"
 #import "ListOfViewController.h"
 
-@interface DrugsViewController : ModelViewController <SLExpandableTableViewDatasource, SLExpandableTableViewDelegate, UISearchBarDelegate>
-@property (strong, nonatomic) IBOutlet SLExpandableTableView *tableView;
-@property (weak, nonatomic) IBOutlet UIView *darkView;
-@property (weak, nonatomic) IBOutlet UIView *containerView;
+@interface DrugsViewController : ModelViewController <UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate>
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end

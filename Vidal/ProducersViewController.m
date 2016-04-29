@@ -50,10 +50,10 @@
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
-    NSString *request = @"SELECT Picture.Image, InfoPage.InfoPageID, InfoPage.RusName AS Name, InfoPage.RusAddress, InfoPage.PhoneNumber, InfoPage.Email, Country.RusName FROM InfoPage INNER JOIN Picture ON InfoPage.PictureID = Picture.PictureID INNER JOIN Country ON InfoPage.CountryCode = Country.CountryCode ORDER BY Name";
+    NSString *request = @"select * from (select inf.*, cnt.RusName as CountryRusName, cnt.EngName as CountryEngName, p.Image from InfoPage inf left join Country cnt on inf.CountryCode = cnt.CountryCode left join Picture p on inf.PictureID = p.PictureID) order by RusName";
     [self loadData:request];
     
-    [super setLabel:@"Производители"];
+    self.navigationItem.title = @"Производители";
     
     [ud removeObjectForKey:@"workWith"];
     [ud removeObjectForKey:@"workActive"];
@@ -108,17 +108,31 @@
     // Dequeue the cell.
     ProducersTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"producersCell" forIndexPath:indexPath];
     
-    NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
+    NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
 
-    NSInteger indexOfRusName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
+    NSInteger indexOfRusName = [self.dbManager.arrColumnNames indexOfObject:@"CountryRusName"];
 
     NSInteger indexOfImage = [self.dbManager.arrColumnNames indexOfObject:@"Image"];
+    
+    NSInteger indexPicture = [self.dbManager.arrColumnNames indexOfObject:@"PictureID"];
     
     
     // Set the loaded data to the appropriate cell labels.
     cell.nameHid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]]];
-    cell.countryHid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfRusName]]];
-    [cell.image setImage:[UIImage imageWithData:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfImage]]];
+    if (![[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfRusName] isEqualToString:@""]) {
+        cell.countryHid.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfRusName]]];
+    } else {
+        cell.countryHid.text = @"";
+    }
+    if (![[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexPicture] isEqualToString:@""]) {
+        if (![[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfImage] isKindOfClass:[NSString class]]) {
+            [cell.image setImage:[UIImage imageWithData:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfImage]]];
+        } else {
+            [cell.image setImage:[UIImage imageNamed:@"company"]];
+        }
+    } else {
+        [cell.image setImage:[UIImage imageNamed:@"company"]];
+    }
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -187,19 +201,6 @@
 - (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [self.tableView beginUpdates];
-    
-//    ProducersTableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
-//    
-//    cell.nameUnhid.hidden = false;
-//    cell.countryUnhid.hidden = false;
-//    
-//    cell.nameHid.hidden = true;
-//    cell.countryHid.hidden = true;
-//    cell.image.hidden = true;
-//    cell.addressHid.hidden = true;
-//    cell.emailHid.hidden = true;
-//    cell.phoneHid.hidden = true;
-//    cell.listBtn.hidden = true;
     
     [self.tableView endUpdates];
 

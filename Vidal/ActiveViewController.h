@@ -14,10 +14,8 @@
 #import "DocsTableViewCell.h"
 #import "ListOfViewController.h"
 
-@interface ActiveViewController : ModelViewController<SLExpandableTableViewDatasource, SLExpandableTableViewDelegate, UITableViewDataSource, UITableViewDelegate>
+@interface ActiveViewController : ModelViewController<UITableViewDataSource, UITableViewDelegate>
 
-@property (strong, nonatomic) IBOutlet SLExpandableTableView *tableView;
-@property (strong, nonatomic) IBOutlet UIView *darkView;
-@property (strong, nonatomic) IBOutlet UIView *containerView;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @end

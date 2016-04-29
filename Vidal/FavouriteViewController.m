@@ -66,7 +66,7 @@
     [self loadData:request];
     
     
-    [self setLabel:@"Избранное"];
+    self.navigationItem.title = @"Избранное";
     
     container = false;
     self.containerView.hidden = true;

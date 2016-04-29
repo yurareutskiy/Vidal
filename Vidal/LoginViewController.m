@@ -7,6 +7,7 @@
 //
 
 #import "LoginViewController.h"
+#define IS_IPHONE_5 ( fabs( ( double )[ [ UIScreen mainScreen ] bounds ].size.height - ( double )568 ) < DBL_EPSILON )
 
 @interface LoginViewController ()
 
@@ -14,6 +15,7 @@
 
 @implementation LoginViewController {
     NSUserDefaults *ud;
+    
 }
 
 - (void)viewDidLoad {
@@ -37,6 +39,11 @@
         [self presentViewController:vc animated:true completion:nil];
     } else {
         [self showAlert:@"Внимание!" mess:@"При первом входе в приложение требуется скачать объемное количество информации (30Мб)." check:NO];
+    }
+    
+    if (IS_IPHONE_5) {
+        [self.regHeight setConstant:45.0];
+        [self.logHeight setConstant:45.0];
     }
     
     // Do any additional setup after loading the view, typically from a nib.

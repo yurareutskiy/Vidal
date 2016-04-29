@@ -33,8 +33,10 @@
     
     ud = [NSUserDefaults standardUserDefaults];
     toDelete = [NSMutableIndexSet indexSet];
-    [self.shareButton.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
+    
     self.navigationItem.title = @"Препарат";
+    
+    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shareArrow"] style:UIBarButtonItemStylePlain target:self action:@selector(share:)];
     
     self.tableView.estimatedRowHeight = 60.0;
     // Do any additional setup after loading the view.
@@ -42,24 +44,24 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     
-            self.latName.text = [self clearString:[[[self.info objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"]];
-            self.name.text = [self clearString:[[[self.info objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"]];
+    NSInteger indexOfLatName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
+    NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
+    NSInteger indexOfCompany = [self.dbManager.arrColumnNames indexOfObject:@"CompaniesDescription"];
     
-            NSString *string = [self clearString:[[[self.info objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"]];
-            self.name.numberOfLines = 0;
-            self.name.text = string;
-            [self.name sizeToFit];
     
-            if (![[[self.info objectAtIndex:0] objectAtIndex:2] isEqualToString:@""]) {
-                self.registred.text = [self clearString:[[self.info objectAtIndex:0] objectAtIndex:2]];
-                [toDelete addIndex:2];
-            } else {
-                [toDelete addIndex:2];
-            }
+    self.latName.text = [self clearString:[self.info objectAtIndex:indexOfLatName]];
+    self.name.text = [self clearString:[self.info objectAtIndex:indexOfName]];
     
-            for (NSUInteger i = 0; i < [[self.info objectAtIndex:0] count]; i++) {
-                if ([[[self.info objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
-                    || [[[self.info objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
+    if (![[self.info objectAtIndex:indexOfCompany] isEqualToString:@""]) {
+        self.registred.text = [self clearString:[self.info objectAtIndex:indexOfCompany]];
+        [toDelete addIndex:2];
+    } else {
+        [toDelete addIndex:2];
+    }
+    
+            for (NSUInteger i = 0; i < [self.info count]; i++) {
+                if ([[self.info objectAtIndex:i] isEqualToString:@""]
+                    || [[self.info objectAtIndex:i] isEqualToString:@"0"])
                     [toDelete addIndex:i];
             }
     
@@ -78,10 +80,10 @@
             }
     
     
-            [toDelete addIndex:0];
-            [toDelete addIndex:1];
+            [toDelete addIndex:indexOfLatName];
+            [toDelete addIndex:indexOfName];
     
-            [[self.info objectAtIndex:0] removeObjectsAtIndexes:toDelete];
+            [self.info removeObjectsAtIndexes:toDelete];
             [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
     
             [self.tableView reloadData];
@@ -158,7 +160,8 @@
     }
 }
 
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
     return [self.dbManager.arrColumnNames count];
 }
 
@@ -174,10 +177,8 @@
     
     [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
     
-    cell.delegate = self;
-    cell.expanded = @"0";
     cell.title.text = [self clearString:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
-    cell.desc.text = [self clearString:[[self.info objectAtIndex:0] objectAtIndex:indexPath.row]];
+    cell.desc.text = [self clearString:[self.info objectAtIndex:indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     return cell;
@@ -194,42 +195,15 @@
         
         [tapsOnCell setObject:@"1" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
         
-        
-        
     } else {
         [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
     }
-    
-    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.tableView.frame.size.width - 40, 0)];
-    NSString *string = [self clearString:[[self.info objectAtIndex:0] objectAtIndex:indexPath.row]];
-    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
-    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-    [paragraphStyle setLineSpacing:1.1];
-    [paragraphStyle setLineBreakMode:NSLineBreakByWordWrapping];
-    [paragraphStyle setAlignment:NSTextAlignmentLeft];
-    [label setFont:[UIFont systemFontOfSize:17.0]];
-    [label setNumberOfLines:0];
-    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [string length])];
-    label.attributedText = attributedString;
-    [label sizeToFit];
-    sizeCell = label.frame.size.height + 95.0;
-    NSLog(@"%f", sizeCell);
     
     [tableView beginUpdates];
     
     [tableView endUpdates];
     
 }
-
-//- (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    selectedRowIndex = [indexPath copy];
-//    
-//    sizeCell = 60.0;
-//    
-//    [tableView beginUpdates];
-//    
-//    [tableView endUpdates];
-//}
 
 - (IBAction)toInter:(UIButton *)sender {
     

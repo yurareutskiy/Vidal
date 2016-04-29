@@ -21,6 +21,8 @@
 @property (strong, nonatomic) IBOutlet UITextField *emailInput;
 @property (strong, nonatomic) IBOutlet UITextField *passInput;
 @property (weak, nonatomic) IBOutlet UILabel *email;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *regHeight;
+@property (strong, nonatomic) IBOutlet NSLayoutConstraint *logHeight;
 
 @end
 

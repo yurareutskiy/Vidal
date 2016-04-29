@@ -25,7 +25,10 @@
 @property (strong, nonatomic) IBOutlet UIButton *button3;
 @property (strong, nonatomic) IBOutlet UIButton *button4;
 @property (nonatomic, strong) IBOutlet UISearchBar *searchBar;
-@property (strong, nonatomic) IBOutlet UIView *line;
+@property (strong, nonatomic) IBOutlet UIView *line2;
+@property (strong, nonatomic) IBOutlet UIView *line1;
+@property (strong, nonatomic) IBOutlet UIView *line3;
+@property (strong, nonatomic) IBOutlet UIView *line4;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
 
 - (IBAction)toDrugs:(UIButton *)sender;

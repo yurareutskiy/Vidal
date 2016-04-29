@@ -44,7 +44,7 @@
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
-    [self setLabel:@"Фармакологические группы"];
+    self.navigationItem.title = @"Фармакологические группы";
     
     self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
                                                             style:UIBarButtonItemStyleDone
@@ -328,15 +328,6 @@
                         [self.tableView reloadData];
                     } completion:nil];
     
-}
-
-- (void) setLabel:(NSString *)label {
-//    UILabel* labelName = [[UILabel alloc] initWithFrame:self.navigationController.navigationBar.frame];
-//    labelName.textAlignment = NSTextAlignmentCenter;
-//    labelName.text = NSLocalizedString(label, @"");
-//    labelName.text = label;
-//    labelName.textColor = [UIColor whiteColor];
-    self.navigationItem.title = label;
 }
 
 - (void)customNavBar {

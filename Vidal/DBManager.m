@@ -102,7 +102,7 @@
                                 dbDataAsChars = (char *)sqlite3_column_text(compiledStatement, i);
                             }
                         } else if ([[ud valueForKey:@"howTo"] isEqualToString:@"prod"]) {
-                            if (i == 0) {
+                            if (i == 11) {
                                 //                            dbDataAsChars = (char *)sqlite3_column_blob(compiledStatement, i);
                                 data = [[NSData alloc] initWithBytes:sqlite3_column_blob(compiledStatement, i) length:sqlite3_column_bytes(compiledStatement, i)];
                             } else {
@@ -122,7 +122,7 @@
                                     [arrDataRow addObject:[NSString  stringWithUTF8String:dbDataAsChars]];
                                 }
                             } else if ([[ud valueForKey:@"howTo"] isEqualToString:@"prod"]) {
-                                if (i == 0) {
+                                if (i == 11) {
                                     [arrDataRow addObject:data];
                                 } else {
                                     [arrDataRow addObject:[NSString  stringWithUTF8String:dbDataAsChars]];

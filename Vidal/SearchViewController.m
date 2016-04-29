@@ -119,6 +119,10 @@
     
     self.navigationItem.title = @"Поиск";
 
+    [self.line2 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+    [self.line1 setBackgroundColor:[UIColor whiteColor]];
+    [self.line3 setBackgroundColor:[UIColor whiteColor]];
+    [self.line4 setBackgroundColor:[UIColor whiteColor]];
     
     // Do any additional setup after loading the view.
 }
@@ -367,6 +371,18 @@
 }
 
 - (void) close {
+    
+    [ud removeObjectForKey:@"activeID"];
+    [ud removeObjectForKey:@"from"];
+    [ud removeObjectForKey:@"level"];
+    [ud removeObjectForKey:@"parent2"];
+    [ud removeObjectForKey:@"parent3"];
+    [ud removeObjectForKey:@"parent4"];
+    [ud removeObjectForKey:@"howTo"];
+    [ud removeObjectForKey:@"molecule"];
+    [ud removeObjectForKey:@"id"];
+    [ud removeObjectForKey:@"info"];
+    
     [self.navigationController popViewControllerAnimated:NO];
 }
 
@@ -560,9 +576,14 @@
         [self toProd:nil];
         [UIView animateWithDuration:0.3 animations:^{
             [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 3, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
-            [self.line setFrame:CGRectMake(self.button4.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
         } completion:^(BOOL finished) {
-
+            [UIView animateWithDuration:0.3 animations:^{
+                [self.line2 setBackgroundColor:[UIColor whiteColor]];
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    [self.line4 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+                }];
+            }];
         }];
         
     } else if (buttonNumber == 1) {
@@ -571,9 +592,14 @@
         [self toMolecule:nil];
         [UIView animateWithDuration:0.3 animations:^{
             [self.scrollView scrollRectToVisible:CGRectMake(0.0, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
-            [self.line setFrame:CGRectMake(self.button2.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
         } completion:^(BOOL finished) {
-            
+            [UIView animateWithDuration:0.3 animations:^{
+                [self.line1 setBackgroundColor:[UIColor whiteColor]];
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    [self.line2 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+                }];
+            }];
         }];
         
     } else if (buttonNumber == 2) {
@@ -582,9 +608,14 @@
         [self toDrugs:nil];
         [UIView animateWithDuration:0.3 animations:^{
             [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 1, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
-            [self.line setFrame:CGRectMake(self.button2.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
         } completion:^(BOOL finished) {
-
+            [UIView animateWithDuration:0.3 animations:^{
+                [self.line3 setBackgroundColor:[UIColor whiteColor]];
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    [self.line1 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+                }];
+            }];
         }];
         
     } else if (buttonNumber == 3) {
@@ -593,9 +624,14 @@
         [self toPharma:nil];
         [UIView animateWithDuration:0.3 animations:^{
             [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 2, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
-            [self.line setFrame:CGRectMake(self.button3.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
         } completion:^(BOOL finished) {
-
+            [UIView animateWithDuration:0.3 animations:^{
+                [self.line4 setBackgroundColor:[UIColor whiteColor]];
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    [self.line3 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+                }];
+            }];
         }];
         
     }
@@ -612,7 +648,11 @@
             [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 1, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.3 animations:^{
-                [self.line setFrame:CGRectMake(self.button2.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
+                [self.line2 setBackgroundColor:[UIColor whiteColor]];
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    [self.line1 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+                }];
             }];
         }];
         
@@ -626,7 +666,12 @@
             [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 2, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.3 animations:^{
-                [self.line setFrame:CGRectMake(self.button3.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
+                [self.line1 setBackgroundColor:[UIColor whiteColor]];
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    [self.line3 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+                }];
+                
             }];
         }];
         
@@ -640,18 +685,28 @@
             [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 3, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.3 animations:^{
-                [self.line setFrame:CGRectMake(self.button4.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
+                [self.line3 setBackgroundColor:[UIColor whiteColor]];
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    [self.line4 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+                }];
+                
             }];
         }];
         
     } else if (buttonNumber == 3) {
         
         buttonNumber = 0;
+        [self toMolecule:nil];
         [UIView animateWithDuration:0.3 animations:^{
             [self.scrollView scrollRectToVisible:CGRectMake(0.0, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.3 animations:^{
-                [self.line setFrame:CGRectMake(self.button2.frame.origin.x, self.line.frame.origin.y, self.line.frame.size.width, self.line.frame.size.height)];
+                [self.line4 setBackgroundColor:[UIColor whiteColor]];
+            } completion:^(BOOL finished) {
+                [UIView animateWithDuration:0.3 animations:^{
+                    [self.line2 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+                }];
             }];
         }];
     }
