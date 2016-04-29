@@ -71,6 +71,8 @@
     [ud removeObjectForKey:@"info"];
     [ud removeObjectForKey:@"from"];
     [ud removeObjectForKey:@"molecule"];
+    [ud removeObjectForKey:@"letterActive"];
+    [ud removeObjectForKey:@"letterDrug"];
     
 }
 
@@ -128,13 +130,14 @@
     
     if (!goNext) {
         
-        NSString *request = [NSString stringWithFormat:@"SELECT Document.DocumentID, Document.RusName, Document.EngName, Document.CompaniesDescription, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозирования', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID INNER JOIN ClinicoPhPointers ON Document_ClPhPointers.ClPhPointerID = ClinicoPhPointers.ClPhPointerID WHERE ClinicoPhPointers.ClPhPointerID = %@", pointIDStr];
+        NSString *request = [NSString stringWithFormat:@"SELECT * FROM Document INNER JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID INNER JOIN ClinicoPhPointers ON Document_ClPhPointers.ClPhPointerID = ClinicoPhPointers.ClPhPointerID WHERE ClinicoPhPointers.ClPhPointerID = %@", pointIDStr];
         [self getMol:request];
         
         if (isEmptyDrugsList) {
             return;
         } else {
-            [ud setObject:self.molecule forKey:@"pharmaList"];
+//            [ud setObject:self.molecule forKey:@"pharmaList"];
+            [ud setObject:pointIDStr forKey:@"pharmaList"];
             [self performSegueWithIdentifier:@"toList" sender:self];
         }
     } else if (goNext){
@@ -228,13 +231,13 @@
     }
     
     if (level + 1 == 1) {
-        req = @"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = 1 ORDER BY ClinicoPhPointers.Name";
+        req = @"select * from ClinicoPhPointers where [Level] = 1 order by Code, [Level]";
     } else if (level + 1 == 2) {
-        req = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", [ud objectForKey:@"parent2"]];
+        req = [NSString stringWithFormat:@"select * from ClinicoPhPointers where [Level] = 2 and ParentCode = '%@' order by Code", [ud objectForKey:@"parent2"]];
     } else if (level + 1 == 3) {
-        req = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = %ld AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", level + 1, [ud objectForKey:@"parent3"]];
+        req = [NSString stringWithFormat:@"select * from ClinicoPhPointers where [Level] = 3 and ParentCode = '%@' order by Code", [ud objectForKey:@"parent3"]];
     } else if (level + 1 == 4) {
-        req = [NSString stringWithFormat:@"Select * From ClinicoPhPointers WHERE ClinicoPhPointers.Level = %ld AND ClinicoPhPointers.ParentCode = '%@' ORDER BY ClinicoPhPointers.Name", level + 1, [ud objectForKey:@"parent4"]];
+        req = [NSString stringWithFormat:@"select * from ClinicoPhPointers where [Level] = 2 and ParentCode = '%@' order by Code", [ud objectForKey:@"parent4"]];
     }
     
     [self loadData:req];
@@ -360,6 +363,18 @@
     [self.view addGestureRecognizer:self.revealViewController.panGestureRecognizer];
     
     self.navigationItem.leftBarButtonItem = self.menuButton;
+    
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"toList"]) {
+        
+        ListOfViewController *lovc = [segue destinationViewController];
+        
+        lovc.dbManager = self.dbManager;
+        
+    }
     
 }
 

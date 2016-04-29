@@ -12,7 +12,6 @@
 
 @property (nonatomic, strong) NSMutableArray *arrPeopleInfo;
 @property (nonatomic, strong) NSMutableArray *molecule;
-@property (nonatomic, strong) DBManager *dbManager;
 
 @end
 
@@ -66,11 +65,11 @@
         [self loadData:req];
     } else if ([ud valueForKey:@"pharmaList"]) {
         
-        req = @"";
+        req = [NSString stringWithFormat:@"SELECT * FROM Document INNER JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID INNER JOIN ClinicoPhPointers ON Document_ClPhPointers.ClPhPointerID = ClinicoPhPointers.ClPhPointerID WHERE ClinicoPhPointers.ClPhPointerID = %@", [ud valueForKey:@"pharmaList"]];
         
         [self setNavBarTitle:@"Фармакологические группы"];
         
-        self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[ud valueForKey:@"pharmaList"]];
+        [self loadData:req];
         
     } else if ([ud valueForKey:@"letterDrug"]) {
         
@@ -85,7 +84,7 @@
         
         req = [NSString stringWithFormat:@"select * from SubDocumentListView where Letter = '%@' order by RusName", [ud valueForKey:@"letterActive"]];
         
-            [self loadData:req];
+        [self loadData:req];
         
     } else if ([ud valueForKey:@"info"] || [ud valueForKey:@"comp"]) {
         
@@ -175,6 +174,14 @@
         cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]]];
         cell.category.text = @"";
         
+    } else if ([ud valueForKey:@"pharmaList"]) {
+        
+        NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
+        NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
+        
+        cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]]];
+        cell.category.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]]];
+        
     }
     
         else if ([ud valueForKey:@"workActive"] && ([self.activeID isEqualToString:@""] || self.activeID == nil)) {
@@ -223,9 +230,9 @@
             
         } else if ([ud valueForKey:@"letterActive"]) {
             
-            NSInteger indexOfDocumentID = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
+            NSInteger indexOfDocumentID = [self.dbManager.arrColumnNames indexOfObject:@"MoleculeID"];
             
-            [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfDocumentID] forKey:@"id"];
+            [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfDocumentID] forKey:@"activeID"];
             [self performSegueWithIdentifier:@"toDoc" sender:self];
             
         }

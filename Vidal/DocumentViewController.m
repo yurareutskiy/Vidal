@@ -63,28 +63,26 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     
-    NSString *request = @"select * from (select inf.*, cnt.RusName as CountryRusName, cnt.EngName as CountryEngName, p.Image from InfoPage inf left join Country cnt on inf.CountryCode = cnt.CountryCode left join Picture p on inf.PictureID = p.PictureID) order by RusName";
+    NSString *request = [NSString stringWithFormat:@"select * from (select mol.*, cp.ClPhPointerID as CategoryID, cp.Code as CategoryCode, cp.Name as CategoryName from (select upper(substr(m.RusName, 1, 1)) as Letter, m.MoleculeID, upper(substr(m.RusName, 1, 1)) || lower(substr(m.RusName, 2)) as RusName, upper(substr(m.LatName, 1, 1)) || lower(substr(m.LatName, 2)) as LatName, doc.* from Molecule_Document md inner join Molecule m on m.MoleculeID = md.MoleculeID inner join Document doc on doc.DocumentID = md.DocumentID where doc.ArticleID = 1) mol left join Document_ClPhPointers dcp on dcp.DocumentID = mol.DocumentID left join ClinicoPhPointers cp on cp.ClPhPointerID = dcp.ClPhPointerID where ifnull(dcp.ItsMainPriority,1) = 1) doc where doc.MoleculeID = %@", [ud valueForKey:@"activeID"]];
     [self loadData:request];
     
     NSInteger indexOfLatName = [self.dbManager.arrColumnNames indexOfObject:@"LatName"];
     NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
     NSInteger indexOfMolecule = [self.dbManager.arrColumnNames indexOfObject:@"MoleculeID"];
     
-    self.latName.text = [self clearString:[self.info objectAtIndex:indexOfLatName]];
-    self.name.text = [self clearString:[self.info objectAtIndex:indexOfName]];
+    self.latName.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexOfLatName]];
+    self.name.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexOfName]];
     
     for (NSUInteger i = 0; i < [self.info count]; i++) {
-        if ([[self.info objectAtIndex:i] isEqualToString:@""]
-            || [[self.info objectAtIndex:i] isEqualToString:@"0"])
+        if ([[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
+            || [[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
             [toDelete addIndex:i];
     }
-    
-    [ud setObject:[self.info objectAtIndex:indexOfMolecule] forKey:@"activeID"];
     
     [toDelete addIndex:indexOfLatName];
     [toDelete addIndex:indexOfName];
     
-    [self.info removeObjectsAtIndexes:toDelete];
+    [[self.arrPeopleInfo objectAtIndex:0] removeObjectsAtIndexes:toDelete];
     [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
     
     [self.tableView reloadData];
@@ -115,11 +113,11 @@
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [self.dbManager.arrColumnNames count];
+    return [[self.arrPeopleInfo objectAtIndex:0] count];
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (self.info == nil) {
+    if (self.arrPeopleInfo == nil) {
         return nil;
     }
     
@@ -135,7 +133,7 @@
     }
     
     cell.title.text = [self clearString:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
-    cell.desc.text = [self clearString:[self.info objectAtIndex:indexPath.row]];
+    cell.desc.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexPath.row]];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -146,13 +144,11 @@
     
     if ([[tapsOnCell valueForKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]] isEqualToString:@"0"]) {
         
-        for (NSString *value in [tapsOnCell allKeys]) {
-            [tapsOnCell setObject:@"0" forKey:value];
-        }
+    for (NSString *value in [tapsOnCell allKeys]) {
+        [tapsOnCell setObject:@"0" forKey:value];
+    }
         
-        [tapsOnCell setObject:@"1" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
-        
-        
+    [tapsOnCell setObject:@"1" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
         
     } else {
         [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
@@ -171,8 +167,8 @@
     
     NSString *text = input;
     
-    NSRange range = NSMakeRange(0, 1);
-    text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
+//    NSRange range = NSMakeRange(0, 1);
+//    text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
@@ -235,8 +231,10 @@
     if (self.arrPeopleInfo != nil) {
         self.arrPeopleInfo = nil;
     }
+    
     self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
     
+    [self.tableView reloadData];
     // Reload the table view.
 }
 

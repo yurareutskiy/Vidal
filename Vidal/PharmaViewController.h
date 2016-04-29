@@ -11,6 +11,7 @@
 #import "DBManager.h"
 #import "SWRevealViewController.h"
 #import "MenuViewController.h"
+#import "ListOfViewController.h"
 
 @interface PharmaViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 

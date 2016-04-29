@@ -20,6 +20,7 @@
 @property (strong, nonatomic) NSMutableArray *dataBase;
 @property (strong, nonatomic) NSString *activeID;
 @property (strong, nonatomic) NSString *drug;
+@property (nonatomic, strong) DBManager *dbManager;
 
 
 @end
