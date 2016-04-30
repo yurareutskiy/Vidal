@@ -20,15 +20,18 @@
     NSUserDefaults *ud;
     BOOL exists;
     UIAlertController *alertController;
+    BOOL isConnectionAvailable;
+    NSString *url;
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self checkConnection];
     ud = [NSUserDefaults standardUserDefaults];
     [ud setValue:@"0" forKey:@"howTo"];
     [ud removeObjectForKey:@"toInter"];
+//    [ud removeObjectForKey:@"url"];
     
     secret_key = @"uX04xN12Tk1654Qz";
     
@@ -39,13 +42,17 @@
     NSURL *databaseURL = [directoryURL URLByAppendingPathComponent:@"vidalDatabase.zip"];
     NSError *error = nil;
     exists = [databaseURL checkResourceIsReachableAndReturnError:&error];
-    
-    if (!exists) {
+    if ([AFNetworkReachabilityManager sharedManager].networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
+        isConnectionAvailable = false;
+    } else {
+        isConnectionAvailable = true;
+    }
+    NSLog(@"conne %d", isConnectionAvailable);
+    if (!exists && isConnectionAvailable) {
         [self checkBool:@"Архив начал скачиваться" mess:@"Подождите 15-30 секунд. Элементы взаимодействия недоступны, пожалуйста, не выключайте приложение." down:NO amount:1];
         [self getLink];
-        [self downloadDB:[ud valueForKey:@"url"]];
-        [self getKey];
-        [ud setObject:[ud valueForKey:@"newVersion"] forKey:@"version"];
+    } else if (isConnectionAvailable == false) {
+        return;
     } else {
         [self getLink];
         if (![[NSString stringWithFormat:@"%@", [ud objectForKey:@"version"]] isEqualToString:[NSString stringWithFormat:@"%@", [ud objectForKey:@"newVersion"]]]) {
@@ -162,15 +169,45 @@
     return output;
 }
 
+- (void)checkConnection {
+    [[AFNetworkReachabilityManager sharedManager] startMonitoring];
+    
+    [[AFNetworkReachabilityManager sharedManager] setReachabilityStatusChangeBlock:^(AFNetworkReachabilityStatus status) {
+        
+        NSLog(@"Reachability changed: %@", AFStringFromNetworkReachabilityStatus(status));
+        
+        
+        switch (status) {
+            case AFNetworkReachabilityStatusReachableViaWWAN:
+            case AFNetworkReachabilityStatusReachableViaWiFi:
+                NSLog(@"Reachable");
+                break;
+            case AFNetworkReachabilityStatusNotReachable:
+            default:
+                // -- Not reachable -- //
+                NSLog(@"Not Reachable");
+                break;
+        }
+        
+    }];
+}
+
 - (void) getLink {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager POST:@"http://www.vidal.ru/api/db/update" parameters:@{@"token":[ud valueForKey:@"archToken"], @"version":@"20160410", @"tag":@"cardio"} success:^(AFHTTPRequestOperation * _Nonnull operation, id responseObject) {
+    [manager POST:@"http://www.vidal.ru/api/db/update" parameters:@{@"token":[ud valueForKey:@"archToken"], @"tag":@"cardio"} success:^(AFHTTPRequestOperation * _Nonnull operation, id responseObject) {
         
         NSLog(@"%@", responseObject);
         
+        
         [ud setObject:[responseObject valueForKey:@"url"] forKey:@"url"];
+        url = [responseObject valueForKey:@"url"];
         [ud setObject:[responseObject valueForKey:@"version"] forKey:@"newVersion"];
+        
+        [self downloadDB:url];
+        [self getKey];
+        [ud setObject:[ud valueForKey:@"newVersion"] forKey:@"version"];
+
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         
@@ -208,6 +245,7 @@
         NSLog(@"Downloading Started");
         NSString *urlToDownload = link;
         NSURL  *url = [NSURL URLWithString:urlToDownload];
+            NSLog(@"URL %@", url);
         NSData *urlData = [NSData dataWithContentsOfURL:url];
         if ( urlData )
         {

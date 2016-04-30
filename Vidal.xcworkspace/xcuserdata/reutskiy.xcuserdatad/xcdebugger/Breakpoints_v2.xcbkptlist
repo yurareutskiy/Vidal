@@ -49,6 +49,38 @@
             endingLineNumber = "181"
             landmarkName = "-segueToBe:"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[PharmaViewController loadData:]"
+                  moduleName = "&#x41a;&#x430;&#x440;&#x434;&#x438;&#x43e;&#x43b;&#x43e;&#x433;&#x438;&#x44f;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/reutskiy/Documents/Development/Vidal123/Vidal/PharmaViewController.m"
+                  timestampString = "483724497.181891"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "181"
+                  endingLineNumber = "181"
+                  offsetFromSymbolStart = "609">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[PharmaViewController loadData:]"
+                  moduleName = "&#x41a;&#x430;&#x440;&#x434;&#x438;&#x43e;&#x43b;&#x43e;&#x433;&#x438;&#x44f;"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/reutskiy/Documents/Development/Vidal123/Vidal/PharmaViewController.m"
+                  timestampString = "483724497.182056"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "181"
+                  endingLineNumber = "181"
+                  offsetFromSymbolStart = "633">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -272,6 +304,54 @@
             startingLineNumber = "244"
             endingLineNumber = "244"
             landmarkName = "-textFieldDidBeginEditing:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vidal/MainViewController.m"
+            timestampString = "483724497.055281"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "50"
+            endingLineNumber = "50"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vidal/MainViewController.m"
+            timestampString = "483724497.055281"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "200"
+            endingLineNumber = "200"
+            landmarkName = "-getLink"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vidal/MainViewController.m"
+            timestampString = "483724497.055281"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "213"
+            endingLineNumber = "213"
+            landmarkName = "-getLink"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
