@@ -79,6 +79,26 @@
             [toDelete addIndex:i];
     }
     
+    NSInteger indexOfLetter = [self.dbManager.arrColumnNames indexOfObject:@"Letter"];
+    NSInteger indexOfDocument = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
+    NSInteger indexOfArticle = [self.dbManager.arrColumnNames indexOfObject:@"ArticleID"];
+    NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryID"];
+    NSInteger indexOfCode = [self.dbManager.arrColumnNames indexOfObject:@"CategoryCode"];
+    NSInteger indexOfCatName = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
+    NSInteger indexOfRusName = [self.dbManager.arrColumnNames indexOfObject:@"RusName:1"];
+    NSInteger indexOfEngName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
+    NSInteger indexOfCompany = [self.dbManager.arrColumnNames indexOfObject:@"CompaniesDescription"];
+    
+    [toDelete addIndex:indexOfLetter];
+    [toDelete addIndex:indexOfDocument];
+    [toDelete addIndex:indexOfArticle];
+    [toDelete addIndex:indexOfCategory];
+    [toDelete addIndex:indexOfCode];
+    [toDelete addIndex:indexOfCatName];
+    [toDelete addIndex:indexOfMolecule];
+    [toDelete addIndex:indexOfRusName];
+    [toDelete addIndex:indexOfEngName];
+    [toDelete addIndex:indexOfCompany];
     [toDelete addIndex:indexOfLatName];
     [toDelete addIndex:indexOfName];
     
@@ -132,7 +152,7 @@
         [cell addSubview:line];
     }
     
-    cell.title.text = [self clearString:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
+    cell.title.text = [self changeDescName:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
     cell.desc.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexPath.row]];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -236,6 +256,45 @@
     
     [self.tableView reloadData];
     // Reload the table view.
+}
+
+- (NSString *) changeDescName:(NSString *) input {
+    
+    NSString *output = input;
+    
+    if ([output isEqualToString:@"CompiledComposition"]) {
+        return @"Описание состава и формы выпуска";
+    } else if ([output isEqualToString:@"YearEdition"]) {
+        return @"Год издания";
+    } else if ([output isEqualToString:@"Elaboration"]) {
+        return output;
+    } else if ([output isEqualToString:@"PhInfluence"]) {
+        return @"Фармакологическое действие";
+    } else if ([output isEqualToString:@"PhKinetics"]) {
+        return @"Фармакокинетика";
+    } else if ([output isEqualToString:@"Dosage"]) {
+        return @"Режим дозировки";
+    } else if ([output isEqualToString:@"OverDosage"]) {
+        return @"Передозировка";
+    } else if ([output isEqualToString:@"Interaction"]) {
+        return @"Лекарственное взаимодействие";
+    } else if ([output isEqualToString:@"Lactation"]) {
+        return @"При беременности, родах и лактации";
+    } else if ([output isEqualToString:@"SideEffects"]) {
+        return @"Побочное действие";
+    } else if ([output isEqualToString:@"StorageCondition"]) {
+        return @"Условия и сроки хранения";
+    } else if ([output isEqualToString:@"Indication"]) {
+        return @"Показания к применению";
+    } else if ([output isEqualToString:@"ContraIndication"]) {
+        return @"Противопоказания";
+    } else if ([output isEqualToString:@"SpecialInstruction"]) {
+        return @"Особые указания";
+    } else if ([output isEqualToString:@"PharmDelivery"]) {
+        return @"Условия отпуска из аптек";
+    } else {
+        return output;
+    }
 }
 
 @end

@@ -56,9 +56,9 @@
     
     if (![[self.info objectAtIndex:indexOfCompany] isEqualToString:@""]) {
         self.registred.text = [self clearString:[self.info objectAtIndex:indexOfCompany]];
-        [toDelete addIndex:2];
+        [toDelete addIndex:indexOfCompany];
     } else {
-        [toDelete addIndex:2];
+        [toDelete addIndex:indexOfCompany];
     }
     
             for (NSUInteger i = 0; i < [self.info count]; i++) {
@@ -66,6 +66,47 @@
                     || [[self.info objectAtIndex:i] isEqualToString:@"0"])
                     [toDelete addIndex:i];
             }
+    
+    NSInteger indexOfLetter = [self.dbManager.arrColumnNames indexOfObject:@"Letter"];
+    NSInteger indexOfDocument = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
+    NSInteger indexOfArticle = [self.dbManager.arrColumnNames indexOfObject:@"ArticleID"];
+    NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryID"];
+    NSInteger indexOfCode = [self.dbManager.arrColumnNames indexOfObject:@"CategoryCode"];
+    NSInteger indexOfCatName = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
+    
+    NSInteger indexOfLevel = [self.dbManager.arrColumnNames indexOfObject:@"Level"];
+    NSInteger indexOfcppid = [self.dbManager.arrColumnNames indexOfObject:@"ClPhPointerID"];
+    NSInteger indexOfscppid = [self.dbManager.arrColumnNames indexOfObject:@"SrcClPhPointerID"];
+    NSInteger indexOfPriority = [self.dbManager.arrColumnNames indexOfObject:@"ItsMainPriority"];
+    NSInteger indexOfPharmaCode = [self.dbManager.arrColumnNames indexOfObject:@"Code"];
+    NSInteger indexOfPharmaName = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
+    NSInteger indexOfParent = [self.dbManager.arrColumnNames indexOfObject:@"ParentCode"];
+    NSInteger indexOfShow = [self.dbManager.arrColumnNames indexOfObject:@"ShowInProduct"];
+    
+    if ([ud valueForKey:@"letterDrug"]) {
+        
+        [toDelete addIndex:indexOfLetter];
+        [toDelete addIndex:indexOfCategory];
+        [toDelete addIndex:indexOfCatName];
+        [toDelete addIndex:indexOfCode];
+        
+    } else if ([ud valueForKey:@"pharmaList"]) {
+        
+        [toDelete addIndex:indexOfLevel];
+        [toDelete addIndex:indexOfcppid];
+        [toDelete addIndex:indexOfscppid];
+        [toDelete addIndex:indexOfPriority];
+        [toDelete addIndex:indexOfPharmaCode];
+        [toDelete addIndex:indexOfPharmaName];
+        [toDelete addIndex:indexOfParent];
+        [toDelete addIndex:indexOfShow];
+        
+    }
+    
+    [toDelete addIndex:indexOfDocument];
+    [toDelete addIndex:indexOfArticle];
+    [toDelete addIndex:indexOfLatName];
+    [toDelete addIndex:indexOfName];
     
             if ([((NSArray *)[ud objectForKey:@"favs"]) containsObject:[ud objectForKey:@"id"]]) {
                 NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:@"Препарат в избранном" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:187.0/255.0 green:0.0 blue:57.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
@@ -80,13 +121,23 @@
                 [self.fav setImage:[UIImage imageNamed:@"favGrey"] forState:UIControlStateNormal];
                 self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0);
             }
-    
-    
-            [toDelete addIndex:indexOfLatName];
-            [toDelete addIndex:indexOfName];
-    
+
             [self.info removeObjectsAtIndexes:toDelete];
             [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
+    
+    toDelete = [NSMutableIndexSet indexSet];
+    
+    NSInteger indexOfDocument2 = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
+    NSInteger indexOfcppid2 = [self.dbManager.arrColumnNames indexOfObject:@"ClPhPointerID"];
+    
+    if ([ud valueForKey:@"pharmaList"]) {
+        
+        [toDelete addIndex:indexOfDocument2];
+        [toDelete addIndex:indexOfcppid2];
+        [self.info removeObjectsAtIndexes:toDelete];
+        [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
+        
+    }
     
             [self.tableView reloadData];
     
@@ -185,7 +236,7 @@
     
     [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
     
-    cell.title.text = [self clearString:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
+    cell.title.text = [self changeDescName:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
     cell.desc.text = [self clearString:[self.info objectAtIndex:indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -276,6 +327,45 @@
 }
 - (void) perfSeg:(DocsTableViewCell *)sender {
     
+}
+
+- (NSString *) changeDescName:(NSString *) input {
+    
+    NSString *output = input;
+    
+    if ([output isEqualToString:@"CompiledComposition"]) {
+        return @"Описание состава и формы выпуска";
+    } else if ([output isEqualToString:@"YearEdition"]) {
+        return @"Год издания";
+    } else if ([output isEqualToString:@"Elaboration"]) {
+        return output;
+    } else if ([output isEqualToString:@"PhInfluence"]) {
+        return @"Фармакологическое действие";
+    } else if ([output isEqualToString:@"PhKinetics"]) {
+        return @"Фармакокинетика";
+    } else if ([output isEqualToString:@"Dosage"]) {
+        return @"Режим дозировки";
+    } else if ([output isEqualToString:@"OverDosage"]) {
+        return @"Передозировка";
+    } else if ([output isEqualToString:@"Interaction"]) {
+        return @"Лекарственное взаимодействие";
+    } else if ([output isEqualToString:@"Lactation"]) {
+        return @"При беременности, родах и лактации";
+    } else if ([output isEqualToString:@"SideEffects"]) {
+        return @"Побочное действие";
+    } else if ([output isEqualToString:@"StorageCondition"]) {
+        return @"Условия и сроки хранения";
+    } else if ([output isEqualToString:@"Indication"]) {
+        return @"Показания к применению";
+    } else if ([output isEqualToString:@"ContraIndication"]) {
+        return @"Противопоказания";
+    } else if ([output isEqualToString:@"SpecialInstruction"]) {
+        return @"Особые указания";
+    } else if ([output isEqualToString:@"PharmDelivery"]) {
+        return @"Условия отпуска из аптек";
+    } else {
+        return output;
+    }
 }
 
 //- (CGFloat) tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
