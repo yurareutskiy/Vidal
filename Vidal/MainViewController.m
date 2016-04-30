@@ -19,6 +19,7 @@
     NSString *secret_key;
     NSUserDefaults *ud;
     BOOL exists;
+    UIAlertController *alertController;
     
 }
 
@@ -40,33 +41,56 @@
     exists = [databaseURL checkResourceIsReachableAndReturnError:&error];
     
     if (!exists) {
-        [self checkBool];
+        [self checkBool:@"Архив начал скачиваться" mess:@"Подождите 15-30 секунд. Элементы взаимодействия недоступны, пожалуйста, не выключайте приложение." down:NO amount:1];
         [self getLink];
+        [self downloadDB:[ud valueForKey:@"url"]];
         [self getKey];
+        [ud setObject:[ud valueForKey:@"newVersion"] forKey:@"version"];
+    } else {
+        [self getLink];
+        if (![[NSString stringWithFormat:@"%@", [ud objectForKey:@"version"]] isEqualToString:[NSString stringWithFormat:@"%@", [ud objectForKey:@"newVersion"]]]) {
+            exists = false;
+            [self checkBool:@"Доступна новая версия архива" mess:@"Скачать?" down:YES amount:2];
+        } else {
+            
+        }
     }
     
     // Do any additional setup after loading the view.
 }
 
-/*
-
- ;sodghfsd;ofh;s
- sdifgousdh
- 
- 
- sdfdsh */
-
-- (void) checkBool {
+- (void) checkBool:(NSString *)title mess:(NSString *)mess down:(BOOL)down amount:(int)butt {
     NSLog(@"HELLOOOOOOOOOOO");
     if (!exists) {
         
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Архив начал скачиваться" message:@"Подождите 15-30 секунд. Элементы взаимодействия недоступны, пожалуйста, не выключайте приложение." preferredStyle:UIAlertControllerStyleAlert];
+        if (butt == 1 || butt == 2) {
         
-        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
-                             {
-                                 
-                             }];
-        [alertController addAction:ok];
+            alertController = [UIAlertController alertControllerWithTitle:title message:mess preferredStyle:UIAlertControllerStyleAlert];
+        
+            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                    {
+                                     if (down) {
+                                         [self deleteFile];
+                                         [self downloadDB:[ud valueForKey:@"url"]];
+                                         [self getKey];
+                                         [ud setObject:[ud valueForKey:@"newVersion"] forKey:@"version"];
+                                        }
+                                    }];
+            [alertController addAction:ok];
+        }
+        
+        if (butt == 2) {
+            
+            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Отменить" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                 {
+                                     self.name.enabled = YES;
+                                     self.navigationItem.leftBarButtonItem.enabled = YES;
+                                     self.revealViewController.panGestureRecognizer.enabled = YES;
+                                     [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                                     [ud setObject:[ud valueForKey:@"newVersion"] forKey:@"version"];
+                                 }];
+            [alertController addAction:ok];
+        }
         
         [self presentViewController:alertController animated:YES completion:nil];
         
@@ -74,9 +98,10 @@
         self.navigationItem.leftBarButtonItem.enabled = NO;
         self.revealViewController.panGestureRecognizer.enabled = NO;
         [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        
     } else {
         
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Архив скачался" message:@"Можете пользоваться приложением." preferredStyle:UIAlertControllerStyleAlert];
+        alertController = [UIAlertController alertControllerWithTitle:title message:mess preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
                              {
@@ -94,7 +119,32 @@
     
 }
 
-- (void) showAlert {
+- (void) deleteFile {
+    
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    NSString *documentsPath = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    
+    NSString *filePath = [documentsPath stringByAppendingPathComponent:@"vidalDatabase.zip"];
+    NSError *error;
+    BOOL success = [fileManager removeItemAtPath:filePath error:&error];
+    if (!success)
+    {
+        NSLog(@"1 Could not delete file -:%@ ",[error localizedDescription]);
+    }
+    
+    filePath = [documentsPath stringByAppendingPathComponent:@"vidal.cardio.db3"];
+    success = [fileManager removeItemAtPath:filePath error:&error];
+    if (!success)
+    {
+        NSLog(@"2 Could not delete file -:%@ ",[error localizedDescription]);
+    }
+    
+    filePath = [documentsPath stringByAppendingPathComponent:@"interactions.min.json"];
+    success = [fileManager removeItemAtPath:filePath error:&error];
+    if (!success)
+    {
+        NSLog(@"3 Could not delete file -:%@ ",[error localizedDescription]);
+    }
     
 }
 
@@ -119,7 +169,8 @@
         
         NSLog(@"%@", responseObject);
         
-        [self downloadDB:[responseObject valueForKey:@"url"]];
+        [ud setObject:[responseObject valueForKey:@"url"] forKey:@"url"];
+        [ud setObject:[responseObject valueForKey:@"version"] forKey:@"newVersion"];
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         
@@ -170,7 +221,7 @@
                 [urlData writeToFile:filePath atomically:YES];
                 NSLog(@"File Saved !");
                 exists = true;
-                [self checkBool];
+                [self checkBool:@"Архив скачался" mess:@"Можете пользоваться приложением." down:NO amount:1];
                 ZipArchive *zipArchive = [[ZipArchive alloc] init];
                 [zipArchive UnzipOpenFile:filePath];
                 
