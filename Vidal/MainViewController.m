@@ -31,7 +31,6 @@
     ud = [NSUserDefaults standardUserDefaults];
     [ud setValue:@"0" forKey:@"howTo"];
     [ud removeObjectForKey:@"toInter"];
-//    [ud removeObjectForKey:@"url"];
     
     secret_key = @"uX04xN12Tk1654Qz";
     
@@ -198,7 +197,6 @@
     [manager POST:@"http://www.vidal.ru/api/db/update" parameters:@{@"token":[ud valueForKey:@"archToken"], @"tag":@"cardio"} success:^(AFHTTPRequestOperation * _Nonnull operation, id responseObject) {
         
         NSLog(@"%@", responseObject);
-        
         
         [ud setObject:[responseObject valueForKey:@"url"] forKey:@"url"];
         url = [responseObject valueForKey:@"url"];
