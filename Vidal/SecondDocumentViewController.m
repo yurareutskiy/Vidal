@@ -63,8 +63,9 @@
     
             for (NSUInteger i = 0; i < [self.info count]; i++) {
                 if ([[self.info objectAtIndex:i] isEqualToString:@""]
-                    || [[self.info objectAtIndex:i] isEqualToString:@"0"])
+                    || [[self.info objectAtIndex:i] isEqualToString:@"0"]) {
                     [toDelete addIndex:i];
+                }
             }
     
     NSInteger indexOfLetter = [self.dbManager.arrColumnNames indexOfObject:@"Letter"];
@@ -239,8 +240,7 @@
     cell.title.text = [self changeDescName:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
     cell.desc.text = [self clearString:[self.info objectAtIndex:indexPath.row]];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    
-    NSLog(@"%d", (int)cell.frame.size.height - ((int)cell.desc.frame.origin.x + (int)cell.desc.frame.size.height));
+
     
     return cell;
 

@@ -96,10 +96,10 @@
     
     ud = [NSUserDefaults standardUserDefaults];
     
-    [self loadData:@"SELECT Document.DocumentID, Product.RusName FROM Document INNER JOIN Product ON Document.DocumentID = Product.DocumentID  GROUP BY Document.DocumentID"
-         loadData2:@"SELECT Document.DocumentID, Molecule.RusName FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID GROUP BY Document.DocumentID"
-         loadData3:@"SELECT ClinicoPhPointers.ClPhPointerID, ClinicoPhPointers.Name FROM ClinicoPhPointers GROUP BY ClinicoPhPointers.ClPhPointerID"
-         loadData4:@"SELECT InfoPage.InfoPageID, InfoPage.RusName FROM InfoPage GROUP BY InfoPage.InfoPageID"];
+    [self loadData:@"select DocumentID, RusName from DocumentListView order by RusName"
+         loadData2:@"select MoleculeID, RusName from SubDocumentListView order by RusName"
+         loadData3:@"select ClPhPointerID, Name from ClinicoPhPointers where [Level] > 0 order by Code, [Level]"
+         loadData4:@"select InfoPageID, RusName from ProducerListView order by RusName"];
     
     self.closeButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"close"] scaledToSize:CGSizeMake(20, 20)]
                                                         style:UIBarButtonItemStyleDone
@@ -167,14 +167,15 @@
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
-    if ([segue.identifier isEqualToString:@"toDoc"]) {
-        
-        DocumentViewController *dvc = [segue destinationViewController];
-        dvc.info = self.data;
-        dvc.dbManager = self.dbManager;
-        
-    } else if ([segue.identifier isEqualToString:@"toSecDoc"]) {
-        
+//    if ([segue.identifier isEqualToString:@"toDoc"]) {
+//        
+//        DocumentViewController *dvc = [segue destinationViewController];
+//        dvc.info = self.data;
+//        dvc.dbManager = self.dbManager;
+//        
+//    } else
+    if ([segue.identifier isEqualToString:@"toSecDoc"]) {
+    
         SecondDocumentViewController *sdvc = [segue destinationViewController];
         sdvc.info = self.data;
         sdvc.dbManager = self.dbManager;
@@ -208,10 +209,10 @@
         }
 
         next = [self.moleculeFull[index] objectAtIndex:0];
-        [ud setObject:next forKey:@"molecule"];
-        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Molecule.MoleculeID, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозирования', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID WHERE Document.DocumentID = %@", next];
-        [self getInfo:request];
-        
+//        [ud setObject:next forKey:@"molecule"];
+//        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Molecule.MoleculeID, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозирования', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID WHERE Document.DocumentID = %@", next];
+//        [self getInfo:request];
+        [ud setObject:next forKey:@"activeID"];
         [self.tableView1 deselectRowAtIndexPath:indexPath animated:NO];
         [self performSegueWithIdentifier:@"toDoc" sender:self];
         
@@ -225,9 +226,10 @@
         }
         
         next = [self.drugsFull[index] objectAtIndex:0];
-        [ud setObject:next forKey:@"molecule"];
+//        [ud setObject:next forKey:@"molecule"];
         [ud setObject:next forKey:@"id"];
-        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозирования', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document WHERE Document.DocumentID = %@", next];
+        [ud setObject:@"А" forKey:@"letterDrug"];
+        NSString *request = [NSString stringWithFormat:@"select * from DocumentListView doc where doc.DocumentID = %@", next];
         [self getInfo:request];
         
         [self.tableView2 deselectRowAtIndexPath:indexPath animated:NO];
@@ -243,7 +245,7 @@
         }
         
         next = [self.pharmaFull[index] objectAtIndex:0];
-        [ud setObject:next forKey:@"molecule"];
+//        [ud setObject:next forKey:@"molecule"];
         
         NSString *request = [NSString stringWithFormat:@"SELECT * FROM ClinicoPhPointers WHERE ClinicoPhPointers.ClPhPointerID = %@", next];
         [self getInfo:request];
@@ -265,7 +267,7 @@
         [ud setObject:next forKey:@"info"];
         
         [ud setObject:@"prod" forKey:@"howTo"];
-        NSString *request = [NSString stringWithFormat:@"SELECT Picture.Image, InfoPage.InfoPageID, InfoPage.RusName AS Name, InfoPage.RusAddress, InfoPage.PhoneNumber, InfoPage.Email, Country.RusName FROM InfoPage LEFT JOIN Picture ON InfoPage.PictureID = Picture.PictureID LEFT JOIN Country ON InfoPage.CountryCode = Country.CountryCode WHERE InfoPage.InfoPageID = %@", next];
+        NSString *request = [NSString stringWithFormat:@"select * from ProducerListView where InfoPageID = %@", next];
         [self getInfo:request];
         [ud removeObjectForKey:@"howTo"];
         
@@ -511,7 +513,7 @@
             self.data = nil;
         }
         self.data = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
-
+        
         [ud setObject:[[self.data objectAtIndex:0] objectAtIndex:3] forKey:@"activeID"];
         [[self.data objectAtIndex:0] removeObjectAtIndex:3];
         [self.dbManager.arrColumnNames removeObjectAtIndex:3];
@@ -523,6 +525,7 @@
             self.data = nil;
         }
         self.data = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
+        self.data = [NSMutableArray arrayWithArray:[self.data objectAtIndex:0]];
         
     } else if (tableView3b) {
         
@@ -550,8 +553,8 @@
         }
         self.data = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
         
-        NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
-        NSInteger indexOfRusName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
+        NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
+        NSInteger indexOfRusName = [self.dbManager.arrColumnNames indexOfObject:@"CountryRusName"];
         NSInteger indexOfImage = [self.dbManager.arrColumnNames indexOfObject:@"Image"];
         NSInteger indexOfAddress = [self.dbManager.arrColumnNames indexOfObject:@"RusAddress"];
         NSInteger indexOfEmail = [self.dbManager.arrColumnNames indexOfObject:@"Email"];

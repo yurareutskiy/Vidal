@@ -73,10 +73,11 @@
     self.latName.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexOfLatName]];
     self.name.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexOfName]];
     
-    for (NSUInteger i = 0; i < [self.info count]; i++) {
+    for (NSUInteger i = 0; i < [[self.arrPeopleInfo objectAtIndex:0] count]; i++) {
         if ([[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
-            || [[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
+            || [[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"]) {
             [toDelete addIndex:i];
+        }
     }
     
     NSInteger indexOfLetter = [self.dbManager.arrColumnNames indexOfObject:@"Letter"];
@@ -124,6 +125,7 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    
     if ([[tapsOnCell valueForKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]] isEqualToString:@"1"]) {
         return UITableViewAutomaticDimension;
     } else {
@@ -152,6 +154,8 @@
         [cell addSubview:line];
     }
     
+    [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
+    
     cell.title.text = [self changeDescName:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
     cell.desc.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexPath.row]];
     
@@ -164,22 +168,19 @@
     
     if ([[tapsOnCell valueForKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]] isEqualToString:@"0"]) {
         
-    for (NSString *value in [tapsOnCell allKeys]) {
-        [tapsOnCell setObject:@"0" forKey:value];
-    }
+        for (NSString *value in [tapsOnCell allKeys]) {
+            [tapsOnCell setObject:@"0" forKey:value];
+        }
         
-    [tapsOnCell setObject:@"1" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
+        [tapsOnCell setObject:@"1" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
         
     } else {
         [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
     }
-
     
-
+    [tableView beginUpdates];
     
-            [tableView beginUpdates];
-    
-            [tableView endUpdates];
+    [tableView endUpdates];
     
 }
 

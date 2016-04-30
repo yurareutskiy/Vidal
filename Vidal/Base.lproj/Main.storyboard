@@ -3593,7 +3593,7 @@ Lactobacillus acidophilus и другие.</string>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mKH-o8-D9E">
-                                <rect key="frame" x="0.0" y="145" width="600" height="455"/>
+                                <rect key="frame" x="0.0" y="132" width="600" height="468"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" shouldIndentWhileEditing="NO" reuseIdentifier="docCell" id="Naj-6E-xog" customClass="DocsTableViewCell">
@@ -3678,7 +3678,7 @@ Lactobacillus acidophilus и другие.</string>
                             <constraint firstItem="XyD-IW-vHv" firstAttribute="top" secondItem="9B6-ff-9rP" secondAttribute="topMargin" constant="20" id="kX3-OR-paJ"/>
                             <constraint firstItem="XyD-IW-vHv" firstAttribute="leading" secondItem="9B6-ff-9rP" secondAttribute="leadingMargin" constant="5" id="v4D-4C-ZsO"/>
                             <constraint firstItem="qkI-gU-txH" firstAttribute="top" secondItem="mKH-o8-D9E" secondAttribute="bottom" id="vSZ-fa-uFd"/>
-                            <constraint firstItem="mKH-o8-D9E" firstAttribute="top" secondItem="uDv-OR-Sgm" secondAttribute="bottom" constant="8" id="vlT-X3-jAF"/>
+                            <constraint firstItem="mKH-o8-D9E" firstAttribute="top" secondItem="uDv-OR-Sgm" secondAttribute="bottom" constant="-5" id="vlT-X3-jAF"/>
                             <constraint firstItem="uDv-OR-Sgm" firstAttribute="leading" secondItem="9B6-ff-9rP" secondAttribute="leadingMargin" constant="-20" id="yYk-U7-0E8"/>
                         </constraints>
                         <variation key="default">
@@ -3775,7 +3775,7 @@ Lactobacillus acidophilus и другие.</string>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qp-qf-Vuk">
                                 <rect key="frame" x="40" y="108" width="520" height="55"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o34-Mj-V2T">
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o34-Mj-V2T">
                                         <rect key="frame" x="100" y="0.0" width="100" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -3789,7 +3789,7 @@ Lactobacillus acidophilus и другие.</string>
                                             <action selector="toDrugs:" destination="Olq-6Q-xtB" eventType="touchUpInside" id="Wkk-Wj-xsp"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ft3-PE-8bu">
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="ft3-PE-8bu">
                                         <rect key="frame" x="200" y="0.0" width="100" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -3805,7 +3805,7 @@ Lactobacillus acidophilus и другие.</string>
                                             <action selector="toPharma:" destination="Olq-6Q-xtB" eventType="touchUpInside" id="dcM-X4-Ygp"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="5Hl-iz-XF4">
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="5Hl-iz-XF4">
                                         <rect key="frame" x="300" y="0.0" width="100" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -3826,7 +3826,7 @@ Lactobacillus acidophilus и другие.</string>
                                             <constraint firstAttribute="height" constant="5" id="jKg-XJ-6Ca"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uJy-ke-hNJ">
+                                    <button opaque="NO" userInteractionEnabled="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uJy-ke-hNJ">
                                         <rect key="frame" x="0.0" y="0.0" width="100" height="50"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -4011,7 +4011,7 @@ Lactobacillus acidophilus и другие.</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pharmaCell" id="a8M-rX-p3K" customClass="PharmaTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="80"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a8M-rX-p3K" id="QUp-yE-pG5">
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
@@ -4094,7 +4094,7 @@ Lactobacillus acidophilus и другие.</string>
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lBn-KM-PfN">
-                                <rect key="frame" x="0.0" y="138" width="600" height="462"/>
+                                <rect key="frame" x="0.0" y="125" width="600" height="475"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="docCell" id="l87-0y-HSO" customClass="DocsTableViewCell">
@@ -4197,7 +4197,7 @@ Lactobacillus acidophilus и другие.</string>
                             <constraint firstItem="yYC-sL-R6M" firstAttribute="top" secondItem="o5q-sN-vir" secondAttribute="bottom" constant="10" id="VKu-NG-nFU"/>
                             <constraint firstItem="yYC-sL-R6M" firstAttribute="top" secondItem="ock-oq-hUK" secondAttribute="bottom" constant="50" id="Wce-jt-1P7"/>
                             <constraint firstItem="o5q-sN-vir" firstAttribute="top" secondItem="ock-oq-hUK" secondAttribute="bottom" constant="5" id="b2n-rH-YiS"/>
-                            <constraint firstItem="lBn-KM-PfN" firstAttribute="top" secondItem="yYC-sL-R6M" secondAttribute="bottom" constant="8" id="d05-k4-7SK"/>
+                            <constraint firstItem="lBn-KM-PfN" firstAttribute="top" secondItem="yYC-sL-R6M" secondAttribute="bottom" constant="-5" id="d05-k4-7SK"/>
                             <constraint firstItem="yYC-sL-R6M" firstAttribute="leading" secondItem="211-dZ-SJ9" secondAttribute="leadingMargin" constant="-20" id="emb-Nh-TC3"/>
                             <constraint firstItem="ock-oq-hUK" firstAttribute="top" secondItem="211-dZ-SJ9" secondAttribute="topMargin" constant="20" id="pT7-5n-fd0"/>
                             <constraint firstItem="lBn-KM-PfN" firstAttribute="centerX" secondItem="211-dZ-SJ9" secondAttribute="centerX" id="qWY-Lg-wpQ"/>
@@ -4294,12 +4294,12 @@ Lactobacillus acidophilus и другие.</string>
         <image name="vkLogo" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="rW2-fw-XxZ"/>
-        <segue reference="TKm-YI-sdg"/>
-        <segue reference="Spl-RC-YMp"/>
         <segue reference="Bf0-3e-nJt"/>
         <segue reference="iWp-6B-1Aa"/>
+        <segue reference="fgw-Jt-fIP"/>
+        <segue reference="Scd-nN-kzm"/>
+        <segue reference="bgK-tD-ymA"/>
         <segue reference="A53-FK-YbD"/>
-        <segue reference="u0a-AY-sbi"/>
+        <segue reference="Spl-RC-YMp"/>
     </inferredMetricsTieBreakers>
 </document>
