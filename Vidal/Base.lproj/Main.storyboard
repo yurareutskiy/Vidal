@@ -3529,69 +3529,6 @@ Lactobacillus acidophilus и другие.</string>
                                 <color key="textColor" red="0.73333333329999995" green="0.0" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uDv-OR-Sgm">
-                                <rect key="frame" x="0.0" y="77" width="600" height="60"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7xx-Kd-4Oz">
-                                        <rect key="frame" x="300" y="5" width="1" height="50"/>
-                                        <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="1" id="i24-f4-1gq"/>
-                                        </constraints>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cJx-Qx-EVT">
-                                        <rect key="frame" x="15" y="12" width="285" height="37"/>
-                                        <inset key="imageEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" image="favGrey">
-                                            <attributedString key="attributedTitle">
-                                                <fragment>
-                                                    <string key="content">Добавить 
-в избранное</string>
-                                                    <attributes>
-                                                        <color key="NSColor" red="0.83529411760000005" green="0.83529411760000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <font key="NSFont" size="16" name="HelveticaNeue"/>
-                                                        <integer key="NSUnderline" value="1"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                        </state>
-                                        <connections>
-                                            <action selector="addToFav:" destination="sbh-iQ-PXQ" eventType="touchUpInside" id="TwB-G4-8Ol"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Psf-W5-aID">
-                                        <rect key="frame" x="306" y="19" width="289" height="22"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                        <state key="normal" image="halfCircle">
-                                            <attributedString key="attributedTitle">
-                                                <fragment content="Узнать про взаимодействие">
-                                                    <attributes>
-                                                        <color key="NSColor" red="0.83529411760000005" green="0.83529411760000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                        <font key="NSFont" size="16" name="LucidaGrande"/>
-                                                        <integer key="NSUnderline" value="1"/>
-                                                    </attributes>
-                                                </fragment>
-                                            </attributedString>
-                                        </state>
-                                        <connections>
-                                            <action selector="toInter:" destination="sbh-iQ-PXQ" eventType="touchUpInside" id="uwz-dH-esA"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstItem="7xx-Kd-4Oz" firstAttribute="top" secondItem="uDv-OR-Sgm" secondAttribute="top" constant="5" id="4Yf-rX-gqB"/>
-                                    <constraint firstItem="cJx-Qx-EVT" firstAttribute="leading" secondItem="uDv-OR-Sgm" secondAttribute="leading" constant="15" id="7Tc-EP-Als"/>
-                                    <constraint firstItem="Psf-W5-aID" firstAttribute="leading" secondItem="7xx-Kd-4Oz" secondAttribute="trailing" constant="5" id="9C2-dR-v4q"/>
-                                    <constraint firstAttribute="trailing" secondItem="Psf-W5-aID" secondAttribute="trailing" constant="5" id="C6f-ie-1cK"/>
-                                    <constraint firstItem="7xx-Kd-4Oz" firstAttribute="leading" secondItem="cJx-Qx-EVT" secondAttribute="trailing" id="Hlj-9r-qHI"/>
-                                    <constraint firstItem="7xx-Kd-4Oz" firstAttribute="centerX" secondItem="uDv-OR-Sgm" secondAttribute="centerX" id="IyC-Ek-CIi"/>
-                                    <constraint firstAttribute="bottom" secondItem="7xx-Kd-4Oz" secondAttribute="bottom" constant="5" id="Jj9-Dj-5ks"/>
-                                    <constraint firstItem="Psf-W5-aID" firstAttribute="centerY" secondItem="uDv-OR-Sgm" secondAttribute="centerY" id="cuf-oO-vJf"/>
-                                    <constraint firstAttribute="height" constant="60" id="gk7-ch-MMo"/>
-                                    <constraint firstItem="cJx-Qx-EVT" firstAttribute="centerY" secondItem="uDv-OR-Sgm" secondAttribute="centerY" id="xUZ-xX-dXz"/>
-                                </constraints>
-                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mKH-o8-D9E">
                                 <rect key="frame" x="0.0" y="132" width="600" height="468"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -3655,6 +3592,69 @@ Lactobacillus acidophilus и другие.</string>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uDv-OR-Sgm">
+                                <rect key="frame" x="0.0" y="77" width="600" height="60"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7xx-Kd-4Oz">
+                                        <rect key="frame" x="300" y="5" width="1" height="50"/>
+                                        <color key="backgroundColor" red="0.91764705882352937" green="0.91764705882352937" blue="0.91764705882352937" alpha="1" colorSpace="calibratedRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="1" id="i24-f4-1gq"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cJx-Qx-EVT">
+                                        <rect key="frame" x="15" y="12" width="285" height="37"/>
+                                        <inset key="imageEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal" image="favGrey">
+                                            <attributedString key="attributedTitle">
+                                                <fragment>
+                                                    <string key="content">Добавить 
+в избранное</string>
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.83529411760000005" green="0.83529411760000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="16" name="HelveticaNeue"/>
+                                                        <integer key="NSUnderline" value="1"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
+                                        <connections>
+                                            <action selector="addToFav:" destination="sbh-iQ-PXQ" eventType="touchUpInside" id="TwB-G4-8Ol"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Psf-W5-aID">
+                                        <rect key="frame" x="306" y="19" width="289" height="22"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
+                                        <state key="normal" image="halfCircle">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="Узнать про взаимодействие">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.83529411760000005" green="0.83529411760000005" blue="0.83529411760000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="16" name="LucidaGrande"/>
+                                                        <integer key="NSUnderline" value="1"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
+                                        <connections>
+                                            <action selector="toInter:" destination="sbh-iQ-PXQ" eventType="touchUpInside" id="uwz-dH-esA"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.95686274509803915" green="0.95686274509803915" blue="0.95686274509803915" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="7xx-Kd-4Oz" firstAttribute="top" secondItem="uDv-OR-Sgm" secondAttribute="top" constant="5" id="4Yf-rX-gqB"/>
+                                    <constraint firstItem="cJx-Qx-EVT" firstAttribute="leading" secondItem="uDv-OR-Sgm" secondAttribute="leading" constant="15" id="7Tc-EP-Als"/>
+                                    <constraint firstItem="Psf-W5-aID" firstAttribute="leading" secondItem="7xx-Kd-4Oz" secondAttribute="trailing" constant="5" id="9C2-dR-v4q"/>
+                                    <constraint firstAttribute="trailing" secondItem="Psf-W5-aID" secondAttribute="trailing" constant="5" id="C6f-ie-1cK"/>
+                                    <constraint firstItem="7xx-Kd-4Oz" firstAttribute="leading" secondItem="cJx-Qx-EVT" secondAttribute="trailing" id="Hlj-9r-qHI"/>
+                                    <constraint firstItem="7xx-Kd-4Oz" firstAttribute="centerX" secondItem="uDv-OR-Sgm" secondAttribute="centerX" id="IyC-Ek-CIi"/>
+                                    <constraint firstAttribute="bottom" secondItem="7xx-Kd-4Oz" secondAttribute="bottom" constant="5" id="Jj9-Dj-5ks"/>
+                                    <constraint firstItem="Psf-W5-aID" firstAttribute="centerY" secondItem="uDv-OR-Sgm" secondAttribute="centerY" id="cuf-oO-vJf"/>
+                                    <constraint firstAttribute="height" constant="60" id="gk7-ch-MMo"/>
+                                    <constraint firstItem="cJx-Qx-EVT" firstAttribute="centerY" secondItem="uDv-OR-Sgm" secondAttribute="centerY" id="xUZ-xX-dXz"/>
+                                </constraints>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Нет информации о производителе" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LKx-De-79L">
                                 <rect key="frame" x="25" y="49" width="550" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
