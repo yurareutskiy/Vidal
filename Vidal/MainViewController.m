@@ -211,10 +211,10 @@
         NSData *urlData = [NSData dataWithContentsOfURL:url];
         if ( urlData )
         {
-            NSArray       *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            NSString  *documentsDirectory = [paths objectAtIndex:0];
+            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *documentsDirectory = [paths objectAtIndex:0];
             
-            NSString  *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"vidalDatabase.zip"];
+            NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"vidalDatabase.zip"];
             NSLog(@"%@", documentsDirectory);
             //saving is done on main thread
             dispatch_async(dispatch_get_main_queue(), ^{

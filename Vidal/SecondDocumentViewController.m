@@ -84,6 +84,8 @@
     NSInteger indexOfParent = [self.dbManager.arrColumnNames indexOfObject:@"ParentCode"];
     NSInteger indexOfShow = [self.dbManager.arrColumnNames indexOfObject:@"ShowInProduct"];
     
+    NSInteger indexOfInfoPage = [self.dbManager.arrColumnNames indexOfObject:@"InfoPageID"];
+    
     if ([ud valueForKey:@"letterDrug"]) {
         
         [toDelete addIndex:indexOfLetter];
@@ -101,6 +103,14 @@
         [toDelete addIndex:indexOfPharmaName];
         [toDelete addIndex:indexOfParent];
         [toDelete addIndex:indexOfShow];
+        
+    } else if ([ud valueForKey:@"activeID"]) {
+        
+        [toDelete addIndex:indexOfLetter];
+        
+    } else if ([ud valueForKey:@"info"] || [ud valueForKey:@"comp"]) {
+        
+        [toDelete addIndex:indexOfInfoPage];
         
     }
     

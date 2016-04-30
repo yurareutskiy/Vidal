@@ -152,6 +152,7 @@
 - (IBAction)toList:(UIButton *)sender {
     
     [ud setObject:@"63" forKey:@"info"];
+    [ud removeObjectForKey:@"howTo"];
     [self performSegueWithIdentifier:@"toList" sender:self];
     
 }
