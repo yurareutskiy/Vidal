@@ -24,6 +24,8 @@ NSString *const SubscriptionTopic = @"/topics/global";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     
+    [YMMYandexMetrica activateWithApiKey:@"08c34940-d2a4-42fa-bf89-d0721a4ffa05"];
+    
     [[FBSDKApplicationDelegate sharedInstance] application:application
                              didFinishLaunchingWithOptions:launchOptions];
     
@@ -86,14 +88,8 @@ NSString *const SubscriptionTopic = @"/topics/global";
                                                               userInfo:userInfo];
         }
     };
-    return YES;
-}
 
-+ (void)initialize
-{
-    if ([self class] == [AppDelegate class]) {
-        [YMMYandexMetrica activateWithApiKey:@"08c34940-d2a4-42fa-bf89-d0721a4ffa05"];
-    }
+    return YES;
 }
 
 - (void)subscribeToTopic {
