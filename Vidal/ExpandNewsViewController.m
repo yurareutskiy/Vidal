@@ -19,6 +19,7 @@
     NSString *pls;
     NSUserDefaults *ud;
     CAGradientLayer *gradient;
+    UIActivityIndicatorView *activityView;
     
 }
 
@@ -41,36 +42,57 @@
     
     array = [NSDictionary dictionary];
     
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    self.newsTitle.text = @"";
+    self.newsText.text = @"";
+    self.date.text = @"";
     
-    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.vidal.ru/api/news-raw/%@", self.newsId]];
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-    
-    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        if (error) {
-            NSLog(@"Error: %@", error);
-        } else {
-            NSLog(@"%@ %@", response, responseObject);
-            array = [responseObject copy];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        
+        activityView.center = CGPointMake([[UIScreen mainScreen] bounds].size.width / 2, [[UIScreen mainScreen] bounds].size.height / 2 - 80.0);
+        
+        [activityView startAnimating];
+        [self.view addSubview:activityView];
+        
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.vidal.ru/api/news-raw/%@", self.newsId]];
+        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+        
+        NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+            if (error) {
+                NSLog(@"Error: %@", error);
+            } else {
+                NSLog(@"%@ %@", response, responseObject);
+                array = [responseObject copy];
+                
+                NSDateFormatter *date = [[NSDateFormatter alloc] init];
+                [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                NSDate *dateNews = [date dateFromString:[array objectForKey:@"date"]];
+                [date setDateFormat:@"dd MMMM yyyy HH:mm"];
+                NSString *resultDate = [date stringFromDate:dateNews];
+                
+                self.date.text = resultDate;
+                self.newsTitle.text = [array objectForKey:@"title"];
+                self.newsText.text = [self stringByStrippingHTML:[array objectForKey:@"body"]];
+                
+                self.newsText.numberOfLines = 0;
+                self.newsTitle.numberOfLines = 0;
+                [self.newsText sizeToFit];
+                [self.newsTitle sizeToFit];
+            }
+        }];
+        [dataTask resume];
+
+        dispatch_sync(dispatch_get_main_queue(), ^{
             
-            NSDateFormatter *date = [[NSDateFormatter alloc] init];
-            [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
-            NSDate *dateNews = [date dateFromString:[array objectForKey:@"date"]];
-            [date setDateFormat:@"dd MMMM yyyy HH:mm"];
-            NSString *resultDate = [date stringFromDate:dateNews];
+            [activityView removeFromSuperview];
             
-            self.date.text = resultDate;
-            self.newsTitle.text = [array objectForKey:@"title"];
-            self.newsText.text = [self stringByStrippingHTML:[array objectForKey:@"body"]];
-            
-            self.newsText.numberOfLines = 0;
-            self.newsTitle.numberOfLines = 0;
-            [self.newsText sizeToFit];
-            [self.newsTitle sizeToFit];
-        }
-    }];
-    [dataTask resume];
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        });
+    });
     
 //    [super setLabel:@"Новости"];
     

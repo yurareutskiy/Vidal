@@ -78,7 +78,9 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
-    [self refreshDb];
+    if (![[ud valueForKey:@"howTo"] isEqualToString:@"back"]) {
+        [self refreshDb];
+    }
 }
 
 - (void) viewDidDisappear:(BOOL)animated {
@@ -225,7 +227,11 @@
 
 - (void) refreshDb {
     if ([ud valueForKey:@"level"] != nil) {
-        level = [[ud objectForKey:@"level"] integerValue];
+        if (![[ud valueForKey:@"howTo"] isEqualToString:@"search"]) {
+            level = [[ud objectForKey:@"level"] integerValue];
+        } else {
+            level = [[ud objectForKey:@"level"] integerValue] - 1;
+        }
     } else {
         level = 0;
     }
@@ -237,7 +243,7 @@
     } else if (level + 1 == 3) {
         req = [NSString stringWithFormat:@"select * from ClinicoPhPointers where [Level] = 3 and ParentCode = '%@' order by Code", [ud objectForKey:@"parent3"]];
     } else if (level + 1 == 4) {
-        req = [NSString stringWithFormat:@"select * from ClinicoPhPointers where [Level] = 2 and ParentCode = '%@' order by Code", [ud objectForKey:@"parent4"]];
+        req = [NSString stringWithFormat:@"select * from ClinicoPhPointers where [Level] = 4 and ParentCode = '%@' order by Code", [ud objectForKey:@"parent4"]];
     }
     
     [self loadData:req];

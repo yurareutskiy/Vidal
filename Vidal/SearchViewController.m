@@ -537,11 +537,11 @@
         [ud setObject:[[self.data objectAtIndex:0] objectAtIndex:3] forKey:@"level"];
         
         if ([[ud objectForKey:@"level"] integerValue] == 1) {
-            [ud setObject:[[self.data objectAtIndex:0] objectAtIndex:1] forKey:@"parent2"];
+            [ud setObject:[[self.data objectAtIndex:0] objectAtIndex:4] forKey:@"parent1"];
         } else if ([[ud objectForKey:@"level"] integerValue] == 2) {
-            [ud setObject:[[self.data objectAtIndex:0] objectAtIndex:1] forKey:@"parent3"];
+            [ud setObject:[[self.data objectAtIndex:0] objectAtIndex:4] forKey:@"parent2"];
         } else if ([[ud objectForKey:@"level"] integerValue] == 3) {
-            [ud setObject:[[self.data objectAtIndex:0] objectAtIndex:1] forKey:@"parent4"];
+            [ud setObject:[[self.data objectAtIndex:0] objectAtIndex:4] forKey:@"parent3"];
         }
         
         [ud setObject:@"search" forKey:@"howTo"];

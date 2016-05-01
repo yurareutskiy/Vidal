@@ -110,6 +110,7 @@
     
     if (self.isMovingFromParentViewController) {
         [ud setObject:@"drugs" forKey:@"from"];
+        [ud setObject:@"back" forKey:@"howTo"];
     }
 }
 
@@ -149,7 +150,7 @@
         NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
         
         cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]]];
-        cell.category.text = [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory];
+        cell.category.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]];
         
     } else if ([ud valueForKey:@"activeID"]) {
         
@@ -157,7 +158,7 @@
         NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
         
         cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]]];
-        cell.category.text = [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory];
+        cell.category.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]];
         
     } else if ([ud valueForKey:@"letterActive"]) {
         
@@ -165,7 +166,7 @@
         NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
         
         cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]]];
-        cell.category.text = [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory];
+        cell.category.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]];
         
     } else if ([ud valueForKey:@"info"] || [ud valueForKey:@"comp"]) {
         
@@ -275,8 +276,8 @@
     
     NSString *text = input;
     
-    NSRange range = NSMakeRange(0, 1);
-    text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
+//    NSRange range = NSMakeRange(0, 1);
+//    text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
@@ -290,6 +291,8 @@
     text = [text stringByReplacingOccurrencesOfString:@"&rdquo;" withString:@"”"];
     text = [text stringByReplacingOccurrencesOfString:@"<SUP>&reg;</SUP>" withString:@"®"];
     text = [text stringByReplacingOccurrencesOfString:@"<sup>&reg;</sup>" withString:@"®"];
+    text = [text stringByReplacingOccurrencesOfString:@"<SUB>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"</SUB>" withString:@" "];
     text = [text stringByReplacingOccurrencesOfString:@"<P>" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"<B>" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"<I>" withString:@""];

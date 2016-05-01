@@ -17,6 +17,7 @@
     NSString *newsID;
     NSUserDefaults *ud;
     ModelViewController *mvc;
+    UIActivityIndicatorView *activityView;
 }
 
 
@@ -33,22 +34,43 @@
     
     array = [NSArray array];
     
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    
-    NSURL *URL = [NSURL URLWithString:@"http://www.vidal.ru/api/news-raw"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-    
-    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        if (error) {
-            NSLog(@"Error: %@", error);
-        } else {
-            NSLog(@"%@ %@", response, responseObject);
-            array = [NSArray arrayWithArray:responseObject];
-            [self.tableView reloadData];
-        }
-    }];
-    [dataTask resume];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+        
+        activityView = [[UIActivityIndicatorView alloc]
+                        initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+        
+        activityView.center = CGPointMake([[UIScreen mainScreen] bounds].size.width / 2, [[UIScreen mainScreen] bounds].size.height / 2 - 80.0);
+        
+        
+        [activityView startAnimating];
+        [self.tableView addSubview:activityView];
+        
+        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+        
+        NSURL *URL = [NSURL URLWithString:@"http://www.vidal.ru/api/news-raw"];
+        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+        
+        NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+            if (error) {
+                NSLog(@"Error: %@", error);
+            } else {
+                NSLog(@"%@ %@", response, responseObject);
+                array = [NSArray arrayWithArray:responseObject];
+                [self.tableView reloadData];
+            }
+        }];
+        [dataTask resume];
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            
+            [activityView removeFromSuperview];
+            
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+        });
+    });
     
     // Do any additional setup after loading the view.
 }
