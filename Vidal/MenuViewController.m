@@ -14,12 +14,15 @@
 
 @implementation MenuViewController {
     UITapGestureRecognizer *singleFingerTap;
+    NSUserDefaults *ud;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     self.revealViewController.delegate = self;
+    
+    ud = [NSUserDefaults standardUserDefaults];
     
     [[self.vidal imageView] setContentMode:UIViewContentModeScaleAspectFit];
     self.revealViewController.rearViewRevealWidth = self.view.frame.size.width - 80.0;
@@ -103,6 +106,7 @@
 
 - (IBAction)toPharma:(UIButton *)sender {
     
+    [ud removeObjectForKey:@"howTo"];
     [self performSegueWithIdentifier:@"toPharma" sender:self];
     
 }

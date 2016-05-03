@@ -41,18 +41,22 @@
     self.tableView.estimatedRowHeight = 60.0;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
+    [ud setObject:@"0" forKey:@"share"];
+    
     // Do any additional setup after loading the view.
 }
 
 - (void) viewWillAppear:(BOOL)animated {
     
+    
+    if ([[ud valueForKey:@"share"] isEqualToString:@"0"]) {
     NSInteger indexOfLatName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
     NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
     NSInteger indexOfCompany = [self.dbManager.arrColumnNames indexOfObject:@"CompaniesDescription"];
     
     
-    self.latName.text = [self clearString:[self.info objectAtIndex:indexOfLatName]];
-    self.name.text = [self clearString:[self.info objectAtIndex:indexOfName]];
+    self.latName.text = [self clearString:[[self.info objectAtIndex:indexOfLatName] valueForKey:@"lowercaseString"]];
+    self.name.text = [self clearString:[[self.info objectAtIndex:indexOfName] valueForKey:@"lowercaseString"]];
     
     if (![[self.info objectAtIndex:indexOfCompany] isEqualToString:@""]) {
         self.registred.text = [self clearString:[self.info objectAtIndex:indexOfCompany]];
@@ -151,6 +155,9 @@
     }
     
             [self.tableView reloadData];
+    } else {
+        [ud setObject:@"0" forKey:@"share"];
+    }
     
 }
 
@@ -210,7 +217,8 @@
     
 }
 
-- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView
+{
     return 1;
 }
 
@@ -298,7 +306,9 @@
     NSString *text = input;
     
     NSRange range = NSMakeRange(0, 1);
-    text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
+    if (![text isEqualToString:@""]) {
+        text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
+    }
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
@@ -393,6 +403,8 @@
 */
 
 - (IBAction)share:(UIButton *)sender {
+    
+    [ud setObject:@"1" forKey:@"share"];
     
     NSString *text = self.name.text;
     

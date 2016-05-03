@@ -62,6 +62,7 @@
     [ud removeObjectForKey:@"comp"];
     [ud removeObjectForKey:@"from"];
     [ud removeObjectForKey:@"letterActive"];
+    [ud removeObjectForKey:@"letterDrug"];
     
     
     

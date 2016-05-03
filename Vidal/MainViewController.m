@@ -243,7 +243,6 @@
         NSLog(@"Downloading Started");
         NSString *urlToDownload = link;
         NSURL  *url = [NSURL URLWithString:urlToDownload];
-            NSLog(@"URL %@", url);
         NSData *urlData = [NSData dataWithContentsOfURL:url];
         if ( urlData )
         {

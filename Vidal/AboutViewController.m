@@ -67,8 +67,9 @@
     // Do any additional setup after loading the view.
 }
 
-- (void) viewDidDisappear:(BOOL)animated {
-    [ud setValue:@"0" forKey:@"howTo"];
+- (void) viewDidDisappear:(BOOL)animated
+{
+        [ud removeObjectForKey:@"howTo"];
 }
 
 -(void)loadData:(NSString *)req{
@@ -157,6 +158,8 @@
     
 }
 
+
+
 - (IBAction)right:(UIButton *)sender {
     
     [UIView animateWithDuration:0.5 animations:^{
@@ -165,12 +168,20 @@
         [self.drug setAlpha:0.0];
     } completion:^(BOOL finished) {
         if (ind < [self.results count] - 1) {
-            [self.image setImage:[UIImage imageWithData:[self.results[ind+1] valueForKey:@"image"]]];
+            if ([[self.results[ind+1] valueForKey:@"image"] length] > 0) {
+                [self.image setImage:[UIImage imageWithData:[self.results[ind+1] valueForKey:@"image"]]];
+            } else {
+                [self.image setImage:[UIImage imageNamed:@"company"]];
+            }
             [self.name setText:[self.results[ind+1] valueForKey:@"nameOf"]];
             [self.drug setText:[self.results[ind+1] valueForKey:@"drug"]];
             ind++;
         } else if (ind == [self.results count] - 1) {
-            [self.image setImage:[UIImage imageWithData:[self.results[0] valueForKey:@"image"]]];
+            if ([[self.results[ind+1] valueForKey:@"image"] length] > 0) {
+                [self.image setImage:[UIImage imageWithData:[self.results[0] valueForKey:@"image"]]];
+            } else {
+                [self.image setImage:[UIImage imageNamed:@"company"]];
+            }
             [self.name setText:[self.results[0] valueForKey:@"nameOf"]];
             [self.drug setText:[self.results[0] valueForKey:@"drug"]];
             ind = 0;
@@ -192,12 +203,20 @@
         [self.drug setAlpha:0.0];
     } completion:^(BOOL finished) {
         if (ind > 0) {
-            [self.image setImage:[UIImage imageWithData:[self.results[ind-1] valueForKey:@"image"]]];
+            if ([[self.results[ind+1] valueForKey:@"image"] length] > 0) {
+                [self.image setImage:[UIImage imageWithData:[self.results[ind-1] valueForKey:@"image"]]];
+            } else {
+                [self.image setImage:[UIImage imageNamed:@"company"]];
+            }
             [self.name setText:[self.results[ind-1] valueForKey:@"nameOf"]];
             [self.drug setText:[self.results[ind-1] valueForKey:@"drug"]];
             ind--;
         } else if (ind == 0) {
-            [self.image setImage:[UIImage imageWithData:[self.results[[self.results count] - 1] valueForKey:@"image"]]];
+            if ([[self.results[ind+1] valueForKey:@"image"] length] > 0) {
+                [self.image setImage:[UIImage imageWithData:[self.results[[self.results count] - 1] valueForKey:@"image"]]];
+            } else {
+                [self.image setImage:[UIImage imageNamed:@"company"]];
+            }
             [self.name setText:[self.results[[self.results count] - 1] valueForKey:@"nameOf"]];
             [self.drug setText:[self.results[[self.results count] - 1] valueForKey:@"drug"]];
             ind = (int)[self.results count] - 1;

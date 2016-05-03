@@ -22,10 +22,7 @@
 		3A1570611CAEAA2B00D49C5E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15705E1CAEAA2B00D49C5E /* FBSDKLoginKit.framework */; };
 		3A1570621CAEAA2B00D49C5E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15705F1CAEAA2B00D49C5E /* FBSDKShareKit.framework */; };
 		3A1570661CAEAAAF00D49C5E /* OKSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1570651CAEAAAF00D49C5E /* OKSDK.m */; };
-		3A1570731CAEB0A000D49C5E /* SocialNetworkManagerVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1570721CAEB0A000D49C5E /* SocialNetworkManagerVC.m */; };
-		3A4E7D501CC98B960006941F /* lucida_grande_bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A4E7D4F1CC98B960006941F /* lucida_grande_bold.ttf */; };
 		3A5638581CA19971000A83B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5638571CA19971000A83B5 /* Assets.xcassets */; };
-		3A5D44901CC26DCD00BDC183 /* lucida_grande.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A5D448F1CC26DCD00BDC183 /* lucida_grande.ttf */; };
 		3A70F38A1C80B32C00193150 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A70F3891C80B32C00193150 /* CoreGraphics.framework */; };
 		3A78E62B1CD0C38200DD13B8 /* SecondModelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78E62A1CD0C38200DD13B8 /* SecondModelViewController.m */; };
 		3A78F0FF1C91E7DA008C6BE5 /* MenuViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78F0FE1C91E7DA008C6BE5 /* MenuViewController.m */; };
@@ -104,11 +101,7 @@
 		3A15705F1CAEAA2B00D49C5E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		3A1570641CAEAAAF00D49C5E /* OKSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OKSDK.h; path = Vidal/OKSDK.h; sourceTree = "<group>"; };
 		3A1570651CAEAAAF00D49C5E /* OKSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OKSDK.m; path = Vidal/OKSDK.m; sourceTree = "<group>"; };
-		3A1570711CAEB0A000D49C5E /* SocialNetworkManagerVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocialNetworkManagerVC.h; sourceTree = "<group>"; };
-		3A1570721CAEB0A000D49C5E /* SocialNetworkManagerVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocialNetworkManagerVC.m; sourceTree = "<group>"; };
-		3A4E7D4F1CC98B960006941F /* lucida_grande_bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lucida_grande_bold.ttf; sourceTree = "<group>"; };
 		3A5638571CA19971000A83B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3A5D448F1CC26DCD00BDC183 /* lucida_grande.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = lucida_grande.ttf; sourceTree = "<group>"; };
 		3A70F3891C80B32C00193150 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3A78E6291CD0C38200DD13B8 /* SecondModelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondModelViewController.h; sourceTree = "<group>"; };
 		3A78E62A1CD0C38200DD13B8 /* SecondModelViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SecondModelViewController.m; sourceTree = "<group>"; };
@@ -264,15 +257,6 @@
 			name = "Database & Server";
 			sourceTree = "<group>";
 		};
-		3A15706A1CAEAE4800D49C5E /* Social Network */ = {
-			isa = PBXGroup;
-			children = (
-				3A1570711CAEB0A000D49C5E /* SocialNetworkManagerVC.h */,
-				3A1570721CAEB0A000D49C5E /* SocialNetworkManagerVC.m */,
-			);
-			name = "Social Network";
-			sourceTree = "<group>";
-		};
 		3A15706B1CAEAE7800D49C5E /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -324,8 +308,6 @@
 				3A15706B1CAEAE7800D49C5E /* Models */,
 				3AA6AC371CBB0B35005AAD85 /* SearchViewController.h */,
 				3AA6AC381CBB0B35005AAD85 /* SearchViewController.m */,
-				3A5D448F1CC26DCD00BDC183 /* lucida_grande.ttf */,
-				3A4E7D4F1CC98B960006941F /* lucida_grande_bold.ttf */,
 			);
 			name = "Additional Files";
 			sourceTree = "<group>";
@@ -389,7 +371,6 @@
 				3A9E3FCF1C80AE330069BDFC /* AppDelegate.h */,
 				3A9E3FD01C80AE330069BDFC /* AppDelegate.m */,
 				3A1570691CAEAE3D00D49C5E /* Database & Server */,
-				3A15706A1CAEAE4800D49C5E /* Social Network */,
 				3A78F1071C92051F008C6BE5 /* Additional Files */,
 				3A78F10C1C9206EF008C6BE5 /* Main Screens */,
 				3A0D5CB21C9C6D29005E6976 /* From Main Screens */,
@@ -506,10 +487,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A0DBD881CB4924300D9BAD3 /* LogOutStoryboard.storyboard in Resources */,
-				3A4E7D501CC98B960006941F /* lucida_grande_bold.ttf in Resources */,
 				BF9A12221CBFE8EB00B65F68 /* GoogleService-Info.plist in Resources */,
 				3A9E3FDF1C80AE330069BDFC /* LaunchScreen.storyboard in Resources */,
-				3A5D44901CC26DCD00BDC183 /* lucida_grande.ttf in Resources */,
 				3A5638581CA19971000A83B5 /* Assets.xcassets in Resources */,
 				3A9E3FD71C80AE330069BDFC /* Main.storyboard in Resources */,
 			);
@@ -595,7 +574,6 @@
 				3A0D5CA41C9C484A005E6976 /* PharmaTableViewCell.m in Sources */,
 				3A0D5CAD1C9C4DA5005E6976 /* ActiveTableViewCell.m in Sources */,
 				3A0D5CA11C9C457B005E6976 /* ProducersTableViewCell.m in Sources */,
-				3A1570731CAEB0A000D49C5E /* SocialNetworkManagerVC.m in Sources */,
 				3A78F1211C920756008C6BE5 /* AboutViewController.m in Sources */,
 				3A78F1181C920737008C6BE5 /* InteractionsViewController.m in Sources */,
 				3A78F10F1C920701008C6BE5 /* NewsViewController.m in Sources */,

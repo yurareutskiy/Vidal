@@ -8,7 +8,6 @@
 
 #import <UIKit/UIKit.h>
 #import "ModelViewController.h"
-#import "SocialNetworkManagerVC.h"
 #import "AFNetworking.h"
 #import "SecondModelViewController.h"
 

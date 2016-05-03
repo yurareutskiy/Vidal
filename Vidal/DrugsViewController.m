@@ -99,6 +99,10 @@
     // Do any additional setup after loading the view.
 }
 
+- (void) viewWillDisappear:(BOOL)animated {
+    [ud removeObjectForKey:@"howTo"];
+}
+
 - (void) search {
     [self performSegueWithIdentifier:@"toSearch" sender:self];
 }
@@ -146,7 +150,7 @@
     NSInteger indexOfLetter = [self.dbManager.arrColumnNames indexOfObject:@"Letter"];
     NSInteger indexOfTitle = [self.dbManager.arrColumnNames indexOfObject:@"Title"];
     
-    cell.name.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfTitle]];
+    cell.name.text = [self clearString:[[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfTitle] valueForKey:@"lowercaseString"]];
     cell.letter.text = [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfLetter];
         
         return cell;

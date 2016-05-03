@@ -78,6 +78,7 @@
 
 - (void) viewWillAppear:(BOOL)animated
 {
+    
     if (![[ud valueForKey:@"howTo"] isEqualToString:@"back"]) {
         [self refreshDb];
     }

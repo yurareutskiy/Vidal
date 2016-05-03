@@ -46,6 +46,8 @@
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
+    
+    [ud setObject:@"0" forKey:@"share"];
 
     // Do any additional setup after loading the view.
 }
@@ -63,6 +65,8 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     
+    if ([[ud valueForKey:@"share"] isEqualToString:@"0"]) {
+    
     NSString *request = [NSString stringWithFormat:@"select * from (select mol.*, cp.ClPhPointerID as CategoryID, cp.Code as CategoryCode, cp.Name as CategoryName from (select upper(substr(m.RusName, 1, 1)) as Letter, m.MoleculeID, upper(substr(m.RusName, 1, 1)) || lower(substr(m.RusName, 2)) as RusName, upper(substr(m.LatName, 1, 1)) || lower(substr(m.LatName, 2)) as LatName, doc.* from Molecule_Document md inner join Molecule m on m.MoleculeID = md.MoleculeID inner join Document doc on doc.DocumentID = md.DocumentID where doc.ArticleID = 1) mol left join Document_ClPhPointers dcp on dcp.DocumentID = mol.DocumentID left join ClinicoPhPointers cp on cp.ClPhPointerID = dcp.ClPhPointerID where ifnull(dcp.ItsMainPriority,1) = 1) doc where doc.MoleculeID = %@", [ud valueForKey:@"activeID"]];
     [self loadData:request];
     
@@ -70,8 +74,8 @@
     NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
     NSInteger indexOfMolecule = [self.dbManager.arrColumnNames indexOfObject:@"MoleculeID"];
     
-    self.latName.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexOfLatName]];
-    self.name.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexOfName]];
+    self.latName.text = [self clearString:[[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexOfLatName] valueForKey:@"lowercaseString"]];
+    self.name.text = [self clearString:[[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexOfName] valueForKey:@"lowercaseString"]];
     
     for (NSUInteger i = 0; i < [[self.arrPeopleInfo objectAtIndex:0] count]; i++) {
         if ([[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
@@ -107,6 +111,9 @@
     [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
     
     [self.tableView reloadData];
+    } else {
+        [ud setObject:@"0" forKey:@"share"];
+    }
 }
 
 /*
@@ -188,8 +195,10 @@
     
     NSString *text = input;
     
-//    NSRange range = NSMakeRange(0, 1);
-//    text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
+    NSRange range = NSMakeRange(0, 1);
+    if (![text isEqualToString:@""]) {
+        text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
+    }
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
@@ -235,6 +244,8 @@
 
 - (IBAction)share:(UIButton *)sender {
     
+    [ud setObject:@"1" forKey:@"share"];
+    
     NSString *text = self.name.text;
     
     UIActivityViewController *controller =
@@ -243,6 +254,7 @@
      applicationActivities:nil];
     
     [self presentViewController:controller animated:YES completion:nil];
+    
     
 }
 

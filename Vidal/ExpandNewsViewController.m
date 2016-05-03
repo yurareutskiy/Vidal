@@ -14,7 +14,6 @@
 
 @implementation ExpandNewsViewController {
     
-    SocialNetworkManagerVC *vc;
     NSDictionary *array;
     NSString *pls;
     NSUserDefaults *ud;
@@ -36,7 +35,6 @@
     
     self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shareArrow"] style:UIBarButtonItemStylePlain target:self action:@selector(shareNews:)];
     
-    vc = [[SocialNetworkManagerVC alloc] init];
     ud = [NSUserDefaults standardUserDefaults];
     self.newsId = [ud objectForKey:@"news"];
     

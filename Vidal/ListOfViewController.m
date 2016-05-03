@@ -149,7 +149,7 @@
         NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
         NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
         
-        cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]]];
+        cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]] valueForKey:@"lowercaseString"]];
         cell.category.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]];
         
     } else if ([ud valueForKey:@"activeID"]) {
@@ -157,7 +157,7 @@
         NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
         NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
         
-        cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]]];
+        cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]] valueForKey:@"lowercaseString"]];
         cell.category.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]];
         
     } else if ([ud valueForKey:@"letterActive"]) {
@@ -165,14 +165,14 @@
         NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
         NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
         
-        cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]]];
+        cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]]  valueForKey:@"lowercaseString"]];
         cell.category.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]];
         
     } else if ([ud valueForKey:@"info"] || [ud valueForKey:@"comp"]) {
         
         NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
         
-        cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]]];
+        cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]] valueForKey:@"lowercaseString"]];
         cell.category.text = @"";
         
     } else if ([ud valueForKey:@"pharmaList"]) {
@@ -180,34 +180,34 @@
         NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
         NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
         
-        cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]]];
+        cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]] valueForKey:@"lowercaseString"]];
         cell.category.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]]];
         
     }
     
         else if ([ud valueForKey:@"workActive"] && ([self.activeID isEqualToString:@""] || self.activeID == nil)) {
             if (![[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2] isEqualToString:@""]) {
-                cell.category.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2]]];
+                cell.category.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2]] valueForKey:@"lowercaseString"]];
                 [cell.category setTextColor:[UIColor lightGrayColor]];
             } else {
                 cell.category.text = @"";
             }
         } else if ([ud valueForKey:@"activeID"]) {
             
-            cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]]];
+            cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]] valueForKey:@"lowercaseString"]];
             [cell.name setTextColor:[UIColor blackColor]];
             cell.category.text = @"";
             
         } else if ([ud valueForKey:@"pharmaList"]) {
-            cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]]];
+            cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]] valueForKey:@"lowercaseString"]];
             [cell.name setTextColor:[UIColor blackColor]];
             cell.category.text = @"";
         } else if ([ud valueForKey:@"comp"]) {
-            cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2]]];
+            cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2]] valueForKey:@"lowercaseString"]];
             [cell.name setTextColor:[UIColor blackColor]];
             cell.category.text = @"";
         } else if ([ud valueForKey:@"info"]) {
-            cell.name.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2]]];
+            cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2]] valueForKey:@"lowercaseString"]];
             [cell.name setTextColor:[UIColor blackColor]];
             cell.category.text = @"";
         } else {
@@ -276,8 +276,10 @@
     
     NSString *text = input;
     
-//    NSRange range = NSMakeRange(0, 1);
-//    text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
+    NSRange range = NSMakeRange(0, 1);
+    if (![text isEqualToString:@""]) {
+        text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
+    }
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];

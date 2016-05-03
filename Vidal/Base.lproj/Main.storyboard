@@ -754,8 +754,6 @@
                                 <exclude reference="wm5-Xq-38y"/>
                                 <exclude reference="JFn-jw-W4Q"/>
                                 <exclude reference="z6r-yG-Lms"/>
-                                <exclude reference="jNm-FF-saM"/>
-                                <exclude reference="5na-nq-LVo"/>
                                 <exclude reference="Pgq-0H-Sbo"/>
                                 <exclude reference="gv9-yp-aKx"/>
                                 <exclude reference="F2b-t5-0IH"/>
@@ -765,6 +763,8 @@
                                 <exclude reference="5rH-Vt-SAP"/>
                                 <exclude reference="CiE-vu-P6x"/>
                                 <exclude reference="imT-XM-i6d"/>
+                                <exclude reference="jNm-FF-saM"/>
+                                <exclude reference="5na-nq-LVo"/>
                             </mask>
                         </variation>
                     </view>
@@ -2267,78 +2267,6 @@ Lactobacillus acidophilus и другие.</string>
             </objects>
             <point key="canvasLocation" x="2884" y="7132"/>
         </scene>
-        <!--Social Network ManagerVC-->
-        <scene sceneID="KNO-uR-3Od">
-            <objects>
-                <viewController id="a97-ab-GWX" customClass="SocialNetworkManagerVC" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="WJr-dX-weW"/>
-                        <viewControllerLayoutGuide type="bottom" id="qG3-sm-wPq"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="s1B-cg-3jl">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7fh-dZ-VDQ" customClass="FBSDKShareButton">
-                                <rect key="frame" x="275" y="75" width="50" height="50"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="XqX-Zu-xm1"/>
-                                    <constraint firstAttribute="width" constant="100" id="rOO-m1-P9l"/>
-                                </constraints>
-                                <state key="normal" image="fbLogo"/>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="XqX-Zu-xm1"/>
-                                        <exclude reference="rOO-m1-P9l"/>
-                                    </mask>
-                                </variation>
-                                <connections>
-                                    <action selector="fbButton:" destination="a97-ab-GWX" eventType="touchUpInside" id="yqZ-qN-lEs"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0eL-dX-d4c">
-                                <rect key="frame" x="345" y="50" width="100" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="DdU-Er-a2l"/>
-                                    <constraint firstAttribute="width" constant="100" id="IdC-V9-pqq"/>
-                                </constraints>
-                                <state key="normal" image="okLogo"/>
-                                <connections>
-                                    <action selector="okButton:" destination="a97-ab-GWX" eventType="touchUpInside" id="B9l-wA-6Oa"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ayW-2x-qMT">
-                                <rect key="frame" x="155" y="50" width="100" height="100"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="100" id="Phv-T8-LuD"/>
-                                    <constraint firstAttribute="width" constant="100" id="l7Q-kJ-eLa"/>
-                                </constraints>
-                                <state key="normal" image="vkLogo"/>
-                                <connections>
-                                    <action selector="vkButton:" destination="a97-ab-GWX" eventType="touchUpInside" id="D4a-zh-lrb"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="7fh-dZ-VDQ" firstAttribute="centerX" secondItem="s1B-cg-3jl" secondAttribute="centerX" id="1Nc-pg-vFW"/>
-                            <constraint firstItem="0eL-dX-d4c" firstAttribute="centerY" secondItem="s1B-cg-3jl" secondAttribute="centerY" id="QTw-dC-Qi6"/>
-                            <constraint firstItem="ayW-2x-qMT" firstAttribute="centerY" secondItem="s1B-cg-3jl" secondAttribute="centerY" id="Sey-C4-A1z"/>
-                            <constraint firstItem="0eL-dX-d4c" firstAttribute="leading" secondItem="7fh-dZ-VDQ" secondAttribute="trailing" constant="20" id="hag-d1-fsw"/>
-                            <constraint firstItem="7fh-dZ-VDQ" firstAttribute="leading" secondItem="ayW-2x-qMT" secondAttribute="trailing" constant="20" id="iEc-p8-Akc"/>
-                            <constraint firstItem="7fh-dZ-VDQ" firstAttribute="centerY" secondItem="s1B-cg-3jl" secondAttribute="centerY" id="oS7-CX-Z3B"/>
-                        </constraints>
-                    </view>
-                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-                    <size key="freeformSize" width="600" height="200"/>
-                    <connections>
-                        <outlet property="buttonFB" destination="7fh-dZ-VDQ" id="ZRB-I0-3Rp"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7wR-j6-prR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3768" y="1806"/>
-        </scene>
         <!--Main View Controller-->
         <scene sceneID="BjM-Rz-tdN">
             <objects>
@@ -3421,7 +3349,6 @@ Lactobacillus acidophilus и другие.</string>
                         <outlet property="date" destination="253-SC-8Aa" id="88g-YO-4uT"/>
                         <outlet property="newsText" destination="fWm-qp-11A" id="mWm-PE-h8D"/>
                         <outlet property="newsTitle" destination="4BG-oW-wTX" id="OKl-WJ-Kjd"/>
-                        <segue destination="a97-ab-GWX" kind="show" identifier="share" id="wK0-hw-HDy"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Hf-GW-yZj" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -4315,13 +4242,11 @@ Lactobacillus acidophilus и другие.</string>
         <image name="favGrey" width="27" height="25"/>
         <image name="favRed" width="27" height="25"/>
         <image name="favWhite" width="33" height="31"/>
-        <image name="fbLogo" width="50" height="50"/>
         <image name="halfCircle" width="22" height="22"/>
         <image name="human" width="29" height="35"/>
         <image name="info" width="35" height="35"/>
         <image name="mainBg" width="523" height="652"/>
         <image name="news" width="31" height="28"/>
-        <image name="okLogo" width="50" height="50"/>
         <image name="pill" width="29" height="29"/>
         <image name="plus" width="32" height="32"/>
         <image name="points" width="27" height="25"/>
@@ -4334,7 +4259,6 @@ Lactobacillus acidophilus и другие.</string>
         <image name="uncheckedSquare" width="19" height="19"/>
         <image name="vidalLogo" width="235" height="49"/>
         <image name="vidalLogoWhite" width="172" height="36"/>
-        <image name="vkLogo" width="50" height="50"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="Bf0-3e-nJt"/>
