@@ -33,7 +33,12 @@
     self.addressHid.text = self.address;
     self.emailHid.text = self.email;
     self.phoneHid.text = self.phone;
-    self.image.image = self.logo;
+    NSLog(@"%@", self.logo);
+    if (self.logo != nil) {
+        self.image.image = self.logo;
+    } else {
+        self.image.image = [UIImage imageNamed:@"company"];
+    }
     
     NSLog(@"%@", self.name);
     
