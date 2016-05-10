@@ -17,5 +17,6 @@
 - (void)setExpansionStyle:(UIExpansionStyle)expansionStyle animated:(BOOL)animated;
 @property (strong, nonatomic) IBOutlet UILabel *name;
 @property (strong, nonatomic) IBOutlet UILabel *category;
+@property (strong, nonatomic) IBOutlet UILabel *elaboration;
 
 @end

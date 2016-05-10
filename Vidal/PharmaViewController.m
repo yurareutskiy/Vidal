@@ -272,6 +272,8 @@
     
     NSString *text = input;
     
+    text = [text stringByReplacingOccurrencesOfString:@"<TD colSpan=\"2\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
@@ -304,6 +306,7 @@
     text = [text stringByReplacingOccurrencesOfString:@"<SUB>" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"<P class=\"F7\">" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
+    text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     return text;
     

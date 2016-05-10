@@ -13,7 +13,7 @@
 #import "ListOfViewController.h"
 #import "SecondModelViewController.h"
 
-@interface DocumentViewController : SecondModelViewController <UITableViewDelegate, UITableViewDataSource>
+@interface DocumentViewController : SecondModelViewController <UITableViewDelegate, UITableViewDataSource, DocsTableViewCellDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *registred;

@@ -22,13 +22,14 @@
 //    self.desc.text = string1;
 //    [self.desc sizeToFit];
     
+    [self.delegate perfSeg:self];
+    [self.delegate perfSeg2:self];
+    
     // Initialization code
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    [self.delegate perfSeg:self];
     
     // Configure the view for the selected state
 }
@@ -38,15 +39,6 @@
     [UIView animateWithDuration:0.3 animations:^{
         self.image.transform = CGAffineTransformMakeRotation(degree);
     }];
-}
-
--(void)prepareForReuse {
-    NSLog(@"%@", self.expanded);
-    if ([self.expanded isEqualToString:@"0"]){
-        [self rotateImage:0];
-    } else if ([self.expanded isEqualToString:@"1"]) {
-        [self rotateImage:M_PI_2];
-    }
 }
 
 @end

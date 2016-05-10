@@ -62,6 +62,16 @@
         }
     }
     
+    [ud removeObjectForKey:@"workWith"];
+    [ud removeObjectForKey:@"activeID"];
+    [ud removeObjectForKey:@"pharmaList"];
+    [ud removeObjectForKey:@"comp"];
+    [ud removeObjectForKey:@"info"];
+    [ud removeObjectForKey:@"from"];
+    [ud removeObjectForKey:@"molecule"];
+    [ud removeObjectForKey:@"letterDrug"];
+    [ud removeObjectForKey:@"letterActive"];
+    
     // Do any additional setup after loading the view.
 }
 

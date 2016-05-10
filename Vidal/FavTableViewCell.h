@@ -20,6 +20,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *name;
 @property (nonatomic, weak) id <FavTableViewCellDelegate> delegate;
 @property (weak, nonatomic) IBOutlet UIButton *favButton;
+@property (strong, nonatomic) IBOutlet UILabel *elaboration;
 - (IBAction)delete:(UIButton *)sender;
 
 @end

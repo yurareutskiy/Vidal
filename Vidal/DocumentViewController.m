@@ -66,8 +66,10 @@
 - (void) viewWillAppear:(BOOL)animated {
     
     if ([[ud valueForKey:@"share"] isEqualToString:@"0"]) {
-    
-    NSString *request = [NSString stringWithFormat:@"select * from (select mol.*, cp.ClPhPointerID as CategoryID, cp.Code as CategoryCode, cp.Name as CategoryName from (select upper(substr(m.RusName, 1, 1)) as Letter, m.MoleculeID, upper(substr(m.RusName, 1, 1)) || lower(substr(m.RusName, 2)) as RusName, upper(substr(m.LatName, 1, 1)) || lower(substr(m.LatName, 2)) as LatName, doc.* from Molecule_Document md inner join Molecule m on m.MoleculeID = md.MoleculeID inner join Document doc on doc.DocumentID = md.DocumentID where doc.ArticleID = 1) mol left join Document_ClPhPointers dcp on dcp.DocumentID = mol.DocumentID left join ClinicoPhPointers cp on cp.ClPhPointerID = dcp.ClPhPointerID where ifnull(dcp.ItsMainPriority,1) = 1) doc where doc.MoleculeID = %@", [ud valueForKey:@"activeID"]];
+        
+        NSString *request = [NSString stringWithFormat:@"select * from (select mol.*, cp.Name as Category from (select m.MoleculeID, upper(substr(m.RusName, 1, 1)) || lower(substr(m.RusName, 2)) as RusName, upper(substr(m.LatName, 1, 1)) || lower(substr(m.LatName, 2)) as LatName, doc.DocumentID, doc.CompiledComposition, doc.PhInfluence, doc.PhKinetics, doc.Indication, doc.Dosage, doc.SideEffects, doc.ContraIndication, doc.Lactation, doc.SpecialInstruction, doc.OverDosage, doc.Interaction, doc.PharmDelivery, doc.StorageCondition from Molecule_Document md inner join Molecule m on m.MoleculeID = md.MoleculeID inner join Document doc on doc.DocumentID = md.DocumentID where doc.ArticleID = 1) mol left join Document_ClPhPointers dcp on dcp.DocumentID = mol.DocumentID left join ClinicoPhPointers cp on cp.ClPhPointerID = dcp.ClPhPointerID where ifnull(dcp.ItsMainPriority,1) = 1) doc where doc.MoleculeID = %@", [ud valueForKey:@"activeID"]];
+        
+        
     [self loadData:request];
     
     NSInteger indexOfLatName = [self.dbManager.arrColumnNames indexOfObject:@"LatName"];
@@ -84,26 +86,26 @@
         }
     }
     
-    NSInteger indexOfLetter = [self.dbManager.arrColumnNames indexOfObject:@"Letter"];
+//    NSInteger indexOfLetter = [self.dbManager.arrColumnNames indexOfObject:@"Letter"];
     NSInteger indexOfDocument = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
-    NSInteger indexOfArticle = [self.dbManager.arrColumnNames indexOfObject:@"ArticleID"];
-    NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryID"];
-    NSInteger indexOfCode = [self.dbManager.arrColumnNames indexOfObject:@"CategoryCode"];
-    NSInteger indexOfCatName = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
-    NSInteger indexOfRusName = [self.dbManager.arrColumnNames indexOfObject:@"RusName:1"];
-    NSInteger indexOfEngName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
-    NSInteger indexOfCompany = [self.dbManager.arrColumnNames indexOfObject:@"CompaniesDescription"];
+//    NSInteger indexOfArticle = [self.dbManager.arrColumnNames indexOfObject:@"ArticleID"];
+//    NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryID"];
+//    NSInteger indexOfCode = [self.dbManager.arrColumnNames indexOfObject:@"CategoryCode"];
+//    NSInteger indexOfCatName = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
+//    NSInteger indexOfRusName = [self.dbManager.arrColumnNames indexOfObject:@"RusName:1"];
+//    NSInteger indexOfEngName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
+//    NSInteger indexOfCompany = [self.dbManager.arrColumnNames indexOfObject:@"CompaniesDescription"];
     
-    [toDelete addIndex:indexOfLetter];
+//    [toDelete addIndex:indexOfLetter];
     [toDelete addIndex:indexOfDocument];
-    [toDelete addIndex:indexOfArticle];
-    [toDelete addIndex:indexOfCategory];
-    [toDelete addIndex:indexOfCode];
-    [toDelete addIndex:indexOfCatName];
+//    [toDelete addIndex:indexOfArticle];
+//    [toDelete addIndex:indexOfCategory];
+//    [toDelete addIndex:indexOfCode];
+//    [toDelete addIndex:indexOfCatName];
     [toDelete addIndex:indexOfMolecule];
-    [toDelete addIndex:indexOfRusName];
-    [toDelete addIndex:indexOfEngName];
-    [toDelete addIndex:indexOfCompany];
+//    [toDelete addIndex:indexOfRusName];
+//    [toDelete addIndex:indexOfEngName];
+//    [toDelete addIndex:indexOfCompany];
     [toDelete addIndex:indexOfLatName];
     [toDelete addIndex:indexOfName];
     
@@ -150,10 +152,11 @@
         return nil;
     }
     
-    DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"docCell" forIndexPath:indexPath];
-    if (cell == nil) {
-        cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
-    };
+        DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"docCell" forIndexPath:indexPath];
+        if (cell == nil) {
+            cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
+        };
+
     
     if (indexPath.row > 0) {
         UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0.0, 1.0, self.view.frame.size.width + 5.0, 1.0)];
@@ -161,12 +164,18 @@
         [cell addSubview:line];
     }
     
+    [cell setTag:1];
+    
+    cell.delegate = self;
+    
     [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
     
     cell.title.text = [self changeDescName:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
     cell.desc.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexPath.row]];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    [self perfSeg2:cell];
     
     return cell;
 }
@@ -177,12 +186,17 @@
         
         for (NSString *value in [tapsOnCell allKeys]) {
             [tapsOnCell setObject:@"0" forKey:value];
+            [self perfSeg2:[tableView cellForRowAtIndexPath:indexPath]];
         }
         
         [tapsOnCell setObject:@"1" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
         
+        [self perfSeg:[tableView cellForRowAtIndexPath:indexPath]];
+        
     } else {
         [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
+        
+        [self perfSeg2:[tableView cellForRowAtIndexPath:indexPath]];
     }
     
     [tableView beginUpdates];
@@ -199,6 +213,8 @@
     if (![text isEqualToString:@""]) {
         text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
     }
+    text = [text stringByReplacingOccurrencesOfString:@"<TD colSpan=\"2\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
@@ -231,8 +247,21 @@
     text = [text stringByReplacingOccurrencesOfString:@"<SUB>" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"<P class=\"F7\">" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
+    text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     return text;
+    
+}
+
+- (void) perfSeg:(DocsTableViewCell *)sender {
+    
+    [sender rotateImage:M_PI_2];
+    
+}
+
+- (void) perfSeg2:(DocsTableViewCell *)sender {
+    
+    [sender rotateImage:0];
     
 }
 
@@ -286,7 +315,7 @@
     } else if ([output isEqualToString:@"PhKinetics"]) {
         return @"Фармакокинетика";
     } else if ([output isEqualToString:@"Dosage"]) {
-        return @"Режим дозировки";
+        return @"Режим дозирования";
     } else if ([output isEqualToString:@"OverDosage"]) {
         return @"Передозировка";
     } else if ([output isEqualToString:@"Interaction"]) {

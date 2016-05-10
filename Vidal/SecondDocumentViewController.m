@@ -10,6 +10,9 @@
 
 @interface SecondDocumentViewController ()
 
+@property (strong, nonatomic) NSMutableArray *dataForCollection;
+@property (strong, nonatomic) NSMutableArray *resultArray;
+
 @end
 
 @implementation SecondDocumentViewController {
@@ -20,14 +23,17 @@
     BOOL open;
     CGFloat sizeCell;
     NSMutableDictionary *tapsOnCell;
+    NSInteger indexOfBigCell;
     
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.resultArray = [NSMutableArray array];
     tapsOnCell = [NSMutableDictionary dictionary];
     
+    self.dataForCollection = [NSMutableArray array];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -53,10 +59,11 @@
     NSInteger indexOfLatName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
     NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
     NSInteger indexOfCompany = [self.dbManager.arrColumnNames indexOfObject:@"CompaniesDescription"];
-    
+        NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
     
     self.latName.text = [self clearString:[[self.info objectAtIndex:indexOfLatName] valueForKey:@"lowercaseString"]];
     self.name.text = [self clearString:[[self.info objectAtIndex:indexOfName] valueForKey:@"lowercaseString"]];
+    self.elaboration.text = [self clearString:[[self.info objectAtIndex:indexOfElaboration] valueForKey:@"lowercaseString"]];
     
     if (![[self.info objectAtIndex:indexOfCompany] isEqualToString:@""]) {
         self.registred.text = [self clearString:[self.info objectAtIndex:indexOfCompany]];
@@ -72,56 +79,59 @@
                 }
             }
     
-    NSInteger indexOfLetter = [self.dbManager.arrColumnNames indexOfObject:@"Letter"];
+//    NSInteger indexOfLetter = [self.dbManager.arrColumnNames indexOfObject:@"Letter"];
     NSInteger indexOfDocument = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
-    NSInteger indexOfArticle = [self.dbManager.arrColumnNames indexOfObject:@"ArticleID"];
-    NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryID"];
-    NSInteger indexOfCode = [self.dbManager.arrColumnNames indexOfObject:@"CategoryCode"];
-    NSInteger indexOfCatName = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
-    
-    NSInteger indexOfLevel = [self.dbManager.arrColumnNames indexOfObject:@"Level"];
-    NSInteger indexOfcppid = [self.dbManager.arrColumnNames indexOfObject:@"ClPhPointerID"];
-    NSInteger indexOfscppid = [self.dbManager.arrColumnNames indexOfObject:@"SrcClPhPointerID"];
-    NSInteger indexOfPriority = [self.dbManager.arrColumnNames indexOfObject:@"ItsMainPriority"];
-    NSInteger indexOfPharmaCode = [self.dbManager.arrColumnNames indexOfObject:@"Code"];
-    NSInteger indexOfPharmaName = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
-    NSInteger indexOfParent = [self.dbManager.arrColumnNames indexOfObject:@"ParentCode"];
-    NSInteger indexOfShow = [self.dbManager.arrColumnNames indexOfObject:@"ShowInProduct"];
-    
-    NSInteger indexOfInfoPage = [self.dbManager.arrColumnNames indexOfObject:@"InfoPageID"];
+//    NSInteger indexOfArticle = [self.dbManager.arrColumnNames indexOfObject:@"ArticleID"];
+//    NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryID"];
+//    NSInteger indexOfCode = [self.dbManager.arrColumnNames indexOfObject:@"CategoryCode"];
+//    NSInteger indexOfCatName = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
+//    
+//    NSInteger indexOfLevel = [self.dbManager.arrColumnNames indexOfObject:@"Level"];
+//    NSInteger indexOfcppid = [self.dbManager.arrColumnNames indexOfObject:@"ClPhPointerID"];
+//    NSInteger indexOfscppid = [self.dbManager.arrColumnNames indexOfObject:@"SrcClPhPointerID"];
+//    NSInteger indexOfPriority = [self.dbManager.arrColumnNames indexOfObject:@"ItsMainPriority"];
+//    NSInteger indexOfPharmaCode = [self.dbManager.arrColumnNames indexOfObject:@"Code"];
+//    NSInteger indexOfPharmaName = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
+//    NSInteger indexOfParent = [self.dbManager.arrColumnNames indexOfObject:@"ParentCode"];
+//    NSInteger indexOfShow = [self.dbManager.arrColumnNames indexOfObject:@"ShowInProduct"];
+//    
+//    NSInteger indexOfInfoPage = [self.dbManager.arrColumnNames indexOfObject:@"InfoPageID"];
     
     if ([ud valueForKey:@"letterDrug"]) {
         
-        [toDelete addIndex:indexOfLetter];
-        [toDelete addIndex:indexOfCategory];
-        [toDelete addIndex:indexOfCatName];
-        [toDelete addIndex:indexOfCode];
+//        [toDelete addIndex:indexOfLetter];
+//        [toDelete addIndex:indexOfCategory];
+//        [toDelete addIndex:indexOfCatName];
+//        [toDelete addIndex:indexOfCode];
         
     } else if ([ud valueForKey:@"pharmaList"]) {
         
-        [toDelete addIndex:indexOfLevel];
-        [toDelete addIndex:indexOfcppid];
-        [toDelete addIndex:indexOfscppid];
-        [toDelete addIndex:indexOfPriority];
-        [toDelete addIndex:indexOfPharmaCode];
-        [toDelete addIndex:indexOfPharmaName];
-        [toDelete addIndex:indexOfParent];
-        [toDelete addIndex:indexOfShow];
+        indexOfDocument = [self.dbManager.arrColumnNames indexOfObject:@"DocumentListView.DocumentID"];
+        
+//        [toDelete addIndex:indexOfLevel];
+//        [toDelete addIndex:indexOfcppid];
+//        [toDelete addIndex:indexOfscppid];
+//        [toDelete addIndex:indexOfPriority];
+//        [toDelete addIndex:indexOfPharmaCode];
+//        [toDelete addIndex:indexOfPharmaName];
+//        [toDelete addIndex:indexOfParent];
+//        [toDelete addIndex:indexOfShow];
         
     } else if ([ud valueForKey:@"activeID"]) {
         
-        [toDelete addIndex:indexOfLetter];
+//        [toDelete addIndex:indexOfLetter];
         
     } else if ([ud valueForKey:@"info"] || [ud valueForKey:@"comp"]) {
         
-        [toDelete addIndex:indexOfInfoPage];
+//        [toDelete addIndex:indexOfInfoPage];
         
     }
     
     [toDelete addIndex:indexOfDocument];
-    [toDelete addIndex:indexOfArticle];
+//    [toDelete addIndex:indexOfArticle];
     [toDelete addIndex:indexOfLatName];
     [toDelete addIndex:indexOfName];
+        [toDelete addIndex:indexOfElaboration];
     
             if ([((NSArray *)[ud objectForKey:@"favs"]) containsObject:[ud objectForKey:@"id"]]) {
                 NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:@"Препарат в избранном" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:187.0/255.0 green:0.0 blue:57.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
@@ -142,17 +152,19 @@
     
     toDelete = [NSMutableIndexSet indexSet];
     
-    NSInteger indexOfDocument2 = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
-    NSInteger indexOfcppid2 = [self.dbManager.arrColumnNames indexOfObject:@"ClPhPointerID"];
+//    NSInteger indexOfDocument2 = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
+//    NSInteger indexOfcppid2 = [self.dbManager.arrColumnNames indexOfObject:@"ClPhPointerID"];
     
     if ([ud valueForKey:@"pharmaList"]) {
         
-        [toDelete addIndex:indexOfDocument2];
-        [toDelete addIndex:indexOfcppid2];
+//        [toDelete addIndex:indexOfDocument2];
+//        [toDelete addIndex:indexOfcppid2];
         [self.info removeObjectsAtIndexes:toDelete];
         [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
         
     }
+        
+         indexOfBigCell = [self.dbManager.arrColumnNames indexOfObject:@"CompiledComposition"];
     
             [self.tableView reloadData];
     } else {
@@ -242,25 +254,83 @@
         return nil;
     }
     
-    DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"docCell" forIndexPath:indexPath];
-    if (cell == nil) {
+    if (indexPath.row != indexOfBigCell) {
+    
+        DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"docCell" forIndexPath:indexPath];
+        if (cell == nil) {
         cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
-    };
+        };
     
-    if (indexPath.row > 0) {
-        UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0.0, 1.0, self.view.frame.size.width + 5.0, 1.0)];
-        [line setBackgroundColor:[UIColor colorWithRed:164.0/255.0 green:164.0/255.0 blue:164.0/255.0 alpha:1.0]];
-        [cell addSubview:line];
-    }
+        if (indexPath.row > 0) {
+            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0.0, 1.0, self.view.frame.size.width + 5.0, 1.0)];
+            [line setBackgroundColor:[UIColor colorWithRed:164.0/255.0 green:164.0/255.0 blue:164.0/255.0 alpha:1.0]];
+            [cell addSubview:line];
+        }
     
-    [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
+        [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
     
-    cell.title.text = [self changeDescName:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
-    cell.desc.text = [self clearString:[self.info objectAtIndex:indexPath.row]];
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        cell.delegate = self;
+        cell.title.text = [self changeDescName:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
+        cell.desc.text = [self clearString:[self.info objectAtIndex:indexPath.row]];
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
+        [self perfSeg2:cell];
     
-    return cell;
+        return cell;
+        
+    } else {
+        
+        CollectTableVieCell *cell = [tableView dequeueReusableCellWithIdentifier:@"collectCell" forIndexPath:indexPath];
+        if (cell == nil) {
+            cell = [[CollectTableVieCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"collectCell"];
+        };
+        
+        if (indexPath.row > 0) {
+            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0.0, 1.0, self.view.frame.size.width + 5.0, 1.0)];
+            [line setBackgroundColor:[UIColor colorWithRed:164.0/255.0 green:164.0/255.0 blue:164.0/255.0 alpha:1.0]];
+            [cell addSubview:line];
+        }
+        
+        [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
+        
+        cell.webView.delegate = self;
+        cell.delegate = self;
+        
+        NSMutableArray *dataArray = [NSMutableArray array];
+        dataArray = [[[self.info objectAtIndex:indexPath.row] componentsSeparatedByString:@"</TABLE>"] mutableCopy];
+        NSString *tableString = [NSString stringWithFormat:@"<!Doctype html><html><head><meta charset='UTF-8'><style>table{border-collapse:collapse}</style></head><body>%@</TABLE></body></html>", [dataArray objectAtIndex:0]];
+
+        [cell.webView loadHTMLString:tableString baseURL:nil];
+        
+        cell.title.text = [self changeDescName:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
+        cell.desc.text = [self clearString:[dataArray objectAtIndex:1]];
+        
+        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        
+        [self perfSeg4:cell];
+        
+        [cell.webView updateConstraintsIfNeeded];
+        [cell.webView layoutIfNeeded];
+        
+        [cell updateConstraintsIfNeeded];
+        [cell layoutIfNeeded];
+        
+        
+        return cell;
+        
+    }
+
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView {
+    CGRect frame = webView.frame;
+    frame.size.height = 1;
+    webView.frame = frame;
+    CGSize fittingSize = [webView sizeThatFits:CGSizeZero];
+    frame.size = fittingSize;
+    webView.frame = frame;
+    
+    NSLog(@"size: %f, %f", fittingSize.width, fittingSize.height);
 
 }
 
@@ -270,12 +340,29 @@
         
         for (NSString *value in [tapsOnCell allKeys]) {
             [tapsOnCell setObject:@"0" forKey:value];
+            if (indexPath.row != indexOfBigCell) {
+                [self perfSeg2:[tableView cellForRowAtIndexPath:indexPath]];
+            } else {
+                [self perfSeg4:[tableView cellForRowAtIndexPath:indexPath]];
+            }
         }
         
         [tapsOnCell setObject:@"1" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
         
+        if (indexPath.row != indexOfBigCell) {
+            [self perfSeg:[tableView cellForRowAtIndexPath:indexPath]];
+        } else {
+            [self perfSeg3:[tableView cellForRowAtIndexPath:indexPath]];
+        }
+        
     } else {
         [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
+        
+        if (indexPath.row != indexOfBigCell) {
+            [self perfSeg2:[tableView cellForRowAtIndexPath:indexPath]];
+        } else {
+            [self perfSeg4:[tableView cellForRowAtIndexPath:indexPath]];
+        }
     }
     
     [tableView beginUpdates];
@@ -283,6 +370,44 @@
     [tableView endUpdates];
     
 }
+
+//#pragma mark - Collection View
+//
+//- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+//{
+//    return [self.resultArray count];
+//}
+//
+//
+//- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+//{
+//    return [[self.resultArray objectAtIndex:0] count];
+//}
+//
+//- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    CollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"tableCell" forIndexPath:indexPath];
+//    
+//    cell.desc.text = [self clearString:[[self.resultArray objectAtIndex:indexPath.row] objectAtIndex:indexPath.section]];
+//    
+//    cell.layer.borderWidth=1.0f;
+//    CGRect cellFrame = cell.frame;
+//    cellFrame.size.width = self.tableView.frame.size.width / 2;
+//    [cell setFrame:cellFrame];
+//    cell.layer.borderColor=[UIColor lightGrayColor].CGColor;
+//    
+//    return cell;
+//}
+//
+//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
+//    
+//    CGSize newSize = CGSizeZero;
+//    newSize.height = 40;
+//    newSize.width = self.tableView.frame.size.width / 2 - 30;
+//
+//    return newSize;
+//    
+//}
 
 - (IBAction)toInter:(UIButton *)sender {
     
@@ -327,6 +452,8 @@
     text = [text stringByReplacingOccurrencesOfString:@"<I>" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"<TR>" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"<TD>" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<TD colSpan=\"2\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
     text = [text stringByReplacingOccurrencesOfString:@"</P>" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"</B>" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"<BR />" withString:@"\n"];
@@ -341,11 +468,34 @@
     text = [text stringByReplacingOccurrencesOfString:@"<SUB>" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"<P class=\"F7\">" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
+    text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
+    text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     return text;
     
 }
+
 - (void) perfSeg:(DocsTableViewCell *)sender {
+    
+    [sender rotateImage:M_PI_2];
+    
+}
+
+- (void) perfSeg2:(DocsTableViewCell *)sender {
+    
+    [sender rotateImage:0];
+    
+}
+
+- (void) perfSeg3:(CollectTableVieCell *)sender {
+    
+    [sender rotateImage:M_PI_2];
+    
+}
+
+- (void) perfSeg4:(CollectTableVieCell *)sender {
+    
+    [sender rotateImage:0];
     
 }
 
@@ -364,7 +514,7 @@
     } else if ([output isEqualToString:@"PhKinetics"]) {
         return @"Фармакокинетика";
     } else if ([output isEqualToString:@"Dosage"]) {
-        return @"Режим дозировки";
+        return @"Режим дозирования";
     } else if ([output isEqualToString:@"OverDosage"]) {
         return @"Передозировка";
     } else if ([output isEqualToString:@"Interaction"]) {
@@ -383,6 +533,8 @@
         return @"Особые указания";
     } else if ([output isEqualToString:@"PharmDelivery"]) {
         return @"Условия отпуска из аптек";
+    } else if ([output isEqualToString:@"Category"]) {
+        return @"Категория препарата";
     } else {
         return output;
     }

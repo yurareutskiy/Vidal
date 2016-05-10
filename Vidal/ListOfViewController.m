@@ -36,22 +36,21 @@
     
     [self refreshDb];
     
-    
-    
     // Do any additional setup after loading the view.
 }
 
 - (void) setNavBarTitle:(NSString *)name {
     
     self.navigationItem.title = name;
-    
+    self.navigationItem.leftBarButtonItem.title = @"";
+
 }
 
 - (void) refreshDb {
     
     if ([ud valueForKey:@"activeID"]) {
         
-        req = [NSString stringWithFormat:@"select * from DocumentListView doc where exists(select 1 from Product_Molecule pm inner join Product pr on pr.ProductID = pm.ProductID where pr.DocumentID = doc.DocumentID and pm.MoleculeID = %@)", [ud valueForKey:@"activeID"]];
+        req = [NSString stringWithFormat:@"select DocumentID, RusName, EngName, Elaboration, CompaniesDescription, CompiledComposition, CategoryName as Category, PhInfluence, PhKinetics, Indication, Dosage, SideEffects, ContraIndication, Lactation, SpecialInstruction, OverDosage, Interaction, PharmDelivery, StorageCondition from DocumentListView doc where exists(select 1 from Product_Molecule pm inner join Product pr on pr.ProductID = pm.ProductID where pr.DocumentID = doc.DocumentID and pm.MoleculeID = %@)", [ud valueForKey:@"activeID"]];
         
         [self setNavBarTitle:@"Препараты"];
         
@@ -65,7 +64,7 @@
         [self loadData:req];
     } else if ([ud valueForKey:@"pharmaList"]) {
         
-        req = [NSString stringWithFormat:@"SELECT * FROM Document INNER JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID INNER JOIN ClinicoPhPointers ON Document_ClPhPointers.ClPhPointerID = ClinicoPhPointers.ClPhPointerID WHERE ClinicoPhPointers.ClPhPointerID = %@", [ud valueForKey:@"pharmaList"]];
+        req = [NSString stringWithFormat:@"SELECT DocumentListView.DocumentID, RusName, EngName, CompaniesDescription, Elaboration, CompiledComposition, CategoryName as Category, PhInfluence, PhKinetics, Indication, Dosage, SideEffects, ContraIndication, Lactation, SpecialInstruction, OverDosage, Interaction, PharmDelivery, StorageCondition FROM DocumentListView INNER JOIN Document_ClPhPointers ON DocumentListView.DocumentID = Document_ClPhPointers.DocumentID INNER JOIN ClinicoPhPointers ON Document_ClPhPointers.ClPhPointerID = ClinicoPhPointers.ClPhPointerID WHERE ClinicoPhPointers.ClPhPointerID = %@", [ud valueForKey:@"pharmaList"]];
         
         [self setNavBarTitle:@"Фармакологические группы"];
         
@@ -75,20 +74,20 @@
         
         [self setNavBarTitle:@"Препараты"];
         
-        req = [NSString stringWithFormat:@"select * from DocumentListView where Letter = '%@' order by RusName", [ud valueForKey:@"letterDrug"]];
+        req = [NSString stringWithFormat:@"select DocumentID, RusName, EngName, CompaniesDescription, Elaboration, CompiledComposition, CategoryName as Category, PhInfluence, PhKinetics, Indication, Dosage, SideEffects, ContraIndication, Lactation, SpecialInstruction, OverDosage, Interaction, PharmDelivery, StorageCondition from DocumentListView where Letter = '%@' order by RusName", [ud valueForKey:@"letterDrug"]];
         [self loadData:req];
         
     }  else if ([ud valueForKey:@"letterActive"]) {
         
         [self setNavBarTitle:@"Активные вещества"];
         
-        req = [NSString stringWithFormat:@"select * from SubDocumentListView where Letter = '%@' order by RusName", [ud valueForKey:@"letterActive"]];
+        req = [NSString stringWithFormat:@"select * from SubDocumentListView where Letter = '%@' OR Letter = '%@' order by RusName", [[ud valueForKey:@"letterActive"] valueForKey:@"uppercaseString"], [[ud valueForKey:@"letterActive"] valueForKey:@"lowercaseString"]];
         
         [self loadData:req];
         
     } else if ([ud valueForKey:@"info"] || [ud valueForKey:@"comp"]) {
         
-        req = [NSString stringWithFormat:@"select * from ProducerDocListView where InfoPageID = %@ order by RusName", [ud valueForKey:@"info"]];
+        req = [NSString stringWithFormat:@"select DocumentID, RusName, EngName, Elaboration, CompaniesDescription, CompiledComposition, PhInfluence, PhKinetics, Indication, Dosage, SideEffects, ContraIndication, Lactation, SpecialInstruction, OverDosage, Interaction, PharmDelivery, StorageCondition from ProducerDocListView where InfoPageID = %@ order by RusName", [ud valueForKey:@"info"]];
         
         [self loadData:req];
         
@@ -147,16 +146,20 @@
     if ([ud valueForKey:@"letterDrug"]) {
         
         NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
-        NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
-        
+        NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"Category"];
+        NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
+        cell.elaboration.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
         cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]] valueForKey:@"lowercaseString"]];
         cell.category.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]];
+        
+        
         
     } else if ([ud valueForKey:@"activeID"]) {
         
         NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
-        NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
-        
+        NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"Category"];
+        NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
+        cell.elaboration.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
         cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]] valueForKey:@"lowercaseString"]];
         cell.category.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]];
         
@@ -171,15 +174,17 @@
     } else if ([ud valueForKey:@"info"] || [ud valueForKey:@"comp"]) {
         
         NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
-        
+        NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
+        cell.elaboration.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
         cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]] valueForKey:@"lowercaseString"]];
         cell.category.text = @"";
         
     } else if ([ud valueForKey:@"pharmaList"]) {
         
         NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
-        NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
-        
+        NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"Category"];
+        NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
+        cell.elaboration.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
         cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]] valueForKey:@"lowercaseString"]];
         cell.category.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]]];
         
@@ -223,7 +228,15 @@
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
         if ([ud valueForKey:@"letterDrug"] || [ud valueForKey:@"comp"] || [ud valueForKey:@"pharmaList"] || [ud valueForKey:@"activeID"] || [ud valueForKey:@"info"]) {
         
-            NSInteger indexOfDocumentID = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
+            NSInteger indexOfDocumentID;
+            
+            if ([ud valueForKey:@"pharmaList"]) {
+                indexOfDocumentID = [self.dbManager.arrColumnNames indexOfObject:@"DocumentListView.DocumentID"];
+            } else {
+                indexOfDocumentID = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
+            }
+            
+            
             
             self.molecule = [NSMutableArray arrayWithArray:[self.arrPeopleInfo objectAtIndex:indexPath.row]];
             [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfDocumentID] forKey:@"id"];
@@ -280,6 +293,8 @@
     if (![text isEqualToString:@""]) {
         text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
     }
+    text = [text stringByReplacingOccurrencesOfString:@"<TD colSpan=\"2\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
@@ -314,6 +329,7 @@
     text = [text stringByReplacingOccurrencesOfString:@"<SUB>" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"<P class=\"F7\">" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
+    text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     return text;
     

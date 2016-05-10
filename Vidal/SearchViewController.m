@@ -403,6 +403,21 @@
     tableView3b = false;
     tableView4b = false;
     
+    [UIView animateWithDuration:0.05 animations:^{
+        [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 1, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.05 animations:^{
+            [self.line2 setBackgroundColor:[UIColor whiteColor]];
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.05 animations:^{
+                [self.line1 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+                [self.line2 setBackgroundColor:[UIColor whiteColor]];
+                [self.line3 setBackgroundColor:[UIColor whiteColor]];
+                [self.line4 setBackgroundColor:[UIColor whiteColor]];
+            }];
+        }];
+    }];
+    
     [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.0];
 }
 
@@ -420,6 +435,21 @@
     tableView1b = true;
     tableView3b = false;
     tableView4b = false;
+    
+    [UIView animateWithDuration:0.05 animations:^{
+        [self.scrollView scrollRectToVisible:CGRectMake(0.0, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.05 animations:^{
+            [self.line4 setBackgroundColor:[UIColor whiteColor]];
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.05 animations:^{
+                [self.line2 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+                [self.line1 setBackgroundColor:[UIColor whiteColor]];
+                [self.line3 setBackgroundColor:[UIColor whiteColor]];
+                [self.line4 setBackgroundColor:[UIColor whiteColor]];
+            }];
+        }];
+    }];
     
     [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.0];
 }
@@ -439,6 +469,22 @@
     tableView3b = true;
     tableView4b = false;
     
+    [UIView animateWithDuration:0.05 animations:^{
+        [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 2, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.05 animations:^{
+            [self.line1 setBackgroundColor:[UIColor whiteColor]];
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.05 animations:^{
+                [self.line3 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+                [self.line2 setBackgroundColor:[UIColor whiteColor]];
+                [self.line1 setBackgroundColor:[UIColor whiteColor]];
+                [self.line4 setBackgroundColor:[UIColor whiteColor]];
+            }];
+            
+        }];
+    }];
+    
     [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.0];
 }
 
@@ -457,6 +503,22 @@
     tableView3b = false;
     tableView4b = true;
     
+    [UIView animateWithDuration:0.05 animations:^{
+        [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 3, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:0.05 animations:^{
+            [self.line3 setBackgroundColor:[UIColor whiteColor]];
+        } completion:^(BOOL finished) {
+            [UIView animateWithDuration:0.05 animations:^{
+                [self.line4 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+                [self.line2 setBackgroundColor:[UIColor whiteColor]];
+                [self.line3 setBackgroundColor:[UIColor whiteColor]];
+                [self.line1 setBackgroundColor:[UIColor whiteColor]];
+            }];
+            
+        }];
+    }];
+    
     [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.0];
     
     
@@ -467,6 +529,8 @@
     
     NSString *text = input;
     
+    text = [text stringByReplacingOccurrencesOfString:@"<TD colSpan=\"2\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
@@ -500,6 +564,7 @@
     text = [text stringByReplacingOccurrencesOfString:@"<SUB>" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"<P class=\"F7\">" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
+    text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     return text;
     
@@ -577,65 +642,65 @@
         
         buttonNumber = 3;
         [self toProd:nil];
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 3, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.3 animations:^{
-                [self.line2 setBackgroundColor:[UIColor whiteColor]];
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.3 animations:^{
-                    [self.line4 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
-                }];
-            }];
-        }];
+//        [UIView animateWithDuration:0.05 animations:^{
+//            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 3, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+//        } completion:^(BOOL finished) {
+//            [UIView animateWithDuration:0.05 animations:^{
+//                [self.line2 setBackgroundColor:[UIColor whiteColor]];
+//            } completion:^(BOOL finished) {
+//                [UIView animateWithDuration:0.05 animations:^{
+//                    [self.line4 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+//                }];
+//            }];
+//        }];
         
     } else if (buttonNumber == 1) {
         
         buttonNumber = 0;
         [self toMolecule:nil];
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.scrollView scrollRectToVisible:CGRectMake(0.0, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.3 animations:^{
-                [self.line1 setBackgroundColor:[UIColor whiteColor]];
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.3 animations:^{
-                    [self.line2 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
-                }];
-            }];
-        }];
+//        [UIView animateWithDuration:0.05 animations:^{
+//            [self.scrollView scrollRectToVisible:CGRectMake(0.0, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+//        } completion:^(BOOL finished) {
+//            [UIView animateWithDuration:0.05 animations:^{
+//                [self.line1 setBackgroundColor:[UIColor whiteColor]];
+//            } completion:^(BOOL finished) {
+//                [UIView animateWithDuration:0.05 animations:^{
+//                    [self.line2 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+//                }];
+//            }];
+//        }];
         
     } else if (buttonNumber == 2) {
         
         buttonNumber = 1;
         [self toDrugs:nil];
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 1, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.3 animations:^{
-                [self.line3 setBackgroundColor:[UIColor whiteColor]];
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.3 animations:^{
-                    [self.line1 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
-                }];
-            }];
-        }];
+//        [UIView animateWithDuration:0.05 animations:^{
+//            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 1, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+//        } completion:^(BOOL finished) {
+//            [UIView animateWithDuration:0.05 animations:^{
+//                [self.line3 setBackgroundColor:[UIColor whiteColor]];
+//            } completion:^(BOOL finished) {
+//                [UIView animateWithDuration:0.05 animations:^{
+//                    [self.line1 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+//                }];
+//            }];
+//        }];
         
     } else if (buttonNumber == 3) {
         
         buttonNumber = 2;
         [self toPharma:nil];
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 2, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.3 animations:^{
-                [self.line4 setBackgroundColor:[UIColor whiteColor]];
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.3 animations:^{
-                    [self.line3 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
-                }];
-            }];
-        }];
+//        [UIView animateWithDuration:0.05 animations:^{
+//            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 2, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+//        } completion:^(BOOL finished) {
+//            [UIView animateWithDuration:0.05 animations:^{
+//                [self.line4 setBackgroundColor:[UIColor whiteColor]];
+//            } completion:^(BOOL finished) {
+//                [UIView animateWithDuration:0.05 animations:^{
+//                    [self.line3 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+//                }];
+//            }];
+//        }];
         
     }
     
@@ -647,17 +712,17 @@
         buttonNumber = 1;
         [self toDrugs:nil];
         
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 1, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.3 animations:^{
-                [self.line2 setBackgroundColor:[UIColor whiteColor]];
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.3 animations:^{
-                    [self.line1 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
-                }];
-            }];
-        }];
+//        [UIView animateWithDuration:0.05 animations:^{
+//            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 1, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+//        } completion:^(BOOL finished) {
+//            [UIView animateWithDuration:0.05 animations:^{
+//                [self.line2 setBackgroundColor:[UIColor whiteColor]];
+//            } completion:^(BOOL finished) {
+//                [UIView animateWithDuration:0.05 animations:^{
+//                    [self.line1 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+//                }];
+//            }];
+//        }];
         
         
         
@@ -665,18 +730,18 @@
         
         buttonNumber = 2;
         [self toPharma:nil];
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 2, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.3 animations:^{
-                [self.line1 setBackgroundColor:[UIColor whiteColor]];
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.3 animations:^{
-                    [self.line3 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
-                }];
-                
-            }];
-        }];
+//        [UIView animateWithDuration:0.05 animations:^{
+//            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 2, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+//        } completion:^(BOOL finished) {
+//            [UIView animateWithDuration:0.05 animations:^{
+//                [self.line1 setBackgroundColor:[UIColor whiteColor]];
+//            } completion:^(BOOL finished) {
+//                [UIView animateWithDuration:0.05 animations:^{
+//                    [self.line3 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+//                }];
+//                
+//            }];
+//        }];
         
         
         
@@ -684,34 +749,34 @@
         
         buttonNumber = 3;
         [self toProd:nil];
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 3, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.3 animations:^{
-                [self.line3 setBackgroundColor:[UIColor whiteColor]];
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.3 animations:^{
-                    [self.line4 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
-                }];
-                
-            }];
-        }];
+//        [UIView animateWithDuration:0.05 animations:^{
+//            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 3, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+//        } completion:^(BOOL finished) {
+//            [UIView animateWithDuration:0.05 animations:^{
+//                [self.line3 setBackgroundColor:[UIColor whiteColor]];
+//            } completion:^(BOOL finished) {
+//                [UIView animateWithDuration:0.05 animations:^{
+//                    [self.line4 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+//                }];
+//                
+//            }];
+//        }];
         
     } else if (buttonNumber == 3) {
         
         buttonNumber = 0;
         [self toMolecule:nil];
-        [UIView animateWithDuration:0.3 animations:^{
-            [self.scrollView scrollRectToVisible:CGRectMake(0.0, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
-        } completion:^(BOOL finished) {
-            [UIView animateWithDuration:0.3 animations:^{
-                [self.line4 setBackgroundColor:[UIColor whiteColor]];
-            } completion:^(BOOL finished) {
-                [UIView animateWithDuration:0.3 animations:^{
-                    [self.line2 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
-                }];
-            }];
-        }];
+//        [UIView animateWithDuration:0.05 animations:^{
+//            [self.scrollView scrollRectToVisible:CGRectMake(0.0, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+//        } completion:^(BOOL finished) {
+//            [UIView animateWithDuration:0.05 animations:^{
+//                [self.line4 setBackgroundColor:[UIColor whiteColor]];
+//            } completion:^(BOOL finished) {
+//                [UIView animateWithDuration:0.05 animations:^{
+//                    [self.line2 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+//                }];
+//            }];
+//        }];
     }
     
 }

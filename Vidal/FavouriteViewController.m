@@ -76,10 +76,10 @@
     NSLog(@"%@", [ud objectForKey:@"favs"]);
     NSLog(@"%@", data);
     if ([data count] == 1) {
-        request = [NSString stringWithFormat:@"select * from DocumentListView where DocumentID = %@ order by RusName", [data objectAtIndex:0]];
+        request = [NSString stringWithFormat:@"select DocumentID, RusName, EngName, Elaboration, CompaniesDescription, CompiledComposition, CategoryName as Category, PhInfluence, PhKinetics, Indication, Dosage, SideEffects, ContraIndication, Lactation, SpecialInstruction, OverDosage, Interaction, PharmDelivery, StorageCondition from DocumentListView where DocumentID = %@ order by RusName", [data objectAtIndex:0]];
     }
     if ([data count] > 1) {
-        request = [NSString stringWithFormat:@"select * from DocumentListView where DocumentID = '%@'", [data objectAtIndex:0]];
+        request = [NSString stringWithFormat:@"select DocumentID, RusName, EngName, Elaboration, CompaniesDescription, CompiledComposition, CategoryName as Category, PhInfluence, PhKinetics, Indication, Dosage, SideEffects, ContraIndication, Lactation, SpecialInstruction, OverDosage, Interaction, PharmDelivery, StorageCondition from DocumentListView where DocumentID = %@", [data objectAtIndex:0]];
         for (int i = 1; i < [data count]; i++) {
             request = [NSString stringWithFormat:@"%@ or DocumentID = %@", request, [data objectAtIndex:i]];
         }
@@ -167,11 +167,14 @@
     
     NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
     NSInteger indexOfComp = [self.dbManager.arrColumnNames indexOfObject:@"CompaniesDescription"];
-    
+        NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
+        
+        
         cell.delegate = self;
     [cell setTag:indexPath.row];
         
     // Set the loaded data to the appropriate cell labels.
+        cell.elaboration.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
         cell.name.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]];
         if (![[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfComp] isEqualToString:@""]) {
         cell.information.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfComp]];
@@ -210,7 +213,7 @@
     
         self.molecule = [NSMutableArray arrayWithArray:[self.arrPeopleInfo objectAtIndex:indexPath.row]];
         [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfDocumentID] forKey:@"id"];
-    [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfDocumentID] forKey:@"letterDrug"];
+        [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfDocumentID] forKey:@"letterDrug"];
         [self performSegueWithIdentifier:@"toSecDoc" sender:self];
 
 }
@@ -323,6 +326,8 @@
     
     NSString *text = input;
     
+    text = [text stringByReplacingOccurrencesOfString:@"<TD colSpan=\"2\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
@@ -355,6 +360,7 @@
     text = [text stringByReplacingOccurrencesOfString:@"<SUB>" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"<P class=\"F7\">" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
+    text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     return text;
     

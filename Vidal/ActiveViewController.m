@@ -16,7 +16,7 @@
 @property (nonatomic, strong) NSMutableIndexSet *expandableSections;
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) ModelViewController *mvc;
-@property (nonatomic, strong) NSArray *arrPeopleInfo;
+@property (nonatomic, strong) NSMutableArray *arrPeopleInfo;
 @property (nonatomic, strong) NSMutableArray *hello1;
 @property (nonatomic, strong) NSArray *letters;
 @property (nonatomic, strong) NSMutableArray *molecule;
@@ -198,6 +198,15 @@
     }
     self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
     
+    NSInteger indexOfLetter = [self.dbManager.arrColumnNames indexOfObject:@"Letter"];
+    
+    for (int i = 0; i < [self.arrPeopleInfo count]; i++) {
+        [self.arrPeopleInfo[i] setObject:[[self.arrPeopleInfo[i] objectAtIndex:indexOfLetter] valueForKey:@"uppercaseString"] atIndex:indexOfLetter];
+    }
+    
+    [self.arrPeopleInfo removeObjectAtIndex:0];
+    [self.arrPeopleInfo removeObjectAtIndex:0];
+    
     // Reload the table view.
     [self.tableView reloadData];
 }
@@ -208,6 +217,8 @@
     
     NSRange range = NSMakeRange(0, 1);
     text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
+    text = [text stringByReplacingOccurrencesOfString:@"<TD colSpan=\"2\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
@@ -240,6 +251,7 @@
     text = [text stringByReplacingOccurrencesOfString:@"<SUB>" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"<P class=\"F7\">" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
+    text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     return text;
     

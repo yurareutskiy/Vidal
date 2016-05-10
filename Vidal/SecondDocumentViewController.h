@@ -10,14 +10,17 @@
 #import "DocsTableViewCell.h"
 #import "DBManager.h"
 #import "SecondModelViewController.h"
+#import "CollectTableVieCell.h"
+#import "CollectionViewCell.h"
 
-@interface SecondDocumentViewController : SecondModelViewController <UITableViewDelegate, UITableViewDataSource, DocsTableViewCellDelegate>
+@interface SecondDocumentViewController : SecondModelViewController <UITableViewDelegate, UITableViewDataSource, DocsTableViewCellDelegate, UICollectionViewDelegate, UICollectionViewDataSource, CollectTableVieCellDelegate, UIWebViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UILabel *name;
 @property (weak, nonatomic) IBOutlet UILabel *registred;
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) IBOutlet UILabel *latName;
 @property (strong, nonatomic) IBOutlet UIButton *fav;
+@property (strong, nonatomic) IBOutlet UILabel *elaboration;
 
 @property (strong, nonatomic) NSMutableArray *info;
 @property (strong, nonatomic) DBManager *dbManager;
@@ -25,6 +28,6 @@
 - (IBAction)addToFav:(UIButton *)sender;
 - (IBAction)toInter:(UIButton *)sender;
 @property (strong, nonatomic) IBOutlet UIButton *shareButton;
-- (IBAction)share:(UIButton *)sender;
+- (IBAction)share:(UIButton *)sender
 
 @end

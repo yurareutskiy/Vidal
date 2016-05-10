@@ -22,6 +22,9 @@
 		3A1570611CAEAA2B00D49C5E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15705E1CAEAA2B00D49C5E /* FBSDKLoginKit.framework */; };
 		3A1570621CAEAA2B00D49C5E /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15705F1CAEAA2B00D49C5E /* FBSDKShareKit.framework */; };
 		3A1570661CAEAAAF00D49C5E /* OKSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1570651CAEAAAF00D49C5E /* OKSDK.m */; };
+		3A3A87521CDC7709007972EA /* CollectTableVieCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3A87511CDC7709007972EA /* CollectTableVieCell.m */; };
+		3A3A87551CDC8229007972EA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A3A87541CDC8229007972EA /* QuartzCore.framework */; };
+		3A3A87581CDC8E24007972EA /* CollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A3A87571CDC8E24007972EA /* CollectionViewCell.m */; };
 		3A5638581CA19971000A83B5 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3A5638571CA19971000A83B5 /* Assets.xcassets */; };
 		3A70F38A1C80B32C00193150 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A70F3891C80B32C00193150 /* CoreGraphics.framework */; };
 		3A78E62B1CD0C38200DD13B8 /* SecondModelViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A78E62A1CD0C38200DD13B8 /* SecondModelViewController.m */; };
@@ -101,6 +104,11 @@
 		3A15705F1CAEAA2B00D49C5E /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		3A1570641CAEAAAF00D49C5E /* OKSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OKSDK.h; path = Vidal/OKSDK.h; sourceTree = "<group>"; };
 		3A1570651CAEAAAF00D49C5E /* OKSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OKSDK.m; path = Vidal/OKSDK.m; sourceTree = "<group>"; };
+		3A3A87501CDC7709007972EA /* CollectTableVieCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectTableVieCell.h; sourceTree = "<group>"; };
+		3A3A87511CDC7709007972EA /* CollectTableVieCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectTableVieCell.m; sourceTree = "<group>"; };
+		3A3A87541CDC8229007972EA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		3A3A87561CDC8E24007972EA /* CollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CollectionViewCell.h; sourceTree = "<group>"; };
+		3A3A87571CDC8E24007972EA /* CollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CollectionViewCell.m; sourceTree = "<group>"; };
 		3A5638571CA19971000A83B5 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3A70F3891C80B32C00193150 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		3A78E6291CD0C38200DD13B8 /* SecondModelViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SecondModelViewController.h; sourceTree = "<group>"; };
@@ -167,6 +175,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3A3A87551CDC8229007972EA /* QuartzCore.framework in Frameworks */,
 				3A1570521CAEA87A00D49C5E /* libsqlcipher.a in Frameworks */,
 				3A1570601CAEAA2B00D49C5E /* FBSDKCoreKit.framework in Frameworks */,
 				3A1570621CAEAA2B00D49C5E /* FBSDKShareKit.framework in Frameworks */,
@@ -205,6 +214,10 @@
 				3A0D5CAF1C9C4E57005E6976 /* NewsTableViewCell.m */,
 				524EDF931CB4E4E900A3BB2F /* DocsTableViewCell.h */,
 				524EDF941CB4E4E900A3BB2F /* DocsTableViewCell.m */,
+				3A3A87501CDC7709007972EA /* CollectTableVieCell.h */,
+				3A3A87511CDC7709007972EA /* CollectTableVieCell.m */,
+				3A3A87561CDC8E24007972EA /* CollectionViewCell.h */,
+				3A3A87571CDC8E24007972EA /* CollectionViewCell.m */,
 			);
 			name = TableCells;
 			sourceTree = "<group>";
@@ -394,6 +407,7 @@
 		FED137FC56CC9C0ECB250158 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3A3A87541CDC8229007972EA /* QuartzCore.framework */,
 				3AF95C141CA66DA900393C62 /* libsqlite3.tbd */,
 				267537716EDB3475C0BE9A2D /* libPods-Vidal.a */,
 			);
@@ -551,9 +565,11 @@
 			files = (
 				3AB2A31F1CCCE8D000731088 /* CompanyViewController.m in Sources */,
 				3A78F1271C92076D008C6BE5 /* FavouriteViewController.m in Sources */,
+				3A3A87521CDC7709007972EA /* CollectTableVieCell.m in Sources */,
 				3AA6AC391CBB0B35005AAD85 /* SearchViewController.m in Sources */,
 				3A78F1151C920725008C6BE5 /* ActiveViewController.m in Sources */,
 				3A1570661CAEAAAF00D49C5E /* OKSDK.m in Sources */,
+				3A3A87581CDC8E24007972EA /* CollectionViewCell.m in Sources */,
 				3A78F11B1C920740008C6BE5 /* PharmaViewController.m in Sources */,
 				3A9E3FD41C80AE330069BDFC /* LoginViewController.m in Sources */,
 				3AAAA2CB1C8384EB006DEE4E /* MainViewController.m in Sources */,
