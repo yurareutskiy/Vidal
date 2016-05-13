@@ -76,8 +76,8 @@
     NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
     NSInteger indexOfMolecule = [self.dbManager.arrColumnNames indexOfObject:@"MoleculeID"];
     
-    self.latName.text = [self clearString:[[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexOfLatName] valueForKey:@"lowercaseString"]];
-    self.name.text = [self clearString:[[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexOfName] valueForKey:@"lowercaseString"]];
+    self.latName.attributedText = [self clearString:[[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexOfLatName] valueForKey:@"lowercaseString"]];
+    self.name.attributedText = [self clearString:[[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexOfName] valueForKey:@"lowercaseString"]];
     
     for (NSUInteger i = 0; i < [[self.arrPeopleInfo objectAtIndex:0] count]; i++) {
         if ([[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
@@ -89,7 +89,7 @@
 //    NSInteger indexOfLetter = [self.dbManager.arrColumnNames indexOfObject:@"Letter"];
     NSInteger indexOfDocument = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
 //    NSInteger indexOfArticle = [self.dbManager.arrColumnNames indexOfObject:@"ArticleID"];
-//    NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryID"];
+    NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"Category"];
 //    NSInteger indexOfCode = [self.dbManager.arrColumnNames indexOfObject:@"CategoryCode"];
 //    NSInteger indexOfCatName = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
 //    NSInteger indexOfRusName = [self.dbManager.arrColumnNames indexOfObject:@"RusName:1"];
@@ -99,7 +99,10 @@
 //    [toDelete addIndex:indexOfLetter];
     [toDelete addIndex:indexOfDocument];
 //    [toDelete addIndex:indexOfArticle];
-//    [toDelete addIndex:indexOfCategory];
+        
+        if (indexOfCategory < 1000) {
+            [toDelete addIndex:indexOfCategory];
+        }
 //    [toDelete addIndex:indexOfCode];
 //    [toDelete addIndex:indexOfCatName];
     [toDelete addIndex:indexOfMolecule];
@@ -171,7 +174,7 @@
     [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
     
     cell.title.text = [self changeDescName:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
-    cell.desc.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexPath.row]];
+    cell.desc.attributedText = [self clearString:[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexPath.row]];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -205,7 +208,7 @@
     
 }
 
-- (NSString *) clearString:(NSString *) input {
+- (NSAttributedString *) clearString:(NSString *) input {
     
     NSString *text = input;
     
@@ -249,7 +252,34 @@
     text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
     text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
-    return text;
+    if ([text containsString:@"[PRING]"]) {
+        text = [text stringByReplacingOccurrencesOfString:@"[PRING]" withString:@"Вспомогательные вещества:"];
+        NSMutableAttributedString *secondPart = [[NSMutableAttributedString alloc] initWithString:text];
+        
+        [secondPart beginEditing];
+        
+        [secondPart addAttribute:NSFontAttributeName
+                           value:[UIFont italicSystemFontOfSize:17]
+                           range:NSMakeRange(0, 25)];
+        
+        [secondPart addAttribute:NSFontAttributeName
+                           value:[UIFont systemFontOfSize:17]
+                           range:NSMakeRange(25, [secondPart length] - 25)];
+        
+        [secondPart endEditing];
+        
+        NSAttributedString *space = [[NSAttributedString alloc] initWithString:@""];
+        
+        while ([secondPart.mutableString containsString:@"[PRING]"]) {
+            NSRange range = [secondPart.mutableString rangeOfString:@"[PRING]"];
+            [secondPart replaceCharactersInRange:range  withAttributedString:space];
+        }
+        
+        return secondPart;
+    } else {
+        NSMutableAttributedString *attrText = [[NSMutableAttributedString alloc] initWithString:text];
+        return attrText;
+    }
     
 }
 

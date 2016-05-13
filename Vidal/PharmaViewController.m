@@ -120,6 +120,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    if ([[ud valueForKey:@"howTo"] isEqualToString:@"search"]) {
+        [ud removeObjectForKey:@"howTo"];
+    }
     isEmptyDrugsList = false;
     [self.tableView deselectRowAtIndexPath:indexPath animated:NO];
     
@@ -145,6 +148,7 @@
         }
     } else if (goNext){
         [ud setObject:levelStr forKey:@"level"];
+        
         if ([[ud objectForKey:@"level"] integerValue] == 1) {
             [ud setObject:parentStr forKey:@"parent2"];
         } else if ([[ud objectForKey:@"level"] integerValue] == 2) {
@@ -152,6 +156,7 @@
         } else if ([[ud objectForKey:@"level"] integerValue] == 3) {
             [ud setObject:parentStr forKey:@"parent4"];
         }
+        
         [self addBackButton];
         [self refreshDb];
         [self reloadTableView];
@@ -229,12 +234,20 @@
 - (void) refreshDb {
     if ([ud valueForKey:@"level"] != nil) {
         if (![[ud valueForKey:@"howTo"] isEqualToString:@"search"]) {
+            
+            NSLog(@"1");
             level = [[ud objectForKey:@"level"] integerValue];
+            
         } else {
+            NSLog(@"2");
+
             level = [[ud objectForKey:@"level"] integerValue] - 1;
+            
         }
     } else {
+        NSLog(@"3");
         level = 0;
+        
     }
     
     if (level + 1 == 1) {

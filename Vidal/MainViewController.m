@@ -54,12 +54,6 @@
         return;
     } else {
         [self getLink];
-        if (![[NSString stringWithFormat:@"%@", [ud objectForKey:@"version"]] isEqualToString:[NSString stringWithFormat:@"%@", [ud objectForKey:@"newVersion"]]]) {
-            exists = false;
-            [self checkBool:@"Доступна новая версия архива" mess:@"Скачать?" down:YES amount:2];
-        } else {
-            
-        }
     }
     
     [ud removeObjectForKey:@"workWith"];
@@ -97,15 +91,29 @@
         
         if (butt == 2) {
             
-            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Отменить" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"Напомнить позже" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
                                  {
                                      self.name.enabled = YES;
                                      self.navigationItem.leftBarButtonItem.enabled = YES;
                                      self.revealViewController.panGestureRecognizer.enabled = YES;
                                      [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-                                     [ud setObject:[ud valueForKey:@"newVersion"] forKey:@"version"];
+                                     NSDate *now = [NSDate date];
+                                     [ud setObject:(NSDate *)now forKey:@"date"];
+                                     
                                  }];
             [alertController addAction:ok];
+            
+            UIAlertAction *decline = [UIAlertAction actionWithTitle:@"Отменить" style:UIAlertActionStyleDefault handler:^(UIAlertAction *action)
+            {
+                self.name.enabled = YES;
+                self.navigationItem.leftBarButtonItem.enabled = YES;
+                self.revealViewController.panGestureRecognizer.enabled = YES;
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+                [ud setObject:[ud valueForKey:@"newVersion"] forKey:@"version"];
+            }];
+            
+            [alertController addAction:decline];
+            
         }
         
         [self presentViewController:alertController animated:YES completion:nil];
@@ -212,9 +220,20 @@
         url = [responseObject valueForKey:@"url"];
         [ud setObject:[responseObject valueForKey:@"version"] forKey:@"newVersion"];
         
-        [self downloadDB:url];
-        [self getKey];
-        [ud setObject:[ud valueForKey:@"newVersion"] forKey:@"version"];
+        if (!exists) {
+            [self downloadDB:url];
+            [self getKey];
+            [ud setObject:[ud valueForKey:@"newVersion"] forKey:@"version"];
+        } else {
+            NSLog(@"%@ - %@", [ud objectForKey:@"version"], [ud objectForKey:@"newVersion"]);
+            if (![[NSString stringWithFormat:@"%@", [ud objectForKey:@"version"]] isEqualToString:[NSString stringWithFormat:@"%@", [ud objectForKey:@"newVersion"]]]) {
+                if ([self compareDate]) {
+                    exists = false;
+                    [self checkBool:@"Доступна новая версия архива" mess:@"Скачать?" down:YES amount:2];
+                }
+            }
+        }
+        
 
         
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
@@ -223,6 +242,25 @@
         
     }];
     
+}
+
+- (BOOL) compareDate {
+    NSDateComponents *components = [[NSCalendar currentCalendar] components:NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:[NSDate date]];
+    NSInteger currentMonth = [components month];
+    NSInteger currentDay = [components day];
+    NSInteger currentHour = [components hour];
+    
+    NSDate *previous = (NSDate *)[ud objectForKey:@"date"];
+    NSDateComponents *oldComponents = [[NSCalendar currentCalendar] components:NSCalendarUnitMonth | NSCalendarUnitDay | NSCalendarUnitHour | NSCalendarUnitMinute | NSCalendarUnitSecond fromDate:previous];
+    NSInteger prevMonth = [oldComponents month];
+    NSInteger prevDay = [oldComponents day];
+    NSInteger prevHour = [oldComponents hour];
+    
+    if (currentMonth > prevMonth || currentDay > prevDay || currentHour > prevHour + 6) {
+        return YES;
+    } else {
+        return NO;
+    }
 }
 
 - (void) getKey {

@@ -24,6 +24,7 @@
     CGFloat sizeCell;
     NSMutableDictionary *tapsOnCell;
     NSInteger indexOfBigCell;
+    CGFloat sizeOfWeb;
     
 }
 
@@ -61,12 +62,12 @@
     NSInteger indexOfCompany = [self.dbManager.arrColumnNames indexOfObject:@"CompaniesDescription"];
         NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
     
-    self.latName.text = [self clearString:[[self.info objectAtIndex:indexOfLatName] valueForKey:@"lowercaseString"]];
-    self.name.text = [self clearString:[[self.info objectAtIndex:indexOfName] valueForKey:@"lowercaseString"]];
-    self.elaboration.text = [self clearString:[[self.info objectAtIndex:indexOfElaboration] valueForKey:@"lowercaseString"]];
+    self.latName.attributedText = [self clearString:[[self.info objectAtIndex:indexOfLatName] valueForKey:@"lowercaseString"]];
+    self.name.attributedText = [self clearString:[[self.info objectAtIndex:indexOfName] valueForKey:@"lowercaseString"]];
+    self.elaboration.attributedText = [self clearString:[[self.info objectAtIndex:indexOfElaboration] valueForKey:@"lowercaseString"]];
     
     if (![[self.info objectAtIndex:indexOfCompany] isEqualToString:@""]) {
-        self.registred.text = [self clearString:[self.info objectAtIndex:indexOfCompany]];
+        self.registred.attributedText = [self clearString:[self.info objectAtIndex:indexOfCompany]];
         [toDelete addIndex:indexOfCompany];
     } else {
         [toDelete addIndex:indexOfCompany];
@@ -79,13 +80,13 @@
                 }
             }
     
-//    NSInteger indexOfLetter = [self.dbManager.arrColumnNames indexOfObject:@"Letter"];
+    NSInteger indexOfLetter = [self.dbManager.arrColumnNames indexOfObject:@"Letter"];
     NSInteger indexOfDocument = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
-//    NSInteger indexOfArticle = [self.dbManager.arrColumnNames indexOfObject:@"ArticleID"];
-//    NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryID"];
-//    NSInteger indexOfCode = [self.dbManager.arrColumnNames indexOfObject:@"CategoryCode"];
-//    NSInteger indexOfCatName = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
-//    
+    NSInteger indexOfArticle = [self.dbManager.arrColumnNames indexOfObject:@"ArticleID"];
+    NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryID"];
+    NSInteger indexOfCode = [self.dbManager.arrColumnNames indexOfObject:@"CategoryCode"];
+    NSInteger indexOfCatName = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
+    
 //    NSInteger indexOfLevel = [self.dbManager.arrColumnNames indexOfObject:@"Level"];
 //    NSInteger indexOfcppid = [self.dbManager.arrColumnNames indexOfObject:@"ClPhPointerID"];
 //    NSInteger indexOfscppid = [self.dbManager.arrColumnNames indexOfObject:@"SrcClPhPointerID"];
@@ -99,10 +100,13 @@
     
     if ([ud valueForKey:@"letterDrug"]) {
         
-//        [toDelete addIndex:indexOfLetter];
-//        [toDelete addIndex:indexOfCategory];
-//        [toDelete addIndex:indexOfCatName];
-//        [toDelete addIndex:indexOfCode];
+        if (indexOfCode < 1000 && indexOfLetter < 1000 && indexOfCategory < 1000 && indexOfCatName < 1000) {
+            [toDelete addIndex:indexOfLetter];
+            [toDelete addIndex:indexOfCategory];
+            [toDelete addIndex:indexOfCatName];
+            [toDelete addIndex:indexOfCode];
+            [toDelete addIndex:indexOfArticle];
+        }
         
     } else if ([ud valueForKey:@"pharmaList"]) {
         
@@ -165,8 +169,9 @@
     }
         
          indexOfBigCell = [self.dbManager.arrColumnNames indexOfObject:@"CompiledComposition"];
-    
-            [self.tableView reloadData];
+                [self.tableView reloadData];
+        
+        
     } else {
         [ud setObject:@"0" forKey:@"share"];
     }
@@ -271,7 +276,7 @@
     
         cell.delegate = self;
         cell.title.text = [self changeDescName:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
-        cell.desc.text = [self clearString:[self.info objectAtIndex:indexPath.row]];
+        cell.desc.attributedText = [self clearString:[self.info objectAtIndex:indexPath.row]];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
 
         [self perfSeg2:cell];
@@ -285,14 +290,7 @@
             cell = [[CollectTableVieCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"collectCell"];
         };
         
-        if (indexPath.row > 0) {
-            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0.0, 1.0, self.view.frame.size.width + 5.0, 1.0)];
-            [line setBackgroundColor:[UIColor colorWithRed:164.0/255.0 green:164.0/255.0 blue:164.0/255.0 alpha:1.0]];
-            [cell addSubview:line];
-        }
-        
-        [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
-        
+        [cell.webView setBackgroundColor:[UIColor whiteColor]];
         cell.webView.delegate = self;
         cell.delegate = self;
         
@@ -302,19 +300,26 @@
 
         [cell.webView loadHTMLString:tableString baseURL:nil];
         
-        cell.title.text = [self changeDescName:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
-        cell.desc.text = [self clearString:[dataArray objectAtIndex:1]];
+        if (indexPath.row > 0) {
+            UIView *line = [[UIView alloc] initWithFrame:CGRectMake(0.0, 1.0, self.view.frame.size.width + 5.0, 1.0)];
+            [line setBackgroundColor:[UIColor colorWithRed:164.0/255.0 green:164.0/255.0 blue:164.0/255.0 alpha:1.0]];
+            [cell addSubview:line];
+        }
         
+        [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
+        
+        cell.title.text = [self changeDescName:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
+        
+        cell.desc.attributedText = [self clearString:[dataArray objectAtIndex:1]];
+
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         
         [self perfSeg4:cell];
+        [cell.webView.scrollView setBounces:NO];
+    
+        [cell.webView.constraints objectAtIndex:0].constant = sizeOfWeb;
         
-        [cell.webView updateConstraintsIfNeeded];
-        [cell.webView layoutIfNeeded];
-        
-        [cell updateConstraintsIfNeeded];
         [cell layoutIfNeeded];
-        
         
         return cell;
         
@@ -323,6 +328,9 @@
 }
 
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
+    
+    if (sizeOfWeb == 0) {
+    
     CGRect frame = webView.frame;
     frame.size.height = 1;
     webView.frame = frame;
@@ -330,8 +338,11 @@
     frame.size = fittingSize;
     webView.frame = frame;
     
-    NSLog(@"size: %f, %f", fittingSize.width, fittingSize.height);
-
+    sizeOfWeb = fittingSize.height;
+        
+        [self.tableView reloadData];
+    }
+    
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -426,7 +437,7 @@
     
 }
 
-- (NSString *) clearString:(NSString *) input {
+- (NSAttributedString *) clearString:(NSString *) input {
     
     NSString *text = input;
     
@@ -470,9 +481,34 @@
     text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
     text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
     text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    if ([text containsString:@"[PRING]"]) {
+        text = [text stringByReplacingOccurrencesOfString:@"[PRING]" withString:@"Вспомогательные вещества:"];
+        NSMutableAttributedString *secondPart = [[NSMutableAttributedString alloc] initWithString:text];
     
-    return text;
-    
+        [secondPart beginEditing];
+        
+        [secondPart addAttribute:NSFontAttributeName
+                           value:[UIFont italicSystemFontOfSize:17]
+                           range:NSMakeRange(0, 25)];
+        
+        [secondPart addAttribute:NSFontAttributeName
+                           value:[UIFont systemFontOfSize:17]
+                           range:NSMakeRange(25, [secondPart length] - 25)];
+        
+        [secondPart endEditing];
+        
+        NSAttributedString *space = [[NSAttributedString alloc] initWithString:@""];
+        
+        while ([secondPart.mutableString containsString:@"[PRING]"]) {
+            NSRange range = [secondPart.mutableString rangeOfString:@"[PRING]"];
+            [secondPart replaceCharactersInRange:range  withAttributedString:space];
+        }
+        
+        return secondPart;
+    } else {
+        NSMutableAttributedString *attrText = [[NSMutableAttributedString alloc] initWithString:text];
+        return attrText;
+    }
 }
 
 - (void) perfSeg:(DocsTableViewCell *)sender {

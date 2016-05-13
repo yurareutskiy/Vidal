@@ -28,6 +28,6 @@
 - (IBAction)addToFav:(UIButton *)sender;
 - (IBAction)toInter:(UIButton *)sender;
 @property (strong, nonatomic) IBOutlet UIButton *shareButton;
-- (IBAction)share:(UIButton *)sender
+- (IBAction)share:(UIButton *)sender;
 
 @end
