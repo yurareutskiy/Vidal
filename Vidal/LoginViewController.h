@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import "AFNetworking.h"
+#import "SWRevealViewController.h"
 
 @interface LoginViewController : UIViewController <UITextFieldDelegate>
 

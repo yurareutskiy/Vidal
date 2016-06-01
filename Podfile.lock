@@ -20,6 +20,10 @@ PODS:
   - AFNetworking/UIKit (2.6.0):
     - AFNetworking/NSURLConnection
     - AFNetworking/NSURLSession
+  - Crashlytics (3.3.1)
+  - Fabric (1.5.1):
+    - Fabric/Base (= 1.5.1)
+  - Fabric/Base (1.5.1)
   - FMDB (2.5):
     - FMDB/standard (= 2.5)
   - FMDB/common (2.5)
@@ -69,6 +73,8 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking
+  - Crashlytics
+  - Fabric
   - Google/CloudMessaging
   - IMQuickSearch
   - SLExpandableTableView
@@ -78,6 +84,8 @@ DEPENDENCIES:
 
 SPEC CHECKSUMS:
   AFNetworking: 79f7eb1a0fcfa7beb409332b2ca49afe9ce53b05
+  Crashlytics: 0e61bdda9def51f1e99720f804eebe94865442b2
+  Fabric: 03c3b3fe77e11a2bc31421b989a9c7adaa4779a5
   FMDB: 96e8f1bcc1329e269330f99770ad4285d9003e52
   GGLInstanceID: 3f2a20acbb91408d45a5696b7722bf44cb410e0b
   Google: ec6c7729037b9579e52a4880ba06eb38ddb1de68

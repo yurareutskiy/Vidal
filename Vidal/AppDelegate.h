@@ -13,6 +13,8 @@
 #import "OKSDK.h"
 #import <Google/CloudMessaging.h>
 #import "YMMYandexMetrica.h"
+#import "Fabric/Fabric.h"
+#import "Crashlytics/Crashlytics.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate, GGLInstanceIDDelegate, GCMReceiverDelegate>
 
@@ -20,6 +22,7 @@
 @property(nonatomic, readonly, strong) NSString *registrationKey;
 @property(nonatomic, readonly, strong) NSString *messageKey;
 @property(nonatomic, readonly, strong) NSString *gcmSenderID;
+@property(nonatomic, strong) NSString* registrationToken;
 @property(nonatomic, readonly, strong) NSDictionary *registrationOptions;
 @property (readonly, strong, nonatomic) NSManagedObjectContext *managedObjectContext;
 @property (readonly, strong, nonatomic) NSManagedObjectModel *managedObjectModel;

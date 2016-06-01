@@ -18,5 +18,6 @@
 @property (strong, nonatomic) IBOutlet UILabel *name;
 @property (strong, nonatomic) IBOutlet UILabel *category;
 @property (strong, nonatomic) IBOutlet UILabel *elaboration;
+@property (strong, nonatomic) IBOutlet UILabel *latName;
 
 @end

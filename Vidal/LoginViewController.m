@@ -220,8 +220,9 @@
 
 - (IBAction)withoutReg:(UIButton *)sender {
     
-    [ud setObject:@"0" forKey:@"reg"];
-    [self performSegueWithIdentifier:@"withoutReg" sender:self];
+    UIStoryboard *stb = [UIStoryboard storyboardWithName:@"LogOutStoryboard" bundle:nil];
+    UIViewController *vc = [stb instantiateViewControllerWithIdentifier:@"revealMenu1"];
+    [self presentViewController:vc animated:true completion:nil];
     
 }
 

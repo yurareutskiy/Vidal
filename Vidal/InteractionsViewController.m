@@ -11,6 +11,7 @@
 @interface InteractionsViewController ()
 
 @property (strong, nonatomic) UIBarButtonItem *searchButton;
+@property (strong, nonatomic) UIBarButtonItem *backButton;
 
 @end
 
@@ -28,7 +29,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    inx = -1;
+    
     ud = [NSUserDefaults standardUserDefaults];
+    
+    if ([ud objectForKey:@"toInter"]) {
+        [self addBackButton];
+    }
     
     NSString *string = self.info1.text;
     self.info1.numberOfLines = 0;
@@ -109,6 +116,22 @@
         self.input.text = [ud objectForKey:@"toInter"];
         [self findFirstResult:[ud objectForKey:@"toInter"]];
 //        [self setUpQuickSearch:self.hello2];
+        
+        if (inx == -1) {
+            
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Ошибка" message:@"Отсутствуют данные для сравнения" preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                 {
+                                     //Do some thing here
+                                     [self.navigationController popViewControllerAnimated:YES];
+                                     
+                                 }];
+            [alertController addAction:ok];
+            
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+        
         self.tableView.hidden = true;
         self.secondInput.hidden = false;
         self.secondLine.hidden = false;
@@ -198,6 +221,10 @@
             inx = i;
             break;
         }
+    }
+    
+    if (inx == -1) {
+        return;
     }
     
     self.hello2 = [NSMutableArray array];
@@ -410,6 +437,20 @@
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     
     return self.hello2[row];
+    
+}
+
+- (void) addBackButton{
+    
+    self.backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Icon-Back"]  landscapeImagePhone:nil style:UIBarButtonItemStylePlain target:self action:@selector(backMethod)];
+    
+    self.navigationItem.leftBarButtonItem = self.backButton;
+    
+}
+
+- (void) backMethod {
+    
+    [self.navigationController popViewControllerAnimated:YES];
     
 }
 

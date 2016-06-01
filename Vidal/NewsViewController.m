@@ -97,7 +97,7 @@
     NSDateFormatter *date = [[NSDateFormatter alloc] init];
     [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
     NSDate *dateNews = [date dateFromString:[[array objectAtIndex:indexPath.row] objectForKey:@"date"]];
-    [date setDateFormat:@"dd MMMM yyyy HH:mm"];
+    [date setDateFormat:@"dd MMMM yyyy"];
     NSString *resultDate = [date stringFromDate:dateNews];
     cell.date.text = resultDate;
     

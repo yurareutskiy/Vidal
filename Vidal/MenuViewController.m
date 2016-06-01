@@ -150,4 +150,15 @@
     
     [self performSegueWithIdentifier:@"toVidal" sender:self];
 }
+
+- (IBAction)toShare:(UIButton *)sender {
+    
+    UIActivityViewController *controller =
+    [[UIActivityViewController alloc]
+     initWithActivityItems:@[@"Качайте приложение Видаль-кардиология!", @"vidal.ru"]
+     applicationActivities:nil];
+    
+    [self presentViewController:controller animated:YES completion:nil];
+    
+}
 @end

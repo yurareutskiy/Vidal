@@ -179,7 +179,7 @@
             [self.drug setText:[self.results[ind+1] valueForKey:@"drug"]];
             ind++;
         } else if (ind == [self.results count] - 1) {
-            if ([[self.results[ind+1] valueForKey:@"image"] length] > 0) {
+            if ([[self.results[0] valueForKey:@"image"] length] > 0) {
                 [self.image setImage:[UIImage imageWithData:[self.results[0] valueForKey:@"image"]]];
             } else {
                 [self.image setImage:[UIImage imageNamed:@"company"]];
@@ -205,7 +205,7 @@
         [self.drug setAlpha:0.0];
     } completion:^(BOOL finished) {
         if (ind > 0) {
-            if ([[self.results[ind+1] valueForKey:@"image"] length] > 0) {
+            if ([[self.results[ind-1] valueForKey:@"image"] length] > 0) {
                 [self.image setImage:[UIImage imageWithData:[self.results[ind-1] valueForKey:@"image"]]];
             } else {
                 [self.image setImage:[UIImage imageNamed:@"company"]];
@@ -214,7 +214,7 @@
             [self.drug setText:[self.results[ind-1] valueForKey:@"drug"]];
             ind--;
         } else if (ind == 0) {
-            if ([[self.results[ind+1] valueForKey:@"image"] length] > 0) {
+            if ([[self.results[[self.results count] - 1] valueForKey:@"image"] length] > 0) {
                 [self.image setImage:[UIImage imageWithData:[self.results[[self.results count] - 1] valueForKey:@"image"]]];
             } else {
                 [self.image setImage:[UIImage imageNamed:@"company"]];

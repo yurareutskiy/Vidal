@@ -40,7 +40,7 @@
     self.navigationItem.title = @"Активное вещество";
     [self.shareButton.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shareArrow"] style:UIBarButtonItemStylePlain target:self action:@selector(share:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shareArrow"] style:UIBarButtonItemStylePlain target:self action:@selector(share:)];
     
     self.tableView.estimatedRowHeight = 60.0;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -218,6 +218,8 @@
     }
     text = [text stringByReplacingOccurrencesOfString:@"<TD colSpan=\"2\">" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"&ge;" withString:@"≥"];
+    text = [text stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];

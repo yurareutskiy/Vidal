@@ -34,8 +34,17 @@
     
     secret_key = @"uX04xN12Tk1654Qz";
     
-    self.bg.layer.masksToBounds = YES;
+    self.progress.hidden = YES;
+    self.bgView.hidden = YES;
     
+    self.progress.layer.cornerRadius = 12.0f;
+    self.progress.layer.borderColor = [UIColor whiteColor].CGColor;
+    self.progress.layer.borderWidth = 1.5f;
+    self.progress.layer.masksToBounds = YES;
+    self.progress.clipsToBounds = YES;
+    
+    self.bg.layer.masksToBounds = YES;
+    if ([[ud valueForKey:@"reg"] isEqualToString:@"2"]) {
     NSArray *URLs = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
     NSURL *directoryURL = [URLs firstObject];
     NSURL *databaseURL = [directoryURL URLByAppendingPathComponent:@"vidalDatabase.zip"];
@@ -48,6 +57,23 @@
     }
     NSLog(@"conne %d", isConnectionAvailable);
     if (!exists && isConnectionAvailable) {
+
+        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        
+        [manager POST:@"http://www.vidal.ru/api/user/set-android-id" parameters:@{
+                                                                                  @"token":[ud valueForKey:@"archToken"],
+                                                                                  @"username":[ud valueForKey:@"email"],
+                                                                                  @"id":appDelegate.registrationToken}
+              success:^(AFHTTPRequestOperation * _Nonnull operation, id responseObject) {
+                  NSLog(@"%@", responseObject);
+                  NSLog(@"%@ - %@ - %@", [ud valueForKey:@"archToken"], [ud valueForKey:@"email"], appDelegate.registrationToken);
+              } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                  NSLog(@"LOH");
+              }];
+        
         [self checkBool:@"Архив начал скачиваться" mess:@"Подождите 15-30 секунд. Элементы взаимодействия недоступны, пожалуйста, не выключайте приложение." down:NO amount:1];
         [self getLink];
     } else if (isConnectionAvailable == false) {
@@ -66,6 +92,7 @@
     [ud removeObjectForKey:@"letterDrug"];
     [ud removeObjectForKey:@"letterActive"];
     
+}
     // Do any additional setup after loading the view.
 }
 
@@ -212,6 +239,7 @@
 - (void) getLink {
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+    NSLog(@"%@", [ud valueForKey:@"archToken"]);
     [manager POST:@"http://www.vidal.ru/api/db/update" parameters:@{@"token":[ud valueForKey:@"archToken"], @"tag":@"cardio"} success:^(AFHTTPRequestOperation * _Nonnull operation, id responseObject) {
         
         NSLog(@"%@", responseObject);
@@ -289,39 +317,59 @@
 
         if (!exists) {
         NSLog(@"Downloading Started");
+            self.progress.hidden = NO;
+            self.bgView.hidden = NO;
         NSString *urlToDownload = link;
-        NSURL  *url = [NSURL URLWithString:urlToDownload];
-        NSData *urlData = [NSData dataWithContentsOfURL:url];
-        if ( urlData )
-        {
-            NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-            NSString *documentsDirectory = [paths objectAtIndex:0];
+        NSURL *url = [NSURL URLWithString:urlToDownload];
+        __block NSData *urlData = [NSData data];
             
-            NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"vidalDatabase.zip"];
-            NSLog(@"%@", documentsDirectory);
-            //saving is done on main thread
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [urlData writeToFile:filePath atomically:YES];
-                NSLog(@"File Saved !");
-                exists = true;
-                [self checkBool:@"Архив скачался" mess:@"Можете пользоваться приложением." down:NO amount:1];
-                ZipArchive *zipArchive = [[ZipArchive alloc] init];
-                [zipArchive UnzipOpenFile:filePath];
+            NSURLRequest *request = [NSURLRequest requestWithURL:url];
+            AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+            
+            
+        [operation setDownloadProgressBlock:^(NSUInteger bytesRead, long long totalBytesRead, long long totalBytesExpectedToRead) {
+            self.progress.progress = (float)totalBytesRead / totalBytesExpectedToRead;
+
+        }];
+            
+            [operation setCompletionBlock:^{
+                urlData = [NSData dataWithData:[operation responseData]];
                 
-                NSArray       *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-                NSString  *documentsDirectory = [paths objectAtIndex:0];
+                if ( urlData )
+                {
+                    
+                    NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                    NSString *documentsDirectory = [paths objectAtIndex:0];
+                    
+                    NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"vidalDatabase.zip"];
+                    NSLog(@"%@", documentsDirectory);
+                    
+                    //saving is done on main thread
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [urlData writeToFile:filePath atomically:YES];
+                        NSLog(@"File Saved !");
+                        exists = true;
+                        [self checkBool:@"Архив скачался" mess:@"Можете пользоваться приложением." down:NO amount:1];
+                        ZipArchive *zipArchive = [[ZipArchive alloc] init];
+                        [zipArchive UnzipOpenFile:filePath];
+                        
+                        NSArray       *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+                        NSString  *documentsDirectory = [paths objectAtIndex:0];
+                        
+                        [zipArchive UnzipFileTo:documentsDirectory overWrite:YES];
+                        [zipArchive UnzipCloseFile];
+                    });
+                } else {
+                    NSLog(@"Download failed");
+                }
                 
-                [zipArchive UnzipFileTo:documentsDirectory overWrite:YES];
-                [zipArchive UnzipCloseFile];
-            });
-        } else {
-            NSLog(@"Download failed");
-        }
-        } else {
-            NSLog(@"OKay");
-        }
-        
-    });
+                self.progress.hidden = YES;
+                self.bgView.hidden = YES;
+            }];
+            
+            
+            [operation start];
+        }});
     
 }
 

@@ -10,12 +10,20 @@
 
 @interface SecondModelViewController ()
 
+@property (strong, nonatomic) UIBarButtonItem *searchButton;
+
 @end
 
 @implementation SecondModelViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
+                                                         style:UIBarButtonItemStyleDone
+                                                        target:self
+                                                        action:@selector(search)];
+    self.navigationItem.rightBarButtonItem = self.searchButton;
     
 //    [[UIBarButtonItem appearance] setBackButtonTitlePositionAdjustment:UIOffsetMake(0, -60) forBarMetrics:UIBarMetricsDefault];
     
@@ -25,6 +33,21 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+    
+}
+
+- (void) search
+{
+    [self performSegueWithIdentifier:@"toSearch" sender:self];
 }
 
 /*

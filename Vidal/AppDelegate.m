@@ -12,14 +12,14 @@
 @property(nonatomic, strong) void (^registrationHandler)
 (NSString *registrationToken, NSError *error);
 @property(nonatomic, assign) BOOL connectedToGCM;
-@property(nonatomic, strong) NSString* registrationToken;
 @property(nonatomic, assign) BOOL subscribedToTopic;
+
 @end
 
 NSString *const SubscriptionTopic = @"/topics/global";
 
 @implementation AppDelegate
-
+@synthesize registrationToken;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
@@ -88,6 +88,8 @@ NSString *const SubscriptionTopic = @"/topics/global";
                                                               userInfo:userInfo];
         }
     };
+    
+    [Fabric with:@[[Crashlytics class]]];
 
     return YES;
 }
@@ -95,8 +97,8 @@ NSString *const SubscriptionTopic = @"/topics/global";
 - (void)subscribeToTopic {
     // If the app has a registration token and is connected to GCM, proceed to subscribe to the
     // topic
-    if (_registrationToken && _connectedToGCM) {
-        [[GCMPubSub sharedInstance] subscribeWithToken:_registrationToken
+    if (registrationToken && _connectedToGCM) {
+        [[GCMPubSub sharedInstance] subscribeWithToken:registrationToken
                                                  topic:SubscriptionTopic
                                                options:nil
                                                handler:^(NSError *error) {

@@ -57,7 +57,7 @@
         [self loadData:req];
         
     } else if ([ud objectForKey:@"molecule"]) {
-        req = [NSString stringWithFormat:@"SELECT Product.DocumentID, Product.RusName AS 'Продукт', Molecule.RusName, Molecule.MoleculeID FROM Molecule INNER JOIN Product_Molecule ON Molecule.MoleculeID = Product_Molecule.MoleculeID INNER JOIN Product ON Product_Molecule.ProductID = Product.ProductID WHERE Molecule.MoleculeID = %@ ORDER BY Molecule.RusName", [ud objectForKey:@"molecule"]];
+        req = [NSString stringWithFormat:@"SELECT Product.DocumentID, Product.RusName AS 'Продукт', Product.EngName, Molecule.RusName, Molecule.MoleculeID FROM Molecule INNER JOIN Product_Molecule ON Molecule.MoleculeID = Product_Molecule.MoleculeID INNER JOIN Product ON Product_Molecule.ProductID = Product.ProductID WHERE Molecule.MoleculeID = %@ ORDER BY Molecule.RusName", [ud objectForKey:@"molecule"]];
         
         [self setNavBarTitle:@"Препараты"];
         
@@ -148,9 +148,12 @@
         NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
         NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"Category"];
         NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
+        NSInteger indexOfEngName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
+
         cell.elaboration.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
         cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]] valueForKey:@"lowercaseString"]];
         cell.category.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]];
+        cell.latName.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEngName]] valueForKey:@"lowercaseString"]];
         
         
         
@@ -159,34 +162,45 @@
         NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
         NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"Category"];
         NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
+        NSInteger indexOfEngName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
         cell.elaboration.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
         cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]] valueForKey:@"lowercaseString"]];
         cell.category.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]];
+        cell.latName.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEngName]] valueForKey:@"lowercaseString"]];
         
     } else if ([ud valueForKey:@"letterActive"]) {
         
         NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
         NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
+        NSInteger indexOfEngName = [self.dbManager.arrColumnNames indexOfObject:@"LatName"];
+
         
         cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]]  valueForKey:@"lowercaseString"]];
         cell.category.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]];
+        cell.latName.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEngName]] valueForKey:@"lowercaseString"]];
         
     } else if ([ud valueForKey:@"info"] || [ud valueForKey:@"comp"]) {
         
         NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
         NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
+        NSInteger indexOfEngName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
+
         cell.elaboration.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
         cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]] valueForKey:@"lowercaseString"]];
         cell.category.text = @"";
+        cell.latName.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEngName]] valueForKey:@"lowercaseString"]];
         
     } else if ([ud valueForKey:@"pharmaList"]) {
         
         NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
         NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"Category"];
         NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
+        NSInteger indexOfEngName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
+
         cell.elaboration.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
         cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]] valueForKey:@"lowercaseString"]];
         cell.category.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]]];
+        cell.latName.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEngName]] valueForKey:@"lowercaseString"]];
         
     }
     

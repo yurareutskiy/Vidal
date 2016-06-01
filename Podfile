@@ -12,6 +12,8 @@ target 'Vidal' do
     pod 'Google/CloudMessaging'
     pod 'ZipArchive'
     pod 'YandexMobileMetrica'
+    pod 'Fabric'
+    pod 'Crashlytics'
     
 end
 

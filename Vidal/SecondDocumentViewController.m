@@ -43,7 +43,7 @@
     
     self.navigationItem.title = @"Препарат";
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shareArrow"] style:UIBarButtonItemStylePlain target:self action:@selector(share:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shareArrow"] style:UIBarButtonItemStylePlain target:self action:@selector(share:)];
     
     self.tableView.estimatedRowHeight = 60.0;
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -259,7 +259,7 @@
         return nil;
     }
     
-    if (indexPath.row != indexOfBigCell) {
+    if (![[self.info objectAtIndex:indexPath.row] containsString:@"TABLE"]) {
     
         DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"docCell" forIndexPath:indexPath];
         if (cell == nil) {
@@ -380,6 +380,16 @@
     
     [tableView endUpdates];
     
+    [self scrollToRowAtIndexPath:indexPath atScrollPosition:UITableViewScrollPositionTop animated:YES];
+    
+}
+
+- (void)scrollToRowAtIndexPath:(NSIndexPath *)indexPath atScrollPosition:(UITableViewScrollPosition)scrollPosition animated:(BOOL)animated {
+    
+    [self.tableView scrollToRowAtIndexPath:indexPath
+                         atScrollPosition:scrollPosition
+                                 animated:YES];
+    
 }
 
 //#pragma mark - Collection View
@@ -424,6 +434,7 @@
     
     [ud setObject:[self clearToInter:self.name.text] forKey:@"toInter"];
     [self performSegueWithIdentifier:@"knowAbout" sender:self];
+    [ud setObject:@"1" forKey:@"share"];
     
 }
 
@@ -446,6 +457,9 @@
         text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
     }
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+    text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"&ge;" withString:@"≥"];
+    text = [text stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
     text = [text stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
@@ -540,7 +554,7 @@
     NSString *output = input;
     
     if ([output isEqualToString:@"CompiledComposition"]) {
-        return @"Описание состава и формы выпуска";
+        return @"Форма выпуска, состав и упаковка";
     } else if ([output isEqualToString:@"YearEdition"]) {
         return @"Год издания";
     } else if ([output isEqualToString:@"Elaboration"]) {

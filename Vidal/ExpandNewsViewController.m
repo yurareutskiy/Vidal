@@ -33,7 +33,7 @@
     gradient.frame = self.backView.bounds;
     gradient.colors = [NSArray arrayWithObjects:(id)[[UIColor colorWithRed:208.0/255.0 green:208.0/255.0 blue:208.0/255.0 alpha:1.0] CGColor], (id)[[UIColor colorWithRed:192.0/255.0 green:192.0/255.0 blue:192.0/255.0 alpha:1.0] CGColor], nil];
     
-    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shareArrow"] style:UIBarButtonItemStylePlain target:self action:@selector(shareNews:)];
+//    self.navigationItem.rightBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"shareArrow"] style:UIBarButtonItemStylePlain target:self action:@selector(shareNews:)];
     
     ud = [NSUserDefaults standardUserDefaults];
     self.newsId = [ud objectForKey:@"news"];
@@ -69,7 +69,7 @@
                 NSDateFormatter *date = [[NSDateFormatter alloc] init];
                 [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
                 NSDate *dateNews = [date dateFromString:[array objectForKey:@"date"]];
-                [date setDateFormat:@"dd MMMM yyyy HH:mm"];
+                [date setDateFormat:@"dd MMMM yyyy"];
                 NSString *resultDate = [date stringFromDate:dateNews];
                 
                 self.date.text = resultDate;

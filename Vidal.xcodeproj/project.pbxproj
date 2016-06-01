@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3A05CA131CF3953A0091AA35 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A05CA121CF3953A0091AA35 /* Fabric.framework */; };
+		3A05CA151CF395440091AA35 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A05CA141CF395440091AA35 /* Crashlytics.framework */; };
 		3A0D5CA11C9C457B005E6976 /* ProducersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0D5CA01C9C457B005E6976 /* ProducersTableViewCell.m */; };
 		3A0D5CA41C9C484A005E6976 /* PharmaTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0D5CA31C9C484A005E6976 /* PharmaTableViewCell.m */; };
 		3A0D5CA71C9C4C5A005E6976 /* DrugsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0D5CA61C9C4C5A005E6976 /* DrugsTableViewCell.m */; };
@@ -79,6 +81,8 @@
 /* Begin PBXFileReference section */
 		267537716EDB3475C0BE9A2D /* libPods-Vidal.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-Vidal.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2EC6DDBDE2C370D5A4C9DA5A /* Pods-Vidal.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vidal.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Vidal/Pods-Vidal.debug.xcconfig"; sourceTree = "<group>"; };
+		3A05CA121CF3953A0091AA35 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Fabric.framework; path = Pods/Fabric/Fabric.framework; sourceTree = "<group>"; };
+		3A05CA141CF395440091AA35 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = Pods/Crashlytics/Crashlytics.framework; sourceTree = "<group>"; };
 		3A0D5C9F1C9C457B005E6976 /* ProducersTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProducersTableViewCell.h; sourceTree = "<group>"; };
 		3A0D5CA01C9C457B005E6976 /* ProducersTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProducersTableViewCell.m; sourceTree = "<group>"; };
 		3A0D5CA21C9C484A005E6976 /* PharmaTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PharmaTableViewCell.h; sourceTree = "<group>"; };
@@ -176,8 +180,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				3A3A87551CDC8229007972EA /* QuartzCore.framework in Frameworks */,
+				3A05CA151CF395440091AA35 /* Crashlytics.framework in Frameworks */,
 				3A1570521CAEA87A00D49C5E /* libsqlcipher.a in Frameworks */,
 				3A1570601CAEAA2B00D49C5E /* FBSDKCoreKit.framework in Frameworks */,
+				3A05CA131CF3953A0091AA35 /* Fabric.framework in Frameworks */,
 				3A1570621CAEAA2B00D49C5E /* FBSDKShareKit.framework in Frameworks */,
 				3A1570611CAEAA2B00D49C5E /* FBSDKLoginKit.framework in Frameworks */,
 				3A70F38A1C80B32C00193150 /* CoreGraphics.framework in Frameworks */,
@@ -252,6 +258,8 @@
 			children = (
 				3A1570641CAEAAAF00D49C5E /* OKSDK.h */,
 				3A1570651CAEAAAF00D49C5E /* OKSDK.m */,
+				3A05CA141CF395440091AA35 /* Crashlytics.framework */,
+				3A05CA121CF3953A0091AA35 /* Fabric.framework */,
 				3A78F1001C91E7E4008C6BE5 /* SWRevealViewController */,
 				3A70F3891C80B32C00193150 /* CoreGraphics.framework */,
 				3A15705D1CAEAA2B00D49C5E /* FBSDKCoreKit.framework */,
@@ -427,6 +435,7 @@
 				3A9E3FC71C80AE330069BDFC /* Resources */,
 				AB1FE182AC0B1F07115FCF39 /* Embed Pods Frameworks */,
 				C6B93B91499BECDD934E44A5 /* Copy Pods Resources */,
+				3A05CA101CF394570091AA35 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -511,6 +520,19 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3A05CA101CF394570091AA35 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT\"/Fabric/Fabric.framework/run eeb7f68e6125d13b6284e25dc96be59fdd1526f1 a1f55221fd42ca4f0cd4d950e7e3279180d444cf9d177c78db6a7a43e902ae3d";
+		};
 		6AC209F1D90B2C7B87C0F10F /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -725,6 +747,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/Fabric",
+					"$(PROJECT_DIR)/Pods/Crashlytics",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -734,7 +758,7 @@
 					./sqlcipher/src,
 				);
 				INFOPLIST_FILE = Vidal/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = (
 					"$(inherited)",
@@ -749,6 +773,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.vidal.app;
 				PRODUCT_NAME = "Кардиология";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -763,6 +788,8 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Pods/Fabric",
+					"$(PROJECT_DIR)/Pods/Crashlytics",
 				);
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -772,7 +799,7 @@
 					./sqlcipher/src,
 				);
 				INFOPLIST_FILE = Vidal/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_CFLAGS = (
 					"$(inherited)",
@@ -787,6 +814,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.vidal.app;
 				PRODUCT_NAME = "Кардиология";
 				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
