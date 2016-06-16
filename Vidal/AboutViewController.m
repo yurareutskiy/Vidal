@@ -164,7 +164,7 @@
 
 - (IBAction)right:(UIButton *)sender {
     
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.1 animations:^{
         [self.image setAlpha:0.0];
         [self.name setAlpha:0.0];
         [self.drug setAlpha:0.0];
@@ -188,7 +188,7 @@
             [self.drug setText:[self.results[0] valueForKey:@"drug"]];
             ind = 0;
         }
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:0.1 animations:^{
             [self.image setAlpha:1.0];
             [self.name setAlpha:1.0];
             [self.drug setAlpha:1.0];
@@ -199,7 +199,7 @@
 
 - (IBAction)left:(UIButton *)sender {
     
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.1 animations:^{
         [self.image setAlpha:0.0];
         [self.name setAlpha:0.0];
         [self.drug setAlpha:0.0];
@@ -223,7 +223,7 @@
             [self.drug setText:[self.results[[self.results count] - 1] valueForKey:@"drug"]];
             ind = (int)[self.results count] - 1;
         }
-        [UIView animateWithDuration:0.5 animations:^{
+        [UIView animateWithDuration:0.1 animations:^{
             [self.image setAlpha:1.0];
             [self.name setAlpha:1.0];
             [self.drug setAlpha:1.0];

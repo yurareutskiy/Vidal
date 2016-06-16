@@ -22,6 +22,8 @@
     [super viewDidLoad];
     
     self.navigationItem.title = @"Компания";
+    self.addressHid.editable = NO;
+    self.addressHid.dataDetectorTypes = UIDataDetectorTypeAll;
     
     // Do any additional setup after loading the view.
 }

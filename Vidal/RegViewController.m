@@ -311,12 +311,16 @@
                     if (![monthYeah isEqualToString:@"0"]) {
                         if (![cityCheck isEqualToString:@"0"]) {
                             if (job != 0) {
-                                if (flag1 && flag2) {
-                                    [self showAlert:@"Мы выслали вам письмо" mess:@"Подтвердите регистрацию" check:YES];
-                                } else {
-                                    [self showAlert:@"Ошибка в данных" mess:@"Поставьте галочки" check:NO];
+                                if (flag1) {
+                                    if (flag2) {
+                                        [self showAlert:@"Мы выслали вам письмо" mess:@"Подтвердите регистрацию" check:YES];
+                                    } else {
+                                            [self showAlert:@"Ошибка в данных" mess:@"Пожалуйста, подтвердите, что вы согласны с пользовательским соглашением" check:NO];
+                                    }} else {
+                                            [self showAlert:@"Ошибка в данных" mess:@"Пожалуйста, подтвердите, что вы являетесь работником здравоохранения" check:NO];
+                                        }
                                 }
-                            } else {
+                             else {
                                 [self showAlert:@"Ошибка в данных" mess:@"Укажите специальность из списка" check:NO];
                             }
                         } else {
@@ -334,10 +338,10 @@
         } else {
             [self showAlert:@"Ошибка ввода данных" mess:@"Пароль не должен содержать русских символов. Длина пароля должна быть от 6 до 255 символов." check:NO];
         }
-    } else {
+            } else {
         [self showAlert:@"Ошибка ввода данных" mess:@"Введите валидный Email" check:NO];
     }
-
+    
     
     [manager POST:@"http://www.vidal.ru/api/user/add" parameters:
      @{@"register[username]":email,

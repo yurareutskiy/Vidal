@@ -50,7 +50,7 @@
     
     if ([ud valueForKey:@"activeID"]) {
         
-        req = [NSString stringWithFormat:@"select DocumentID, RusName, EngName, Elaboration, CompaniesDescription, CompiledComposition, CategoryName as Category, PhInfluence, PhKinetics, Indication, Dosage, SideEffects, ContraIndication, Lactation, SpecialInstruction, OverDosage, Interaction, PharmDelivery, StorageCondition from DocumentListView doc where exists(select 1 from Product_Molecule pm inner join Product pr on pr.ProductID = pm.ProductID where pr.DocumentID = doc.DocumentID and pm.MoleculeID = %@)", [ud valueForKey:@"activeID"]];
+        req = [NSString stringWithFormat:@"select DocumentID, RusName, EngName, Elaboration, CompaniesDescription, CompiledComposition, CategoryName as Category, PhInfluence, PhKinetics, Indication, Dosage, SideEffects, ContraIndication, Lactation, SpecialInstruction, OverDosage, Interaction, PharmDelivery, StorageCondition from DocumentListView doc where exists(select 1 from Product_Molecule pm inner join Product pr on pr.ProductID = pm.ProductID where pr.DocumentID = doc.DocumentID and pm.MoleculeID = %@) order by RusName", [ud valueForKey:@"activeID"]];
         
         [self setNavBarTitle:@"Препараты"];
         

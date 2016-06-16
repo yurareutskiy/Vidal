@@ -14,7 +14,7 @@
 @property (strong, nonatomic) IBOutlet UIImageView *image;
 @property (strong, nonatomic) IBOutlet UILabel *nameHid;
 @property (strong, nonatomic) IBOutlet UILabel *countryHid;
-@property (strong, nonatomic) IBOutlet UILabel *addressHid;
+@property (strong, nonatomic) IBOutlet UITextView *addressHid;
 @property (strong, nonatomic) IBOutlet UILabel *emailHid;
 @property (strong, nonatomic) IBOutlet UILabel *phoneHid;
 @property (strong, nonatomic) IBOutlet UIButton *listBtn;
