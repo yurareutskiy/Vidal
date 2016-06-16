@@ -58,17 +58,15 @@
     [self.specialistPickerView setBackgroundColor:[UIColor whiteColor]];
     self.toolbar.hidden = true;
     
-//    self.tableView.delegate = self;
-//    self.tableView.dataSource = self;
-//    [self.tableView setTag:1];
-    
     self.tableView2.delegate = self;
     self.tableView2.dataSource = self;
     [self.tableView2 setTag:2];
     self.tableView.hidden = true;
     self.tableView2.hidden = true;
     
-    
+    self.year.text = @"1990";
+    self.month.text = @"Января";
+    self.day.text = @"1";
     
     svos = self.scrollView.contentOffset;
     
@@ -260,24 +258,26 @@
 
 - (IBAction)button1:(UIButton *)sender {
     
-    if (!flag1) {
-        flag1 = true;
-        [self.check1 setImage:[UIImage imageNamed:@"checkedSquare"] forState:UIControlStateNormal];
-    } else {
-        flag1 = false;
-        [self.check1 setImage:[UIImage imageNamed:@"uncheckedSquare"] forState:UIControlStateNormal];
-    }
-    
-}
-
-- (IBAction)button2:(UIButton *)sender {
-    
     if (!flag2) {
         flag2 = true;
         [self.check2 setImage:[UIImage imageNamed:@"checkedSquare"] forState:UIControlStateNormal];
     } else {
         flag2 = false;
         [self.check2 setImage:[UIImage imageNamed:@"uncheckedSquare"] forState:UIControlStateNormal];
+    }
+    
+}
+
+- (IBAction)button2:(UIButton *)sender {
+    
+    
+    
+    if (!flag1) {
+        flag1 = true;
+        [self.check1 setImage:[UIImage imageNamed:@"checkedSquare"] forState:UIControlStateNormal];
+    } else {
+        flag1 = false;
+        [self.check1 setImage:[UIImage imageNamed:@"uncheckedSquare"] forState:UIControlStateNormal];
     }
     
 }
@@ -311,14 +311,15 @@
                     if (![monthYeah isEqualToString:@"0"]) {
                         if (![cityCheck isEqualToString:@"0"]) {
                             if (job != 0) {
-                                if (flag1) {
-                                    if (flag2) {
+                                if (flag1 && flag2) {
+
                                         [self showAlert:@"Мы выслали вам письмо" mess:@"Подтвердите регистрацию" check:YES];
-                                    } else {
-                                            [self showAlert:@"Ошибка в данных" mess:@"Пожалуйста, подтвердите, что вы согласны с пользовательским соглашением" check:NO];
-                                    }} else {
+                                    
+                                    } else if (!flag1) {
                                             [self showAlert:@"Ошибка в данных" mess:@"Пожалуйста, подтвердите, что вы являетесь работником здравоохранения" check:NO];
-                                        }
+                                    } else {
+                                [self showAlert:@"Ошибка в данных" mess:@"Пожалуйста, подтвердите, что вы согласны с пользовательским соглашением" check:NO];
+                                }
                                 }
                              else {
                                 [self showAlert:@"Ошибка в данных" mess:@"Укажите специальность из списка" check:NO];
