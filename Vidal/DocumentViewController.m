@@ -218,6 +218,7 @@
     }
     text = [text stringByReplacingOccurrencesOfString:@"<TD colSpan=\"2\">" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"&trade;" withString:@"™"];
     text = [text stringByReplacingOccurrencesOfString:@"&ge;" withString:@"≥"];
     text = [text stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];

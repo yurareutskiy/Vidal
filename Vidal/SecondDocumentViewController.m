@@ -457,6 +457,7 @@
         text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
     }
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+    text = [text stringByReplacingOccurrencesOfString:@"&trade;" withString:@"™"];
     text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
     text = [text stringByReplacingOccurrencesOfString:@"&ge;" withString:@"≥"];
     text = [text stringByReplacingOccurrencesOfString:@"&lt;" withString:@"<"];
