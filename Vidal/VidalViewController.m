@@ -22,6 +22,8 @@
     self.text.selectable = YES;
     self.text.dataDetectorTypes = UIDataDetectorTypeLink;
     
+    [self setLabel:@"Справка"];
+
     // Do any additional setup after loading the view.
 }
 

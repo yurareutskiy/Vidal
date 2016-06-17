@@ -9,6 +9,7 @@
 #import "ExpandNewsViewController.h"
 
 @interface ExpandNewsViewController ()
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
 
 @end
 
@@ -25,6 +26,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+
     self.navigationItem.title = @"Новости";
     
     [self.shareButton.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
@@ -56,7 +58,7 @@
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         
-        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.vidal.ru/api/news-raw/%@", self.newsId]];
+        NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"http://www.vidal.ru/api/news/%@", self.newsId]];
         NSURLRequest *request = [NSURLRequest requestWithURL:URL];
         
         NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
@@ -74,7 +76,9 @@
                 
                 self.date.text = resultDate;
                 self.newsTitle.text = [array objectForKey:@"title"];
-                self.newsText.text = [self stringByStrippingHTML:[array objectForKey:@"body"]];
+                NSString *data = [NSString stringWithFormat:@"%@%@", @"<style> body {font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 14px; line-height: 1.42857143;} </style>", [array objectForKey:@"body"]];
+                [self.webView loadHTMLString:data baseURL:[NSURL URLWithString: @"http://vidal.ru/"]];
+                NSLog(@"%@", [array objectForKey:@"body"]);
                 
                 self.newsText.numberOfLines = 0;
                 self.newsTitle.numberOfLines = 0;

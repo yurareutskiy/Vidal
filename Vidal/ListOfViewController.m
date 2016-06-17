@@ -1,6 +1,6 @@
 //
 //  ListOfViewController.m
-//  
+//
 //
 //  Created by Anton Scherbakov on 10/04/16.
 //
@@ -12,13 +12,13 @@
 
 @property (nonatomic, strong) NSMutableArray *arrPeopleInfo;
 @property (nonatomic, strong) NSMutableArray *molecule;
+@property (strong, nonatomic) NSString *req;
 
 @end
 
 @implementation ListOfViewController {
     
     NSUserDefaults *ud;
-    NSString *req;
     NSMutableIndexSet *toDelete;
     
 }
@@ -43,57 +43,57 @@
     
     self.navigationItem.title = name;
     self.navigationItem.leftBarButtonItem.title = @"";
-
+    
 }
 
 - (void) refreshDb {
     
     if ([ud valueForKey:@"activeID"]) {
         
-        req = [NSString stringWithFormat:@"select DocumentID, RusName, EngName, Elaboration, CompaniesDescription, CompiledComposition, CategoryName as Category, PhInfluence, PhKinetics, Indication, Dosage, SideEffects, ContraIndication, Lactation, SpecialInstruction, OverDosage, Interaction, PharmDelivery, StorageCondition from DocumentListView doc where exists(select 1 from Product_Molecule pm inner join Product pr on pr.ProductID = pm.ProductID where pr.DocumentID = doc.DocumentID and pm.MoleculeID = %@) order by RusName", [ud valueForKey:@"activeID"]];
+        self.req = [NSString stringWithFormat:@"select DocumentID, RusName, EngName, Elaboration, CompaniesDescription, CompiledComposition, CategoryName as Category, PhInfluence, PhKinetics, Indication, Dosage, SideEffects, ContraIndication, Lactation, SpecialInstruction, OverDosage, Interaction, PharmDelivery, StorageCondition from DocumentListView doc where exists(select 1 from Product_Molecule pm inner join Product pr on pr.ProductID = pm.ProductID where pr.DocumentID = doc.DocumentID and pm.MoleculeID = %@) order by RusName", [ud valueForKey:@"activeID"]];
         
         [self setNavBarTitle:@"Препараты"];
         
-        [self loadData:req];
+        [self loadData:self.req];
         
     } else if ([ud objectForKey:@"molecule"]) {
-        req = [NSString stringWithFormat:@"SELECT Product.DocumentID, Product.RusName AS 'Продукт', Product.EngName, Molecule.RusName, Molecule.MoleculeID FROM Molecule INNER JOIN Product_Molecule ON Molecule.MoleculeID = Product_Molecule.MoleculeID INNER JOIN Product ON Product_Molecule.ProductID = Product.ProductID WHERE Molecule.MoleculeID = %@ ORDER BY Molecule.RusName", [ud objectForKey:@"molecule"]];
+        self.req = [NSString stringWithFormat:@"SELECT Product.DocumentID, Product.RusName AS 'Продукт', Product.EngName, Molecule.RusName, Molecule.MoleculeID FROM Molecule INNER JOIN Product_Molecule ON Molecule.MoleculeID = Product_Molecule.MoleculeID INNER JOIN Product ON Product_Molecule.ProductID = Product.ProductID WHERE Molecule.MoleculeID = %@ ORDER BY Molecule.RusName", [ud objectForKey:@"molecule"]];
         
         [self setNavBarTitle:@"Препараты"];
         
-        [self loadData:req];
+        [self loadData:self.req];
     } else if ([ud valueForKey:@"pharmaList"]) {
         
-        req = [NSString stringWithFormat:@"SELECT DocumentListView.DocumentID, RusName, EngName, CompaniesDescription, Elaboration, CompiledComposition, CategoryName as Category, PhInfluence, PhKinetics, Indication, Dosage, SideEffects, ContraIndication, Lactation, SpecialInstruction, OverDosage, Interaction, PharmDelivery, StorageCondition FROM DocumentListView INNER JOIN Document_ClPhPointers ON DocumentListView.DocumentID = Document_ClPhPointers.DocumentID INNER JOIN ClinicoPhPointers ON Document_ClPhPointers.ClPhPointerID = ClinicoPhPointers.ClPhPointerID WHERE ClinicoPhPointers.ClPhPointerID = %@", [ud valueForKey:@"pharmaList"]];
+        self.req = [NSString stringWithFormat:@"SELECT DocumentListView.DocumentID, RusName, EngName, CompaniesDescription, Elaboration, CompiledComposition, CategoryName as Category, PhInfluence, PhKinetics, Indication, Dosage, SideEffects, ContraIndication, Lactation, SpecialInstruction, OverDosage, Interaction, PharmDelivery, StorageCondition FROM DocumentListView INNER JOIN Document_ClPhPointers ON DocumentListView.DocumentID = Document_ClPhPointers.DocumentID INNER JOIN ClinicoPhPointers ON Document_ClPhPointers.ClPhPointerID = ClinicoPhPointers.ClPhPointerID WHERE ClinicoPhPointers.ClPhPointerID = %@", [ud valueForKey:@"pharmaList"]];
         
         [self setNavBarTitle:@"Фармакологические группы"];
         
-        [self loadData:req];
+        [self loadData:self.req];
         
     } else if ([ud valueForKey:@"letterDrug"]) {
         
         [self setNavBarTitle:@"Препараты"];
         
-        req = [NSString stringWithFormat:@"select DocumentID, RusName, EngName, CompaniesDescription, Elaboration, CompiledComposition, CategoryName as Category, PhInfluence, PhKinetics, Indication, Dosage, SideEffects, ContraIndication, Lactation, SpecialInstruction, OverDosage, Interaction, PharmDelivery, StorageCondition from DocumentListView where Letter = '%@' order by RusName", [ud valueForKey:@"letterDrug"]];
-        [self loadData:req];
+        self.req = [NSString stringWithFormat:@"select DocumentListView.DocumentID as DocumentID, DocumentListView.RusName as RusName, DocumentListView.EngName as EngName, DocumentListView.CompaniesDescription as CompaniesDescription, DocumentListView.Elaboration as Elaboration, DocumentListView.CompiledComposition as CompiledComposition, DocumentListView.CategoryName as Category, DocumentListView.PhInfluence as PhInfluence, DocumentListView.PhKinetics as PhKinetics, DocumentListView.Indication as Indication, DocumentListView.Dosage as Dosage, DocumentListView.SideEffects as SideEffects, DocumentListView.ContraIndication as ContraIndication, DocumentListView.Lactation as Lactation, DocumentListView.SpecialInstruction as SpecialInstruction, DocumentListView.OverDosage as OverDosage, DocumentListView.Interaction as Interaction, DocumentListView.PharmDelivery as PharmDelivery, DocumentListView.StorageCondition as StorageCondition , InfoPage.RusName as InfoPageName from DocumentListView JOIN Document_InfoPage ON Document_InfoPage.DocumentID = DocumentListView.DocumentID JOIN InfoPage ON InfoPage.InfoPageID = Document_InfoPage.InfoPageID where Letter = '%@' order by DocumentListView.RusName", [ud valueForKey:@"letterDrug"]];
+        [self loadData:self.req];
         
     }  else if ([ud valueForKey:@"letterActive"]) {
         
         [self setNavBarTitle:@"Активные вещества"];
         
-        req = [NSString stringWithFormat:@"select * from SubDocumentListView where Letter = '%@' OR Letter = '%@' order by RusName", [[ud valueForKey:@"letterActive"] valueForKey:@"uppercaseString"], [[ud valueForKey:@"letterActive"] valueForKey:@"lowercaseString"]];
+        self.req = [NSString stringWithFormat:@"select * from SubDocumentListView where Letter = '%@' OR Letter = '%@' order by RusName", [[ud valueForKey:@"letterActive"] valueForKey:@"uppercaseString"], [[ud valueForKey:@"letterActive"] valueForKey:@"lowercaseString"]];
         
-        [self loadData:req];
+        [self loadData:self.req];
         
     } else if ([ud valueForKey:@"info"] || [ud valueForKey:@"comp"]) {
         
-        req = [NSString stringWithFormat:@"select DocumentID, RusName, EngName, Elaboration, CompaniesDescription, CompiledComposition, PhInfluence, PhKinetics, Indication, Dosage, SideEffects, ContraIndication, Lactation, SpecialInstruction, OverDosage, Interaction, PharmDelivery, StorageCondition from ProducerDocListView where InfoPageID = %@ order by RusName", [ud valueForKey:@"info"]];
+        self.req = [NSString stringWithFormat:@"select DocumentID, RusName, EngName, Elaboration, CompaniesDescription, CompiledComposition, PhInfluence, PhKinetics, Indication, Dosage, SideEffects, ContraIndication, Lactation, SpecialInstruction, OverDosage, Interaction, PharmDelivery, StorageCondition from ProducerDocListView where InfoPageID = %@ order by RusName", [ud valueForKey:@"info"]];
         
-        [self loadData:req];
+        [self loadData:self.req];
         
     } else {
-        req = @"";
-        [self loadData:req];
+        self.req = @"";
+        [self loadData:self.req];
     }
     
 }
@@ -135,25 +135,25 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-        PharmaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pharmaCell"];
-        if (cell == nil) {
-            cell = [[PharmaTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
-        };
+    PharmaTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"pharmaCell"];
+    if (cell == nil) {
+        cell = [[PharmaTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"cell"];
+    };
     
-        // Set the loaded data to the appropriate cell labels.
-        [cell.name setTextColor:[UIColor blackColor]];
+    // Set the loaded data to the appropriate cell labels.
+    [cell.name setTextColor:[UIColor blackColor]];
     
     if ([ud valueForKey:@"letterDrug"]) {
         
         NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
         NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"Category"];
         NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
-        NSInteger indexOfEngName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
-
+        NSInteger indexOfEngName = [self.dbManager.arrColumnNames indexOfObject:@"InfoPageName"];
+        
         cell.elaboration.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
         cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]] valueForKey:@"lowercaseString"]];
         cell.category.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]];
-        cell.latName.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEngName]] valueForKey:@"lowercaseString"]];
+        cell.latName.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEngName]];
         
         
         
@@ -173,7 +173,7 @@
         NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
         NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
         NSInteger indexOfEngName = [self.dbManager.arrColumnNames indexOfObject:@"LatName"];
-
+        
         
         cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]]  valueForKey:@"lowercaseString"]];
         cell.category.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]];
@@ -184,7 +184,7 @@
         NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
         NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
         NSInteger indexOfEngName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
-
+        
         cell.elaboration.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
         cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]] valueForKey:@"lowercaseString"]];
         cell.category.text = @"";
@@ -196,7 +196,7 @@
         NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"Category"];
         NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
         NSInteger indexOfEngName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
-
+        
         cell.elaboration.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
         cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]] valueForKey:@"lowercaseString"]];
         cell.category.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]]];
@@ -204,66 +204,66 @@
         
     }
     
-        else if ([ud valueForKey:@"workActive"] && ([self.activeID isEqualToString:@""] || self.activeID == nil)) {
-            if (![[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2] isEqualToString:@""]) {
-                cell.category.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2]] valueForKey:@"lowercaseString"]];
-                [cell.category setTextColor:[UIColor lightGrayColor]];
-            } else {
-                cell.category.text = @"";
-            }
-        } else if ([ud valueForKey:@"activeID"]) {
-            
-            cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]] valueForKey:@"lowercaseString"]];
-            [cell.name setTextColor:[UIColor blackColor]];
-            cell.category.text = @"";
-            
-        } else if ([ud valueForKey:@"pharmaList"]) {
-            cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]] valueForKey:@"lowercaseString"]];
-            [cell.name setTextColor:[UIColor blackColor]];
-            cell.category.text = @"";
-        } else if ([ud valueForKey:@"comp"]) {
-            cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2]] valueForKey:@"lowercaseString"]];
-            [cell.name setTextColor:[UIColor blackColor]];
-            cell.category.text = @"";
-        } else if ([ud valueForKey:@"info"]) {
-            cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2]] valueForKey:@"lowercaseString"]];
-            [cell.name setTextColor:[UIColor blackColor]];
-            cell.category.text = @"";
+    else if ([ud valueForKey:@"workActive"] && ([self.activeID isEqualToString:@""] || self.activeID == nil)) {
+        if (![[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2] isEqualToString:@""]) {
+            cell.category.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2]] valueForKey:@"lowercaseString"]];
+            [cell.category setTextColor:[UIColor lightGrayColor]];
         } else {
             cell.category.text = @"";
         }
+    } else if ([ud valueForKey:@"activeID"]) {
         
-        return cell;
+        cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]] valueForKey:@"lowercaseString"]];
+        [cell.name setTextColor:[UIColor blackColor]];
+        cell.category.text = @"";
+        
+    } else if ([ud valueForKey:@"pharmaList"]) {
+        cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]] valueForKey:@"lowercaseString"]];
+        [cell.name setTextColor:[UIColor blackColor]];
+        cell.category.text = @"";
+    } else if ([ud valueForKey:@"comp"]) {
+        cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2]] valueForKey:@"lowercaseString"]];
+        [cell.name setTextColor:[UIColor blackColor]];
+        cell.category.text = @"";
+    } else if ([ud valueForKey:@"info"]) {
+        cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2]] valueForKey:@"lowercaseString"]];
+        [cell.name setTextColor:[UIColor blackColor]];
+        cell.category.text = @"";
+    } else {
+        cell.category.text = @"";
+    }
+    
+    return cell;
     
 }
 
 - (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:NO];
-        if ([ud valueForKey:@"letterDrug"] || [ud valueForKey:@"comp"] || [ud valueForKey:@"pharmaList"] || [ud valueForKey:@"activeID"] || [ud valueForKey:@"info"]) {
+    if ([ud valueForKey:@"letterDrug"] || [ud valueForKey:@"comp"] || [ud valueForKey:@"pharmaList"] || [ud valueForKey:@"activeID"] || [ud valueForKey:@"info"]) {
         
-            NSInteger indexOfDocumentID;
-            
-            if ([ud valueForKey:@"pharmaList"]) {
-                indexOfDocumentID = [self.dbManager.arrColumnNames indexOfObject:@"DocumentListView.DocumentID"];
-            } else {
-                indexOfDocumentID = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
-            }
-            
-            
-            
-            self.molecule = [NSMutableArray arrayWithArray:[self.arrPeopleInfo objectAtIndex:indexPath.row]];
-            [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfDocumentID] forKey:@"id"];
-            [self performSegueWithIdentifier:@"toSecDoc" sender:self];
-            
-        } else if ([ud valueForKey:@"letterActive"]) {
-            
-            NSInteger indexOfDocumentID = [self.dbManager.arrColumnNames indexOfObject:@"MoleculeID"];
-            
-            [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfDocumentID] forKey:@"activeID"];
-            [self performSegueWithIdentifier:@"toDoc" sender:self];
-            
+        NSInteger indexOfDocumentID;
+        
+        if ([ud valueForKey:@"pharmaList"]) {
+            indexOfDocumentID = [self.dbManager.arrColumnNames indexOfObject:@"DocumentListView.DocumentID"];
+        } else {
+            indexOfDocumentID = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
         }
+        
+        
+        
+        self.molecule = [NSMutableArray arrayWithArray:[self.arrPeopleInfo objectAtIndex:indexPath.row]];
+        [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfDocumentID] forKey:@"id"];
+        [self performSegueWithIdentifier:@"toSecDoc" sender:self];
+        
+    } else if ([ud valueForKey:@"letterActive"]) {
+        
+        NSInteger indexOfDocumentID = [self.dbManager.arrColumnNames indexOfObject:@"MoleculeID"];
+        
+        [ud setObject:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfDocumentID] forKey:@"activeID"];
+        [self performSegueWithIdentifier:@"toDoc" sender:self];
+        
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -278,9 +278,9 @@
         self.arrPeopleInfo = nil;
     }
     self.arrPeopleInfo = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
-    
+	
     if ([self.arrPeopleInfo count] == 0) {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Alert title" message:@"Alert message" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Нет таких препаратов" message:@"Попробуйте нажать на другую букву" preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
                              {
@@ -357,29 +357,29 @@
         
         sdvc.info = self.molecule;
         sdvc.dbManager = self.dbManager;
-
+        
     }
-//    } else if ([segue.identifier isEqualToString:@"toDoc"]) {
-//        
-//        DocumentViewController *dvc = [segue destinationViewController];
-//        
-//        dvc.info = self.molecule;
-//        dvc.dbManager = self.dbManager;
-//        
-//    }
+    //    } else if ([segue.identifier isEqualToString:@"toDoc"]) {
+    //
+    //        DocumentViewController *dvc = [segue destinationViewController];
+    //
+    //        dvc.info = self.molecule;
+    //        dvc.dbManager = self.dbManager;
+    //
+    //    }
     
 }
 
 
 /*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
+ #pragma mark - Navigation
+ 
+ // In a storyboard-based application, you will often want to do a little preparation before navigation
+ - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+ // Get the new view controller using [segue destinationViewController].
+ // Pass the selected object to the new view controller.
+ }
+ */
 
 // CEMETERY OF CODE
 

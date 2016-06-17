@@ -50,9 +50,10 @@
         NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
         AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
         
-        NSURL *URL = [NSURL URLWithString:@"http://www.vidal.ru/api/news-raw"];
+        NSURL *URL = [NSURL URLWithString:@"http://www.vidal.ru/api/news-raw?from=0&size=100"];
         NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-        
+
+    
         NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
             if (error) {
                 NSLog(@"Error: %@", error);

@@ -65,6 +65,7 @@
     if(openDatabaseResult == SQLITE_OK) {
         
         const char* key = [[ud valueForKey:@"pass"] UTF8String];
+        NSLog(@"key - %s", key);
         sqlite3_key(db, key, (int)strlen(key));
         
         // Declare a sqlite3_stmt object in which will be stored the query after having been compiled into a SQLite statement.

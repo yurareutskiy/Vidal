@@ -7,6 +7,7 @@
 //
 
 #import "SecondModelViewController.h"
+#import "SearchViewController.h"
 
 @interface SecondModelViewController ()
 
@@ -45,9 +46,9 @@
     
 }
 
-- (void) search
-{
-    [self performSegueWithIdentifier:@"toSearch" sender:self];
+- (void) search {
+    SearchViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"search"];
+    [self.navigationController pushViewController:vc animated:NO];
 }
 
 /*

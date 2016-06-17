@@ -18,7 +18,6 @@
 		3A0D5CB51C9C6D6E005E6976 /* ExpandNewsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0D5CB41C9C6D6E005E6976 /* ExpandNewsViewController.m */; };
 		3A0DBD861CB45FA800D9BAD3 /* DocumentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A0DBD851CB45FA800D9BAD3 /* DocumentViewController.m */; };
 		3A0DBD881CB4924300D9BAD3 /* LogOutStoryboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3A0DBD871CB4924300D9BAD3 /* LogOutStoryboard.storyboard */; };
-		3A1570521CAEA87A00D49C5E /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15704F1CAEA86800D49C5E /* libsqlcipher.a */; };
 		3A1570551CAEA8F800D49C5E /* DBManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 3A1570541CAEA8F800D49C5E /* DBManager.m */; };
 		3A1570601CAEAA2B00D49C5E /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15705D1CAEAA2B00D49C5E /* FBSDKCoreKit.framework */; };
 		3A1570611CAEAA2B00D49C5E /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A15705E1CAEAA2B00D49C5E /* FBSDKLoginKit.framework */; };
@@ -57,21 +56,50 @@
 		3AB2A31F1CCCE8D000731088 /* CompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB2A31E1CCCE8D000731088 /* CompanyViewController.m */; };
 		3AB2A3231CCCF50800731088 /* VidalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB2A3221CCCF50800731088 /* VidalViewController.m */; };
 		524EDF951CB4E4E900A3BB2F /* DocsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 524EDF941CB4E4E900A3BB2F /* DocsTableViewCell.m */; };
+		BF72BBD41D13731900441A5E /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF72BBD11D13730600441A5E /* libsqlcipher.a */; };
 		BF9A12221CBFE8EB00B65F68 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF9A12211CBFE8EB00B65F68 /* GoogleService-Info.plist */; };
 		E82C22A1236860E5691C38CA /* libPods-Vidal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 267537716EDB3475C0BE9A2D /* libPods-Vidal.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		3A15704E1CAEA86800D49C5E /* PBXContainerItemProxy */ = {
+		BF72BBC81D13730600441A5E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3A1570491CAEA86800D49C5E /* sqlcipher.xcodeproj */;
+			containerPortal = BF72BBBF1D13730600441A5E /* sqlcipher.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C0041981BFC382400ED2AD5;
+			remoteInfo = "SQLCipher iOS";
+		};
+		BF72BBCA1D13730600441A5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF72BBBF1D13730600441A5E /* sqlcipher.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C0041B11BFC3B2200ED2AD5;
+			remoteInfo = "SQLCipher OSX";
+		};
+		BF72BBCC1D13730600441A5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF72BBBF1D13730600441A5E /* sqlcipher.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C0041C31BFC3CC000ED2AD5;
+			remoteInfo = "SQLCipher tvOS";
+		};
+		BF72BBCE1D13730600441A5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF72BBBF1D13730600441A5E /* sqlcipher.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 4C0041D61BFC3E2500ED2AD5;
+			remoteInfo = "SQLCipher watchOS";
+		};
+		BF72BBD01D13730600441A5E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BF72BBBF1D13730600441A5E /* sqlcipher.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D2AAC046055464E500DB518D;
 			remoteInfo = sqlcipher;
 		};
-		3A1570501CAEA87300D49C5E /* PBXContainerItemProxy */ = {
+		BF72BBD21D13731100441A5E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 3A1570491CAEA86800D49C5E /* sqlcipher.xcodeproj */;
+			containerPortal = BF72BBBF1D13730600441A5E /* sqlcipher.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = sqlcipher;
@@ -100,7 +128,6 @@
 		3A0DBD841CB45FA800D9BAD3 /* DocumentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocumentViewController.h; sourceTree = "<group>"; };
 		3A0DBD851CB45FA800D9BAD3 /* DocumentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocumentViewController.m; sourceTree = "<group>"; };
 		3A0DBD871CB4924300D9BAD3 /* LogOutStoryboard.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LogOutStoryboard.storyboard; sourceTree = "<group>"; };
-		3A1570491CAEA86800D49C5E /* sqlcipher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sqlcipher.xcodeproj; path = sqlcipher/sqlcipher.xcodeproj; sourceTree = "<group>"; };
 		3A1570531CAEA8F800D49C5E /* DBManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DBManager.h; sourceTree = "<group>"; };
 		3A1570541CAEA8F800D49C5E /* DBManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DBManager.m; sourceTree = "<group>"; };
 		3A15705D1CAEAA2B00D49C5E /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -171,6 +198,7 @@
 		524EDF931CB4E4E900A3BB2F /* DocsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocsTableViewCell.h; sourceTree = "<group>"; };
 		524EDF941CB4E4E900A3BB2F /* DocsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocsTableViewCell.m; sourceTree = "<group>"; };
 		639C2F57EA1C775AEEFEE2C9 /* Pods-Vidal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vidal.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vidal/Pods-Vidal.release.xcconfig"; sourceTree = "<group>"; };
+		BF72BBBF1D13730600441A5E /* sqlcipher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sqlcipher.xcodeproj; path = ../sqlcipher/sqlcipher.xcodeproj; sourceTree = "<group>"; };
 		BF9A12211CBFE8EB00B65F68 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -179,9 +207,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF72BBD41D13731900441A5E /* libsqlcipher.a in Frameworks */,
 				3A3A87551CDC8229007972EA /* QuartzCore.framework in Frameworks */,
 				3A05CA151CF395440091AA35 /* Crashlytics.framework in Frameworks */,
-				3A1570521CAEA87A00D49C5E /* libsqlcipher.a in Frameworks */,
 				3A1570601CAEAA2B00D49C5E /* FBSDKCoreKit.framework in Frameworks */,
 				3A05CA131CF3953A0091AA35 /* Fabric.framework in Frameworks */,
 				3A1570621CAEAA2B00D49C5E /* FBSDKShareKit.framework in Frameworks */,
@@ -243,14 +271,6 @@
 				3AB2A31E1CCCE8D000731088 /* CompanyViewController.m */,
 			);
 			name = "From Main Screens";
-			sourceTree = "<group>";
-		};
-		3A15704A1CAEA86800D49C5E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				3A15704F1CAEA86800D49C5E /* libsqlcipher.a */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		3A1570681CAEAE2900D49C5E /* Libraries */ = {
@@ -369,7 +389,7 @@
 			isa = PBXGroup;
 			children = (
 				BF9A12211CBFE8EB00B65F68 /* GoogleService-Info.plist */,
-				3A1570491CAEA86800D49C5E /* sqlcipher.xcodeproj */,
+				BF72BBBF1D13730600441A5E /* sqlcipher.xcodeproj */,
 				3A1570681CAEAE2900D49C5E /* Libraries */,
 				3A9E3FCB1C80AE330069BDFC /* Vidal */,
 				3A9E3FCA1C80AE330069BDFC /* Products */,
@@ -412,6 +432,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		BF72BBC01D13730600441A5E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BF72BBC91D13730600441A5E /* SQLCipher.framework */,
+				BF72BBCB1D13730600441A5E /* SQLCipher.framework */,
+				BF72BBCD1D13730600441A5E /* SQLCipher.framework */,
+				BF72BBCF1D13730600441A5E /* SQLCipher.framework */,
+				BF72BBD11D13730600441A5E /* libsqlcipher.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		FED137FC56CC9C0ECB250158 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -440,7 +472,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				3A1570511CAEA87300D49C5E /* PBXTargetDependency */,
+				BF72BBD31D13731100441A5E /* PBXTargetDependency */,
 			);
 			name = Vidal;
 			productName = Vidal;
@@ -483,8 +515,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = 3A15704A1CAEA86800D49C5E /* Products */;
-					ProjectRef = 3A1570491CAEA86800D49C5E /* sqlcipher.xcodeproj */;
+					ProductGroup = BF72BBC01D13730600441A5E /* Products */;
+					ProjectRef = BF72BBBF1D13730600441A5E /* sqlcipher.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -495,11 +527,39 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		3A15704F1CAEA86800D49C5E /* libsqlcipher.a */ = {
+		BF72BBC91D13730600441A5E /* SQLCipher.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SQLCipher.framework;
+			remoteRef = BF72BBC81D13730600441A5E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BF72BBCB1D13730600441A5E /* SQLCipher.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SQLCipher.framework;
+			remoteRef = BF72BBCA1D13730600441A5E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BF72BBCD1D13730600441A5E /* SQLCipher.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SQLCipher.framework;
+			remoteRef = BF72BBCC1D13730600441A5E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BF72BBCF1D13730600441A5E /* SQLCipher.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SQLCipher.framework;
+			remoteRef = BF72BBCE1D13730600441A5E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		BF72BBD11D13730600441A5E /* libsqlcipher.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libsqlcipher.a;
-			remoteRef = 3A15704E1CAEA86800D49C5E /* PBXContainerItemProxy */;
+			remoteRef = BF72BBD01D13730600441A5E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -629,10 +689,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		3A1570511CAEA87300D49C5E /* PBXTargetDependency */ = {
+		BF72BBD31D13731100441A5E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = sqlcipher;
-			targetProxy = 3A1570501CAEA87300D49C5E /* PBXContainerItemProxy */;
+			targetProxy = BF72BBD21D13731100441A5E /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 

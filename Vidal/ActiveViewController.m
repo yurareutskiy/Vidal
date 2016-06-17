@@ -154,10 +154,10 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
         
-        ActiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"activeCell"];
-        if (cell == nil) {
-            cell = [[ActiveTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"activeCell"];
-        }
+    ActiveTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"activeCell"];
+    if (cell == nil) {
+        cell = [[ActiveTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"activeCell"];
+    }
     
     NSInteger indexOfLetter = [self.dbManager.arrColumnNames indexOfObject:@"Letter"];
     NSInteger indexOfTitle = [self.dbManager.arrColumnNames indexOfObject:@"Title"];
@@ -204,8 +204,8 @@
         [self.arrPeopleInfo[i] setObject:[[self.arrPeopleInfo[i] objectAtIndex:indexOfLetter] valueForKey:@"uppercaseString"] atIndex:indexOfLetter];
     }
     
-    [self.arrPeopleInfo removeObjectAtIndex:0];
-    [self.arrPeopleInfo removeObjectAtIndex:0];
+//    [self.arrPeopleInfo removeObjectAtIndex:0];
+//    [self.arrPeopleInfo removeObjectAtIndex:0];
     
     // Reload the table view.
     [self.tableView reloadData];

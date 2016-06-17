@@ -73,7 +73,7 @@
     self.agree.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.worker.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     
-    
+    [self.agreementReadButton addTarget:self action:@selector(agreementLink:) forControlEvents:UIControlEventTouchUpInside];
     
     [self getSpec];
     
@@ -95,6 +95,14 @@
     }
     
     // Do any additional setup after loading the view.
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [self.tableView.backgroundView setBackgroundColor:[UIColor whiteColor]];
+    [self.tableView setBackgroundColor:[UIColor whiteColor]];
+    
+    [self.tableView2.backgroundView setBackgroundColor:[UIColor whiteColor]];
+    [self.tableView2 setBackgroundColor:[UIColor whiteColor]];
 }
 
 -(void) hideKeyboard {
@@ -189,8 +197,8 @@
     
     if (textField.tag == 4) {
         self.namesCity = [NSMutableArray array];
-        self.special.userInteractionEnabled = NO;
-        self.special.enabled = NO;
+//        self.special.userInteractionEnabled = NO;
+//        self.special.enabled = NO;
         [self.tableView2 reloadData];
         self.cityText.text = @"";
         [self.scrollView removeGestureRecognizer:tap];
@@ -258,12 +266,12 @@
 
 - (IBAction)button1:(UIButton *)sender {
     
-    if (!flag2) {
-        flag2 = true;
-        [self.check2 setImage:[UIImage imageNamed:@"checkedSquare"] forState:UIControlStateNormal];
+    if (!flag1) {
+        flag1 = true;
+        [self.check1 setImage:[UIImage imageNamed:@"checkedSquare"] forState:UIControlStateNormal];
     } else {
-        flag2 = false;
-        [self.check2 setImage:[UIImage imageNamed:@"uncheckedSquare"] forState:UIControlStateNormal];
+        flag1 = false;
+        [self.check1 setImage:[UIImage imageNamed:@"uncheckedSquare"] forState:UIControlStateNormal];
     }
     
 }
@@ -272,12 +280,12 @@
     
     
     
-    if (!flag1) {
-        flag1 = true;
-        [self.check1 setImage:[UIImage imageNamed:@"checkedSquare"] forState:UIControlStateNormal];
+    if (!flag2) {
+        flag2 = true;
+        [self.check2 setImage:[UIImage imageNamed:@"checkedSquare"] forState:UIControlStateNormal];
     } else {
-        flag1 = false;
-        [self.check1 setImage:[UIImage imageNamed:@"uncheckedSquare"] forState:UIControlStateNormal];
+        flag2 = false;
+        [self.check2 setImage:[UIImage imageNamed:@"uncheckedSquare"] forState:UIControlStateNormal];
     }
     
 }
@@ -548,6 +556,10 @@
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
 {
     return self.namesSpec[row + 1];
+}
+
+- (IBAction)agreementLink:(UIButton *)sender {
+    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://vidal.ru/eula"]];
 }
 
 @end

@@ -26,76 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vidal/PharmaViewController.m"
-            timestampString = "482933437.375575"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "171"
-            endingLineNumber = "171"
-            landmarkName = "-tableView:didSelectRowAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vidal/PharmaViewController.m"
-            timestampString = "482933440.86358"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "181"
-            endingLineNumber = "181"
-            landmarkName = "-segueToBe:"
-            landmarkType = "5">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[PharmaViewController loadData:]"
-                  moduleName = "&#x41a;&#x430;&#x440;&#x434;&#x438;&#x43e;&#x43b;&#x43e;&#x433;&#x438;&#x44f;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/reutskiy/Documents/Development/Vidal123/Vidal/PharmaViewController.m"
-                  timestampString = "483724497.181891"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "181"
-                  endingLineNumber = "181"
-                  offsetFromSymbolStart = "609">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "-[PharmaViewController loadData:]"
-                  moduleName = "&#x41a;&#x430;&#x440;&#x434;&#x438;&#x43e;&#x43b;&#x43e;&#x433;&#x438;&#x44f;"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/reutskiy/Documents/Development/Vidal123/Vidal/PharmaViewController.m"
-                  timestampString = "483724497.182056"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "181"
-                  endingLineNumber = "181"
-                  offsetFromSymbolStart = "633">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vidal/PharmaViewController.m"
             timestampString = "482933445.839006"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "222"
             endingLineNumber = "222"
-            landmarkName = "-loadData:"
+            landmarkName = "-getMol:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -298,12 +234,28 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vidal/RegViewController.m"
-            timestampString = "482953141.812084"
+            timestampString = "487829937.080052"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "244"
-            endingLineNumber = "244"
+            startingLineNumber = "252"
+            endingLineNumber = "252"
             landmarkName = "-textFieldDidBeginEditing:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vidal/DrugsViewController.m"
+            timestampString = "487815575.453397"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "177"
+            endingLineNumber = "177"
+            landmarkName = "-loadData:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -313,13 +265,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Vidal/MainViewController.m"
-            timestampString = "483724497.055281"
+            filePath = "Vidal/ListOfViewController.m"
+            timestampString = "487826098.395091"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "213"
-            endingLineNumber = "213"
-            landmarkName = "-getLink"
+            startingLineNumber = "28"
+            endingLineNumber = "28"
+            landmarkName = "-viewDidLoad"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vidal/RegViewController.m"
+            timestampString = "487829937.080052"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "303"
+            endingLineNumber = "303"
+            landmarkName = "-regButton:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Vidal/RegViewController.m"
+            timestampString = "487829937.080052"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "469"
+            endingLineNumber = "469"
+            landmarkName = "-showPicker:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

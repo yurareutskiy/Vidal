@@ -57,18 +57,18 @@
     
     
     if ([[ud valueForKey:@"share"] isEqualToString:@"0"]) {
-    NSInteger indexOfLatName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
-    NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
-    NSInteger indexOfCompany = [self.dbManager.arrColumnNames indexOfObject:@"CompaniesDescription"];
-        NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
-    
-    self.latName.attributedText = [self clearString:[[self.info objectAtIndex:indexOfLatName] valueForKey:@"lowercaseString"]];
-    self.name.attributedText = [self clearString:[[self.info objectAtIndex:indexOfName] valueForKey:@"lowercaseString"]];
-    self.elaboration.attributedText = [self clearString:[[self.info objectAtIndex:indexOfElaboration] valueForKey:@"lowercaseString"]];
-    
-    if (![[self.info objectAtIndex:indexOfCompany] isEqualToString:@""]) {
-        self.registred.attributedText = [self clearString:[self.info objectAtIndex:indexOfCompany]];
-        [toDelete addIndex:indexOfCompany];
+        NSInteger indexOfLatName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
+        NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
+        NSInteger indexOfCompany = [self.dbManager.arrColumnNames indexOfObject:@"CompaniesDescription"];
+            NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
+        
+        self.latName.attributedText = [self clearString:[[self.info objectAtIndex:indexOfLatName] valueForKey:@"lowercaseString"]];
+        self.name.attributedText = [self clearString:[[self.info objectAtIndex:indexOfName] valueForKey:@"lowercaseString"]];
+        self.elaboration.attributedText = [self clearString:[[self.info objectAtIndex:indexOfElaboration] valueForKey:@"lowercaseString"]];
+        
+        if (![[self.info objectAtIndex:indexOfCompany] isEqualToString:@""]) {
+            self.registred.attributedText = [self clearString:[self.info objectAtIndex:indexOfCompany]];
+            [toDelete addIndex:indexOfCompany];
     } else {
         [toDelete addIndex:indexOfCompany];
     }

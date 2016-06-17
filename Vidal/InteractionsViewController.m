@@ -217,7 +217,8 @@
 - (void) findFirstResult:(NSString *) first {
     
     for (int i = 0; i < [[array objectForKey:@"interactions"] count]; i++) {
-        if ([[[array objectForKey:@"interactions"] objectAtIndex:i] containsObject:first]) {
+        NSString *value = [[[array objectForKey:@"interactions"] objectAtIndex:i] objectForKey:@"name"];
+        if ([value isEqualToString:first]) {
             inx = i;
             break;
         }

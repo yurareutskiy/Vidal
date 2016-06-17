@@ -63,16 +63,16 @@
         AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
         [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
         
-        [manager POST:@"http://www.vidal.ru/api/user/set-android-id" parameters:@{
-                                                                                  @"token":[ud valueForKey:@"archToken"],
-                                                                                  @"username":[ud valueForKey:@"email"],
-                                                                                  @"id":appDelegate.registrationToken}
-              success:^(AFHTTPRequestOperation * _Nonnull operation, id responseObject) {
-                  NSLog(@"%@", responseObject);
-                  NSLog(@"%@ - %@ - %@", [ud valueForKey:@"archToken"], [ud valueForKey:@"email"], appDelegate.registrationToken);
-              } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-                  NSLog(@"LOH");
-              }];
+//        [manager POST:@"http://www.vidal.ru/api/user/set-android-id" parameters:@{
+//                                                                                  @"token":[ud valueForKey:@"archToken"],
+//                                                                                  @"username":[ud valueForKey:@"email"],
+//                                                                                  @"id":appDelegate.registrationToken}
+//              success:^(AFHTTPRequestOperation * _Nonnull operation, id responseObject) {
+//                  NSLog(@"%@", responseObject);
+//                  NSLog(@"%@ - %@ - %@", [ud valueForKey:@"archToken"], [ud valueForKey:@"email"], appDelegate.registrationToken);
+//              } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+//                  NSLog(@"LOH");
+//              }];
         
         [self checkBool:@"Архив начал скачиваться" mess:@"Подождите 15-30 секунд. Элементы взаимодействия недоступны, пожалуйста, не выключайте приложение." down:NO amount:1];
         [self getLink];
@@ -94,6 +94,7 @@
     
 }
     // Do any additional setup after loading the view.
+    [self setLabel:@"Vidal"];
 }
 
 - (void) checkBool:(NSString *)title mess:(NSString *)mess down:(BOOL)down amount:(int)butt {
@@ -313,6 +314,11 @@
 
 - (void) downloadDB:(NSString *) link {
     
+    self.progress.hidden = NO;
+    self.bgView.hidden = NO;
+    
+    NSLog(@"LINK - %@", link);
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
         if (!exists) {
@@ -402,14 +408,14 @@
 
 - (IBAction)toTakeda:(UIButton *)sender {
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.takeda.com.ru/"]];
+//    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.takeda.com.ru/"]];
+    [self performSegueWithIdentifier:@"takeda" sender:nil];
 
 }
 
 - (IBAction)toVidal:(UIButton *)sender {
     
-    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.vidal.ru"]];
-    
+    [self performSegueWithIdentifier:@"about" sender:nil];    
 }
 
 - (IBAction)toList:(UIButton *)sender {

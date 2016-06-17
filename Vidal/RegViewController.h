@@ -40,9 +40,12 @@
 @property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (strong, nonatomic) IBOutlet UIButton *check1;
 @property (strong, nonatomic) IBOutlet UIButton *check2;
+@property (weak, nonatomic) IBOutlet UIButton *agreementReadButton;
 
 - (IBAction)button1:(UIButton *)sender;
 - (IBAction)button2:(UIButton *)sender;
+- (IBAction)agreementLink:(UIButton *)sender;
+
 
 - (IBAction)callDatePicker:(UIButton*)sender;
 - (IBAction)regButton:(UIButton *)sender;

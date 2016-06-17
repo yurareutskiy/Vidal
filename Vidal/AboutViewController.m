@@ -27,6 +27,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    
     ind = 5;
     
     ud = [NSUserDefaults standardUserDefaults];
@@ -43,7 +44,7 @@
     self.drug.text = string2;
     [self.drug sizeToFit];
     
-    [super setLabel:@"О Такеда"];
+    [self setLabel:@"О Такеда"];
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
