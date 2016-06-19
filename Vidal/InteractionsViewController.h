@@ -9,7 +9,7 @@
 #import "ModelViewController.h"
 #import "IMQuickSearch.h"
 
-@interface InteractionsViewController : ModelViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPickerViewDelegate>
+@interface InteractionsViewController : ModelViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UIPickerViewDelegate, SWRevealViewControllerDelegate>
 @property (nonatomic, strong) IMQuickSearch *quickSearch;
 @property (strong, nonatomic) IBOutlet UILabel *info1;
 @property (strong, nonatomic) IBOutlet UILabel *info2;

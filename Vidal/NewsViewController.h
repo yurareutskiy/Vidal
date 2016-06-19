@@ -13,5 +13,7 @@
 
 @interface NewsViewController : ModelViewController<UITableViewDataSource, UITableViewDelegate>
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UIButton *refreshButton;
+- (IBAction)refresh:(UIButton *)sender;
 
 @end

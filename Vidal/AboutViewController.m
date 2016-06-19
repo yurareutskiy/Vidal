@@ -13,6 +13,8 @@
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSArray *arrPeopleInfo;
 @property (nonatomic, strong) NSMutableArray *results;
+@property (nonatomic, strong) NSMutableArray *molecule;
+@property (nonatomic, strong) NSMutableArray *IDs;
 
 -(void)loadData:(NSString *)req;
 
@@ -27,6 +29,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [self.image.imageView setContentMode:UIViewContentModeScaleAspectFit];
     
     ind = 5;
     
@@ -48,11 +51,18 @@
     
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
-    NSString *request = @"SELECT Document.RusName, Document.CompiledComposition, Picture.Image FROM Document INNER JOIN Document_InfoPage ON Document.DocumentID = Document_InfoPage.DocumentID INNER JOIN InfoPage ON Document_InfoPage.InfoPageID = InfoPage.InfoPageID INNER JOIN Product ON Document.DocumentID = Product.DocumentID LEFT JOIN Product_Picture ON Product.ProductID  = Product_Picture.ProductID LEFT JOIN Picture ON Product_Picture.PictureID = Picture.PictureID WHERE InfoPage.InfoPageID = 63 GROUP BY Document.RusName";
+    NSString *request = @"select DocumentListView.RusName as RusName, DocumentListView.CompiledComposition as CompiledComposition, Picture.Image, DocumentListView.DocumentID as DocumentID, DocumentListView.EngName as EngName, DocumentListView.CompaniesDescription as CompaniesDescription, DocumentListView.Elaboration as Elaboration, DocumentListView.CategoryName as Category, DocumentListView.PhInfluence as PhInfluence, DocumentListView.PhKinetics as PhKinetics, DocumentListView.Indication as Indication, DocumentListView.Dosage as Dosage, DocumentListView.SideEffects as SideEffects, DocumentListView.ContraIndication as ContraIndication, DocumentListView.Lactation as Lactation, DocumentListView.SpecialInstruction as SpecialInstruction, DocumentListView.OverDosage as OverDosage, DocumentListView.Interaction as Interaction, DocumentListView.PharmDelivery as PharmDelivery, DocumentListView.StorageCondition as StorageCondition, InfoPage.RusName as InfoPageName FROM DocumentListView INNER JOIN Document_InfoPage ON Document_InfoPage.DocumentID = DocumentListView.DocumentID INNER JOIN InfoPage ON Document_InfoPage.InfoPageID = InfoPage.InfoPageID INNER JOIN Product ON DocumentListView.DocumentID = Product.DocumentID LEFT JOIN Product_Picture ON Product.ProductID  = Product_Picture.ProductID LEFT JOIN Picture ON Product_Picture.PictureID = Picture.PictureID WHERE InfoPage.InfoPageID = 63 GROUP BY DocumentListView.RusName";
     
     [self loadData:request];
     
-    [self.image setImage:[UIImage imageWithData:[self.results[ind] valueForKey:@"image"]]];
+    self.IDs = [NSMutableArray array];
+    for (int i = 0; i < [self.arrPeopleInfo count]; i++) {
+        
+        [self.IDs addObject:[[self.arrPeopleInfo objectAtIndex:i] objectAtIndex:3]];
+        NSLog(@"%@", [[self.arrPeopleInfo objectAtIndex:i] objectAtIndex:3]);
+    }
+    
+    [self.image setImage:[UIImage imageWithData:[self.results[ind] valueForKey:@"image"]] forState:UIControlStateNormal];
     [self.name setText:[self.results[ind] valueForKey:@"nameOf"]];
     [self.drug setText:[self.results[ind] valueForKey:@"drug"]];
     
@@ -72,6 +82,7 @@
 {
         [ud removeObjectForKey:@"howTo"];
 }
+
 
 -(void)loadData:(NSString *)req{
     // Form the query.
@@ -100,6 +111,9 @@
     
     
     text = [text stringByReplacingOccurrencesOfString:@"<TD colSpan=\"2\">" withString:@""];
+    text = [text stringByReplacingOccurrencesOfString:@"<sup>&trade;</sup>" withString:@"™"];
+    text = [text stringByReplacingOccurrencesOfString:@"<SUP>&trade;</SUP>" withString:@"™"];
+    text = [text stringByReplacingOccurrencesOfString:@"&trade;" withString:@"™"];
     text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
@@ -172,18 +186,18 @@
     } completion:^(BOOL finished) {
         if (ind < [self.results count] - 1) {
             if ([[self.results[ind+1] valueForKey:@"image"] length] > 0) {
-                [self.image setImage:[UIImage imageWithData:[self.results[ind+1] valueForKey:@"image"]]];
+                [self.image setImage:[UIImage imageWithData:[self.results[ind+1] valueForKey:@"image"]] forState:UIControlStateNormal];
             } else {
-                [self.image setImage:[UIImage imageNamed:@"company"]];
+                [self.image setImage:[UIImage imageNamed:@"company"] forState:UIControlStateNormal];
             }
             [self.name setText:[self.results[ind+1] valueForKey:@"nameOf"]];
             [self.drug setText:[self.results[ind+1] valueForKey:@"drug"]];
             ind++;
         } else if (ind == [self.results count] - 1) {
             if ([[self.results[0] valueForKey:@"image"] length] > 0) {
-                [self.image setImage:[UIImage imageWithData:[self.results[0] valueForKey:@"image"]]];
+                [self.image setImage:[UIImage imageWithData:[self.results[0] valueForKey:@"image"]] forState:UIControlStateNormal];
             } else {
-                [self.image setImage:[UIImage imageNamed:@"company"]];
+                [self.image setImage:[UIImage imageNamed:@"company"] forState:UIControlStateNormal];
             }
             [self.name setText:[self.results[0] valueForKey:@"nameOf"]];
             [self.drug setText:[self.results[0] valueForKey:@"drug"]];
@@ -207,18 +221,18 @@
     } completion:^(BOOL finished) {
         if (ind > 0) {
             if ([[self.results[ind-1] valueForKey:@"image"] length] > 0) {
-                [self.image setImage:[UIImage imageWithData:[self.results[ind-1] valueForKey:@"image"]]];
+                [self.image setImage:[UIImage imageWithData:[self.results[ind-1] valueForKey:@"image"]] forState:UIControlStateNormal];
             } else {
-                [self.image setImage:[UIImage imageNamed:@"company"]];
+                [self.image setImage:[UIImage imageNamed:@"company"] forState:UIControlStateNormal];
             }
             [self.name setText:[self.results[ind-1] valueForKey:@"nameOf"]];
             [self.drug setText:[self.results[ind-1] valueForKey:@"drug"]];
             ind--;
         } else if (ind == 0) {
             if ([[self.results[[self.results count] - 1] valueForKey:@"image"] length] > 0) {
-                [self.image setImage:[UIImage imageWithData:[self.results[[self.results count] - 1] valueForKey:@"image"]]];
+                [self.image setImage:[UIImage imageWithData:[self.results[[self.results count] - 1] valueForKey:@"image"]] forState:UIControlStateNormal];
             } else {
-                [self.image setImage:[UIImage imageNamed:@"company"]];
+                [self.image setImage:[UIImage imageNamed:@"company"] forState:UIControlStateNormal];
             }
             [self.name setText:[self.results[[self.results count] - 1] valueForKey:@"nameOf"]];
             [self.drug setText:[self.results[[self.results count] - 1] valueForKey:@"drug"]];
@@ -230,6 +244,26 @@
             [self.drug setAlpha:1.0];
         }];
     }];
+    
+}
+
+- (IBAction)toPreparat:(UIButton *)sender {
+    
+    self.molecule = [NSMutableArray arrayWithArray:[self.arrPeopleInfo objectAtIndex:ind]];
+    [ud setObject:[self.IDs objectAtIndex:ind] forKey:@"id"];
+    [self performSegueWithIdentifier:@"toDrug" sender:self];
+}
+
+- (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"toDrug"]) {
+        
+        SecondDocumentViewController *sdvc = [segue destinationViewController];
+        
+        sdvc.info = self.molecule;
+        sdvc.dbManager = self.dbManager;
+        
+    }
     
 }
 @end

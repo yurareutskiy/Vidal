@@ -131,6 +131,9 @@
         
         text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
         text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
+        text = [text stringByReplacingOccurrencesOfString:@"<sup>&trade;</sup>" withString:@"™"];
+        text = [text stringByReplacingOccurrencesOfString:@"<SUP>&trade;</SUP>" withString:@"™"];
+        text = [text stringByReplacingOccurrencesOfString:@"&trade;" withString:@"™"];
         text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
         text = [text stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
         text = [text stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];

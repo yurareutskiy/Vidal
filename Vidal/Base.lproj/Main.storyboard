@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5fu-Bl-9V5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="5fu-Bl-9V5">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
@@ -99,23 +99,6 @@
                                     <action selector="registration:" destination="BYZ-38-t0r" eventType="touchUpInside" id="YLN-Uf-k2X"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lBQ-dW-H2d">
-                                <rect key="frame" x="26" y="499" width="548" height="61"/>
-                                <state key="normal">
-                                    <attributedString key="attributedTitle">
-                                        <fragment content="Я не являюсь специалистом здравоохранения &gt;">
-                                            <attributes>
-                                                <color key="NSColor" red="0.69411764710000001" green="0.69411764710000001" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                <font key="NSFont" size="14" name="LucidaGrande"/>
-                                                <integer key="NSUnderline" value="1"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
-                                </state>
-                                <connections>
-                                    <action selector="withoutReg:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Aje-PS-PMz"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Авторизация" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T9e-jL-KHj">
                                 <rect key="frame" x="229" y="45" width="142" height="21"/>
                                 <fontDescription key="fontDescription" name="LucidaGrande" family="Lucida Grande" pointSize="22"/>
@@ -160,6 +143,23 @@
                                 </state>
                                 <connections>
                                     <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eSh-Px-5d8"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lBQ-dW-H2d">
+                                <rect key="frame" x="26" y="527" width="548" height="29"/>
+                                <state key="normal">
+                                    <attributedString key="attributedTitle">
+                                        <fragment content="Я не являюсь специалистом здравоохранения &gt;">
+                                            <attributes>
+                                                <color key="NSColor" red="0.69411764710000001" green="0.69411764710000001" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <font key="NSFont" size="12" name="LucidaGrande"/>
+                                                <integer key="NSUnderline" value="1"/>
+                                            </attributes>
+                                        </fragment>
+                                    </attributedString>
+                                </state>
+                                <connections>
+                                    <action selector="withoutReg:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Aje-PS-PMz"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -831,10 +831,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pharmaCell" id="Gzf-bK-d7N" customClass="PharmaTableViewCell">
-                                        <rect key="frame" x="0.0" y="92" width="600" height="80"/>
+                                        <rect key="frame" x="0.0" y="28" width="600" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Gzf-bK-d7N" id="32R-0a-8DN">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="79.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Анксиолитики" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="4" translatesAutoresizingMaskIntoConstraints="NO" id="mrj-vD-lLo">
@@ -899,7 +899,7 @@
                                         <rect key="frame" x="0.0" y="92" width="600" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="qsq-8T-3XL" id="eEv-QW-vSj">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="99.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="99"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Зарегистрировано и произведено BAYER SCHERING PHARMA (Германия)" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0yh-Lh-637">
@@ -1016,7 +1016,7 @@
                                         <rect key="frame" x="0.0" y="92" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="FA6-c6-fAq" id="UME-Wh-c6z">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="А." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rF5-Ke-sZ4">
@@ -1093,7 +1093,7 @@
                                         <rect key="frame" x="0.0" y="92" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Y8s-Zh-ovR" id="XiR-Cq-Cjf">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="А." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3OB-LZ-wfl">
@@ -1207,10 +1207,22 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XJC-IH-76U">
+                                <rect key="frame" x="189" y="282" width="223" height="36"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="Обновить информацию">
+                                    <color key="titleColor" red="0.61176470589999998" green="0.0" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                                <connections>
+                                    <action selector="refresh:" destination="YWh-nb-tr3" eventType="touchUpInside" id="b9X-As-6za"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailingMargin" secondItem="c0B-g8-Smc" secondAttribute="trailing" constant="-20" id="1p9-Jc-KPC"/>
+                            <constraint firstItem="XJC-IH-76U" firstAttribute="centerY" secondItem="VdQ-iD-BmH" secondAttribute="centerY" id="mhS-rt-iBl"/>
+                            <constraint firstItem="XJC-IH-76U" firstAttribute="centerX" secondItem="VdQ-iD-BmH" secondAttribute="centerX" id="sdX-TB-bdh"/>
                             <constraint firstItem="c0B-g8-Smc" firstAttribute="top" secondItem="VdQ-iD-BmH" secondAttribute="topMargin" id="t5S-3X-O03"/>
                             <constraint firstItem="c0B-g8-Smc" firstAttribute="leading" secondItem="VdQ-iD-BmH" secondAttribute="leadingMargin" constant="-20" id="y0q-4K-UQt"/>
                             <constraint firstItem="wO2-NJ-mWo" firstAttribute="top" secondItem="c0B-g8-Smc" secondAttribute="bottom" id="yPq-xd-ph6"/>
@@ -1220,6 +1232,7 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="vqW-7N-FnH"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="refreshButton" destination="XJC-IH-76U" id="tB4-xD-wZ7"/>
                         <outlet property="tableView" destination="c0B-g8-Smc" id="SOV-8V-21Q"/>
                         <segue destination="HKz-3e-iwT" kind="show" identifier="toExpandNews" id="nKD-cS-lLL"/>
                     </connections>
@@ -1395,7 +1408,7 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="60"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Uzm-SR-pdG" id="BIy-MW-piK">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -1480,7 +1493,7 @@
                                         <rect key="frame" x="0.0" y="92" width="600" height="110"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ntv-na-WlI" id="4FQ-px-jHr">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="109.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="109"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="company" translatesAutoresizingMaskIntoConstraints="NO" id="xSW-Zp-AHa">
@@ -1496,13 +1509,13 @@
                                                     </variation>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S6G-Yo-N3t">
-                                                    <rect key="frame" x="128" y="18" width="454" height="20.5"/>
+                                                    <rect key="frame" x="128" y="18" width="454" height="21"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                                     <color key="textColor" red="0.71764705880000002" green="0.0" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHV-Bv-uV4">
-                                                    <rect key="frame" x="128" y="46.5" width="454" height="19.5"/>
+                                                    <rect key="frame" x="128" y="47" width="454" height="19"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
@@ -1726,14 +1739,8 @@ E-mail: vidal@vidal.ru
                                             <constraint firstAttribute="height" constant="60" id="hNq-ye-EjZ"/>
                                         </constraints>
                                     </imageView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rioLogo" translatesAutoresizingMaskIntoConstraints="NO" id="NTb-Dk-uuN">
-                                        <rect key="frame" x="227" y="122" width="146" height="100"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="bNK-Dh-dLi"/>
-                                        </constraints>
-                                    </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Риофлора" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="F9D-U7-BZw">
-                                        <rect key="frame" x="20" y="237" width="560" height="20.5"/>
+                                        <rect key="frame" x="20" y="237" width="560" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1748,7 +1755,7 @@ Lactobacillus acidophilus и другие.</string>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="At8-ML-VGa">
-                                        <rect key="frame" x="15" y="146.5" width="40" height="50"/>
+                                        <rect key="frame" x="15" y="147" width="40" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="JqX-4E-a9B"/>
                                             <constraint firstAttribute="width" constant="40" id="P9C-Pk-QNm"/>
@@ -1759,7 +1766,7 @@ Lactobacillus acidophilus и другие.</string>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CKf-rP-oPZ">
-                                        <rect key="frame" x="545" y="146.5" width="40" height="50"/>
+                                        <rect key="frame" x="545" y="147" width="40" height="50"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="PiQ-qE-cHw"/>
                                             <constraint firstAttribute="width" constant="40" id="adX-Eo-Syk"/>
@@ -1780,47 +1787,46 @@ Lactobacillus acidophilus и другие.</string>
                                         <color key="textColor" red="0.68235294117647061" green="0.68235294117647061" blue="0.68235294117647061" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f4F-6D-uJb">
+                                        <rect key="frame" x="227" y="122" width="146" height="100"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="100" id="YGM-aZ-XEh"/>
+                                        </constraints>
+                                        <state key="normal" image="rioLogo"/>
+                                        <connections>
+                                            <action selector="toPreparat:" destination="ir5-gk-GIB" eventType="touchUpInside" id="1Ha-Zs-LFs"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="CKf-rP-oPZ" secondAttribute="trailing" constant="15" id="5oB-bV-PZv"/>
                                     <constraint firstItem="bMn-Xp-X7Q" firstAttribute="leading" secondItem="XjF-h0-rUk" secondAttribute="leading" constant="20" id="6Ve-pq-XWF"/>
                                     <constraint firstAttribute="trailing" secondItem="gi5-2M-9S1" secondAttribute="trailing" constant="20" id="8ob-Ss-v3L"/>
-                                    <constraint firstItem="NTb-Dk-uuN" firstAttribute="top" secondItem="b9e-Al-j9y" secondAttribute="bottom" constant="15" id="CR3-uh-BIj"/>
+                                    <constraint firstItem="F9D-U7-BZw" firstAttribute="top" secondItem="f4F-6D-uJb" secondAttribute="bottom" constant="15" id="BzJ-j9-sf8"/>
                                     <constraint firstItem="F9D-U7-BZw" firstAttribute="leading" secondItem="XjF-h0-rUk" secondAttribute="leading" constant="20" id="CW6-J2-WvQ"/>
                                     <constraint firstItem="CKf-rP-oPZ" firstAttribute="centerY" secondItem="At8-ML-VGa" secondAttribute="centerY" id="Exl-9e-rs7"/>
-                                    <constraint firstItem="gi5-2M-9S1" firstAttribute="top" secondItem="NTb-Dk-uuN" secondAttribute="bottom" constant="15" id="Gpn-JM-WTN"/>
                                     <constraint firstAttribute="bottom" secondItem="gi5-2M-9S1" secondAttribute="bottom" constant="15" id="Gyj-M1-3sL"/>
+                                    <constraint firstItem="f4F-6D-uJb" firstAttribute="centerY" secondItem="At8-ML-VGa" secondAttribute="centerY" id="JSN-Kn-OqG"/>
                                     <constraint firstItem="gi5-2M-9S1" firstAttribute="leading" secondItem="XjF-h0-rUk" secondAttribute="leading" constant="20" id="Kk0-Rl-qBp"/>
-                                    <constraint firstItem="NTb-Dk-uuN" firstAttribute="top" secondItem="b9e-Al-j9y" secondAttribute="bottom" constant="15" id="LNu-15-0kt"/>
-                                    <constraint firstItem="NTb-Dk-uuN" firstAttribute="centerX" secondItem="XjF-h0-rUk" secondAttribute="centerX" id="Mkg-m7-kDQ"/>
-                                    <constraint firstItem="gi5-2M-9S1" firstAttribute="top" secondItem="NTb-Dk-uuN" secondAttribute="bottom" constant="15" id="OLE-17-Tce"/>
+                                    <constraint firstItem="f4F-6D-uJb" firstAttribute="centerX" secondItem="XjF-h0-rUk" secondAttribute="centerX" id="Kkg-eQ-jiV"/>
                                     <constraint firstItem="gi5-2M-9S1" firstAttribute="top" secondItem="F9D-U7-BZw" secondAttribute="bottom" constant="15" id="PJE-OO-h6k"/>
                                     <constraint firstItem="b9e-Al-j9y" firstAttribute="leading" secondItem="XjF-h0-rUk" secondAttribute="leading" constant="20" id="PrL-Eg-Zj9"/>
-                                    <constraint firstAttribute="trailing" secondItem="NTb-Dk-uuN" secondAttribute="trailing" constant="20" id="Ty7-eb-eq0"/>
+                                    <constraint firstItem="f4F-6D-uJb" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="At8-ML-VGa" secondAttribute="trailing" constant="25" id="SSB-gu-5X6"/>
                                     <constraint firstAttribute="trailing" secondItem="bMn-Xp-X7Q" secondAttribute="trailing" constant="20" id="Xsg-Q6-Uyd"/>
+                                    <constraint firstItem="CKf-rP-oPZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="f4F-6D-uJb" secondAttribute="trailing" constant="25" id="YQz-xf-gvA"/>
                                     <constraint firstAttribute="trailing" secondItem="F9D-U7-BZw" secondAttribute="trailing" constant="20" id="ZXw-cb-gG6"/>
-                                    <constraint firstItem="CKf-rP-oPZ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="NTb-Dk-uuN" secondAttribute="trailing" constant="25" id="a8u-Yy-pCO"/>
                                     <constraint firstItem="bMn-Xp-X7Q" firstAttribute="top" secondItem="XjF-h0-rUk" secondAttribute="top" constant="15" id="aBA-oW-SsW"/>
-                                    <constraint firstItem="NTb-Dk-uuN" firstAttribute="centerY" secondItem="At8-ML-VGa" secondAttribute="centerY" id="bfu-R0-aJU"/>
                                     <constraint firstItem="At8-ML-VGa" firstAttribute="leading" secondItem="XjF-h0-rUk" secondAttribute="leading" constant="15" id="cfo-1z-wQ7"/>
                                     <constraint firstAttribute="bottom" secondItem="F9D-U7-BZw" secondAttribute="bottom" constant="15" id="g6m-jU-ZcE"/>
                                     <constraint firstItem="bMn-Xp-X7Q" firstAttribute="centerX" secondItem="XjF-h0-rUk" secondAttribute="centerX" id="jQa-5G-Mb1"/>
                                     <constraint firstAttribute="trailing" secondItem="b9e-Al-j9y" secondAttribute="trailing" constant="20" id="jWU-6C-E8T"/>
-                                    <constraint firstItem="F9D-U7-BZw" firstAttribute="top" secondItem="NTb-Dk-uuN" secondAttribute="bottom" constant="15" id="l8X-Ez-41h"/>
-                                    <constraint firstItem="NTb-Dk-uuN" firstAttribute="leading" secondItem="XjF-h0-rUk" secondAttribute="leading" constant="20" id="nu8-1t-suW"/>
                                     <constraint firstItem="b9e-Al-j9y" firstAttribute="top" secondItem="bMn-Xp-X7Q" secondAttribute="bottom" constant="15" id="rgd-m4-BFu"/>
+                                    <constraint firstItem="f4F-6D-uJb" firstAttribute="top" secondItem="b9e-Al-j9y" secondAttribute="bottom" constant="15" id="twj-Tr-JGH"/>
                                     <constraint firstItem="bMn-Xp-X7Q" firstAttribute="centerX" secondItem="XjF-h0-rUk" secondAttribute="centerX" id="uWA-E0-gbH"/>
-                                    <constraint firstItem="NTb-Dk-uuN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="At8-ML-VGa" secondAttribute="trailing" constant="25" id="vAV-Za-Fhl"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="subviews">
                                         <exclude reference="gi5-2M-9S1"/>
-                                    </mask>
-                                    <mask key="constraints">
-                                        <exclude reference="Gpn-JM-WTN"/>
-                                        <exclude reference="OLE-17-Tce"/>
-                                        <exclude reference="Ty7-eb-eq0"/>
-                                        <exclude reference="nu8-1t-suW"/>
                                     </mask>
                                 </variation>
                             </scrollView>
@@ -1862,15 +1868,16 @@ Lactobacillus acidophilus и другие.</string>
                     </navigationItem>
                     <connections>
                         <outlet property="drug" destination="gi5-2M-9S1" id="QON-04-0hk"/>
-                        <outlet property="image" destination="NTb-Dk-uuN" id="mgr-Y8-ElI"/>
+                        <outlet property="image" destination="f4F-6D-uJb" id="nJh-tp-eeX"/>
                         <outlet property="name" destination="F9D-U7-BZw" id="vfG-o9-bF1"/>
                         <outlet property="takeda" destination="b9e-Al-j9y" id="r82-lZ-GW2"/>
                         <segue destination="jFz-ci-plm" kind="show" identifier="toList" id="cPF-cF-nnw"/>
+                        <segue destination="sbh-iQ-PXQ" kind="show" identifier="toDrug" id="KrD-Vc-vBT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QSJ-Pv-PoD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2870" y="3716"/>
+            <point key="canvasLocation" x="2892" y="3742"/>
         </scene>
         <!--Company View Controller-->
         <scene sceneID="Eq7-8M-07e">
@@ -1885,7 +1892,7 @@ Lactobacillus acidophilus и другие.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IO4-j0-r6q">
-                                <rect key="frame" x="140" y="111" width="430" height="19.5"/>
+                                <rect key="frame" x="140" y="111" width="430" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -2079,43 +2086,43 @@ Lactobacillus acidophilus и другие.</string>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Информация об образованиии" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4JI-Aq-3LH">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Информация об образовании" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4JI-Aq-3LH">
                                         <rect key="frame" x="20" y="317" width="560" height="21"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" red="0.58039215690000001" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Основная специальность" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uF7-4a-3w3">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Основная специальность" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uF7-4a-3w3">
                                         <rect key="frame" x="20" y="353" width="560" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.68235294120000001" green="0.68235294120000001" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Учебное заведение" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6L-Ot-Myi">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Учебное заведение" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="N6L-Ot-Myi">
                                         <rect key="frame" x="20" y="415" width="560" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.68235294120000001" green="0.68235294120000001" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Год окончания" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTE-q4-ZQq">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Год окончания" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yTE-q4-ZQq">
                                         <rect key="frame" x="20" y="480" width="560" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.68235294120000001" green="0.68235294120000001" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Дополнительная специальность" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62s-GC-dza">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Дополнительная специальность" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="62s-GC-dza">
                                         <rect key="frame" x="20" y="536" width="560" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.68235294120000001" green="0.68235294120000001" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Ученая степень" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ci9-DY-RgN">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ученая степень" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ci9-DY-RgN">
                                         <rect key="frame" x="20" y="592" width="560" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.68235294120000001" green="0.68235294120000001" blue="0.68235294120000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Хирург" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rex-SO-sz4">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="Хирург" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Rex-SO-sz4">
                                         <rect key="frame" x="20" y="375" width="560" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="FUV-AB-bFh"/>
@@ -2123,7 +2130,7 @@ Lactobacillus acidophilus и другие.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="-" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vAf-aT-V2M">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" enabled="NO" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="-" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vAf-aT-V2M">
                                         <rect key="frame" x="20" y="437" width="560" height="30"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="30" id="fZP-48-w6b"/>
@@ -2132,19 +2139,19 @@ Lactobacillus acidophilus и другие.</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lu-ZK-tTg">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lu-ZK-tTg">
                                         <rect key="frame" x="20" y="502" width="560" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y1g-ba-OJt">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="y1g-ba-OJt">
                                         <rect key="frame" x="20" y="558" width="560" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PoK-4A-jAp">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PoK-4A-jAp">
                                         <rect key="frame" x="20" y="614" width="560" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -2161,43 +2168,43 @@ Lactobacillus acidophilus и другие.</string>
                                             <action selector="change:" destination="jCG-ax-89l" eventType="touchUpInside" id="BUE-j4-cNa"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYT-lO-iIh">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YYT-lO-iIh">
                                         <rect key="frame" x="560" y="502" width="20" height="22"/>
                                         <state key="normal" image="arrowDownRed"/>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fOY-1R-1Sr">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fOY-1R-1Sr">
                                         <rect key="frame" x="560" y="558" width="20" height="22"/>
                                         <state key="normal" image="arrowDownRed"/>
                                     </button>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cY1-uW-Nm5">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cY1-uW-Nm5">
                                         <rect key="frame" x="20" y="469" width="560" height="1"/>
                                         <color key="backgroundColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="G1h-QO-s2U"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lCv-zU-Rs4">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lCv-zU-Rs4">
                                         <rect key="frame" x="20" y="525" width="560" height="1"/>
                                         <color key="backgroundColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="GE4-Ec-AIN"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B7w-d0-r3T">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B7w-d0-r3T">
                                         <rect key="frame" x="20" y="581" width="560" height="1"/>
                                         <color key="backgroundColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="F6z-At-uUo"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dgn-A6-SjI">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dgn-A6-SjI">
                                         <rect key="frame" x="20" y="637" width="560" height="1"/>
                                         <color key="backgroundColor" red="0.64313725489999995" green="0.64313725489999995" blue="0.64313725489999995" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="Gog-cU-gB3"/>
                                         </constraints>
                                     </view>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ft7-At-jWL">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ft7-At-jWL">
                                         <rect key="frame" x="560" y="614" width="20" height="22"/>
                                         <state key="normal" image="arrowDownRed"/>
                                     </button>
@@ -2478,16 +2485,22 @@ Lactobacillus acidophilus и другие.</string>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="niM-nr-LyU">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="850"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Oad-mA-KKc">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Oad-mA-KKc">
                                         <rect key="frame" x="0.0" y="1" width="600" height="746"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="746" id="1tr-Ic-Z3A"/>
                                             <constraint firstAttribute="height" constant="746" id="mXF-xu-LnR"/>
                                         </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="1tr-Ic-Z3A"/>
+                                                <exclude reference="mXF-xu-LnR"/>
+                                            </mask>
+                                        </variation>
                                     </view>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MU0-J4-Etb">
-                                        <rect key="frame" x="55" y="592" width="525" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MU0-J4-Etb">
+                                        <rect key="frame" x="55" y="583" width="525" height="29"/>
                                         <state key="normal">
                                             <attributedString key="attributedTitle">
                                                 <fragment content="Я принимаю условия пользовательского соглашения">
@@ -2503,7 +2516,7 @@ Lactobacillus acidophilus и другие.</string>
                                             <action selector="button2:" destination="sDu-zh-5Ai" eventType="touchUpInside" id="DTO-8T-pb6"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nzf-dk-0o8">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Nzf-dk-0o8">
                                         <rect key="frame" x="25" y="194" width="550" height="1"/>
                                         <color key="backgroundColor" red="0.69411764710000001" green="0.69411764710000001" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -2511,17 +2524,17 @@ Lactobacillus acidophilus и другие.</string>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Регистрация" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nLY-mZ-Shn">
-                                        <rect key="frame" x="25" y="25" width="550" height="26.5"/>
+                                        <rect key="frame" x="25" y="25" width="550" height="27"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                         <color key="textColor" red="0.61176470589999998" green="0.0" blue="0.18039215689999999" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Иван" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="baT-ao-CM3">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Иван" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="baT-ao-CM3">
                                         <rect key="frame" x="25" y="299" width="550" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no"/>
                                     </textField>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eh6-RD-sHO">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Eh6-RD-sHO">
                                         <rect key="frame" x="25" y="261" width="550" height="1"/>
                                         <color key="backgroundColor" red="0.69411764710000001" green="0.69411764710000001" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -2534,7 +2547,7 @@ Lactobacillus acidophilus и другие.</string>
                                             </mask>
                                         </variation>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJh-Iq-2kP">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xJh-Iq-2kP">
                                         <rect key="frame" x="25" y="272" width="550" height="17"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Имя">
@@ -2555,12 +2568,12 @@ Lactobacillus acidophilus и другие.</string>
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Иванов" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iVI-ss-hUr">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Иванов" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iVI-ss-hUr">
                                         <rect key="frame" x="25" y="232" width="550" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYe-Jt-Evg">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gYe-Jt-Evg">
                                         <rect key="frame" x="25" y="339" width="550" height="17"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Дата рождения">
@@ -2581,7 +2594,7 @@ Lactobacillus acidophilus и другие.</string>
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iB0-dC-cwQ">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iB0-dC-cwQ">
                                         <rect key="frame" x="25" y="203" width="550" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19" id="HXf-vT-rkt"/>
@@ -2606,8 +2619,8 @@ Lactobacillus acidophilus и другие.</string>
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2YC-UI-XGR">
-                                        <rect key="frame" x="278" y="706" width="44" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="2YC-UI-XGR">
+                                        <rect key="frame" x="278" y="735" width="44" height="29"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="wHU-ql-zgX"/>
                                         </constraints>
@@ -2631,7 +2644,7 @@ Lactobacillus acidophilus и другие.</string>
                                             <action selector="backButton:" destination="sDu-zh-5Ai" eventType="touchUpInside" id="sc1-7J-E7n"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYo-hu-6Hj">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JYo-hu-6Hj">
                                         <rect key="frame" x="25" y="556" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="ONu-dU-r9u"/>
@@ -2642,7 +2655,7 @@ Lactobacillus acidophilus и другие.</string>
                                             <action selector="button1:" destination="sDu-zh-5Ai" eventType="touchUpInside" id="FPs-lp-ceS"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EsZ-Gd-VS9">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EsZ-Gd-VS9">
                                         <rect key="frame" x="25" y="596" width="20" height="20"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="20" id="87c-zg-em7"/>
@@ -2653,8 +2666,8 @@ Lactobacillus acidophilus и другие.</string>
                                             <action selector="button2:" destination="sDu-zh-5Ai" eventType="touchUpInside" id="SOu-dj-JEg"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="opU-aR-0I0">
-                                        <rect key="frame" x="50" y="636" width="500" height="50"/>
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="opU-aR-0I0">
+                                        <rect key="frame" x="50" y="677" width="500" height="50"/>
                                         <color key="backgroundColor" red="0.61176470588235299" green="0.0" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="50" id="4Fi-0U-zUp"/>
@@ -2667,24 +2680,15 @@ Lactobacillus acidophilus и другие.</string>
                                             <action selector="regButton:" destination="sDu-zh-5Ai" eventType="touchUpInside" id="sr3-hj-fbn"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Swx-Qt-4wt" userLabel="Link">
-                                        <rect key="frame" x="55" y="656" width="46" height="30"/>
-                                        <state key="normal" title="Читать соглашение">
-                                            <color key="titleColor" red="0.18451891449999999" green="0.22633463540000001" blue="0.29317434209999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="agreementLink:" destination="sDu-zh-5Ai" eventType="touchUpInside" id="BRK-Iq-2ta"/>
-                                        </connections>
-                                    </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="arrowDownRed" translatesAutoresizingMaskIntoConstraints="NO" id="Aae-YX-Ymr">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="arrowDownRed" translatesAutoresizingMaskIntoConstraints="NO" id="Aae-YX-Ymr">
                                         <rect key="frame" x="560" y="446" width="15" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="15" id="FxE-c5-OYe"/>
                                             <constraint firstAttribute="height" constant="15" id="wCy-8G-vdV"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Iu-OG-fWS">
-                                        <rect key="frame" x="55" y="552" width="525" height="30"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8Iu-OG-fWS">
+                                        <rect key="frame" x="55" y="543" width="525" height="29"/>
                                         <state key="normal">
                                             <attributedString key="attributedTitle">
                                                 <fragment content="Я являюсь работником здравоохранения">
@@ -2700,10 +2704,10 @@ Lactobacillus acidophilus и другие.</string>
                                             <action selector="button1:" destination="sDu-zh-5Ai" eventType="touchUpInside" id="QDP-e5-0C8"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DZ7-yw-Yqn">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DZ7-yw-Yqn">
                                         <rect key="frame" x="25" y="366" width="550" height="40"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gZ8-bz-Hn3">
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gZ8-bz-Hn3">
                                                 <rect key="frame" x="182" y="3" width="1" height="34"/>
                                                 <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -2711,7 +2715,7 @@ Lactobacillus acidophilus и другие.</string>
                                                     <constraint firstAttribute="width" constant="1" id="pKL-Ia-Ijq"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YzP-rA-hYe">
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YzP-rA-hYe">
                                                 <rect key="frame" x="366" y="3" width="1" height="34"/>
                                                 <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
@@ -2719,13 +2723,13 @@ Lactobacillus acidophilus и другие.</string>
                                                     <constraint firstAttribute="width" constant="1" id="fDZ-Y8-f60"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="01" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BlA-i3-LdT">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="01" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BlA-i3-LdT">
                                                 <rect key="frame" x="0.0" y="0.0" width="183" height="40"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="января" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDf-eY-NBw">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="января" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TDf-eY-NBw">
                                                 <rect key="frame" x="183" y="0.0" width="183" height="40"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="180" id="E1Y-1C-99T"/>
@@ -2740,19 +2744,19 @@ Lactobacillus acidophilus и другие.</string>
                                                     </mask>
                                                 </variation>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" text="2016" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLN-lA-EcO">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="2016" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLN-lA-EcO">
                                                 <rect key="frame" x="367" y="0.0" width="152" height="40"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36m-mB-Ubb">
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="36m-mB-Ubb">
                                                 <rect key="frame" x="0.0" y="0.0" width="519" height="40"/>
                                                 <connections>
                                                     <action selector="callDatePicker:" destination="sDu-zh-5Ai" eventType="touchUpInside" id="jcN-Ea-CLA"/>
                                                 </connections>
                                             </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="arrowDownRed" translatesAutoresizingMaskIntoConstraints="NO" id="JwF-4s-foD">
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowDownRed" translatesAutoresizingMaskIntoConstraints="NO" id="JwF-4s-foD">
                                                 <rect key="frame" x="527" y="13" width="15" height="15"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="15" id="5jF-zK-yRl"/>
@@ -2811,7 +2815,7 @@ Lactobacillus acidophilus и другие.</string>
                                             </mask>
                                         </variation>
                                     </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcf-9a-H61">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Fcf-9a-H61">
                                         <rect key="frame" x="25" y="71" width="550" height="17"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Email">
@@ -2831,7 +2835,7 @@ Lactobacillus acidophilus и другие.</string>
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jo6-H8-Qfo">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jo6-H8-Qfo">
                                         <rect key="frame" x="25" y="136" width="550" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19" id="ryq-dN-7P6"/>
@@ -2856,7 +2860,7 @@ Lactobacillus acidophilus и другие.</string>
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZRp-mu-aog">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZRp-mu-aog">
                                         <rect key="frame" x="25" y="127" width="550" height="1"/>
                                         <color key="backgroundColor" red="0.69411764710000001" green="0.69411764710000001" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -2869,24 +2873,24 @@ Lactobacillus acidophilus и другие.</string>
                                             </mask>
                                         </variation>
                                     </view>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email@vidal.ru" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8BQ-eU-2SQ">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="email@vidal.ru" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="8BQ-eU-2SQ">
                                         <rect key="frame" x="25" y="98" width="550" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress"/>
                                     </textField>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PUk-QT-dyp">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="PUk-QT-dyp">
                                         <rect key="frame" x="25" y="328" width="550" height="1"/>
                                         <color key="backgroundColor" red="0.69411764710000001" green="0.69411764710000001" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="CLG-pa-8WE"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Начните вводить название..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z8a-zH-GQl">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="4" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Начните вводить название..." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="z8a-zH-GQl">
                                         <rect key="frame" x="25" y="443" width="530" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAG-It-Vb1">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TAG-It-Vb1">
                                         <rect key="frame" x="25" y="416" width="550" height="17"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Город">
@@ -2908,7 +2912,7 @@ Lactobacillus acidophilus и другие.</string>
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzR-Vh-ufB">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rzR-Vh-ufB">
                                         <rect key="frame" x="25" y="483" width="550" height="17"/>
                                         <attributedString key="attributedText">
                                             <fragment content="Основная специальность">
@@ -2930,37 +2934,55 @@ Lactobacillus acidophilus и другие.</string>
                                         </attributedString>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GXS-nf-Hd3">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GXS-nf-Hd3">
                                         <rect key="frame" x="25" y="535" width="550" height="1"/>
                                         <color key="backgroundColor" red="0.69411764710000001" green="0.69411764710000001" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="aGc-0M-kZq"/>
                                         </constraints>
                                     </view>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nHj-XA-Aca">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nHj-XA-Aca">
                                         <rect key="frame" x="25" y="472" width="550" height="1"/>
                                         <color key="backgroundColor" red="0.69411764710000001" green="0.69411764710000001" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="1" id="97p-bC-UJB"/>
                                         </constraints>
                                     </view>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aDE-h7-CDL">
+                                    <textField opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aDE-h7-CDL">
                                         <rect key="frame" x="25" y="165" width="550" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no" secureTextEntry="YES"/>
                                     </textField>
-                                    <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Выберите" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yck-oH-HRz">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Swx-Qt-4wt" userLabel="Link">
+                                        <rect key="frame" x="55" y="614" width="137" height="29"/>
+                                        <state key="normal">
+                                            <attributedString key="attributedTitle">
+                                                <fragment content="Читать соглашение">
+                                                    <attributes>
+                                                        <color key="NSColor" red="0.61176470588235299" green="0.0" blue="0.1803921568627451" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <font key="NSFont" size="15" name="HelveticaNeue"/>
+                                                        <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                        <integer key="NSUnderline" value="1"/>
+                                                    </attributes>
+                                                </fragment>
+                                            </attributedString>
+                                        </state>
+                                        <connections>
+                                            <action selector="agreementLink:" destination="sDu-zh-5Ai" eventType="touchUpInside" id="BRK-Iq-2ta"/>
+                                        </connections>
+                                    </button>
+                                    <textField opaque="NO" clipsSubviews="YES" tag="5" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Выберите" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="yck-oH-HRz">
                                         <rect key="frame" x="25" y="510" width="527" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" autocorrectionType="no"/>
                                     </textField>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9m2-sj-TCz">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9m2-sj-TCz">
                                         <rect key="frame" x="25" y="505" width="527" height="30"/>
                                         <connections>
                                             <action selector="showPicker:" destination="sDu-zh-5Ai" eventType="touchUpInside" id="VBV-xk-Ad4"/>
                                         </connections>
                                     </button>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4RS-bx-1eD">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4RS-bx-1eD">
                                         <rect key="frame" x="0.0" y="544" width="600" height="170"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -2973,7 +2995,7 @@ Lactobacillus acidophilus и другие.</string>
                                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Yge-YW-Bhc" id="1ww-h7-2Ge">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
@@ -2985,14 +3007,14 @@ Lactobacillus acidophilus и другие.</string>
                                             </mask>
                                         </variation>
                                     </tableView>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" image="arrowDownRed" translatesAutoresizingMaskIntoConstraints="NO" id="API-5V-We3">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="arrowDownRed" translatesAutoresizingMaskIntoConstraints="NO" id="API-5V-We3">
                                         <rect key="frame" x="560" y="511" width="15" height="15"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="15" id="4nW-RS-f9w"/>
                                             <constraint firstAttribute="height" constant="15" id="Gfg-VK-gTY"/>
                                         </constraints>
                                     </imageView>
-                                    <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bny-ez-V4A">
+                                    <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bny-ez-V4A">
                                         <rect key="frame" x="0.0" y="481" width="600" height="265"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -3004,7 +3026,7 @@ Lactobacillus acidophilus и другие.</string>
                                                 <rect key="frame" x="0.0" y="28" width="600" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Arw-Yd-zRZ" id="IT3-Yu-wKJ">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
@@ -3064,6 +3086,7 @@ Lactobacillus acidophilus и другие.</string>
                                     <constraint firstItem="EsZ-Gd-VS9" firstAttribute="centerY" secondItem="MU0-J4-Etb" secondAttribute="centerY" id="M6O-ad-bxg"/>
                                     <constraint firstItem="Eh6-RD-sHO" firstAttribute="top" secondItem="iVI-ss-hUr" secondAttribute="bottom" constant="8" id="Mbw-RD-6sY"/>
                                     <constraint firstAttribute="trailing" secondItem="nLY-mZ-Shn" secondAttribute="trailing" constant="25" id="Mji-6R-ZMZ"/>
+                                    <constraint firstItem="opU-aR-0I0" firstAttribute="top" secondItem="Swx-Qt-4wt" secondAttribute="bottom" constant="10" id="NH6-8b-pzI"/>
                                     <constraint firstAttribute="bottom" secondItem="4RS-bx-1eD" secondAttribute="bottom" constant="32" id="NZl-7h-44a"/>
                                     <constraint firstItem="2YC-UI-XGR" firstAttribute="centerX" secondItem="niM-nr-LyU" secondAttribute="centerX" id="Nmp-tg-ax1"/>
                                     <constraint firstItem="nLY-mZ-Shn" firstAttribute="top" secondItem="niM-nr-LyU" secondAttribute="top" constant="25" id="O3v-5K-TiX"/>
@@ -3152,18 +3175,27 @@ Lactobacillus acidophilus и другие.</string>
                                     <constraint firstItem="Bny-ez-V4A" firstAttribute="leading" secondItem="EsZ-Gd-VS9" secondAttribute="trailing" id="xkf-Co-CSV"/>
                                     <constraint firstItem="TAG-It-Vb1" firstAttribute="top" secondItem="DZ7-yw-Yqn" secondAttribute="bottom" constant="10" id="xpO-qj-Lae"/>
                                     <constraint firstItem="GXS-nf-Hd3" firstAttribute="top" secondItem="9m2-sj-TCz" secondAttribute="bottom" id="xvn-h8-T6X"/>
+                                    <constraint firstItem="Swx-Qt-4wt" firstAttribute="top" secondItem="MU0-J4-Etb" secondAttribute="bottom" constant="2" id="xw5-cN-E8y"/>
                                     <constraint firstItem="JYo-hu-6Hj" firstAttribute="leading" secondItem="GXS-nf-Hd3" secondAttribute="leading" id="xx2-D8-LcS"/>
                                     <constraint firstAttribute="bottom" secondItem="Bny-ez-V4A" secondAttribute="bottom" constant="32" id="zRL-Bb-QPo"/>
                                     <constraint firstItem="iB0-dC-cwQ" firstAttribute="leading" secondItem="Nzf-dk-0o8" secondAttribute="leading" id="zUK-5P-ED4"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="Dgy-Rf-Mk4"/>
-                                        <exclude reference="st1-D7-VE5"/>
-                                        <exclude reference="x6p-YB-uIN"/>
-                                        <exclude reference="hl3-YL-ffM"/>
                                         <exclude reference="xkf-Co-CSV"/>
                                         <exclude reference="zRL-Bb-QPo"/>
+                                        <exclude reference="7hp-Gl-ID4"/>
+                                        <exclude reference="Dgy-Rf-Mk4"/>
+                                        <exclude reference="Kks-Jl-VIb"/>
+                                        <exclude reference="OPG-ly-Bfl"/>
+                                        <exclude reference="aIG-5l-OMb"/>
+                                        <exclude reference="ibg-fr-EtD"/>
+                                        <exclude reference="ph2-aJ-JTz"/>
+                                        <exclude reference="s1e-yl-uRf"/>
+                                        <exclude reference="st1-D7-VE5"/>
+                                        <exclude reference="xWD-Oo-via"/>
+                                        <exclude reference="x6p-YB-uIN"/>
+                                        <exclude reference="hl3-YL-ffM"/>
                                         <exclude reference="q3t-HF-yJr"/>
                                         <exclude reference="cBz-hw-mkQ"/>
                                         <exclude reference="41Q-OD-UVA"/>
@@ -3171,10 +3203,12 @@ Lactobacillus acidophilus и другие.</string>
                                         <exclude reference="iIt-qo-6sa"/>
                                         <exclude reference="Cce-dg-GSD"/>
                                         <exclude reference="2Iz-Wd-r35"/>
+                                        <exclude reference="GAY-oO-Mob"/>
                                         <exclude reference="gte-b5-qdX"/>
                                         <exclude reference="vyT-vI-7sq"/>
                                         <exclude reference="GQM-qg-sDx"/>
                                         <exclude reference="VvO-06-zCO"/>
+                                        <exclude reference="nJk-yp-aTR"/>
                                         <exclude reference="ufT-Tf-jFX"/>
                                         <exclude reference="j9H-g7-dfY"/>
                                         <exclude reference="ukK-dF-8fF"/>
@@ -3392,13 +3426,13 @@ Lactobacillus acidophilus и другие.</string>
                                 <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Заголовок" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4BG-oW-wTX">
-                                        <rect key="frame" x="20" y="52" width="525" height="20.5"/>
+                                        <rect key="frame" x="20" y="52" width="525" height="21"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Текст" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWm-qp-11A">
-                                        <rect key="frame" x="20" y="92" width="560" height="20.5"/>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Текст" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fWm-qp-11A">
+                                        <rect key="frame" x="20" y="92" width="560" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.64313725490196072" green="0.64313725490196072" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -3660,7 +3694,7 @@ Lactobacillus acidophilus и другие.</string>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" text="Гадовист" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XyD-IW-vHv">
-                                <rect key="frame" x="25" y="20" width="93.5" height="24"/>
+                                <rect key="frame" x="25" y="20" width="94" height="24"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                 <color key="textColor" red="0.73333333329999995" green="0.0" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -3673,7 +3707,7 @@ Lactobacillus acidophilus и другие.</string>
                                         <rect key="frame" x="0.0" y="28" width="600" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Naj-6E-xog" id="iNQ-1D-Zy8">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="199.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="199"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CgE-Hq-71P">
@@ -3682,7 +3716,7 @@ Lactobacillus acidophilus и другие.</string>
                                                         <constraint firstAttribute="height" constant="30" id="AZD-cd-GYS"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="twa-ia-s7u"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -3737,7 +3771,7 @@ Lactobacillus acidophilus и другие.</string>
                                         <rect key="frame" x="0.0" y="228" width="600" height="200"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="zzC-FL-de3" id="CMd-Ca-ger">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="199.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="199"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="myb-8y-H7n">
@@ -3746,7 +3780,7 @@ Lactobacillus acidophilus и другие.</string>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="8IG-eJ-flI"/>
                                                         <constraint firstAttribute="height" constant="30" id="ldZ-ra-aM6"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <variation key="default">
@@ -3766,7 +3800,7 @@ Lactobacillus acidophilus и другие.</string>
                                                     <rect key="frame" x="28" y="159" width="544" height="21"/>
                                                     <string key="text">Вспомогательные вещества: ланолин, парафин белый мягкий.
 20 г - тубы алюминиевые (1) - пачки картонные.</string>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.64313725490196072" green="0.64313725490196072" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -3826,7 +3860,7 @@ Lactobacillus acidophilus и другие.</string>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cJx-Qx-EVT">
-                                        <rect key="frame" x="15" y="12" width="285" height="37.5"/>
+                                        <rect key="frame" x="15" y="12" width="285" height="37"/>
                                         <inset key="imageEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" image="favGrey">
                                             <attributedString key="attributedTitle">
@@ -3885,14 +3919,8 @@ Lactobacillus acidophilus и другие.</string>
                                 <color key="textColor" red="0.35706676136363635" green="0.35706676136363635" blue="0.35706676136363635" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" misplaced="YES" text="Labelnnlnkl Labelnnlnkl Labelnnlnkl lnnlnkl " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcK-jK-N0P">
-                                <rect key="frame" x="123" y="21" width="423.5" height="25"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <color key="textColor" red="0.64313725490196072" green="0.64313725490196072" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMO-Cj-EBP">
-                                <rect key="frame" x="555" y="16" width="35" height="32"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMO-Cj-EBP">
+                                <rect key="frame" x="555" y="10" width="35" height="32"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="SID-JN-TnT"/>
                                 </constraints>
@@ -3901,6 +3929,12 @@ Lactobacillus acidophilus и другие.</string>
                                     <action selector="share:" destination="sbh-iQ-PXQ" eventType="touchUpInside" id="ebe-JZ-0Ol"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalCompressionResistancePriority="749" text="Labelnnlnkl Labelnnlnkl Labelnnlnkl lnnlnkl " textAlignment="natural" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qcK-jK-N0P">
+                                <rect key="frame" x="25" y="46" width="294" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" red="0.64313725490196072" green="0.64313725490196072" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -3912,6 +3946,7 @@ Lactobacillus acidophilus и другие.</string>
                             <constraint firstAttribute="trailingMargin" secondItem="uDv-OR-Sgm" secondAttribute="trailing" constant="-20" id="Ipx-lE-XDF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="LKx-De-79L" secondAttribute="trailing" constant="5" id="MBD-Cr-9bI"/>
                             <constraint firstItem="qcK-jK-N0P" firstAttribute="top" secondItem="XyD-IW-vHv" secondAttribute="top" constant="5" id="Qri-fq-k4e"/>
+                            <constraint firstItem="LKx-De-79L" firstAttribute="top" secondItem="qcK-jK-N0P" secondAttribute="bottom" constant="5" id="RAd-Bx-OJC"/>
                             <constraint firstItem="MMO-Cj-EBP" firstAttribute="centerY" secondItem="qcK-jK-N0P" secondAttribute="centerY" constant="-1.5" id="VWL-2k-F4t"/>
                             <constraint firstItem="mKH-o8-D9E" firstAttribute="leading" secondItem="9B6-ff-9rP" secondAttribute="leadingMargin" constant="-20" id="W0r-Ov-yuO"/>
                             <constraint firstItem="uDv-OR-Sgm" firstAttribute="top" secondItem="LKx-De-79L" secondAttribute="bottom" constant="10" id="Xxe-L1-Poo"/>
@@ -3923,22 +3958,30 @@ Lactobacillus acidophilus и другие.</string>
                             <constraint firstItem="qcK-jK-N0P" firstAttribute="centerY" secondItem="XyD-IW-vHv" secondAttribute="centerY" constant="1.5" id="hZA-vM-kzM"/>
                             <constraint firstItem="qcK-jK-N0P" firstAttribute="leading" secondItem="XyD-IW-vHv" secondAttribute="trailing" constant="5" id="igx-N0-9hc"/>
                             <constraint firstItem="XyD-IW-vHv" firstAttribute="top" secondItem="9B6-ff-9rP" secondAttribute="topMargin" constant="20" id="kX3-OR-paJ"/>
+                            <constraint firstItem="qcK-jK-N0P" firstAttribute="top" secondItem="XyD-IW-vHv" secondAttribute="bottom" constant="2" id="s67-Sc-Civ"/>
+                            <constraint firstItem="qcK-jK-N0P" firstAttribute="leading" secondItem="XyD-IW-vHv" secondAttribute="leading" id="tBY-En-24v"/>
+                            <constraint firstItem="MMO-Cj-EBP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qcK-jK-N0P" secondAttribute="trailing" constant="5" id="tPP-4r-w5h"/>
                             <constraint firstItem="qcK-jK-N0P" firstAttribute="top" secondItem="qzg-VA-qG5" secondAttribute="bottom" constant="21" id="ujB-vV-3Cz"/>
                             <constraint firstItem="XyD-IW-vHv" firstAttribute="leading" secondItem="9B6-ff-9rP" secondAttribute="leadingMargin" constant="5" id="v4D-4C-ZsO"/>
                             <constraint firstItem="qkI-gU-txH" firstAttribute="top" secondItem="mKH-o8-D9E" secondAttribute="bottom" id="vSZ-fa-uFd"/>
                             <constraint firstItem="mKH-o8-D9E" firstAttribute="top" secondItem="uDv-OR-Sgm" secondAttribute="bottom" constant="-5" id="vlT-X3-jAF"/>
                             <constraint firstAttribute="trailingMargin" secondItem="MMO-Cj-EBP" secondAttribute="trailing" constant="-10" id="w0z-sf-lcF"/>
+                            <constraint firstItem="MMO-Cj-EBP" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="XyD-IW-vHv" secondAttribute="trailing" constant="5" id="wks-oa-0Yf"/>
                             <constraint firstItem="uDv-OR-Sgm" firstAttribute="leading" secondItem="9B6-ff-9rP" secondAttribute="leadingMargin" constant="-20" id="yYk-U7-0E8"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
                                 <exclude reference="AuZ-mL-yYr"/>
                                 <exclude reference="fev-uw-bIQ"/>
-                                <exclude reference="4bx-zo-bej"/>
+                                <exclude reference="Qri-fq-k4e"/>
                                 <exclude reference="gV9-rC-Sbd"/>
                                 <exclude reference="hZA-vM-kzM"/>
+                                <exclude reference="igx-N0-9hc"/>
                                 <exclude reference="ujB-vV-3Cz"/>
+                                <exclude reference="2I7-Lk-a5R"/>
+                                <exclude reference="4bx-zo-bej"/>
                                 <exclude reference="VWL-2k-F4t"/>
+                                <exclude reference="Yi4-Cy-49E"/>
                             </mask>
                         </variation>
                     </view>
@@ -3972,21 +4015,21 @@ Lactobacillus acidophilus и другие.</string>
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wO8-eY-JRB">
+                            <tableView clipsSubviews="YES" tag="1" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="wO8-eY-JRB">
                                 <rect key="frame" x="20" y="163" width="560" height="437"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="searchCell" id="KhK-bn-mEC">
-                                        <rect key="frame" x="0.0" y="92" width="560" height="44"/>
+                                        <rect key="frame" x="0.0" y="28" width="560" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KhK-bn-mEC" id="5bQ-Sz-KCA">
-                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mZ9-6w-jLi">
+                            <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="mZ9-6w-jLi">
                                 <rect key="frame" x="20" y="163" width="560" height="437"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -3994,13 +4037,13 @@ Lactobacillus acidophilus и другие.</string>
                                         <rect key="frame" x="0.0" y="28" width="560" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="GkB-n6-3IX" id="ArM-kz-7xI">
-                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ca1-ZK-7gB">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Ca1-ZK-7gB">
                                 <rect key="frame" x="20" y="163" width="560" height="437"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -4008,13 +4051,13 @@ Lactobacillus acidophilus и другие.</string>
                                         <rect key="frame" x="0.0" y="28" width="560" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="cV6-wI-QUe" id="Meb-G9-pSQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G44-5j-ylM">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="G44-5j-ylM">
                                 <rect key="frame" x="20" y="163" width="560" height="437"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -4022,17 +4065,17 @@ Lactobacillus acidophilus и другие.</string>
                                         <rect key="frame" x="0.0" y="28" width="560" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="0zP-9w-VGn" id="wgP-Gw-a3E">
-                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="a5O-tU-nQw">
+                            <searchBar contentMode="redraw" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="a5O-tU-nQw">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qp-qf-Vuk">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qp-qf-Vuk">
                                 <rect key="frame" x="40" y="108" width="520" height="55"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="o34-Mj-V2T">
@@ -4173,14 +4216,14 @@ Lactobacillus acidophilus и другие.</string>
                                     </mask>
                                 </variation>
                             </scrollView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1x-3i-SCV">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q1x-3i-SCV">
                                 <rect key="frame" x="0.0" y="108" width="40" height="55"/>
                                 <state key="normal" image="arrowLeftRed"/>
                                 <connections>
                                     <action selector="left:" destination="Olq-6Q-xtB" eventType="touchUpInside" id="aiM-xs-FZw"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1wc-W1-nFl">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1wc-W1-nFl">
                                 <rect key="frame" x="560" y="108" width="40" height="55"/>
                                 <state key="normal" image="rightArrowRed"/>
                                 <connections>
@@ -4274,10 +4317,10 @@ Lactobacillus acidophilus и другие.</string>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="pharmaCell" id="a8M-rX-p3K" customClass="PharmaTableViewCell">
-                                        <rect key="frame" x="0.0" y="28" width="600" height="90"/>
+                                        <rect key="frame" x="0.0" y="92" width="600" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="a8M-rX-p3K" id="QUp-yE-pG5">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="89.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="89"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="260" verticalHuggingPriority="251" text="Анксиолитики" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vaI-FH-h4z">
@@ -4405,7 +4448,7 @@ Lactobacillus acidophilus и другие.</string>
                                 <color key="textColor" red="0.73333333329999995" green="0.0" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lBn-KM-PfN">
+                            <tableView clipsSubviews="YES" tag="2" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="lBn-KM-PfN">
                                 <rect key="frame" x="0.0" y="124" width="600" height="476"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
@@ -4416,16 +4459,16 @@ Lactobacillus acidophilus и другие.</string>
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="200"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kbx-rQ-nZc">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kbx-rQ-nZc">
                                                     <rect key="frame" x="28" y="19" width="47" height="30"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="30" id="idN-un-T96"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowRightRed" translatesAutoresizingMaskIntoConstraints="NO" id="wYk-hG-T0x">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="arrowRightRed" translatesAutoresizingMaskIntoConstraints="NO" id="wYk-hG-T0x">
                                                     <rect key="frame" x="85" y="26" width="10" height="15"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="15" id="C3H-sS-7KD"/>
@@ -4475,7 +4518,7 @@ Lactobacillus acidophilus и другие.</string>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yYC-sL-R6M">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yYC-sL-R6M">
                                 <rect key="frame" x="0.0" y="79" width="600" height="50"/>
                                 <color key="backgroundColor" red="0.73333333329999995" green="0.0" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -4623,14 +4666,14 @@ Lactobacillus acidophilus и другие.</string>
         <image name="vidalLogoWhite" width="172" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9JT-PY-gD3"/>
-        <segue reference="4PJ-ed-yTX"/>
-        <segue reference="PRL-4K-GSG"/>
-        <segue reference="iWp-6B-1Aa"/>
         <segue reference="Scd-nN-kzm"/>
-        <segue reference="Spl-RC-YMp"/>
-        <segue reference="qBz-Jy-uvX"/>
-        <segue reference="A53-FK-YbD"/>
+        <segue reference="rjW-fm-kxr"/>
+        <segue reference="KrD-Vc-vBT"/>
+        <segue reference="4PJ-ed-yTX"/>
+        <segue reference="9JT-PY-gD3"/>
+        <segue reference="cPF-cF-nnw"/>
         <segue reference="u0a-AY-sbi"/>
+        <segue reference="Spl-RC-YMp"/>
+        <segue reference="iWp-6B-1Aa"/>
     </inferredMetricsTieBreakers>
 </document>

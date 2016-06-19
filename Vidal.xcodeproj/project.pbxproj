@@ -56,52 +56,17 @@
 		3AB2A31F1CCCE8D000731088 /* CompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB2A31E1CCCE8D000731088 /* CompanyViewController.m */; };
 		3AB2A3231CCCF50800731088 /* VidalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB2A3221CCCF50800731088 /* VidalViewController.m */; };
 		524EDF951CB4E4E900A3BB2F /* DocsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 524EDF941CB4E4E900A3BB2F /* DocsTableViewCell.m */; };
-		BF72BBD41D13731900441A5E /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF72BBD11D13730600441A5E /* libsqlcipher.a */; };
+		90413E261D16C862004D07CD /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 90413E251D16BD19004D07CD /* libsqlcipher.a */; };
 		BF9A12221CBFE8EB00B65F68 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF9A12211CBFE8EB00B65F68 /* GoogleService-Info.plist */; };
 		E82C22A1236860E5691C38CA /* libPods-Vidal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 267537716EDB3475C0BE9A2D /* libPods-Vidal.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		BF72BBC81D13730600441A5E /* PBXContainerItemProxy */ = {
+		90413E241D16BD19004D07CD /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = BF72BBBF1D13730600441A5E /* sqlcipher.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4C0041981BFC382400ED2AD5;
-			remoteInfo = "SQLCipher iOS";
-		};
-		BF72BBCA1D13730600441A5E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BF72BBBF1D13730600441A5E /* sqlcipher.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4C0041B11BFC3B2200ED2AD5;
-			remoteInfo = "SQLCipher OSX";
-		};
-		BF72BBCC1D13730600441A5E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BF72BBBF1D13730600441A5E /* sqlcipher.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4C0041C31BFC3CC000ED2AD5;
-			remoteInfo = "SQLCipher tvOS";
-		};
-		BF72BBCE1D13730600441A5E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BF72BBBF1D13730600441A5E /* sqlcipher.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4C0041D61BFC3E2500ED2AD5;
-			remoteInfo = "SQLCipher watchOS";
-		};
-		BF72BBD01D13730600441A5E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BF72BBBF1D13730600441A5E /* sqlcipher.xcodeproj */;
+			containerPortal = 90413E1F1D16BD19004D07CD /* sqlcipher.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = D2AAC046055464E500DB518D;
-			remoteInfo = sqlcipher;
-		};
-		BF72BBD21D13731100441A5E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BF72BBBF1D13730600441A5E /* sqlcipher.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = D2AAC045055464E500DB518D;
 			remoteInfo = sqlcipher;
 		};
 /* End PBXContainerItemProxy section */
@@ -198,7 +163,7 @@
 		524EDF931CB4E4E900A3BB2F /* DocsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocsTableViewCell.h; sourceTree = "<group>"; };
 		524EDF941CB4E4E900A3BB2F /* DocsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocsTableViewCell.m; sourceTree = "<group>"; };
 		639C2F57EA1C775AEEFEE2C9 /* Pods-Vidal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vidal.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vidal/Pods-Vidal.release.xcconfig"; sourceTree = "<group>"; };
-		BF72BBBF1D13730600441A5E /* sqlcipher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sqlcipher.xcodeproj; path = ../sqlcipher/sqlcipher.xcodeproj; sourceTree = "<group>"; };
+		90413E1F1D16BD19004D07CD /* sqlcipher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sqlcipher.xcodeproj; path = sqlcipher/sqlcipher.xcodeproj; sourceTree = "<group>"; };
 		BF9A12211CBFE8EB00B65F68 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -207,7 +172,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BF72BBD41D13731900441A5E /* libsqlcipher.a in Frameworks */,
+				90413E261D16C862004D07CD /* libsqlcipher.a in Frameworks */,
 				3A3A87551CDC8229007972EA /* QuartzCore.framework in Frameworks */,
 				3A05CA151CF395440091AA35 /* Crashlytics.framework in Frameworks */,
 				3A1570601CAEAA2B00D49C5E /* FBSDKCoreKit.framework in Frameworks */,
@@ -389,7 +354,7 @@
 			isa = PBXGroup;
 			children = (
 				BF9A12211CBFE8EB00B65F68 /* GoogleService-Info.plist */,
-				BF72BBBF1D13730600441A5E /* sqlcipher.xcodeproj */,
+				90413E1F1D16BD19004D07CD /* sqlcipher.xcodeproj */,
 				3A1570681CAEAE2900D49C5E /* Libraries */,
 				3A9E3FCB1C80AE330069BDFC /* Vidal */,
 				3A9E3FCA1C80AE330069BDFC /* Products */,
@@ -432,14 +397,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		BF72BBC01D13730600441A5E /* Products */ = {
+		90413E201D16BD19004D07CD /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				BF72BBC91D13730600441A5E /* SQLCipher.framework */,
-				BF72BBCB1D13730600441A5E /* SQLCipher.framework */,
-				BF72BBCD1D13730600441A5E /* SQLCipher.framework */,
-				BF72BBCF1D13730600441A5E /* SQLCipher.framework */,
-				BF72BBD11D13730600441A5E /* libsqlcipher.a */,
+				90413E251D16BD19004D07CD /* libsqlcipher.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -472,7 +433,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				BF72BBD31D13731100441A5E /* PBXTargetDependency */,
 			);
 			name = Vidal;
 			productName = Vidal;
@@ -515,8 +475,8 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = BF72BBC01D13730600441A5E /* Products */;
-					ProjectRef = BF72BBBF1D13730600441A5E /* sqlcipher.xcodeproj */;
+					ProductGroup = 90413E201D16BD19004D07CD /* Products */;
+					ProjectRef = 90413E1F1D16BD19004D07CD /* sqlcipher.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -527,39 +487,11 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		BF72BBC91D13730600441A5E /* SQLCipher.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SQLCipher.framework;
-			remoteRef = BF72BBC81D13730600441A5E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		BF72BBCB1D13730600441A5E /* SQLCipher.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SQLCipher.framework;
-			remoteRef = BF72BBCA1D13730600441A5E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		BF72BBCD1D13730600441A5E /* SQLCipher.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SQLCipher.framework;
-			remoteRef = BF72BBCC1D13730600441A5E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		BF72BBCF1D13730600441A5E /* SQLCipher.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SQLCipher.framework;
-			remoteRef = BF72BBCE1D13730600441A5E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		BF72BBD11D13730600441A5E /* libsqlcipher.a */ = {
+		90413E251D16BD19004D07CD /* libsqlcipher.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
 			path = libsqlcipher.a;
-			remoteRef = BF72BBD01D13730600441A5E /* PBXContainerItemProxy */;
+			remoteRef = 90413E241D16BD19004D07CD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -687,14 +619,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		BF72BBD31D13731100441A5E /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = sqlcipher;
-			targetProxy = BF72BBD21D13731100441A5E /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3A9E3FD51C80AE330069BDFC /* Main.storyboard */ = {

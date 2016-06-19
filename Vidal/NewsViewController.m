@@ -18,12 +18,15 @@
     NSUserDefaults *ud;
     ModelViewController *mvc;
     UIActivityIndicatorView *activityView;
+    BOOL isConnectionAvailable;
 }
 
 
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.refreshButton.hidden = YES;
     
     ud = [NSUserDefaults standardUserDefaults];
     mvc = [[ModelViewController alloc] init];
@@ -34,44 +37,7 @@
     
     array = [NSArray array];
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-        [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-        
-        activityView = [[UIActivityIndicatorView alloc]
-                        initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
-        
-        activityView.center = CGPointMake([[UIScreen mainScreen] bounds].size.width / 2, [[UIScreen mainScreen] bounds].size.height / 2 - 80.0);
-        
-        
-        [activityView startAnimating];
-        [self.tableView addSubview:activityView];
-        
-        NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-        AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-        
-        NSURL *URL = [NSURL URLWithString:@"http://www.vidal.ru/api/news-raw?from=0&size=100"];
-        NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-
-    
-        NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-            if (error) {
-                NSLog(@"Error: %@", error);
-            } else {
-                NSLog(@"%@ %@", response, responseObject);
-                array = [NSArray arrayWithArray:responseObject];
-                [self.tableView reloadData];
-            }
-        }];
-        [dataTask resume];
-        
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            
-            [activityView removeFromSuperview];
-            
-            [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
-        });
-    });
+    [self refreshAction];
     
     // Do any additional setup after loading the view.
 }
@@ -127,5 +93,78 @@
     // Pass the selected object to the new view controller.
 }
 */
+
+- (void) refreshAction {
+    
+    if ([AFNetworkReachabilityManager sharedManager].networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
+        isConnectionAvailable = false;
+    } else {
+        isConnectionAvailable = true;
+    }
+    
+    if (isConnectionAvailable) {
+        self.refreshButton.hidden = YES;
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
+            
+            activityView = [[UIActivityIndicatorView alloc]
+                            initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+            
+            activityView.center = CGPointMake([[UIScreen mainScreen] bounds].size.width / 2, [[UIScreen mainScreen] bounds].size.height / 2 - 80.0);
+            
+            
+            [activityView startAnimating];
+            [self.tableView addSubview:activityView];
+            
+            NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+            AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+            
+            NSURL *URL = [NSURL URLWithString:@"http://www.vidal.ru/api/news-raw"];
+            NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+            
+            NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+                if (error) {
+                    NSLog(@"Error: %@", error);
+                } else {
+                    NSLog(@"%@ %@", response, responseObject);
+                    array = [NSArray arrayWithArray:responseObject];
+                    [self.tableView reloadData];
+                }
+            }];
+            [dataTask resume];
+            
+            dispatch_sync(dispatch_get_main_queue(), ^{
+                
+                [activityView removeFromSuperview];
+                
+                [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+            });
+        });
+        
+    } else {
+        [self showAlert:@"Отсутствует Интернет-соединение" mess:@"Попробуйте зайти позже"];
+        self.refreshButton.hidden = NO;
+    }
+    
+    
+    
+}
+
+- (IBAction)refresh:(UIButton *)sender {
+    [self refreshAction];
+}
+
+- (void) showAlert:(NSString *)alert  mess:(NSString *)mess {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alert message:mess preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                         {
+                             
+                         }];
+    [alertController addAction:ok];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
 
 @end

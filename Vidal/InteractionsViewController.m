@@ -12,6 +12,7 @@
 
 @property (strong, nonatomic) UIBarButtonItem *searchButton;
 @property (strong, nonatomic) UIBarButtonItem *backButton;
+@property (strong, nonatomic) SWRevealViewController *reveal;
 
 @end
 
@@ -30,6 +31,8 @@
     [super viewDidLoad];
     
     inx = -1;
+    
+    self.reveal.delegate = self;
     
     ud = [NSUserDefaults standardUserDefaults];
     
@@ -359,6 +362,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [self.view endEditing:YES];
+}
+
 #pragma mark - keyboard movements
 - (void)keyboardWillShow:(NSNotification *)notification
 {
@@ -386,6 +393,9 @@
     
     text = [text stringByReplacingOccurrencesOfString:@"<TD colSpan=\"2\">" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
+    text = [text stringByReplacingOccurrencesOfString:@"<sup>&trade;</sup>" withString:@"™"];
+    text = [text stringByReplacingOccurrencesOfString:@"<SUP>&trade;</SUP>" withString:@"™"];
+    text = [text stringByReplacingOccurrencesOfString:@"&trade;" withString:@"™"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
@@ -453,6 +463,10 @@
     
     [self.navigationController popViewControllerAnimated:YES];
     
+}
+
+- (void)revealController:(SWRevealViewController *)revealController willMoveToPosition:(FrontViewPosition) position {
+        [self.view endEditing:YES];
 }
 
 /*

@@ -57,6 +57,20 @@
     
     
     if ([[ud valueForKey:@"share"] isEqualToString:@"0"]) {
+        
+        toDelete = [NSMutableIndexSet indexSet];
+        
+        NSInteger indexOfPicture = [self.dbManager.arrColumnNames indexOfObject:@"Picture.Image"];
+        NSInteger indexOfIPN = [self.dbManager.arrColumnNames indexOfObject:@"InfoPageName"];
+        if (indexOfPicture < 1000000) {
+            
+            [self.info removeObjectAtIndex:indexOfIPN];
+            [self.dbManager.arrColumnNames removeObjectAtIndex:indexOfIPN];
+            
+            [self.info removeObjectAtIndex:indexOfPicture];
+            [self.dbManager.arrColumnNames removeObjectAtIndex:indexOfPicture];
+        }
+        
         NSInteger indexOfLatName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
         NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
         NSInteger indexOfCompany = [self.dbManager.arrColumnNames indexOfObject:@"CompaniesDescription"];
@@ -68,15 +82,23 @@
         
         if (![[self.info objectAtIndex:indexOfCompany] isEqualToString:@""]) {
             self.registred.attributedText = [self clearString:[self.info objectAtIndex:indexOfCompany]];
-            [toDelete addIndex:indexOfCompany];
+            if (indexOfCompany < 1000000) {
+                [toDelete addIndex:indexOfCompany];
+            }
     } else {
-        [toDelete addIndex:indexOfCompany];
+        if (indexOfCompany < 1000000) {
+            [toDelete addIndex:indexOfCompany];
+        }
     }
+        
+
     
             for (NSUInteger i = 0; i < [self.info count]; i++) {
                 if ([[self.info objectAtIndex:i] isEqualToString:@""]
                     || [[self.info objectAtIndex:i] isEqualToString:@"0"]) {
-                    [toDelete addIndex:i];
+                    if (i < 1000000) {
+                        [toDelete addIndex:i];
+                    }
                 }
             }
     
@@ -100,7 +122,7 @@
     
     if ([ud valueForKey:@"letterDrug"]) {
         
-        if (indexOfCode < 1000 && indexOfLetter < 1000 && indexOfCategory < 1000 && indexOfCatName < 1000) {
+        if (indexOfCode < 1000000 && indexOfLetter < 1000000 && indexOfCategory < 1000000 && indexOfCatName < 1000000 && indexOfArticle) {
             [toDelete addIndex:indexOfLetter];
             [toDelete addIndex:indexOfCategory];
             [toDelete addIndex:indexOfCatName];
@@ -130,12 +152,13 @@
 //        [toDelete addIndex:indexOfInfoPage];
         
     }
-    
+        if (indexOfDocument < 1000000 && indexOfLatName < 1000000 && indexOfName < 1000000 && indexOfElaboration < 1000000) {
     [toDelete addIndex:indexOfDocument];
 //    [toDelete addIndex:indexOfArticle];
     [toDelete addIndex:indexOfLatName];
     [toDelete addIndex:indexOfName];
         [toDelete addIndex:indexOfElaboration];
+        }
     
             if ([((NSArray *)[ud objectForKey:@"favs"]) containsObject:[ud objectForKey:@"id"]]) {
                 NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:@"Препарат в избранном" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:187.0/255.0 green:0.0 blue:57.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
@@ -150,9 +173,10 @@
                 [self.fav setImage:[UIImage imageNamed:@"favGrey"] forState:UIControlStateNormal];
                 self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0);
             }
-
-            [self.info removeObjectsAtIndexes:toDelete];
-            [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
+        
+        [self.info removeObjectsAtIndexes:toDelete];
+        [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
+        
     
     toDelete = [NSMutableIndexSet indexSet];
     
@@ -169,7 +193,7 @@
     }
         
          indexOfBigCell = [self.dbManager.arrColumnNames indexOfObject:@"CompiledComposition"];
-                [self.tableView reloadData];
+        [self.tableView reloadData];
         
         
     } else {

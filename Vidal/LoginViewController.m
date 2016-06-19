@@ -15,7 +15,7 @@
 
 @implementation LoginViewController {
     NSUserDefaults *ud;
-    
+    BOOL isConnectionAvailable;
 }
 
 - (void)viewDidLoad {
@@ -34,11 +34,21 @@
     self.lead.text = string;
     [self.lead sizeToFit];
 
-    if ([[ud valueForKey:@"reg"] isEqualToString:@"2"]) {
-        UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
-        [self presentViewController:vc animated:true completion:nil];
+    if ([AFNetworkReachabilityManager sharedManager].networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
+        isConnectionAvailable = false;
     } else {
-        [self showAlert:@"Внимание!" mess:@"При первом входе в приложение требуется скачать объемное количество информации (30Мб)." check:NO];
+        isConnectionAvailable = true;
+    }
+    
+    if (isConnectionAvailable) {
+        if ([[ud valueForKey:@"reg"] isEqualToString:@"2"]) {
+            UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
+            [self presentViewController:vc animated:true completion:nil];
+        } else {
+            [self showAlert:@"Внимание!" mess:@"При первом входе в приложение требуется скачать объемное количество информации (30Мб)." check:NO];
+        }
+    } else {
+        [self showAlert:@"Отсутствует Интернет-соединение" mess:@"Попробуйте зайти позже" check:NO];
     }
     
     if (IS_IPHONE_5) {
