@@ -25,11 +25,13 @@
     NSMutableDictionary *tapsOnCell;
     NSInteger indexOfBigCell;
     CGFloat sizeOfWeb;
-    
+    NSInteger activeWebViewTag;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    activeWebViewTag = 0;
     
     self.resultArray = [NSMutableArray array];
     tapsOnCell = [NSMutableDictionary dictionary];
@@ -51,155 +53,154 @@
     [ud setObject:@"0" forKey:@"share"];
     
     // Do any additional setup after loading the view.
-}
-
-- (void) viewWillAppear:(BOOL)animated {
-    
     
     if ([[ud valueForKey:@"share"] isEqualToString:@"0"]) {
         
         toDelete = [NSMutableIndexSet indexSet];
         
         NSInteger indexOfPicture = [self.dbManager.arrColumnNames indexOfObject:@"Picture.Image"];
-        NSInteger indexOfIPN = [self.dbManager.arrColumnNames indexOfObject:@"InfoPageName"];
         if (indexOfPicture < 1000000) {
-            
-            [self.info removeObjectAtIndex:indexOfIPN];
-            [self.dbManager.arrColumnNames removeObjectAtIndex:indexOfIPN];
+            NSMutableArray *array = self.dbManager.arrColumnNames;
             
             [self.info removeObjectAtIndex:indexOfPicture];
-            [self.dbManager.arrColumnNames removeObjectAtIndex:indexOfPicture];
+            [array removeObjectAtIndex:indexOfPicture];
+            
+            self.dbManager.arrColumnNames = array;
         }
         
-        NSInteger indexOfLatName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
-        NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
-        NSInteger indexOfCompany = [self.dbManager.arrColumnNames indexOfObject:@"CompaniesDescription"];
-            NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
+        NSInteger indexOfLatName                = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
+        NSInteger indexOfName                   = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
+        NSInteger indexOfCompany                = [self.dbManager.arrColumnNames indexOfObject:@"InfoPageName"];
+        NSInteger indexOfCompanyDescription     = [self.dbManager.arrColumnNames indexOfObject:@"CompaniesDescription"];
+        NSInteger indexOfElaboration            = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
         
         self.latName.attributedText = [self clearString:[[self.info objectAtIndex:indexOfLatName] valueForKey:@"lowercaseString"]];
         self.name.attributedText = [self clearString:[[self.info objectAtIndex:indexOfName] valueForKey:@"lowercaseString"]];
         self.elaboration.attributedText = [self clearString:[[self.info objectAtIndex:indexOfElaboration] valueForKey:@"lowercaseString"]];
         
-        if (![[self.info objectAtIndex:indexOfCompany] isEqualToString:@""]) {
-            self.registred.attributedText = [self clearString:[self.info objectAtIndex:indexOfCompany]];
-            if (indexOfCompany < 1000000) {
-                [toDelete addIndex:indexOfCompany];
-            }
-    } else {
-        if (indexOfCompany < 1000000) {
-            [toDelete addIndex:indexOfCompany];
-        }
-    }
-        
-
-    
-            for (NSUInteger i = 0; i < [self.info count]; i++) {
-                if ([[self.info objectAtIndex:i] isEqualToString:@""]
-                    || [[self.info objectAtIndex:i] isEqualToString:@"0"]) {
-                    if (i < 1000000) {
-                        [toDelete addIndex:i];
-                    }
+        if (indexOfCompany < [self.info count]) {
+            if (![[self.info objectAtIndex:indexOfCompany] isEqualToString:@""]) {
+                self.registred.attributedText = [self clearString:[self.info objectAtIndex:indexOfCompany]];
+                if (indexOfCompany < 1000000) {
+                    [toDelete addIndex:indexOfCompany];
+                }
+            } else {
+                if (indexOfCompany < 1000000) {
+                    [toDelete addIndex:indexOfCompany];
                 }
             }
-    
-    NSInteger indexOfLetter = [self.dbManager.arrColumnNames indexOfObject:@"Letter"];
-    NSInteger indexOfDocument = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
-    NSInteger indexOfArticle = [self.dbManager.arrColumnNames indexOfObject:@"ArticleID"];
-    NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryID"];
-    NSInteger indexOfCode = [self.dbManager.arrColumnNames indexOfObject:@"CategoryCode"];
-    NSInteger indexOfCatName = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
-    
-//    NSInteger indexOfLevel = [self.dbManager.arrColumnNames indexOfObject:@"Level"];
-//    NSInteger indexOfcppid = [self.dbManager.arrColumnNames indexOfObject:@"ClPhPointerID"];
-//    NSInteger indexOfscppid = [self.dbManager.arrColumnNames indexOfObject:@"SrcClPhPointerID"];
-//    NSInteger indexOfPriority = [self.dbManager.arrColumnNames indexOfObject:@"ItsMainPriority"];
-//    NSInteger indexOfPharmaCode = [self.dbManager.arrColumnNames indexOfObject:@"Code"];
-//    NSInteger indexOfPharmaName = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
-//    NSInteger indexOfParent = [self.dbManager.arrColumnNames indexOfObject:@"ParentCode"];
-//    NSInteger indexOfShow = [self.dbManager.arrColumnNames indexOfObject:@"ShowInProduct"];
-//    
-//    NSInteger indexOfInfoPage = [self.dbManager.arrColumnNames indexOfObject:@"InfoPageID"];
-    
-    if ([ud valueForKey:@"letterDrug"]) {
-        
-        if (indexOfCode < 1000000 && indexOfLetter < 1000000 && indexOfCategory < 1000000 && indexOfCatName < 1000000 && indexOfArticle) {
-            [toDelete addIndex:indexOfLetter];
-            [toDelete addIndex:indexOfCategory];
-            [toDelete addIndex:indexOfCatName];
-            [toDelete addIndex:indexOfCode];
-            [toDelete addIndex:indexOfArticle];
         }
         
-    } else if ([ud valueForKey:@"pharmaList"]) {
         
-        indexOfDocument = [self.dbManager.arrColumnNames indexOfObject:@"DocumentListView.DocumentID"];
-        
-//        [toDelete addIndex:indexOfLevel];
-//        [toDelete addIndex:indexOfcppid];
-//        [toDelete addIndex:indexOfscppid];
-//        [toDelete addIndex:indexOfPriority];
-//        [toDelete addIndex:indexOfPharmaCode];
-//        [toDelete addIndex:indexOfPharmaName];
-//        [toDelete addIndex:indexOfParent];
-//        [toDelete addIndex:indexOfShow];
-        
-    } else if ([ud valueForKey:@"activeID"]) {
-        
-//        [toDelete addIndex:indexOfLetter];
-        
-    } else if ([ud valueForKey:@"info"] || [ud valueForKey:@"comp"]) {
-        
-//        [toDelete addIndex:indexOfInfoPage];
-        
-    }
-        if (indexOfDocument < 1000000 && indexOfLatName < 1000000 && indexOfName < 1000000 && indexOfElaboration < 1000000) {
-    [toDelete addIndex:indexOfDocument];
-//    [toDelete addIndex:indexOfArticle];
-    [toDelete addIndex:indexOfLatName];
-    [toDelete addIndex:indexOfName];
-        [toDelete addIndex:indexOfElaboration];
-        }
-    
-            if ([((NSArray *)[ud objectForKey:@"favs"]) containsObject:[ud objectForKey:@"id"]]) {
-                NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:@"Препарат в избранном" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:187.0/255.0 green:0.0 blue:57.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
-    
-                [self.fav setAttributedTitle:resultText forState:UIControlStateNormal];
-                [self.fav setImage:[UIImage imageNamed:@"favRed"] forState:UIControlStateNormal];
-                self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0);
-            } else {
-                NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:@"Добавить в избранное" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
-    
-                [self.fav setAttributedTitle:resultText forState:UIControlStateNormal];
-                [self.fav setImage:[UIImage imageNamed:@"favGrey"] forState:UIControlStateNormal];
-                self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0);
+        for (NSUInteger i = 0; i < [self.info count]; i++) {
+            if ([[self.info objectAtIndex:i] isEqualToString:@""]
+                || [[self.info objectAtIndex:i] isEqualToString:@"0"]) {
+                if (i < 1000000) {
+                    [toDelete addIndex:i];
+                }
             }
+        }
+        
+        NSInteger indexOfLetter = [self.dbManager.arrColumnNames indexOfObject:@"Letter"];
+        NSInteger indexOfDocument = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
+        NSInteger indexOfArticle = [self.dbManager.arrColumnNames indexOfObject:@"ArticleID"];
+        NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"CategoryID"];
+        NSInteger indexOfCode = [self.dbManager.arrColumnNames indexOfObject:@"CategoryCode"];
+        NSInteger indexOfCatName = [self.dbManager.arrColumnNames indexOfObject:@"CategoryName"];
+        
+        //    NSInteger indexOfLevel = [self.dbManager.arrColumnNames indexOfObject:@"Level"];
+        //    NSInteger indexOfcppid = [self.dbManager.arrColumnNames indexOfObject:@"ClPhPointerID"];
+        //    NSInteger indexOfscppid = [self.dbManager.arrColumnNames indexOfObject:@"SrcClPhPointerID"];
+        //    NSInteger indexOfPriority = [self.dbManager.arrColumnNames indexOfObject:@"ItsMainPriority"];
+        //    NSInteger indexOfPharmaCode = [self.dbManager.arrColumnNames indexOfObject:@"Code"];
+        //    NSInteger indexOfPharmaName = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
+        //    NSInteger indexOfParent = [self.dbManager.arrColumnNames indexOfObject:@"ParentCode"];
+        //    NSInteger indexOfShow = [self.dbManager.arrColumnNames indexOfObject:@"ShowInProduct"];
+        //
+        //    NSInteger indexOfInfoPage = [self.dbManager.arrColumnNames indexOfObject:@"InfoPageID"];
+        
+        if ([ud valueForKey:@"letterDrug"]) {
+            
+            if (indexOfCode < 1000000 && indexOfLetter < 1000000 && indexOfCategory < 1000000 && indexOfCatName < 1000000 && indexOfArticle) {
+                [toDelete addIndex:indexOfLetter];
+                [toDelete addIndex:indexOfCategory];
+                [toDelete addIndex:indexOfCatName];
+                [toDelete addIndex:indexOfCode];
+                [toDelete addIndex:indexOfArticle];
+                [toDelete addIndex:indexOfCompanyDescription];
+            }
+            
+        } else if ([ud valueForKey:@"pharmaList"]) {
+            
+            indexOfDocument = [self.dbManager.arrColumnNames indexOfObject:@"DocumentListView.DocumentID"];
+            
+            //        [toDelete addIndex:indexOfLevel];
+            //        [toDelete addIndex:indexOfcppid];
+            //        [toDelete addIndex:indexOfscppid];
+            //        [toDelete addIndex:indexOfPriority];
+            //        [toDelete addIndex:indexOfPharmaCode];
+            //        [toDelete addIndex:indexOfPharmaName];
+            //        [toDelete addIndex:indexOfParent];
+            //        [toDelete addIndex:indexOfShow];
+            
+        } else if ([ud valueForKey:@"activeID"]) {
+            
+            //        [toDelete addIndex:indexOfLetter];
+            
+        } else if ([ud valueForKey:@"info"] || [ud valueForKey:@"comp"]) {
+            
+            //        [toDelete addIndex:indexOfInfoPage];
+            
+        }
+        if (indexOfDocument < 1000000 && indexOfLatName < 1000000 && indexOfName < 1000000 && indexOfElaboration < 1000000) {
+            [toDelete addIndex:indexOfDocument];
+            [toDelete addIndex:indexOfLatName];
+            [toDelete addIndex:indexOfName];
+            [toDelete addIndex:indexOfElaboration];
+            [toDelete addIndex:indexOfCompanyDescription];
+            
+        }
+        
+        if ([((NSArray *)[ud objectForKey:@"favs"]) containsObject:[ud objectForKey:@"id"]]) {
+            NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:@"Препарат в избранном" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:187.0/255.0 green:0.0 blue:57.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
+            
+            [self.fav setAttributedTitle:resultText forState:UIControlStateNormal];
+            [self.fav setImage:[UIImage imageNamed:@"favRed"] forState:UIControlStateNormal];
+            self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0);
+        } else {
+            NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:@"Добавить в избранное" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
+            
+            [self.fav setAttributedTitle:resultText forState:UIControlStateNormal];
+            [self.fav setImage:[UIImage imageNamed:@"favGrey"] forState:UIControlStateNormal];
+            self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0);
+        }
         
         [self.info removeObjectsAtIndexes:toDelete];
         [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
         
-    
-    toDelete = [NSMutableIndexSet indexSet];
-    
-//    NSInteger indexOfDocument2 = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
-//    NSInteger indexOfcppid2 = [self.dbManager.arrColumnNames indexOfObject:@"ClPhPointerID"];
-    
-    if ([ud valueForKey:@"pharmaList"]) {
         
-//        [toDelete addIndex:indexOfDocument2];
-//        [toDelete addIndex:indexOfcppid2];
-        [self.info removeObjectsAtIndexes:toDelete];
-        [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
+        toDelete = [NSMutableIndexSet indexSet];
         
-    }
+        //    NSInteger indexOfDocument2 = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
+        //    NSInteger indexOfcppid2 = [self.dbManager.arrColumnNames indexOfObject:@"ClPhPointerID"];
         
-         indexOfBigCell = [self.dbManager.arrColumnNames indexOfObject:@"CompiledComposition"];
+        if ([ud valueForKey:@"pharmaList"]) {
+            
+            //        [toDelete addIndex:indexOfDocument2];
+            //        [toDelete addIndex:indexOfcppid2];
+            [self.info removeObjectsAtIndexes:toDelete];
+            [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
+            
+        }
+        
+        indexOfBigCell = [self.dbManager.arrColumnNames indexOfObject:@"CompiledComposition"];
         [self.tableView reloadData];
         
         
     } else {
         [ud setObject:@"0" forKey:@"share"];
     }
-    
+
 }
 
 - (void)didReceiveMemoryWarning {
@@ -273,9 +274,9 @@
     }
 }
 
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return [self.dbManager.arrColumnNames count];
+
 }
 
 - (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -316,11 +317,13 @@
         
         [cell.webView setBackgroundColor:[UIColor whiteColor]];
         cell.webView.delegate = self;
+        cell.webView.tag = 100 + indexPath.row;
+        cell.webView.scrollView.scrollEnabled = NO;
         cell.delegate = self;
         
         NSMutableArray *dataArray = [NSMutableArray array];
         dataArray = [[[self.info objectAtIndex:indexPath.row] componentsSeparatedByString:@"</TABLE>"] mutableCopy];
-        NSString *tableString = [NSString stringWithFormat:@"<!Doctype html><html><head><meta charset='UTF-8'><style>table{border-collapse:collapse}</style></head><body>%@</TABLE></body></html>", [dataArray objectAtIndex:0]];
+        NSString *tableString = [NSString stringWithFormat:@"<!Doctype html><html><head><meta charset='UTF-8'><style>body {color: rgb(164, 164, 164);} table{border-collapse:collapse}</style></head><body>%@</TABLE></body></html>", [dataArray objectAtIndex:0]];
 
         [cell.webView loadHTMLString:tableString baseURL:nil];
         
@@ -352,28 +355,31 @@
 
 }
 
+
 - (void)webViewDidFinishLoad:(UIWebView *)webView {
+    NSLog(@"1 %d", activeWebViewTag);
+    if (webView.tag != activeWebViewTag) {
     
-    if (sizeOfWeb == 0) {
-    
-    CGRect frame = webView.frame;
-    frame.size.height = 1;
-    webView.frame = frame;
-    CGSize fittingSize = [webView sizeThatFits:CGSizeZero];
-    frame.size = fittingSize;
-    webView.frame = frame;
-    
-    sizeOfWeb = fittingSize.height;
+        CGRect frame = webView.frame;
+        frame.size.height = 1;
+        webView.frame = frame;
+        CGSize fittingSize = [webView sizeThatFits:CGSizeZero];
+        frame.size = fittingSize;
+        webView.frame = frame;
         
+        sizeOfWeb = fittingSize.height;
+        activeWebViewTag = webView.tag;
         [self.tableView reloadData];
     }
     
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSLog(@"2 %d", activeWebViewTag);
+
     
     if ([[tapsOnCell valueForKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]] isEqualToString:@"0"]) {
-        
+
         for (NSString *value in [tapsOnCell allKeys]) {
             [tapsOnCell setObject:@"0" forKey:value];
             if (indexPath.row != indexOfBigCell) {
@@ -410,7 +416,7 @@
 }
 
 - (void)scrollToRowAtIndexPath:(NSIndexPath *)indexPath atScrollPosition:(UITableViewScrollPosition)scrollPosition animated:(BOOL)animated {
-    
+    NSLog(@"%@", indexPath);
     [self.tableView scrollToRowAtIndexPath:indexPath
                          atScrollPosition:scrollPosition
                                  animated:YES];
@@ -457,9 +463,34 @@
 
 - (IBAction)toInter:(UIButton *)sender {
     
-    [ud setObject:[self clearToInter:self.name.text] forKey:@"toInter"];
-    [self performSegueWithIdentifier:@"knowAbout" sender:self];
-    [ud setObject:@"1" forKey:@"share"];
+    NSString *reqRaw = @"SELECT MoleculeListView.RusName AS Name FROM MoleculeListView "
+                        "JOIN Product_Molecule ON Product_Molecule.MoleculeID = MoleculeListView.MoleculeID "
+                        "JOIN Product ON Product.ProductID = Product_Molecule.ProductID "
+                        "JOIN DocumentListView ON DocumentListView.DocumentID = Product.DocumentID "
+                        "WHERE DocumentListView.RusName LIKE '";
+    NSString *endRequest = @"%'";
+    NSString *req = [NSString stringWithFormat:@"%@%@%@", reqRaw, [[self clearToInter:self.name.text] uppercaseString], endRequest];
+    NSLog(@"%@", req);
+    NSArray *requestResult = [[[DBManager alloc] init] loadDataFromDB:req];
+    if ([requestResult count] > 0) {
+        NSString *rawStringResult = requestResult[0][0];
+        if (rawStringResult) {
+            [ud setObject:[rawStringResult capitalizedString] forKey:@"toInter"];
+            [self performSegueWithIdentifier:@"knowAbout" sender:self];
+            [ud setObject:@"1" forKey:@"share"];
+        } else {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Нет данных" message:@"Для этого препарата не найдено веществ" preferredStyle:UIAlertControllerStyleAlert];
+            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+            [alertController addAction:ok];
+            [self presentViewController:alertController animated:YES completion:nil];
+        }
+    } else {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Нет данных" message:@"Для этого препарата не найдено веществ" preferredStyle:UIAlertControllerStyleAlert];
+        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+        [alertController addAction:ok];
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+
     
 }
 
@@ -637,7 +668,7 @@
     [ud setObject:@"1" forKey:@"share"];
     
     NSString *text = self.name.text;
-    
+
     UIActivityViewController *controller =
     [[UIActivityViewController alloc]
      initWithActivityItems:@[text, @"Я узнал об этом препарате через приложение Видаль-кардиология", @"vidal.ru"]

@@ -92,16 +92,16 @@
     
     
     [self setUpQuickSearch:self.hello1];
-    self.FilteredResults = [self.quickSearch filteredObjectsWithValue:nil];
+    self.FilteredResults = [[self.quickSearch filteredObjectsWithValue:nil] sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
     
     [super setLabel:@"Лекарственное взаимодействие"];
     
-        self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
+    self.searchButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
                                                              style:UIBarButtonItemStyleDone
                                                             target:self
                                                             action:@selector(search)];
     
-        self.navigationItem.rightBarButtonItem = self.searchButton;
+    self.navigationItem.rightBarButtonItem = self.searchButton;
     
     [self.secondLinePicker setBackgroundColor:[UIColor whiteColor]];
 
@@ -118,16 +118,14 @@
     if ([ud objectForKey:@"toInter"]) {
         self.input.text = [ud objectForKey:@"toInter"];
         [self findFirstResult:[ud objectForKey:@"toInter"]];
-//        [self setUpQuickSearch:self.hello2];
         
         if (inx == -1) {
-            
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Ошибка" message:@"Отсутствуют данные для сравнения" preferredStyle:UIAlertControllerStyleAlert];
+            NSString *moleculeString = [[ud objectForKey:@"toInter"] capitalizedString];
+            NSString *message = [NSString stringWithFormat:@"Для вещества %@ не найдено лекарственных взаимодействий. Пожалуйста, введите другое вещество", moleculeString];
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Ошибка" message:message  preferredStyle:UIAlertControllerStyleAlert];
             
             UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
                                  {
-                                     //Do some thing here
-                                     [self.navigationController popViewControllerAnimated:YES];
                                      
                                  }];
             [alertController addAction:ok];
@@ -188,7 +186,15 @@
 }
 
 - (void)updateTableViewWithNewResults:(NSArray *)results {
-    self.FilteredResults = results;
+    self.FilteredResults = [results sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+    if ([self.FilteredResults count] == 0) {
+        self.hello2 = [NSMutableArray arrayWithArray:@[]];
+        self.secondInput.hidden = true;
+        self.secondLine.hidden = true;
+        self.secondLabel.hidden = true;
+        self.lead.hidden = true;
+    }
+    NSLog(@"%@", self.FilteredResults);
     [self.tableView reloadData];
 //    [self.secondLinePicker reloadAllComponents];
 }
@@ -219,9 +225,17 @@
 
 - (void) findFirstResult:(NSString *) first {
     
+    NSLog(@"%@", first);
+    
     for (int i = 0; i < [[array objectForKey:@"interactions"] count]; i++) {
-        NSString *value = [[[array objectForKey:@"interactions"] objectAtIndex:i] objectForKey:@"name"];
-        if ([value isEqualToString:first]) {
+        NSDictionary *value = [[array objectForKey:@"interactions"] objectAtIndex:i];
+//        for (NSDictionary *coName in [value objectForKey:@"info"]) {
+//            if ([[coName objectForKey:@"coname"] isEqualToString:first]) {
+//                NSLog(@"HERE %@", [value objectForKey:@"name"]);
+//            }
+//        }
+        
+        if ([[value objectForKey:@"name"] isEqualToString:first]) {
             inx = i;
             break;
         }
@@ -237,6 +251,8 @@
         [self.hello2 addObject:[[[array objectForKey:@"interactions"][inx] objectForKey:@"info"][i] objectForKey:@"coname"]];
         NSLog(@"%@", [[[array objectForKey:@"interactions"][inx] objectForKey:@"info"][i] objectForKey:@"coname"]);
     }
+    
+    self.hello2 = [[self.hello2 sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] mutableCopy];
     
     NSLog(@"%d", (int)self.hello2.count);
     
@@ -299,7 +315,7 @@
     [textField resignFirstResponder];
     self.tableView.hidden = true;
     self.secondLinePicker.hidden = true;
-    self.lead.hidden = false;
+//    self.lead.hidden = false;
     return YES;
 }
 

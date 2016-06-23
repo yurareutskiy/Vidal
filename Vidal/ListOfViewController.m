@@ -50,7 +50,7 @@
     
     if ([ud valueForKey:@"activeID"]) {
         
-        self.req = [NSString stringWithFormat:@"select DocumentID, RusName, EngName, Elaboration, CompaniesDescription, CompiledComposition, CategoryName as Category, PhInfluence, PhKinetics, Indication, Dosage, SideEffects, ContraIndication, Lactation, SpecialInstruction, OverDosage, Interaction, PharmDelivery, StorageCondition from DocumentListView doc where exists(select 1 from Product_Molecule pm inner join Product pr on pr.ProductID = pm.ProductID where pr.DocumentID = doc.DocumentID and pm.MoleculeID = %@) order by RusName", [ud valueForKey:@"activeID"]];
+        self.req = [NSString stringWithFormat:@"select doc.DocumentID as DocumentID, doc.RusName as RusName, doc.EngName as EngName, doc.Elaboration as Elaboration, doc.CompaniesDescription as CompaniesDescription, doc.CompiledComposition as CompiledComposition, doc.CategoryName  as Category, doc.PhInfluence as PhInfluence, doc.PhKinetics as PhKinetics, doc.Indication as Indication, doc.Dosage as Dosage, doc.SideEffects as SideEffects, doc.ContraIndication as ContraIndication, doc.Lactation as Lactation, doc.SpecialInstruction as SpecialInstruction, doc.OverDosage as OverDosage, doc.Interaction as Interaction, doc.PharmDelivery as PharmDelivery, doc.StorageCondition as StorageCondition, InfoPage.RusName as InfoPageName from DocumentListView  doc INNER JOIN Document_InfoPage ON Document_InfoPage.DocumentID = doc.DocumentID INNER JOIN InfoPage ON InfoPage.InfoPageID = Document_InfoPage.InfoPageID  where exists(	select 1 from Product_Molecule pm 	inner join Product pr on pr.ProductID = pm.ProductID 	where pr.DocumentID = doc.DocumentID and pm.MoleculeID = %@) order by doc.RusName", [ud valueForKey:@"activeID"]];
         
         [self setNavBarTitle:@"Препараты"];
         
@@ -73,8 +73,9 @@
     } else if ([ud valueForKey:@"letterDrug"]) {
         
         [self setNavBarTitle:@"Препараты"];
-        
-        self.req = [NSString stringWithFormat:@"select DocumentListView.DocumentID as DocumentID, DocumentListView.RusName as RusName, DocumentListView.EngName as EngName, DocumentListView.CompaniesDescription as CompaniesDescription, DocumentListView.Elaboration as Elaboration, DocumentListView.CompiledComposition as CompiledComposition, DocumentListView.CategoryName as Category, DocumentListView.PhInfluence as PhInfluence, DocumentListView.PhKinetics as PhKinetics, DocumentListView.Indication as Indication, DocumentListView.Dosage as Dosage, DocumentListView.SideEffects as SideEffects, DocumentListView.ContraIndication as ContraIndication, DocumentListView.Lactation as Lactation, DocumentListView.SpecialInstruction as SpecialInstruction, DocumentListView.OverDosage as OverDosage, DocumentListView.Interaction as Interaction, DocumentListView.PharmDelivery as PharmDelivery, DocumentListView.StorageCondition as StorageCondition , InfoPage.RusName as InfoPageName from DocumentListView JOIN Document_InfoPage ON Document_InfoPage.DocumentID = DocumentListView.DocumentID JOIN InfoPage ON InfoPage.InfoPageID = Document_InfoPage.InfoPageID where Letter = '%@' order by DocumentListView.RusName", [ud valueForKey:@"letterDrug"]];
+
+        self.req = [NSString stringWithFormat:@"select DocumentListView.DocumentID as DocumentID, DocumentListView.RusName as RusName, DocumentListView.EngName as EngName, DocumentListView.CompaniesDescription as CompaniesDescription, DocumentListView.Elaboration as Elaboration, DocumentListView.CompiledComposition as CompiledComposition, DocumentListView.CategoryName as Category, DocumentListView.PhInfluence as PhInfluence, DocumentListView.PhKinetics as PhKinetics, DocumentListView.Indication as Indication, DocumentListView.Dosage as Dosage, DocumentListView.SideEffects as SideEffects, DocumentListView.ContraIndication as ContraIndication, DocumentListView.Lactation as Lactation, DocumentListView.SpecialInstruction as SpecialInstruction, DocumentListView.OverDosage as OverDosage, DocumentListView.Interaction as Interaction, DocumentListView.PharmDelivery as PharmDelivery, DocumentListView.StorageCondition as StorageCondition , InfoPage.RusName as InfoPageName from DocumentListView LEFT JOIN Document_InfoPage ON Document_InfoPage.DocumentID = DocumentListView.DocumentID LEFT JOIN InfoPage ON InfoPage.InfoPageID = Document_InfoPage.InfoPageID where Letter = '%@' order by DocumentListView.RusName", [ud valueForKey:@"letterDrug"]];
+        NSLog(@"%@", self.req);
         [self loadData:self.req];
         
     }  else if ([ud valueForKey:@"letterActive"]) {
@@ -292,6 +293,18 @@
         
         [self presentViewController:alertController animated:YES completion:nil];
     } else {
+        if (([ud valueForKey:@"info"] || [ud valueForKey:@"comp"]) && [[ud valueForKey:@"info"] isEqualToString:@"63"]) {
+            NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
+            for (NSArray *element in self.arrPeopleInfo) {
+                NSLog(@"%@", element[indexOfName]);
+                if ([element[indexOfName] isEqualToString:@"КАРДИОМАГНИЛ"]) {
+                    NSArray *object = [element copy];
+                    [self.arrPeopleInfo removeObject:element];
+                    [self.arrPeopleInfo insertObject:object atIndex:0];
+                    break;
+                }
+            }
+        }
         [self.tableView reloadData];
     }
     

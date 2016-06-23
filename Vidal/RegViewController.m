@@ -8,25 +8,49 @@
 
 #import "RegViewController.h"
 
+typedef enum : NSUInteger {
+    PickerViewSelectingNone,
+    PickerViewSelectingDate,
+    PickerViewSelectingPrimarySpec,
+    PickerViewSelectingSecondSpec,
+    PickerViewSelectingUniver,
+    PickerViewSelectingDegree,
+    PickerViewSelectingYearDegree,
+} PickerViewSelectingType;
+
 @interface RegViewController ()
 
 @end
 
 @implementation RegViewController {
     
+    PickerViewSelectingType selectingType;
     UITapGestureRecognizer *singleTap;
     BOOL keyboard;
     CGPoint svos;
     NSString *monthYeah;
     NSString *job;
+    NSString *secondJob;
+    NSString *univer;
+    NSString *degree;
+    NSString *degreeYear;
     NSString *cityCheck;
     BOOL flag1;
     BOOL flag2;
     UITapGestureRecognizer *tap;
     CGFloat kh;
     NSUserDefaults *ud;
-    
 }
+
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.isProfileUpdate = NO;
+    }
+    return self;
+}
+
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,6 +60,8 @@
     monthYeah = @"0";
     job = @"0";
     cityCheck = @"0";
+    
+    self.namesDegree = @[@"Нет", @"Кандидат наук", @"Доктор медицинских наук"];
     
     flag1 = false;
     flag2 = false;
@@ -50,7 +76,12 @@
     self.cityText.delegate = self;
     self.specialistPickerView.dataSource = self;
     self.specialistPickerView.delegate = self;
+    self.universityText.delegate = self;
+    self.degreeText.delegate = self;
+    self.secondSpecialiteText.delegate = self;
+    self.yearDegreeText.delegate = self;
     
+    selectingType = PickerViewSelectingNone;
 
     self.datePicker.hidden = true;
     [self.datePicker setBackgroundColor:[UIColor whiteColor]];
@@ -75,7 +106,8 @@
     
     [self.agreementReadButton addTarget:self action:@selector(agreementLink:) forControlEvents:UIControlEventTouchUpInside];
     
-    [self getSpec];
+    [self getDataFromVidal:@"universities"];
+    [self getDataFromVidal:@"specialties"];
     
     tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(hideEver)];
     [self.scrollView addGestureRecognizer:tap];
@@ -94,15 +126,107 @@
         [button.titleLabel setFont:[UIFont systemFontOfSize:15.0]];
     }
     
+    if ([ud objectForKey:@"email_temp"]) {
+        self.emailText.text = [ud objectForKey:@"email_temp"];
+    }
+    if ([ud objectForKey:@"pass_temp"]) {
+        self.passText.text = [ud objectForKey:@"pass_temp"];
+    }
+    
     // Do any additional setup after loading the view.
+    
+
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    NSLog(@"%d", self.isProfileUpdate);
+    
+    if (self.isProfileUpdate) {
+        [self configureForProfileUpdating];
+    }
+    
     [self.tableView.backgroundView setBackgroundColor:[UIColor whiteColor]];
     [self.tableView setBackgroundColor:[UIColor whiteColor]];
     
     [self.tableView2.backgroundView setBackgroundColor:[UIColor whiteColor]];
     [self.tableView2 setBackgroundColor:[UIColor whiteColor]];
+}
+
+-(void)configureForProfileUpdating {
+    [self loadExistValueForFields];
+    // Hide main title
+    [self.mainLabel setText:@"Редактирование профиля"];
+    
+    // Hide checkboxes and link
+    [self.check1 setHidden:YES];
+    [self.check2 setHidden:YES];
+    [self.agree setHidden:YES];
+    [self.worker setHidden:YES];
+    [self.agreementReadButton setHidden:YES];
+    
+    // Hide back button
+    [self.backButton setHidden:YES];
+//    self.doneButtonBottomMarginConstraint.constant += 300;
+//    self.scrollView.contentSize = CGSizeMake(self.scrollView.contentSize.width, self.scrollView.contentSize.height - 100);
+    
+    // Change link
+}
+
+-(void)loadExistValueForFields {
+    NSString *surname = [ud valueForKey:@"surname"];
+    NSString *name = [ud valueForKey:@"manName"];
+    NSString *email = [ud valueForKey:@"email"];
+    NSString *bd = [ud valueForKey:@"birthDay"];
+    NSString *city = [ud valueForKey:@"city"];
+    NSString *spec = [ud valueForKey:@"spec"];
+    NSString *univer = [ud valueForKey:@"university"];
+    NSString *degree = [ud valueForKey:@"academicDegree"];
+    NSString *yearDegree = [ud valueForKey:@"graduateYear"];
+    NSString *secondSpec = [ud valueForKey:@"secondarySpecialty"];
+    
+    [self.nameText setText:surname];
+    [self.surnameText setText:name];
+    [self.emailText setText:email];
+    [self.cityText setText:city];
+    [self.special setText:spec];
+    [self.universityText setText:univer];
+    [self.degreeText setText:degree];
+    [self.yearDegreeText setText:yearDegree];
+    [self.secondSpecialiteText setText:secondSpec];
+    
+    NSArray *bdParts = [bd componentsSeparatedByString:@"."];
+    if ([bdParts count] == 3) {
+        [self.day setText:bdParts[0]];
+        [self.year setText:bdParts[2]];
+        NSString *monthName;
+        if ([bdParts[1] isEqualToString:@"01"]) {
+            monthName = @"Января";
+        } else if ([bdParts[1] isEqualToString:@"02"]) {
+            monthName = @"Февраля";
+        } else if ([bdParts[1] isEqualToString:@"03"]) {
+            monthName = @"Марта";
+        } else if ([bdParts[1] isEqualToString:@"04"]) {
+            monthName = @"Апреля";
+        } else if ([bdParts[1] isEqualToString:@"05"]) {
+            monthName = @"Мая";
+        } else if ([bdParts[1] isEqualToString:@"06"]) {
+            monthName = @"Июня";
+        } else if ([bdParts[1] isEqualToString:@"07"]) {
+            monthName = @"Июля";
+        } else if ([bdParts[1] isEqualToString:@"08"]) {
+            monthName = @"Августа";
+        } else if ([bdParts[1] isEqualToString:@"09"]) {
+            monthName = @"Сентября";
+        } else if ([bdParts[1] isEqualToString:@"10"]) {
+            monthName = @"Октября";
+        } else if ([bdParts[1] isEqualToString:@"11"]) {
+            monthName = @"Ноября";
+        } else if ([bdParts[1] isEqualToString:@"12"]) {
+            monthName = @"Декабря";
+        }
+        [self.month setText:monthName];
+    }
+
 }
 
 -(void) hideKeyboard {
@@ -157,12 +281,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-        self.cityText.text = self.namesCity[indexPath.row];
-        self.tableView2.hidden = true;
-        cityCheck = self.namesCity[indexPath.row];
+    self.cityText.text = self.namesCity[indexPath.row];
+    self.tableView2.hidden = true;
+    cityCheck = self.namesCity[indexPath.row];
 //        [self hideEver];
     [self.cityText resignFirstResponder];
-        [self.scrollView addGestureRecognizer:tap];
+    [self.scrollView addGestureRecognizer:tap];
     self.special.userInteractionEnabled = YES;
     self.special.enabled = YES;
     
@@ -222,7 +346,7 @@
                   NSLog(@"%@", error);
               }];
         
-    }
+    } 
     return YES;
 }
 
@@ -290,13 +414,6 @@
     
 }
 
-- (IBAction)callDatePicker:(UIButton*)sender {
-    
-    [self hideEver];
-    self.datePicker.hidden = false;
-    self.toolbar.hidden = false;
-    
-}
 
 - (IBAction)regButton:(UIButton *)sender {
     
@@ -312,6 +429,21 @@
     
     NSLog(@"%@ %@ %@ %@ %@", self.day.text, monthYeah, self.year.text, city, job);
     
+    if ([self.universityText.text isEqualToString:@""]) {
+        [self showAlert:@"Ошибка в данных" mess:@"Укажите учебное заведение" check:NO];
+        return;
+    }
+
+    if ([self.yearDegreeText.text isEqualToString:@""]) {
+        [self showAlert:@"Ошибка в данных" mess:@"Укажите дату окончания учебы" check:NO];
+        return;
+    }
+    
+    if ([self.degreeText.text isEqualToString:@""]) {
+        [self showAlert:@"Ошибка в данных" mess:@"Укажите свою ученную степень" check:NO];
+        return;
+    }
+    
     if ([self NSStringIsValidEmail:self.emailText.text] && ![self.emailText.text isEqualToString:@""]) {
         if ([self.passText.text length] >= 6 && [self.passText.text length] <= 255 && ![self hasRussianCharacters:self.passText.text]) {
             if (![self.surnameText.text isEqualToString:@""]) {
@@ -321,54 +453,73 @@
                             if (job != 0) {
                                 if (flag1 && flag2) {
 
-                                        [self showAlert:@"Мы выслали вам письмо" mess:@"Подтвердите регистрацию" check:YES];
                                     
                                     } else if (!flag1) {
-                                            [self showAlert:@"Ошибка в данных" mess:@"Пожалуйста, подтвердите, что вы являетесь работником здравоохранения" check:NO];
+                                        [self showAlert:@"Ошибка в данных" mess:@"Пожалуйста, подтвердите, что вы являетесь работником здравоохранения" check:NO];
+                                        return;
                                     } else {
-                                [self showAlert:@"Ошибка в данных" mess:@"Пожалуйста, подтвердите, что вы согласны с пользовательским соглашением" check:NO];
-                                }
+                                        [self showAlert:@"Ошибка в данных" mess:@"Пожалуйста, подтвердите, что вы согласны с пользовательским соглашением" check:NO];
+                                        return;
+                                    }
                                 }
                              else {
                                 [self showAlert:@"Ошибка в данных" mess:@"Укажите специальность из списка" check:NO];
+                                 return;
                             }
                         } else {
                             [self showAlert:@"Ошибка ввода данных" mess:@"Укажите город из списка" check:NO];
+                            return;
                         }
                     } else {
                         [self showAlert:@"Ошибка ввода данных" mess:@"Укажите дату рождения" check:NO];
+                        return;
                     }
                 } else {
                     [self showAlert:@"Ошибка ввода данных" mess:@"Укажите имя" check:NO];
+                    return;
                 }
             } else {
                 [self showAlert:@"Ошибка ввода данных" mess:@"Укажите фамилию" check:NO];
+                return;
             }
         } else {
             [self showAlert:@"Ошибка ввода данных" mess:@"Пароль не должен содержать русских символов. Длина пароля должна быть от 6 до 255 символов." check:NO];
+            return;
         }
             } else {
         [self showAlert:@"Ошибка ввода данных" mess:@"Введите валидный Email" check:NO];
+        return;
     }
     
+    NSMutableDictionary *parametrs = [NSMutableDictionary dictionaryWithDictionary:@{@"register[username]":email,
+                                                                                     @"register[password]":pass,
+                                                                                     @"register[firstName]":name,
+                                                                                     @"register[lastName]":surname,
+                                                                                     @"register[birthdate][day]":self.day.text,
+                                                                                     @"register[birthdate][month]":monthYeah,
+                                                                                     @"register[birthdate][year]":self.year.text,
+                                                                                     @"register[city]":city,
+                                                                                     @"register[primarySpecialty]":job,
+                                                                                     @"register[graduateYear]":degreeYear,
+                                                                                     @"register[academicDegree]":degree,
+                                                                                     @"register[university]":univer}];
+    if (secondJob != nil) {
+        [parametrs setObject: secondJob forKey:@"register[secondarySpecialty]"];
+    }
     
-    [manager POST:@"http://www.vidal.ru/api/user/add" parameters:
-     @{@"register[username]":email,
-    @"register[password]":pass,
-    @"register[firstName]":name,
-    @"register[lastName]":surname,
-    @"register[birthdate][day]":self.day.text,
-    @"register[birthdate][month]":monthYeah,
-    @"register[birthdate][year]":self.year.text,
-    @"register[city]":city,
-    @"register[primarySpecialty]":job}
+    [manager POST:@"http://www.vidal.ru/api/user/add" parameters: parametrs
+     
           success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
               NSLog(@"Responce is :%@",responseObject);
+              [ud setObject:self.emailText.text forKey:@"email_temp"];
+              [ud setObject:self.passText.text forKey:@"pass_temp"];
+              [self showAlert:@"Мы выслали вам письмо" mess:@"Подтвердите регистрацию" check:YES];
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         NSLog(@"%@", error);
+        [self showAlert:@"Ошибка" mess:@"Проверьте введенные данные" check:NO];
     }];
 }
-     
+
 - (void) showAlert:(NSString *)alert  mess:(NSString *)mess check:(BOOL) yep {
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:alert message:mess preferredStyle:UIAlertControllerStyleAlert];
     
@@ -432,10 +583,45 @@
     
 }
 
+#pragma mark - Picker View Select
+
 - (IBAction)getData:(UIBarButtonItem *)sender {
     
     self.datePicker.hidden = true;
     self.toolbar.hidden = true;
+
+    switch (selectingType) {
+        case PickerViewSelectingUniver:
+            [self selectingData:univer];
+            self.universityText.text = [self.pickerViewData[[self.specialistPickerView selectedRowInComponent:0]] objectForKey:@"title"];
+            break;
+        case PickerViewSelectingDate:
+            [self selectingDate];
+            break;
+        case PickerViewSelectingPrimarySpec:
+            [self selectingData:job];
+            self.special.text = [self.pickerViewData[[self.specialistPickerView selectedRowInComponent:0]] objectForKey:@"doctorName"];
+            break;
+        case PickerViewSelectingSecondSpec:
+            [self selectingData:secondJob];
+            self.secondSpecialiteText.text = [self.pickerViewData[[self.specialistPickerView selectedRowInComponent:0]] objectForKey:@"doctorName"];
+            break;
+        case PickerViewSelectingDegree:
+            [self selectingDegree];
+            break;
+        case PickerViewSelectingYearDegree:
+            [self selectingDegreeYear];
+            break;
+        default:
+            break;
+    }
+    
+    [self hideEver];
+    [self.scrollView addGestureRecognizer:tap];
+    
+}
+
+- (void)selectingDate {
     NSDate *bd = [self.datePicker date];
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -448,29 +634,35 @@
     [formatter setDateFormat:@"M"];
     monthYeah = [formatter stringFromDate:bd];
     NSLog(@"%@", monthYeah);
-    
-    
-    self.specialistPickerView.hidden = true;
-    self.toolbar.hidden = true;
-    self.special.text = self.namesSpec[[self.specialistPickerView selectedRowInComponent:0] + 1];
-    for (NSDictionary *key in self.dictSpec) {
-        if ([[key objectForKey:@"doctorName"] isEqualToString:self.namesSpec[[self.specialistPickerView selectedRowInComponent:0] + 1]]) {
-            job = [key objectForKey:@"id"];
-            break;
-        }
-    }
-    NSLog(@"%d %@", (int)[self.specialistPickerView selectedRowInComponent:0], self.namesSpec[[self.specialistPickerView selectedRowInComponent:0]]);
-    [self hideEver];
-    [self.scrollView addGestureRecognizer:tap];
-    
 }
 
-- (IBAction)showPicker:(UIButton *)sender {
-    
-    self.specialistPickerView.hidden = false;
-    self.toolbar.hidden = false;
-    
+- (void)selectingDegree {
+    degree = self.namesDegree[[self.specialistPickerView selectedRowInComponent:0]];
+    self.degreeText.text = degree;
 }
+
+- (void)selectingDegreeYear {
+    degreeYear = self.pickerViewData[[self.specialistPickerView selectedRowInComponent:0]];
+    self.yearDegreeText.text = degreeYear;
+}
+
+
+- (void)selectingData:(NSString*)targetProperty {
+    NSDictionary *object = self.pickerViewData[[self.specialistPickerView selectedRowInComponent:0]];
+    targetProperty = [object objectForKey:@"id"];
+    if (selectingType == PickerViewSelectingUniver) {
+        univer = targetProperty;
+    } else if (selectingType == PickerViewSelectingPrimarySpec) {
+        job = targetProperty;
+    } else if (selectingType == PickerViewSelectingSecondSpec) {
+        secondJob = targetProperty;
+    }
+    NSLog(@"%@", targetProperty);
+}
+
+#pragma mark - Picker View Others
+
+
 
 - (NSString *)urlencode:(NSString *) input {
     NSMutableString *output = [NSMutableString string];
@@ -492,28 +684,35 @@
     return output;
 }
 
-- (void) getSpec {
-    
-    self.namesSpec = [NSMutableArray array];
+- (void)getDataFromVidal:(NSString*)type {
+    __block NSMutableArray *dataArray = [NSMutableArray array];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    [manager GET:@"http://www.vidal.ru/api/specialties" parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, NSArray *responseObject) {
+    [manager GET:[@"http://www.vidal.ru/api/" stringByAppendingString:type] parameters:nil success:^(AFHTTPRequestOperation * _Nonnull operation, NSArray *responseObject) {
         
-        self.dictSpec = [[NSMutableArray alloc] initWithArray:responseObject];
-        NSLog(@"%@", self.dictSpec);
-        for (NSDictionary *key in self.dictSpec) {
-            [self.namesSpec addObject:[key objectForKey:@"doctorName"]];
+        NSArray *dict = [[NSArray alloc] initWithArray:responseObject];
+        NSLog(@"%@", dict);
+
+        if ([type isEqualToString:@"specialties"]) {
+            self.namesSpec = [responseObject sortedArrayUsingComparator:^(NSDictionary *item1, NSDictionary *item2) {
+                NSString *age1 = [item1 objectForKey:@"doctorName"];
+                NSString *age2 = [item2 objectForKey:@"doctorName"];
+                return [age1 compare:age2 options:NSCaseInsensitiveSearch];
+            }];
+        } else if ([type isEqualToString:@"universities"]) {
+            self.namesUniversities = [responseObject sortedArrayUsingComparator:^(NSDictionary *item1, NSDictionary *item2) {
+                NSString *age1 = [item1 objectForKey:@"title"];
+                NSString *age2 = [item2 objectForKey:@"title"];
+                return [age1 compare:age2 options:NSCaseInsensitiveSearch];
+            }];
         }
-        self.namesSpec = [[self.namesSpec sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] mutableCopy];
-//        [self setUpQuickSearch:self.namesSpec];
-//        self.FilteredResults = [self.quickSearch filteredObjectsWithValue:nil];
-        
-        [self.specialistPickerView reloadAllComponents];
+
     } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
         NSLog(@"%@",error.localizedDescription);
     }];
 
 }
+
 
 - (void) hideEver {
     [UIView animateWithDuration:0.3 animations:^{
@@ -529,37 +728,134 @@
         self.toolbar.hidden = true;
         self.special.userInteractionEnabled = YES;
         self.special.enabled = YES;
-//        CGPoint point = self.scrollView.frame.origin;
-//        point.y = 0;
+
         
         svos = self.scrollView.contentOffset;
         CGPoint pt;
         pt.x = svos.x;
         pt.y = 0;
-        [self.scrollView setContentOffset:pt animated:YES];
+//        [self.scrollView setContentOffset:pt animated:YES];
     }];
 }
 
 // returns the number of 'columns' to display.
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView
-{
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
     return 1;
 }
 
 // returns the # of rows in each component..
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component
-{
-    return [self.namesSpec count] - 1;
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return [self.pickerViewData count];
 }
 
 
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component
-{
-    return self.namesSpec[row + 1];
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    NSString *returnValue = @"";
+    if (selectingType == PickerViewSelectingUniver || selectingType == PickerViewSelectingPrimarySpec || selectingType == PickerViewSelectingSecondSpec) {
+        NSDictionary *object = self.pickerViewData[row];
+        NSString *key = @"title";
+        if ([[object allKeys] containsObject:@"doctorName"]) {
+            key = @"doctorName";
+        }
+        returnValue = [object objectForKey:key];
+    } else if (selectingType == PickerViewSelectingYearDegree || selectingType == PickerViewSelectingDegree) {
+        returnValue = self.pickerViewData[row];
+    }
+
+    return returnValue;
+//    return [NSString stringWithFormat:@"%d", row];
 }
 
 - (IBAction)agreementLink:(UIButton *)sender {
     [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://vidal.ru/eula"]];
 }
 
+#pragma mark - Actions
+
+
+- (IBAction)callDatePicker:(UIButton*)sender {
+    selectingType = PickerViewSelectingDate;
+    [self showPickerView:self.datePicker WithButton:sender];
+}
+
+- (IBAction)selectYearDegreeAction:(id)sender {
+    selectingType = PickerViewSelectingYearDegree;
+    NSMutableArray *dateArray = [NSMutableArray array];
+    for (NSInteger i = [[NSCalendar currentCalendar] component:NSCalendarUnitYear fromDate:[NSDate date]]; i >= 1900; i--) {
+        [dateArray addObject:[NSString stringWithFormat:@"%lu", i]];
+    }
+    self.pickerViewData = dateArray;
+    [self showPickerView:self.specialistPickerView WithButton:sender];
+
+}
+
+- (IBAction)selectSecondSpecialateAction:(id)sender {
+    selectingType = PickerViewSelectingSecondSpec;
+    self.pickerViewData = self.namesSpec;
+    [self showPickerView:self.specialistPickerView WithButton:sender];
+}
+
+- (IBAction)selectDegreeAction:(id)sender {
+    selectingType = PickerViewSelectingDegree;
+    self.pickerViewData = self.namesDegree;
+    [self showPickerView:self.specialistPickerView WithButton:sender];
+}
+
+
+- (IBAction)showPicker:(UIButton *)sender {
+    selectingType = PickerViewSelectingPrimarySpec;
+    self.pickerViewData = self.namesSpec;
+    [self showPickerView:self.specialistPickerView WithButton:sender];
+}
+
+- (IBAction)selectUniverAction:(id)sender {
+    selectingType = PickerViewSelectingUniver;
+    self.pickerViewData = self.namesUniversities;
+    [self showPickerView:self.specialistPickerView WithButton:sender];
+}
+
+
+
+
+- (void)showPickerView:(UIView*)picker WithButton:(UIView*)sender {
+    [self hideEver];
+    [self.specialistPickerView selectRow:0 inComponent:0 animated:NO];
+    picker.hidden = false;
+    self.toolbar.hidden = false;
+    if ([picker isKindOfClass:[UIPickerView class]]) {
+        [(UIPickerView*)picker reloadComponent:0];
+    }
+    [self fieldIsVisibleWithRect:sender.frame];
+}
+
+
+#pragma mark - ScrollView calculates
+
+- (void)fieldIsVisibleWithRect:(CGRect)targetField {
+    static const NSInteger pickerViewHeight = 256;
+    CGPoint currentOffset = self.scrollView.contentOffset;
+    const NSInteger screenHeight = self.view.frame.size.height;
+    const NSInteger visibleHeight = screenHeight - pickerViewHeight;
+    CGRect visibleRect = CGRectMake(0, currentOffset.y, self.view.frame.size.height, visibleHeight);
+    if (CGRectContainsRect(visibleRect, targetField) == NO) {
+        currentOffset.y -= visibleRect.origin.y + visibleHeight - targetField.origin.y - targetField.size.height - 30;
+        [UIView animateWithDuration:0.2 animations:^{
+                self.scrollView.contentOffset = currentOffset;
+        }];
+    }
+}
+
+
 @end
+
+
+
+
+
+
+
+
+
+
+
+

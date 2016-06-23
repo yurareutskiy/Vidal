@@ -150,6 +150,7 @@
     NSInteger indexOfLetter = [self.dbManager.arrColumnNames indexOfObject:@"Letter"];
     NSInteger indexOfTitle = [self.dbManager.arrColumnNames indexOfObject:@"Title"];
     
+
     cell.name.text = [self clearString:[[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfTitle] valueForKey:@"lowercaseString"]];
     cell.letter.text = [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfLetter];
         
@@ -186,12 +187,26 @@
     // Reload the table view.
 }
 
-- (NSString *) clearString:(NSString *) input {
+- (NSString *) clearString:(NSString *) text {
     
-    NSString *text = input;
+    
     
     NSRange range = NSMakeRange(0, 1);
+    
     text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
+    
+    while (range.location < text.length) {
+        range.length = text.length - range.location;
+        range = [text rangeOfString:@"," options:0 range:range];
+        if (range.length > 0) {
+            range.location += + 2;
+            range.length = 1;
+            text = [text stringByReplacingCharactersInRange:range withString:[[text substringWithRange:range] uppercaseString]];
+        } else {
+            break;
+        }
+    }
+    
     text = [text stringByReplacingOccurrencesOfString:@"<TD colSpan=\"2\">" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
     text = [text stringByReplacingOccurrencesOfString:@"<sup>&trade;</sup>" withString:@"™"];

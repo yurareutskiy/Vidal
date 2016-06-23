@@ -136,6 +136,19 @@
     }
     self.arrPeopleInfo = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
     
+        NSInteger index = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
+        for (NSArray *element in self.arrPeopleInfo) {
+            if ([element[index] isEqualToString:@"ТАКЕДА"]) {
+                NSMutableArray *tempArray = [self.arrPeopleInfo mutableCopy];
+                NSArray *object = [element copy];
+                [tempArray removeObject:element];
+                [tempArray insertObject:object atIndex:0];
+                self.arrPeopleInfo = tempArray;
+                break;
+            }
+        }
+
+    
     // Reload the table view.
     [self.tableView reloadData];
 }

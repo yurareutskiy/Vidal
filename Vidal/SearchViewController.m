@@ -67,8 +67,8 @@
     
     buttonNumber = 0;
     
-    tableView1b = true;
-    tableView2b = false;
+    tableView2b = true;
+    tableView1b = false;
     tableView3b = false;
     tableView4b = false;
     
@@ -112,19 +112,21 @@
     [self setUpQuickSearch:self.moleculeSearch];
     self.FilteredResults = [self.quickSearch filteredObjectsWithValue:nil];
     
-    self.tableView1.hidden = false;
-    self.tableView2.hidden = true;
+    self.tableView2.hidden = false;
+    self.tableView1.hidden = true;
     self.tableView3.hidden = true;
     self.tableView4.hidden = true;
     
     self.navigationItem.title = @"Поиск";
 
-    [self.line2 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
-    [self.line1 setBackgroundColor:[UIColor whiteColor]];
+    [self.line1 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+    [self.line2 setBackgroundColor:[UIColor whiteColor]];
     [self.line3 setBackgroundColor:[UIColor whiteColor]];
     [self.line4 setBackgroundColor:[UIColor whiteColor]];
     
     // Do any additional setup after loading the view.
+    
+    [self toDrugs:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -149,19 +151,21 @@
     return self.FilteredResults.count;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchCell"];
-        }
-        
-        NSString *title;
-        title = [self clearString:self.FilteredResults[indexPath.row]];
-        cell.textLabel.text = title;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchCell"];
+    }
     
-        return cell;
+    NSString *title;
+    title = [self clearString:self.FilteredResults[indexPath.row]];
+    if (!tableView4b) {
+        title = [title capitalizedString];
+    }
+    cell.textLabel.text = title;
+
+    return cell;
     
 }
 
@@ -201,23 +205,6 @@
     
     if (tableView1b) {
         
-        for (int i = 0; i < [self.moleculeSearch count]; i++) {
-            if ([[self.moleculeSearch objectAtIndex:i] isEqualToString:self.FilteredResults[indexPath.row]]) {
-                index = i;
-                break;
-            }
-        }
-
-        next = [self.moleculeFull[index] objectAtIndex:0];
-//        [ud setObject:next forKey:@"molecule"];
-//        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Molecule.MoleculeID, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозирования', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID WHERE Document.DocumentID = %@", next];
-//        [self getInfo:request];
-        [ud setObject:next forKey:@"activeID"];
-        [self.tableView1 deselectRowAtIndexPath:indexPath animated:NO];
-        [self performSegueWithIdentifier:@"toDoc" sender:self];
-        
-    } else if (tableView2b) {
-        
         for (int i = 0; i < [self.drugsSearch count]; i++) {
             if ([[self.drugsSearch objectAtIndex:i] isEqualToString:self.FilteredResults[indexPath.row]]) {
                 index = i;
@@ -226,7 +213,7 @@
         }
         
         next = [self.drugsFull[index] objectAtIndex:0];
-//        [ud setObject:next forKey:@"molecule"];
+        //        [ud setObject:next forKey:@"molecule"];
         [ud setObject:next forKey:@"id"];
         [ud setObject:@"А" forKey:@"letterDrug"];
         NSString *request = [NSString stringWithFormat:@"select * from DocumentListView doc where doc.DocumentID = %@", next];
@@ -234,6 +221,23 @@
         
         [self.tableView2 deselectRowAtIndexPath:indexPath animated:NO];
         [self performSegueWithIdentifier:@"toSecDoc" sender:self];
+        
+    } else if (tableView2b) {
+        for (int i = 0; i < [self.moleculeSearch count]; i++) {
+            if ([[self.moleculeSearch objectAtIndex:i] isEqualToString:self.FilteredResults[indexPath.row]]) {
+                index = i;
+                break;
+            }
+        }
+        
+        next = [self.moleculeFull[index] objectAtIndex:0];
+        //        [ud setObject:next forKey:@"molecule"];
+        //        NSString *request = [NSString stringWithFormat:@"SELECT Document.RusName, Document.EngName, Document.CompaniesDescription, Molecule.MoleculeID, Document.CompiledComposition AS 'Описание состава и форма выпуска', Document.YearEdition AS 'Год издания', Document.PhInfluence AS 'Фармакологическое действие', Document.PhKinetics AS 'Фармакокинетика', Document.Dosage AS 'Режим дозирования', Document.OverDosage AS 'Передозировка', Document.Lactation AS 'При беременности, родах и лактации', Document.SideEffects AS 'Побочное действие', Document.StorageCondition AS 'Условия и сроки хранения', Document.Indication AS 'Показания к применению', Document.ContraIndication AS 'Противопоказания', Document.SpecialInstruction AS 'Особые указания', Document.PharmDelivery AS 'Условия отпуска из аптек' FROM Document INNER JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID INNER JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID WHERE Document.DocumentID = %@", next];
+        //        [self getInfo:request];
+        [ud setObject:next forKey:@"activeID"];
+        [self.tableView1 deselectRowAtIndexPath:indexPath animated:NO];
+        [self performSegueWithIdentifier:@"toDoc" sender:self];
+
         
     } else if (tableView3b) {
         
@@ -392,26 +396,26 @@
     [self setUpQuickSearch:self.drugsSearch];
     self.FilteredResults = [self.quickSearch filteredObjectsWithValue:nil];
     
-    [self.tableView2 reloadData];
-    self.tableView2.hidden = false;
-    self.tableView1.hidden = true;
+    [self.tableView1 reloadData];
+    self.tableView1.hidden = false;
+    self.tableView2.hidden = true;
     self.tableView3.hidden = true;
     self.tableView4.hidden = true;
     
-    tableView2b = true;
-    tableView1b = false;
+    tableView1b = true;
+    tableView2b = false;
     tableView3b = false;
     tableView4b = false;
     
     [UIView animateWithDuration:0.05 animations:^{
-        [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 1, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+        [self.scrollView scrollRectToVisible:CGRectMake(0.0, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.05 animations:^{
             [self.line2 setBackgroundColor:[UIColor whiteColor]];
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.05 animations:^{
-                [self.line1 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
-                [self.line2 setBackgroundColor:[UIColor whiteColor]];
+                [self.line2 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+                [self.line1 setBackgroundColor:[UIColor whiteColor]];
                 [self.line3 setBackgroundColor:[UIColor whiteColor]];
                 [self.line4 setBackgroundColor:[UIColor whiteColor]];
             }];
@@ -425,26 +429,27 @@
     [self setUpQuickSearch:self.moleculeSearch];
     self.FilteredResults = [self.quickSearch filteredObjectsWithValue:nil];
     
-    [self.tableView1 reloadData];
-    self.tableView1.hidden = false;
-    self.tableView2.hidden = true;
+    [self.tableView2 reloadData];
+    self.tableView2.hidden = false;
+    self.tableView1.hidden = true;
     self.tableView3.hidden = true;
     self.tableView4.hidden = true;
     
-    tableView2b = false;
-    tableView1b = true;
+    tableView1b = false;
+    tableView2b = true;
     tableView3b = false;
     tableView4b = false;
     
     [UIView animateWithDuration:0.05 animations:^{
-        [self.scrollView scrollRectToVisible:CGRectMake(0.0, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+        [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 1, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
+
     } completion:^(BOOL finished) {
         [UIView animateWithDuration:0.05 animations:^{
             [self.line4 setBackgroundColor:[UIColor whiteColor]];
         } completion:^(BOOL finished) {
             [UIView animateWithDuration:0.05 animations:^{
-                [self.line2 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
-                [self.line1 setBackgroundColor:[UIColor whiteColor]];
+                [self.line1 setBackgroundColor:[UIColor colorWithRed:187.0/255.0 green:0 blue:57.0/255.0 alpha:1.0]];
+                [self.line2 setBackgroundColor:[UIColor whiteColor]];
                 [self.line3 setBackgroundColor:[UIColor whiteColor]];
                 [self.line4 setBackgroundColor:[UIColor whiteColor]];
             }];
@@ -659,7 +664,8 @@
     } else if (buttonNumber == 1) {
         
         buttonNumber = 0;
-        [self toMolecule:nil];
+        [self toDrugs:nil];
+
 //        [UIView animateWithDuration:0.05 animations:^{
 //            [self.scrollView scrollRectToVisible:CGRectMake(0.0, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
 //        } completion:^(BOOL finished) {
@@ -675,7 +681,8 @@
     } else if (buttonNumber == 2) {
         
         buttonNumber = 1;
-        [self toDrugs:nil];
+        [self toMolecule:nil];
+
 //        [UIView animateWithDuration:0.05 animations:^{
 //            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 1, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
 //        } completion:^(BOOL finished) {
@@ -712,7 +719,9 @@
     if (buttonNumber == 0) {
         
         buttonNumber = 1;
-        [self toDrugs:nil];
+        [self toMolecule:nil];
+
+
         
 //        [UIView animateWithDuration:0.05 animations:^{
 //            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 1, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
@@ -732,6 +741,7 @@
         
         buttonNumber = 2;
         [self toPharma:nil];
+
 //        [UIView animateWithDuration:0.05 animations:^{
 //            [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * 2, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
 //        } completion:^(BOOL finished) {
@@ -767,7 +777,8 @@
     } else if (buttonNumber == 3) {
         
         buttonNumber = 0;
-        [self toMolecule:nil];
+        [self toDrugs:nil];
+
 //        [UIView animateWithDuration:0.05 animations:^{
 //            [self.scrollView scrollRectToVisible:CGRectMake(0.0, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
 //        } completion:^(BOOL finished) {

@@ -194,4 +194,12 @@
     [self runQuery:[query UTF8String] isQueryExecutable:YES];
 }
 
+-(id)copyWithZone:(NSZone *)zone {
+    DBManager *copy = [[DBManager alloc] init];
+    copy.arrColumnNames = [_arrColumnNames copyWithZone:zone];
+    copy.affectedRows = self.affectedRows;
+    copy.lastInsertedRowID = self.lastInsertedRowID;
+    return copy;
+}
+
 @end

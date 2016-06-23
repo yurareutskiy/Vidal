@@ -33,8 +33,17 @@
     self.nameHid.text = self.name;
     self.countryHid.text = self.country;
     self.addressHid.text = self.address;
-    self.emailHid.text = self.email;
-    self.phoneHid.text = self.phone;
+    if ([self.address containsString:@"Тел.:"]) {
+        [self.phoneHid setHidden:YES];
+    } else {
+        self.phoneHid.text = self.phone;
+    }
+    if ([self.address containsString:@"E-mail:"]) {
+        [self.emailHid setHidden:YES];
+    } else {
+        self.emailHid.text = self.email;
+    }
+    
     NSLog(@"%@", self.logo);
     if (self.logo != nil) {
         self.image.image = self.logo;

@@ -121,15 +121,6 @@
     }
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -205,6 +196,10 @@
     [tableView beginUpdates];
     
     [tableView endUpdates];
+    
+    [tableView scrollToRowAtIndexPath:indexPath
+                     atScrollPosition:UITableViewScrollPositionTop
+                             animated:YES];
     
 }
 

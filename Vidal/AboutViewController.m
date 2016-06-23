@@ -259,9 +259,14 @@
     if ([segue.identifier isEqualToString:@"toDrug"]) {
         
         SecondDocumentViewController *sdvc = [segue destinationViewController];
+        NSLog(@"%@", self.molecule);
         
-        sdvc.info = self.molecule;
-        sdvc.dbManager = self.dbManager;
+        sdvc.info = [self.molecule mutableCopy];
+        DBManager *manager = [[DBManager alloc] init];
+        manager.arrColumnNames = [self.dbManager.arrColumnNames mutableCopy];
+        manager.affectedRows = self.dbManager.affectedRows;
+        manager.lastInsertedRowID = self.dbManager.lastInsertedRowID;
+        sdvc.dbManager = manager;
         
     }
     

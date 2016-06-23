@@ -27,28 +27,37 @@
     // Do any additional setup after loading the view.
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [self.text setContentOffset:CGPointZero animated:NO];
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-- (NSMutableAttributedString *) clearString:(NSMutableAttributedString *) input {
-    
-    NSMutableAttributedString *text = input;
-    NSURL *URL = [NSURL URLWithString:@"http://webvidal.ru/"];
-    
-    NSString *string = [input string];
-    NSRange range = [string rangeOfString:@"http://webvidal.ru/"];
-    
-    NSMutableAttributedString *link = [[NSMutableAttributedString alloc] initWithString:@"http://webvidal.ru/"];
-    [link addAttribute: NSLinkAttributeName value:URL range: NSMakeRange(0, link.length)];
-    
-    [text replaceCharactersInRange:range withString:@""];
-    [text insertAttributedString:link atIndex:range.location];
-    
-    return text;
-    
-}
+//- (NSMutableAttributedString *) clearString:(NSMutableAttributedString *) input {
+//    
+//    NSMutableAttributedString *text = input;
+//    NSURL *URL = [NSURL URLWithString:@"http://webvidal.ru/"];
+//    
+//    NSString *string = [input string];
+//    NSRange range = [string rangeOfString:@"http://webvidal.ru/"];
+//    
+//    NSMutableAttributedString *link = [[NSMutableAttributedString alloc] initWithString:@"http://webvidal.ru/"];
+//    [link addAttribute: NSLinkAttributeName value:URL range: NSMakeRange(0, link.length)];
+//    
+//    [text replaceCharactersInRange:range withString:@""];
+//    [text insertAttributedString:link atIndex:range.location];
+//    
+//    return text;
+//    
+//}
 
 - (BOOL)textView:(UITextView *)textView shouldInteractWithURL:(NSURL *)url inRange:(NSRange)characterRange
 {
