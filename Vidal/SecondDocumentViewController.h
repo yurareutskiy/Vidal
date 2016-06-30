@@ -23,7 +23,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *elaboration;
 
 @property (strong, nonatomic) NSMutableArray *info;
+@property (strong, nonatomic) NSMutableArray *tempInfo;
 @property (strong, nonatomic) DBManager *dbManager;
+@property (strong, nonatomic) NSString *drugID;
 
 - (IBAction)addToFav:(UIButton *)sender;
 - (IBAction)toInter:(UIButton *)sender;

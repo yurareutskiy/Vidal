@@ -8,6 +8,7 @@
 
 #import "ProfileViewController.h"
 #import "RegViewController.h"
+#import "LoginViewController.h"
 
 @interface ProfileViewController ()
 
@@ -27,12 +28,28 @@
     ud = [NSUserDefaults standardUserDefaults];
     [self loadData];
     
-    [self updateUserData];
     
     NSLog(@"%f", self.changeButton.imageView.image.size.width);
     [self.changeButton setImage:[self imageWithImage:[UIImage imageNamed:@"edit"] scaledToSize:CGSizeMake(16, 20)]  forState:UIControlStateNormal];
     NSLog(@"%f", self.changeButton.imageView.image.size.width);
     // Do any additional setup after loading the view.
+    
+    UIBarButtonItem *item = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"edit"] scaledToSize:CGSizeMake(20, 20)]
+                                                             style:UIBarButtonItemStyleDone
+                                                            target:self
+                                                            action:@selector(editButtonAction:)];
+    
+    self.navigationItem.rightBarButtonItem = item;
+}
+
+- (void)editButtonAction:(id)sender {
+    RegViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"edit"];
+    vc.isProfileUpdate = YES;
+    [self.navigationController pushViewController:vc animated:YES];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [self updateUserData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -53,9 +70,7 @@
 - (IBAction)change:(UIButton *)sender {
     
 //    [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.vidal.ru/profile"]];
-    RegViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"edit"];
-    vc.isProfileUpdate = YES;
-    [self.navigationController pushViewController:vc animated:YES];
+
     
 }
 
@@ -71,6 +86,7 @@
 
 - (IBAction)logOut:(id)sender {
     [ud setValue:@"1" forKey:@"reg"];
+    [ud setObject:@"1" forKey:@"wasExit"];
     [self performSegueWithIdentifier:@"logout" sender:nil];
 }
 
@@ -94,7 +110,10 @@
               [ud setObject:[responseObject valueForKey:@"birthdate"] forKey:@"birthDay"];
               [ud setObject:[responseObject valueForKey:@"city"] forKey:@"city"];
               [ud setObject:[responseObject valueForKey:@"primarySpecialty"] forKey:@"spec"];
-              if ([responseObject valueForKey:@""] != nil) {
+              NSString *nullString;
+              NSLog(@"%@", nullString);
+              NSLog(@"%@", [responseObject valueForKey:@"secondarySpecialty"]);
+              if ([[responseObject valueForKey:@"secondarySpecialty"] isKindOfClass:[NSNull class]] == NO) {
                   [ud setObject:[responseObject valueForKey:@"secondarySpecialty"] forKey:@"secondarySpecialty"];
               } else {
                   [ud setObject:@"-" forKey:@"secondarySpecialty"];
@@ -190,6 +209,8 @@
     [self.secondSpecText setText:secondSpec];
 
 }
+
+
 
 
 

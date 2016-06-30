@@ -7,6 +7,7 @@
 //
 
 #import "CompanyViewController.h"
+#import "SearchViewController.h"
 
 @interface CompanyViewController ()
 
@@ -32,8 +33,8 @@
     
     self.nameHid.text = self.name;
     self.countryHid.text = self.country;
-    self.addressHid.text = self.address;
-    if ([self.address containsString:@"Тел.:"]) {
+    self.addressHid.text = [self addPhonePrefix: self.address];
+    if ([self.address containsString:@"Тел."] || [self.address containsString:@"Тел:"]) {
         [self.phoneHid setHidden:YES];
     } else {
         self.phoneHid.text = self.phone;
@@ -60,20 +61,33 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (NSString*)addPhonePrefix:(NSString*)text {
+    if ([text containsString:@"+7"]) {
+        return text;
+    }
+    NSArray *keyWords = @[@"Тел.:", @"Факс:", @"Тел./Факс:", @"Tel.:", @"Fax:"];
+    for (NSString *key in keyWords) {
+        NSRange range = [text rangeOfString:key options:0];
+        if (range.length != 0) {
+            NSMutableString *mutableString = [NSMutableString stringWithString:text];
+            NSInteger index = range.location + range.length;
+            [mutableString insertString:@"+7 " atIndex: index];
+            text = mutableString;
+        }
+    }
+    return text;
 }
-*/
 
 - (IBAction) toListDrugs:(UIButton *)sender {
     
     [self performSegueWithIdentifier:@"toList" sender:self];
     
+}
+
+- (void) search {
+    SearchViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"search"];
+    [vc setSearchType:SearchCompany];
+    [self.navigationController pushViewController:vc animated:NO];
 }
 
 @end

@@ -40,6 +40,8 @@ typedef enum : NSUInteger {
     UITapGestureRecognizer *tap;
     CGFloat kh;
     NSUserDefaults *ud;
+    NSMutableDictionary *paramsUpdate;
+    CGFloat offset;
 }
 
 - (instancetype)init
@@ -57,14 +59,21 @@ typedef enum : NSUInteger {
     
     ud = [NSUserDefaults standardUserDefaults];
     
+    offset = 0;
+    
     monthYeah = @"0";
     job = @"0";
+    univer = @"0";
+    secondJob = @"0";
+    degreeYear = @"0";
+    degree = @"0";
     cityCheck = @"0";
     
     self.namesDegree = @[@"Нет", @"Кандидат наук", @"Доктор медицинских наук"];
     
     flag1 = false;
     flag2 = false;
+
     
     self.scrollView.delegate = self;
     
@@ -94,6 +103,11 @@ typedef enum : NSUInteger {
     [self.tableView2 setTag:2];
     self.tableView.hidden = true;
     self.tableView2.hidden = true;
+    
+    if (self.isProfileUpdate) {
+        [self.doneButton setHidden:YES];
+        [self.updateButton setHidden:NO];
+    }
     
     self.year.text = @"1990";
     self.month.text = @"Января";
@@ -150,9 +164,22 @@ typedef enum : NSUInteger {
     
     [self.tableView2.backgroundView setBackgroundColor:[UIColor whiteColor]];
     [self.tableView2 setBackgroundColor:[UIColor whiteColor]];
+    
+
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    if (self.isProfileUpdate) {
+        CGSize size = self.scrollView.contentSize;
+        size.height -= 150;
+        self.scrollView.contentSize = size;
+    }
+
 }
 
 -(void)configureForProfileUpdating {
+    paramsUpdate = [NSMutableDictionary dictionaryWithDictionary:@{@"username":[ud objectForKey:@"email"], @"token" : [ud objectForKey:@"archToken"]}];
+    
     [self loadExistValueForFields];
     // Hide main title
     [self.mainLabel setText:@"Редактирование профиля"];
@@ -166,10 +193,12 @@ typedef enum : NSUInteger {
     
     // Hide back button
     [self.backButton setHidden:YES];
-//    self.doneButtonBottomMarginConstraint.constant += 300;
-//    self.scrollView.contentSize = CGSizeMake(self.scrollView.contentSize.width, self.scrollView.contentSize.height - 100);
+    [self.doneButton setTitle:@"Обновить" forState:UIControlStateNormal];
     
     // Change link
+    
+    [self.emailText setUserInteractionEnabled:NO];
+    [self.passText setUserInteractionEnabled:NO];
 }
 
 -(void)loadExistValueForFields {
@@ -183,6 +212,7 @@ typedef enum : NSUInteger {
     NSString *degree = [ud valueForKey:@"academicDegree"];
     NSString *yearDegree = [ud valueForKey:@"graduateYear"];
     NSString *secondSpec = [ud valueForKey:@"secondarySpecialty"];
+    NSString *password = [ud valueForKey:@"pass_temp"];
     
     [self.nameText setText:surname];
     [self.surnameText setText:name];
@@ -193,6 +223,14 @@ typedef enum : NSUInteger {
     [self.degreeText setText:degree];
     [self.yearDegreeText setText:yearDegree];
     [self.secondSpecialiteText setText:secondSpec];
+    [self.passText setText:password];
+
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"MM.dd.yyyy"];
+    NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
+    [formatter setTimeZone:gmt];
+    NSDate *date = [formatter dateFromString:bd];
+    [self.datePicker setDate:date];
     
     NSArray *bdParts = [bd componentsSeparatedByString:@"."];
     if ([bdParts count] == 3) {
@@ -224,6 +262,7 @@ typedef enum : NSUInteger {
         } else if ([bdParts[1] isEqualToString:@"12"]) {
             monthName = @"Декабря";
         }
+        monthYeah = monthName;
         [self.month setText:monthName];
     }
 
@@ -289,6 +328,7 @@ typedef enum : NSUInteger {
     [self.scrollView addGestureRecognizer:tap];
     self.special.userInteractionEnabled = YES;
     self.special.enabled = YES;
+    [paramsUpdate setObject:cityCheck forKey:@"profile[city]"];
     
 }
 
@@ -417,6 +457,8 @@ typedef enum : NSUInteger {
 
 - (IBAction)regButton:(UIButton *)sender {
     
+    [self.indicator setHidden:NO];
+    
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
     [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
@@ -448,10 +490,10 @@ typedef enum : NSUInteger {
         if ([self.passText.text length] >= 6 && [self.passText.text length] <= 255 && ![self hasRussianCharacters:self.passText.text]) {
             if (![self.surnameText.text isEqualToString:@""]) {
                 if (![self.nameText.text isEqualToString:@""]) {
-                    if (![monthYeah isEqualToString:@"0"]) {
-                        if (![cityCheck isEqualToString:@"0"]) {
+                    if (![monthYeah isEqualToString:@"0"] || self.isProfileUpdate) {
+                        if (![cityCheck isEqualToString:@"0"] || [city length] > 0) {
                             if (job != 0) {
-                                if (flag1 && flag2) {
+                                if ((flag1 && flag2) || self.isProfileUpdate) {
 
                                     
                                     } else if (!flag1) {
@@ -491,6 +533,10 @@ typedef enum : NSUInteger {
         return;
     }
     
+    if ([monthYeah length] > 2) {
+        [self selectingDate];
+    }
+    
     NSMutableDictionary *parametrs = [NSMutableDictionary dictionaryWithDictionary:@{@"register[username]":email,
                                                                                      @"register[password]":pass,
                                                                                      @"register[firstName]":name,
@@ -507,17 +553,95 @@ typedef enum : NSUInteger {
         [parametrs setObject: secondJob forKey:@"register[secondarySpecialty]"];
     }
     
-    [manager POST:@"http://www.vidal.ru/api/user/add" parameters: parametrs
-     
-          success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
-              NSLog(@"Responce is :%@",responseObject);
-              [ud setObject:self.emailText.text forKey:@"email_temp"];
-              [ud setObject:self.passText.text forKey:@"pass_temp"];
-              [self showAlert:@"Мы выслали вам письмо" mess:@"Подтвердите регистрацию" check:YES];
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        NSLog(@"%@", error);
-        [self showAlert:@"Ошибка" mess:@"Проверьте введенные данные" check:NO];
-    }];
+    if (self.isProfileUpdate) {
+        
+        
+        
+        [paramsUpdate setObject:self.nameText.text forKey:@"profile[firstName]"];
+        [paramsUpdate setObject:self.surnameText.text forKey:@"profile[lastName]"];
+        if ([[paramsUpdate allKeys] containsObject:@"profile[city]"] == NO) {
+            [paramsUpdate setObject:[ud objectForKey:@"city"] forKey:@"profile[city]"];
+        }
+        if ([[paramsUpdate allKeys] containsObject:@"profile[primarySpecialty]"] == NO) {
+            for (NSDictionary *spec in self.namesSpec) {
+                if ([[spec objectForKey:@"title"] isEqualToString:[ud objectForKey:@"spec"]]) {
+                    [paramsUpdate setObject:[spec objectForKey:@"id"] forKey:@"profile[primarySpecialty]"];
+                    break;
+                }
+            }
+        }
+        if ([[paramsUpdate allKeys] containsObject:@"profile[secondarySpecialty]"] == NO && [ud objectForKey:@"secondarySpecialty"]) {
+            for (NSDictionary *spec in self.namesSpec) {
+                if ([[spec objectForKey:@"doctorName"] isEqualToString:[ud objectForKey:@"secondarySpecialty"]]) {
+                    [paramsUpdate setObject:[spec objectForKey:@"id"] forKey:@"profile[secondarySpecialty]"];
+                    break;
+                }
+            }
+        }
+        if ([[paramsUpdate allKeys] containsObject:@"profile[university]"] == NO && [ud objectForKey:@"university"]) {
+            for (NSDictionary *spec in self.namesUniversities) {
+                if ([[spec objectForKey:@"title"] isEqualToString:[ud objectForKey:@"university"]]) {
+                    [paramsUpdate setObject:[spec objectForKey:@"id"] forKey:@"profile[university]"];
+                    break;
+                }
+            }
+        }
+        if ([[paramsUpdate allKeys] containsObject:@"profile[graduateYear]"] == NO && [ud objectForKey:@"graduateYear"]) {
+            [paramsUpdate setObject:[ud objectForKey:@"graduateYear"] forKey:@"profile[graduateYear]"];
+        }
+        if ([[paramsUpdate allKeys] containsObject:@"profile[academicDegree]"] == NO && [ud objectForKey:@"academicDegree"]) {
+            [paramsUpdate setObject:[ud objectForKey:@"academicDegree"] forKey:@"profile[academicDegree]"];
+        }
+        
+        
+        NSLog(@"%@", paramsUpdate);
+        
+        [manager POST:@"http://www.vidal.ru/api/user/edit" parameters: paramsUpdate
+         
+              success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                  [self.indicator setHidden:YES];
+                  NSLog(@"Responce is :%@",responseObject);
+                  UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"" message:@"Ваш профиль успешно был отредактирован" preferredStyle:UIAlertControllerStyleAlert];
+                  
+                  UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                       {
+                                           [self.navigationController popViewControllerAnimated:YES];
+                                           
+                                       }];
+                  [alertController addAction:ok];
+                  
+                  [self presentViewController:alertController animated:YES completion:nil];
+                  
+              } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                  [self.indicator setHidden:YES];
+                  NSLog(@"%@", [[NSString alloc] initWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"]  encoding:NSUTF8StringEncoding]);
+                  NSError *errorJson;
+                  NSDictionary *dictResponse = [NSJSONSerialization JSONObjectWithData:[error.userInfo objectForKey:@"com.alamofire.serialization.response.error.data"] options:NSJSONReadingMutableContainers error:&errorJson];
+                  NSString *msgString = [NSMutableString stringWithString:@""];
+                  for (NSString *partMessage in [dictResponse allValues]) {
+                      msgString = [[msgString stringByAppendingString:partMessage] stringByAppendingString:@"\n"];
+                  }
+//                  [self showAlert:@"Ошибка" mess:@"Проверьте введенные данные" check:NO];
+                  [self showAlert:@"Ошибка" mess:msgString check:NO];
+              }];
+    } else {
+        [manager POST:@"http://www.vidal.ru/api/user/add" parameters: parametrs
+         
+              success:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
+                  [self.indicator setHidden:YES];
+                  NSLog(@"Responce is :%@",responseObject);
+                  [ud setObject:self.emailText.text forKey:@"email_temp"];
+                  [ud setObject:self.passText.text forKey:@"pass_temp"];
+                  [self showAlert:@"Мы выслали вам письмо" mess:@"Подтвердите регистрацию" check:YES];
+                  [ud setObject:@"1" forKey:@"reg"];
+              } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                  [self.indicator setHidden:YES];
+                  NSLog(@"%@", error);
+                  [self showAlert:@"Ошибка" mess:@"Проверьте введенные данные" check:NO];
+              }];
+    }
+    
+    
 }
 
 - (void) showAlert:(NSString *)alert  mess:(NSString *)mess check:(BOOL) yep {
@@ -574,7 +698,8 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)backButton:(id)sender {
-    
+
+    NSLog(@"%@", [ud valueForKey:@"reg"]);
     if ([[ud valueForKey:@"reg"] isEqualToString:@"1"]) {
         [self.navigationController popViewControllerAnimated:YES];
     } else if ([[ud valueForKey:@"reg"] isEqualToString:@"0"]) {
@@ -587,6 +712,8 @@ typedef enum : NSUInteger {
 
 - (IBAction)getData:(UIBarButtonItem *)sender {
     
+    [self.scrollView setContentOffset:CGPointMake(self.scrollView.contentOffset.x, self.scrollView.contentOffset.y + offset)];
+    
     self.datePicker.hidden = true;
     self.toolbar.hidden = true;
 
@@ -594,6 +721,7 @@ typedef enum : NSUInteger {
         case PickerViewSelectingUniver:
             [self selectingData:univer];
             self.universityText.text = [self.pickerViewData[[self.specialistPickerView selectedRowInComponent:0]] objectForKey:@"title"];
+            [paramsUpdate setObject:univer forKey:@"profile[university]"];
             break;
         case PickerViewSelectingDate:
             [self selectingDate];
@@ -601,10 +729,12 @@ typedef enum : NSUInteger {
         case PickerViewSelectingPrimarySpec:
             [self selectingData:job];
             self.special.text = [self.pickerViewData[[self.specialistPickerView selectedRowInComponent:0]] objectForKey:@"doctorName"];
+            [paramsUpdate setObject:job forKey:@"profile[primarySpecialty]"];
             break;
         case PickerViewSelectingSecondSpec:
             [self selectingData:secondJob];
             self.secondSpecialiteText.text = [self.pickerViewData[[self.specialistPickerView selectedRowInComponent:0]] objectForKey:@"doctorName"];
+            [paramsUpdate setObject:secondJob forKey:@"profile[secondarySpecialty]"];
             break;
         case PickerViewSelectingDegree:
             [self selectingDegree];
@@ -633,17 +763,25 @@ typedef enum : NSUInteger {
     self.day.text = [formatter stringFromDate:bd];
     [formatter setDateFormat:@"M"];
     monthYeah = [formatter stringFromDate:bd];
+    [paramsUpdate setObject:self.year.text forKey:@"profile[birthdate][year]"];
+    [paramsUpdate setObject:self.day.text forKey:@"profile[birthdate][day]"];
+    [paramsUpdate setObject:monthYeah forKey:@"profile[birthdate][month]"];
     NSLog(@"%@", monthYeah);
 }
 
 - (void)selectingDegree {
+    NSString *degreeText = self.degreeText.text;
+    
     degree = self.namesDegree[[self.specialistPickerView selectedRowInComponent:0]];
     self.degreeText.text = degree;
+    [paramsUpdate setObject:degree forKey:@"profile[academicDegree]"];
 }
 
 - (void)selectingDegreeYear {
     degreeYear = self.pickerViewData[[self.specialistPickerView selectedRowInComponent:0]];
     self.yearDegreeText.text = degreeYear;
+    [paramsUpdate setObject:degreeYear forKey:@"profile[graduateYear]"];
+
 }
 
 
@@ -786,6 +924,14 @@ typedef enum : NSUInteger {
     }
     self.pickerViewData = dateArray;
     [self showPickerView:self.specialistPickerView WithButton:sender];
+    NSString *yearDegree = self.yearDegreeText.text;
+    for (int i = 0; i < [self.pickerViewData count]; i++) {
+        NSString *tempDict = self.pickerViewData[i];
+        if ([tempDict isEqual:yearDegree]) {
+            [self.specialistPickerView selectRow:i inComponent:0 animated:NO];
+            break;
+        }
+    }
 
 }
 
@@ -793,12 +939,28 @@ typedef enum : NSUInteger {
     selectingType = PickerViewSelectingSecondSpec;
     self.pickerViewData = self.namesSpec;
     [self showPickerView:self.specialistPickerView WithButton:sender];
+    NSString *secondSpecialist = self.secondSpecialiteText.text;
+    for (int i = 0; i < [self.pickerViewData count]; i++) {
+        NSDictionary *tempDict = self.pickerViewData[i];
+        if ([[tempDict objectForKey:@"title"] isEqual:secondSpecialist]) {
+            [self.specialistPickerView selectRow:i inComponent:0 animated:NO];
+            break;
+        }
+    }
 }
 
 - (IBAction)selectDegreeAction:(id)sender {
     selectingType = PickerViewSelectingDegree;
     self.pickerViewData = self.namesDegree;
     [self showPickerView:self.specialistPickerView WithButton:sender];
+    NSString *degree = self.degreeText.text;
+    for (int i = 0; i < [self.pickerViewData count]; i++) {
+        NSString *tempDict = self.pickerViewData[i];
+        if ([tempDict isEqual:degree]) {
+            [self.specialistPickerView selectRow:i inComponent:0 animated:NO];
+            break;
+        }
+    }
 }
 
 
@@ -806,12 +968,28 @@ typedef enum : NSUInteger {
     selectingType = PickerViewSelectingPrimarySpec;
     self.pickerViewData = self.namesSpec;
     [self showPickerView:self.specialistPickerView WithButton:sender];
+    NSString *specialist = self.special.text;
+    for (int i = 0; i < [self.pickerViewData count]; i++) {
+        NSDictionary *tempDict = self.pickerViewData[i];
+        if ([[tempDict objectForKey:@"title"] isEqual:specialist]) {
+            [self.specialistPickerView selectRow:i inComponent:0 animated:NO];
+            break;
+        }
+    }
 }
 
 - (IBAction)selectUniverAction:(id)sender {
     selectingType = PickerViewSelectingUniver;
     self.pickerViewData = self.namesUniversities;
     [self showPickerView:self.specialistPickerView WithButton:sender];
+    NSString *university = self.universityText.text;
+    for (int i = 0; i < [self.pickerViewData count]; i++) {
+        NSDictionary *tempDict = self.pickerViewData[i];
+        if ([[tempDict objectForKey:@"title"] isEqual:university]) {
+            [self.specialistPickerView selectRow:i inComponent:0 animated:NO];
+            break;
+        }
+    }
 }
 
 
@@ -838,9 +1016,14 @@ typedef enum : NSUInteger {
     const NSInteger visibleHeight = screenHeight - pickerViewHeight;
     CGRect visibleRect = CGRectMake(0, currentOffset.y, self.view.frame.size.height, visibleHeight);
     if (CGRectContainsRect(visibleRect, targetField) == NO) {
-        currentOffset.y -= visibleRect.origin.y + visibleHeight - targetField.origin.y - targetField.size.height - 30;
+        offset = visibleRect.origin.y + visibleHeight - targetField.origin.y - targetField.size.height - 30;
+        if (offset > self.scrollView.contentOffset.y) {
+            offset = 0;
+            return;
+        }
+        currentOffset.y -= offset;
         [UIView animateWithDuration:0.2 animations:^{
-                self.scrollView.contentOffset = currentOffset;
+            self.scrollView.contentOffset = currentOffset;
         }];
     }
 }

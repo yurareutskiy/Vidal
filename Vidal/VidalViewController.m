@@ -16,20 +16,22 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
+    [self.text setContentOffset:CGPointZero animated:NO];
+
     self.text.delegate = self;
     self.text.editable = NO;
     self.text.selectable = YES;
     self.text.dataDetectorTypes = UIDataDetectorTypeLink;
     
     [self setLabel:@"Справка"];
-
+    [self.text setContentOffset:CGPointZero animated:NO];
     // Do any additional setup after loading the view.
 }
 
 -(void)viewWillAppear:(BOOL)animated {
+    [self.text setContentOffset:CGPointZero animated:NO];
     [super viewWillAppear:animated];
-
+    [self.text setContentOffset:CGPointZero animated:NO];
 }
 
 -(void)viewDidAppear:(BOOL)animated {

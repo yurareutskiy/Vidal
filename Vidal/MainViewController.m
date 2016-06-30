@@ -7,6 +7,7 @@
 //
 
 #import "MainViewController.h"
+#import "OnboardingViewController.h"
 
 @interface MainViewController ()
 
@@ -40,62 +41,69 @@
     self.progress.layer.cornerRadius = 12.0f;
     self.progress.layer.borderColor = [UIColor whiteColor].CGColor;
     self.progress.layer.borderWidth = 1.5f;
+    [self.progress setProgress:0];
     self.progress.layer.masksToBounds = YES;
     self.progress.clipsToBounds = YES;
     
     self.bg.layer.masksToBounds = YES;
-    if ([[ud valueForKey:@"reg"] isEqualToString:@"2"]) {
-    NSArray *URLs = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
-    NSURL *directoryURL = [URLs firstObject];
-    NSURL *databaseURL = [directoryURL URLByAppendingPathComponent:@"vidalDatabase.zip"];
-    NSError *error = nil;
-    exists = [databaseURL checkResourceIsReachableAndReturnError:&error];
-    if ([AFNetworkReachabilityManager sharedManager].networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
-        isConnectionAvailable = false;
-    } else {
-        isConnectionAvailable = true;
-    }
-    NSLog(@"conne %d", isConnectionAvailable);
-    if (!exists && isConnectionAvailable) {
+    NSLog(@"%@", [ud valueForKey:@"reg"]);
+    if ([[ud valueForKey:@"reg"] isEqualToString:@"1"]) {
+        NSArray *URLs = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
+        NSURL *directoryURL = [URLs firstObject];
+        NSURL *databaseURL = [directoryURL URLByAppendingPathComponent:@"vidalDatabase.zip"];
+        NSError *error = nil;
+        exists = [databaseURL checkResourceIsReachableAndReturnError:&error];
+        if ([AFNetworkReachabilityManager sharedManager].networkReachabilityStatus == AFNetworkReachabilityStatusNotReachable) {
+            isConnectionAvailable = false;
+        } else {
+            isConnectionAvailable = true;
+        }
+        NSLog(@"conne %d", isConnectionAvailable);
 
-        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+        if (!exists && isConnectionAvailable) {
+            AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+
+            if (appDelegate.registrationToken) {
+                AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+                [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+                NSLog(@"%@", appDelegate.registrationToken);
+                NSDictionary *params = @{
+                                         @"token":[ud valueForKey:@"archToken"],
+                                         @"username":[ud valueForKey:@"email"],
+                                         @"id":appDelegate.registrationToken};
+                [manager POST:@"http://www.vidal.ru/api/user/set-android-id" parameters:params
+                      success:^(AFHTTPRequestOperation * _Nonnull operation, id responseObject) {
+                          NSLog(@"%@", responseObject);
+                          NSLog(@"%@ - %@ - %@", [ud valueForKey:@"archToken"], [ud valueForKey:@"email"], appDelegate.registrationToken);
+                      } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                          NSLog(@"LOH");
+                      }];
+            }
+
+
+            [self checkBool:@"Архив начал скачиваться" mess:@"Подождите 15-30 секунд. Элементы взаимодействия недоступны, пожалуйста, не выключайте приложение." down:NO amount:1];
+            [self getLink];
+        } else if (isConnectionAvailable == false) {
+            return;
+        } else {
+            [self getLink];
+        }
         
-        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-        [manager.requestSerializer setValue:@"application/x-www-form-urlencoded" forHTTPHeaderField:@"Content-Type"];
+        [ud removeObjectForKey:@"workWith"];
+        [ud removeObjectForKey:@"activeID"];
+        [ud removeObjectForKey:@"pharmaList"];
+        [ud removeObjectForKey:@"comp"];
+        [ud removeObjectForKey:@"info"];
+        [ud removeObjectForKey:@"from"];
+        [ud removeObjectForKey:@"molecule"];
+        [ud removeObjectForKey:@"letterDrug"];
+        [ud removeObjectForKey:@"letterActive"];
         
-//        [manager POST:@"http://www.vidal.ru/api/user/set-android-id" parameters:@{
-//                                                                                  @"token":[ud valueForKey:@"archToken"],
-//                                                                                  @"username":[ud valueForKey:@"email"],
-//                                                                                  @"id":appDelegate.registrationToken}
-//              success:^(AFHTTPRequestOperation * _Nonnull operation, id responseObject) {
-//                  NSLog(@"%@", responseObject);
-//                  NSLog(@"%@ - %@ - %@", [ud valueForKey:@"archToken"], [ud valueForKey:@"email"], appDelegate.registrationToken);
-//              } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-//                  NSLog(@"LOH");
-//              }];
-        
-        [self checkBool:@"Архив начал скачиваться" mess:@"Подождите 15-30 секунд. Элементы взаимодействия недоступны, пожалуйста, не выключайте приложение." down:NO amount:1];
-        [self getLink];
-    } else if (isConnectionAvailable == false) {
-        return;
-    } else {
-        [self getLink];
     }
-    
-    [ud removeObjectForKey:@"workWith"];
-    [ud removeObjectForKey:@"activeID"];
-    [ud removeObjectForKey:@"pharmaList"];
-    [ud removeObjectForKey:@"comp"];
-    [ud removeObjectForKey:@"info"];
-    [ud removeObjectForKey:@"from"];
-    [ud removeObjectForKey:@"molecule"];
-    [ud removeObjectForKey:@"letterDrug"];
-    [ud removeObjectForKey:@"letterActive"];
-    
-}
     // Do any additional setup after loading the view.
     [self setLabel:@"Vidal"];
 }
+
 
 - (void) checkBool:(NSString *)title mess:(NSString *)mess down:(BOOL)down amount:(int)butt {
     NSLog(@"HELLOOOOOOOOOOO");
@@ -112,7 +120,9 @@
                                          [self downloadDB:[ud valueForKey:@"url"]];
                                          [self getKey];
                                          [ud setObject:[ud valueForKey:@"newVersion"] forKey:@"version"];
-                                        }
+                                     } else {
+                                         [self performSegueWithIdentifier:@"onboarding" sender:nil];
+                                     }
                                     }];
             [alertController addAction:ok];
         }
@@ -319,6 +329,8 @@
     
     NSLog(@"LINK - %@", link);
     
+    
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
 
         if (!exists) {
@@ -349,6 +361,8 @@
                     
                     NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"vidalDatabase.zip"];
                     NSLog(@"%@", documentsDirectory);
+                    [ud setObject:@"2" forKey:@"reg"];
+
                     
                     //saving is done on main thread
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -368,7 +382,7 @@
                 } else {
                     NSLog(@"Download failed");
                 }
-                
+                [self.progress setProgress:0];
                 self.progress.hidden = YES;
                 self.bgView.hidden = YES;
             }];
@@ -422,5 +436,6 @@
     [ud setObject:@"63" forKey:@"info"];
     [self performSegueWithIdentifier:@"toList" sender:self];
 }
+
 
 @end

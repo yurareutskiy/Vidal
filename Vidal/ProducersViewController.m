@@ -7,6 +7,7 @@
 //
 
 #import "ProducersViewController.h"
+#import "SearchViewController.h"
 
 @interface ProducersViewController () <ProducersTableViewCellDelegate>
 
@@ -64,6 +65,12 @@
     [ud removeObjectForKey:@"letterActive"];
     [ud removeObjectForKey:@"letterDrug"];
     
+    UIBarButtonItem *searchIcon = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
+                                                         style:UIBarButtonItemStyleDone
+                                                        target:self
+                                                        action:@selector(search)];
+    
+    self.navigationItem.rightBarButtonItem = searchIcon;
     
     
     // Do any additional setup after loading the view.
@@ -271,9 +278,27 @@
         cvc.phone = phoneToPass;
         cvc.logo = imageToPass;
     
+    } else if ([segue.identifier isEqualToString:@"toSearch"]) {
+        SearchViewController *vc = [segue destinationViewController];
+        [vc setSearchType:SearchCompany];
     }
     
 }
+
+
+
+- (UIImage *)imageWithImage:(UIImage *)image scaledToSize:(CGSize)newSize {
+    UIGraphicsBeginImageContextWithOptions(newSize, NO, 0.0);
+    [image drawInRect:CGRectMake(0, 0, newSize.width, newSize.height)];
+    UIImage *newImage = UIGraphicsGetImageFromCurrentImageContext();
+    UIGraphicsEndImageContext();
+    return newImage;
+}
+
+- (void) search {
+    [self performSegueWithIdentifier:@"toSearch" sender:self];
+}
+
 
 /*
 #pragma mark - Navigation

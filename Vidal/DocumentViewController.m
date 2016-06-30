@@ -7,6 +7,7 @@
 //
 
 #import "DocumentViewController.h"
+#import "SearchViewController.h"
 
 @interface DocumentViewController ()
 
@@ -76,8 +77,8 @@
     NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
     NSInteger indexOfMolecule = [self.dbManager.arrColumnNames indexOfObject:@"MoleculeID"];
     
-    self.latName.attributedText = [self clearString:[[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexOfLatName] valueForKey:@"lowercaseString"]];
-    self.name.attributedText = [self clearString:[[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexOfName] valueForKey:@"lowercaseString"]];
+    self.latName.attributedText = [self clearString:[[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexOfLatName] valueForKey:@"lowercaseString"]  InTitle:YES];
+    self.name.attributedText = [self clearString:[[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexOfName] valueForKey:@"lowercaseString"]  InTitle:YES];
     
     for (NSUInteger i = 0; i < [[self.arrPeopleInfo objectAtIndex:0] count]; i++) {
         if ([[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
@@ -165,7 +166,7 @@
     [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
     
     cell.title.text = [self changeDescName:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
-    cell.desc.attributedText = [self clearString:[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexPath.row]];
+    cell.desc.attributedText = [self clearString:[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexPath.row] InTitle:NO];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -203,7 +204,7 @@
     
 }
 
-- (NSAttributedString *) clearString:(NSString *) input {
+- (NSAttributedString *) clearString:(NSString *) input InTitle:(BOOL)isTitle {
     
     NSString *text = input;
     
@@ -251,6 +252,11 @@
     text = [text stringByReplacingOccurrencesOfString:@"<P class=\"F7\">" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
     text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    
+    if (isTitle) {
+        text = [self formatNameString:text];
+    }
+
     
     if ([text containsString:@"[PRING]"]) {
         text = [text stringByReplacingOccurrencesOfString:@"[PRING]" withString:@"Вспомогательные вещества:"];
@@ -367,6 +373,35 @@
     } else {
         return output;
     }
+}
+
+
+
+- (void) search {
+    SearchViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"search"];
+    [vc setSearchType:SearchMolecule];
+    [self.navigationController pushViewController:vc animated:NO];
+}
+
+
+- (NSString*)formatNameString:(NSString*)name {
+    NSArray *parts = [name componentsSeparatedByString:@" "];
+    for (int i = 0; i < [parts count]; i++) {
+        if (i == 1 || i == 2) {
+            NSString *partString = parts[i];
+            if ([partString length] <= 3) {
+                partString = [partString uppercaseString];
+            } else {
+                partString = [partString capitalizedString];
+            }
+            NSMutableArray *tempArray = [NSMutableArray arrayWithArray:parts];
+            [tempArray setObject:partString atIndexedSubscript:i];
+            parts = tempArray;
+        }
+    }
+    name = [parts componentsJoinedByString:@" "];
+    
+    return name;
 }
 
 @end

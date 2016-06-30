@@ -51,9 +51,13 @@
 @property (strong, nonatomic) IBOutlet UIButton *check2;
 @property (weak, nonatomic) IBOutlet UIButton *agreementReadButton;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *indicator;
+
+@property (strong, nonatomic) IBOutlet UIButton *doneButton;
+@property (strong, nonatomic) IBOutlet UIButton *updateButton;
+
 @property (strong, nonatomic) IBOutlet UIButton *backButton;
 @property (strong, nonatomic) IBOutlet UILabel *mainLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *doneButtonBottomMarginConstraint;
 
 - (IBAction)button1:(UIButton *)sender;
 - (IBAction)button2:(UIButton *)sender;

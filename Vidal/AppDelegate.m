@@ -56,12 +56,14 @@ NSString *const SubscriptionTopic = @"/topics/global";
     } else {
         // iOS 8 or later
         // [END_EXCLUDE]
-        UIUserNotificationType allNotificationTypes =
-        (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
-        UIUserNotificationSettings *settings =
-        [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:nil];
-        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
+        if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+            UIUserNotificationType allNotificationTypes =
+            (UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge);
+            UIUserNotificationSettings *settings =
+            [UIUserNotificationSettings settingsForTypes:allNotificationTypes categories:nil];
+            [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+            [[UIApplication sharedApplication] registerForRemoteNotifications];
+        }
     }
     // [END register_for_remote_notifications]
     // [START start_gcm_service]
@@ -80,6 +82,8 @@ NSString *const SubscriptionTopic = @"/topics/global";
             [[NSNotificationCenter defaultCenter] postNotificationName:weakSelf.registrationKey
                                                                 object:nil
                                                               userInfo:userInfo];
+            
+            
         } else {
             NSLog(@"Registration to GCM failed with error: %@", error.localizedDescription);
             NSDictionary *userInfo = @{@"error":error.localizedDescription};
@@ -276,8 +280,7 @@ didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
 }
 
 // [START receive_apns_token_error]
-- (void)application:(UIApplication *)application
-didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     NSLog(@"Registration for remote notification failed with error: %@", error.localizedDescription);
     // [END receive_apns_token_error]
     NSDictionary *userInfo = @{@"error" :error.localizedDescription};
@@ -287,8 +290,7 @@ didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
 }
 
 // [START ack_message_reception]
-- (void)application:(UIApplication *)application
-didReceiveRemoteNotification:(NSDictionary *)userInfo {
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
     NSLog(@"Notification received: %@", userInfo);
     // This works only if the app started the GCM service
     [[GCMService sharedInstance] appDidReceiveMessage:userInfo];
@@ -300,9 +302,7 @@ didReceiveRemoteNotification:(NSDictionary *)userInfo {
     // [END_EXCLUDE]
 }
 
-- (void)application:(UIApplication *)application
-didReceiveRemoteNotification:(NSDictionary *)userInfo
-fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))handler {
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult))handler {
     NSLog(@"Notification received: %@", userInfo);
     // This works only if the app started the GCM service
     [[GCMService sharedInstance] appDidReceiveMessage:userInfo];

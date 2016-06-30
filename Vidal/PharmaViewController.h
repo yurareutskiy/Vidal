@@ -16,5 +16,8 @@
 @interface PharmaViewController : UIViewController<UITableViewDelegate, UITableViewDataSource, UIGestureRecognizerDelegate>
 
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (assign, nonatomic) NSInteger level;
+@property (strong, nonatomic) NSString *code;
+
 
 @end

@@ -56,7 +56,12 @@
 		3AB2A31F1CCCE8D000731088 /* CompanyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB2A31E1CCCE8D000731088 /* CompanyViewController.m */; };
 		3AB2A3231CCCF50800731088 /* VidalViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 3AB2A3221CCCF50800731088 /* VidalViewController.m */; };
 		524EDF951CB4E4E900A3BB2F /* DocsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 524EDF941CB4E4E900A3BB2F /* DocsTableViewCell.m */; };
+		BF2DD95B1D21ECCB0078A0A9 /* OnboardingViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2DD95A1D21ECCB0078A0A9 /* OnboardingViewController.m */; };
+		BF2DD9631D21FC090078A0A9 /* OnboardingScrollItem.m in Sources */ = {isa = PBXBuildFile; fileRef = BF2DD9621D21FC090078A0A9 /* OnboardingScrollItem.m */; };
+		BF54BE7D1D1CDAC500E73A21 /* PharmaDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BF54BE7C1D1CDAC500E73A21 /* PharmaDetailViewController.m */; };
+		BF54BE861D2053F800E73A21 /* StringFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = BF54BE851D2053F800E73A21 /* StringFormatter.m */; };
 		BF9A12221CBFE8EB00B65F68 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BF9A12211CBFE8EB00B65F68 /* GoogleService-Info.plist */; };
+		BFBDB3221D2285DF00FA612E /* StartViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = BFBDB3211D2285DF00FA612E /* StartViewController.m */; };
 		BFE7119D1D1819CF004CA56B /* libsqlcipher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BFE7119A1D1819BD004CA56B /* libsqlcipher.a */; };
 		E82C22A1236860E5691C38CA /* libPods-Vidal.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 267537716EDB3475C0BE9A2D /* libPods-Vidal.a */; };
 /* End PBXBuildFile section */
@@ -198,7 +203,17 @@
 		524EDF931CB4E4E900A3BB2F /* DocsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DocsTableViewCell.h; sourceTree = "<group>"; };
 		524EDF941CB4E4E900A3BB2F /* DocsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DocsTableViewCell.m; sourceTree = "<group>"; };
 		639C2F57EA1C775AEEFEE2C9 /* Pods-Vidal.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Vidal.release.xcconfig"; path = "Pods/Target Support Files/Pods-Vidal/Pods-Vidal.release.xcconfig"; sourceTree = "<group>"; };
+		BF2DD9591D21ECCB0078A0A9 /* OnboardingViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnboardingViewController.h; sourceTree = "<group>"; };
+		BF2DD95A1D21ECCB0078A0A9 /* OnboardingViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnboardingViewController.m; sourceTree = "<group>"; };
+		BF2DD9611D21FC090078A0A9 /* OnboardingScrollItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OnboardingScrollItem.h; sourceTree = "<group>"; };
+		BF2DD9621D21FC090078A0A9 /* OnboardingScrollItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OnboardingScrollItem.m; sourceTree = "<group>"; };
+		BF54BE7B1D1CDAC500E73A21 /* PharmaDetailViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PharmaDetailViewController.h; sourceTree = "<group>"; };
+		BF54BE7C1D1CDAC500E73A21 /* PharmaDetailViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PharmaDetailViewController.m; sourceTree = "<group>"; };
+		BF54BE841D2053F800E73A21 /* StringFormatter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringFormatter.h; sourceTree = "<group>"; };
+		BF54BE851D2053F800E73A21 /* StringFormatter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StringFormatter.m; sourceTree = "<group>"; };
 		BF9A12211CBFE8EB00B65F68 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		BFBDB3201D2285DF00FA612E /* StartViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StartViewController.h; sourceTree = "<group>"; };
+		BFBDB3211D2285DF00FA612E /* StartViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StartViewController.m; sourceTree = "<group>"; };
 		BFE711881D1819BC004CA56B /* sqlcipher.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = sqlcipher.xcodeproj; path = ../sqlcipher/sqlcipher.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -312,6 +327,8 @@
 		3A15706C1CAEAED300D49C5E /* Login Screens */ = {
 			isa = PBXGroup;
 			children = (
+				BFBDB3201D2285DF00FA612E /* StartViewController.h */,
+				BFBDB3211D2285DF00FA612E /* StartViewController.m */,
 				3A9E3FD21C80AE330069BDFC /* LoginViewController.h */,
 				3A9E3FD31C80AE330069BDFC /* LoginViewController.m */,
 				3AAAA2C61C833FA3006DEE4E /* RegViewController.h */,
@@ -333,8 +350,6 @@
 		3A78F1001C91E7E4008C6BE5 /* SWRevealViewController */ = {
 			isa = PBXGroup;
 			children = (
-				3A78F0FD1C91E7DA008C6BE5 /* MenuViewController.h */,
-				3A78F0FE1C91E7DA008C6BE5 /* MenuViewController.m */,
 				3A78F1041C91E80A008C6BE5 /* SWRevealViewController.h */,
 				3A78F1051C91E80A008C6BE5 /* SWRevealViewController.m */,
 			);
@@ -345,10 +360,15 @@
 		3A78F1071C92051F008C6BE5 /* Additional Files */ = {
 			isa = PBXGroup;
 			children = (
+				BF54BE841D2053F800E73A21 /* StringFormatter.h */,
+				BF54BE851D2053F800E73A21 /* StringFormatter.m */,
+				BF2DD9641D21FC0F0078A0A9 /* Onboarding Item */,
 				3A0D5C9E1C9C455A005E6976 /* TableCells */,
 				3A15706B1CAEAE7800D49C5E /* Models */,
 				3AA6AC371CBB0B35005AAD85 /* SearchViewController.h */,
 				3AA6AC381CBB0B35005AAD85 /* SearchViewController.m */,
+				BF2DD9591D21ECCB0078A0A9 /* OnboardingViewController.h */,
+				BF2DD95A1D21ECCB0078A0A9 /* OnboardingViewController.m */,
 			);
 			name = "Additional Files";
 			sourceTree = "<group>";
@@ -369,6 +389,8 @@
 				3A78F1171C920737008C6BE5 /* InteractionsViewController.m */,
 				3A78F1191C920740008C6BE5 /* PharmaViewController.h */,
 				3A78F11A1C920740008C6BE5 /* PharmaViewController.m */,
+				BF54BE7B1D1CDAC500E73A21 /* PharmaDetailViewController.h */,
+				BF54BE7C1D1CDAC500E73A21 /* PharmaDetailViewController.m */,
 				3A78F11C1C92074B008C6BE5 /* ProducersViewController.h */,
 				3A78F11D1C92074B008C6BE5 /* ProducersViewController.m */,
 				3A78F11F1C920755008C6BE5 /* AboutViewController.h */,
@@ -411,6 +433,7 @@
 			children = (
 				3A9E3FCF1C80AE330069BDFC /* AppDelegate.h */,
 				3A9E3FD01C80AE330069BDFC /* AppDelegate.m */,
+				BF68F63D1D25864B00ACA514 /* Menu */,
 				3A1570691CAEAE3D00D49C5E /* Database & Server */,
 				3A78F1071C92051F008C6BE5 /* Additional Files */,
 				3A78F10C1C9206EF008C6BE5 /* Main Screens */,
@@ -430,6 +453,24 @@
 				3A9E3FCD1C80AE330069BDFC /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		BF2DD9641D21FC0F0078A0A9 /* Onboarding Item */ = {
+			isa = PBXGroup;
+			children = (
+				BF2DD9611D21FC090078A0A9 /* OnboardingScrollItem.h */,
+				BF2DD9621D21FC090078A0A9 /* OnboardingScrollItem.m */,
+			);
+			name = "Onboarding Item";
+			sourceTree = "<group>";
+		};
+		BF68F63D1D25864B00ACA514 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+				3A78F0FD1C91E7DA008C6BE5 /* MenuViewController.h */,
+				3A78F0FE1C91E7DA008C6BE5 /* MenuViewController.m */,
+			);
+			name = Menu;
 			sourceTree = "<group>";
 		};
 		BFE711891D1819BC004CA56B /* Products */ = {
@@ -645,6 +686,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF2DD9631D21FC090078A0A9 /* OnboardingScrollItem.m in Sources */,
 				3AB2A31F1CCCE8D000731088 /* CompanyViewController.m in Sources */,
 				3A78F1271C92076D008C6BE5 /* FavouriteViewController.m in Sources */,
 				3A3A87521CDC7709007972EA /* CollectTableVieCell.m in Sources */,
@@ -662,6 +704,7 @@
 				3A8C25231CBA2E8C00CFA905 /* ListOfViewController.m in Sources */,
 				3A0DBD861CB45FA800D9BAD3 /* DocumentViewController.m in Sources */,
 				3A78F1061C91E80A008C6BE5 /* SWRevealViewController.m in Sources */,
+				BFBDB3221D2285DF00FA612E /* StartViewController.m in Sources */,
 				3A78F10A1C920531008C6BE5 /* ModelViewController.m in Sources */,
 				3A9E3FDA1C80AE330069BDFC /* Vidal.xcdatamodeld in Sources */,
 				3A0D5CAA1C9C4CAD005E6976 /* FavTableViewCell.m in Sources */,
@@ -674,7 +717,10 @@
 				3A0D5CA11C9C457B005E6976 /* ProducersTableViewCell.m in Sources */,
 				3A78F1211C920756008C6BE5 /* AboutViewController.m in Sources */,
 				3A78F1181C920737008C6BE5 /* InteractionsViewController.m in Sources */,
+				BF54BE7D1D1CDAC500E73A21 /* PharmaDetailViewController.m in Sources */,
 				3A78F10F1C920701008C6BE5 /* NewsViewController.m in Sources */,
+				BF54BE861D2053F800E73A21 /* StringFormatter.m in Sources */,
+				BF2DD95B1D21ECCB0078A0A9 /* OnboardingViewController.m in Sources */,
 				3A8C251F1CB999AD00CFA905 /* SecondDocumentViewController.m in Sources */,
 				3AB2A3231CCCF50800731088 /* VidalViewController.m in Sources */,
 				3A1570551CAEA8F800D49C5E /* DBManager.m in Sources */,

@@ -7,6 +7,7 @@
 //
 
 #import "ActiveViewController.h"
+#import "SearchViewController.h"
 
 @interface ActiveViewController ()
 
@@ -215,8 +216,28 @@
     
     NSString *text = input;
     
+    if ([text hasSuffix:@".."]) {
+        text = [text stringByAppendingString:@"."];
+    }
+    
     NSRange range = NSMakeRange(0, 1);
+    
     text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
+    
+    while (range.location < text.length) {
+        range.length = text.length - range.location;
+        range = [text rangeOfString:@"," options:0 range:range];
+        if (range.length > 0) {
+            range.location += 2;
+            range.length = 1;
+            text = [text stringByReplacingCharactersInRange:range withString:[[text substringWithRange:range] uppercaseString]];
+        } else {
+            break;
+        }
+    }
+    
+    [text stringByReplacingOccurrencesOfString:@",.." withString:@".."];
+    
     text = [text stringByReplacingOccurrencesOfString:@"<TD colSpan=\"2\">" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
     text = [text stringByReplacingOccurrencesOfString:@"<sup>&trade;</sup>" withString:@"™"];
@@ -267,6 +288,9 @@
         ListOfViewController *lovc = [segue destinationViewController];
         
         lovc.dataBase = self.dbManager.arrColumnNames;
+    } else if ([segue.identifier isEqualToString:@"toSearch"]) {
+        SearchViewController *vc = [segue destinationViewController];
+        [vc setSearchType:SearchMolecule];
     }
     
 }

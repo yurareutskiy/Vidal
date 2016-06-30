@@ -18,6 +18,8 @@
 @property (weak, nonatomic) IBOutlet UIImageView *bg;
 @property (strong, nonatomic) IBOutlet UIProgressView *progress;
 @property (strong, nonatomic) IBOutlet UIView *bgView;
+@property (strong, nonatomic) IBOutlet UILabel *systemInfoLabel;
+
 - (IBAction)toTakeda:(UIButton *)sender;
 - (IBAction)toVidal:(UIButton *)sender;
 - (IBAction)toList:(UIButton *)sender;

@@ -16,7 +16,6 @@
     NSArray *array;
     NSString *newsID;
     NSUserDefaults *ud;
-    ModelViewController *mvc;
     UIActivityIndicatorView *activityView;
     BOOL isConnectionAvailable;
 }
@@ -29,7 +28,6 @@
     self.refreshButton.hidden = YES;
     
     ud = [NSUserDefaults standardUserDefaults];
-    mvc = [[ModelViewController alloc] init];
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
@@ -81,8 +79,11 @@
     
     [ud setObject:[[array objectAtIndex:indexPath.row] objectForKey:@"id"] forKey:@"news"];
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
-    [self performSegueWithIdentifier:@"toExpandNews" sender:self];
-}
+    if ([[ud valueForKey:@"reg"] isEqualToString:@"2"]) {
+        [self performSegueWithIdentifier:@"toExpandNews" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"toExpandNews_demo" sender:self];
+    }}
 
 /*
 #pragma mark - Navigation

@@ -315,7 +315,15 @@
     [textField resignFirstResponder];
     self.tableView.hidden = true;
     self.secondLinePicker.hidden = true;
-//    self.lead.hidden = false;
+    if ([self.FilteredResults count] == 0) {
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Ошибка" message:@"Не найдено взаимодействие для введенного вещества" preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler: nil];
+        [alertController addAction:ok];
+        
+        [self presentViewController:alertController animated:YES completion:nil];
+    }
+    
     return YES;
 }
 

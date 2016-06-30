@@ -14,6 +14,13 @@
 #import "CompanyViewController.h"
 #import "PharmaViewController.h"
 
+typedef enum : NSUInteger {
+    SearchDrug,
+    SearchMolecule,
+    SearchPharmGroup,
+    SearchCompany,
+} SearchType;
+
 @interface SearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 
 @property (nonatomic, strong) IBOutlet UITableView *tableView1;
@@ -30,6 +37,7 @@
 @property (strong, nonatomic) IBOutlet UIView *line3;
 @property (strong, nonatomic) IBOutlet UIView *line4;
 @property (strong, nonatomic) IBOutlet UIScrollView *scrollView;
+@property (assign, nonatomic ) SearchType searchType;
 
 - (IBAction)toDrugs:(UIButton *)sender;
 - (IBAction)toMolecule:(UIButton *)sender;

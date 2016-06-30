@@ -7,6 +7,8 @@
 //
 
 #import "PharmaViewController.h"
+#import "SearchViewController.h"
+#import "PharmaDetailViewController.h"
 
 @interface PharmaViewController ()
 
@@ -28,7 +30,6 @@
     NSUserDefaults *ud;
     NSString *req;
     BOOL isEmptyDrugsList;
-    NSInteger level;
 
 }
 
@@ -39,6 +40,7 @@
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+
     
     ud = [NSUserDefaults standardUserDefaults];
     
@@ -140,26 +142,40 @@
         [self getMol:request];
         
         if (isEmptyDrugsList) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Ошибка" message:@"Для данной группы осутствуют препараты и дркгие группы" preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                 {
+                                     
+                                 }];
+            [alertController addAction:ok];
+            
+            [self presentViewController:alertController animated:YES completion:nil];
+            
             return;
         } else {
 //            [ud setObject:self.molecule forKey:@"pharmaList"];
             [ud setObject:pointIDStr forKey:@"pharmaList"];
-            [self performSegueWithIdentifier:@"toList" sender:self];
+            [self performSegueWithIdentifier:@"pharma_segue" sender:indexPath];
+//            [self performSegueWithIdentifier:@"toList" sender:self];
+
         }
     } else if (goNext){
-        [ud setObject:levelStr forKey:@"level"];
+//        [ud setObject:levelStr forKey:@"level"];
+//        
+//        if ([[ud objectForKey:@"level"] integerValue] == 1) {
+//            [ud setObject:parentStr forKey:@"parent2"];
+//        } else if ([[ud objectForKey:@"level"] integerValue] == 2) {
+//            [ud setObject:parentStr forKey:@"parent3"];
+//        } else if ([[ud objectForKey:@"level"] integerValue] == 3) {
+//            [ud setObject:parentStr forKey:@"parent4"];
+//        }
         
-        if ([[ud objectForKey:@"level"] integerValue] == 1) {
-            [ud setObject:parentStr forKey:@"parent2"];
-        } else if ([[ud objectForKey:@"level"] integerValue] == 2) {
-            [ud setObject:parentStr forKey:@"parent3"];
-        } else if ([[ud objectForKey:@"level"] integerValue] == 3) {
-            [ud setObject:parentStr forKey:@"parent4"];
-        }
+        [self performSegueWithIdentifier:@"pharma_segue" sender:indexPath];
         
-        [self addBackButton];
-        [self refreshDb];
-        [self reloadTableView];
+//        [self addBackButton];
+//        [self refreshDb];
+//        [self reloadTableView];
     }
     
 }
@@ -199,7 +215,7 @@
     if (self.tryArray != nil) {
         self.tryArray = nil;
     }
-    self.tryArray = [[NSArray alloc] initWithArray:[self.dbManager loadDataFromDB:req]];
+    self.tryArray = [[NSArray alloc] initWithArray:[[[DBManager alloc] init] loadDataFromDB:req]];
     
     if ([self.tryArray count] == 0){
         return NO;
@@ -212,7 +228,7 @@
     if (self.molecule != nil) {
         self.molecule = nil;
     }
-    self.molecule = [[NSMutableArray alloc] initWithArray:[self.dbManager loadDataFromDB:mol]];
+    self.molecule = [[NSMutableArray alloc] initWithArray:[[[DBManager alloc] init] loadDataFromDB:mol]];
     
     if ([self.molecule count] == 0) {
         isEmptyDrugsList = true;
@@ -232,32 +248,11 @@
 
 
 - (void) refreshDb {
-    if ([ud valueForKey:@"level"] != nil) {
-        if (![[ud valueForKey:@"howTo"] isEqualToString:@"search"]) {
-            
-            NSLog(@"1");
-            level = [[ud objectForKey:@"level"] integerValue];
-            
-        } else {
-            NSLog(@"2");
-
-            level = [[ud objectForKey:@"level"] integerValue] - 1;
-            
-        }
-    } else {
-        NSLog(@"3");
-        level = 0;
-        
-    }
     
-    if (level + 1 == 1) {
-        req = @"select * from ClinicoPhPointers where [Level] = 1 order by Code, [Level]";
-    } else if (level + 1 == 2) {
-        req = [NSString stringWithFormat:@"select * from ClinicoPhPointers where [Level] = 2 and ParentCode = '%@' order by Code", [ud objectForKey:@"parent2"]];
-    } else if (level + 1 == 3) {
-        req = [NSString stringWithFormat:@"select * from ClinicoPhPointers where [Level] = 3 and ParentCode = '%@' order by Code", [ud objectForKey:@"parent3"]];
-    } else if (level + 1 == 4) {
-        req = [NSString stringWithFormat:@"select * from ClinicoPhPointers where [Level] = 4 and ParentCode = '%@' order by Code", [ud objectForKey:@"parent4"]];
+    if (_level == 0) {
+        req = @"select * from ClinicoPhPointers where [Level] = 1 order by Name";
+    } else {
+        req = [NSString stringWithFormat:@"select * from ClinicoPhPointers where ParentCode = '%@' order by Name", _code];
     }
     
     [self loadData:req];
@@ -377,7 +372,7 @@
     
     self.reveal = self.revealViewController;
     
-    if (!self.reveal) {
+    if (!self.reveal || self.level != 0) {
         return;
     }
     
@@ -400,6 +395,18 @@
         
         lovc.dbManager = self.dbManager;
         
+    }  else if ([segue.identifier isEqualToString:@"toSearch"]) {
+        SearchViewController *vc = [segue destinationViewController];
+        [vc setSearchType:SearchPharmGroup];
+    } else if ([segue.identifier isEqualToString:@"pharma_segue"]) {
+        PharmaDetailViewController *vc = [segue destinationViewController];
+        NSInteger indexCode = [self.dbManager.arrColumnNames indexOfObject:@"Code"];
+        NSInteger indexName = [self.dbManager.arrColumnNames indexOfObject:@"Name"];
+        NSString *code = [[self.arrPeopleInfo objectAtIndex:[(NSIndexPath*)sender row]] objectAtIndex:indexCode];
+        NSString *name = [[self.arrPeopleInfo objectAtIndex:[(NSIndexPath*)sender row]] objectAtIndex:indexName];
+        vc.parentCode = code;
+        vc.pharmaName = name;
+        vc.level = self.level + 1;
     }
     
 }

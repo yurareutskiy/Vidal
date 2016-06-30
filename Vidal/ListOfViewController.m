@@ -7,12 +7,15 @@
 //
 
 #import "ListOfViewController.h"
+#import "SearchViewController.h"
+#import "StringFormatter.h"
 
 @interface ListOfViewController ()
 
 @property (nonatomic, strong) NSMutableArray *arrPeopleInfo;
 @property (nonatomic, strong) NSMutableArray *molecule;
 @property (strong, nonatomic) NSString *req;
+@property (assign, nonatomic) SearchType seatchType;
 
 @end
 
@@ -54,12 +57,15 @@
         
         [self setNavBarTitle:@"Препараты"];
         
+        self.seatchType = SearchDrug;
+        
         [self loadData:self.req];
         
     } else if ([ud objectForKey:@"molecule"]) {
         self.req = [NSString stringWithFormat:@"SELECT Product.DocumentID, Product.RusName AS 'Продукт', Product.EngName, Molecule.RusName, Molecule.MoleculeID FROM Molecule INNER JOIN Product_Molecule ON Molecule.MoleculeID = Product_Molecule.MoleculeID INNER JOIN Product ON Product_Molecule.ProductID = Product.ProductID WHERE Molecule.MoleculeID = %@ ORDER BY Molecule.RusName", [ud objectForKey:@"molecule"]];
         
         [self setNavBarTitle:@"Препараты"];
+        self.seatchType = SearchDrug;
         
         [self loadData:self.req];
     } else if ([ud valueForKey:@"pharmaList"]) {
@@ -67,20 +73,22 @@
         self.req = [NSString stringWithFormat:@"SELECT DocumentListView.DocumentID, RusName, EngName, CompaniesDescription, Elaboration, CompiledComposition, CategoryName as Category, PhInfluence, PhKinetics, Indication, Dosage, SideEffects, ContraIndication, Lactation, SpecialInstruction, OverDosage, Interaction, PharmDelivery, StorageCondition FROM DocumentListView INNER JOIN Document_ClPhPointers ON DocumentListView.DocumentID = Document_ClPhPointers.DocumentID INNER JOIN ClinicoPhPointers ON Document_ClPhPointers.ClPhPointerID = ClinicoPhPointers.ClPhPointerID WHERE ClinicoPhPointers.ClPhPointerID = %@", [ud valueForKey:@"pharmaList"]];
         
         [self setNavBarTitle:@"Фармакологические группы"];
-        
+        self.seatchType = SearchPharmGroup;
         [self loadData:self.req];
         
     } else if ([ud valueForKey:@"letterDrug"]) {
         
         [self setNavBarTitle:@"Препараты"];
+        self.seatchType = SearchDrug;
 
         self.req = [NSString stringWithFormat:@"select DocumentListView.DocumentID as DocumentID, DocumentListView.RusName as RusName, DocumentListView.EngName as EngName, DocumentListView.CompaniesDescription as CompaniesDescription, DocumentListView.Elaboration as Elaboration, DocumentListView.CompiledComposition as CompiledComposition, DocumentListView.CategoryName as Category, DocumentListView.PhInfluence as PhInfluence, DocumentListView.PhKinetics as PhKinetics, DocumentListView.Indication as Indication, DocumentListView.Dosage as Dosage, DocumentListView.SideEffects as SideEffects, DocumentListView.ContraIndication as ContraIndication, DocumentListView.Lactation as Lactation, DocumentListView.SpecialInstruction as SpecialInstruction, DocumentListView.OverDosage as OverDosage, DocumentListView.Interaction as Interaction, DocumentListView.PharmDelivery as PharmDelivery, DocumentListView.StorageCondition as StorageCondition , InfoPage.RusName as InfoPageName from DocumentListView LEFT JOIN Document_InfoPage ON Document_InfoPage.DocumentID = DocumentListView.DocumentID LEFT JOIN InfoPage ON InfoPage.InfoPageID = Document_InfoPage.InfoPageID where Letter = '%@' order by DocumentListView.RusName", [ud valueForKey:@"letterDrug"]];
-        NSLog(@"%@", self.req);
+
         [self loadData:self.req];
         
     }  else if ([ud valueForKey:@"letterActive"]) {
         
         [self setNavBarTitle:@"Активные вещества"];
+        self.seatchType = SearchMolecule;
         
         self.req = [NSString stringWithFormat:@"select * from SubDocumentListView where Letter = '%@' OR Letter = '%@' order by RusName", [[ud valueForKey:@"letterActive"] valueForKey:@"uppercaseString"], [[ud valueForKey:@"letterActive"] valueForKey:@"lowercaseString"]];
         
@@ -91,6 +99,7 @@
         self.req = [NSString stringWithFormat:@"select DocumentID, RusName, EngName, Elaboration, CompaniesDescription, CompiledComposition, PhInfluence, PhKinetics, Indication, Dosage, SideEffects, ContraIndication, Lactation, SpecialInstruction, OverDosage, Interaction, PharmDelivery, StorageCondition from ProducerDocListView where InfoPageID = %@ order by RusName", [ud valueForKey:@"info"]];
         
         [self loadData:self.req];
+        self.seatchType = SearchDrug;
         
     } else {
         self.req = @"";
@@ -151,10 +160,10 @@
         NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
         NSInteger indexOfEngName = [self.dbManager.arrColumnNames indexOfObject:@"InfoPageName"];
         
-        cell.elaboration.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
-        cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]] valueForKey:@"lowercaseString"]];
-        cell.category.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]];
-        cell.latName.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEngName]];
+        cell.elaboration.text = [StringFormatter clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
+        cell.name.text = [self formatNameString: [StringFormatter clearString:[[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname] lowercaseString]]];
+        cell.category.text = [StringFormatter clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]];
+        cell.latName.text = [StringFormatter clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEngName]];
         
         
         
@@ -163,11 +172,11 @@
         NSInteger indexOfFirstname = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
         NSInteger indexOfCategory = [self.dbManager.arrColumnNames indexOfObject:@"Category"];
         NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
-        NSInteger indexOfEngName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
-        cell.elaboration.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
-        cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]] valueForKey:@"lowercaseString"]];
-        cell.category.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]];
-        cell.latName.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEngName]] valueForKey:@"lowercaseString"]];
+        NSInteger indexOfPageName = [self.dbManager.arrColumnNames indexOfObject:@"InfoPageName"];
+        cell.elaboration.text = [StringFormatter clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
+        cell.name.text = [self formatNameString: [StringFormatter clearString:[[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname] lowercaseString]]];
+        cell.category.text = [StringFormatter clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]];
+        cell.latName.text = [StringFormatter clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfPageName]]];
         
     } else if ([ud valueForKey:@"letterActive"]) {
         
@@ -176,9 +185,9 @@
         NSInteger indexOfEngName = [self.dbManager.arrColumnNames indexOfObject:@"LatName"];
         
         
-        cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname]]  valueForKey:@"lowercaseString"]];
-        cell.category.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]];
-        cell.latName.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEngName]] valueForKey:@"lowercaseString"]];
+        cell.name.text = [StringFormatter clearString:[[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfFirstname] lowercaseString]];
+        cell.category.text = [StringFormatter clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]];
+        cell.latName.text = [StringFormatter clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEngName]] valueForKey:@"lowercaseString"]];
         
     } else if ([ud valueForKey:@"info"] || [ud valueForKey:@"comp"]) {
         
@@ -186,10 +195,10 @@
         NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
         NSInteger indexOfEngName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
         
-        cell.elaboration.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
-        cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]] valueForKey:@"lowercaseString"]];
+        cell.elaboration.text = [StringFormatter clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
+        cell.name.text = [self formatNameString: [StringFormatter clearString:[[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName] lowercaseString]]];
         cell.category.text = @"";
-        cell.latName.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEngName]] valueForKey:@"lowercaseString"]];
+        cell.latName.text = [StringFormatter clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEngName]] valueForKey:@"lowercaseString"]];
         
     } else if ([ud valueForKey:@"pharmaList"]) {
         
@@ -198,36 +207,36 @@
         NSInteger indexOfElaboration = [self.dbManager.arrColumnNames indexOfObject:@"Elaboration"];
         NSInteger indexOfEngName = [self.dbManager.arrColumnNames indexOfObject:@"EngName"];
         
-        cell.elaboration.text = [self clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
-        cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]] valueForKey:@"lowercaseString"]];
-        cell.category.text = [self clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]]];
-        cell.latName.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEngName]] valueForKey:@"lowercaseString"]];
+        cell.elaboration.text = [StringFormatter clearString:[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfElaboration]];
+        cell.name.text = [StringFormatter clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfName]] valueForKey:@"lowercaseString"]];
+        cell.category.text = [StringFormatter clearString:[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfCategory]]];
+        cell.latName.text = [StringFormatter clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfEngName]] valueForKey:@"lowercaseString"]];
         
     }
     
     else if ([ud valueForKey:@"workActive"] && ([self.activeID isEqualToString:@""] || self.activeID == nil)) {
         if (![[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2] isEqualToString:@""]) {
-            cell.category.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2]] valueForKey:@"lowercaseString"]];
+            cell.category.text = [StringFormatter clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2]] valueForKey:@"lowercaseString"]];
             [cell.category setTextColor:[UIColor lightGrayColor]];
         } else {
             cell.category.text = @"";
         }
     } else if ([ud valueForKey:@"activeID"]) {
         
-        cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]] valueForKey:@"lowercaseString"]];
+        cell.name.text = [StringFormatter clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]] valueForKey:@"lowercaseString"]];
         [cell.name setTextColor:[UIColor blackColor]];
         cell.category.text = @"";
         
     } else if ([ud valueForKey:@"pharmaList"]) {
-        cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]] valueForKey:@"lowercaseString"]];
+        cell.name.text = [StringFormatter clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:1]] valueForKey:@"lowercaseString"]];
         [cell.name setTextColor:[UIColor blackColor]];
         cell.category.text = @"";
     } else if ([ud valueForKey:@"comp"]) {
-        cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2]] valueForKey:@"lowercaseString"]];
+        cell.name.text = [StringFormatter clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2]] valueForKey:@"lowercaseString"]];
         [cell.name setTextColor:[UIColor blackColor]];
         cell.category.text = @"";
     } else if ([ud valueForKey:@"info"]) {
-        cell.name.text = [self clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2]] valueForKey:@"lowercaseString"]];
+        cell.name.text = [StringFormatter clearString:[[NSString stringWithFormat:@"%@", [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:2]] valueForKey:@"lowercaseString"]];
         [cell.name setTextColor:[UIColor blackColor]];
         cell.category.text = @"";
     } else {
@@ -296,7 +305,6 @@
         if (([ud valueForKey:@"info"] || [ud valueForKey:@"comp"]) && [[ud valueForKey:@"info"] isEqualToString:@"63"]) {
             NSInteger indexOfName = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
             for (NSArray *element in self.arrPeopleInfo) {
-                NSLog(@"%@", element[indexOfName]);
                 if ([element[indexOfName] isEqualToString:@"КАРДИОМАГНИЛ"]) {
                     NSArray *object = [element copy];
                     [self.arrPeopleInfo removeObject:element];
@@ -312,57 +320,25 @@
     
 }
 
-- (NSString *) clearString:(NSString *) input {
-    
-    NSString *text = input;
-    
-    NSRange range = NSMakeRange(0, 1);
-    if (![text isEqualToString:@""]) {
-        text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
+
+- (NSString*)formatNameString:(NSString*)name {
+    NSArray *parts = [name componentsSeparatedByString:@" "];
+    for (int i = 0; i < [parts count]; i++) {
+        if (i == 1 || i == 2) {
+            NSString *partString = parts[i];
+            if ([partString length] <= 3) {
+                partString = [partString uppercaseString];
+            } else {
+                partString = [partString capitalizedString];
+            }
+            NSMutableArray *tempArray = [NSMutableArray arrayWithArray:parts];
+            [tempArray setObject:partString atIndexedSubscript:i];
+            parts = tempArray;
+        }
     }
-    text = [text stringByReplacingOccurrencesOfString:@"<TD colSpan=\"2\">" withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
-    text = [text stringByReplacingOccurrencesOfString:@"<sup>&trade;</sup>" withString:@"™"];
-    text = [text stringByReplacingOccurrencesOfString:@"<SUP>&trade;</SUP>" withString:@"™"];
-    text = [text stringByReplacingOccurrencesOfString:@"&trade;" withString:@"™"];
-    text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
-    text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
-    text = [text stringByReplacingOccurrencesOfString:@"&raquo;" withString:@"»"];
-    text = [text stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
-    text = [text stringByReplacingOccurrencesOfString:@"&nbsp;" withString:@" "];
-    text = [text stringByReplacingOccurrencesOfString:@"&-nb-sp;" withString:@" "];
-    text = [text stringByReplacingOccurrencesOfString:@"&ndash;" withString:@"–"];
-    text = [text stringByReplacingOccurrencesOfString:@"&mdash;" withString:@"–"];
-    text = [text stringByReplacingOccurrencesOfString:@"&ldquo;" withString:@"“"];
-    text = [text stringByReplacingOccurrencesOfString:@"&loz;" withString:@"◊"];
-    text = [text stringByReplacingOccurrencesOfString:@"&rdquo;" withString:@"”"];
-    text = [text stringByReplacingOccurrencesOfString:@"<SUP>&reg;</SUP>" withString:@"®"];
-    text = [text stringByReplacingOccurrencesOfString:@"<sup>&reg;</sup>" withString:@"®"];
-    text = [text stringByReplacingOccurrencesOfString:@"<SUB>" withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"</SUB>" withString:@" "];
-    text = [text stringByReplacingOccurrencesOfString:@"<P>" withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"<B>" withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"<I>" withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"<TR>" withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"<TD>" withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"</P>" withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"</B>" withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"<BR />" withString:@"\n"];
-    text = [text stringByReplacingOccurrencesOfString:@"<FONT class=\"F7\">" withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"</FONT>" withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"</I>" withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"</TR>" withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"</TD>" withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"<TABLE width=\"100%\" border=\"1\">" withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"</TABLE>" withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"</SUB>" withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"<SUB>" withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"<P class=\"F7\">" withString:@""];
-    text = [text stringByReplacingOccurrencesOfString:@"&deg;" withString:@"°"];
-    text = [text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-    
-    return text;
-    
+    name = [parts componentsJoinedByString:@" "];
+
+    return name;
 }
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -375,376 +351,15 @@
         sdvc.dbManager = self.dbManager;
         
     }
-    //    } else if ([segue.identifier isEqualToString:@"toDoc"]) {
-    //
-    //        DocumentViewController *dvc = [segue destinationViewController];
-    //
-    //        dvc.info = self.molecule;
-    //        dvc.dbManager = self.dbManager;
-    //
-    //    }
     
 }
 
 
-/*
- #pragma mark - Navigation
- 
- // In a storyboard-based application, you will often want to do a little preparation before navigation
- - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
- // Get the new view controller using [segue destinationViewController].
- // Pass the selected object to the new view controller.
- }
- */
 
-// CEMETERY OF CODE
-
-//        ((DocumentViewController *)self.childViewControllers.lastObject).latName.text = [[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"];
-//
-//        ((DocumentViewController *)self.childViewControllers.lastObject).name.text = [[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
-//
-//        NSString *string = [[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"];
-//        ((DocumentViewController *)self.childViewControllers.lastObject).name.numberOfLines = 0;
-//        ((DocumentViewController *)self.childViewControllers.lastObject).name.text = string;
-//        [((DocumentViewController *)self.childViewControllers.lastObject).name sizeToFit];
-//
-//
-//        for (NSUInteger i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
-//            if ([[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
-//                || [[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
-//                [toDelete addIndex:i];
-//        }
-//
-//        [toDelete addIndex:0];
-//        [toDelete addIndex:1];
-//
-//        [[self.molecule objectAtIndex:0] removeObjectsAtIndexes:toDelete];
-//        [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
-//
-//        [((DocumentViewController *)self.childViewControllers.lastObject).tableView reloadData];
-
-
-
-
-//        ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).latName.text = [self clearString:[[[self.molecule objectAtIndex:0] objectAtIndex:1] valueForKey:@"lowercaseString"]];
-//        ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).name.text = [self clearString:[[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"]];
-//
-//        NSString *string = [self clearString:[[[self.molecule objectAtIndex:0] objectAtIndex:0] valueForKey:@"lowercaseString"]];
-//        ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).name.numberOfLines = 0;
-//        ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).name.text = string;
-//        [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).name sizeToFit];
-//
-//        if (![[[self.molecule objectAtIndex:0] objectAtIndex:2] isEqualToString:@""]) {
-//            ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).registred.text = [self clearString:[[self.molecule objectAtIndex:0] objectAtIndex:2]];
-//            [toDelete addIndex:2];
-//        } else {
-//            [toDelete addIndex:2];
-//        }
-//
-//        for (NSUInteger i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
-//            if ([[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""]
-//                || [[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@"0"])
-//                [toDelete addIndex:i];
-//        }
-//
-//        if ([((NSArray *)[ud objectForKey:@"favs"]) containsObject:[ud objectForKey:@"id"]]) {
-//            NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:@"Препарат в избранном" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:187.0/255.0 green:0.0 blue:57.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
-//
-//            [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setAttributedTitle:resultText forState:UIControlStateNormal];
-//            [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setImage:[UIImage imageNamed:@"favRed"] forState:UIControlStateNormal];
-//            ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0);
-//        } else {
-//            NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:@"Добавить в избранное" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
-//
-//            [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setAttributedTitle:resultText forState:UIControlStateNormal];
-//            [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav setImage:[UIImage imageNamed:@"favGrey"] forState:UIControlStateNormal];
-//            ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0);
-//        }
-//
-//
-//        [toDelete addIndex:0];
-//        [toDelete addIndex:1];
-//
-//        [[self.molecule objectAtIndex:0] removeObjectsAtIndexes:toDelete];
-//        [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
-//
-//        [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).tableView reloadData];
-
-
-
-//- (void) close {
-//
-//    if ([[ud valueForKey:@"screen"] isEqualToString:@"1"]) {
-//        [ud removeObjectForKey:@"listOfDrugs"];
-//    }
-//
-//    if (rly) {
-//        [ud removeObjectForKey:@"listOfDrugs"];
-//    }
-//
-//    [self refreshDb];
-//
-//
-//
-//    self.containerView.hidden = true;
-//    self.containerView2.hidden = true;
-//    container = false;
-//    [self.darkView removeGestureRecognizer:tap];
-//    self.darkView.hidden = true;
-//
-//    open = false;
-//    [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).tableView reloadData];
-//    [((DocumentViewController *)[self.childViewControllers objectAtIndex:1]).tableView reloadData];
-//
-//}
-
-
-
-//- (void) tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (tableView.tag == 2 || tableView.tag == 3){
-//        selectedRowIndex = [indexPath copy];
-//
-//        open = false;
-//
-//        sizeCell = [self labelSize:[[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row]] + 60.0;
-//
-//        [tableView beginUpdates];
-//
-//        [tableView endUpdates];
-//    } else {
-//        NSLog(@"hello");
-//    }
-//}
-
-
-
-//    }} else if (tableView.tag == 2 || tableView.tag == 3){
-//        selectedRowIndex = [indexPath copy];
-//        if (!open) {
-//            open = true;
-//            DocsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//            [self perfSeg:cell];
-//
-//        } else {
-//            open = false;
-//            DocsTableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
-//            [self perfSeg:cell];
-//        }
-//
-//        UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.containerView.frame.size.width - 40, 0)];
-//        NSString *string = [self clearString:[[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row]];
-//        NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
-//        NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-//        [paragraphStyle setLineSpacing:0.1];
-//        [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [string length])];
-//        label.attributedText = attributedString;
-//        label.lineBreakMode = NSLineBreakByWordWrapping;
-//        label.textAlignment = NSTextAlignmentLeft;
-//        label.numberOfLines = 0;
-//        label.font = [UIFont fontWithName:@"Lucida Grande-Regular" size:17.f];
-//        [label sizeToFit];
-//        sizeCell = label.frame.size.height + 60.0;
-//        NSLog(@"%f", sizeCell);
-//
-//        [tableView beginUpdates];
-//
-//        [tableView endUpdates];
-//    } else {
-//        NSLog(@"hello");
-//    }
-
-
-
-//- (CGFloat) labelSize:(NSString *)text  {
-//
-//    UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width - 40, 0)];
-//    NSString *string = text;
-//    NSMutableAttributedString *attributedString = [[NSMutableAttributedString alloc] initWithString:string];
-//    NSMutableParagraphStyle *paragraphStyle = [[NSMutableParagraphStyle alloc] init];
-//    [paragraphStyle setLineSpacing:0.5];
-//    [attributedString addAttribute:NSParagraphStyleAttributeName value:paragraphStyle range:NSMakeRange(0, [string length])];
-//    label.attributedText = attributedString;
-//    label.lineBreakMode = NSLineBreakByWordWrapping;
-//    label.numberOfLines = 0;
-//    label.font = [UIFont fontWithName:@"Lucida_Grande-Regular" size:17.f];
-//    [label sizeToFit];
-//    CGFloat result = label.frame.size.height;
-//
-//    return result;
-//}
-
-
-
-//    } else if (tableView.tag == 2 || tableView.tag == 3){
-//
-//        if (self.molecule == nil) {
-//            return nil;
-//        }
-//
-//        DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"docCell" forIndexPath:indexPath];
-//        if (cell == nil) {
-//            cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
-//        };
-//
-//        cell.delegate = self;
-//        cell.expanded = @"0";
-//        cell.title.text = [self clearString:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
-//        cell.desc.text = [self clearString:[[self.molecule objectAtIndex:0] objectAtIndex:indexPath.row]];
-//        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//
-//        return cell;
-//
-//    } else {
-//        return nil;
-//    }
-
-
-//    if (tableView.tag == 1) {
-//        return [self.arrPeopleInfo count];
-//    } else if (tableView.tag == 2 || tableView.tag == 3){
-//        NSInteger x = 0;
-//        for (int i = 0; i < [[self.molecule objectAtIndex:0] count]; i++) {
-//            if (![[[self.molecule objectAtIndex:0] objectAtIndex:i] isEqualToString:@""])
-//                x++;
-//        }
-//        return x;
-//    } else {
-//        return 1;
-//    }
-
-
-
-//    if (tableView.tag == 1){
-//        return 60;
-//    } else if (tableView.tag == 2 || tableView.tag == 3) {
-//        if(selectedRowIndex && indexPath.row == selectedRowIndex.row) {
-//            if (open) {
-//                return sizeCell;
-//            } else {
-//                return 60;
-//            }
-//        } else {
-//            return 60;
-//        }
-//    } else {
-//        return 60;
-//    }
-
-
-//- (void) viewWillDisappear:(BOOL)animated {
-//
-//    [ud removeObjectForKey:@"listOfDrugs"];
-//
-//
-//    [ud removeObjectForKey:@"pharmaList"];
-//    [ud removeObjectForKey:@"molecule"];
-//    [ud removeObjectForKey:@"comp"];
-////    [ud removeObjectForKey:@"workWith"];
-//    if ([ud valueForKey:@"listOfDrugs"]) {
-//
-//    } else {
-//        [ud removeObjectForKey:@"workActive"];
-//    }
-//
-//    if ([[ud valueForKey:@"screen"] isEqualToString:@"2"]) {
-////        [ud removeObjectForKey:@"listOfDrugs"];
-//        rly = true;
-//    }
-//}
-
-//    if ([[ud valueForKey:@"screen"] isEqualToString:@"2"]) {
-//        [ud removeObjectForKey:@"listOfDrugs"];
-//        [ud setValue:@"1" forKey:@"screen"];
-//    } else if ([[ud valueForKey:@"screen"] isEqualToString:@"1"] && [ud valueForKey:@"listOfDrugs"]) {
-//
-//    } else {
-//        [ud removeObjectForKey:@"workActive"];
-//    }
-
-//- (void) viewWillDisappear:(BOOL)animated {
-//
-//    [ud removeObjectForKey:@"pharmaList"];
-//    [ud removeObjectForKey:@"info"];
-//    [ud removeObjectForKey:@"molecule"];
-//    [ud removeObjectForKey:@"comp"];
-//    [ud removeObjectForKey:@"workWith"];
-//    if ([ud valueForKey:@"listOfDrugs"]) {
-//
-//    } else {
-//        [ud removeObjectForKey:@"workActive"];
-//    }
-//
-//}
-
-//    ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).tableView.delegate = self;
-//    ((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).tableView.dataSource = self;
-//    [((SecondDocumentViewController *)[self.childViewControllers objectAtIndex:0]).tableView setTag:2];
-//
-//    ((DocumentViewController *)[self.childViewControllers objectAtIndex:1]).tableView.delegate = self;
-//    ((DocumentViewController *)[self.childViewControllers objectAtIndex:1]).tableView.dataSource = self;
-//    [((DocumentViewController *)[self.childViewControllers objectAtIndex:1]).tableView setTag:3];
-
-
-//    if ([ud valueForKey:@"listOfDrugs"] && [ud valueForKey:@"workACtive"] && [[ud valueForKey:@"screen"] isEqualToString:@"2"]) {
-//        [ud removeObjectForKey:@"listOfDrugs"];
-//    } else if ([ud valueForKey:@"workACtive"] && [[ud valueForKey:@"screen"] isEqualToString:@"1"]) {
-//        [ud removeObjectForKey:@"workActive"];
-//    }
-
-
-//    self.containerView2.hidden = true;
-//    self.containerView.hidden = true;
-//    self.darkView.hidden = true;
-//    container = false;
-
-
-//    tap =
-//    [[UITapGestureRecognizer alloc] initWithTarget:self
-//                                            action:@selector(close)];
-
-//    open = false;
-//    rly = false;
-
-//    BOOL container;
-//    UITapGestureRecognizer *tap;
-//    NSIndexPath *selectedRowIndex;
-//    CGFloat sizeCell;
-//    BOOL open;
-//    BOOL rly;
-
-
-//            self.containerView.hidden = false;
-//            container = true;
-//            self.darkView.hidden = false;
-//            [self.darkView addGestureRecognizer:tap];
-
-
-//- (void) perfSeg:(DocsTableViewCell *)sender {
-//    if (open) {
-//        sender.image.transform = CGAffineTransformMakeRotation(M_PI_2);
-//    } else {
-//        sender.image.transform = CGAffineTransformMakeRotation(0.0);
-//    }
-//}
-
-
-//                self.containerView2.hidden = false;
-//                container = true;
-//                self.darkView.hidden = false;
-//                [self.darkView addGestureRecognizer:tap];
-
-//        if ([ud valueForKey:@"listOfDrugs"]) {
-//
-//            [ud setValue:@"2" forKey:@"screen"];
-//
-////            req = [NSString stringWithFormat:@"SELECT Document.*, ClinicoPhPointers.Name as Category FROM Document LEFT JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID LEFT JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID LEFT JOIN Document_ClPhPointers ON Document.DocumentID = Document_ClPhPointers.DocumentID LEFT JOIN ClinicoPhPointers ON ClinicoPhPointers.ClPhPointerID = Document_ClPhPointers.SrcClPhPointerID WHERE Molecule.MoleculeID = %@", [ud objectForKey:@"listOfDrugs"]];
-//
-//            req = [NSString stringWithFormat:@"SELECT Product.DocumentID, Product.RusName FROM Document LEFT JOIN Molecule_Document ON Document.DocumentID = Molecule_Document.DocumentID LEFT JOIN Molecule ON Molecule_Document.MoleculeID = Molecule.MoleculeID INNER JOIN Product_Molecule ON Molecule.MoleculeID = Product_Molecule.MoleculeID INNER JOIN Product ON Product_Molecule.ProductID = Product.ProductID WHERE Molecule.MoleculeID = %@ ORDER BY Document.RusName", [ud objectForKey:@"listOfDrugs"]];
-//
-//
-//            [self loadData:req];
-//        } else {
-
-//            [ud setValue:@"1" forKey:@"screen"];
+- (void) search {
+    SearchViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"search"];
+    [vc setSearchType:self.seatchType];
+    [self.navigationController pushViewController:vc animated:NO];
+}
 
 @end

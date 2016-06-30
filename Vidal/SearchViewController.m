@@ -60,8 +60,18 @@
     
 }
 
+- (instancetype)init
+{
+    self = [super init];
+    if (self) {
+        self.searchType = SearchDrug;
+    }
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     
     self.data = [NSMutableArray array];
     
@@ -126,12 +136,48 @@
     
     // Do any additional setup after loading the view.
     
-    [self toDrugs:nil];
+
+}
+
+-(void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    [self setFocusWithSearchType];
+}
+
+-(void)viewDidAppear:(BOOL)animated {
+    [self.scrollView scrollRectToVisible:CGRectMake(self.scrollView.frame.size.width / 4 * buttonNumber, self.scrollView.frame.origin.y, self.scrollView.frame.size.width, self.scrollView.frame.size.height) animated:YES];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)setFocusWithSearchType {
+    switch (self.searchType) {
+        case SearchDrug: {
+            [self toDrugs:nil];
+            buttonNumber = 0;
+            break;
+        }
+        case SearchMolecule: {
+            [self toMolecule:nil];
+            buttonNumber = 1;
+            break;
+        }
+        case SearchPharmGroup: {
+            [self toPharma:nil];
+            buttonNumber = 2;
+            break;
+        }
+        case SearchCompany: {
+            [self toProd:nil];
+            buttonNumber = 3;
+            break;
+        }
+        default:
+            break;
+    }
 }
 
 #pragma mark - UITableViewDataSource
@@ -579,7 +625,7 @@
 
 - (void) getInfo:(NSString *)req {
     
-    if (tableView1b) {
+    if (tableView2b) {
         
         if (self.data != nil) {
             self.data = nil;
@@ -591,7 +637,7 @@
         [self.dbManager.arrColumnNames removeObjectAtIndex:3];
         [ud setObject:@"active" forKey:@"from"];
         
-    } else if (tableView2b) {
+    } else if (tableView1b) {
         
         if (self.data != nil) {
             self.data = nil;

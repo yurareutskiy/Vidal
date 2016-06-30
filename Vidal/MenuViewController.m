@@ -82,7 +82,11 @@
 
 - (IBAction)toNews:(UIButton *)sender {
     
-    [self performSegueWithIdentifier:@"toNews" sender:self];
+    if ([[ud valueForKey:@"reg"] isEqualToString:@"2"]) {
+        [self performSegueWithIdentifier:@"toNews" sender:self];
+    } else {
+        [self performSegueWithIdentifier:@"toNews_demo" sender:self];
+    }
     
 }
 
@@ -120,7 +124,6 @@
 - (IBAction)toAbout:(UIButton *)sender {
     
     [self performSegueWithIdentifier:@"toAbout" sender:self];
-    
 }
 
 - (IBAction)toProfile:(UIButton *)sender {

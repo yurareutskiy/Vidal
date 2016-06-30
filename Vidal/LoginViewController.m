@@ -23,10 +23,10 @@
     
     ud = [NSUserDefaults standardUserDefaults];
     
-    if ([[ud valueForKey:@"reg"] isEqualToString:@"2"]) {
-        UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
-        [self presentViewController:vc animated:NO completion:nil];
-    }
+//    if ([[ud valueForKey:@"reg"] isEqualToString:@"2"]) {
+//        UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
+//        [self presentViewController:vc animated:NO completion:nil];
+//    }
     
     self.emailInput.delegate = self;
     self.passInput.delegate = self;
@@ -45,10 +45,10 @@
         isConnectionAvailable = true;
     }
     
-    if (isConnectionAvailable) {
+    if ([ud objectForKey:@"wasExit"] == nil) {
         [self showAlert:@"Внимание!" mess:@"При первом входе в приложение требуется скачать объемное количество информации (30Мб)." check:NO];
     } else {
-        [self showAlert:@"Отсутствует Интернет-соединение" mess:@"Попробуйте зайти позже" check:NO];
+//        [self showAlert:@"Отсутствует Интернет-соединение" mess:@"Попробуйте зайти позже" check:NO];
     }
     
     if (IS_IPHONE_5) {
@@ -63,17 +63,22 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillShow:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(keyboardWillHide:) name:UIKeyboardWillHideNotification object:nil];
     
-    
+    [ud setObject:@"1" forKey:@"reg"];
     if ([ud objectForKey:@"email_temp"] && [ud objectForKey:@"pass_temp"]) {
         self.emailInput.text = [ud objectForKey:@"email_temp"];
         self.passInput.text = [ud objectForKey:@"pass_temp"];
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated {
+
+-(void)viewWillDisappear:(BOOL)animated {
+    [ud setObject:self.emailInput.text forKey:@"email_temp"];
+    [ud setObject:self.passInput.text forKey:@"pass_temp"];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
+
 
 #pragma mark - keyboard movements
 - (void)keyboardWillShow:(NSNotification *)notification
@@ -156,6 +161,7 @@
     
 }
 
+
 - (IBAction)login:(id)sender {
     if ([self NSStringIsValidEmail:self.emailInput.text] && ![self.emailInput.text isEqualToString:@""]) {
         if ([self.passInput.text length] >= 6 && [self.passInput.text length] <= 255 && ![self hasRussianCharacters:self.passInput.text]) {
@@ -186,7 +192,6 @@
                       [ud setObject:[responseObject valueForKey:@"university"] forKey:@"university"];
                       [ud setObject:[responseObject valueForKey:@"graduateYear"] forKey:@"graduateYear"];
                       
-                      [ud setObject:@"2" forKey:@"reg"];
                       [ud setObject:[responseObject valueForKey:@"token"] forKey:@"archToken"];
                       UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
                       [self presentViewController:vc animated:true completion:nil];
@@ -244,7 +249,7 @@
 }
 
 - (IBAction)withoutReg:(UIButton *)sender {
-    
+    [ud setObject:@"0" forKey:@"reg"];
     UIStoryboard *stb = [UIStoryboard storyboardWithName:@"LogOutStoryboard" bundle:nil];
     UIViewController *vc = [stb instantiateViewControllerWithIdentifier:@"revealMenu1"];
     [self presentViewController:vc animated:true completion:nil];

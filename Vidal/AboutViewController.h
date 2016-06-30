@@ -16,6 +16,13 @@
 @property (strong, nonatomic) IBOutlet UIButton *image;
 @property (strong, nonatomic) IBOutlet UILabel *name;
 
+@property (strong, nonatomic) IBOutlet UIButton *rightButton;
+@property (strong, nonatomic) IBOutlet UIButton *leftButton;
+@property (strong, nonatomic) IBOutlet UIButton *showDrugsListButoon;
+
+@property (assign, nonatomic) BOOL demoAccount;
+
+
 - (IBAction)toList:(UIButton *)sender;
 - (IBAction)right:(UIButton *)sender;
 - (IBAction)left:(UIButton *)sender;

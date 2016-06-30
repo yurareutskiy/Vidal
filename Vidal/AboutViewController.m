@@ -26,6 +26,12 @@
     int ind;
 }
 
+-(instancetype)init {
+    self = [super init];
+    self.demoAccount = YES;
+    return self;
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -253,6 +259,8 @@
     [ud setObject:[self.IDs objectAtIndex:ind] forKey:@"id"];
     [self performSegueWithIdentifier:@"toDrug" sender:self];
 }
+
+
 
 - (void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
