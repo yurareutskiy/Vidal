@@ -251,7 +251,7 @@
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     NSLog(@"%@", [ud valueForKey:@"archToken"]);
-    [manager POST:@"http://www.vidal.ru/api/db/update" parameters:@{@"token":[ud valueForKey:@"archToken"], @"tag":@"cardio"} success:^(AFHTTPRequestOperation * _Nonnull operation, id responseObject) {
+    [manager POST:@"http://www.vidal.ru/api/db/update-android" parameters:@{@"token":[ud valueForKey:@"archToken"], @"tag":@"cardio"} success:^(AFHTTPRequestOperation * _Nonnull operation, id responseObject) {
         
         NSLog(@"%@", responseObject);
         
@@ -309,7 +309,13 @@
         
         NSLog(@"%@", responseObject);
         
-        NSString *pass = [[self md5:[NSString stringWithFormat:@"%@%@", secret_key,[responseObject valueForKey:@"key"]]] substringToIndex:16];
+        NSString *pass;
+        if ([[responseObject valueForKey:@"key"] isEqualToString:@""]) {
+            pass = @"";
+        } else {
+            pass = [[self md5:[NSString stringWithFormat:@"%@%@", secret_key,[responseObject valueForKey:@"key"]]] substringToIndex:16];
+        }
+        
         NSLog(@"%@", [responseObject valueForKey:@"key"]);
         NSLog(@"%@", secret_key);
         [ud setObject:pass forKey:@"pass"];
