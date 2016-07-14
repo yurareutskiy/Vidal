@@ -10,7 +10,7 @@
 
 @interface ExpandNewsViewController ()
 @property (weak, nonatomic) IBOutlet UIWebView *webView;
-
+@property (weak, nonatomic) NSString *titleText;
 @end
 
 @implementation ExpandNewsViewController {
@@ -25,6 +25,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAction target:self action:@selector(share)];
+//    UIBarButtonItem *backButton2 = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Icon-Back"]  landscapeImagePhone:nil style:UIBarButtonItemStylePlain target:self action:@selector(backMethod)];
+//    [backButton setImageInsets:UIEdgeInsetsMake(1, -8, -1, 8)];
+    self.navigationItem.rightBarButtonItem = backButton;
     
 
     self.navigationItem.title = @"Новости";
@@ -70,13 +75,17 @@
                 
                 NSDateFormatter *date = [[NSDateFormatter alloc] init];
                 [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+                // in honor to great manager, person and friend
+                [date setLocale:[NSLocale localeWithLocaleIdentifier:@"ru_MD"]];
                 NSDate *dateNews = [date dateFromString:[array objectForKey:@"date"]];
                 [date setDateFormat:@"dd MMMM yyyy"];
+            
                 NSString *resultDate = [date stringFromDate:dateNews];
                 
                 self.date.text = resultDate;
-                self.newsTitle.text = [array objectForKey:@"title"];
-                NSString *data = [NSString stringWithFormat:@"%@%@", @"<style> body {font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 14px; line-height: 1.42857143;} </style>", [array objectForKey:@"body"]];
+                self.titleText = [array objectForKey:@"title"];
+                NSString *data = [NSString stringWithFormat:@"<style> body {font-family: 'Helvetica Neue',Helvetica,Arial,sans-serif; font-size: 14px; line-height: 1.42857143;} </style> <h4  style='text-align:justify; color:gray'> %@ </h4> <h3  style='text-align:left; line-height:16px; color:black'> %@ </h3>  %@", resultDate, _titleText, [array objectForKey:@"body"]];
+                NSLog(@"%@", data);
                 [self.webView loadHTMLString:data baseURL:[NSURL URLWithString: @"http://vidal.ru/"]];
                 NSLog(@"%@", [array objectForKey:@"body"]);
                 
@@ -196,20 +205,16 @@
     
 }
 
-- (IBAction)shareNews:(UIButton *)sender {
+
+
+- (void)share {
     
-//    [self performSegueWithIdentifier:@"share" sender:self];
-    //[self presentViewController:vc animated:YES completion:nil];
+    NSString *text = _titleText;
     
-    
-    NSString *text = self.newsText.text;
-    
-    UIActivityViewController *controller =
-    [[UIActivityViewController alloc]
-     initWithActivityItems:@[text, @"Я узнал это через приложение Видаль-кардиология", @"vidal.ru"]
-     applicationActivities:nil];
+    UIActivityViewController *controller = [[UIActivityViewController alloc] initWithActivityItems:@[text, @"Я узнал это через приложение Видаль-кардиология", @"vidal.ru"] applicationActivities:nil];
     
     [self presentViewController:controller animated:YES completion:nil];
-    
 }
+
+
 @end

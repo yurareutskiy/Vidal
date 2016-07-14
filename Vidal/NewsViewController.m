@@ -61,6 +61,7 @@
     
     NSDateFormatter *date = [[NSDateFormatter alloc] init];
     [date setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    [date setLocale:[NSLocale localeWithLocaleIdentifier:@"ru_MD"]];
     NSDate *dateNews = [date dateFromString:[[array objectAtIndex:indexPath.row] objectForKey:@"date"]];
     [date setDateFormat:@"dd MMMM yyyy"];
     NSString *resultDate = [date stringFromDate:dateNews];

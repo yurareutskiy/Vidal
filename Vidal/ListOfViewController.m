@@ -38,7 +38,7 @@
     self.dbManager = [[DBManager alloc] initWithDatabaseFilename];
     
     [self refreshDb];
-    
+    [self.tableView reloadData];
     // Do any additional setup after loading the view.
 }
 
@@ -105,15 +105,9 @@
         self.req = @"";
         [self loadData:self.req];
     }
-    
+
 }
 
-- (void) viewWillAppear:(BOOL)animated {
-    
-    [self refreshDb];
-    [self.tableView reloadData];
-    
-}
 
 - (void) viewWillDisappear:(BOOL)animated {
     
@@ -347,8 +341,10 @@
         
         SecondDocumentViewController *sdvc = [segue destinationViewController];
         
-        sdvc.info = self.molecule;
-        sdvc.dbManager = self.dbManager;
+//        sdvc.info = [self.molecule copy];
+//        sdvc.dbManager = [self.dbManager copy];
+        NSInteger indexOfId = [self.dbManager.arrColumnNames indexOfObject:@"DocumentID"];
+        sdvc.drugID = [self.molecule objectAtIndex:indexOfId];
         
     }
     

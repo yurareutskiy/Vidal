@@ -32,6 +32,7 @@
     NSInteger activeWebViewTag;
 }
 
+
 - (void)viewDidLoad {
     [super viewDidLoad];
 
@@ -59,13 +60,28 @@
     
     [ud setObject:@"0" forKey:@"share"];
     
+    if ([((NSArray *)[ud objectForKey:@"favs"]) containsObject:[ud objectForKey:@"id"]]) {
+        UIColor *color = [UIColor colorWithRed:187.0/255.0 green:0.0/255.0 blue:57.0/255.0 alpha:1];
+        
+        [self changeButton:@"Препарат в избранном" image:@"favRed" color:color];
+        [self.favIconImageView setImage:[UIImage imageNamed:@"preparation_hover"]];
+        self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0);
+    } else {
+        UIColor *color = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1];
+        
+        [self.favIconImageView setImage:[UIImage imageNamed:@"preparation"]];
+        [self changeButton:@"Добавить в избранное" image:@"favGrey" color:color];
+        self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0);
+    }
+    
     if (self.drugID) {
         self.dbManager = [[DBManager alloc] init];
         NSString *request =   [NSString stringWithFormat: @"select doc.RusName as RusName, doc.CompiledComposition as CompiledComposition, doc.CategoryName  as Category, doc.PhInfluence as PhInfluence, doc.PhKinetics as PhKinetics, doc.Indication as Indication, doc.Dosage as Dosage, doc.SideEffects as SideEffects, doc.ContraIndication as ContraIndication, doc.Lactation as Lactation, doc.SpecialInstruction as SpecialInstruction, doc.OverDosage as OverDosage, doc.Interaction as Interaction, doc.PharmDelivery as PharmDelivery, doc.StorageCondition as StorageCondition, doc.Elaboration as Elaboration,  InfoPage.RusName as InfoPageName "
            "from DocumentListView doc "
-           "INNER JOIN Document_InfoPage ON Document_InfoPage.DocumentID = doc.DocumentID "
-           "INNER JOIN InfoPage ON InfoPage.InfoPageID = Document_InfoPage.InfoPageID "
+           "LEFT JOIN Document_InfoPage ON Document_InfoPage.DocumentID = doc.DocumentID "
+           "LEFT JOIN InfoPage ON InfoPage.InfoPageID = Document_InfoPage.InfoPageID "
            "where doc.DocumentID = '%@'", self.drugID];
+        NSLog(@"%@", request);
         self.info = [[NSMutableArray arrayWithArray:[self.dbManager loadDataFromDB:request]] objectAtIndex:0];
         
         NSInteger nameIndex = [self.dbManager.arrColumnNames indexOfObject:@"RusName"];
@@ -191,19 +207,7 @@
                 
             }
             
-            if ([((NSArray *)[ud objectForKey:@"favs"]) containsObject:[ud objectForKey:@"id"]]) {
-                NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:@"Препарат в избранном" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:187.0/255.0 green:0.0 blue:57.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
-                
-                [self.fav setAttributedTitle:resultText forState:UIControlStateNormal];
-                [self.fav setImage:[UIImage imageNamed:@"favRed"] forState:UIControlStateNormal];
-                self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0);
-            } else {
-                NSMutableAttributedString *resultText = [[NSMutableAttributedString alloc] initWithString:@"Добавить в избранное" attributes:@{NSForegroundColorAttributeName:[UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1], NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
-                
-                [self.fav setAttributedTitle:resultText forState:UIControlStateNormal];
-                [self.fav setImage:[UIImage imageNamed:@"favGrey"] forState:UIControlStateNormal];
-                self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0);
-            }
+
             
             [self.info removeObjectsAtIndexes:toDelete];
             [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
@@ -242,7 +246,7 @@
     //    self.backButton = [[UIBarButtonItem alloc] initWithTitle:@"Назад" style:UIBarButtonItemStylePlain target:self action:@selector(backMethod)];
     
     UIBarButtonItem *backButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"Icon-Back"]  landscapeImagePhone:nil style:UIBarButtonItemStylePlain target:self action:@selector(backMethod)];
-    
+    [backButton setImageInsets:UIEdgeInsetsMake(1, -8, -1, 8)];
     self.navigationItem.leftBarButtonItem = backButton;
     
 }
@@ -303,6 +307,7 @@
             UIColor *color = [UIColor colorWithRed:187.0/255.0 green:0.0/255.0 blue:57.0/255.0 alpha:1];
             
             [self changeButton:@"Препарат в избранном" image:@"favRed" color:color];
+            [self.favIconImageView setImage:[UIImage imageNamed:@"preparation_hover"]];
             self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0);
             
         } else {
@@ -313,7 +318,7 @@
             
             UIColor *color = [UIColor colorWithRed:221.0/255.0 green:221.0/255.0 blue:221.0/255.0 alpha:1];
 
-            
+            [self.favIconImageView setImage:[UIImage imageNamed:@"preparation"]];
             [self changeButton:@"Добавить в избранное" image:@"favGrey" color:color];
             self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 5.0, 0.0, 0.0);
             
@@ -327,7 +332,7 @@
     NSMutableAttributedString *result = [[NSMutableAttributedString alloc] initWithString:name attributes:@{NSForegroundColorAttributeName:color, NSUnderlineStyleAttributeName:@(NSUnderlineStyleSingle)}];
     
     [self.fav setAttributedTitle:result forState:UIControlStateNormal];
-    [self.fav setImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
+//    [self.fav setImage:[UIImage imageNamed:image] forState:UIControlStateNormal];
     self.fav.imageEdgeInsets = UIEdgeInsetsMake(0.0, 10.0, 0.0, 0.0);
     
 }
@@ -450,7 +455,6 @@
     
     if ([[sizesDictionary allKeys] containsObject:[NSString stringWithFormat:@"%ld", webView.tag]] == NO) {
 
-    
         
         CGRect frame = webView.frame;
         frame.size.height = 1;
@@ -565,26 +569,32 @@
     NSString *endRequest = @"%'";
     NSString *req = [NSString stringWithFormat:@"%@%@%@", reqRaw, [[self clearToInter:self.name.text] uppercaseString], endRequest];
     NSArray *requestResult = [[[DBManager alloc] init] loadDataFromDB:req];
+    NSString *rawStringResult = @"";
     if ([requestResult count] > 0) {
-        NSString *rawStringResult = requestResult[0][0];
-        if (rawStringResult) {
-            [ud setObject:[rawStringResult capitalizedString] forKey:@"toInter"];
-            [self performSegueWithIdentifier:@"knowAbout" sender:self];
-            [ud setObject:@"1" forKey:@"share"];
-        } else {
-            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Нет данных" message:@"Для этого препарата не найдено веществ" preferredStyle:UIAlertControllerStyleAlert];
-            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-            [alertController addAction:ok];
-            [self presentViewController:alertController animated:YES completion:nil];
-        }
-    } else {
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Нет данных" message:@"Для этого препарата не найдено веществ" preferredStyle:UIAlertControllerStyleAlert];
-        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
-        [alertController addAction:ok];
-        [self presentViewController:alertController animated:YES completion:nil];
+        rawStringResult = requestResult[0][0];
     }
+    [ud setObject:[rawStringResult capitalizedString] forKey:@"toInter"];
+    [self performSegueWithIdentifier:@"knowAbout" sender:self];
+    [ud setObject:@"1" forKey:@"share"];
+//        if (rawStringResult) {
+//            [ud setObject:[rawStringResult capitalizedString] forKey:@"toInter"];
+//            [self performSegueWithIdentifier:@"knowAbout" sender:self];
+//            [ud setObject:@"1" forKey:@"share"];
+//        } else {
+//            NSString *message = [NSString stringWithFormat:@"Для препарата %@ не найдено веществ", self.name.text];
+//            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Нет данных" message: message  preferredStyle:UIAlertControllerStyleAlert];
+//            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+//            [alertController addAction:ok];
+//            [self presentViewController:alertController animated:YES completion:nil];
+//        }
+//    } else {
+//        NSString *message = [NSString stringWithFormat:@"Для препарата %@ не найдено веществ", self.name.text];
+//        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Нет данных" message:message preferredStyle:UIAlertControllerStyleAlert];
+//        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:nil];
+//        [alertController addAction:ok];
+//        [self presentViewController:alertController animated:YES completion:nil];
+//    }
 
-    
 }
 
 - (NSString *) clearToInter:(NSString *) input {
@@ -605,6 +615,7 @@
     if (![text isEqualToString:@""]) {
         text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
     }
+    text = [text stringByReplacingOccurrencesOfString:@"&amp;>" withString:@"&"];
     text = [text stringByReplacingOccurrencesOfString:@"&laquo;" withString:@"«"];
     text = [text stringByReplacingOccurrencesOfString:@"<sup>&trade;</sup>" withString:@"™"];
     text = [text stringByReplacingOccurrencesOfString:@"<SUP>&trade;</SUP>" withString:@"™"];

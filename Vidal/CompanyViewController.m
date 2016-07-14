@@ -8,6 +8,7 @@
 
 #import "CompanyViewController.h"
 #import "SearchViewController.h"
+#import "StringFormatter.h"
 
 @interface CompanyViewController ()
 
@@ -31,7 +32,7 @@
 
 - (void) viewWillAppear:(BOOL)animated {
     
-    self.nameHid.text = self.name;
+    self.nameHid.text = [StringFormatter clearString:self.name];
     self.countryHid.text = self.country;
     self.addressHid.text = [self addPhonePrefix: self.address];
     if ([self.address containsString:@"Тел."] || [self.address containsString:@"Тел:"]) {

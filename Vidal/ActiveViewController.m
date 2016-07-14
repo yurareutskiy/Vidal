@@ -163,12 +163,26 @@
     NSInteger indexOfLetter = [self.dbManager.arrColumnNames indexOfObject:@"Letter"];
     NSInteger indexOfTitle = [self.dbManager.arrColumnNames indexOfObject:@"Title"];
     
-    cell.name.text = [self clearString:[[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfTitle] valueForKey:@"lowercaseString"]];
-        cell.letter.text = [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfLetter];
+    NSString *nameMolecule = [self clearString:[[[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfTitle] valueForKey:@"lowercaseString"]];
+    NSString *letter = [[self.arrPeopleInfo objectAtIndex:indexPath.row] objectAtIndex:indexOfLetter];
+    
+    cell.name.text = [nameMolecule substringToIndex:nameMolecule.length - 2];
+    cell.letter.text = letter;
         
-        return cell;
+    return cell;
     
 
+}
+
+- (NSString*)sliceStringWithExceptionsFromString:(NSString*)string WithLetter:(NSString*)letter {
+    
+    if (self.view.frame.size.width == 375) {
+        if ([letter isEqualToString:@"О"] || [letter isEqualToString:@"П"]) {
+            
+        }
+    }
+    
+    return string;
 }
 
 #pragma mark - UITableViewDelegate
@@ -238,6 +252,7 @@
     
     [text stringByReplacingOccurrencesOfString:@",.." withString:@".."];
     
+    text = [text stringByReplacingOccurrencesOfString:@"&amp;>" withString:@"&"];
     text = [text stringByReplacingOccurrencesOfString:@"<TD colSpan=\"2\">" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
     text = [text stringByReplacingOccurrencesOfString:@"<sup>&trade;</sup>" withString:@"™"];

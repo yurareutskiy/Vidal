@@ -28,8 +28,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self checkConnection];
+    [self setLabel:@"Vidal"];
     ud = [NSUserDefaults standardUserDefaults];
+
+    if ([[ud objectForKey:@"reg"] isEqualToString:@"0"]) {
+        return;
+    }
+    
+    [self checkConnection];
     [ud setValue:@"0" forKey:@"howTo"];
     [ud removeObjectForKey:@"toInter"];
     
@@ -47,7 +53,7 @@
     
     self.bg.layer.masksToBounds = YES;
     NSLog(@"%@", [ud valueForKey:@"reg"]);
-    if ([[ud valueForKey:@"reg"] isEqualToString:@"1"]) {
+//    if ([[ud valueForKey:@"reg"] isEqualToString:@"1"]) {
         NSArray *URLs = [[NSFileManager defaultManager] URLsForDirectory:NSDocumentDirectory inDomains:NSUserDomainMask];
         NSURL *directoryURL = [URLs firstObject];
         NSURL *databaseURL = [directoryURL URLByAppendingPathComponent:@"vidalDatabase.zip"];
@@ -99,9 +105,8 @@
         [ud removeObjectForKey:@"letterDrug"];
         [ud removeObjectForKey:@"letterActive"];
         
-    }
-    // Do any additional setup after loading the view.
-    [self setLabel:@"Vidal"];
+//    }
+//     Do any additional setup after loading the view.
 }
 
 
@@ -248,38 +253,41 @@
 }
 
 - (void) getLink {
-    
-    AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
-    NSLog(@"%@", [ud valueForKey:@"archToken"]);
-    [manager POST:@"http://www.vidal.ru/api/db/update-android" parameters:@{@"token":[ud valueForKey:@"archToken"], @"tag":@"cardio"} success:^(AFHTTPRequestOperation * _Nonnull operation, id responseObject) {
-        
-        NSLog(@"%@", responseObject);
-        
-        [ud setObject:[responseObject valueForKey:@"url"] forKey:@"url"];
-        url = [responseObject valueForKey:@"url"];
-        [ud setObject:[responseObject valueForKey:@"version"] forKey:@"newVersion"];
-        
-        if (!exists) {
-            [self downloadDB:url];
-            [self getKey];
-            [ud setObject:[ud valueForKey:@"newVersion"] forKey:@"version"];
-        } else {
-            NSLog(@"%@ - %@", [ud objectForKey:@"version"], [ud objectForKey:@"newVersion"]);
-            if (![[NSString stringWithFormat:@"%@", [ud objectForKey:@"version"]] isEqualToString:[NSString stringWithFormat:@"%@", [ud objectForKey:@"newVersion"]]]) {
-                if ([self compareDate]) {
-                    exists = false;
-                    [self checkBool:@"Доступна новая версия архива" mess:@"Скачать?" down:YES amount:2];
+    // TODO
+    if (![[ud valueForKey:@"reg"] isEqualToString:@"0"]) {
+        AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
+        NSLog(@"%@", [ud valueForKey:@"archToken"]);
+        [manager POST:@"http://www.vidal.ru/api/db/update-android" parameters:@{@"token":[ud valueForKey:@"archToken"], @"tag":@"cardio"} success:^(AFHTTPRequestOperation * _Nonnull operation, id responseObject) {
+            
+            NSLog(@"%@", responseObject);
+            
+            [ud setObject:[responseObject valueForKey:@"url"] forKey:@"url"];
+            url = [responseObject valueForKey:@"url"];
+            [ud setObject:[responseObject valueForKey:@"version"] forKey:@"newVersion"];
+            
+            if (!exists) {
+                [self downloadDB:url];
+                [self getKey];
+                [ud setObject:[ud valueForKey:@"newVersion"] forKey:@"version"];
+            } else {
+                NSLog(@"%@ - %@", [ud objectForKey:@"version"], [ud objectForKey:@"newVersion"]);
+                if (![[NSString stringWithFormat:@"%@", [ud objectForKey:@"version"]] isEqualToString:[NSString stringWithFormat:@"%@", [ud objectForKey:@"newVersion"]]]) {
+                    if ([self compareDate]) {
+                        exists = false;
+                        [self checkBool:@"Доступна новая версия архива" mess:@"Скачать?" down:YES amount:2];
+                    }
                 }
             }
-        }
-        
+            
+            
+            
+        } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+            
+            NSLog(@"%@", error);
+            
+        }];
 
-        
-    } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
-        
-        NSLog(@"%@", error);
-        
-    }];
+    }
     
 }
 

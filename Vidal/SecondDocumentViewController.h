@@ -21,6 +21,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *latName;
 @property (strong, nonatomic) IBOutlet UIButton *fav;
 @property (strong, nonatomic) IBOutlet UILabel *elaboration;
+@property (weak, nonatomic) IBOutlet UIImageView *favIconImageView;
 
 @property (strong, nonatomic) NSMutableArray *info;
 @property (strong, nonatomic) NSMutableArray *tempInfo;

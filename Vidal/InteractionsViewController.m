@@ -132,15 +132,27 @@
             
             [self presentViewController:alertController animated:YES completion:nil];
         }
-        
-        self.tableView.hidden = true;
-        self.secondInput.hidden = false;
-        self.secondLine.hidden = false;
-        self.secondLabel.hidden = false;
-        self.lead.hidden = true;
-        self.toolbar.hidden = false;
-        self.secondLinePicker.hidden = false;
-//        [self.secondLinePicker reloadAllComponents];
+        if ([[ud objectForKey:@"toInter"] isEqualToString:@""] == NO) {
+            self.tableView.hidden = true;
+            self.secondInput.hidden = false;
+            self.secondLine.hidden = false;
+            self.secondLabel.hidden = false;
+//            self.lead.hidden = false;
+            self.toolbar.hidden = false;
+            self.secondLinePicker.hidden = false;
+            [self.secondLinePicker reloadAllComponents];
+        }
+        if (inx == -1) {
+            self.tableView.hidden = true;
+            self.secondInput.hidden = true;
+            self.secondLine.hidden = true;
+            self.secondLabel.hidden = true;
+            self.lead.hidden = true;
+            self.toolbar.hidden = true;
+            self.secondLinePicker.hidden = true;
+            [self.secondLinePicker reloadAllComponents];
+            self.input.text = @"";
+        }
     }
 }
 
@@ -242,6 +254,14 @@
     }
     
     if (inx == -1) {
+        self.tableView.hidden = true;
+        self.secondInput.hidden = false;
+        self.secondLine.hidden = false;
+        self.secondLabel.hidden = false;
+//        self.lead.hidden = false;
+        self.toolbar.hidden = false;
+        self.secondLinePicker.hidden = false;
+        [self.secondLinePicker reloadAllComponents];
         return;
     }
     
@@ -289,24 +309,36 @@
     self.secondInput.hidden = false;
     self.secondLine.hidden = false;
     self.secondLabel.hidden = false;
-    self.lead.hidden = false;
+//    self.lead.hidden = false;
 
 }
 
 - (IBAction)getData:(UIBarButtonItem *)sender {
     
-    self.secondInput.text = self.hello2[[self.secondLinePicker selectedRowInComponent:0]];
-    self.result.text = [self findSecondResult:self.hello2[[self.secondLinePicker selectedRowInComponent:0]]];
-    self.result.hidden = false;
-    self.lead.hidden = false;
-    [self.secondInput resignFirstResponder];
-    self.tableView.hidden = true;
-    self.secondInput.hidden = false;
-    self.secondLine.hidden = false;
-    self.secondLabel.hidden = false;
-    self.lead.hidden = false;
-    self.toolbar.hidden = true;
-    self.secondLinePicker.hidden = true;
+    if (self.hello2.count > 0) {
+        self.tableView.hidden = true;
+        self.toolbar.hidden = true;
+        self.secondLinePicker.hidden = true;
+        self.secondInput.text = self.hello2[[self.secondLinePicker selectedRowInComponent:0]];
+        self.result.text = [self findSecondResult:self.hello2[[self.secondLinePicker selectedRowInComponent:0]]];
+        self.result.hidden = false;
+        [self.secondInput resignFirstResponder];
+        self.secondInput.hidden = false;
+        self.secondLine.hidden = false;
+        self.secondLabel.hidden = false;
+        self.lead.hidden = false;
+
+    } else {
+        self.tableView.hidden = true;
+        self.toolbar.hidden = true;
+        self.lead.hidden = true;
+        self.secondLinePicker.hidden = true;
+        self.secondInput.hidden = true;
+        self.secondLine.hidden = true;
+        self.secondLabel.hidden = true;
+
+    }
+    
     
 }
 
@@ -415,6 +447,7 @@
     
     NSString *text = input;
     
+    text = [text stringByReplacingOccurrencesOfString:@"&amp;>" withString:@"&"];
     text = [text stringByReplacingOccurrencesOfString:@"<TD colSpan=\"2\">" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
     text = [text stringByReplacingOccurrencesOfString:@"<sup>&trade;</sup>" withString:@"™"];

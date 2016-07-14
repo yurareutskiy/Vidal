@@ -211,7 +211,7 @@
     
     [text stringByReplacingOccurrencesOfString:@",.." withString:@".."];
     
-    
+    text = [text stringByReplacingOccurrencesOfString:@"&amp;>" withString:@"&"];
     text = [text stringByReplacingOccurrencesOfString:@"<TD colSpan=\"2\">" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
     text = [text stringByReplacingOccurrencesOfString:@"<sup>&trade;</sup>" withString:@"™"];

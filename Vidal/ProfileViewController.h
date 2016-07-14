@@ -14,7 +14,7 @@
 @property (strong, nonatomic) IBOutlet UITextField *email;
 @property (strong, nonatomic) IBOutlet UILabel *bd;
 @property (strong, nonatomic) IBOutlet UILabel *city;
-@property (strong, nonatomic) IBOutlet UITextField *universityText;
+@property (strong, nonatomic) IBOutlet UILabel *universityText;
 @property (strong, nonatomic) IBOutlet UILabel *degreeText;
 @property (strong, nonatomic) IBOutlet UILabel *degreeYearText;
 @property (strong, nonatomic) IBOutlet UILabel *secondSpecText;

@@ -76,16 +76,16 @@
     self.sourceArray = [self.dbManager loadDataFromDB:req];
     
     if ([self.sourceArray count] == 0) {
-        
-        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Нет данных" message:@"Отсутствует информация о группе" preferredStyle:UIAlertControllerStyleAlert];
-        
-        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
-                             {
-                                 
-                             }];
-        [alertController addAction:ok];
-        
-        [self presentViewController:alertController animated:YES completion:nil];
+//        
+//        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Нет данных" message:@"Отсутствует информация о группе" preferredStyle:UIAlertControllerStyleAlert];
+//        
+//        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+//                             {
+//                                 
+//                             }];
+//        [alertController addAction:ok];
+//        
+//        [self presentViewController:alertController animated:YES completion:nil];
         
     } else {
         [self.table reloadData];
