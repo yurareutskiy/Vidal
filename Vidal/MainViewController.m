@@ -364,12 +364,10 @@
             self.progress.progress = (float)totalBytesRead / totalBytesExpectedToRead;
 
         }];
-            
-            [operation setCompletionBlock:^{
+            [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                 urlData = [NSData dataWithData:[operation responseData]];
                 
-                if ( urlData )
-                {
+                if (urlData) {
                     
                     NSArray *paths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
                     NSString *documentsDirectory = [paths objectAtIndex:0];
@@ -377,7 +375,7 @@
                     NSString *filePath = [NSString stringWithFormat:@"%@/%@", documentsDirectory,@"vidalDatabase.zip"];
                     NSLog(@"%@", documentsDirectory);
                     [ud setObject:@"2" forKey:@"reg"];
-
+                    
                     
                     //saving is done on main thread
                     dispatch_async(dispatch_get_main_queue(), ^{
@@ -401,8 +399,22 @@
                 [self.progress setProgress:0];
                 self.progress.hidden = YES;
                 self.bgView.hidden = YES;
+            } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                if (self.onboardingVC) {
+                    [self.onboardingVC dismissViewControllerAnimated:NO completion:^{
+                        [ud setValue:@"1" forKey:@"reg"];
+                        [ud setObject:@"1" forKey:@"wasExit"];
+                        [ud setObject:@"1" forKey:@"noConnection"];
+                        [self performSegueWithIdentifier:@"back" sender:nil];
+                    }];
+                } else {
+                    [ud setValue:@"1" forKey:@"reg"];
+                    [ud setObject:@"1" forKey:@"wasExit"];
+                    [ud setObject:@"1" forKey:@"noConnection"];
+                    [self performSegueWithIdentifier:@"back" sender:nil];
+                }
+
             }];
-            
             
             [operation start];
         }});

@@ -8,6 +8,7 @@
 
 #import "DocumentViewController.h"
 #import "SearchViewController.h"
+#import "ListOfViewController.h"
 
 @interface DocumentViewController ()
 
@@ -402,6 +403,13 @@
     name = [parts componentsJoinedByString:@" "];
     
     return name;
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"toList"]) {
+        ListOfViewController *vc = segue.destinationViewController;
+        vc.activeID = [ud objectForKey:@"activeID"];
+    }
 }
 
 @end

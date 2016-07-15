@@ -45,6 +45,21 @@
         isConnectionAvailable = true;
     }
     
+    
+    if ([ud objectForKey:@"noConnection"]) {
+        if ([[ud objectForKey:@"noConnection"] isEqualToString:@"1"]) {
+            UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Ошибка" message:@"Архив не загрузился. Проверьте интернет-соединение." preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                 {
+                                     
+                                 }];
+            [alertController addAction:ok];
+            [self presentViewController:alertController animated:YES completion:nil];
+            [ud removeObjectForKey:@"noConnection"];
+        }
+    }
+    
     if ([ud objectForKey:@"wasExit"] == nil) {
         [self showAlert:@"Внимание!" mess:@"При первом входе в приложение требуется скачать объемное количество информации (30Мб)." check:NO];
     } else {

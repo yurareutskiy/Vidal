@@ -53,8 +53,16 @@
     
     if ([ud valueForKey:@"activeID"]) {
         
-        self.req = [NSString stringWithFormat:@"select doc.DocumentID as DocumentID, doc.RusName as RusName, doc.EngName as EngName, doc.Elaboration as Elaboration, doc.CompaniesDescription as CompaniesDescription, doc.CompiledComposition as CompiledComposition, doc.CategoryName  as Category, doc.PhInfluence as PhInfluence, doc.PhKinetics as PhKinetics, doc.Indication as Indication, doc.Dosage as Dosage, doc.SideEffects as SideEffects, doc.ContraIndication as ContraIndication, doc.Lactation as Lactation, doc.SpecialInstruction as SpecialInstruction, doc.OverDosage as OverDosage, doc.Interaction as Interaction, doc.PharmDelivery as PharmDelivery, doc.StorageCondition as StorageCondition, InfoPage.RusName as InfoPageName from DocumentListView  doc INNER JOIN Document_InfoPage ON Document_InfoPage.DocumentID = doc.DocumentID INNER JOIN InfoPage ON InfoPage.InfoPageID = Document_InfoPage.InfoPageID  where exists(	select 1 from Product_Molecule pm 	inner join Product pr on pr.ProductID = pm.ProductID 	where pr.DocumentID = doc.DocumentID and pm.MoleculeID = %@) order by doc.RusName", [ud valueForKey:@"activeID"]];
+        self.req = [NSString stringWithFormat:@"select doc.DocumentID as DocumentID, doc.RusName as RusName, doc.EngName as EngName, doc.Elaboration as Elaboration, doc.CompaniesDescription as CompaniesDescription, doc.CompiledComposition as CompiledComposition, doc.CategoryName  as Category, doc.PhInfluence as PhInfluence, doc.PhKinetics as PhKinetics, doc.Indication as Indication, doc.Dosage as Dosage, doc.SideEffects as SideEffects, doc.ContraIndication as ContraIndication, doc.Lactation as Lactation, doc.SpecialInstruction as SpecialInstruction, doc.OverDosage as OverDosage, doc.Interaction as Interaction, doc.PharmDelivery as PharmDelivery, doc.StorageCondition as StorageCondition, InfoPage.RusName as InfoPageName from DocumentListView  doc                    LEFT JOIN Document_InfoPage ON Document_InfoPage.DocumentID = doc.DocumentID                   LEFT JOIN InfoPage ON InfoPage.InfoPageID = Document_InfoPage.InfoPageID                    where exists(	select 1 from Product_Molecule pm                                 inner join Product pr on pr.ProductID = pm.ProductID                                 where pr.DocumentID = doc.DocumentID and pm.MoleculeID = %@) order by doc.RusName", self.activeID];
         
+        
+//        select doc.DocumentID as DocumentID, doc.RusName as RusName, doc.EngName as EngName, doc.Elaboration as Elaboration, doc.CompaniesDescription as CompaniesDescription, doc.CompiledComposition as CompiledComposition, doc.CategoryName  as Category, doc.PhInfluence as PhInfluence, doc.PhKinetics as PhKinetics, doc.Indication as Indication, doc.Dosage as Dosage, doc.SideEffects as SideEffects, doc.ContraIndication as ContraIndication, doc.Lactation as Lactation, doc.SpecialInstruction as SpecialInstruction, doc.OverDosage as OverDosage, doc.Interaction as Interaction, doc.PharmDelivery as PharmDelivery, doc.StorageCondition as StorageCondition, InfoPage.RusName as InfoPageName
+//        from DocumentListView doc
+//        where exists(
+//                     select 1 from Product_Molecule pm
+//                     inner join Product pr on pr.ProductID = pm.ProductID
+//                     where pr.DocumentID = doc.DocumentID and pm.MoleculeID = )
+//        order by RusName
         [self setNavBarTitle:@"Препараты"];
         
         self.seatchType = SearchDrug;
