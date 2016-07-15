@@ -12,6 +12,7 @@
 @interface OnboardingViewController ()
 
 @property (strong, nonatomic) NSArray *viewsArray;
+@property (assign, nonatomic) BOOL isDownloadDone;
 
 @end
 
@@ -19,9 +20,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    self.isDownloadDone = NO;
     self.viewsArray = [self createViewsArray];
     [self setLayout];
 
+    [self.doneButton setAlpha:0.5f];
     
     [self.swipe addTarget:self action:@selector(swipeAction:)];
     [self.backSwipe addTarget:self action:@selector(swipeAction:)];
@@ -83,7 +86,20 @@
 }
 
 -(IBAction)doneButtonAction:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (self.isDownloadDone) {
+        [self dismissViewControllerAnimated:YES completion:nil];
+    } else {
+        
+        UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"Подождите" message:@"Архив еще не загрузился." preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction* ok = [UIAlertAction actionWithTitle:@"OK" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                             {
+                                 
+                             }];
+        [alertController addAction:ok];
+        [self presentViewController:alertController animated:YES completion:nil];
+
+    }
 }
 
 -(IBAction)nextButtonAction:(id)sender {
@@ -112,6 +128,13 @@
     [UIView animateWithDuration:0.2 animations:^{
         [self.scroll setContentOffset:pointOffset];
     }];
+}
+
+- (void)changeDoneButtonWithType:(BOOL)isDone {
+    if (isDone) {
+        [self.doneButton setAlpha:1];
+        self.isDownloadDone = YES;
+    }
 }
 
 @end

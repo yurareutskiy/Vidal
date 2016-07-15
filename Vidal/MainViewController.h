@@ -13,6 +13,7 @@
 #import <CommonCrypto/CommonDigest.h>
 #import "AppDelegate.h"
 
+
 @interface MainViewController : ModelViewController
 
 @property (weak, nonatomic) IBOutlet UIImageView *bg;

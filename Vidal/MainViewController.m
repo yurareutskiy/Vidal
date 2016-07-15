@@ -12,6 +12,7 @@
 @interface MainViewController ()
 
 @property (strong, nonatomic) UIBarButtonItem *searchButton;
+@property (strong, nonatomic) OnboardingViewController *onboardingVC;
 
 @end
 
@@ -392,6 +393,7 @@
                         
                         [zipArchive UnzipFileTo:documentsDirectory overWrite:YES];
                         [zipArchive UnzipCloseFile];
+                        [self.onboardingVC changeDoneButtonWithType:YES];
                     });
                 } else {
                     NSLog(@"Download failed");
@@ -449,6 +451,12 @@
 - (IBAction)toList:(UIButton *)sender {
     [ud setObject:@"63" forKey:@"info"];
     [self performSegueWithIdentifier:@"toList" sender:self];
+}
+
+-(void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([segue.identifier isEqualToString:@"onboarding"]) {
+        self.onboardingVC = segue.destinationViewController;
+    }
 }
 
 

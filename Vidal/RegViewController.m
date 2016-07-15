@@ -457,7 +457,6 @@ typedef enum : NSUInteger {
 
 - (IBAction)regButton:(UIButton *)sender {
     
-    [self.indicator setHidden:NO];
     
     AFHTTPRequestOperationManager *manager = [AFHTTPRequestOperationManager manager];
     
@@ -532,6 +531,9 @@ typedef enum : NSUInteger {
         [self showAlert:@"Ошибка ввода данных" mess:@"Введите валидный Email" check:NO];
         return;
     }
+    
+    [self.indicator setHidden:NO];
+
     
     if ([monthYeah length] > 2) {
         [self selectingDate];

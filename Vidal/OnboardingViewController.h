@@ -20,4 +20,6 @@
 -(IBAction)nextButtonAction:(id)sender;
 -(IBAction)doneButtonAction:(id)sender;
 
+- (void)changeDoneButtonWithType:(BOOL)isDone;
+
 @end

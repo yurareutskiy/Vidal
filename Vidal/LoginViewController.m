@@ -194,6 +194,7 @@
                       
                       [ud setObject:[responseObject valueForKey:@"token"] forKey:@"archToken"];
                       UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"revealMenu"];
+                      [ud setObject:@"2" forKey:@"reg"];
                       [self presentViewController:vc animated:true completion:nil];
                       
                   } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
