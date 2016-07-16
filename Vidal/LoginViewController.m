@@ -21,6 +21,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[self navigationController] setNavigationBarHidden:YES animated:NO];
+    
     ud = [NSUserDefaults standardUserDefaults];
     
 //    if ([[ud valueForKey:@"reg"] isEqualToString:@"2"]) {
