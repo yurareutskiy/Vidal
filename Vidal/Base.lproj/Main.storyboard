@@ -2106,7 +2106,7 @@ Lactobacillus acidophilus и другие.</string>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="YGM-aZ-XEh"/>
                                         </constraints>
-                                        <state key="normal" image="DF250358-F4E4-4610-821E-C78543AFB92B"/>
+                                        <state key="normal" image="F9B2B448-B10F-4580-B379-20A5CF9F5507"/>
                                         <connections>
                                             <action selector="toPreparat:" destination="ir5-gk-GIB" eventType="touchUpInside" id="1Ha-Zs-LFs"/>
                                         </connections>
@@ -4549,7 +4549,7 @@ Lactobacillus acidophilus и другие.</string>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cJx-Qx-EVT">
                                         <rect key="frame" x="15" y="12" width="285" height="38"/>
                                         <animations/>
-                                        <inset key="contentEdgeInsets" minX="10" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="contentEdgeInsets" minX="25" minY="0.0" maxX="2" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="5" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <state key="normal">
                                             <attributedString key="attributedTitle">
@@ -4568,10 +4568,18 @@ Lactobacillus acidophilus и другие.</string>
                                             <action selector="addToFav:" destination="sbh-iQ-PXQ" eventType="touchUpInside" id="TwB-G4-8Ol"/>
                                         </connections>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="preparation" translatesAutoresizingMaskIntoConstraints="NO" id="Y4g-cJ-g1L">
+                                        <rect key="frame" x="12" y="19" width="25" height="25"/>
+                                        <animations/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="25" id="GvL-aD-0mR"/>
+                                            <constraint firstAttribute="width" constant="25" id="vR6-U5-23C"/>
+                                        </constraints>
+                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="wordWrap" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Psf-W5-aID">
                                         <rect key="frame" x="291" y="-20" width="320" height="100"/>
                                         <animations/>
-                                        <inset key="contentEdgeInsets" minX="20" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <inset key="contentEdgeInsets" minX="25" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
                                         <state key="normal">
                                             <attributedString key="attributedTitle">
@@ -4589,14 +4597,6 @@ Lactobacillus acidophilus и другие.</string>
                                             <action selector="toInter:" destination="sbh-iQ-PXQ" eventType="touchUpInside" id="uwz-dH-esA"/>
                                         </connections>
                                     </button>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="preparation" translatesAutoresizingMaskIntoConstraints="NO" id="Y4g-cJ-g1L">
-                                        <rect key="frame" x="12" y="19" width="25" height="25"/>
-                                        <animations/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="GvL-aD-0mR"/>
-                                            <constraint firstAttribute="width" constant="25" id="vR6-U5-23C"/>
-                                        </constraints>
-                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="medicine" translatesAutoresizingMaskIntoConstraints="NO" id="Ks2-br-up0">
                                         <rect key="frame" x="296" y="20" width="23" height="23"/>
                                         <animations/>
@@ -5537,7 +5537,7 @@ Lactobacillus acidophilus и другие.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="DF250358-F4E4-4610-821E-C78543AFB92B" width="146" height="108">
+        <image name="F9B2B448-B10F-4580-B379-20A5CF9F5507" width="146" height="108">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw
@@ -6670,13 +6670,13 @@ AK4
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="9JT-PY-gD3"/>
-        <segue reference="ELr-Oy-Agp"/>
-        <segue reference="QYA-id-OEe"/>
-        <segue reference="4PJ-ed-yTX"/>
         <segue reference="VBe-MC-ss4"/>
+        <segue reference="ELr-Oy-Agp"/>
+        <segue reference="4PJ-ed-yTX"/>
+        <segue reference="u0a-AY-sbi"/>
         <segue reference="KrD-Vc-vBT"/>
         <segue reference="Spl-RC-YMp"/>
-        <segue reference="u0a-AY-sbi"/>
+        <segue reference="rjW-fm-kxr"/>
         <segue reference="rW2-fw-XxZ"/>
         <segue reference="A7s-EC-332"/>
     </inferredMetricsTieBreakers>
