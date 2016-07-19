@@ -397,28 +397,20 @@
             cell = [[CollectTableVieCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"collectCell"];
         };
         
-        UIWebView *webView;
-        if ([[webViewsArray allKeys] containsObject:[NSString stringWithFormat:@"%ld", (long)indexPath.row]]) {
-            webView = [webViewsArray objectForKey:[NSString stringWithFormat:@"%ld", (long)indexPath.row]];
-            sizeOfWeb = [(NSNumber*)[sizesDictionary objectForKey:[NSString stringWithFormat:@"%ld", webView.tag]] floatValue];
+        UIWebView *webView = cell.webView;
+        [webView setBackgroundColor:[UIColor whiteColor]];
+        webView.delegate = self;
+        webView.tag = 100 + indexPath.row;
+        webView.scrollView.scrollEnabled = NO;
+        [webView.scrollView setBounces:NO];
+        
+        sizeOfWeb = [(NSNumber*)[sizesDictionary objectForKey:[NSString stringWithFormat:@"%ld", webView.tag]] floatValue];
+        [webView.constraints objectAtIndex:0].constant = sizeOfWeb;
+        
 
-
-            [webView.constraints objectAtIndex:0].constant = sizeOfWeb;
-        } else {
-            webView = cell.webView;
-            [webView setBackgroundColor:[UIColor whiteColor]];
-            webView.delegate = self;
-            webView.tag = 100 + indexPath.row;
-            webView.scrollView.scrollEnabled = NO;
-            [webView.scrollView setBounces:NO];
-            
-            NSMutableArray *dataArray = [NSMutableArray array];
-            dataArray = [[[self.info objectAtIndex:indexPath.row] componentsSeparatedByString:@"</TABLE>"] mutableCopy];
-            
-            [webViewsArray setObject:webView forKey:[NSString stringWithFormat:@"%ld", (long)indexPath.row]];
-
-        }
         NSString *tableString = [NSString stringWithFormat:@"<!Doctype html><html><head><meta charset='UTF-8'><style>body {color: rgb(164, 164, 164);} table{border-collapse:collapse}</style></head><body>%@</TABLE></body></html>",[self.info objectAtIndex:indexPath.row]];
+        [tableString stringByReplacingOccurrencesOfString:@"[PRING]" withString:@"Вспомогательные вещества:"];
+        
         [webView loadHTMLString:tableString baseURL:nil];
         cell.webView = webView;
         
