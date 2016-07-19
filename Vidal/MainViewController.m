@@ -391,6 +391,7 @@
                         
                         [zipArchive UnzipFileTo:documentsDirectory overWrite:YES];
                         [zipArchive UnzipCloseFile];
+                        [alertController dismissViewControllerAnimated:NO completion:nil];
                         [self.onboardingVC changeDoneButtonWithType:YES];
                     });
                 } else {
