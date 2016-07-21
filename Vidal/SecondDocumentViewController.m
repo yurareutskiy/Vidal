@@ -94,6 +94,16 @@
         [set addIndex:nameIndex];
         [set addIndex:elaborationIndex];
         [set addIndex:companyNameIndex];
+        for (int i = 0; i < [self.info count]; i++) {
+            NSString *value = [self.info objectAtIndex:i];
+            if (value != nil) {
+                if ([value isEqualToString:@""]) {
+                    [set addIndex:i];
+                }
+            } else {
+                [set addIndex:i];
+            }
+        }
         [self.info removeObjectsAtIndexes:set];
         [self.dbManager.arrColumnNames removeObjectsAtIndexes:set];
         
@@ -231,7 +241,9 @@
         }
 
     }
-    
+    for (int i = 0; i < [self.dbManager.arrColumnNames count]; i++) {
+        [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", i]];
+    }
     
     indexOfBigCell = [self.dbManager.arrColumnNames indexOfObject:@"CompiledComposition"];
     [self.tableView reloadData];
@@ -379,8 +391,9 @@
             [cell addSubview:line];
         }
     
-        [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
+        
         [cell.desc setHidden:NO];
+
         cell.delegate = self;
         cell.title.text = [self changeDescName:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
         cell.desc.attributedText = [self clearString:[self.info objectAtIndex:indexPath.row]];
@@ -408,7 +421,7 @@
         [webView.constraints objectAtIndex:0].constant = sizeOfWeb;
         
 
-        NSString *tableString = [NSString stringWithFormat:@"<!Doctype html><html><head><meta charset='UTF-8'><style>body {color: rgb(164, 164, 164);} table{border-collapse:collapse}</style></head><body>%@</TABLE></body></html>",[self.info objectAtIndex:indexPath.row]];
+        NSString *tableString = [NSString stringWithFormat:@"<!Doctype html><html><head><meta charset='UTF-8'><style>body {color: rgb(91, 91, 91);} table{border-collapse:collapse}</style></head><body>%@</TABLE></body></html>",[self.info objectAtIndex:indexPath.row]];
         [tableString stringByReplacingOccurrencesOfString:@"[PRING]" withString:@"Вспомогательные вещества:"];
         
         [webView loadHTMLString:tableString baseURL:nil];
@@ -420,8 +433,6 @@
             [line setBackgroundColor:[UIColor colorWithRed:164.0/255.0 green:164.0/255.0 blue:164.0/255.0 alpha:1.0]];
             [cell addSubview:line];
         }
-        
-        [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
         
         cell.title.text = [self changeDescName:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
         
@@ -739,7 +750,7 @@
     } else if ([output isEqualToString:@"PharmDelivery"]) {
         return @"Условия отпуска из аптек";
     } else if ([output isEqualToString:@"Category"]) {
-        return @"Категория препарата";
+        return @"Фармакологическая группа";
     } else {
         return output;
     }
@@ -800,6 +811,7 @@
     [vc setSearchType:SearchDrug];
     [self.navigationController pushViewController:vc animated:NO];
 }
+
 
 
 @end

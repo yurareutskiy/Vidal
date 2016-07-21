@@ -194,7 +194,7 @@
             if ([[self.results[ind+1] valueForKey:@"image"] length] > 0) {
                 [self.image setImage:[UIImage imageWithData:[self.results[ind+1] valueForKey:@"image"]] forState:UIControlStateNormal];
             } else {
-                [self.image setImage:[UIImage imageNamed:@"company"] forState:UIControlStateNormal];
+                [self.image setImage:[UIImage imageNamed:@"dump"] forState:UIControlStateNormal];
             }
             [self.name setText:[self.results[ind+1] valueForKey:@"nameOf"]];
             [self.drug setText:[self.results[ind+1] valueForKey:@"drug"]];
@@ -203,7 +203,7 @@
             if ([[self.results[0] valueForKey:@"image"] length] > 0) {
                 [self.image setImage:[UIImage imageWithData:[self.results[0] valueForKey:@"image"]] forState:UIControlStateNormal];
             } else {
-                [self.image setImage:[UIImage imageNamed:@"company"] forState:UIControlStateNormal];
+                [self.image setImage:[UIImage imageNamed:@"dump"] forState:UIControlStateNormal];
             }
             [self.name setText:[self.results[0] valueForKey:@"nameOf"]];
             [self.drug setText:[self.results[0] valueForKey:@"drug"]];
@@ -229,7 +229,7 @@
             if ([[self.results[ind-1] valueForKey:@"image"] length] > 0) {
                 [self.image setImage:[UIImage imageWithData:[self.results[ind-1] valueForKey:@"image"]] forState:UIControlStateNormal];
             } else {
-                [self.image setImage:[UIImage imageNamed:@"company"] forState:UIControlStateNormal];
+                [self.image setImage:[UIImage imageNamed:@"dump"] forState:UIControlStateNormal];
             }
             [self.name setText:[self.results[ind-1] valueForKey:@"nameOf"]];
             [self.drug setText:[self.results[ind-1] valueForKey:@"drug"]];
@@ -238,7 +238,7 @@
             if ([[self.results[[self.results count] - 1] valueForKey:@"image"] length] > 0) {
                 [self.image setImage:[UIImage imageWithData:[self.results[[self.results count] - 1] valueForKey:@"image"]] forState:UIControlStateNormal];
             } else {
-                [self.image setImage:[UIImage imageNamed:@"company"] forState:UIControlStateNormal];
+                [self.image setImage:[UIImage imageNamed:@"dump"] forState:UIControlStateNormal];
             }
             [self.name setText:[self.results[[self.results count] - 1] valueForKey:@"nameOf"]];
             [self.drug setText:[self.results[[self.results count] - 1] valueForKey:@"drug"]];

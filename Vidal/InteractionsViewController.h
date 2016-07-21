@@ -25,6 +25,7 @@
 @property (strong, nonatomic) IBOutlet UILabel *result;
 @property (strong, nonatomic) IBOutlet UIImageView *topImage;
 @property (weak, nonatomic) IBOutlet UILabel *lead;
+@property (strong, nonatomic) IBOutlet UIScrollView *scroll;
 
 @property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (strong, nonatomic) IBOutlet UIPickerView *secondLinePicker;

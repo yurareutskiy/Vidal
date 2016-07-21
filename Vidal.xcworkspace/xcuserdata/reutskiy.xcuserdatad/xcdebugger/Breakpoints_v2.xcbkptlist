@@ -218,11 +218,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vidal/RegViewController.m"
-            timestampString = "488849474.970392"
+            timestampString = "490822221.902544"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "411"
-            endingLineNumber = "411"
+            startingLineNumber = "412"
+            endingLineNumber = "412"
             landmarkName = "-textFieldDidBeginEditing:"
             landmarkType = "5">
          </BreakpointContent>
@@ -266,11 +266,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vidal/RegViewController.m"
-            timestampString = "488849474.970392"
+            timestampString = "490822221.902544"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "618"
-            endingLineNumber = "618"
+            startingLineNumber = "619"
+            endingLineNumber = "619"
             landmarkName = "-regButton:"
             landmarkType = "5">
          </BreakpointContent>
@@ -298,12 +298,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vidal/RegViewController.m"
-            timestampString = "489000097.342895"
+            timestampString = "490822221.902544"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1017"
-            endingLineNumber = "1017"
-            landmarkName = "-fieldIsVisibleWithRect:"
+            startingLineNumber = "641"
+            endingLineNumber = "641"
+            landmarkName = "-regButton:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -314,28 +314,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Vidal/RegViewController.m"
-            timestampString = "489000097.342895"
+            timestampString = "490822221.902544"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "985"
-            endingLineNumber = "985"
-            landmarkName = "-selectUniverAction:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Vidal/DBManager.m"
-            timestampString = "490016545.504472"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "-runQuery:isQueryExecutable:"
+            startingLineNumber = "488"
+            endingLineNumber = "488"
+            landmarkName = "-regButton:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

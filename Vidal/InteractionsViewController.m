@@ -378,14 +378,24 @@
             self.secondLinePicker.hidden = false;
             self.toolbar.hidden = false;
             self.lead.hidden = false;
-//            [self performSelector:@selector(filterResults) withObject:nil afterDelay:0.07];
             [self.secondLinePicker reloadAllComponents];
+            [self upScrollWithKeyboard];
             return NO;
         } else {
             return NO;
         }
     } else {
         return YES;
+    }
+}
+
+- (void)upScrollWithKeyboard {
+    CGFloat height = self.toolbar.frame.size.height + self.secondLinePicker.frame.size.height;
+    CGFloat offset = height - self.view.frame.size.height + self.secondInput.frame.origin.y + self.secondInput.frame.size.height + 10;
+    if (offset > 0) {
+        [UIView animateWithDuration:0.25 animations:^{
+            [self.scroll setContentOffset:CGPointMake(0, self.scroll.contentOffset.y + offset)];
+        }];
     }
 }
 

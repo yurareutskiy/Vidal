@@ -35,9 +35,10 @@
 }
 
 - (void) rotateImage: (double) degree {
-    
+    self.desc.alpha = 0;
     [UIView animateWithDuration:0.3 animations:^{
         self.image.transform = CGAffineTransformMakeRotation(degree);
+        self.desc.alpha = 1;
     }];
 }
 

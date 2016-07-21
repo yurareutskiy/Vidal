@@ -42,6 +42,7 @@ typedef enum : NSUInteger {
     NSUserDefaults *ud;
     NSMutableDictionary *paramsUpdate;
     CGFloat offset;
+    
 }
 
 - (instancetype)init
@@ -504,23 +505,23 @@ typedef enum : NSUInteger {
                                     }
                                 }
                              else {
-                                [self showAlert:@"Ошибка в данных" mess:@"Укажите специальность из списка" check:NO];
+                                [self showAlert:@"Ошибка в данных" mess:@"Пожалуйста, укажите основную специальность." check:NO];
                                  return;
                             }
                         } else {
-                            [self showAlert:@"Ошибка ввода данных" mess:@"Укажите город из списка" check:NO];
+                            [self showAlert:@"Ошибка ввода данных" mess:@"Пожалуйста, укажите город из списка" check:NO];
                             return;
                         }
                     } else {
-                        [self showAlert:@"Ошибка ввода данных" mess:@"Укажите дату рождения" check:NO];
+                        [self showAlert:@"Ошибка ввода данных" mess:@"Пожалуйста, укажите дату рождения" check:NO];
                         return;
                     }
                 } else {
-                    [self showAlert:@"Ошибка ввода данных" mess:@"Укажите имя" check:NO];
+                    [self showAlert:@"Ошибка ввода данных" mess:@"Пожалуйста, укажите имя" check:NO];
                     return;
                 }
             } else {
-                [self showAlert:@"Ошибка ввода данных" mess:@"Укажите фамилию" check:NO];
+                [self showAlert:@"Ошибка ввода данных" mess:@"Пожалуйста, укажите фамилию" check:NO];
                 return;
             }
         } else {
@@ -551,7 +552,7 @@ typedef enum : NSUInteger {
                                                                                      @"register[graduateYear]":degreeYear,
                                                                                      @"register[academicDegree]":degree,
                                                                                      @"register[university]":univer}];
-    if (secondJob != nil) {
+    if ([secondJob isEqualToString:@"0"] == false) {
         [parametrs setObject: secondJob forKey:@"register[secondarySpecialty]"];
     }
     
@@ -639,11 +640,27 @@ typedef enum : NSUInteger {
               } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
                   [self.indicator setHidden:YES];
                   NSLog(@"%@", error);
-                  [self showAlert:@"Ошибка" mess:@"Проверьте введенные данные" check:NO];
+                  [self detectErrorMessage:operation];
               }];
     }
     
     
+}
+
+
+- (void)detectErrorMessage:(AFHTTPRequestOperation *) operation {
+    if (operation.responseObject == nil) {
+        [self showAlert:@"Ошибка" mess:@"Проверьте введенные данные" check:NO];
+    } else {
+        NSDictionary *responseDictionary = operation.responseObject;
+        if ([responseDictionary count] == 0) {
+            [self showAlert:@"Ошибка" mess:@"Проверьте введенные данные" check:NO];
+        } else {
+            NSDictionary *errorKeyDictionary = @{@"secondarySpecialty" : @"Дополнительная специальность", @"primarySpecialty" : @"Основная специальность", @"university" : @"Университет"};
+            [self showAlert:[[responseDictionary allKeys] firstObject] mess:[[responseDictionary allValues] firstObject] check:NO];
+
+        }
+    }
 }
 
 - (void) showAlert:(NSString *)alert  mess:(NSString *)mess check:(BOOL) yep {

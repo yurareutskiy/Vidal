@@ -10,6 +10,7 @@
 // НЕПРАВИЛЬНО ВЫБИРАЕТСЯ ИНДЕКС ЯЧЕЙКИ
 
 #import "SearchViewController.h"
+#import "PharmaDetailViewController.h"
 
 @interface SearchViewController ()
 
@@ -108,7 +109,7 @@
     
     [self loadData:@"select DocumentID, RusName from DocumentListView order by RusName"
          loadData2:@"select MoleculeID, RusName from SubDocumentListView order by RusName"
-         loadData3:@"select ClPhPointerID, Name from ClinicoPhPointers where [Level] > 0 order by Code, [Level]"
+         loadData3:@"select ClPhPointerID, Name, Code from ClinicoPhPointers where [Level] > 0 order by Name"
          loadData4:@"select InfoPageID, RusName from ProducerListView order by RusName"];
     
     self.closeButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"close"] scaledToSize:CGSizeMake(20, 20)]
@@ -206,9 +207,13 @@
     
     NSString *title;
     title = [self clearString:self.FilteredResults[indexPath.row]];
-    if (!tableView4b) {
+    if (tableView1b) {
+        title = [self formatDrugNameString:title];
+    } else if (tableView2b) {
+        title = [NSString stringWithFormat:@"%@%@", [[title substringToIndex:1] uppercaseString], [[title substringFromIndex:1] lowercaseString]];
+    } else if (tableView3b) {
         title = [title capitalizedString];
-    }
+    } 
     cell.textLabel.text = title;
 
     return cell;
@@ -286,22 +291,25 @@
 
         
     } else if (tableView3b) {
+        [self.tableView3 deselectRowAtIndexPath:indexPath animated:NO];
         
-        for (int i = 0; i < [self.pharmaSearch count]; i++) {
-            if ([[self.pharmaSearch objectAtIndex:i] isEqualToString:self.FilteredResults[indexPath.row]]) {
-                index = i;
+        PharmaDetailViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"pharma_detail"];
+        NSString *targetName = self.FilteredResults[indexPath.row];
+        NSString *name;
+        NSString *code;
+        for (NSArray *pharm in self.pharmaFull) {
+            if ([pharm[1] isEqualToString:targetName]) {
+                name = pharm[1];
+                code = pharm[2];
                 break;
             }
         }
         
-        next = [self.pharmaFull[index] objectAtIndex:0];
-//        [ud setObject:next forKey:@"molecule"];
-        
-        NSString *request = [NSString stringWithFormat:@"SELECT * FROM ClinicoPhPointers WHERE ClinicoPhPointers.ClPhPointerID = %@", next];
-        [self getInfo:request];
+        vc.parentCode = code;
+        vc.pharmaName = name;
+        vc.level = [[code componentsSeparatedByString:@"."] count] - 1;
 
-        [self.tableView3 deselectRowAtIndexPath:indexPath animated:NO];
-        [self performSegueWithIdentifier:@"toPharma" sender:self];
+        [self.navigationController pushViewController:vc animated:YES];
         
     } else if (tableView4b) {
         
@@ -396,7 +404,8 @@
 }
 
 - (void)updateTableViewWithNewResults:(NSArray *)results {
-    self.FilteredResults = results;
+    self.FilteredResults = [results sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)];;
+
     [self.tableView1 reloadData];
     [self.tableView2 reloadData];
     [self.tableView3 reloadData];
@@ -507,7 +516,7 @@
 
 - (IBAction)toPharma:(UIButton *)sender {
     [self setUpQuickSearch:self.pharmaSearch];
-    self.FilteredResults = [self.quickSearch filteredObjectsWithValue:nil];
+    self.FilteredResults = self.pharmaSearch;
     
     [self.tableView3 reloadData];
     self.tableView1.hidden = true;
@@ -838,6 +847,28 @@
 //        }];
     }
     
+}
+
+
+- (NSString*)formatDrugNameString:(NSString*)name {
+    name = [NSString stringWithFormat:@"%@%@", [[name substringToIndex:1] uppercaseString], [[name substringFromIndex:1] lowercaseString]];
+    NSArray *parts = [name componentsSeparatedByString:@" "];
+    for (int i = 0; i < [parts count]; i++) {
+        if (i == 1 || i == 2) {
+            NSString *partString = parts[i];
+            if ([partString length] <= 3) {
+                partString = [partString uppercaseString];
+            } else {
+                partString = [partString capitalizedString];
+            }
+            NSMutableArray *tempArray = [NSMutableArray arrayWithArray:parts];
+            [tempArray setObject:partString atIndexedSubscript:i];
+            parts = tempArray;
+        }
+    }
+    name = [parts componentsJoinedByString:@" "];
+    
+    return name;
 }
 
 @end

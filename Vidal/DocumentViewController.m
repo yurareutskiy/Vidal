@@ -117,6 +117,10 @@
     [[self.arrPeopleInfo objectAtIndex:0] removeObjectsAtIndexes:toDelete];
     [self.dbManager.arrColumnNames removeObjectsAtIndexes:toDelete];
     
+    for (int i = 0; i < [self.dbManager.arrColumnNames count]; i++) {
+        [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", i]];
+    }
+        
     [self.tableView reloadData];
     } else {
         [ud setObject:@"0" forKey:@"share"];
@@ -148,10 +152,10 @@
         return nil;
     }
     
-        DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"docCell" forIndexPath:indexPath];
-        if (cell == nil) {
-            cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
-        };
+    DocsTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"docCell" forIndexPath:indexPath];
+    if (cell == nil) {
+        cell = [[DocsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"docCell"];
+    };
 
     
     if (indexPath.row > 0) {
@@ -164,10 +168,14 @@
     
     cell.delegate = self;
     
-    [tapsOnCell setObject:@"0" forKey:[NSString stringWithFormat:@"%d", (int)indexPath.row]];
     
     cell.title.text = [self changeDescName:[self.dbManager.arrColumnNames objectAtIndex:indexPath.row]];
     cell.desc.attributedText = [self clearString:[[self.arrPeopleInfo objectAtIndex:0] objectAtIndex:indexPath.row] InTitle:NO];
+//    cell.desc.alpha = 0;
+//    [cell.desc setHidden:NO];
+//    [UIView animateWithDuration:0.3 animations:^{
+//        cell.alpha = 1;
+//    }];
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
@@ -213,6 +221,7 @@
     if (![text isEqualToString:@""]) {
         text = [text stringByReplacingCharactersInRange:range withString:[[text substringToIndex:1] valueForKey:@"uppercaseString"]];
     }
+    text = [text stringByReplacingOccurrencesOfString:@"[PRING]" withString:@"Вспомогательные вещества:"];
     text = [text stringByReplacingOccurrencesOfString:@"<TD colSpan=\"2\">" withString:@""];
     text = [text stringByReplacingOccurrencesOfString:@"&emsp;" withString:@" "];
     text = [text stringByReplacingOccurrencesOfString:@"&trade;" withString:@"™"];

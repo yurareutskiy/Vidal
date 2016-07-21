@@ -29,7 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setLabel:@"Vidal"];
+    [self setLabel:@"Vidal-кардиология"];
     ud = [NSUserDefaults standardUserDefaults];
 
     if ([[ud objectForKey:@"reg"] isEqualToString:@"0"]) {
@@ -88,7 +88,7 @@
             }
 
 
-            [self checkBool:@"Архив начал скачиваться" mess:@"Подождите 15-30 секунд. Элементы взаимодействия недоступны, пожалуйста, не выключайте приложение." down:NO amount:1];
+            [self checkBool:@"Началась загрузка данных" mess:@"Пожалуйста, не выключайте приложение до окончания загрузки." down:NO amount:1];
             [self getLink];
         } else if (isConnectionAvailable == false) {
             return;
@@ -382,7 +382,7 @@
                         [urlData writeToFile:filePath atomically:YES];
                         NSLog(@"File Saved !");
                         exists = true;
-                        [self checkBool:@"Архив скачался" mess:@"Можете пользоваться приложением." down:NO amount:1];
+                        [self checkBool:@"Данные успешно загружены!" mess:@"Вы можете пользоваться приложением." down:NO amount:1];
                         ZipArchive *zipArchive = [[ZipArchive alloc] init];
                         [zipArchive UnzipOpenFile:filePath];
                         
