@@ -42,7 +42,7 @@ typedef enum : NSUInteger {
     NSUserDefaults *ud;
     NSMutableDictionary *paramsUpdate;
     CGFloat offset;
-    
+    UITextField *activeTextField;
 }
 
 - (instancetype)init
@@ -299,37 +299,62 @@ typedef enum : NSUInteger {
     return 1;
 }
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
         return self.namesCity.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
-        if (!cell) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchCell"];
-        }
-    
-        NSString *title;
-        title = self.namesCity[indexPath.row];
-        cell.textLabel.text = title;
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"searchCell" forIndexPath:indexPath];
+    if (!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"searchCell"];
+    }
 
-        return cell;
+    NSString *title;
+    title = self.namesCity[indexPath.row];
+    cell.textLabel.text = title;
+
+    return cell;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    self.cityText.text = self.namesCity[indexPath.row];
     self.tableView2.hidden = true;
-    cityCheck = self.namesCity[indexPath.row];
-//        [self hideEver];
     [self.cityText resignFirstResponder];
     [self.scrollView addGestureRecognizer:tap];
     self.special.userInteractionEnabled = YES;
     self.special.enabled = YES;
-    [paramsUpdate setObject:cityCheck forKey:@"profile[city]"];
+    activeTextField.text = self.namesCity[indexPath.row];
+    if (activeTextField.tag == 4) {
+        cityCheck = self.namesCity[indexPath.row];
+        [paramsUpdate setObject:cityCheck forKey:@"profile[city]"];
+    } else if (activeTextField.tag == 5) {
+        for (NSDictionary *item in self.namesSpec) {
+            if ([[item objectForKey:@"doctorName"] isEqualToString:self.namesCity[indexPath.row]]) {
+                job = [item objectForKey:@"id"];
+                break;
+            }
+        }
+    } else if (activeTextField.tag == 14) {
+        for (NSDictionary *item in self.namesSpec) {
+            if ([[item objectForKey:@"title"] isEqualToString:self.namesCity[indexPath.row]]) {
+                univer = [item objectForKey:@"id"];
+                break;
+            }
+        }
+    } else if (activeTextField.tag == 17) {
+        for (NSDictionary *item in self.namesSpec) {
+            if ([[item objectForKey:@"doctorName"] isEqualToString:self.namesCity[indexPath.row]]) {
+                secondJob = [item objectForKey:@"id"];
+                break;
+            }
+        }
+    } else {
+        return;
+    }
+    
+
     
 }
 
@@ -359,16 +384,40 @@ typedef enum : NSUInteger {
 }
 
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
-    
+
+    self.namesCity = [NSMutableArray array];
     if (textField.tag == 4) {
-        self.namesCity = [NSMutableArray array];
-//        self.special.userInteractionEnabled = NO;
-//        self.special.enabled = NO;
-        [self.tableView2 reloadData];
-        self.cityText.text = @"";
-        [self.scrollView removeGestureRecognizer:tap];
-        self.tableView2.hidden = false;
+        self.tableTopConstraint.constant = 8;
+    } else if (textField.tag == 14) {
+        for (NSDictionary *item in self.namesUniversities) {
+            [self.namesCity addObject:[item objectForKey:@"title"]];
+        }
+        self.tableTopConstraint.constant = 170;
+    } else if (textField.tag == 5) {
+        for (NSDictionary *item in self.namesSpec) {
+            [self.namesCity addObject:[item objectForKey:@"doctorName"]];
+        }
+        self.tableTopConstraint.constant = 91;
+    } else if (textField.tag == 17) {
+        for (NSDictionary *item in self.namesSpec) {
+            [self.namesCity addObject:[item objectForKey:@"doctorName"]];
+        }
+        self.tableTopConstraint.constant = 251;
+    } else {
+        return YES;
     }
+    
+    activeTextField = textField;
+    
+    textField.text = @"";
+
+    [self textField:textField shouldChangeCharactersInRange:NSMakeRange(0, 0) replacementString:@""];
+    [self.scrollView removeGestureRecognizer:tap];
+    [self.tableView2 reloadData];
+
+    
+    self.tableView2.hidden = false;
+
     return YES;
 }
 
@@ -387,12 +436,20 @@ typedef enum : NSUInteger {
                   NSLog(@"%@", error);
               }];
         
-    } 
+    } else if (textField.tag == 5 || textField.tag == 17 || textField.tag == 14) {
+        string = [textField.text stringByAppendingString:string];
+        if (string.length) {
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF BEGINSWITH %@", string];
+            self.namesCity = [NSMutableArray arrayWithArray:[self.namesCity filteredArrayUsingPredicate:predicate]];
+            [self.tableView2 reloadData];
+        }
+    }
+    
     return YES;
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField {
-    if (textField.tag == 3 || textField.tag == 4) {
+    if (textField.tag == 3 || textField.tag == 4 || textField.tag == 5 || textField.tag == 17 || textField.tag == 14) {
         svos = self.scrollView.contentOffset;
         CGPoint pt;
         CGRect rc = [textField bounds];
@@ -400,28 +457,10 @@ typedef enum : NSUInteger {
         pt = rc.origin;
         pt.x = self.scrollView.contentOffset.x;
         pt.y -= 200;
-//        } else {
-//            if (self.view.frame.size.height == 736) {
-//                pt.y -= 200;
-//            } else {
-//                pt.y -= 180;
-//            }
-//        }
-//        } else if (textField.tag == 6) {
-//            pt.y = 0;
-//        }
+
         [self.scrollView setContentOffset:pt animated:YES];
     }
     
-    if (textField.tag != 5) {
-        self.tableView.hidden = true;
-    }
-    
-    if (textField.tag != 4) {
-        self.tableView2.hidden = true;
-    } else {
-        [self.scrollView removeGestureRecognizer:tap];
-    }
 }
 
 - (void)didReceiveMemoryWarning {

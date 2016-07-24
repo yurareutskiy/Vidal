@@ -30,7 +30,7 @@
 
 @property (strong, nonatomic) NSMutableArray *dictSpec;
 @property (strong, nonatomic) NSArray *namesSpec;
-@property (strong, nonatomic) NSArray *namesCity;
+@property (strong, nonatomic) NSMutableArray *namesCity;
 @property (strong, nonatomic) NSArray *namesUniversities;
 @property (strong, nonatomic) NSArray *pickerViewData;
 @property (strong, nonatomic) NSArray *namesDegree;
@@ -44,7 +44,10 @@
 @property (strong, nonatomic) IBOutlet UITextField *secondSpecialiteText;
 @property (strong, nonatomic) IBOutlet UITextField *yearDegreeText;
 @property (strong, nonatomic) IBOutlet UITextField *degreeText;
+@property (weak, nonatomic) IBOutlet UITableView *tableSpec;
 
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableSearchTopConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *tableTopConstraint;
 @property (strong, nonatomic) IBOutlet UIDatePicker *datePicker;
 @property (strong, nonatomic) IBOutlet UIToolbar *toolbar;
 @property (strong, nonatomic) IBOutlet UIButton *check1;
