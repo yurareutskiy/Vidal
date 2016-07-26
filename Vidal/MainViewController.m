@@ -29,7 +29,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    [self setLabel:@"Vidal-кардиология"];
+    [self setLabel:@"Vidal Кардиология"];
     ud = [NSUserDefaults standardUserDefaults];
 
     if ([[ud objectForKey:@"reg"] isEqualToString:@"0"]) {

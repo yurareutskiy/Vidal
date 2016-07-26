@@ -535,7 +535,7 @@ typedef enum : NSUInteger {
                 if (![self.nameText.text isEqualToString:@""]) {
                     if (![monthYeah isEqualToString:@"0"] || self.isProfileUpdate) {
                         if (![cityCheck isEqualToString:@"0"] || [city length] > 0) {
-                            if (job != 0) {
+                            if (!self.isProfileUpdate && ([job isEqualToString:@"0"] == false && [job isEqualToString:@"91"] == false)) {
                                 if ((flag1 && flag2) || self.isProfileUpdate) {
 
                                     
