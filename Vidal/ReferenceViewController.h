@@ -11,5 +11,6 @@
 @interface ReferenceViewController : ModelViewController
 
 @property (strong, nonatomic) IBOutlet UILabel *takeda;
+@property (strong, nonatomic) IBOutlet UITextView *content;
 
 @end

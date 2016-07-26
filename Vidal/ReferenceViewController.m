@@ -24,6 +24,9 @@
     self.takeda.text = string;
     [self.takeda sizeToFit];
     
+    self.content.textContainerInset = UIEdgeInsetsZero;
+    self.content.textContainer.lineFragmentPadding = 0;
+    
     [super setLabel:@"Справка"];
     // Do any additional setup after loading the view.
 }
@@ -33,6 +36,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    [self.content sizeToFit];
+    [self.content setContentInset:UIEdgeInsetsMake(0, 0, -100, 0)];
+}
 
 
 /*

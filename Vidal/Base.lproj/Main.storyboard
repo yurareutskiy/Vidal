@@ -1771,24 +1771,149 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="wordWrap" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XgV-TR-9hg">
                                         <rect key="frame" x="20" y="20" width="560" height="21"/>
-                                        <mutableString key="text">VIDAL Кардиология, версия 1.0.1.Информация, содержащаяся в мобильном приложении, предназначена только для специалистов в области здравоохранения.Пожалуйста, направляйте Ваши вопросы, пожелания и замечания по адресу m.vlasenko@vidal.ruВ приложении используются ПО:Android licenseOpenSSL licenseICU licenseSQLCipherCopyright (c) 2008-2012 Zetetic LLCAll rights reserved.Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.* Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.* Neither the name of the ZETETIC LLC nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.            THIS SOFTWARE IS PROVIDED BY ZETETIC LLC ''AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL ZETETIC LLC BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</mutableString>
+                                        <string key="text">VIDAL Кардиология, версия 1.0.1.
+
+Информация, содержащаяся в мобильном приложении, предназначена только для специалистов в области здравоохранения.
+
+Пожалуйста, направляйте Ваши вопросы, пожелания и замечания по адресу m.vlasenko@vidal.ru
+
+В приложении используются ПО:
+
+Android license
+OpenSSL license
+ICU license
+
+SQLCipher
+Copyright (c) 2008-2012 Zetetic LLC
+All rights reserved.
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+* Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+* Neither the name of the ZETETIC LLC nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+            
+THIS SOFTWARE IS PROVIDED BY ZETETIC LLC ''AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL ZETETIC LLC BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+</string>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <color key="textColor" red="0.64313725490196072" green="0.64313725490196072" blue="0.64313725490196072" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KKI-K0-pds">
-                                        <rect key="frame" x="20" y="20" width="560" height="516"/>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KKI-K0-pds">
+                                        <rect key="frame" x="20" y="20" width="560" height="33"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <attributedString key="attributedText">
+                                            <fragment content="VIDAL Кардиология, версия 1.0.1.">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="Helvetica-Bold"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
                                             <fragment>
-                                                <string key="content">VIDAL Кардиология, версия 1.0.1.Информация, содержащаяся в мобильном приложении, предназначена только для специалистов в области здравоохранения.Пожалуйста, направляйте Ваши вопросы, пожелания и замечания по адресу m.vlasenko@vidal.ruВ приложении используются ПО:Android licenseOpenSSL licenseICU licenseSQLCipherCopyright (c) 2008-2012 Zetetic LLCAll rights reserved.Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.* Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.* Neither the name of the ZETETIC LLC nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.            THIS SOFTWARE IS PROVIDED BY ZETETIC LLC ''AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL ZETETIC LLC BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</string>
+                                                <string key="content" base64-UTF8="YES">
+Cg
+</string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">
+Информация, содержащаяся в мобильном приложении, предназначена только для специалистов в области здравоохранения.
+
+Пожалуйста, направляйте Ваши вопросы, пожелания и замечания по адресу m.vlasenko@vidal.ru
+
+</string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="В приложении используются ПО:">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="Helvetica-Bold"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">
+
+Android license </string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="https://source.android.com/source/licenses.html">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.20392156862745098" green="0.20392156862745098" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <real key="NSKern" value="0.0"/>
+                                                    <color key="NSStrokeColor" red="0.20392156862745098" green="0.20392156862745098" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <integer key="NSUnderline" value="1"/>
+                                                    <color key="NSUnderlineColor" red="0.20392156862745098" green="0.20392156862745098" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">
+OpenSSL license </string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="https://www.openssl.org/source/license.html">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.20392156862745098" green="0.20392156862745098" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <real key="NSKern" value="0.0"/>
+                                                    <color key="NSStrokeColor" red="0.20392156862745098" green="0.20392156862745098" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <integer key="NSUnderline" value="1"/>
+                                                    <color key="NSUnderlineColor" red="0.20392156862745098" green="0.20392156862745098" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">
+ICU license </string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="http://source.icu-project.org/repos/icu/icu/trunk/LICENSE">
+                                                <attributes>
+                                                    <color key="NSColor" red="0.20392156862745098" green="0.20392156862745098" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                    <real key="NSKern" value="0.0"/>
+                                                    <color key="NSStrokeColor" red="0.20392156862745098" green="0.20392156862745098" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <integer key="NSUnderline" value="1"/>
+                                                    <color key="NSUnderlineColor" red="0.20392156862745098" green="0.20392156862745098" blue="0.20392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content" base64-UTF8="YES">
+Cgo
+</string>
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="HelveticaNeue"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment content="SQLCipher">
+                                                <attributes>
+                                                    <font key="NSFont" size="14" name="Helvetica-Bold"/>
+                                                </attributes>
+                                            </fragment>
+                                            <fragment>
+                                                <string key="content">
+Copyright (c) 2008-2012 Zetetic LLC
+All rights reserved.
+Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+* Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
+* Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
+* Neither the name of the ZETETIC LLC nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+            
+THIS SOFTWARE IS PROVIDED BY ZETETIC LLC ''AS IS'' AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL ZETETIC LLC BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.</string>
                                                 <attributes>
                                                     <font key="NSFont" size="14" name="HelveticaNeue"/>
                                                 </attributes>
                                             </fragment>
                                         </attributedString>
                                         <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                        <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES" address="YES" calendarEvent="YES"/>
+                                        <dataDetectorType key="dataDetectorTypes" link="YES" address="YES"/>
                                     </textView>
                                 </subviews>
                                 <constraints>
@@ -1798,9 +1923,9 @@
                                     <constraint firstAttribute="bottom" secondItem="XgV-TR-9hg" secondAttribute="bottom" constant="20" id="7WV-XP-DgO"/>
                                     <constraint firstItem="XgV-TR-9hg" firstAttribute="top" secondItem="0ba-nE-HXd" secondAttribute="top" constant="20" id="Jrj-3e-Oh7"/>
                                     <constraint firstItem="KKI-K0-pds" firstAttribute="top" secondItem="0ba-nE-HXd" secondAttribute="top" constant="20" id="f8T-zJ-tsQ"/>
-                                    <constraint firstAttribute="bottom" secondItem="KKI-K0-pds" secondAttribute="bottom" id="fsH-Ft-icj"/>
                                     <constraint firstItem="XgV-TR-9hg" firstAttribute="leading" secondItem="0ba-nE-HXd" secondAttribute="leading" constant="20" id="g1R-uG-cz0"/>
                                     <constraint firstAttribute="trailing" secondItem="XgV-TR-9hg" secondAttribute="trailing" constant="20" id="qhu-YO-CZS"/>
+                                    <constraint firstAttribute="bottomMargin" secondItem="KKI-K0-pds" secondAttribute="bottom" id="tds-6e-o9E"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -1817,6 +1942,7 @@
                         <barButtonItem key="backBarButtonItem" title=" " id="V60-qx-1ik"/>
                     </navigationItem>
                     <connections>
+                        <outlet property="content" destination="KKI-K0-pds" id="zg4-Rf-i6k"/>
                         <outlet property="takeda" destination="XgV-TR-9hg" id="a24-bV-3vp"/>
                     </connections>
                 </viewController>
@@ -2224,7 +2350,7 @@ Lactobacillus acidophilus и другие.</string>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="100" id="YGM-aZ-XEh"/>
                                         </constraints>
-                                        <state key="normal" image="B71B37D4-496A-4903-80E8-E8F0EA29CEE1"/>
+                                        <state key="normal" image="F9EEFD84-28AF-4A89-8C83-E4421C62FD95"/>
                                         <connections>
                                             <action selector="toPreparat:" destination="ir5-gk-GIB" eventType="touchUpInside" id="1Ha-Zs-LFs"/>
                                         </connections>
@@ -2329,7 +2455,7 @@ Lactobacillus acidophilus и другие.</string>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3m7-7I-CMV">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3m7-7I-CMV">
                                 <rect key="frame" x="0.0" y="182" width="600" height="50"/>
                                 <color key="backgroundColor" red="0.73333333329999995" green="0.0" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -2355,13 +2481,13 @@ Lactobacillus acidophilus и другие.</string>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Производитель" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="cFB-7t-4SZ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Производитель" textAlignment="center" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="cFB-7t-4SZ">
                                 <rect key="frame" x="128" y="78" width="461" height="20"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
                                 <color key="textColor" red="0.71764705880000002" green="0.0" blue="0.22352941179999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="takedaLogo" translatesAutoresizingMaskIntoConstraints="NO" id="TlV-RB-zbf">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="takedaLogo" translatesAutoresizingMaskIntoConstraints="NO" id="TlV-RB-zbf">
                                 <rect key="frame" x="20" y="74" width="100" height="93"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="93" id="X3Z-kn-eBw"/>
@@ -2374,7 +2500,7 @@ Lactobacillus acidophilus и другие.</string>
                                     </mask>
                                 </variation>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="oCJ-Qb-lrL">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="oCJ-Qb-lrL">
                                 <rect key="frame" x="20" y="247" width="550" height="333"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="120" id="N87-4m-LpU"/>
@@ -5485,7 +5611,7 @@ Lactobacillus acidophilus и другие.</string>
         </scene>
     </scenes>
     <resources>
-        <image name="B71B37D4-496A-4903-80E8-E8F0EA29CEE1" width="146" height="108">
+        <image name="F9EEFD84-28AF-4A89-8C83-E4421C62FD95" width="146" height="108">
             <mutableData key="keyedArchiveRepresentation">
 YnBsaXN0MDDUAQIDBAUGPT5YJHZlcnNpb25YJG9iamVjdHNZJGFyY2hpdmVyVCR0b3ASAAGGoK4HCBMU
 GR4fIyQrLjE3OlUkbnVsbNUJCgsMDQ4PEBESVk5TU2l6ZVYkY2xhc3NcTlNJbWFnZUZsYWdzVk5TUmVw

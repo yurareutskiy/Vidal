@@ -405,7 +405,7 @@
         NSString *code = [[self.arrPeopleInfo objectAtIndex:[(NSIndexPath*)sender row]] objectAtIndex:indexCode];
         NSString *name = [[self.arrPeopleInfo objectAtIndex:[(NSIndexPath*)sender row]] objectAtIndex:indexName];
         vc.parentCode = code;
-//        vc.pharmaName = name;
+        vc.pharmaName = name;
 //        vc.level = self.level + 1;
     }
     

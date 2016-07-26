@@ -43,6 +43,7 @@ typedef enum : NSUInteger {
     NSMutableDictionary *paramsUpdate;
     CGFloat offset;
     UITextField *activeTextField;
+    NSArray *rawNames;
 }
 
 - (instancetype)init
@@ -227,9 +228,7 @@ typedef enum : NSUInteger {
     [self.passText setText:password];
 
     NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
-    [formatter setDateFormat:@"MM.dd.yyyy"];
-    NSTimeZone *gmt = [NSTimeZone timeZoneWithAbbreviation:@"GMT"];
-    [formatter setTimeZone:gmt];
+    [formatter setDateFormat:@"dd.MM.yyyy"];
     NSDate *date = [formatter dateFromString:bd];
     [self.datePicker setDate:date];
     
@@ -320,6 +319,7 @@ typedef enum : NSUInteger {
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self hideEver];
     self.tableView2.hidden = true;
     [self.cityText resignFirstResponder];
     [self.scrollView addGestureRecognizer:tap];
@@ -332,21 +332,21 @@ typedef enum : NSUInteger {
     } else if (activeTextField.tag == 5) {
         for (NSDictionary *item in self.namesSpec) {
             if ([[item objectForKey:@"doctorName"] isEqualToString:self.namesCity[indexPath.row]]) {
-                job = [item objectForKey:@"id"];
+                job = [NSString stringWithFormat:@"%@",  [item objectForKey:@"id"]];
                 break;
             }
         }
     } else if (activeTextField.tag == 14) {
-        for (NSDictionary *item in self.namesSpec) {
+        for (NSDictionary *item in self.namesUniversities) {
             if ([[item objectForKey:@"title"] isEqualToString:self.namesCity[indexPath.row]]) {
-                univer = [item objectForKey:@"id"];
+                univer = [NSString stringWithFormat:@"%@",  [item objectForKey:@"id"]];
                 break;
             }
         }
     } else if (activeTextField.tag == 17) {
         for (NSDictionary *item in self.namesSpec) {
             if ([[item objectForKey:@"doctorName"] isEqualToString:self.namesCity[indexPath.row]]) {
-                secondJob = [item objectForKey:@"id"];
+                secondJob = [NSString stringWithFormat:@"%@",  [item objectForKey:@"id"]];
                 break;
             }
         }
@@ -369,10 +369,10 @@ typedef enum : NSUInteger {
     
     NSInteger i = textField.tag;
     
-    if (textField.tag < 5) {
+    if (textField.tag < 50) {
         [[self.view viewWithTag:i+1] becomeFirstResponder];
         i += 1;
-        if (textField.tag == 4) {
+        if (textField.tag == 4 || textField.tag == 5 || textField.tag == 14 || textField.tag == 17) {
             [self hideEver];
             [textField resignFirstResponder];
             [[self.view viewWithTag:i+1] becomeFirstResponder];
@@ -386,6 +386,7 @@ typedef enum : NSUInteger {
 - (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
 
     self.namesCity = [NSMutableArray array];
+    rawNames = [NSArray array];
     if (textField.tag == 4) {
         self.tableTopConstraint.constant = 8;
     } else if (textField.tag == 14) {
@@ -406,7 +407,7 @@ typedef enum : NSUInteger {
     } else {
         return YES;
     }
-    
+    rawNames = self.namesCity;
     activeTextField = textField;
     
     textField.text = @"";
@@ -439,8 +440,11 @@ typedef enum : NSUInteger {
     } else if (textField.tag == 5 || textField.tag == 17 || textField.tag == 14) {
         string = [textField.text stringByAppendingString:string];
         if (string.length) {
-            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF BEGINSWITH %@", string];
-            self.namesCity = [NSMutableArray arrayWithArray:[self.namesCity filteredArrayUsingPredicate:predicate]];
+            NSPredicate *predicate = [NSPredicate predicateWithFormat:@"SELF BEGINSWITH %@ OR SELF BEGINSWITH %@", string, [string capitalizedString]];
+            self.namesCity = [NSMutableArray arrayWithArray:[rawNames filteredArrayUsingPredicate:predicate]];
+            [self.tableView2 reloadData];
+        } else {
+            self.namesCity = [rawNames mutableCopy];
             [self.tableView2 reloadData];
         }
     }
@@ -591,13 +595,12 @@ typedef enum : NSUInteger {
                                                                                      @"register[graduateYear]":degreeYear,
                                                                                      @"register[academicDegree]":degree,
                                                                                      @"register[university]":univer}];
-    if ([secondJob isEqualToString:@"0"] == false) {
+    
+    if ([secondJob isEqualToString:@"0"] == false || [secondJob isEqualToString:@"91"] == false) {
         [parametrs setObject: secondJob forKey:@"register[secondarySpecialty]"];
     }
     
     if (self.isProfileUpdate) {
-        
-        
         
         [paramsUpdate setObject:self.nameText.text forKey:@"profile[firstName]"];
         [paramsUpdate setObject:self.surnameText.text forKey:@"profile[lastName]"];
@@ -605,28 +608,36 @@ typedef enum : NSUInteger {
             [paramsUpdate setObject:[ud objectForKey:@"city"] forKey:@"profile[city]"];
         }
         if ([[paramsUpdate allKeys] containsObject:@"profile[primarySpecialty]"] == NO) {
-            for (NSDictionary *spec in self.namesSpec) {
-                if ([[spec objectForKey:@"title"] isEqualToString:[ud objectForKey:@"spec"]]) {
-                    [paramsUpdate setObject:[spec objectForKey:@"id"] forKey:@"profile[primarySpecialty]"];
-                    break;
+            if ([job isEqualToString:@"0"]) {
+                for (NSDictionary *spec in self.namesSpec) {
+                    if ([[spec objectForKey:@"title"] isEqualToString:[ud objectForKey:@"spec"]]) {
+                        job = [spec objectForKey:@"id"];
+                        break;
+                    }
                 }
             }
+            [paramsUpdate setObject:job forKey:@"profile[primarySpecialty]"];
+            
         }
-        if ([[paramsUpdate allKeys] containsObject:@"profile[secondarySpecialty]"] == NO && [ud objectForKey:@"secondarySpecialty"]) {
+        if ([[paramsUpdate allKeys] containsObject:@"profile[secondarySpecialty]"] == NO && [ud objectForKey:@"secondarySpecialty"] && [secondJob isEqualToString:@"0"] == NO) {
             for (NSDictionary *spec in self.namesSpec) {
-                if ([[spec objectForKey:@"doctorName"] isEqualToString:[ud objectForKey:@"secondarySpecialty"]]) {
+                NSString *idString = [NSString stringWithFormat:@"%@", [spec objectForKey:@"id"]];
+                if ([idString isEqualToString:secondJob]) {
                     [paramsUpdate setObject:[spec objectForKey:@"id"] forKey:@"profile[secondarySpecialty]"];
                     break;
                 }
             }
         }
         if ([[paramsUpdate allKeys] containsObject:@"profile[university]"] == NO && [ud objectForKey:@"university"]) {
-            for (NSDictionary *spec in self.namesUniversities) {
-                if ([[spec objectForKey:@"title"] isEqualToString:[ud objectForKey:@"university"]]) {
-                    [paramsUpdate setObject:[spec objectForKey:@"id"] forKey:@"profile[university]"];
-                    break;
+            if ([univer isEqualToString:@"0"]) {
+                for (NSDictionary *spec in self.namesUniversities) {
+                    if ([[spec objectForKey:@"title"] isEqualToString:[ud objectForKey:@"university"]]) {
+                        job = [spec objectForKey:@"id"];
+                        break;
+                    }
                 }
             }
+            [paramsUpdate setObject:job forKey:@"profile[university]"];
         }
         if ([[paramsUpdate allKeys] containsObject:@"profile[graduateYear]"] == NO && [ud objectForKey:@"graduateYear"]) {
             [paramsUpdate setObject:[ud objectForKey:@"graduateYear"] forKey:@"profile[graduateYear]"];
@@ -634,6 +645,26 @@ typedef enum : NSUInteger {
         if ([[paramsUpdate allKeys] containsObject:@"profile[academicDegree]"] == NO && [ud objectForKey:@"academicDegree"]) {
             [paramsUpdate setObject:[ud objectForKey:@"academicDegree"] forKey:@"profile[academicDegree]"];
         }
+        
+//        [paramsUpdate setObject:self.nameText.text forKey:@"profile[firstName]"];
+//        [paramsUpdate setObject:self.surnameText.text forKey:@"profile[lastName]"];
+//
+//        if (job == 0) {
+//            [paramsUpdate setObject:[ud objectForKey:@"primarySpecialty"] forKey:@"profile[primarySpecialty]"];
+//        } else {
+//            [paramsUpdate setObject:job forKey:@"profile[primarySpecialty]"];
+//        }
+//        if ([secondJob isEqualToString:@"0"]) {
+//            [paramsUpdate setObject:[ud objectForKey:@"secondarySpecialty"] forKey:@"profile[secondarySpecialty]"];
+//        }
+//        if (univer == 0) {
+//            [paramsUpdate setObject:[ud objectForKey:@"university"] forKey:@"profile[university]"];
+//        }
+//        [paramsUpdate setObject:[ud objectForKey:@"city"] forKey:@"profile[city]"];
+//        [paramsUpdate setObject:self.yearDegreeText.text forKey:@"profile[graduateYear]"];
+//        [paramsUpdate setObject:degree forKey:@"profile[academicDegree]"];
+
+
         
         
         NSLog(@"%@", paramsUpdate);
@@ -847,11 +878,11 @@ typedef enum : NSUInteger {
     NSDictionary *object = self.pickerViewData[[self.specialistPickerView selectedRowInComponent:0]];
     targetProperty = [object objectForKey:@"id"];
     if (selectingType == PickerViewSelectingUniver) {
-        univer = targetProperty;
+        univer = [NSString stringWithFormat:@"%@", targetProperty];
     } else if (selectingType == PickerViewSelectingPrimarySpec) {
-        job = targetProperty;
+        job = [NSString stringWithFormat:@"%@", targetProperty];
     } else if (selectingType == PickerViewSelectingSecondSpec) {
-        secondJob = targetProperty;
+        secondJob = [NSString stringWithFormat:@"%@", targetProperty];
     }
     NSLog(@"%@", targetProperty);
 }
@@ -924,7 +955,9 @@ typedef enum : NSUInteger {
         self.toolbar.hidden = true;
         self.special.userInteractionEnabled = YES;
         self.special.enabled = YES;
-
+        for (UIView *subview in self.scrollView.subviews) {
+            [subview resignFirstResponder];
+        }
         
         svos = self.scrollView.contentOffset;
         CGPoint pt;
@@ -970,11 +1003,13 @@ typedef enum : NSUInteger {
 
 
 - (IBAction)callDatePicker:(UIButton*)sender {
+    [self hideEver];
     selectingType = PickerViewSelectingDate;
     [self showPickerView:self.datePicker WithButton:sender];
 }
 
 - (IBAction)selectYearDegreeAction:(id)sender {
+    [self hideEver];
     selectingType = PickerViewSelectingYearDegree;
     NSMutableArray *dateArray = [NSMutableArray array];
     for (NSInteger i = [[NSCalendar currentCalendar] component:NSCalendarUnitYear fromDate:[NSDate date]]; i >= 1900; i--) {
@@ -994,6 +1029,7 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)selectSecondSpecialateAction:(id)sender {
+    [self hideEver];
     selectingType = PickerViewSelectingSecondSpec;
     self.pickerViewData = self.namesSpec;
     [self showPickerView:self.specialistPickerView WithButton:sender];
@@ -1008,6 +1044,7 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)selectDegreeAction:(id)sender {
+    [self hideEver];
     selectingType = PickerViewSelectingDegree;
     self.pickerViewData = self.namesDegree;
     [self showPickerView:self.specialistPickerView WithButton:sender];
@@ -1023,6 +1060,7 @@ typedef enum : NSUInteger {
 
 
 - (IBAction)showPicker:(UIButton *)sender {
+    [self hideEver];
     selectingType = PickerViewSelectingPrimarySpec;
     self.pickerViewData = self.namesSpec;
     [self showPickerView:self.specialistPickerView WithButton:sender];
@@ -1037,6 +1075,7 @@ typedef enum : NSUInteger {
 }
 
 - (IBAction)selectUniverAction:(id)sender {
+    [self hideEver];
     selectingType = PickerViewSelectingUniver;
     self.pickerViewData = self.namesUniversities;
     [self showPickerView:self.specialistPickerView WithButton:sender];
