@@ -422,7 +422,7 @@
         
 
         NSString *tableString = [NSString stringWithFormat:@"<!Doctype html><html><head><meta charset='UTF-8'><style>body {color: rgb(91, 91, 91);} table{border-collapse:collapse}</style></head><body>%@</TABLE></body></html>",[self.info objectAtIndex:indexPath.row]];
-        tableString = [tableString stringByReplacingOccurrencesOfString:@"[PRING]" withString:@"Вспомогательные вещества:"];
+        tableString  = [tableString stringByReplacingOccurrencesOfString:@"[PRING]" withString:@"Вспомогательные вещества:"];
         
         [webView loadHTMLString:tableString baseURL:nil];
         cell.webView = webView;

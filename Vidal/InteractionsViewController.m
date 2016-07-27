@@ -153,6 +153,8 @@
             [self.secondLinePicker reloadAllComponents];
             self.input.text = @"";
         }
+    } else {
+        [self.input becomeFirstResponder];
     }
 }
 
@@ -229,6 +231,7 @@
     // Set Content
     NSString *title;
     title = self.FilteredResults[indexPath.row];
+    title = [NSString stringWithFormat:@"%@%@", [[title substringToIndex:1] uppercaseString], [[title substringFromIndex:1] lowercaseString]];
     cell.textLabel.text = title;
     
     // Return Cell
@@ -275,8 +278,10 @@
     self.hello2 = [[self.hello2 sortedArrayUsingSelector:@selector(localizedCaseInsensitiveCompare:)] mutableCopy];
     
     NSLog(@"%d", (int)self.hello2.count);
-    
+    self.lead.hidden = true;
     [self.secondLinePicker reloadAllComponents];
+    [self.secondInput becomeFirstResponder];
+//    [self upScrollWithKeyboard];
 }
 
 - (NSString *) findSecondResult:(NSString *) second {
@@ -287,7 +292,7 @@
             break;
         }
     }
-    
+    self.lead.hidden = false;
     return [NSString stringWithFormat:@"%@", [[[array objectForKey:@"interactions"][inx] objectForKey:@"info"][inx2] objectForKey:@"effect"]];
     
 }
@@ -326,7 +331,7 @@
         self.secondInput.hidden = false;
         self.secondLine.hidden = false;
         self.secondLabel.hidden = false;
-        self.lead.hidden = false;
+//        self.lead.hidden = false;
 
     } else {
         self.tableView.hidden = true;
@@ -377,7 +382,6 @@
             self.secondInput.text = @"";
             self.secondLinePicker.hidden = false;
             self.toolbar.hidden = false;
-            self.lead.hidden = false;
             [self.secondLinePicker reloadAllComponents];
             [self upScrollWithKeyboard];
             return NO;
@@ -413,8 +417,7 @@
     // Dispose of any resources that can be recreated.
 }
 
--(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
-{
+-(void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
     [self.input resignFirstResponder];
     [self.secondInput resignFirstResponder];
     self.tableView.hidden = true;
@@ -444,8 +447,7 @@
     }];
 }
 
--(void)keyboardWillHide:(NSNotification *)notification
-{
+-(void)keyboardWillHide:(NSNotification *)notification {
     [UIView animateWithDuration:0.3 animations:^{
         CGRect f = self.view.frame;
         f.origin.y = +self.navigationController.navigationBar.frame.size.height + 20.0;

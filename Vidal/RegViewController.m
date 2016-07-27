@@ -727,7 +727,7 @@ typedef enum : NSUInteger {
             [self showAlert:@"Ошибка" mess:@"Проверьте введенные данные" check:NO];
         } else {
             NSDictionary *errorKeyDictionary = @{@"secondarySpecialty" : @"Дополнительная специальность", @"primarySpecialty" : @"Основная специальность", @"university" : @"Университет"};
-            [self showAlert:[[responseDictionary allKeys] firstObject] mess:[[responseDictionary allValues] firstObject] check:NO];
+            [self showAlert:@"Ошибка" mess:[[responseDictionary allValues] firstObject] check:NO];
 
         }
     }

@@ -23,7 +23,7 @@
     self.text.selectable = YES;
     self.text.dataDetectorTypes = UIDataDetectorTypeLink;
     
-    [self setLabel:@"Справка"];
+    [self setLabel:@"VIDAL"];
     [self.text setContentOffset:CGPointZero animated:NO];
     // Do any additional setup after loading the view.
 }
@@ -32,6 +32,7 @@
     [self.text setContentOffset:CGPointZero animated:NO];
     [super viewWillAppear:animated];
     [self.text setContentOffset:CGPointZero animated:NO];
+    [self.text setTextColor:[UIColor colorWithRed:91.f/255.f green:91.f/255.f blue:91.f/255.f alpha:1]];
 }
 
 -(void)viewDidAppear:(BOOL)animated {
