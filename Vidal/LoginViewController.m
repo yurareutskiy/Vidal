@@ -85,6 +85,10 @@
         self.emailInput.text = [ud objectForKey:@"email_temp"];
         self.passInput.text = [ud objectForKey:@"pass_temp"];
     }
+    
+    if (self.view.frame.size.height == 480) {
+        self.lead.text = @"";
+    }
 }
 
 

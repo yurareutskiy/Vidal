@@ -30,6 +30,10 @@
     [self.backSwipe addTarget:self action:@selector(swipeAction:)];
     
     [self.pageControl setNumberOfPages:[_viewsArray count]];
+    
+    if (self.view.frame.size.height == 480) {
+        [self.pageControl setHidden:YES];
+    }
 }
 
 - (NSArray*)createViewsArray {

@@ -24,6 +24,18 @@
     
     ud = [NSUserDefaults standardUserDefaults];
     
+//    UIScrollView *scroll = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)];
+//    UIView *mainViewCopy = self.view;
+//    [scroll addSubview:mainViewCopy];
+//    [self.view addSubview:scroll];
+//    for (UIView *view in [self.view subviews]) {
+//        if ([view isEqual:scroll] == false) {
+//            [view setHidden:YES];
+//        }
+//    }
+
+
+    
     [[self.vidal imageView] setContentMode:UIViewContentModeScaleAspectFit];
     self.revealViewController.rearViewRevealWidth = self.view.frame.size.width - 80.0;
     
