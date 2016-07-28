@@ -110,6 +110,14 @@
 //     Do any additional setup after loading the view.
 }
 
+-(void)viewWillAppear:(BOOL)animated {
+    UIBarButtonItem *barButton = [[UIBarButtonItem alloc] initWithImage:[self imageWithImage:[UIImage imageNamed:@"searchWhite"] scaledToSize:CGSizeMake(20, 20)]
+                                                         style:UIBarButtonItemStyleDone
+                                                        target:self
+                                                        action:@selector(search)];
+    self.navigationItem.rightBarButtonItem = barButton;
+}
+
 
 - (void) checkBool:(NSString *)title mess:(NSString *)mess down:(BOOL)down amount:(int)butt {
     NSLog(@"HELLOOOOOOOOOOO");
@@ -180,7 +188,6 @@
         [self presentViewController:alertController animated:YES completion:nil];
         
         self.name.enabled = YES;
-        self.navigationItem.leftBarButtonItem.enabled = YES;
         self.revealViewController.panGestureRecognizer.enabled = YES;
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }

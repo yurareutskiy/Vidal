@@ -876,7 +876,7 @@
 					"\"${PODS_ROOT}/Headers/Public/SLExpandableTableView\"",
 					"-DSQLITE_HAS_CODEC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vidal.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vidal.cardio;
 				PRODUCT_NAME = "Кардиология";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -917,7 +917,7 @@
 					"\"${PODS_ROOT}/Headers/Public/SLExpandableTableView\"",
 					"-DSQLITE_HAS_CODEC",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vidal.app;
+				PRODUCT_BUNDLE_IDENTIFIER = com.vidal.cardio;
 				PRODUCT_NAME = "Кардиология";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
