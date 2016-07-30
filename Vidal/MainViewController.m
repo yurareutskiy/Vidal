@@ -371,6 +371,8 @@
             self.progress.progress = (float)totalBytesRead / totalBytesExpectedToRead;
 
         }];
+            self.navigationItem.leftBarButtonItem.enabled = NO;
+            self.navigationItem.rightBarButtonItem.enabled = NO;
             [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation * _Nonnull operation, id  _Nonnull responseObject) {
                 urlData = [NSData dataWithData:[operation responseData]];
                 
@@ -386,6 +388,8 @@
                     
                     //saving is done on main thread
                     dispatch_async(dispatch_get_main_queue(), ^{
+                        self.navigationItem.leftBarButtonItem.enabled = YES;
+                        self.navigationItem.rightBarButtonItem.enabled = YES;
                         [urlData writeToFile:filePath atomically:YES];
                         NSLog(@"File Saved !");
                         exists = true;
@@ -408,6 +412,8 @@
                 self.progress.hidden = YES;
                 self.bgView.hidden = YES;
             } failure:^(AFHTTPRequestOperation * _Nonnull operation, NSError * _Nonnull error) {
+                self.navigationItem.leftBarButtonItem.enabled = YES;
+                self.navigationItem.rightBarButtonItem.enabled = YES;
                 if (self.onboardingVC) {
                     [self.onboardingVC dismissViewControllerAnimated:NO completion:^{
                         [ud setValue:@"1" forKey:@"reg"];
