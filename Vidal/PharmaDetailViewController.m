@@ -18,6 +18,7 @@
 
 @property (nonatomic, strong) DBManager *dbManager;
 @property (nonatomic, strong) NSArray *sourceArray;
+@property (strong, nonatomic) NSString *code;
 
 
 @end
@@ -168,7 +169,7 @@
     } else if ([segue.identifier isEqualToString:@"pharm"]) {
         PharmaViewController *vc = [segue destinationViewController];
         
-        vc.level = _level;
+        vc.level = _level + 1;
         vc.code = _parentCode;
     }  else if ([segue.identifier isEqualToString:@"toSearch"]) {
         SearchViewController *vc = [segue destinationViewController];

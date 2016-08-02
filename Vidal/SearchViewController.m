@@ -237,6 +237,9 @@
         
     } else if ([segue.identifier isEqualToString:@"toPharma"]) {
         
+        PharmaDetailViewController *pharmaVC = [segue destinationViewController];
+        
+        
     } else if ([segue.identifier isEqualToString:@"toCompany"]) {
         
         CompanyViewController *cvc = [segue destinationViewController];
